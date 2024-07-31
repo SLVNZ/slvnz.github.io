@@ -1,0 +1,134 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900|family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900|family=Bebas+Neue|family=Germania+One|family=Markazi+Text:wght@400..700|family=Pirata+One|family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900|family=UnifrakturCook:wght@700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Germania+One&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Bokor&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@100..900&display=swap');
+
+
+
+
+
+
+
+/* IMPORTED FONTS 
+
+
+
+'UnifrakturCook'  - Blackletter
+
+'Germania One'    - Blackletter
+
+'Pirata One'      - Blackletter 
+
+'Bokor'           - Blackletter
+
+'Grenze Gotisch'  - Blackletter Text
+
+'Markazi Text'    - Serif Text
+
+'Roboto'          - Sans Serif Text
+
+'Bebas Neue'      - All Caps 
+
+'Barlow'          - Sans Serif Text
+
+'Barlow Condensed'- Sans Serif Condensed Text
+
+
+
+
+
+*/
+
+.main {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.header h1 {
+	font-family: "gandur-new", semi-bold;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 32pt;
+    margin: 0;
+	align-items: center;
+}
+
+
+.header {
+	display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: whitesmoke;
+    align-items: center;
+}
+
+.header label {
+	font-family: Barlow;
+	display: flex;
+	flex-direction: row;
+	font-size: 12pt;
+	align-items: flex-end;
+	padding-left: 30%;
+	
+}
+
+.header button {
+	background-color: transparent;
+	border: none;
+	font-family: barlow;
+	font-weight: bold;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.header button:hover {
+	color: blueviolet;
+	cursor: pointer;
+}
+
+.header button:active {
+	color: blueviolet;
+}
+
+.spells-div {
+	background-color: white;
+	width: 70%;
+	margin: 20px;
+}
+
+.page-contents {
+	background-color: white;
+	width: 70%;
+	margin: 20px;
+}
+
+.page-contents h1 {
+	font-family: "gandur-new", semi-bold;
+	font-weight: 300;
+	font-style: normal;
+}
+
+.spells-div h1 {
+	font-family: "gandur-new", semi-bold;
+	font-weight: 300;
+	font-style: normal;
+}
+
+.footer {
+	padding-top: 50px;
+	font-family: barlow;
+	font-weight: light;
+	text-align: center;
+}
