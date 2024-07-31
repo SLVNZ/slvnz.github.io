@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://use.typekit.net/jze1rws.css">
-<title>index</title>
+<title>Büyüler ve Yetenekler - SLVNZ Veritabanı</title>
 <link href="slvnz.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -34,8 +34,6 @@
 					<a href="index.html"> <button> ANA SAYFA </button> </a>
 					
 					<a href="spells.html"> <button style="color: blueviolet; border: 1px solid blueviolet; border-radius: 5px;"> BÜYÜLER/YETENEKLER </button> </a>
-					
-					<a href="about.html"> <button> HAKKINDA </button> </a>
 			
 				</div>
 			
@@ -48,11 +46,443 @@
 		<div class="spells-div">
 		
 		
-			<h1> BÜYÜLER VE YETENEKLER </h1>
-		
-		
-		
-		</div>
+			<div class="container">
+                <div class="filter">
+                    <input type="text" id="search" placeholder="Büyü ismini ara" oninput="filterSpells()">
+                        <select id="level-filter" onchange="filterSpells()">
+                            <option value="">Seviye</option>
+				            <option value="0">Bazbüyü</option>
+                            <option value="1">Seviye 1</option>
+                            <option value="2">Seviye 2</option>
+                            <option value="3">Seviye 3</option>
+                            <option value="4">Seviye 4</option>
+                        </select>
+                        <select id="energy-filter" onchange="filterSpells()">
+                            <option value="">Enerji Türü</option>
+                            <option value="evoc">Yıkım</option>
+                            <option value="div">Kehanet</option>
+                            <option value="conj">Oluşturma</option>
+                            <option value="abj">Koruma</option>
+				            <option value="trns">Dönüştürme</option>
+				            <option value="ench">Cezbetme</option>
+				            <option value="illu">İllüzyon</option>
+				            <option value="necro">Nekromansi</option>
+				            <option value="fth">İnanç</option>
+				            <option value="pkt">Pakt</option>
+				            <option value="bld">Kan</option>
+				            <option value="chs">Kaos</option>
+				            <option value="drk">Karanlık</option>
+				            <option value="rdnt">Aydınlık</option>
+				            <option value="sl">Ruh</option>
+				            <option value="lf">Yaşam</option>
+                        </select>
+                        <select id="duration-filter" onchange="filterSpells()">
+                            <option value="">Tüm Süreler</option>
+                            <option value="inst">Anında</option>
+				            <option value="bonus">Bonus Eylem</option>
+				            <option value="react">Reaksiyon</option>
+                            <option value="1min">1 dakika</option>
+                            <option value="10min">10 dakika</option>
+				            <option value="30min">30 dakika</option>
+				            <option value="1hr">1 saat</option>
+				            <option value="12hr">12 saat</option>
+				            <option value="1day">1 gün</option>
+				            <option value="1week">1 hafta</option>
+				            <option value="2week">2 hafta</option>
+				            <option value="1mnth">1 ay</option>
+                        </select>
+                        <input type="number" id="mana-filter" placeholder="Maksimum Mana" oninput="filterSpells()">
+                        <input type="number" id="range-filter" placeholder="Minimum Menzil (metre)" oninput="filterSpells()">
+                    </div>
+
+
+
+
+
+
+
+
+
+
+                        <div class="main-content">
+                            <div class="spell-list">
+                                <table>
+                                <thead>
+                                    <tr>
+                                        <th onclick="sortTable('name')">İsim</th>
+                                        <th onclick="sortTable('level')">Seviye</th>
+                                        <th onclick="sortTable('duration')">Süre</th>
+                                        <th onclick="sortTable('energy')">Enerji Türü</th>
+                                        <th onclick="sortTable('mana')">Mana</th>
+                                        <th onclick="sortTable('range')">Menzil</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="spell-list">
+                                    <tr data-name="hokkabaz" data-level="0" data-energy="trns" data-duration="inst" data-mana="0" data-range="4" onclick="showSpell('spell1')">
+                                        <td>Hokkabazlık</td>
+                                        <td>Bazbüyü</td>
+                                        <td>Anında</td>
+                                        <td>Dönüştürme</td>
+                                        <td>0</td>
+                                        <td>4 kare</td>
+                                    </tr>
+                                    <tr data-name="ışık" data-level="0" data-energy="illu" data-duration="1hr" data-mana="0" data-range="0" onclick="showSpell('spell2')">
+                                        <td>Işık</td>
+                                        <td>Bazbüyü</td>
+                                        <td>1 saat</td>
+                                        <td>İllüzyon</td>
+                                        <td>0</td>
+                                        <td>Dokunma</td>
+                                    </tr>
+                                    <tr data-name="mesaj" data-level="0" data-energy="trns" data-duration="inst" data-mana="0" data-range="24" onclick="showSpell('spell3')">
+                                        <td>Mesaj</td>
+                                        <td>Bazbüyü</td>
+                                        <td>Anında</td>
+                                        <td>Dönüştürme</td>
+                                        <td>0</td>
+                                        <td>24 kare</td>
+                                    </tr>
+
+                                    <tr data-name="tamirat" data-level="0" data-energy="trns" data-duration="inst" data-mana="0" data-range="0" onclick="showSpell('spell4')">
+                                        <td>Tamirat</td>
+                                        <td>Bazbüyü</td>
+                                        <td>Anında</td>
+                                        <td>Dönüştürme</td>
+                                        <td>0</td>
+                                        <td>Dokunma</td>
+                                    </tr>
+
+                                    <tr data-name="silah çağır" data-level="0" data-energy="conj" data-duration="inst" data-mana="0" data-range="0" onclick="showSpell('spell5')">
+                                        <td>Silah Çağır</td>
+                                        <td>Bazbüyü</td>
+                                        <td>Anında</td>
+                                        <td>Oluşturma</td>
+                                        <td>0</td>
+                                        <td>Kendin</td>
+                                    </tr>
+
+                                    <tr data-name="ürperten dokunuş" data-level="0" data-energy="necro" data-duration="inst" data-mana="0" data-range="24" onclick="showSpell('spell6')">
+                                        <td>Ürperten Dokunuş</td>
+                                        <td>Bazbüyü</td>
+                                        <td>Anında</td>
+                                        <td>Nekromansi</td>
+                                        <td>0</td>
+                                        <td>24 kare</td>
+                                    </tr>
+
+                                    <tr data-name="ölümün çanları" data-level="0" data-energy="necro" data-duration="inst" data-mana="0" data-range="12" onclick="showSpell('spell7')">
+                                        <td>Ölümün Çanları</td>
+                                        <td>Bazbüyü</td>
+                                        <td>Anında</td>
+                                        <td>Nekromansi</td>
+                                        <td>0</td>
+                                        <td>12 kare</td>
+                                    </tr>
+
+                                    <tr data-name="kan kontrolü" data-level="0" data-energy="bld" data-duration="inst" data-mana="0" data-range="12" onclick="showSpell('spell8')">
+                                        <td>Kan Kontrolü</td>
+                                        <td>Bazbüyü</td>
+                                        <td>Anında</td>
+                                        <td>Kan</td>
+                                        <td>0</td>
+                                        <td>12 kare</td>
+                                    </tr>
+
+                                    <tr data-name="kamp ateşi yarat" data-level="0" data-energy="conj" data-duration="1min" data-mana="0" data-range="12" onclick="showSpell('spell9')">
+                                        <td>Kamp Ateşi Yarat</td>
+                                        <td>Bazbüyü</td>
+                                        <td>1 Dakika</td>
+                                        <td>Oluşturma</td>
+                                        <td>0</td>
+                                        <td>12 kare</td>
+                                    </tr>
+
+                                    <tr data-name="ateş kontrolü" data-level="0" data-energy="evoc" data-duration="inst" data-mana="0" data-range="12" onclick="showSpell('spell10')">
+                                        <td>Ateş Kontrolü</td>
+                                        <td>Bazbüyü</td>
+                                        <td>Anlık</td>
+                                        <td>Yıkım</td>
+                                        <td>0</td>
+                                        <td>12 kare</td>
+                                    </tr>
+
+                                    <tr data-name="eldritch patlaması" data-level="0" data-energy="evoc" data-duration="inst" data-mana="0" data-range="24" onclick="showSpell('spell11')">
+                                        <td>Eldritch Patlaması</td>
+                                        <td>Bazbüyü</td>
+                                        <td>Anlık</td>
+                                        <td>Pakt</td>
+                                        <td>0</td>
+                                        <td>24 kare</td>
+                                    </tr>
+
+                                    <!-- Daha fazla büyü ekleyebilirsin -->
+                                </tbody>
+                                </table>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <div class="spell-description" id="spell1">
+                                <h2>Hokkabazlık <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Dönüştürme Bazbüyüsü</span> </h2>
+				
+				                <div class="spell-details">
+                	                <p><strong>Büyü Süresi:</strong> Anında</p>
+                	                <p><strong>Enerji Türü:</strong> Dönüştürme</p>
+                	                <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                	                <p><strong>Büyü Menzili:</strong> 4 kare</p>
+				                </div>
+                                <p class="spell-aciklama">
+                                    30 santimetre küplük alanı (1ft.) kapsayacak bir hacimde ufak etkiler bırakabilirsin. Bu etkiler şunlarla sınırlıdır:
+                                    <br><br>
+                                    <strong>Temizleme:</strong> Belirlediğin alandaki basit lekeleri, kirleri ya da tozu temizleyebilirsin. 
+                                    <br>
+                                    <strong>Kıvılcım Çıkarma:</strong> Belirlediğin alanda bulunan yanıcı nesenelerin birinden kıvılcım çıkarabilirsin
+                                    (Saman, kuru odun, kömür, muşamba vb.).
+                                    <br>
+                                    <strong>Yakma/Söndürme:</strong> Belirlediğin alanda bulunan mum, meşale vb. kolay yanıcı neseneleri yakıp söndürebilirsin.
+                                    <br>
+                                    <strong>Tatlandırma:</strong> Hacmi en fazla belirtilen miktarda olan bir nesneye dokunarak onu serinletebilir, ılıtabilir ya da
+                                    istediğin şekilde bir tat kazandırabilirsin.
+                                    <br>
+                                    <strong>Sembol:</strong> En fazla 30 santimetre kare alanı kapsayacak bir sembolü bir zemine işleyebilirsin. Sembol 1 saat sonrak
+                                    kaybolur.
+                                    <br>
+                                    <strong>Sihirbazlık:</strong> 6 saniye süre boyunca elinde belirecek büyüsüz ıvır zıvır ya da çok basit bir illüzyon görüntüsü
+                                    oluşturabilirsin.
+                                </p>
+                            </div>
+                            
+                            <div class="spell-description" id="spell2">
+                                <h2>Işık <span style="font-family: barlow; font-style: italic; font-size: 10pt;">İllüzyon Bazbüyüsü</span> </h2>
+				
+				                <div class="spell-details">
+                	                <p><strong>Büyü Süresi:</strong> 1 Saat</p>
+                	                <p><strong>Enerji Türü:</strong> İllüzyon</p>
+                	                <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                	                <p><strong>Büyü Menzili:</strong> Dokunma Mesafesi</p>
+				                </div>
+                                <p class="spell-aciklama">
+                                    Küçük sayılabilecek boyutlarda bir nesneye dokunarak nesnenin ışık saçmasını sağlarsın. Işık saçan nesne,
+                                    6 kareye kadar parlak ışık, sonraki 6 kareye kadar soluk ışık saçabilir. Bu durum, enerjinin kuvvetine bağlı
+                                    olarak değişkenlik gösterir.
+                                </p>
+                            </div>
+                            
+                            <div class="spell-description" id="spell3">
+                                <h2>Mesaj <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Dönüştürme Bazbüyüsü</span> </h2>
+				
+				                <div class="spell-details">
+                	                <p><strong>Büyü Süresi:</strong> Anında</p>
+                	                <p><strong>Enerji Türü:</strong> Dönüştürme</p>
+                	                <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                	                <p><strong>Büyü Menzili:</strong> 24 kare</p>
+				                </div>
+                                <p class="spell-aciklama">Menzilindeki bir varlığa parmağını doğrultup bir mesaj fısıldarsın. Hedef (ve sadece hedef) mesajı duyar ve sadece senin duyabileceğin bir fısıltı ile yanıtlayabilir.
+
+                                    <br><br>
+
+                                    Eğer hedefi tanıyorsan ve bariyerin ardında olduğunu biliyorsan, bu büyüyü katı nesnelerin ardında da kullanabilirsin.
+                                     Büyülü sessizlik, 1 fitlik taş, 1 inç metal, kurşundan ince bir plaka ya da 3 fitlik odun büyüyü bloklar. 
+                                     Büyü düz bir hizada gitmek zorunda değildir, rahatlıkla açıklıklardan geçer ve köşeleri dönebilir.</p>
+                            </div>
+
+                            <div class="spell-description" id="spell4">
+                                <h2>Tamirat <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Dönüştürme Bazbüyüsü</span> </h2>
+				
+				                <div class="spell-details">
+                	                <p><strong>Büyü Süresi:</strong> Anında</p>
+                	                <p><strong>Enerji Türü:</strong> Dönüştürme</p>
+                	                <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                	                <p><strong>Büyü Menzili:</strong> Dokunma Mesafesi</p>
+				                </div>
+                                <p class="spell-aciklama">Dokunma menzilindeki çatlak, ikiye ayrılmış ya da yırtılmış bir nesnenin hasarlı kısmına 
+                                    dokunursun. Dokunduğun bölge enerjinin kuvvetine bağlı olarak tamir olabilir, kırılıp ayrıldığı yerden birleşebilir.
+                                </p>
+                            </div>
+
+                            <div class="spell-description" id="spell5">
+                                <h2>Silah Çağır <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Oluşturma Bazbüyüsü</span> </h2>
+				
+				                <div class="spell-details">
+                	                <p><strong>Büyü Süresi:</strong> Anında</p>
+                	                <p><strong>Enerji Türü:</strong> Oluşturma</p>
+                	                <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                	                <p><strong>Büyü Menzili:</strong> Kendin</p>
+				                </div>
+                                <p class="spell-aciklama">1 ay boyunca varlığı üstüne sinmiş, sürekli yanında taşımış olduğun bir silahı büyü ile kendine
+                                    bağlayabilirsin. Silahla fiziksel olarak etkileşimdeyken, bu büyüyü kullanarak bağladığın silahını yok edebilir, aynı 
+                                    şekilde tekrar elinde oluşturabilirsin.
+
+                                    <br><br>
+
+                                    Fiziksel olarak temas halinde değilsen, silahını yok edip elinde tekrar oluşturamazsın. Bir ay boyunca başka bir silahı 
+                                    üstüne sindirip bağlanman halinde bir önceki silahın bağı kesilir.
+
+                                    <br><br>
+
+                                    <span style="font-style: italic; font-size: 9pt; color: gray;">
+
+                                        <strong>Özel Büyü:</strong> Bu büyüyü kullanabilmek için hikâyesel ya da sınıfsal olarak özel bir durumda olmak gerekir.
+                                        Özel durumları oyun yöneticiniz ile konuşarak öğrenebilir ve karakterinizin öğrenmesi için anlaşabilirsiniz.
+
+                                    </span>
+                                </p>
+                            </div>
+
+                            <div class="spell-description" id="spell6">
+                                <h2>Ürperten Dokunuş <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Nekromansi Bazbüyüsü</span> </h2>
+				
+				                <div class="spell-details">
+                	                <p><strong>Büyü Süresi:</strong> Anında</p>
+                	                <p><strong>Enerji Türü:</strong> Nekromansi</p>
+                	                <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                	                <p><strong>Büyü Menzili:</strong> 24 Kare</p>
+				                </div>
+                                <p class="spell-aciklama">Menzilindeki bir hedefe odaklanarak ona nekromansi enerjisinden oluşma bir el ile saldırırsın.
+                                    Rakip ÇEVİKLİK kurtulma zarı ile kaçınamazsa oluşturduğun el bir sonraki turunun sonuna kadar hedefe tutunur ve 
+                                    üstünde gerçekleştirilecek iyileştirme etkilerini engellemeye çalışır.
+                                </p>
+                            </div>
+
+                            <div class="spell-description" id="spell7">
+                                <h2>Ölümün Çanları <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Nekromansi Bazbüyüsü</span> </h2>
+				
+				                <div class="spell-details">
+                	                <p><strong>Büyü Süresi:</strong> Anında</p>
+                	                <p><strong>Enerji Türü:</strong> Nekromansi</p>
+                	                <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                	                <p><strong>Büyü Menzili:</strong> 24 Kare</p>
+				                </div>
+                                <p class="spell-aciklama">Menzilindeki hedefe odaklanarak zihninde uğursuz enerji yayan çanlar yankılanmasını sağlarsın. Hedefin 
+                                    İRADE kurtulmasında başarısız olursa yankılanan çanlardan zihinsel hasar alır. 
+                                </p>
+                            </div>
+
+                            <div class="spell-description" id="spell8">
+                                <h2>Kan Kontrolü <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Kan Bazbüyüsü</span> </h2>
+				
+				                <div class="spell-details">
+                	                <p><strong>Büyü Süresi:</strong> Anında</p>
+                	                <p><strong>Enerji Türü:</strong> Kan</p>
+                	                <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                	                <p><strong>Büyü Menzili:</strong> 12 Kare</p>
+				                </div>
+                                <p class="spell-aciklama">Menzilde hissedebildiğin serbest kan kaynaklarındaki kan hacimlerini kontrol ederek isteğin doğrultusunda 
+                                    dönüşüm geçirmesini ve hareket etmesini sağlayabilirsin.
+                                    
+                                    <br><br>
+
+                                    Kan kontrolü ile gerçekleştirebileceklerinin genel bir tanımı yoktur ancak sınırları vardır. Kan kontrolü ile gerçekleştirmek istediğin 
+                                    eylem, karmaşıklığına ve eylemde kullanacağın kan miktarına göre mana kullanır. Ayrıca kan kontrolü ile gerçekleştirmek istenilen eylemin
+                                    ağırlığı ve karmaşıklığı, kullanıcının mevcut kan büyülerine olan yetkinliği ile doğru orantılıdır. Bu yetkinlik, kullanıcının hakim olduğu 
+                                    kan büyülerinin en yüksek seviyesi üzerinden belirlenir.
+
+                                    <br><br>
+
+                                    <span style="font-style: italic; font-size: 9pt; color: gray;">
+
+                                        <strong>Özel Büyü:</strong> Bu büyüyü kullanabilmek için hikâyesel ya da sınıfsal olarak özel bir durumda 
+                                        ya da Vampir ırkına mensup olmak gerekir.
+                                        Özel durumları oyun yöneticiniz ile konuşarak öğrenebilir ve karakterinizin öğrenmesi için anlaşabilirsiniz.
+
+                                    </span>
+                                </p>
+                            </div>
+
+                            <div class="spell-description" id="spell9">
+                                <h2>Kamp Ateşi Yarat <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Oluşturma Bazbüyüsü</span> </h2>
+				
+				                <div class="spell-details">
+                	                <p><strong>Büyü Süresi:</strong> 1 Dakika</p>
+                	                <p><strong>Enerji Türü:</strong> Oluşturma</p>
+                	                <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                	                <p><strong>Büyü Menzili:</strong> 12 Kare</p>
+				                </div>
+                                <p class="spell-aciklama">Menzilinde bulunan bir alana enerjiden meydana gelme bir kamp ateşi odaklarsın. Bu ateş, doğal yollarla oluşmuş bir 
+                                    ateş gibi etrafını ısıtır ve ışık yayar. Ateşin üstünde kalan varlıklar ÇEVİKLİK kurtulma zarı atar, başarısız olma durumunda yanma hasarı alır.
+                                
+                                </p>
+                            </div>
+
+                            <div class="spell-description" id="spell10">
+                                <h2>Ateş Kontrolü <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Yıkım Bazbüyüsü</span> </h2>
+				
+				                <div class="spell-details">
+                	                <p><strong>Büyü Süresi:</strong> Anlık</p>
+                	                <p><strong>Enerji Türü:</strong> Oluşturma</p>
+                	                <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                	                <p><strong>Büyü Menzili:</strong> 12 Kare</p>
+				                </div>
+                                <p class="spell-aciklama">Menzilinde görebileceğin 1 kare küplük alan içinde bulunan doğal bir ateş seç. Seçeceğin doğal ateş ile aşağıdaki
+                                    eylemleri gerçekleştirebilirsin:
+
+                                    <br><br>
+
+                                    - Yakınında odun ya da benzeri bir yakıt varsa, ateşi anında 1 kare mesafelik alanda genişletebilirisin.
+
+                                    <br><br>
+
+                                    - Seçtiğin alandaki ateşi anında söndürebilirsin.
+
+                                    <br><br>
+
+                                    - Ateşin yaydığı ışığın mesafesini ikiye katlar ya da rengini değiştirirsin. Bu etki 1 saat sürer.
+
+                                    <br><br>
+
+                                    - Alevlerin içinde istediğin bir şekil oluşturup hareket ettirebilirsin. Bu etki 1 saat sürer.
+                                
+                                </p>
+                            </div>
+
+                            <div class="spell-description" id="spell11">
+                                <h2>Ateş Kontrolü <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Yıkım Bazbüyüsü</span> </h2>
+				
+				                <div class="spell-details">
+                	                <p><strong>Büyü Süresi:</strong> Anlık</p>
+                	                <p><strong>Enerji Türü:</strong> Oluşturma</p>
+                	                <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                	                <p><strong>Büyü Menzili:</strong> 12 Kare</p>
+				                </div>
+                                <p class="spell-aciklama">Menzilinde görebileceğin bir hedefe ellerinden fırlayacak konsantre bir basınç öbeği fırlatırsın. 
+                                    Bu basınç öbeği çarpma halinde hedefe basınç hasarı uygular.
+
+                                    <br><br>
+
+                                    Bu büyüyü üst seviyelerde farklı etkilerini uyandırabilecek biçimde geliştirmeye çalışabilirsin.
+
+                                    <br><br>
+
+                                    <span style="font-style: italic; font-size: 9pt; color: gray;">
+
+                                        <strong>Özel Büyü:</strong> Bu büyüyü kullanabilmek için hikâyesel ya da sınıfsal olarak özel bir durumda olmak gerekir.
+                                        Özel durumları oyun yöneticiniz ile konuşarak öğrenebilir ve karakterinizin öğrenmesi için anlaşabilirsiniz.
+
+                                        <br><br>
+
+                                        <strong>Özel Sınıflar: </strong>Sehhar, Cadı (Yıkım ya da Karanlık Enerji)
+
+                                    </span>
+                                
+                                </p>
+                            </div>
+                                <!-- Daha fazla büyü açıklaması ekleyebilirsin -->
+                        </div>
+		    </div>
+		 </div>
 		
 		
 		
@@ -61,6 +491,86 @@
 	
 	</div>
 	
+	
+	
+	<script>
+        let sortDirection = {
+            name: true,
+            level: true,
+            duration: true,
+            energy: true,
+            mana: true,
+            range: true
+        };
+
+        function showSpell(spellId) {
+            const descriptions = document.querySelectorAll('.spell-description');
+            descriptions.forEach(description => description.classList.remove('active'));
+
+            const selectedSpell = document.getElementById(spellId);
+            if (selectedSpell) {
+                selectedSpell.classList.add('active');
+            }
+        }
+
+        function filterSpells() {
+            const searchValue = document.getElementById('search').value.toLowerCase();
+            const levelValue = document.getElementById('level-filter').value;
+            const energyValue = document.getElementById('energy-filter').value;
+            const durationValue = document.getElementById('duration-filter').value;
+            const manaValue = document.getElementById('mana-filter').value;
+            const rangeValue = document.getElementById('range-filter').value;
+
+            const spells = document.querySelectorAll('#spell-list tr');
+            spells.forEach(spell => {
+                const spellName = spell.getAttribute('data-name').toLowerCase();
+                const spellLevel = spell.getAttribute('data-level');
+                const spellEnergy = spell.getAttribute('data-energy');
+                const spellDuration = spell.getAttribute('data-duration');
+                const spellMana = parseInt(spell.getAttribute('data-mana'));
+                const spellRange = parseInt(spell.getAttribute('data-range'));
+
+                const matchesName = spellName.includes(searchValue);
+                const matchesLevel = !levelValue || spellLevel === levelValue;
+                const matchesEnergy = !energyValue || spellEnergy === energyValue;
+                const matchesDuration = !durationValue || spellDuration === durationValue;
+                const matchesMana = !manaValue || spellMana <= parseInt(manaValue);
+                const matchesRange = !rangeValue || spellRange >= parseInt(rangeValue);
+
+                if (matchesName && matchesLevel && matchesEnergy && matchesDuration && matchesMana && matchesRange) {
+                    spell.style.display = 'table-row';
+                } else {
+                    spell.style.display = 'none';
+                }
+            });
+        }
+
+        function sortTable(column) {
+            const table = document.getElementById('spell-list');
+            const rows = Array.from(table.getElementsByTagName('tr'));
+            const direction = sortDirection[column];
+            let sortedRows;
+
+            if (column === 'name' || column === 'energy' || column === 'duration') {
+                sortedRows = rows.sort((a, b) => {
+                    const aText = a.getAttribute(`data-${column}`).toLowerCase();
+                    const bText = b.getAttribute(`data-${column}`).toLowerCase();
+                    if (aText < bText) return direction ? -1 : 1;
+                    if (aText > bText) return direction ? 1 : -1;
+                    return 0;
+                });
+            } else {
+                sortedRows = rows.sort((a, b) => {
+                    const aValue = parseInt(a.getAttribute(`data-${column}`));
+                    const bValue = parseInt(b.getAttribute(`data-${column}`));
+                    return direction ? aValue - bValue : bValue - aValue;
+                });
+            }
+
+            sortedRows.forEach(row => table.appendChild(row));
+            sortDirection[column] = !direction;
+        }
+    </script>
 	
 </body>
 </html>

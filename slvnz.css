@@ -104,14 +104,16 @@
 
 .spells-div {
 	background-color: white;
-	width: 70%;
+	width: 80%;
 	margin: 20px;
 }
 
 .page-contents {
 	background-color: white;
-	width: 70%;
+	width: 50%;
 	margin: 20px;
+	text-align: justify;
+	hyphens: auto;
 }
 
 .page-contents h1 {
@@ -131,4 +133,103 @@
 	font-family: barlow;
 	font-weight: light;
 	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+.container {
+    width: 90%;
+    margin-top: 20px;
+}
+
+.filter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 10px;
+	font-family: barlow !important;
+}
+
+.filter input, .filter select {
+    margin: 5px;
+    padding: 5px;
+    font-size: 10px;
+}
+
+.main-content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.spell-list {
+    width: 55%;
+    background-color: #fff;
+    padding: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+	font-family: barlow;
+	font-size: 10pt;
+}
+
+.spell-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.spell-list th, .spell-list td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.spell-list th {
+    background-color: blueviolet;
+	font-family: barlow;
+	text-align: start;
+	font-size: 10pt;
+	color: white;
+}
+
+.spell-list tr:hover {
+    background-color: #f9f9f9;
+}
+
+.spell-description {
+    width: 35%;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    display: none;
+	font-family: barlow;
+}
+
+.spell-description h2 {
+	font-family: 'pirata one';
+	font-weight: 300;
+	border-bottom: 1px solid;
+}
+
+.spell-description.active {
+    display: block;
+}
+
+.spell-details {
+	font-size: 9pt;
+}
+
+.spell-details p {
+	margin: 0;
+	font-size: 10pt;
+}
+
+.spell-aciklama {
+	font-size: 10pt;
 }
