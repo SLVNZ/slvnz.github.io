@@ -170,7 +170,7 @@
 }
 
 .spell-list {
-    width: 55%;
+    width: 600px;
     background-color: #fff;
     padding: 20px;
     max-height: 60vh;
@@ -185,8 +185,10 @@
 }
 
 .spell-list th, .spell-list td {
-    padding: 10px;
-    border: 1px solid #ddd;
+    padding-left: 10px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+    border-bottom: 1px solid #ddd;
     cursor: pointer;
 }
 
