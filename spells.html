@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="https://use.typekit.net/jze1rws.css">
 <title>Büyüler ve Yetenekler - SLVNZ Veritabanı</title>
 <link href="slvnz.css" rel="stylesheet" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
@@ -33,7 +34,7 @@
 				
 					<a href="index.html"> <button> ANA SAYFA </button> </a>
 					
-					<a href="spells.html"> <button style="color: blueviolet; border: 1px solid blueviolet; border-radius: 5px;"> BÜYÜLER/YETENEKLER </button> </a>
+					<a href="spells.html"> <button style="color: blueviolet; border: 1px solid blueviolet; border-radius: 5px;"> BÜYÜLER </button> </a>
 			
 				</div>
 			
@@ -121,7 +122,7 @@
                                     <tr data-name="hokkabaz" data-level="0" data-energy="trns" data-duration="inst" data-mana="0" data-range="4" onclick="showSpell('spell1')">
                                         <td>Hokkabazlık</td>
                                         <td>Bazbüyü</td>
-                                        <td>Anında</td>
+                                        <td>Anlık</td>
                                         <td>Dönüştürme</td>
                                         <td>0</td>
                                         <td>4 kare</td>
@@ -137,7 +138,7 @@
                                     <tr data-name="mesaj" data-level="0" data-energy="trns" data-duration="inst" data-mana="0" data-range="24" onclick="showSpell('spell3')">
                                         <td>Mesaj</td>
                                         <td>Bazbüyü</td>
-                                        <td>Anında</td>
+                                        <td>Anlık</td>
                                         <td>Dönüştürme</td>
                                         <td>0</td>
                                         <td>24 kare</td>
@@ -146,7 +147,7 @@
                                     <tr data-name="tamirat" data-level="0" data-energy="trns" data-duration="inst" data-mana="0" data-range="0" onclick="showSpell('spell4')">
                                         <td>Tamirat</td>
                                         <td>Bazbüyü</td>
-                                        <td>Anında</td>
+                                        <td>Anlık</td>
                                         <td>Dönüştürme</td>
                                         <td>0</td>
                                         <td>Dokunma</td>
@@ -155,7 +156,7 @@
                                     <tr data-name="silah çağır" data-level="0" data-energy="conj" data-duration="inst" data-mana="0" data-range="0" onclick="showSpell('spell5')">
                                         <td>Silah Çağır</td>
                                         <td>Bazbüyü</td>
-                                        <td>Anında</td>
+                                        <td>Anlık</td>
                                         <td>Oluşturma</td>
                                         <td>0</td>
                                         <td>Kendin</td>
@@ -164,7 +165,7 @@
                                     <tr data-name="ürperten dokunuş" data-level="0" data-energy="necro" data-duration="inst" data-mana="0" data-range="24" onclick="showSpell('spell6')">
                                         <td>Ürperten Dokunuş</td>
                                         <td>Bazbüyü</td>
-                                        <td>Anında</td>
+                                        <td>Anlık</td>
                                         <td>Nekromansi</td>
                                         <td>0</td>
                                         <td>24 kare</td>
@@ -173,7 +174,7 @@
                                     <tr data-name="ölümün çanları" data-level="0" data-energy="necro" data-duration="inst" data-mana="0" data-range="12" onclick="showSpell('spell7')">
                                         <td>Ölümün Çanları</td>
                                         <td>Bazbüyü</td>
-                                        <td>Anında</td>
+                                        <td>Anlık</td>
                                         <td>Nekromansi</td>
                                         <td>0</td>
                                         <td>12 kare</td>
@@ -182,7 +183,7 @@
                                     <tr data-name="kan kontrolü" data-level="0" data-energy="bld" data-duration="inst" data-mana="0" data-range="12" onclick="showSpell('spell8')">
                                         <td>Kan Kontrolü</td>
                                         <td>Bazbüyü</td>
-                                        <td>Anında</td>
+                                        <td>Anlık</td>
                                         <td>Kan</td>
                                         <td>0</td>
                                         <td>12 kare</td>
@@ -240,6 +241,42 @@
                                         <td>Yıkım</td>
                                         <td>0</td>
                                         <td>12 kare</td>
+                                    </tr>
+
+                                    <tr data-name="büyücü eli" data-level="0" data-energy="conj" data-duration="1min" data-mana="0" data-range="12" onclick="showSpell('spell15')">
+                                        <td>Büyücü Eli</td>
+                                        <td>Bazbüyü</td>
+                                        <td>1 Dakika</td>
+                                        <td>Yıkım</td>
+                                        <td>0</td>
+                                        <td>12 kare</td>
+                                    </tr>
+
+                                    <tr data-name="dans eden ışıklar" data-level="0" data-energy="evoc" data-duration="1min" data-mana="0" data-range="24" onclick="showSpell('spell16')">
+                                        <td>Dans Eden Işıklar (K)</td>
+                                        <td>Bazbüyü</td>
+                                        <td>1 Dakika</td>
+                                        <td>Yıkım</td>
+                                        <td>0</td>
+                                        <td>24 kare</td>
+                                    </tr>
+
+                                    <tr data-name="dans eden ışıklar" data-level="0" data-energy="evoc" data-duration="1min" data-mana="0" data-range="24" onclick="showSpell('spell16')">
+                                        <td>Dans Eden Işıklar (K)</td>
+                                        <td>Bazbüyü</td>
+                                        <td>1 Dakika</td>
+                                        <td>Yıkım</td>
+                                        <td>0</td>
+                                        <td>24 kare</td>
+                                    </tr>
+
+                                    <tr data-name="rehberlik" data-level="0" data-energy="div" data-duration="1min" data-mana="0" data-range="0" onclick="showSpell('spell17')">
+                                        <td>Rehberlik (K)</td>
+                                        <td>Bazbüyü</td>
+                                        <td>1 Dakika</td>
+                                        <td>Kehânet</td>
+                                        <td>0</td>
+                                        <td>Dokunma</td>
                                     </tr>
 
                                     <!-- Daha fazla büyü ekleyebilirsin -->
@@ -554,6 +591,67 @@
                                         don, hedefe donma hasarı uygularken <strong>dayanıklılık</strong> kurtulmasını geçemezse bir sonraki saldırısında negatif
                                         puan almasına sebep olur.
                                     
+                                    </p>
+                                </div>
+
+                                <div class="spell-description" id="spell15">
+                                    <h2>Büyücü Eli <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Oluşturma Bazbüyüsü</span> </h2>
+                    
+                                    <div class="spell-details">
+                                        <p><strong>Kullanıma Süresi:</strong> 1 eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> 1 dakika</p>
+                                        <p><strong>Enerji Türü:</strong> Oluşturma</p>
+                                        <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> 6 Kare</p>
+                                    </div>
+                                    <p class="spell-aciklama">Menzilinde seçtiğin bir noktada spektral ve süzülen bir el belirir. El süre boyunca ya da eylem
+                                         olarak sen savıncaya kadar kalır. Eğer senden 6 kareden fazla uzaklaşırsa ya da sen bu büyüyü tekrar kullanırsan el kaybolur.
+
+                                        <br><br>
+
+                                        Eylemini kullanıp eli kontrol edebilirsin. Eli bir nesneyi kullanma, kilitsiz bir kapıyı ya da kabı açma, açık bir kaptan eşya 
+                                        alma ya da yerine koyma, veya şişenin içeriklerini dökme gibi eylemler için kullanabilirsin. Eli her kullanışında 6 kareye kadar hareket ettirebilirsin.
+                                    
+                                        <br><br>
+
+                                        El saldıramaz, büyülü nesneleri etkinleştiremez ya da 5 kilodan ağır nesneleri taşıyamaz.
+                                    </p>
+                                </div>
+
+                                <div class="spell-description" id="spell16">
+                                    <h2>Dans Eden Işıklar <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Yıkım Bazbüyüsü - Konsantrasyon</span> </h2>
+                    
+                                    <div class="spell-details">
+                                        <p><strong>Kullanıma Süresi:</strong> 1 eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> 1 dakika</p>
+                                        <p><strong>Enerji Türü:</strong> Yıkım</p>
+                                        <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> 24 Kare</p>
+                                    </div>
+                                    <p class="spell-aciklama">Menzilinde 4 taneye kadar meşale boyutunda ışık yaratıp bunlara meşale, kandil ya da havada süzülen parlayan küreler şeklini verebilirsin.
+                                         Ayrıca bu 4 ışığı birleştirip kabaca Orta boyutlu bir insansı şeklini de verebilirsin. Hangi şekli seçersen seç her ışık 2 karelik çapta loş ışık verir.
+
+                                        <br><br>
+
+                                        Sıranda bonus eylem olarak, ışıkları menzilin içerisinde 12 kareye kadar hareket ettirebilirsin. Bu büyü ile yaratılan ışıklar birbirine en fazla 4 kare uzaklıkta
+                                         olabilirler ve eğer bir ışık menzil dışında kalırsa söner.
+                                        
+                                    </p>
+                                </div>
+
+                                <div class="spell-description" id="spell17">
+                                    <h2>Rehberlik <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Kehânet Bazbüyüsü - Konsantrasyon</span> </h2>
+                    
+                                    <div class="spell-details">
+                                        <p><strong>Kullanıma Süresi:</strong> 1 eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> 1 dakika</p>
+                                        <p><strong>Enerji Türü:</strong> Kehânet</p>
+                                        <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> Dokunuş Mesafesi</p>
+                                    </div>
+                                    <p class="spell-aciklama">İstekli bir varlığa dokunursun. Büyü bitmeden önce bir kereliğine, hedef 1d4 atıp sonucunu seçtiği bir yetenek
+                                         zarına ekleyebilir. Bu d4'lük zarı yetenek zarından önce ya da sonra atabilir. Sonrasında büyü sona erer.
+                                        
                                     </p>
                                 </div>
                                     <!-- Daha fazla büyü açıklaması ekleyebilirsin -->
