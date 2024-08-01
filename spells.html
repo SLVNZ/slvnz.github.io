@@ -22,7 +22,7 @@
 					 
 			<div style="display: flex; flex-direction: row; padding-bottom: 10px; pointer-events: none;">
 			
-				<div style="font-family: Barlow; display: flex; flex-direction: row; align-items: flex-end; margin-right: 100px;">
+				<div id="header-slvnz" style="font-family: Barlow; display: flex; flex-direction: row; align-items: flex-end; margin-right: 100px;">
 				
 				<h1> SLVNZ</h1>
 				
@@ -277,6 +277,33 @@
                                         <td>Kehânet</td>
                                         <td>0</td>
                                         <td>Dokunma</td>
+                                    </tr>
+
+                                    <tr data-name="ufak illüzyon" data-level="0" data-energy="illu" data-duration="1min" data-mana="0" data-range="6" onclick="showSpell('minorillusion')">
+                                        <td>Ufak İllüzyon</td>
+                                        <td>Bazbüyü</td>
+                                        <td>1 Dakika</td>
+                                        <td>İllüzyon</td>
+                                        <td>0</td>
+                                        <td>6 kare</td>
+                                    </tr>
+
+                                    <tr data-name="kıvılcım" data-level="0" data-energy="evoc" data-duration="1min" data-mana="0" data-range="0" onclick="showSpell('spark')">
+                                        <td>Kıvılcım</td>
+                                        <td>Bazbüyü</td>
+                                        <td>1 Dakika</td>
+                                        <td>Yıkım</td>
+                                        <td>0</td>
+                                        <td>Dokunma</td>
+                                    </tr>
+
+                                    <tr data-name="kutsal alev" data-level="0" data-energy="evoc" data-duration="inst" data-mana="0" data-range="0" onclick="showSpell('kutsalalev')">
+                                        <td>Kutsal Alev *</td>
+                                        <td>Bazbüyü</td>
+                                        <td>Anlık</td>
+                                        <td>Yıkım</td>
+                                        <td>0</td>
+                                        <td>12 Kare</td>
                                     </tr>
 
                                     <!-- Daha fazla büyü ekleyebilirsin -->
@@ -652,6 +679,86 @@
                                     <p class="spell-aciklama">İstekli bir varlığa dokunursun. Büyü bitmeden önce bir kereliğine, hedef 1d4 atıp sonucunu seçtiği bir yetenek
                                          zarına ekleyebilir. Bu d4'lük zarı yetenek zarından önce ya da sonra atabilir. Sonrasında büyü sona erer.
                                         
+                                    </p>
+                                </div>
+
+                                <div class="spell-description" id="minorillusion">
+                                    <h2>Ufak İllüzyon <span style="font-family: barlow; font-style: italic; font-size: 10pt;">İllüzyon Bazbüyüsü</span> </h2>
+                    
+                                    <div class="spell-details">
+                                        <p><strong>Kullanıma Süresi:</strong> 1 eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> 1 dakika</p>
+                                        <p><strong>Enerji Türü:</strong> İllüzyon</p>
+                                        <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> 6 Kare</p>
+                                    </div>
+                                    <p class="spell-aciklama">Menzilinde büyü süresince kalacak bir ses ya da bir nesne görüntüsü yaratırsın. 
+                                        İllüzyon, onu eylemini kullanıp savarsan ya da bu büyüyü yeniden kullanırsan sonlanır.
+
+                                        <br><br>
+
+                                        Eğer ses yaratırsan, bu bir fısıltıdan çığlığa kadar değişebilir. Bu senin sesin ya da başkasının sesi,
+                                         bir aslan kükremesi, davul gürültüsü ya da seçeceğin herhangi bir ses olabilir. Oluşturduğun ses,
+                                         süre boyunca kesilmeden devam edebilir.
+                                        
+                                        <br><br>
+
+                                        Eğer sandalye, çamurlu ayak izleri ya da küçük bir sandık gibi nesnelerin görüntüsünü yarattıysan, 
+                                        bu 1 karelik küpten büyük olamaz. Görüntü ses, ışık, koku ya da herhangi bir duyusal etki yaratamaz. 
+                                        Görüntü ile fiziksel etkileşim onun bir illüzyon olduğunu ortaya çıkarır, çünkü nesneler içinden geçebilir.
+                                        
+                                        <br><br>
+
+                                        Eğer bir varlık eylemini bu ses ya da görüntüyü incelemek için kullanırsa, büyünün kuvvetine karşılık 
+                                        <strong>araştırma</strong> zarı ile illüzyon olduğunu anlayabilir. Eğer bir varlık illüzyonun 
+                                        aslını farkederse, illüzyon o varlık için sönük hale gelir.
+                                        
+                                    </p>
+                                </div>
+
+                                <div class="spell-description" id="spark">
+                                    <h2>Kıvılcım <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Yıkım Bazbüyüsü</span> </h2>
+                    
+                                    <div class="spell-details">
+                                        <p><strong>Kullanıma Süresi:</strong> 1 eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> 1 dakika</p>
+                                        <p><strong>Enerji Türü:</strong> Yıkım</p>
+                                        <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> Dokunuş Mesafesi</p>
+                                    </div>
+                                    <p class="spell-aciklama">Büyülü sözleri söylerken parmaklarını şıklatırsın. Parmaklarının çıklamasıyla bir 
+                                        kıvılcım meydana gelir. 1 dakika boyunca parmaklarını şıklatarak bu kıvılcımı çıkarabilirsin. Kıvılcım, 
+                                        çıra, kuru otlar, kağıtlar gibi yanıcı maddeleri tek seferde tutuşturabilir.
+                                        
+                                    </p>
+                                </div>
+
+                                <div class="spell-description" id="kutsalalev">
+                                    <h2>Kutsal Alev <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Yıkım Bazbüyüsü</span> </h2>
+                    
+                                    <div class="spell-details">
+                                        <p><strong>Kullanıma Süresi:</strong> 1 eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> Anlık</p>
+                                        <p><strong>Enerji Türü:</strong> Yıkım</p>
+                                        <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> 12 Kare</p>
+                                    </div>
+                                    <p class="spell-aciklama">Görüş mesafende odaklanacağın bir varlığın çevresinde ışıyan alevler oluşarak hedefine akın eder. 
+                                        Hedefin <strong>çeviklik</strong> kurtulması kullanarak bu akından kaçınabilir. Kaçınması halinde saldırından hasar almaz.
+                                        
+                                        <br><br>
+    
+                                        <span style="font-style: italic; font-size: 9pt; color: gray;">
+    
+                                            <strong>Özel Büyü:</strong> Bu büyüyü kullanabilmek için hikâyesel ya da sınıfsal olarak özel bir durumda olmak gerekir.
+                                            Özel durumları oyun yöneticiniz ile konuşarak öğrenebilir ve karakterinizin öğrenmesi için anlaşabilirsiniz.
+    
+                                            <br><br>
+    
+                                            <strong>Özel Sınıflar: </strong>Ruhban, Paladin
+    
+                                        </span>
+
                                     </p>
                                 </div>
                                     <!-- Daha fazla büyü açıklaması ekleyebilirsin -->
