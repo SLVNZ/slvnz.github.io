@@ -30,12 +30,30 @@
 			
 				</div>
 			
-				<div style="font-family: Barlow; display: flex; flex-direction: row; align-items: center; width: 60%; pointer-events: all; padding-top: 6px">
+				<div id="menu-vert" style="font-family: Barlow; display: flex; flex-direction: row; align-items: center; width: 60%; pointer-events: all; padding-top: 6px">
 				
 					<a href="index.html"> <button> ANA SAYFA </button> </a>
 					
 					<a href="spells.html"> <button style="color: blueviolet; border: 1px solid blueviolet; border-radius: 5px;"> BÜYÜLER </button> </a>
 			
+                    <a href="skills.html"> <button> FİZİKSEL <br> YETENEKLER </button> </a>
+
+                    <a href="battle-arts.html"> <button> SAVAŞ <br> SANATLARI </button> </a>
+
+				</div>
+
+                <div id="menu-drop" style="font-family: Barlow; display: flex; flex-direction: row; align-items: center; width: 60%; pointer-events: all; padding-top: 6px">
+                    <div class="dropdown">
+                        <button class="dropbtn">MENÜ</button>
+                        <div class="dropdown-content">
+                            <a href="index.html">ANA SAYFA</a>
+                            <a href="spells.html" style="color: white; background-color: blueviolet;">BÜYÜLER</a>
+                            <a href="skills.html">FİZİKSEL YETENEKLER</a>
+                            <a href="battle-arts.html">SAVAŞ SANATLARI</a>
+                        </div>
+                    </div>
+                </div>
+
 				</div>
 			
 			</div>
@@ -306,6 +324,69 @@
                                         <td>12 Kare</td>
                                     </tr>
 
+                                    <tr data-name="su şekillendirme" data-level="0" data-energy="trns" data-duration="inst" data-mana="0" data-range="0" onclick="showSpell('shapewater')">
+                                        <td>Su Şekillendirme</td>
+                                        <td>Bazbüyü</td>
+                                        <td>Anlık</td>
+                                        <td>Dönüştürme</td>
+                                        <td>0</td>
+                                        <td>6 Kare</td>
+                                    </tr>
+
+                                    <tr data-name="çarpan kavrayış" data-level="0" data-energy="evoc" data-duration="inst" data-mana="0" data-range="0" onclick="showSpell('smitinggrasp')">
+                                        <td>Çarpan Kavrayış</td>
+                                        <td>Bazbüyü</td>
+                                        <td>Anlık</td>
+                                        <td>Yıkım</td>
+                                        <td>0</td>
+                                        <td>Dokunma</td>
+                                    </tr>
+
+                                    <tr data-name="kılıç patlaması" data-level="0" data-energy="conj" data-duration="inst" data-mana="0" data-range="1" onclick="showSpell('swordburst')">
+                                        <td>Kılıç Patlaması</td>
+                                        <td>Bazbüyü</td>
+                                        <td>Anlık</td>
+                                        <td>Oluşturma</td>
+                                        <td>0</td>
+                                        <td>1 Kare</td>
+                                    </tr>
+
+                                    <tr data-name="acımasız alay" data-level="0" data-energy="ench" data-duration="inst" data-mana="0" data-range="12" onclick="showSpell('viciousmockery')">
+                                        <td>Acımasız Alay</td>
+                                        <td>Bazbüyü</td>
+                                        <td>Anlık</td>
+                                        <td>Cezbetme</td>
+                                        <td>0</td>
+                                        <td>12 Kare</td>
+                                    </tr>
+
+                                    <tr data-name="kartal gözler" data-level="0" data-energy="div" data-duration="inst" data-mana="0" data-range="0" onclick="showSpell('eagleeyes')">
+                                        <td>Kartal Gözler</td>
+                                        <td>Bazbüyü</td>
+                                        <td>Anlık</td>
+                                        <td>Kehanet</td>
+                                        <td>0</td>
+                                        <td>Dokunma</td>
+                                    </tr>
+
+                                    <tr data-name="illüzyon saldırısı" data-level="1" data-energy="illu" data-duration="inst" data-mana="1" data-range="6" onclick="showSpell('illusionstrike')">
+                                        <td>İllüzyon Saldırısı</td>
+                                        <td>1. Seviye</td>
+                                        <td>Anlık</td>
+                                        <td>İllüzyon</td>
+                                        <td>1</td>
+                                        <td>6 kare</td>
+                                    </tr>
+
+                                    <tr data-name="yönelimli kartopu" data-level="1" data-energy="div" data-duration="bonus" data-mana="1" data-range="0" onclick="showSpell('aligningsnowball')">
+                                        <td>Yönelimli Kartopu</td>
+                                        <td>1. Seviye</td>
+                                        <td>Anlık</td>
+                                        <td>Kehanet</td>
+                                        <td>1</td>
+                                        <td>Dokunma</td>
+                                    </tr>
+
                                     <!-- Daha fazla büyü ekleyebilirsin -->
                                 </tbody>
                                 </table>
@@ -326,6 +407,46 @@
 
 
                             <div style="width: 480px;">
+
+                                <div class="spell-description" id="aligningsnowball">
+                                    <h2>Yönelimli Kartopu <span style="font-family: barlow; font-style: italic; font-size: 10pt;">1. Seviye Kehanet Büyüsü</span> </h2>
+                    
+                                    <div class="spell-details">
+                                        <p><strong>Kullanma Süresi:</strong> 1 Eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> 1 dakika</p>
+                                        <p><strong>Enerji Türü:</strong> Kehanet</p>
+                                        <p><strong>Büyü Bedeli:</strong> 1 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> Dokunma Mesafesi</p>
+                                    </div>
+                                    <p class="spell-aciklama">
+                                        3 adet kartopuna dokunarak onlara büyü enerjisini aktarırsın. Kartopunu fırlatmadan önce bir ahlaksal yönelim seçersin: 
+                                        İyi, kötü, nötr ya da kaotik. Kartopunu fırlattığın varlığın genel ahlaki yönelimi seçtiğin yönelim ile uyuşuyor ise 
+                                        kartopu hedefe isabet halinde vurur. Eğer kartopu için belirlediğin yönelimle uyuşmuyorsa, isabet zarı olumlu gelse bile 
+                                        kartopu çözünerek hedefi ıskalar.
+
+                                        <br><br>
+
+                                        Bu büyüyü başka kartopları üzerinde kullandığın zaman, hali hazırda büyü etkisinde bulunan kartoplarının büyülü etkileri sonlanır.
+                                    </p>
+                                </div>
+
+
+                                <div class="spell-description" id="illusionstrike">
+                                    <h2>İllüzyon Saldırısı <span style="font-family: barlow; font-style: italic; font-size: 10pt;">1. Seviye İllüzyon Büyüsü</span> </h2>
+                    
+                                    <div class="spell-details">
+                                        <p><strong>Kullanma Süresi:</strong> 1 Eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> Anında</p>
+                                        <p><strong>Enerji Türü:</strong> İllüzyon</p>
+                                        <p><strong>Büyü Bedeli:</strong> 1 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> 6 kare</p>
+                                    </div>
+                                    <p class="spell-aciklama">
+                                        Menzilinde görebildiğin bir varlığa saldıracak bir illüzyonunu oluşturursun. Bu illüzyonun elinde bulunduracağın bir silahı 
+                                        tutar. İllüzyonun saldırı nitelikleri seninkiyle aynıdır ve hedefe senin belirleyeceğin bir şekilde saldırır. Büyünün kuvvetine 
+                                        göre illüzyonun hedefe saldırır ve ortadan kaybolur. Hedef bu saldırıdan kaçınamazsa fiziksel bir hasar almaz ancak zihinsel hasar alır.
+                                    </p>
+                                </div>
 
 
                                 <div class="spell-description" id="spell1">
@@ -733,6 +854,22 @@
                                     </p>
                                 </div>
 
+                                <div class="spell-description" id="eagleeyes">
+                                    <h2>Kartal Gözler <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Kehanet Bazbüyüsü</span> </h2>
+                    
+                                    <div class="spell-details">
+                                        <p><strong>Kullanıma Süresi:</strong> 1 eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> 1 tur (6 Saniye)</p>
+                                        <p><strong>Enerji Türü:</strong> Kehanet</p>
+                                        <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> Dokunuş Mesafesi</p>
+                                    </div>
+                                    <p class="spell-aciklama">Dokunacağın istekli bir varlığın görüşü süre boyunca yağmur ve kar yağışı gibi görüşü engelleyecek etkenlerden 
+                                        etkilenmez ve görüş mesafesi iki katına çıkar. 
+                                        
+                                    </p>
+                                </div>
+
                                 <div class="spell-description" id="kutsalalev">
                                     <h2>Kutsal Alev <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Yıkım Bazbüyüsü</span> </h2>
                     
@@ -758,6 +895,106 @@
                                             <strong>Özel Sınıflar: </strong>Ruhban, Paladin
     
                                         </span>
+
+                                    </p>
+                                </div>
+
+                                <div class="spell-description" id="shapewater">
+                                    <h2>Su Şekillendirme <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Dönüştürme Bazbüyüsü</span> </h2>
+                    
+                                    <div class="spell-details">
+                                        <p><strong>Kullanıma Süresi:</strong> 1 eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> Anlık ya da 1 Saat</p>
+                                        <p><strong>Enerji Türü:</strong> Dönüştürme</p>
+                                        <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> 6 Kare</p>
+                                    </div>
+                                    <p class="spell-aciklama">Etki alanında 1 kare küplük alanı kapsayan suyu şekillendirebilir ya da hareket ettirebilirsin.
+                                        Bu büyü ile gerçekleştirebileceğin basit eylemler şunlardır:
+                                        
+                                        <br><br>
+
+                                        Suyun akışının yönünü değiştirebilir ya da 1 kare mesafeye taşacak şekilde suyu hareket ettirebilirsin. Gerçekleşen bu 
+                                        hareketlenme herhangi bir şeye zarar verebilecek kadar kuvvetli gerçekleşmez.
+
+                                        <br><br>
+
+                                        Suyun isteğin doğrultusunda farklı şekillere girmesini sağlayabilirsin. Bu şekillenme 1 saat süresince kendini korur.
+
+                                        <br><br> 
+
+                                        Suyun rengini ya da bulanıklığını değiştirebilirsin. Ancak bu değişimin olması için suyun bütününün değişebilecek 
+                                        durumda olması gerekmektedir (bir dereyi, göl yatağını, havuzu ya da daha büyük bir alanı bu şekilde değiştiremezsin.) 
+                                        Bu etki 1 saat sürer.
+
+                                        <br><br>
+
+                                        İçinde herhangi bir varlık yok ise suyun o alanını dondurabilirsin. Donma, 1 saat içinde çözülür.
+    
+                                        
+
+                                    </p>
+                                </div>
+
+                                <div class="spell-description" id="smitinggrasp">
+                                    <h2>Çarpan Kavrayış <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Yıkım Bazbüyüsü</span> </h2>
+                    
+                                    <div class="spell-details">
+                                        <p><strong>Kullanıma Süresi:</strong> 1 eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> Anlık</p>
+                                        <p><strong>Enerji Türü:</strong> Yıkım</p>
+                                        <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> Dokunma Mesafesi</p>
+                                    </div>
+                                    <p class="spell-aciklama">Bir elinden yıldırımlar çıkarak hedeflediğin bir varlığı kavramaya çalışırsın. Gerçekleştireceğin 
+                                        yakın mesafe saldırısı sonucunda hedeflediğin varlığa dokunabilirsen yıldırımlar hedef varlığa çarparak yıldırım hasarı 
+                                        uygular. Bu hasar sonucunda varlık <strong>dayanıklılık</strong> kurtulması dener, başarısız olursa bir sonraki raunda 
+                                        kadar reaksiyon kullanamaz.
+
+                                        <br><br> 
+
+                                        Eğer saldırdığın varlık metalden yapılma, en az yarım plaka metal zırh giyiyor ya da aşırı iletken parçalar içeren bir 
+                                        şeyler kuşanıyorsa, saldırın avantajlı gerçekleşir.
+    
+                                        
+
+                                    </p>
+                                </div>
+
+                                <div class="spell-description" id="swordburst">
+                                    <h2>Kılıç Patlaması <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Oluşturma Bazbüyüsü</span> </h2>
+                    
+                                    <div class="spell-details">
+                                        <p><strong>Kullanıma Süresi:</strong> 1 eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> Anlık</p>
+                                        <p><strong>Enerji Türü:</strong> Oluşturma</p>
+                                        <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> 1 Kare</p>
+                                    </div>
+                                    <p class="spell-aciklama">Bir anlık etrafını çevreleyen kılıçlardan oluşan bir basınç alanı meydana getirirsin. Kılıçlar, 
+                                        sen merkezli olmak üzere 1 kare çember alanı etrafındaki herkese basınç hasarı uygular. Eğer büyünün kuvveti <strong> doğal 20</strong>
+                                         gelirse, uygulanan hasar delme hasarına dönüşür.
+                                        
+
+                                    </p>
+                                </div>
+
+                                <div class="spell-description" id="viciousmockery">
+                                    <h2>Acımasız Alay <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Cezbetme Bazbüyüsü</span> </h2>
+                    
+                                    <div class="spell-details">
+                                        <p><strong>Kullanıma Süresi:</strong> 1 eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> Anlık</p>
+                                        <p><strong>Enerji Türü:</strong> Cezbetme</p>
+                                        <p><strong>Büyü Bedeli:</strong> 0 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> 12 Kare</p>
+                                    </div>
+                                    <p class="spell-aciklama">Görebildiğin bir varlığın zihnine erişerek büyüyle çevrelenmiş bir dizi hakaret yağdırırsın. Eğer 
+                                        hedef varlık seni duyabiliyorsa ve zeka değeri -3'ten yüksek ise <strong>irade</strong> kurtulma zarı kullanır. Sağır ya da 
+                                        zeka değeri -3'ten düşük olan varlıklar otomatik olarak kurtulmada başarılı sayılır. İrade kurtulmasında başarısız olan 
+                                        varlıklar zihinsel hasar alır ve sonraki turunda gerçekleştireceği ilk saldırısı (yakın mesafe ya da uzak menzilli / büyü fark etmez) 
+                                        dezavantajlı olur.
+                                        
 
                                     </p>
                                 </div>
