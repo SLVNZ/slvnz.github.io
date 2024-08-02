@@ -206,6 +206,16 @@
     background-color: #f9f9f9;
 }
 
+.spell-list tr:active {
+    background-color: blueviolet;
+	color: white;
+}
+
+.spell-list:focus {
+	background-color: blueviolet;
+	color: white			;
+}
+
 .spell-description {
     background-color: #fff;
     padding: 20px;
@@ -311,6 +321,8 @@
     background-color: blueviolet;
 	color: white;
 }
+
+
 
 
 
