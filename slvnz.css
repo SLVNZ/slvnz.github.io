@@ -48,6 +48,46 @@
 
 */
 
+
+
+.pageindex {
+	width: auto;
+	position: fixed;
+	transform: translate(-5px, 75px);
+	background-color: white;
+}
+
+.pageindex table {
+	border: none !important;
+}
+
+.pageindex table td, th {
+	border: none;
+	padding: 0;
+}
+
+.pageindex tr:nth-child(even) {
+	background-color: rgb(247, 238, 255);
+}
+
+
+.pageindex table td:hover {
+	background-color: blueviolet;
+	color: white !important;
+}
+
+.pageindex a {
+	text-decoration: none;
+	color: black;
+	display: block;
+	padding: 5px;
+	font-size: 10pt;
+}
+
+.pageindex a:hover {
+	color: white;
+}
+
 .main {
 	display: flex;
 	flex-wrap: wrap;
@@ -226,6 +266,7 @@
 	font-family: 'pirata one';
 	font-weight: 300;
 	border-bottom: 1px solid;
+	margin-top: 0;
 }
 
 .spell-description.active {
