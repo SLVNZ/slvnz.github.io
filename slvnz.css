@@ -325,6 +325,45 @@
 
 
 
+table {
+	border: 1px solid blueviolet;
+	font-family: barlow;
+	border-collapse: collapse;
+	width: 50%;
+}
+
+td, th {
+	padding: 10px;
+	border: 1px solid blueviolet;
+}
+
+p {
+	font-family: barlow;
+}
+
+h3 {
+	font-family: barlow;
+	color: blueviolet;
+}
+
+h2 {
+	font-family: 'gandur new';
+	font-weight: 900;
+	font-size: 24pt;
+	margin-top: 100px;
+}
+
+h4 {
+	font-family: barlow;
+	color: blueviolet;
+}
+
+
+
+
+
+
+
 
 
 @media screen and (max-width: 1100px) {

@@ -32,29 +32,32 @@
 			
 				<div id="menu-vert" style="font-family: Barlow; display: flex; flex-direction: row; align-items: center; width: 60%; pointer-events: all; padding-top: 6px">
 				
-					<a href="index.html"> <button> ANA SAYFA </button> </a>
+
+					<a href="index.html"> <button style="color: blueviolet; border: 1px solid blueviolet; border-radius: 5px;"> ANA SAYFA </button> </a>
+
+					<a href="playguide.html"> <button> OYNANIŞ </button> </a>
 					
-					<a href="spells.html"> <button style="color: blueviolet; border: 1px solid blueviolet; border-radius: 5px;"> BÜYÜLER </button> </a>
-			
-                    <a href="skills.html"> <button> FİZİKSEL <br> YETENEKLER </button> </a>
+					<a href="spells.html"> <button> BÜYÜLER </button> </a>
+
+					<a href="skills.html"> <button> FİZİKSEL <br> YETENEKLER </button> </a>
 
                     <a href="battle-arts.html"> <button> SAVAŞ <br> SANATLARI </button> </a>
 
+			
 				</div>
 
-                <div id="menu-drop" style="font-family: Barlow; display: flex; flex-direction: row; align-items: center; width: 60%; pointer-events: all; padding-top: 6px">
+				<div id="menu-drop" style="font-family: Barlow; display: flex; flex-direction: row; align-items: center; width: 60%; pointer-events: all; padding-top: 6px">
                     <div class="dropdown">
                         <button class="dropbtn">MENÜ</button>
                         <div class="dropdown-content">
-                            <a href="index.html">ANA SAYFA</a>
-                            <a href="spells.html" style="color: white; background-color: blueviolet;">BÜYÜLER</a>
+                            <a href="index.html" style="color: white; background-color: blueviolet;">ANA SAYFA</a>
+							<a href="playguide.html"> OYNANIŞ</a>
+                            <a href="spells.html">BÜYÜLER</a>
                             <a href="skills.html">FİZİKSEL YETENEKLER</a>
                             <a href="battle-arts.html">SAVAŞ SANATLARI</a>
                         </div>
                     </div>
                 </div>
-
-				</div>
 			
 			</div>
 		
@@ -603,6 +606,78 @@
                                         <td>Dokunma</td>
                                     </tr>
 
+                                    <tr data-name="boyut kapısı" data-level="4" data-energy="conj" data-duration="inst" data-mana="4" data-range="24" onclick="showSpell('dimensiondoor')">
+                                        <td>Boyut Kapısı</td>
+                                        <td>4. Seviye</td>
+                                        <td>Anlık</td>
+                                        <td>Oluşturma</td>
+                                        <td>4</td>
+                                        <td>24 Kare</td>
+                                    </tr>
+
+                                    <tr data-name="kabusun çığlığı" data-level="4" data-energy="drk" data-duration="1min" data-mana="4" data-range="12" onclick="showSpell('screamsofnightmare')">
+                                        <td>Kabusun Çığlığı (K)</td>
+                                        <td>4. Seviye</td>
+                                        <td>1 Dakika</td>
+                                        <td>Karanlık</td>
+                                        <td>4</td>
+                                        <td>12 Kare</td>
+                                    </tr>
+
+                                    <tr data-name="akıl karışıklığı" data-level="4" data-energy="ench" data-duration="1min" data-mana="4" data-range="12" onclick="showSpell('confusion')">
+                                        <td>Akıl Karışıklığı</td>
+                                        <td>4. Seviye</td>
+                                        <td>1 Dakika</td>
+                                        <td>Cezbetme</td>
+                                        <td>4</td>
+                                        <td>12 Kare</td>
+                                    </tr>
+
+                                    <tr data-name="buz fırtınası" data-level="4" data-energy="evoc" data-duration="inst" data-mana="4" data-range="12" onclick="showSpell('icestorm')">
+                                        <td>Buz Fırtınası</td>
+                                        <td>4. Seviye</td>
+                                        <td>Anlık</td>
+                                        <td>Yıkım</td>
+                                        <td>4</td>
+                                        <td>12 Kare</td>
+                                    </tr>
+
+                                    <tr data-name="kalkan" data-level="3" data-energy="abj" data-duration="react" data-mana="3" data-range="12" onclick="showSpell('shield')">
+                                        <td>Kalkan</td>
+                                        <td>3. Seviye</td>
+                                        <td>Reaksiyon</td>
+                                        <td>Koruma</td>
+                                        <td>3</td>
+                                        <td>12 Kare</td>
+                                    </tr>
+
+                                    <tr data-name="düzlem kayması" data-level="7" data-energy="conj" data-duration="inst" data-mana="10" data-range="0" onclick="showSpell('planeshift')">
+                                        <td>Düzlem Kayması</td>
+                                        <td>7. Seviye</td>
+                                        <td>Anlık</td>
+                                        <td>Oluşturma</td>
+                                        <td>10</td>
+                                        <td>Kendin</td>
+                                    </tr>
+
+                                    <tr data-name="gerçek görüş" data-level="6" data-energy="div" data-duration="1hr" data-mana="10" data-range="0" onclick="showSpell('trueseeing')">
+                                        <td>Gerçek Görüş (K)</td>
+                                        <td>6. Seviye</td>
+                                        <td>1 Saat</td>
+                                        <td>Kehanet</td>
+                                        <td>10</td>
+                                        <td>Dokunma</td>
+                                    </tr>
+
+                                    <tr data-name="metal ısıt" data-level="2" data-energy="evoc" data-duration="1min" data-mana="2" data-range="12" onclick="showSpell('heatmetal')">
+                                        <td>Metal Isıt (K)</td>
+                                        <td>2. Seviye</td>
+                                        <td>1 Dakika</td>
+                                        <td>Yıkım</td>
+                                        <td>2</td>
+                                        <td>12 Kare</td>
+                                    </tr>
+
                                     
 
                                     <!-- Daha fazla büyü ekleyebilirsin -->
@@ -625,6 +700,183 @@
 
 
                             <div style="width: 480px;">
+
+                                <div class="spell-description" id="heatmetal">
+                                    <h2>Metal Isıt  <span style="font-family: barlow; font-style: italic; font-size: 10pt;">2. Seviye Yıkım Büyüsü - Konsantrasyon</span> </h2>
+                        
+                                    <div class="spell-details">
+                                        <p><strong>Kullanma Süresi:</strong> 1 Eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> 1 Dakika</p>
+                                        <p><strong>Enerji Türü:</strong> Yıkım</p>
+                                        <p><strong>Büyü Bedeli:</strong> 2 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> 12 Kare </p>
+
+                                    </div>
+                                    <p class="spell-aciklama">
+
+                                        Menzilinde görebildiğin giyilebilir, giyilemez, kuşanılmış ya da kuşanılmamış herhangi bir metal nesneyi anında yüksek sıcaklıklara çıkacak 
+                                        şekilde ısıtırsın. Eğer ısıttığın metal nesne kuşanılmış bir nesne ise, nesneyi kuşanan varlık temas ettiği bölgelerden yanma hasarı almaya 
+                                        başlar. Kuşanılmış nesne elde tutulan bir şey ise, varlık bu nesneyi elinde tutmaya devam edebilmek için <strong>dayanıklılık</strong> kurtulma 
+                                        zarı atar. Başarısız olma durumunda varlık elindeki nesneyi bırakmak zorunda kalır, başarılı olma durumunda elinde tutmaya devam edebilir ancak 
+                                        tenine işleyen yanma hasarında bir azalma meydana gelmez. 
+                                        
+                                        Isıtılmaya çalışılan metal parça ne kadar büyük ise ısınması için gerekli büyü kuvveti o kadar fazla olmalıdır.
+                                        
+                                        Eğer ısınan nesne vücutta kuşanılmış bir zırh parçası gibi bir nesne ise, nesne türüne 
+                                        bağlı olarak, varlık turunda farklı eylem türlerini kullanarak bu parçayı üstünden çıkarıp atabilir: <strong>Gövde Zırhı.</strong> Eylem+Bonus Eylem+Reaksiyon. 
+                                        <strong>Kol, Bacak, Omuz Zırhı.</strong> 1 Eylem. <strong>Eldiven.</strong> Bonus Eylem.
+                                    </p>
+                                </div>
+
+                                <div class="spell-description" id="trueseeing">
+                                    <h2>Gerçek Görüş  <span style="font-family: barlow; font-style: italic; font-size: 10pt;">6. Seviye Kehanet Büyüsü - Konsantrasyon</span> </h2>
+                        
+                                    <div class="spell-details">
+                                        <p><strong>Kullanma Süresi:</strong> 1 Eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> 1 Saat</p>
+                                        <p><strong>Enerji Türü:</strong> Kehanet</p>
+                                        <p><strong>Büyü Bedeli:</strong> 10 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> Dokunma Mesafesi </p>
+
+                                    </div>
+                                    <p class="spell-aciklama">
+
+                                        Ruhlar ötesi alemler ve kozmik enerjiden oluşan, normal gözün göremediği her enerjiyi görmeye başlarsın. Buna görünmez olanları görmek, illüzyonların arkasını görmek vb. durumlar da dahildir.
+                                        
+                                        
+                                    </p>
+                                </div>
+
+                                <div class="spell-description" id="planeshift">
+                                    <h2>Düzlem Kayması  <span style="font-family: barlow; font-style: italic; font-size: 10pt;">7. Seviye Oluşturma Büyüsü</span> </h2>
+                        
+                                    <div class="spell-details">
+                                        <p><strong>Kullanma Süresi:</strong> 1 Eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> Anlık</p>
+                                        <p><strong>Enerji Türü:</strong> Oluşturma</p>
+                                        <p><strong>Büyü Bedeli:</strong> 10 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> Kendin </p>
+
+                                    </div>
+                                    <p class="spell-aciklama">
+
+                                        Büyünün kuvvetine bağlı olarak, varlığını bildiğin, aşina olduğun ya da hayal edebileceğin bir diyara geçiş yapmayı denersin. Eğer büyünün 
+                                        kuvveti geçiş yapmak istediğin diyara aşinalığına göre yeterli ise bu eylemin başarılı olur. Ancak başarısızlık durumunda geçiş yapmak istediğin 
+                                        diyara yakın ya da tamamen farklı bir diyara geçişle sonuçlanabilir. Başka bir diyardayken gelmiş olduğun ana diyarına dönmek için bu büyüyü kullanırsan, 
+                                        d20 zarda 1-2 gelmediği sürece başarılı bir şekilde geri dönebilirsin.
+
+                                        <br><br>
+
+                                        Düzlem kayması gerçekleşirken, kendi etrafında 2 kare menzile kadar bulunan istekli 3 varlığı da yanında götürebilirsin.
+                                    
+                                    </p>
+                                </div>
+
+                                <div class="spell-description" id="shield">
+                                    <h2>Kalkan  <span style="font-family: barlow; font-style: italic; font-size: 10pt;">3. Seviye Koruma Büyüsü</span> </h2>
+                        
+                                    <div class="spell-details">
+                                        <p><strong>Kullanma Süresi:</strong> Reaksyion</p>
+                                        <p><strong>Büyü Süresi:</strong> Anlık</p>
+                                        <p><strong>Enerji Türü:</strong> Koruma</p>
+                                        <p><strong>Büyü Bedeli:</strong> 3 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> 12 Kare </p>
+
+                                    </div>
+                                    <p class="spell-aciklama">
+                                        Üstüne bir menzilli saldırı yapılan bir varlığı korumak için çevresine hızlıca bir kalkan alanı oluşturursun. Bu kalkan, bir sonraki tur sana dönene kadar varlığın üzerinde kalır.                             
+                                    </p>
+                                </div>
+
+                                <div class="spell-description" id="icestorm">
+                                    <h2>Buz Fırtınası  <span style="font-family: barlow; font-style: italic; font-size: 10pt;">4. Seviye Yıkım Büyüsü</span> </h2>
+                        
+                                    <div class="spell-details">
+                                        <p><strong>Kullanma Süresi:</strong> 1 Eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> Anlık</p>
+                                        <p><strong>Enerji Türü:</strong> Yıkım</p>
+                                        <p><strong>Büyü Bedeli:</strong> 4 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> 12 Kare </p>
+
+                                    </div>
+                                    <p class="spell-aciklama">
+                                        Menzilinde bir noktada 4 kare yarıçaplı, 8 kare yükseklikte bir silindir içine kaya gibi sert buzlardan dolu yağdırırsın. 
+                                        Silindir içindeki her varlık Çeviklik kurtulma zarı atar. Başarısız olan bir varlık ezme hasarı ve soğuk hasarı alır, başarılı olursa bunun bir kısmından kaçınır. 
+                                        
+                                        <br><br>
+
+                                        Dolu buzları etki alanını bir sonraki sıranın sonuna kadar zorlu araziye çevirir.
+                                    </p>
+                                </div>
+
+                                <div class="spell-description" id="confusion">
+                                    <h2>Akıl Karışıklığı  <span style="font-family: barlow; font-style: italic; font-size: 10pt;">4. Seviye Cezbetme Büyüsü</span> </h2>
+                        
+                                    <div class="spell-details">
+                                        <p><strong>Kullanma Süresi:</strong> 1 Eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> 1 Dakika</p>
+                                        <p><strong>Enerji Türü:</strong> Cezbetme</p>
+                                        <p><strong>Büyü Bedeli:</strong> 4 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> 12 Kare </p>
+
+                                    </div>
+                                    <p class="spell-aciklama">
+                                        Bu büyü varlıkların zihnine saldırıp onu saptırarak sanrılar yaratır ve kontrolsüz hareketler ortaya çıkarır. Menzilinde seçeceğin bir noktadan çıkan 3m yarıçaplı bir küre içerisindeki her varlık, sen bu büyüyü yaptığında Zihin kurtulma zarı atar ya da bu büyü tarafından etkilenir.
+                                        <br><br>
+                                        Şaşkınlık Davranışı
+                                        <br>
+                                        1d10
+                                        <br>
+                                        <strong>1.</strong> Varlık tüm hareketini rastgele bir yöne hareket etmek için kullanır. Yönü belirlemek için 1d8 at ve zarın her yüzüne bir yön belirle. Varlık bu sırasında eylem kullanmaz.
+                                        <br>
+                                        <strong>2-6.</strong> Varlık bu sırasında hareket etmez ve eylem kullanmaz.
+                                        <br>
+                                        <strong>7-8.</strong> Varlık eylemini kullanıp menzilindeki rastgele bir varlığa yakın dövüş saldırısı yapar. Eğer menzilinde bir varlık yoksa, bu sırasında hiçbir şey yapmaz.
+                                        <br>
+                                        <strong>9-10.</strong> Varlık normal bir şekilde davranıp hareket edebilir.
+                                        <br><br>
+                                        Sıralarının sonunda, etki altındaki bir hedef Akıl kurtulma zarı atabilir. Başarılı olursa, bu etki o hedef için sonlanır.
+                                        
+                                    </p>
+                                </div>
+
+                                <div class="spell-description" id="screamsofnightmare">
+                                    <h2>Kabusun Çığlığı  <span style="font-family: barlow; font-style: italic; font-size: 10pt;">4. Seviye Karabüyü - Konsantrasyon</span> </h2>
+                        
+                                    <div class="spell-details">
+                                        <p><strong>Kullanma Süresi:</strong> 1 Eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> 1 Dakika</p>
+                                        <p><strong>Enerji Türü:</strong> Karanlık</p>
+                                        <p><strong>Büyü Bedeli:</strong> 4 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> Dokunma Mesafesi </p>
+
+                                    </div>
+                                    <p class="spell-aciklama">
+                                        Yıldızlar arasındaki karanlığa, bilinmez korkuların yuvasına bir kapı açarsın. 4 kare yarıçaplı bir karanlık ve acı soğuk küresi, menzilde belirlediğin bir noktada belirir ve süre boyunca kalır. Bu boşluk 6 kare uzaklıktan duyulabilecek üstüste binmiş fısıltılar ve ağız şapırdatma sesleri ile doludur. Büyülü ya da değil, hiçbir ışık bu karanlığı aydınlatamaz ve bu alandaki varlıklar körlük etkisindedir. 
+
+                                        <br><br>
+
+                                        Bu boşluk uzayın yapısını büker, zorlu arazi sayılır. Sırasına bu alanda başlayan her varlık soğuk hasar alır. Sırasını alan içinde bitiren her varlık çeviklik kurturlma zarı atar ya da solgun, dünyadışı dokunaçlar ona sürtünürken asit hasarı alır.
+                                    </p>
+                                </div>
+
+                                <div class="spell-description" id="dimensiondoor">
+                                    <h2>Boyut Kapısı  <span style="font-family: barlow; font-style: italic; font-size: 10pt;">4. Seviye Oluşturma Büyüsü</span> </h2>
+                        
+                                    <div class="spell-details">
+                                        <p><strong>Kullanma Süresi:</strong> 1 Eylem</p>
+                                        <p><strong>Büyü Süresi:</strong> Anlık</p>
+                                        <p><strong>Enerji Türü:</strong> Oluşturma</p>
+                                        <p><strong>Büyü Bedeli:</strong> 4 mana</p>
+                                        <p><strong>Büyü Menzili:</strong> 24 Kare </p>
+
+                                    </div>
+                                    <p class="spell-aciklama">
+                                        24 kare mesafede görebildiğin ya da bir engelin arkasında hayal edebildiğin bir noktaya odaklanarak, beraberinde götürebileceğin 
+                                        3 varlık ile ışınlanabilirsin. Eğer bir engelin arkasında hayal edebildiğin bir noktaya ışınlanmayı denerken hayal ettiğin nokta 
+                                        herhangi bir katı hacim ile kaplı ise, ışınlanan varlıklar ağır basınç hasarı alarak hacmin dışındaki noktalara doğru savrulur. 
+                                    </p>
+                                </div>
 
                                 <div class="spell-description" id="tinyservant">
                                     <h2>Minik Hizmetkar  <span style="font-family: barlow; font-style: italic; font-size: 10pt;">3. Seviye Dönüştürme Büyüsü - Ritüel</span> </h2>
