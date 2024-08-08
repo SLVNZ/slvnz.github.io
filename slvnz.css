@@ -211,10 +211,7 @@
 	color: white;
 }
 
-.spell-list:focus {
-	background-color: blueviolet;
-	color: white			;
-}
+
 
 .spell-description {
     background-color: #fff;
