@@ -438,6 +438,7 @@ h4 {
 
 	.page-contents {
 		width: 70% !important;
+		display: flex; flex-direction: column; margin-left: 25%;
 	}
 }
 
@@ -447,7 +448,8 @@ h4 {
 	}
 
 	.page-contents {
-		width: 80%;
+		width: 70%;
+		display: flex; flex-direction: column; margin-left: 30%;
 	}
 }
 
@@ -457,7 +459,8 @@ h4 {
 	}
 
 	.page-contents {
-		width: 90%;
+		width: 50%;
+		display: flex; flex-direction: column; margin-left: 25%;
 	}
 }
 
