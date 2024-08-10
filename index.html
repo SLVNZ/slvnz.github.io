@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+	
 	@media screen and (max-width: 600px) {
 	#cards-contain {
 		flex-direction: column !important;
@@ -145,6 +146,22 @@
 					</div>
 				</div>
 			</a>
+
+			<a id="card-a" href="spells.html">
+				<div class="outercard">
+					<div id="card" class="card" >
+	
+						<div class="general-card-container">
+	
+							<h1 class="cardheader">CANAVARLAR</h1>
+	
+							<div id="spells-card" class="innercard">
+							</div>
+	
+						</div>
+					</div>
+				</div>
+			</a>
 	
 		
 		</div>
@@ -193,8 +210,8 @@
 					const cardX = cardRect.left + cardRect.width / 2;
 					const cardY = cardRect.top + cardRect.height / 2;
 					
-					const angleY = -(e.clientX - cardX) / 20;
-					const angleX = (e.clientY - cardY) / 20;
+					const angleY = -(e.clientX - cardX) / 40;
+					const angleX = (e.clientY - cardY) / 40;
 
 					card.style.transform = `rotateY(${angleY}deg) rotateX(${angleX}deg)`;
 				});
