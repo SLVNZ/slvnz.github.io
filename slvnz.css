@@ -415,7 +415,7 @@ h3 {
 
 h2 {
 	font-family: "gandur-new";
-	font-weight: 900;
+	font-weight: 300;
 	font-size: 24pt;
 	margin-top: 100px;
 }
@@ -430,7 +430,7 @@ h4 {
 	color: blueviolet;
 	font-family: "gandur-new";
 	font-size: 18pt;
-	font-weight: 900;
+	font-weight: 300;
 }
 
 .page-contents a:hover {
