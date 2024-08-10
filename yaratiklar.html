@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="slvnz.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.typekit.net/jze1rws.css">
+
+    <title>Yaratıklar Listesi</title>
+    <style>
+        
+
+        .listcontainer {
+            display: flex;
+            width: 100%;
+        }
+
+        .left-panel {
+            width: 50%;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.369);
+            backdrop-filter: blur(25px);
+            overflow-y: auto;
+        }
+
+        .filter-section {
+            margin-bottom: 10px;
+        }
+
+        #search {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            background-color: transparent;
+            color: white;
+        }
+
+        .filter-dropdown {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            background-color: transparent;
+            color: white;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid blueviolet;
+            text-align: left;
+            cursor: pointer;
+            color: white;
+            padding: 5px !important;
+        }
+
+
+        tr:hover {
+            background-color: rgba(137, 43, 226, 0.523);
+        }
+
+        th {
+            background-color: blueviolet;
+            color: white;
+        }
+
+        th:hover {
+            background-color: rgb(174, 102, 241);
+        }
+
+        .right-panel {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            color: white;
+        }
+
+        .creature-details {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            background-color: rgba(0, 0, 0, 0.546);
+            backdrop-filter: blur(25px);
+        }
+
+        .creature-details.active {
+            display: flex;
+        }
+
+        .creature-details h1 {
+            font-family: "gandur-new";
+            font-weight: 300;
+            text-align: center;
+            padding-top: 150px;
+            font-size: 32pt;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid white;
+            width: 50%;
+        }
+
+        .creature-details span {
+            font-family: "barlow";
+            text-align: center;
+            padding: 0;
+            margin-bottom: 10px;
+        }
+
+        .creature-details h2 {
+            margin-top: 30px;
+            border-bottom: 1px solid white;
+            padding-bottom: 5px;
+
+        }
+
+        .creature-details small {
+            font-family: "barlow";
+            font-style: italic;
+            font-weight: 100;
+        }
+
+        .creature-image {
+                                    background-size: cover;
+                                    background-position: center center;
+                                    width: 100%;
+                                    height: 325px;
+                                    display: flex;
+                                    flex-direction: column;
+                                    align-items: center;
+        }
+
+
+        
+    </style>
+</head>
+<body>
+
+    <div class="main">
+        <div class="header">
+		
+		
+			
+					 
+            <div style="display: flex; flex-direction: row; padding-bottom: 10px;">
+            
+                <a href="index.html" style="text-decoration: none;">
+                    <div id="header-slvnz" style="font-family: Barlow; display: flex; flex-direction: row; align-items: flex-end;">
+                
+                        <h1> SLVNZ</h1>
+                    
+                        <p style=" margin: 0; margin-bottom: 5px; font-size: 14pt;"> <em>DATABASE</em> </p>
+                
+                    </div>
+                </a>
+            
+                
+            
+            </div>
+        
+        
+        </div>
+    
+    
+        <div style="display: flex; flex-direction: row; width: 100%; height: 94vh;">
+    
+            <div class="listcontainer">
+                <div class="left-panel">
+                    <div class="filter-section">
+                        <input type="text" id="search" placeholder="Filtrele...">
+                        <select id="typeFilter" class="filter-dropdown">
+                            <option value="">Yaratık Türü Seç</option>
+                            <option value="Ejder">Ejder</option>
+                            <option value="Ejderha">Ejderha</option>
+                            <option value="Yapısal">Yapısal</option>
+                        </select>
+                        <select id="subtypeFilter" class="filter-dropdown">
+                            <option value="">Yaratık Tipi Seç</option>
+                            <option value="Canavar">Canavar</option>
+                            <option value="Hayvan">Hayvan</option>
+                            <option value="Mahlukat">Mahlukat</option>
+                        </select>
+                    </div>
+                    <table id="creatureTable">
+                        <thead>
+                            <tr>
+                                <th data-column="creature" onclick="sortTable(this)">Yaratıklar</th>
+                                <th data-column="type" onclick="sortTable(this)">Yaratık Türü</th>
+                                <th data-column="subtype" onclick="sortTable(this)">Yaratık Tipi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="creature1" onclick="showDetails('creature1')">
+                                <td>Anfara</td>
+                                <td>Ejder</td>
+                                <td>Canavar</td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+                <div class="right-panel">
+                    <div id="creature1-details" class="creature-details">
+                        <div class="creature-image" style="
+                                    background-image: url(resources/images/monsters/anfara.png);
+                                    position: sticky;
+                                    top: 0;
+                                    padding-bottom: 20px;
+                                    ">
+
+                                    <h1> ANFARA</h1>
+                                    <span> BÜYÜK KARANLIK EJDER</span>
+                                    <small>ENDER</small>
+
+                        </div>
+
+                        <div style="display: flex; flex-direction: row;">
+                            <div style="display: flex; flex-direction: column; width: 50%; padding: 20px;">
+                                
+
+                                <div id="statcontainer" style="display: flex; flex-direction: row; justify-content: space-between; padding-left: 20%; padding-right: 20%;">
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+3</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">KUV</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+3</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">ÇEV</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+3</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">DAY</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+3</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">İRD</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+3</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">ZEK</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+3</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">İRF</label>
+                                    </div>
+
+                                </div>
+
+                                <h2>Temeller</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Dayanıklılıklar:
+                                    </strong> 
+                                    Karanlık, asit, ateş, yakma
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kırılganlıklar:
+                                    </strong> 
+                                    Işık ve Gümüş
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Bağışıklıklar:
+                                    </strong> 
+                                    Kuvveti +5 üstü olmayan her varlık için 16’dan düşük fiziksel saldırılar, zihinsel. 
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kondisyon Bağışıklıkları:
+                                    </strong> 
+                                    Cezbedilme, korkutma, körleştirme.
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Diller:
+                                    </strong> 
+                                    Kara Lisan, Derin Konuşma
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Hareket Kabiliyeti:
+                                    </strong> 
+                                    8 kare yürüme (40ft.), 12 Kare Uçma (60ft.)
+                                </span>
+
+
+                                <h2>Kabiliyetler</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Doğuştan Büyücülük:
+                                    </strong> 
+                                    Anfara, doğasından gelen karanlık enerji yetisini kullanarak büyü kullanabilir. Bunu gerçekleştirirken Karanlık Enerjiye +4 puan alır. Bu doğa ile şu büyüler gerçekleştirilebilir:
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;İstediğinde: Büyü Saptama, Büyü Defetme, Karanlık, Yangı <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3/Gün (Büyü Başına): Korku, Karşı Büyü (6. Seviye) <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1/Gün (Büyü Başına): Zayıf Akıl, Düzlem Kayması, Kara Delik <br>
+
+
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Efsanevi Dayanıklılık (2/Gün):
+                                    </strong> 
+                                    Anfara bir kurtulma zarında başarısız olması durumunda başarılı olmayı seçebilir. 
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Büyülü Silahlar:
+                                    </strong> 
+                                    Anfaranın saldırıları büyü enerjisi yüklüdür. 
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Ejder Nefesi (3 Tur Bekleme Süresi).
+                                    </strong> 
+                                    Anfara, kara alevden oluşan bir nefesi 5 kare uzun 5 kare geniş konik bir alana püskürterek yakar. 
+                                </span>
+
+
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; width: 50%; padding: 20px;">
+
+
+                                <h2 style="margin-top: 0;">Eylemler</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Çoklu Saldırı.
+                                    </strong> 
+                                    Anfara, kara öfke kondisyonuna girer, ardından birden fazla saldırıda bulunarak karşısına çıkan rakiplere ardı ardına hamleler yapabilir: iki Pençe, Isırma ve Kuyruk Hamlesi.
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Pençe.
+                                    </strong> 
+                                    Anfara, pençelerinden birini rakibine savurur. +3 ile isabet, 2 kare uzaklığa erişim, tek hedef.
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Isırma.
+                                    </strong> 
+                                    Anfara, büyük ağzı ile 2 kare mesafedeki bir hedefe ısırma hamlesi gerçekleştirir. +4 ile isabet, tek hedef.
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kuyruk.
+                                    </strong> 
+                                    Anfara, kuyruğu ile bir hedefe vurma ya da bulunduğu konumdan 3 kare uzak 3 kare geniş konik bir alanı süpürme saldırısı gerçekleştirebilir. Tek hedefli saldırıda +4 isabet, çoklu hedefli saldırıda +2 isabet.
+                                </span>
+
+
+                                <h2>Efsanevi Eylemler</h2>
+
+                                <span style="text-align: left;">
+                                    
+                                    Anfara toplamda 3 efsanevi aksiyon alabilir, ancak bu eylemi yerine getirmek için aşağıdakilerden birini seçmelidir. Efsanevi eylemi herhangi bir varlığın turunun sonunda gerçekleştirir. Anfara’nın efsanevi eylemleri tur kendisine döndüğü zaman yenilenir.
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Karanlığın Gözleri.
+                                    </strong> 
+                                    Anfara, 6 gözünün her birinden görebileceği ve kontrol edebileceği bir karanlık hizmetkâr çağırır. Bu hizmetkârlar Karanlığın Hizmetkârları tablosuna göre rasgele çağırılır. Her göz için bir hizmektar çağırılabilir. 
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Uçuş.
+                                    </strong> 
+                                    Anfara, 12 kareye kadar uçarak hareket edebilir.
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kara Öfke.
+                                    </strong> 
+                                    Anfara, rakibine karşı öfkelenerek iki rasgele niteliğini +6’ya kadar güçlendirebilir. Öfkesi bir şeylere vurdukça devam eder. Öfke krizinin sonunda 3 tur bütün niteliklerine aldığı bonus kadar negatif puan alır.
+                                </span>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <script>
+                // Filtreleme İşlevi
+                function applyFilters() {
+                    const searchTerm = document.getElementById('search').value.toLowerCase();
+                    const typeFilter = document.getElementById('typeFilter').value;
+                    const subtypeFilter = document.getElementById('subtypeFilter').value;
+                    const rows = document.querySelectorAll('#creatureTable tbody tr');
+                    
+                    rows.forEach(row => {
+                        const cells = row.getElementsByTagName('td');
+                        const matchesSearch = Array.from(cells).some(cell => 
+                            cell.textContent.toLowerCase().includes(searchTerm)
+                        );
+                        const matchesType = !typeFilter || cells[1].textContent === typeFilter;
+                        const matchesSubtype = !subtypeFilter || cells[2].textContent === subtypeFilter;
+        
+                        if (matchesSearch && matchesType && matchesSubtype) {
+                            row.style.display = '';
+                        } else {
+                            row.style.display = 'none';
+                        }
+                    });
+                }
+        
+                document.getElementById('search').addEventListener('keyup', applyFilters);
+                document.getElementById('typeFilter').addEventListener('change', applyFilters);
+                document.getElementById('subtypeFilter').addEventListener('change', applyFilters);
+        
+                // Sıralama İşlevi
+                let sortOrder = true;
+                function sortTable(header) {
+                    const column = header.getAttribute('data-column');
+                    const table = document.getElementById('creatureTable').querySelector('tbody');
+                    const rows = Array.from(table.querySelectorAll('tr'));
+                    
+                    rows.sort((a, b) => {
+                        const cellA = a.querySelector(`td:nth-child(${header.cellIndex + 1})`).textContent;
+                        const cellB = b.querySelector(`td:nth-child(${header.cellIndex + 1})`).textContent;
+                        
+                        return sortOrder ? cellA.localeCompare(cellB) : cellB.localeCompare(cellA);
+                    });
+                    
+                    sortOrder = !sortOrder;
+                    
+                    rows.forEach(row => table.appendChild(row));
+                }
+        
+                // Detay Gösterme İşlevi
+                function showDetails(creatureId) {
+                    const detailsPanels = document.querySelectorAll('.creature-details');
+                    detailsPanels.forEach(panel => panel.classList.remove('active'));
+        
+                    const selectedPanel = document.getElementById(creatureId + '-details');
+                    if (selectedPanel) {
+                        selectedPanel.classList.add('active');
+                    }
+                }
+            </script>
+</body>
+</html>
