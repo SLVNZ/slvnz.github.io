@@ -312,8 +312,8 @@
 					const cardX = cardRect.left + cardRect.width / 2;
 					const cardY = cardRect.top + cardRect.height / 2;
 					
-					const angleY = -(e.clientX - cardX) / 20;
-					const angleX = (e.clientY - cardY) / 20;
+					const angleY = -(e.clientX - cardX) / 60;
+					const angleX = (e.clientY - cardY) / 60;
 
 					card.style.transform = `rotateY(${angleY}deg) rotateX(${angleX}deg)`;
 				});
