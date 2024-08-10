@@ -48,13 +48,26 @@
 
 */
 
+body {
+	background-image: url(resources/images/background/index-bg.png);
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	height: 100vh;
+	background-attachment: fixed;
+	margin: 0;
+	padding: 0;
+	background-color: black;
+}
+
 
 
 .pageindex {
 	width: auto;
 	position: fixed;
-	transform: translate(-5px, 75px);
-	background-color: white;
+	transform: translate(0, 70px);
+	backdrop-filter: blur(15px);
+	z-index: 1;
 }
 
 .pageindex table {
@@ -67,18 +80,18 @@
 }
 
 .pageindex tr:nth-child(even) {
-	background-color: rgb(247, 238, 255);
+	background-color: rgba(255, 0, 0, 0.225);
 }
 
 
 .pageindex table td:hover {
-	background-color: blueviolet;
+	background-color: red;
 	color: white !important;
 }
 
 .pageindex a {
 	text-decoration: none;
-	color: black;
+	color: white;
 	display: block;
 	padding: 5px;
 	font-size: 10pt;
@@ -94,6 +107,7 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	align-content: center;
 }
 
 .header h1 {
@@ -110,7 +124,8 @@
 	display: flex;
     flex-direction: column;
     width: 100%;
-    background-color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0.324);
+	backdrop-filter: blur(25px);
     align-items: center;
 }
 
@@ -142,14 +157,16 @@
 	color: blueviolet;
 }
 
+#header-slvnz {
+	color: red;
+}
+
 .spells-div {
-	background-color: white;
 	width: 100%;
 	margin: 20px;
 }
 
 .page-contents {
-	background-color: white;
 	width: 50%;
 	margin: 20px;
 	text-align: justify;
@@ -169,10 +186,15 @@
 }
 
 .footer {
-	padding-top: 50px;
 	font-family: barlow;
 	font-weight: light;
 	text-align: center;
+	color: red !important;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	padding-bottom: 10% !important;
+	padding-top: 10% !important;
 }
 
 
@@ -195,7 +217,6 @@
     display: flex;
     justify-content: flex-start;
     margin-bottom: 20px;
-    background-color: #fff;
     padding: 10px;
 	font-family: barlow !important;
 }
@@ -213,12 +234,13 @@
 
 .spell-list {
     width: 600px;
-    background-color: #fff;
-    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.37);
+	backdrop-filter: blur(15px);
     max-height: 60vh;
     overflow-y: auto;
 	font-family: barlow;
 	font-size: 10pt;
+	color: white;
 }
 
 .spell-list table {
@@ -230,7 +252,7 @@
     padding-left: 10px;
 	padding-top: 2px;
 	padding-bottom: 2px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #353535;
     cursor: pointer;
 }
 
@@ -243,7 +265,7 @@
 }
 
 .spell-list tr:hover {
-    background-color: #f9f9f9;
+    background-color: blueviolet;
 }
 
 .spell-list tr:active {
@@ -254,12 +276,14 @@
 
 
 .spell-description {
-    background-color: #fff;
+    background-color: rgba(0, 0, 0, 0.299);
+	backdrop-filter: blur(25px);
     padding: 20px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     display: none;
 	font-family: barlow;
 	width: 100%;
+	color: white;
 }
 
 .spell-description h2 {
@@ -293,7 +317,6 @@
 }
 
 .spell-form {
-    background-color: #fff;
     padding: 20px;
     margin-top: 20px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -368,6 +391,8 @@ table {
 	font-family: barlow;
 	border-collapse: collapse;
 	width: 50%;
+	backdrop-filter: blur(25px);
+	background-color: rgba(0, 0, 0, 0.406);
 }
 
 td, th {
@@ -429,6 +454,136 @@ h4 {
 
 
 
+.card {
+	width: 300px;
+	height: 400px;
+	background-color: #ffffff14;
+	backdrop-filter: blur(50px);
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 24px;
+	border-radius: 20px;
+	border: 0.2px solid red;
+	transition: transform 0.1s ease, box-shadow 1s ease, scale 1s ease;
+	perspective: 1000px;
+	margin: 25px;
+	box-shadow: 0 0 0 red;
+
+}
+
+.innercard {
+	height: 100%;
+	width: 100%;
+	border-radius: 20px;
+	box-shadow: 0 0 0 red;
+	transition: 0.5s ease;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.innercard:hover {
+	box-shadow: 0 0 25px red;
+}
+
+.innercard h1 {
+	text-align: center;
+	color: white !important;
+}
+
+.outercard {
+	transition: 0.5s ease;
+}
+
+.outercard:hover {
+	scale: 1.1;
+}
+
+
+
+
+
+.card h1 {
+	font-family: 'gandur new';
+	font-weight: 900;
+	text-align: center;
+	color: white;
+}
+
+
+#gameplay-card {
+	background-image: url(resources/images/cards/gameplay.png);
+	background-position: center;
+	background-size: cover;
+	scale: 1;
+	transition: 1s ease;
+}
+
+#spells-card {
+	background-image: url(resources/images/cards/spells.png);
+	background-position: center;
+	background-size: cover;
+	scale: 1;
+	transition: 1s ease;
+}
+
+#gameplay-card h1 {
+	scale: 1;
+	transition: 1s ease;
+}
+
+
+
+
+#gameplay-card:hover {
+	filter: blur(6px);
+	scale: 1.5;
+}
+
+#spells-card:hover {
+	filter: blur(6px);
+	scale: 1.5;
+}
+
+
+
+.cardheader {
+	position: absolute;
+	z-index: 1;
+	pointer-events: none;
+	transition: 1s ease;
+	scale: 1;
+	
+}
+
+.general-card-container {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 20px;
+	overflow: hidden;
+	box-shadow: 0 0 0 red;
+	transition: 0.5s ease;
+
+}
+
+.general-card-container:hover {
+	box-shadow: 0 0 25px red;
+}
+
+.general-card-container:hover .cardheader {
+	scale: 1.3;
+}
+
+
+
+
+
+
 
 
 
@@ -461,25 +616,43 @@ h4 {
 	
 }
 
+#stickyindex {
+	display: none;
+}
+
 @media screen and (max-width: 800px) {
 	#header-slvnz {
 		margin-right: 20% !important;
 	}
 
 	.page-contents {
-		width: 70% !important;
-		display: flex; flex-direction: column; margin-left: 25%;
+		width: 80% !important;
+	}
+
+	.pageindex {
+		position: sticky;
+		top: 0;
+		width: 100%;
+		transform: translate(0, 0);
+	}
+
+	#stickyindex {
+		display: block;
+	}
+
+	#fixedindex {
+		display: none;
 	}
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
 	#header-slvnz {
 		margin-right: 10% !important;
 	}
 
 	.page-contents {
 		width: 70%;
-		display: flex; flex-direction: column; margin-left: 30%;
+		margin-top: 45%;
 	}
 }
 
@@ -490,7 +663,7 @@ h4 {
 
 	.page-contents {
 		width: 50%;
-		display: flex; flex-direction: column; margin-left: 25%;
+		margin-top: 100%;
 	}
 }
 

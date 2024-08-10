@@ -6,6 +6,23 @@
 <title>Oynanış - SLVNZ Veritabanı</title>
 <link href="slvnz.css" rel="stylesheet" type="text/css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    .page-contents {
+        background-color: rgba(0, 0, 0, 0.373);
+        backdrop-filter: blur(15px);
+        padding: 50px;
+    }
+
+    h3 {
+        color: red;
+    }
+
+    h4 {
+        color: red;
+    }
+</style>
+
 </head>
 
 <body>
@@ -13,7 +30,7 @@
 
 
 
-    <div id="turkish" class="pageindex">
+    <div id="fixedindex" class="pageindex">
 
         
         <table style="width: 100%;">
@@ -75,68 +92,102 @@
         </table>
     </div>
 
-    <div id="english" class="pageindex">
+    
 
-    </div>
+    
 	
 	
-	<div class="main">
+	<div class="main" style="color: white; flex-direction: column;">
+
+        
 	
 	
 
-	  	<div class="header">
-
-            <div class="upbutton">
-                <a href="#header-slvnz"> <img src="resources/icons/up-button.png" width="35px"> </a>
-            </div>
+        <div class="header">
 		
 		
 			
 					 
-			<div style="display: flex; flex-direction: row; padding-bottom: 10px; pointer-events: none;">
-			
-				<div id="header-slvnz" style="font-family: Barlow; display: flex; flex-direction: row; align-items: flex-end; margin-right: 100px;">
-				
-				<h1> SLVNZ</h1>
-				
-					<p style=" margin: 0; margin-bottom: 5px; font-size: 14pt;"> <em>DATABASE</em> </p>
-			
-				</div>
-			
-				<div id="menu-vert" style="font-family: Barlow; display: flex; flex-direction: row; align-items: center; width: 60%; pointer-events: all; padding-top: 6px">
-				
-
-					<a href="index.html"> <button > ANA SAYFA </button> </a>
-
-					<a href="playguide.html" style="color: blueviolet; border: 1px solid blueviolet; border-radius: 5px;"> <button> OYNANIŞ </button> </a>
-					
-					<a href="spells.html"> <button> BÜYÜLER </button> </a>
-
-					<a href="skills.html"> <button> FİZİKSEL <br> YETENEKLER </button> </a>
-
-                    <a href="battle-arts.html"> <button> SAVAŞ <br> SANATLARI </button> </a>
-
-			
-				</div>
-
-				<div id="menu-drop" style="font-family: Barlow; display: flex; flex-direction: row; align-items: center; width: 60%; pointer-events: all; padding-top: 6px">
-                    <div class="dropdown">
-                        <button class="dropbtn">MENÜ</button>
-                        <div class="dropdown-content">
-                            <a href="index.html" >ANA SAYFA</a>
-							<a href="playguide.html" style="color: white; background-color: blueviolet;"> OYNANIŞ</a>
-                            <a href="spells.html">BÜYÜLER</a>
-                            <a href="skills.html">FİZİKSEL YETENEKLER</a>
-                            <a href="battle-arts.html">SAVAŞ SANATLARI</a>
-                        </div>
+            <div style="display: flex; flex-direction: row; padding-bottom: 10px;">
+            
+                <a href="index.html" style="text-decoration: none;">
+                    <div id="header-slvnz" style="font-family: Barlow; display: flex; flex-direction: row; align-items: flex-end;">
+                
+                        <h1> SLVNZ</h1>
+                    
+                        <p style=" margin: 0; margin-bottom: 5px; font-size: 14pt;"> <em>DATABASE</em> </p>
+                
                     </div>
-                </div>
-			
-			</div>
+                </a>
+            
+                
+            
+            </div>
+        
+        
+        </div>
 
-		
-		
-		</div>
+        <div id="stickyindex" class="pageindex">
+
+        
+            <table style="width: 100%;">
+                    <tr>
+                        <td>
+                            <a href="#Zarlar_ve_Eylemler">Zarlar ve Eylemler</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Zara_Gore_Basari_Durumlari">Zara Göre Başarı Durumları</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Nitelik">Nitelikler</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Beceriler">Beceriler</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Enerjiler">Enerjiler</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Yetenekler">Yetenekler</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Ekipmanlar">Ekipmanlar</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Savas_ve_Mucadele">Savaş ve Mücadele</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Karakter_Gelisimi">Karakter Gelişimi</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Huner_Avantaj_ve_Kusur">Hüner, Avantaj ve Kusur</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Siniflar">Sınıflar</a>
+                        </td>
+                    </tr>
+            </table>
+        </div>
 		
 		
 		<div class="page-contents">
@@ -375,38 +426,38 @@
 
             <p style="font-family: barlow;">
                 
-                <strong>KUVVET <span style="color: blueviolet;">(KUV)</span>:</strong> Karakterin kas gücü ile gerçekleştirebileceği eylemleri belirleyen niteliktir. Bu eylemler ağır bir nesneyi kaldırma, bir şeye vurma durumunda uygulanan kuvvet, mücadele sırasında bir şeye asılma vb. gibi durumları oluşturur. Bir karakterin kuvvet niteliği ne kadar yüksek ise, bu niteliği gerektiren eylemleri başarma kapasitesi de o kadar yükselir.
+                <strong>KUVVET <span style="color: red;">(KUV)</span>:</strong> Karakterin kas gücü ile gerçekleştirebileceği eylemleri belirleyen niteliktir. Bu eylemler ağır bir nesneyi kaldırma, bir şeye vurma durumunda uygulanan kuvvet, mücadele sırasında bir şeye asılma vb. gibi durumları oluşturur. Bir karakterin kuvvet niteliği ne kadar yüksek ise, bu niteliği gerektiren eylemleri başarma kapasitesi de o kadar yükselir.
 
 
             </p>
 
             <p style="font-family: barlow;">
                 
-                <strong>ÇEVİKLİK <span style="color: blueviolet;">(ÇEV)</span>:</strong> Karakterin hızlı hareket etme, ani tepki verme, kaçınma vb. eylemlerinde ihtiyaç duyduğu niteliktir. Bir karakterin çevikliği ne kadar yüksek ise o kadar atik ve hareketli olduğu düşünülebilir. Bu nitelik aynı zamanda karakterin yakın dövüşte silahını, yumruğunu veya tekmesini rakibe isabet ettirmesinde fayda sağlayabilirken, savunma konusunda da gelen darbelerden kaçınma becerisini de etkileyebilen bir niteliktir.
+                <strong>ÇEVİKLİK <span style="color: red;">(ÇEV)</span>:</strong> Karakterin hızlı hareket etme, ani tepki verme, kaçınma vb. eylemlerinde ihtiyaç duyduğu niteliktir. Bir karakterin çevikliği ne kadar yüksek ise o kadar atik ve hareketli olduğu düşünülebilir. Bu nitelik aynı zamanda karakterin yakın dövüşte silahını, yumruğunu veya tekmesini rakibe isabet ettirmesinde fayda sağlayabilirken, savunma konusunda da gelen darbelerden kaçınma becerisini de etkileyebilen bir niteliktir.
 
             </p>
 
             <p style="font-family: barlow;">
                 
-                <strong>DAYANIKLILIK <span style="color: blueviolet;">(DAY)</span>:</strong> Karakterlerin darbelere dayanma, yıkıcı durumlara karşı ayakta kalabilme, ağır durumlarda bilincini koruyabilme ya da acıya dayanma gibi durumlarda ihtiyaç duyduğu niteliktir. Aynı zamanda bir karakterin STAMINA değerini de etkilemektedir. Bir karakterin DAYANIKLILIK niteliği ne kadar yüksek olursa, sahip olduğu STAMINA miktarı da doğru orantılı olarak yükselecektir.
+                <strong>DAYANIKLILIK <span style="color: red;">(DAY)</span>:</strong> Karakterlerin darbelere dayanma, yıkıcı durumlara karşı ayakta kalabilme, ağır durumlarda bilincini koruyabilme ya da acıya dayanma gibi durumlarda ihtiyaç duyduğu niteliktir. Aynı zamanda bir karakterin STAMINA değerini de etkilemektedir. Bir karakterin DAYANIKLILIK niteliği ne kadar yüksek olursa, sahip olduğu STAMINA miktarı da doğru orantılı olarak yükselecektir.
 
             </p>
 
             <p style="font-family: barlow;">
                 
-                <strong>İRADE <span style="color: blueviolet;">(İRD)</span>:</strong> Dayanıklılığa benzer biçimde karakterin zihinsel dayanıklılığında; yani zihinsel olarak gireceği herhangi bir mücadelede ihtiyaç duyacağı niteliktir. Bu mücadeleler herhangi bir büyü etkisi altında kalma, zihne sızma, isteği dışında telepati vb. etkilerin altında kalma gibi durumlar olarak nitelendirilebilir. Bir karakterin İRADE niteliği ne kadar yüksek ise, MANA değeri doğru orantılı olarak yükselecektir.
+                <strong>İRADE <span style="color: red;">(İRD)</span>:</strong> Dayanıklılığa benzer biçimde karakterin zihinsel dayanıklılığında; yani zihinsel olarak gireceği herhangi bir mücadelede ihtiyaç duyacağı niteliktir. Bu mücadeleler herhangi bir büyü etkisi altında kalma, zihne sızma, isteği dışında telepati vb. etkilerin altında kalma gibi durumlar olarak nitelendirilebilir. Bir karakterin İRADE niteliği ne kadar yüksek ise, MANA değeri doğru orantılı olarak yükselecektir.
 
             </p>
 
             <p style="font-family: barlow;">
                 
-                <strong>ZEKÂ <span style="color: blueviolet;">(ZEK)</span>:</strong> Karakterin geçmişe yönelik tarihi bilgilerini, bir konuya yönelik bilgi birikimlerini, zor bulmacalar ve bilmeceleri kavrayabilme yetilerini etkileyen bir niteliktir. Aynı zamanda yüksek zekâya sahip karakterler, bilgileri öğrenme, algılama ve aklında tutma konusunda avantaj sahibidirler. Bunun anlamı, zekâ niteliği yüksek karakterlerin bazı bilgileri öğrenme eğrilerinin normal bir karaktere göre daha yüksek olmasıdır.
+                <strong>ZEKÂ <span style="color: red;">(ZEK)</span>:</strong> Karakterin geçmişe yönelik tarihi bilgilerini, bir konuya yönelik bilgi birikimlerini, zor bulmacalar ve bilmeceleri kavrayabilme yetilerini etkileyen bir niteliktir. Aynı zamanda yüksek zekâya sahip karakterler, bilgileri öğrenme, algılama ve aklında tutma konusunda avantaj sahibidirler. Bunun anlamı, zekâ niteliği yüksek karakterlerin bazı bilgileri öğrenme eğrilerinin normal bir karaktere göre daha yüksek olmasıdır.
 
             </p>
 
             <p style="font-family: barlow;">
                 
-                <strong>İRFAN <span style="color: blueviolet;">(İRF)</span>:</strong> Karakterlerin başka karakterlerle olan iletişimlerinde, şüpheli buldukları karakterlerin davranışlarının altında yatan gerçeği anlama, bir kişinin yalan söyleyip söylemediğini kavramaya çalışma gibi durumlarda ihtiyaç duyacağı niteliktir. Aynı zamanda irfan sahibi karakterlerin algıları daha açık olacağından, irfan niteliğinin sağlayacağı avantaj sayesinde farkındalıkları olumlu yönde etkilenmektedir. Benzer biçimde irfan sahibi karakterler enerji dolu auraları fark etme ve bu enerjilerin yoğunluğunu tanılama konusunda da daha yetkin durumdadırlar. 
+                <strong>İRFAN <span style="color: red;">(İRF)</span>:</strong> Karakterlerin başka karakterlerle olan iletişimlerinde, şüpheli buldukları karakterlerin davranışlarının altında yatan gerçeği anlama, bir kişinin yalan söyleyip söylemediğini kavramaya çalışma gibi durumlarda ihtiyaç duyacağı niteliktir. Aynı zamanda irfan sahibi karakterlerin algıları daha açık olacağından, irfan niteliğinin sağlayacağı avantaj sayesinde farkındalıkları olumlu yönde etkilenmektedir. Benzer biçimde irfan sahibi karakterler enerji dolu auraları fark etme ve bu enerjilerin yoğunluğunu tanılama konusunda da daha yetkin durumdadırlar. 
 
             </p>
 
@@ -428,7 +479,7 @@
 
 
 
-            <h3 style="font-family: barlow; color: blueviolet;">TEMEL BECERİLER</h3>
+            <h3 style="font-family: barlow; color: red;">TEMEL BECERİLER</h3>
 
 
             <p style="font-family: barlow;">
@@ -439,7 +490,7 @@
 
             <p style="font-family: barlow;">
                 
-                <strong>Bloklama:</strong> Karaktere yönelmiş bir saldırıdan kaçınmaya yönelik bir beceridir. <span style="color: blueviolet; font-weight: bold;">ÇEV</span> niteliği ile kullanılır.
+                <strong>Bloklama:</strong> Karaktere yönelmiş bir saldırıdan kaçınmaya yönelik bir beceridir. <span style="color: red; font-weight: bold;">ÇEV</span> niteliği ile kullanılır.
 
             </p>
 
@@ -469,7 +520,7 @@
 
             <p style="font-family: barlow;">
                 
-                <strong>Farkındalık:</strong> Duyma ve görme temelli olarak herhangi bir şeyi fark etme konusunda ihtiyaç duyulan beceridir. Bu durumda ek olarak <span style="color: blueviolet; font-weight: bold;">İRF</span> niteliği ile kullanılır.
+                <strong>Farkındalık:</strong> Duyma ve görme temelli olarak herhangi bir şeyi fark etme konusunda ihtiyaç duyulan beceridir. Bu durumda ek olarak <span style="color: red; font-weight: bold;">İRF</span> niteliği ile kullanılır.
             
             </p>
 
@@ -481,13 +532,13 @@
 
             <p style="font-family: barlow;">
                 
-                <strong>Araştırma:</strong> Farkındalık becerisinden farklı olarak, araştırma becerisi karakterlerin görsel ya da sözsel bir bilmecede özel bir detayı yakalamasını, ipuçları bulmasını, mevcut bilgiyi analiz ederek bir sonuca ulaşmasını/yaklaşmasını belirleyen beceridir. <span style="color: blueviolet; font-weight: bold;">ZEK</span> niteliği ile kullanılır.
+                <strong>Araştırma:</strong> Farkındalık becerisinden farklı olarak, araştırma becerisi karakterlerin görsel ya da sözsel bir bilmecede özel bir detayı yakalamasını, ipuçları bulmasını, mevcut bilgiyi analiz ederek bir sonuca ulaşmasını/yaklaşmasını belirleyen beceridir. <span style="color: red; font-weight: bold;">ZEK</span> niteliği ile kullanılır.
             
             </p>
 
             <p style="font-family: barlow;">
                 
-                <strong>Hayatta Kalma:</strong> Özellikle vahşi doğada yön bulma, iz sürme, sığınak bulma, hava durumu tahmini vb. durumlarda ihtiyaç duyulan beceridir. <span style="color: blueviolet; font-weight: bold;">İRF</span> niteliği ile kullanılır.
+                <strong>Hayatta Kalma:</strong> Özellikle vahşi doğada yön bulma, iz sürme, sığınak bulma, hava durumu tahmini vb. durumlarda ihtiyaç duyulan beceridir. <span style="color: red; font-weight: bold;">İRF</span> niteliği ile kullanılır.
 
             </p>
 
@@ -506,7 +557,7 @@
 
 
 
-            <h3 style="font-family: barlow; color: blueviolet;">ÖZEL BECERİLER</h3>
+            <h3 style="font-family: barlow; color: red;">ÖZEL BECERİLER</h3>
 
 
             <p style="font-family: barlow;">
@@ -550,7 +601,7 @@
 
 
 
-            <h3 style="font-family: barlow; color: blueviolet;">TEMEL ENERJİLER</h3>
+            <h3 style="font-family: barlow; color: red;">TEMEL ENERJİLER</h3>
 
 
             <p style="font-family: barlow;">
@@ -616,7 +667,7 @@
 
             
 
-            <h3 style="font-family: barlow; color: blueviolet;">ÖZEL ENERJİLER</h3>
+            <h3 style="font-family: barlow; color: red;">ÖZEL ENERJİLER</h3>
 
 
             <p style="font-family: barlow;">
@@ -695,7 +746,7 @@
 
             </p>
 
-            <h3 style="font-family: barlow; color: blueviolet;">FİZİKSEL YETENEKLER</h3>
+            <h3 style="font-family: barlow; color: red;">FİZİKSEL YETENEKLER</h3>
 
             <p style="font-family: barlow;">
                             
@@ -703,7 +754,7 @@
             
             </p>
 
-            <h3 style="font-family: barlow; color: blueviolet;">ENERJİSEL YETENEKLER</h3>
+            <h3 style="font-family: barlow; color: red;">ENERJİSEL YETENEKLER</h3>
 
             <p style="font-family: barlow;">
                             
@@ -711,7 +762,7 @@
 
             </p>
 
-            <h3 style="font-family: barlow; color: blueviolet;">ODAK VE KONSANTRASYON</h3>
+            <h3 style="font-family: barlow; color: red;">ODAK VE KONSANTRASYON</h3>
 
             <p style="font-family: barlow;">
                             
@@ -761,7 +812,7 @@
 
             <table style="width: 70%;">
 
-                <h3 style="font-family: barlow; color: blueviolet;">Zırh Nitelikleri</h3>
+                <h3 style="font-family: barlow; color: red;">Zırh Nitelikleri</h3>
 
                 <tr>
                     <th>
@@ -862,7 +913,7 @@
 
             <table style="width: 70%;">
 
-                <h3 style="font-family: barlow; color: blueviolet;">Silah Nitelikleri</h3>
+                <h3 style="font-family: barlow; color: red;">Silah Nitelikleri</h3>
 
                 <tr>
                     <th>
@@ -1018,7 +1069,7 @@
 
             <table style="width: 70%;">
 
-                <h3 style="font-family: barlow; color: blueviolet;">Kalkan Nitelikleri</h3>
+                <h3 style="font-family: barlow; color: red;">Kalkan Nitelikleri</h3>
 
                 <tr>
                     <th>
@@ -1099,13 +1150,13 @@
 
             </p>
 
-            <h3 style="color: blueviolet; font-family: barlow;"> SAVAŞ POZU </h3>
+            <h3 style="color: red; font-family: barlow;"> SAVAŞ POZU </h3>
 
             <p>
                 Karakterin kalkanı tuttuğu normal savaş duruşudur. Bu duruşta karakter gelen saldırıyı bloke etmek için kuşanmış olduğu kalkanın blok niteliğini ve kendi sahip olduğu blok becerisini birleştirerek kullanır.
             </p>
 
-            <h3 style="color: blueviolet; font-family: barlow;"> TAM BLOK POZU </h3>
+            <h3 style="color: red; font-family: barlow;"> TAM BLOK POZU </h3>
 
             <p>
                 Tam blok pozunda karakter, kalkanını önünü kapatacak biçimde tutacak şekilde bir duruşa geçer. Bu şekilde karakterin vücudunun dönük olduğu yönden gelen saldırılar NET BLOK gerçekleştirir. NET BLOK, karakterin bütün fiziksel saldırılardan zarar görmemesine, kalkanın hasar alması ve kolun baskı altında kalmasına sebep olur. Aşağıdan gelebilecek saldırılara karşı yine de bir savunma refleksi gerektirir. 
@@ -1144,7 +1195,7 @@
                 Yukarıdaki anlatım ışığında, savaş ve mücadele durumlarında takip edilebilecek durumlar şu şekilde birbirinden ayrılabilir:
             </p>
 
-            <h3 style="color: blueviolet; font-family: barlow;">SIRADAN MÜCADELE</h3>
+            <h3 style="color: red; font-family: barlow;">SIRADAN MÜCADELE</h3>
 
 
             <p>
@@ -1157,7 +1208,7 @@
             </p>
 
 
-            <h3 style="color: blueviolet; font-family: barlow;">
+            <h3 style="color: red; font-family: barlow;">
                 SAVAŞ
             </h3>
 
@@ -1190,7 +1241,7 @@
 
 
 
-            <h3 style="color: blueviolet; font-family: barlow;">BÜYÜ KULLANIMI</h3>
+            <h3 style="color: red; font-family: barlow;">BÜYÜ KULLANIMI</h3>
 
             <p>Enerjinin yönlendirilmesi ve kullanımı basit formlarda başlasa da geliştikçe karmaşıklaşan, dolayısıyla zar kullanımı açısından da farklı yaklaşımlar isteyebilen bir durumdur. Ayrıca, büyü kullanımı neredeyse her zaman MANA, RUH ya da YAŞAM enerjilerini kaynak olarak kullanmaktadır. Çoğu büyü kullanımı için iki ya da üç zar kullanılsa da büyünün tanımı ya da işlevi özelleştikçe, bu işleve uyum sağlamak adına büyü kullanımına farklı türde zarlar eklenebilir. </p>
 
@@ -1211,13 +1262,13 @@
             </p>
 
 
-            <h3 style="color: blueviolet; font-family: barlow;">FİZİKSEL YETENEK KULLANIMI</h3>
+            <h3 style="color: red; font-family: barlow;">FİZİKSEL YETENEK KULLANIMI</h3>
 
             <p>
                 Sistemsel ve mantıksal olarak fiziksel yeteneklerin kullanımı, büyülerden çok farklı değildir. Fiziksel yeteneğin özelliklerine göre, yetenek için kullanılacak zar sayısı artış gösterebilir. Genel olarak zar kullanım-ları sırasıyla İSABET, KUVVET, MESAFE, BAŞARI şeklinde gelişebilmektedir.
             </p>
 
-            <h3 style="color: blueviolet; font-family: barlow;">MÜCADELEDE ODAK VE KONSANTRASYON</h3>
+            <h3 style="color: red; font-family: barlow;">MÜCADELEDE ODAK VE KONSANTRASYON</h3>
 
             <p>
                 Fiziksek ya da enerjisel bir yeteneğini odak/konsantrasyon durumunda bulundurmak, karakterlerin bu durumlara yönelik yuvalarını dolduran eylemlerdir. İki durum da birbirine süreç olarak benzerlik gösterebilse de bu durumların korunması konusu birbirinden farklılık gösterebilir.
@@ -1258,7 +1309,7 @@
             </p>
 
 
-            <h3 style="color: blueviolet; font-family: barlow;">TEMEL GELİŞİM</h3>
+            <h3 style="color: red; font-family: barlow;">TEMEL GELİŞİM</h3>
 
             <p>
                 Temel gelişim, karakterlerin temel niteliklerini, temel becerilerini, ekipman yetkinliklerini, enerjisel yetkinliklerini ve kaynak havuzlarını geliştirebileceği süreçleri kapsamaktadır. Bu süreç, karakterin gireceği 6 saatlik antrenman ya da meditasyon süreci sonunda atılan 20 yüzlü zar ile, <strong>SEVİYE x 80 Deneyim Puanı’na</strong> erişmeye çalışarak seviye atlayabileceği bir sistemdir.
@@ -1269,7 +1320,7 @@
             </p>
 
 
-            <h3 style="color: blueviolet; font-family: barlow;">ÖZEL GELİŞİM</h3>
+            <h3 style="color: red; font-family: barlow;">ÖZEL GELİŞİM</h3>
 
             <p>
                 Özel gelişim, karakterlerin özel becerilerini geliştirebilecekleri bir gelişim sürecini kapsamaktadır. Bu süreç, temel gelişimdeki özel antrenmanlardan farklı olarak yaptıkça öğrenme ve gelişme modeli üstüne kuruludur. Yani, bir karakter özel becerisini kullandığı zaman attığı zar ile deneyim puanı kazanır. Bu bağlamda, özel becerileri geliştirmek için gerekli deneyim formülü ise SEVİYE X 100 Deneyim Puanı şeklindedir.
@@ -1280,7 +1331,7 @@
             </p>
 
 
-            <h3 style="color: blueviolet; font-family: barlow;">YETENEK GELİŞİMİ</h3>
+            <h3 style="color: red; font-family: barlow;">YETENEK GELİŞİMİ</h3>
 
             <p>
                 Enerjisel ve fiziksel olarak pek çok yeteneğin temel seviyesinin üstüne çıkılabilecek şekilde geliştirilme kapasitesi vardır. Bu gelişim süreci, GM tarafından belirlenen özel bir biçimde olabilirken, bazı yetenekler için sistem kapsamında belirtilmiştir. Geliştirilebilir tipte olan yetenekleri, yetenek açıklamalarında bulunan özel bir belirteç dahilinde fark edebilirsiniz.

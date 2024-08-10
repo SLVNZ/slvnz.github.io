@@ -6,6 +6,23 @@
 <title>Oynanış - SLVNZ Veritabanı</title>
 <link href="slvnz.css" rel="stylesheet" type="text/css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    .page-contents {
+        background-color: rgba(0, 0, 0, 0.373);
+        backdrop-filter: blur(15px);
+        padding: 50px;
+    }
+
+    h3 {
+        color: red;
+    }
+
+    h4 {
+        color: red;
+    }
+</style>
+
 </head>
 
 <body lang="en">
@@ -13,7 +30,7 @@
 
 
 
-    <div class="pageindex">
+    <div id="fixedindex" class="pageindex">
 
         
         <table style="width: 100%;">
@@ -78,63 +95,97 @@
     
 	
 	
-	<div class="main">
+	<div class="main" style="color: white;">
 	
 	
 
-	  	<div class="header">
-
-            <div class="upbutton">
-                <a href="#header-slvnz"> <img src="resources/icons/up-button.png" width="35px"> </a>
-            </div>
+        <div class="header">
 		
 		
 			
 					 
-			<div style="display: flex; flex-direction: row; padding-bottom: 10px; pointer-events: none;">
-			
-				<div id="header-slvnz" style="font-family: Barlow; display: flex; flex-direction: row; align-items: flex-end; margin-right: 100px;">
-				
-				<h1> SLVNZ</h1>
-				
-					<p style=" margin: 0; margin-bottom: 5px; font-size: 14pt;"> <em>DATABASE</em> </p>
-			
-				</div>
-			
-				<div id="menu-vert" style="font-family: Barlow; display: flex; flex-direction: row; align-items: center; width: 60%; pointer-events: all; padding-top: 6px">
-				
-
-					<a href="index.html"> <button > MAIN PAGE </button> </a>
-
-					<a href="playguide.html" style="color: blueviolet; border: 1px solid blueviolet; border-radius: 5px;"> <button> GAMEPLAY </button> </a>
-					
-					<a href="spells.html"> <button> SPELLS </button> </a>
-
-					<a href="skills.html"> <button> PHYSICAL <br> ABILITIES </button> </a>
-
-                    <a href="battle-arts.html"> <button> BATTLE <br> ARTS </button> </a>
-
-			
-				</div>
-
-				<div id="menu-drop" style="font-family: Barlow; display: flex; flex-direction: row; align-items: center; width: 60%; pointer-events: all; padding-top: 6px">
-                    <div class="dropdown">
-                        <button class="dropbtn">MENU</button>
-                        <div class="dropdown-content">
-                            <a href="index.html" >MAIN PAGE</a>
-							<a href="playguide.html" style="color: white; background-color: blueviolet;"> GAMEPLAY</a>
-                            <a href="spells.html">SPELLS</a>
-                            <a href="skills.html">PHYSICAL ABILITIES</a>
-                            <a href="battle-arts.html">BATTLE ARTS</a>
-                        </div>
+            <div style="display: flex; flex-direction: row; padding-bottom: 10px;">
+            
+                <a href="index.html" style="text-decoration: none;">
+                    <div id="header-slvnz" style="font-family: Barlow; display: flex; flex-direction: row; align-items: flex-end;">
+                
+                        <h1> SLVNZ</h1>
+                    
+                        <p style=" margin: 0; margin-bottom: 5px; font-size: 14pt;"> <em>DATABASE</em> </p>
+                
                     </div>
-                </div>
-			
-			</div>
+                </a>
+            
+                
+            
+            </div>
+        
+        
+        </div>
 
-		
-		
-		</div>
+        
+
+        <div id="stickyindex" class="pageindex">
+
+        
+            <table style="width: 100%;">
+                    <tr>
+                        <td>
+                            <a href="#Zarlar_ve_Eylemler">Dices and Actions</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Zara_Gore_Basari_Durumlari">Success Statuses <br>According to Dice</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Nitelik">Attributes</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Beceriler">Skills</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Energies">Energies</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Abilities">Abilities</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Equipment">Equipment</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Combat_and_Conflict">Combat and Conflict</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Character_Development">Character Development</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Skill_Advantage_and_Flaw">Feat, Advantage and Flaw</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="#Classes">Classes</a>
+                        </td>
+                    </tr>
+            </table>
+        </div>
 		
 		
 		<div class="page-contents">
@@ -373,38 +424,38 @@
 
             <p style="font-family: barlow;">
                 
-                <strong>STRENGHT <span style="color: blueviolet;">(STR)</span>:</strong> It is the quality that determines the actions that the character can perform with muscular strength. These actions include lifting a heavy object, the force applied when hitting something, hanging on to something during a fight, etc. The higher a character's strength attribute, the higher their capacity to perform actions that require this attribute.
+                <strong>STRENGHT <span style="color: red;">(STR)</span>:</strong> It is the quality that determines the actions that the character can perform with muscular strength. These actions include lifting a heavy object, the force applied when hitting something, hanging on to something during a fight, etc. The higher a character's strength attribute, the higher their capacity to perform actions that require this attribute.
 
 
             </p>
 
             <p style="font-family: barlow;">
                 
-                <strong>DEXTERITY <span style="color: blueviolet;">(DEX)</span>:</strong> It is the quality that the character needs in actions such as moving fast, reacting suddenly, avoiding, etc. The higher a character's agility, the more agile and mobile they are. This quality can also help the character to hit the opponent with his weapon, fist or kick in melee combat, while it can also affect his ability to avoid incoming blows in defence.
+                <strong>DEXTERITY <span style="color: red;">(DEX)</span>:</strong> It is the quality that the character needs in actions such as moving fast, reacting suddenly, avoiding, etc. The higher a character's agility, the more agile and mobile they are. This quality can also help the character to hit the opponent with his weapon, fist or kick in melee combat, while it can also affect his ability to avoid incoming blows in defence.
 
             </p>
 
             <p style="font-family: barlow;">
                 
-                <strong>ENDURANCE <span style="color: blueviolet;">(END)</span>:</strong> It is the quality that characters need to be able to withstand blows, survive destructive situations, maintain consciousness in severe situations, or endure pain. It also affects a character's STAMINA. The higher a character's STAMINA, the more STAMINA they have.
+                <strong>ENDURANCE <span style="color: red;">(END)</span>:</strong> It is the quality that characters need to be able to withstand blows, survive destructive situations, maintain consciousness in severe situations, or endure pain. It also affects a character's STAMINA. The higher a character's STAMINA, the more STAMINA they have.
 
             </p>
 
             <p style="font-family: barlow;">
                 
-                <strong>WILLPOWER <span style="color: blueviolet;">(WIL)</span>:</strong> Similar to endurance, it is the character's mental endurance; in other words, it is the quality that the character will need in any mental struggle. These struggles can be characterised as being under the influence of any magic, infiltrating the mind, being under the influence of telepathy, etc. against his will. The higher the WILL quality of a character, the MANA value will increase in direct proportion.
+                <strong>WILLPOWER <span style="color: red;">(WIL)</span>:</strong> Similar to endurance, it is the character's mental endurance; in other words, it is the quality that the character will need in any mental struggle. These struggles can be characterised as being under the influence of any magic, infiltrating the mind, being under the influence of telepathy, etc. against his will. The higher the WILL quality of a character, the MANA value will increase in direct proportion.
 
             </p>
 
             <p style="font-family: barlow;">
                 
-                <strong>INTELLIGENCE <span style="color: blueviolet;">(INT)</span>:</strong> It is a quality that affects the character's historical knowledge of the past, their knowledge of a subject, and their ability to comprehend difficult puzzles and riddles. At the same time, characters with high intelligence have an advantage in learning, perceiving and memorising information. This means that characters with high intelligence have a higher learning curve for some information than a normal character.
+                <strong>INTELLIGENCE <span style="color: red;">(INT)</span>:</strong> It is a quality that affects the character's historical knowledge of the past, their knowledge of a subject, and their ability to comprehend difficult puzzles and riddles. At the same time, characters with high intelligence have an advantage in learning, perceiving and memorising information. This means that characters with high intelligence have a higher learning curve for some information than a normal character.
 
             </p>
 
             <p style="font-family: barlow;">
                 
-                <strong>WISDOM <span style="color: blueviolet;">(WIS)</span>:</strong> It is the quality that characters will need in their communication with other characters, in situations such as understanding the truth underlying the behaviour of characters they find suspicious, trying to grasp whether a person is lying or not. At the same time, since characters with lore will have more open perceptions, their awareness is positively affected by the advantage of the lore attribute. Similarly, characters with lore are more competent in recognising energetic auras and diagnosing the intensity of these energies. 
+                <strong>WISDOM <span style="color: red;">(WIS)</span>:</strong> It is the quality that characters will need in their communication with other characters, in situations such as understanding the truth underlying the behaviour of characters they find suspicious, trying to grasp whether a person is lying or not. At the same time, since characters with lore will have more open perceptions, their awareness is positively affected by the advantage of the lore attribute. Similarly, characters with lore are more competent in recognising energetic auras and diagnosing the intensity of these energies. 
 
             </p>
 
@@ -424,7 +475,7 @@
 
 
 
-            <h3 style="font-family: barlow; color: blueviolet;">BASIC SKILLS</h3>
+            <h3 style="font-family: barlow; color: red;">BASIC SKILLS</h3>
 
 
             <p style="font-family: barlow;">
@@ -435,7 +486,7 @@
             
             <p style="font-family: barlow;">
             
-                <strong>Dodging:</strong> A skill aimed at avoiding an attack directed at the character. It is used with the <span style="color: blueviolet; font-weight: bold;">DEX</span> attribute.
+                <strong>Dodging:</strong> A skill aimed at avoiding an attack directed at the character. It is used with the <span style="color: red; font-weight: bold;">DEX</span> attribute.
             
             </p>
             
@@ -465,7 +516,7 @@
             
             <p style="font-family: barlow;">
             
-                <strong>Awareness:</strong> The skill required to notice something based on hearing or sight. Additionally, it is used with the <span style="color: blueviolet; font-weight: bold;">WIS</span> attribute.
+                <strong>Awareness:</strong> The skill required to notice something based on hearing or sight. Additionally, it is used with the <span style="color: red; font-weight: bold;">WIS</span> attribute.
             
             </p>
             
@@ -477,13 +528,13 @@
             
             <p style="font-family: barlow;">
             
-                <strong>Investigation:</strong> Unlike the Awareness skill, Investigation determines a character's ability to notice special details in visual or verbal puzzles, find clues, or analyze existing information to reach or approach a conclusion. It is used with the <span style="color: blueviolet; font-weight: bold;">INT</span> attribute.
+                <strong>Investigation:</strong> Unlike the Awareness skill, Investigation determines a character's ability to notice special details in visual or verbal puzzles, find clues, or analyze existing information to reach or approach a conclusion. It is used with the <span style="color: red; font-weight: bold;">INT</span> attribute.
             
             </p>
             
             <p style="font-family: barlow;">
             
-                <strong>Survival:</strong> The skill needed for navigating, tracking, finding shelter, predicting weather, etc., especially in the wilderness. It is used with the <span style="color: blueviolet; font-weight: bold;">WIS</span> attribute.
+                <strong>Survival:</strong> The skill needed for navigating, tracking, finding shelter, predicting weather, etc., especially in the wilderness. It is used with the <span style="color: red; font-weight: bold;">WIS</span> attribute.
             
             </p>
             
@@ -503,7 +554,7 @@
 
 
 
-            <h3 style="font-family: barlow; color: blueviolet;">SPECIAL SKILLS</h3>
+            <h3 style="font-family: barlow; color: red;">SPECIAL SKILLS</h3>
 
 
             <p style="font-family: barlow;">
@@ -539,7 +590,7 @@
                 In SLVNZ 2.0, it is possible to perform magic or, more appropriately, to channel energy. To channel energy, one must master the various types of energy present in the universe. These energy types are divided into <strong>Basic Energy Types</strong> and <strong>Special Energy Types</strong>.
             </p>
 
-            <h3 style="font-family: barlow; color: blueviolet;">BASIC ENERGIES</h3>
+            <h3 style="font-family: barlow; color: red;">BASIC ENERGIES</h3>
 
             <p style="font-family: barlow;">
                 Basic energy types are the kinds of energies that can be commonly found in the universe, and they are considered simple to access and channel. These energies are generally those that characters can easily learn at Wizard academies or from other characters who have previously learned to channel them.
@@ -577,7 +628,7 @@
                 <strong>Death Energy:</strong> This type of energy is primarily associated with causing death, disease, and misfortune or directly facilitating the emergence of different attributes related to these events. Examples of such situations include summoning the dead, animating dead bodies, communicating with the dead, spreading disease, cursing, etc.
             </p>
 
-            <h3 style="font-family: barlow; color: blueviolet;">SPECIAL ENERGIES</h3>
+            <h3 style="font-family: barlow; color: red;">SPECIAL ENERGIES</h3>
 
             <p style="font-family: barlow;">
                 Special energy types are more specialized and less accessible compared to the basic ones, or they require certain conditions to be met. These types of energies are generally not encountered frequently in nature but can be rarely found or brought out with special effort.
@@ -633,19 +684,19 @@
                 In addition to their attributes, skills, and energies, characters also possess abilities that they can use by incorporating these elements. These abilities are shaped according to the path the player wishes their character to follow. Character abilities are divided into two branches: physical and energetic. Physical abilities consume STAMINA as a resource, while energetic abilities may consume MANA, SPIRIT, KI, or LIFE energy. However, some physical abilities may also consume energetic resources.
             </p>
 
-            <h3 style="font-family: barlow; color: blueviolet;">PHYSICAL ABILITIES</h3>
+            <h3 style="font-family: barlow; color: red;">PHYSICAL ABILITIES</h3>
 
             <p style="font-family: barlow;">
                 Physical abilities are mainly the abilities needed by characters who specialize in close combat or use ranged weapons. As they generally require muscle strength, physical abilities consume the character's STAMINA, but sometimes they can be combined with energy to transform into abilities with different effects. This form of physical abilities is known as <strong>Martial Arts</strong>.
             </p>
 
-            <h3 style="font-family: barlow; color: blueviolet;">ENERGETIC ABILITIES</h3>
+            <h3 style="font-family: barlow; color: red;">ENERGETIC ABILITIES</h3>
 
             <p style="font-family: barlow;">
                 Energetic abilities (Spells) are the result of drawing chaotic energy from nature into the body, controlling it, and transforming it into the desired form when released. Some characters may choose to specialize solely in energetic abilities, but characters who focus on physical combat may also wish to develop their energetic abilities. This should not be confused with the martial arts aspect of physical abilities. For example, a character with martial arts abilities may enhance their strikes by spending a certain amount of MANA with each hit. However, a similar character may use an energetic ability to enchant their weapon with an element using only MANA without the need to spend STAMINA.
             </p>
 
-            <h3 style="font-family: barlow; color: blueviolet;">FOCUS AND CONCENTRATION</h3>
+            <h3 style="font-family: barlow; color: red;">FOCUS AND CONCENTRATION</h3>
 
             <p style="font-family: barlow;">
                 Both types of abilities may have effects that occur instantly or last for a duration. Some abilities that remain active for a duration require focus or concentration to maintain, and characters have limitations in their ability to focus or concentrate. Focus is used for physical abilities, while concentration is used for energetic abilities.
@@ -681,7 +732,7 @@
             </p>
 
             <table style="width: 70%;">
-                <h3 style="font-family: barlow; color: blueviolet;">Armor Attributes</h3>
+                <h3 style="font-family: barlow; color: red;">Armor Attributes</h3>
                 <tr>
                     <th>Armor Type</th>
                     <th style="text-align: center;">DEX</th>
@@ -729,7 +780,7 @@
             </p>
 
             <table style="width: 70%;">
-                <h3 style="font-family: barlow; color: blueviolet;">Weapon Attributes</h3>
+                <h3 style="font-family: barlow; color: red;">Weapon Attributes</h3>
                 <tr>
                     <th>Weapon Type</th>
                     <th style="text-align: center;">ACCURACY</th>
@@ -802,7 +853,7 @@
             </p>
 
             <table style="width: 70%;">
-                <h3 style="font-family: barlow; color: blueviolet;">Shield Attributes</h3>
+                <h3 style="font-family: barlow; color: red;">Shield Attributes</h3>
                 <tr>
                     <th>Shield Type</th>
                     <th style="text-align: center;">BLOCK</th>
@@ -840,13 +891,13 @@
                 Shields are a type of equipment that provides extra protection for characters in addition to armor. A character can protect themselves in two different ways by shaping their shield usage style. These and similar situations that can be used with shields and many other abilities are called Stances. The stances that can be used with shields are the Battle Stance and the Full Block Stance. The shield types that can use these stances are the Normal Shield and the Tower Shield types. Other shield types rely on the character's agility attribute for blocking.
             </p>
 
-            <h3 style="color: blueviolet; font-family: barlow;"> BATTLE STANCE </h3>
+            <h3 style="color: red; font-family: barlow;"> BATTLE STANCE </h3>
 
             <p>
                 This is the normal combat stance in which the character holds their shield. In this stance, the character uses the block attribute of the shield they are wielding combined with their own block ability to block incoming attacks.
             </p>
 
-            <h3 style="color: blueviolet; font-family: barlow;"> FULL BLOCK STANCE </h3>
+            <h3 style="color: red; font-family: barlow;"> FULL BLOCK STANCE </h3>
 
             <p>
                 In the Full Block Stance, the character positions themselves to hold their shield in front, covering their body. In this stance, the character achieves a NET BLOCK against attacks coming from the direction they are facing. NET BLOCK allows the character to avoid damage from all physical attacks, but it may cause the shield to take damage and the arm to be strained. It still requires a defensive reflex against attacks that may come from below.
@@ -880,7 +931,7 @@
                 In light of the above explanation, the situations that can be followed in combat and conflict can be categorized as follows:
             </p>
 
-            <h3 style="color: blueviolet; font-family: barlow;">STANDARD CONFLICT</h3>
+            <h3 style="color: red; font-family: barlow;">STANDARD CONFLICT</h3>
 
             <p>
                 Standard conflicts include situations such as wrestling, blocking each other, lying, persuading, etc., where success and failure are determined mutually. In these situations, both sides generally roll one die each. The side with the higher numeric value, aided by additional points, wins the conflict.
@@ -890,7 +941,7 @@
                 Majik uses the Sleight of Hand special ability to try to steal a gold pouch from a man's pocket as he walks absentmindedly through a crowded street. In response, the man uses an AWARENESS skill die to see if he notices the attempt in time.
             </p>
 
-            <h3 style="color: blueviolet; font-family: barlow;">
+            <h3 style="color: red; font-family: barlow;">
                 COMBAT
             </h3>
 
@@ -918,7 +969,7 @@
                 In blocking situations, if the character is not in FULL BLOCK stance, the chance of protection is higher compared to dodging. If the attacker's roll exceeds the character's block die by 6 points, the attack bypasses the shield and deals damage to the character. However, if the difference is less than 6 points, the attack hits the shield, damaging it and reducing the character's STAMINA. If the character's block value is higher than the attack value, the shield only suffers wear and tear while deflecting the attack.
             </p>
 
-            <h3 style="color: blueviolet; font-family: barlow;">SPELL USE</h3>
+            <h3 style="color: red; font-family: barlow;">SPELL USE</h3>
 
             <p>The use and direction of energy start with simple forms but become more complex as they develop, requiring different approaches in terms of dice use. Also, spell usage almost always consumes MANA, SPIRIT, or LIFE energies as resources. While two or three dice are typically used for most spells, different types of dice may be added to align with the spell's definition or function as it becomes more specialized.</p>
 
@@ -938,13 +989,13 @@
                 <strong>Force-Based Spells:</strong> These spells generally focus on creating a specific effect on an entity or an area without requiring accuracy. They include spells that cause effects such as mental attacks, explosions, burning, melting, etc., in an area, or producing different effects on a substance. Similar to accuracy-based spells, different dice rolls can be added to force-based spells, considering area, duration, range, and other factors.
             </p>
 
-            <h3 style="color: blueviolet; font-family: barlow;">PHYSICAL ABILITY USE</h3>
+            <h3 style="color: red; font-family: barlow;">PHYSICAL ABILITY USE</h3>
 
             <p>
                 Systemically and logically, the use of physical abilities is not very different from spells. The number of dice used for an ability may increase depending on the physical ability's characteristics. Generally, dice usage may develop sequentially as ACCURACY, STRENGTH, DISTANCE, SUCCESS.
             </p>
 
-            <h3 style="color: blueviolet; font-family: barlow;">FOCUS AND CONCENTRATION IN CONFLICT</h3>
+            <h3 style="color: red; font-family: barlow;">FOCUS AND CONCENTRATION IN CONFLICT</h3>
 
             <p>
                 Using physical or energetic abilities while in a focus/concentration state is an action that fills the slots dedicated to these states. While the processes for these states may be similar, their maintenance differs.
@@ -980,7 +1031,7 @@
                 The character's development process is divided into two different branches and formulas. These are <strong>Basic Development</strong> and <strong>Special Development</strong>.
             </p>
 
-            <h3 style="color: blueviolet; font-family: barlow;">BASIC DEVELOPMENT</h3>
+            <h3 style="color: red; font-family: barlow;">BASIC DEVELOPMENT</h3>
 
             <p>
                 Basic development encompasses the processes by which characters can improve their basic attributes, basic skills, equipment proficiency, energetic proficiency, and resource pools. This process allows the character to level up by completing a 6-hour training or meditation session and rolling a 20-sided die to try to reach <strong>LEVEL x 80 Experience Points</strong>.
@@ -990,7 +1041,7 @@
                 Majik wants to improve his strength. Majik's current strength score is +1. To increase this attribute to +2, he decides to train for 6 hours by lifting weights. The experience points required to reach +2: 2 x 80 = 160 experience points.
             </p>
 
-            <h3 style="color: blueviolet; font-family: barlow;">SPECIAL DEVELOPMENT</h3>
+            <h3 style="color: red; font-family: barlow;">SPECIAL DEVELOPMENT</h3>
 
             <p>
                 Special development involves the process by which characters can improve their special skills. Unlike special training in basic development, this process is built on the learn-by-doing model. In other words, a character gains experience points by rolling a die when using a special skill. The experience formula required to improve special skills is LEVEL X 100 Experience Points.
@@ -1000,7 +1051,7 @@
                 Majik is developing his alchemy skills. Every time he makes a potion, the success roll also contributes to Majik's development process, helping him progress to the next level.
             </p>
 
-            <h3 style="color: blueviolet; font-family: barlow;">ABILITY DEVELOPMENT</h3>
+            <h3 style="color: red; font-family: barlow;">ABILITY DEVELOPMENT</h3>
 
             <p>
                 Many abilities have the potential to be developed beyond their basic level, both energetically and physically. This development process can be specifically determined by the GM, but some abilities are defined within the system. You can identify abilities that can be developed by looking for a special marker in the ability descriptions.
