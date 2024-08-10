@@ -40,9 +40,9 @@
 
 'Bebas Neue'      - All Caps 
 
-''barlow''          - Sans Serif Text
+'"barlow"'          - Sans Serif Text
 
-''barlow' Condensed'- Sans Serif Condensed Text
+'"barlow" Condensed'- Sans Serif Condensed Text
 
 
 
@@ -132,7 +132,7 @@ body {
 }
 
 .header label {
-	font-family: 'barlow';
+	font-family: "barlow";
 	display: flex;
 	flex-direction: row;
 	font-size: 12pt;
@@ -144,7 +144,7 @@ body {
 .header button {
 	background-color: transparent;
 	border: none;
-	font-family: 'barlow';
+	font-family: "barlow";
 	font-weight: bold;
 	margin-left: 5px;
 	margin-right: 5px;
@@ -188,7 +188,7 @@ body {
 }
 
 .footer {
-	font-family: 'barlow';
+	font-family: "barlow";
 	font-weight: light;
 	text-align: center;
 	color: red !important;
@@ -220,7 +220,7 @@ body {
     justify-content: flex-start;
     margin-bottom: 20px;
     padding: 10px;
-	font-family: 'barlow' !important;
+	font-family: "barlow" !important;
 }
 
 .filter input, .filter select {
@@ -240,7 +240,7 @@ body {
 	backdrop-filter: blur(15px);
     max-height: 60vh;
     overflow-y: auto;
-	font-family: 'barlow';
+	font-family: "barlow";
 	font-size: 10pt;
 	color: white;
 }
@@ -260,7 +260,7 @@ body {
 
 .spell-list th {
     background-color: blueviolet;
-	font-family: 'barlow';
+	font-family: "barlow";
 	text-align: start;
 	font-size: 10pt;
 	color: white;
@@ -283,7 +283,7 @@ body {
     padding: 20px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     display: none;
-	font-family: 'barlow';
+	font-family: "barlow";
 	width: 100%;
 	color: white;
 }
@@ -390,7 +390,7 @@ body {
 
 table {
 	border: 1px solid blueviolet;
-	font-family: 'barlow';
+	font-family: "barlow";
 	border-collapse: collapse;
 	width: 50%;
 	backdrop-filter: blur(25px);
@@ -403,11 +403,11 @@ td, th {
 }
 
 p {
-	font-family: 'barlow';
+	font-family: "barlow";
 }
 
 h3 {
-	font-family: 'barlow';
+	font-family: "barlow";
 	color: blueviolet;
 }
 
@@ -419,7 +419,7 @@ h2 {
 }
 
 h4 {
-	font-family: 'barlow';
+	font-family: "barlow";
 	color: blueviolet;
 }
 
@@ -442,7 +442,7 @@ h4 {
 
 .disclaimer {
 	display: none;
-	font-family: 'barlow';
+	font-family: "barlow";
 	font-size: 10pt;
 	font-style: italic;
 }
