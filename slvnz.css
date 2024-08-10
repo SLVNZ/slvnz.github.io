@@ -122,6 +122,8 @@ body {
 }
 
 
+
+
 .header {
 	display: flex;
     flex-direction: column;
@@ -403,7 +405,7 @@ td, th {
 }
 
 p {
-	font-family: "barlow";
+	font-family: 'barlow';
 }
 
 h3 {
@@ -509,7 +511,7 @@ h4 {
 
 .card h1 {
 	font-family: "gandur-new";
-	font-weight: 900;
+	font-weight: 300;
 	text-align: center;
 	color: white;
 }
