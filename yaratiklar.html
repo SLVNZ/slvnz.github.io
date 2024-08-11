@@ -17,7 +17,7 @@
         }
 
         .left-panel {
-            width: 50%;
+            width: 35%;
             padding: 10px;
             background-color: rgba(0, 0, 0, 0.369);
             backdrop-filter: blur(25px);
@@ -74,7 +74,7 @@
         }
 
         .right-panel {
-            width: 50%;
+            width: 65%;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
@@ -136,13 +136,78 @@
                                     display: flex;
                                     flex-direction: column;
                                     align-items: center;
+                                    cursor: pointer;
+                                    background-repeat: no-repeat;
+                                    transition: all 0.5s ease;
         }
+
+        .modal {
+            display: none; /* Başlangıçta gizli */
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8); /* Arka planı karartma */
+            text-align: center;
+            
+            }
+
+            .modal-content {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%); /* Yatay ve dikey olarak ortalar */
+                max-width: 80%;
+                max-height: 80%;
+            }
+
+            @keyframes zoom {
+            from {transform: scale(0.1);}
+            to {transform: scale(1);}
+            }
+
+            .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            }
+
+            .close:hover,
+            .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+            }
+
+            .gradient-overlay {
+                background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+                bottom: 0;
+                left: 0;
+                width: 100vw;
+                height: 10vh;
+                position: absolute;
+                z-index: -1;
+            }
+
 
 
         
     </style>
 </head>
 <body lang="tr">
+
+    <div id="imageModal" class="modal" onclick="closeImageModal()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
 
     <div class="main">
         <div class="header">
@@ -203,20 +268,50 @@
                             <tr id="creature1" onclick="showDetails('dungrug')">
                                 <td>Dungrug</td>
                                 <td>Aberasyon</td>
-                                <td>Canavar</td>
+                                <td>Lanetli</td>
                                 <td>Tehlikeli</td>
                             </tr>
                             <tr id="creature1" onclick="showDetails('anfara')">
                                 <td>Anfara</td>
                                 <td>Ejder</td>
-                                <td>Canavar</td>
+                                <td>Karanlık</td>
                                 <td>Ölümcül</td>
                             </tr>
                             <tr id="creature1" onclick="showDetails('andanofara')">
                                 <td>Andanofara</td>
                                 <td>Ejderha</td>
+                                <td>Karanlık</td>
+                                <td>Ölüm Kapanı</td>
+                            </tr>
+                            <tr id="creature1" onclick="showDetails('mukur')">
+                                <td>Mukur</td>
                                 <td>Canavar</td>
-                                <td>Ölüm Tuzağı</td>
+                                <td>Doğal</td>
+                                <td>Ortalama</td>
+                            </tr>
+                            <tr id="creature1" onclick="showDetails('indurog')">
+                                <td>İndurog</td>
+                                <td>İblis</td>
+                                <td>Ateş</td>
+                                <td>Zorlayıcı</td>
+                            </tr>
+                            <tr id="creature1" onclick="showDetails('karafaran')">
+                                <td>Karafaran</td>
+                                <td>Canavar</td>
+                                <td>Karanlık</td>
+                                <td>Zorlayıcı</td>
+                            </tr>
+                            <tr id="creature1" onclick="showDetails('bulbon')">
+                                <td>Bulbon</td>
+                                <td>İnsanımsı</td>
+                                <td>Doğal</td>
+                                <td>Ortalama</td>
+                            </tr>
+                            <tr id="creature1" onclick="showDetails('sulduran-panter')">
+                                <td>Sulduran Panteri</td>
+                                <td>Yaratık</td>
+                                <td>Mistik</td>
+                                <td>Zorlayıcı</td>
                             </tr>
                         </tbody>
                     </table>
@@ -234,13 +329,911 @@
 
                 <div class="right-panel">
 
+                    <div id="sulduran-panter-details" class="creature-details">
+                        <div class="creature-image" style="
+                                    background-image: url(resources/images/monsters/sulduran-panter.png);
+                                    position: sticky;
+                                    top: 0;
+                                    padding-bottom: 20px;
+                                    " onclick="showImageModal(event)">
+
+
+
+                                    <h1> SULDURAN PANTERİ</h1>
+                                    <span> ORTA MİSTİK YARATIK</span>
+                                    <small>ENDER</small>
+
+                                    <div class="gradient-overlay"></div>
+
+
+                        </div>
+
+                        <div style="display: flex; flex-direction: row;">
+                            <div style="display: flex; flex-direction: column; width: 50%; padding: 20px;">
+                                
+
+                                <div id="statcontainer" style="display: flex; flex-direction: row; justify-content: space-between; padding-left: 20%; padding-right: 20%;">
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+3</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">KUV</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+6</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">ÇEV</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+2</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">DAY</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+2</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">İRD</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">0</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">ZEK</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+1</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">İRF</label>
+                                    </div>
+
+                                </div>
+
+                                <h2>Temeller</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Dayanıklılıklar:
+                                    </strong> 
+                                    Ruh hasarı
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kırılganlıklar:
+                                    </strong> 
+                                    -
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Bağışıklıklar:
+                                    </strong> 
+                                    Hastalık, Ruh Alevi. 
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kondisyon Bağışıklıkları:
+                                    </strong> 
+                                    Uyku, Korkma.
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Diller:
+                                    </strong> 
+                                    -
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Hareket Kabiliyeti:
+                                    </strong> 
+                                    10 Kare Yürüme (50ft.)
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Hisler:
+                                    </strong> 
+                                    Gerçek görüş 3 Kare (15ft.)
+                                </span>
+
+
+                                <h2>Kabiliyetler</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Ruhani Avcı.
+                                    </strong> 
+                                    Sulduran Panteri, ruh ile beslenir. Saldırıları ruh enerjisi ile yüklüdür. Her bir saldırısı ruh hasarı vurur.
+
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Ruh Alevi.
+                                    </strong> 
+                                    Panterin kuruğu ve pençeleri ruh alevi ile çevrelenir. Bu alevler isabet halinde bir miktar hedefe sıçrayarak fiziksel olarak imkansız, manasal olarak zor söndürülebilen şekilde hedefin ruhunu yakmaya başlar.
+                                
+                                </span>       
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Doğal Büyü Kullanıcısı.
+                                    </strong> 
+                                    Sulduran Panteri, doğasından gelen bir büyü yapma gücüne sahiptir. Bu güç ile gerçekleştirebildiği büyülere <strong>Cezbetme</strong> enerjisinden +3 puan alır. Bu enerjiyle şu büyüleri gerçekleştirebilir:
+
+                                    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;İstediği Zaman: Felâket, Kişi Cezbet, Emret, Hex
+                                    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gün/3 (Büyü Başına): Delilik Tacı, Kedi Uykusu
+                                    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gün/1 (Büyü Başına): Kişi Zaptet, Şaşkınlık
+    
+                                </span> 
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Çifte Zıplama.
+                                    </strong> 
+                                    Sulduran Panteri, ilk zıplamasının ardından zıplama noktasının zirvesine ulaştığında, havada bir zıplama daha gerçekleştirerek bu yüksekliği ikiye katlayabilir.
+                                
+                                </span>  
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Telepati.
+                                    </strong> 
+                                    Sulduran Panteri, ortak bir dili konuşabildiği bir varlık ile zihinsel bir iletişim gerçekleştirebilir.
+                                
+                                </span> 
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Dil Mimikrisi.
+                                    </strong> 
+                                    Sulduran Panteri, bilmediği bir dili 10 dakika boyunca dinleyip analiz ederek taklit etmeye çalışabilir.
+
+                                </span> 
+
+                                
+                                
+
+
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; width: 50%; padding: 20px;">
+
+                                <h2 style="margin-top: 0;">Eylemler</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Çoklu Saldırı.
+                                    </strong> 
+                                    Sulduran Panteri, toplamda 3 saldırı gerçekleştirir: Bir tane pençeyle, bir tane ağızla, bir tane kuyrukla.
+
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Pençe.
+                                    </strong> 
+                                    Sulduran panteri hedefine bir peçe savurur. Pençe isabet halinde hem fiziksel hem ruhsal zarar verir. +8 ile isabet.
+
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Isırık.
+                                    </strong> 
+                                    Sulduran Panteri, hedefine karşı bir ısırma hamlesi gerçekleştirir. Bu hamle sadece fiziksel hasar verir. Panter isterse ağzı ile rakibinin bir eşyasını ya da uzvunu kıstırabilir. +4 ile isabet.
+
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kuyruk.
+                                    </strong> 
+                                    Sulduran panteri hedefine kuyruğunu savurur. İsabet halinde kuyruğu hem basınç hasarı verir hem de üstünde taşıdığı ruh alevinin bir kısmını hedefine geçirir. Eğer hedef ruh ateşinden kurtulamazsa, her tur ateşten ruh hasarı alır.
+                                </span>
+
+                                
+
+                                
+                                <h2>Sulduran Panteri'nin Doğası</h2>
+
+                                <span style="text-align: left;">
+                                    Sulduran Panterleri mistik yaratıklardır. Göç eden ve sürekli mekan değiştirebilen yapıları sebebiyle pek çok farklı ormanda karşılaşılabilme ihtimalleri bulunmaktadır. Genel olarak barışçıl canlılar olsalar da, temkinli davranma yapıları sebebiyle dost canlısı olmayan yaratıklar olarak algılanabilmektedirler. 
+                                </span>
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="bulbon-details" class="creature-details">
+                        <div class="creature-image" style="
+                                    background-image: url(resources/images/monsters/bulbon.png);
+                                    position: sticky;
+                                    top: 0;
+                                    padding-bottom: 20px;
+                                    " onclick="showImageModal(event)">
+
+                                    <h1> BULBON</h1>
+                                    <span> ORTA DOĞAL İNSANIMSI</span>
+                                    <small>YAYGIN</small>
+
+                        </div>
+
+                        <div style="display: flex; flex-direction: row;">
+                            <div style="display: flex; flex-direction: column; width: 50%; padding: 20px;">
+                                
+
+                                <div id="statcontainer" style="display: flex; flex-direction: row; justify-content: space-between; padding-left: 20%; padding-right: 20%;">
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+1</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">KUV</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+2</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">ÇEV</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">-1</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">DAY</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+1</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">İRD</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">0</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">ZEK</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">0</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">İRF</label>
+                                    </div>
+
+                                </div>
+
+                                <h2>Temeller</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Dayanıklılıklar:
+                                    </strong> 
+                                    -
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kırılganlıklar:
+                                    </strong> 
+                                    Ses hasarı.
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Bağışıklıklar:
+                                    </strong> 
+                                    Zehir. 
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kondisyon Bağışıklıkları:
+                                    </strong> 
+                                    Basit hastalanma.
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Diller:
+                                    </strong> 
+                                    Bulbonca
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Hareket Kabiliyeti:
+                                    </strong> 
+                                    6 Kare Yürüme (30ft.)
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Hisler:
+                                    </strong> 
+                                    Gece görüşü (Basit)
+                                </span>
+
+
+                                <h2>Kabiliyetler</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kurnaz.
+                                    </strong> 
+                                    Bulbonlar, zeki ve hileci oldukları için avantajlı saklanma ve kaçma hareketlerine sahiptirler. <strong>Gizlilik +4, Kaçınma +4</strong>
+
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Doğal Çeviklik.
+                                    </strong> 
+                                    Bir Bulbon, saldırılardan kaçınmada ve tehlikeli bölgelerde hareket etmede oldukça beceriklidir. Zorlu arazilerde hareket kabiliyeti etkilenmeden hareket edebilir.
+                                </span>       
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Doğal Büyü Kullanıcısı.
+                                    </strong> 
+                                    Bulbon, bazı büyüleri doğal olarak gerçekleştirebilir:
+                                    <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Işık, Hile, Hokkabazlık, Druid Zanaatı, Sis Bulutu, Gölgelerden Kaçış
+    
+                                </span> 
+
+                                
+                                
+
+
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; width: 50%; padding: 20px;">
+
+                                <h2 style="margin-top: 0;">Eylemler</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Saldırı.
+                                    </strong> 
+                                    Bulbon, elinde bulunan silahlarından biriyle bir saldırıda bulunabilir. Bu saldırı, bulbon için belirlenen özel yetkinlikler ve silah nitelikleriyle bağlantılı olarak değişken değerlere sahiptir. Sıradan şartlar altında, ek bir değer kazanmayıp silahın varsayılan değerlerini kullanır.
+
+                                </span>
+
+                                
+
+                                
+                                <h2>Bulbon'un Doğası</h2>
+
+                                <span style="text-align: left;">
+                                    Bulbon, gobline benzeyen ama daha zeki ve büyüyle uğraşan bir yaratıktır. Ortalama bir goblinin boyutlarına ve görünümüne sahip olmasına rağmen, derileri parlak yeşil tonlarındadır ve başlarının üzerinde, geyiklerin boynuzlarına benzer boynuzları vardır. Bu boynuzlar, Bulbonların doğal büyü güçlerini toplamak ve kanalize etmek için kullandıkları bir araç olarak hizmet eder. Gözleri ise parlak yeşil renkte parlar. Bulbonlar, küçük ama etkili büyüler kullanma yeteneğiyle tanınır. Genellikle ışık, gizlilik ve yanılsama gibi basit büyülerle düşmanlarını şaşırtır ve yollarına devam ederler. Bu büyüler, özellikle ormanlık ve karanlık bölgelerde avlanırken veya saklanırken onlara büyük avantaj sağlar.
+
+                                    <br><br>Bulbonlar, zeki ve sinsi doğaları sayesinde genellikle daha büyük goblin toplulukları içinde danışman veya şaman olarak yer alırlar. Büyü yetenekleri, kabilelerindeki diğer üyeler tarafından saygı görmelerini sağlar. Büyülerini doğrudan saldırı için nadiren kullanırlar; bunun yerine, düşmanlarını tuzaklara çekmek veya dikkatlerini dağıtmak için kullanmayı tercih ederler.
+                                    
+                                    <br><br>Eğer bir maceracı, bir Bulbon ile karşılaşırsa, dikkatli olmalı ve onun büyü yeteneklerine karşı tetikte olmalıdır. Bulbonların genellikle zayıf fiziksel savunmaları vardır, ancak zihin oyunları ve büyü hileleri onları tehlikeli kılar.
+
+                                </span>
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="karafaran-details" class="creature-details">
+                        <div class="creature-image" style="
+                                    background-image: url(resources/images/monsters/karafaran.png);
+                                    position: sticky;
+                                    top: 0;
+                                    padding-bottom: 20px;
+                                    " onclick="showImageModal(event)">
+
+                                    <h1> KARAFARAN</h1>
+                                    <span> ORTA KARANLIK CANAVAR</span>
+                                    <small>ENDER</small>
+
+                        </div>
+
+                        <div style="display: flex; flex-direction: row;">
+                            <div style="display: flex; flex-direction: column; width: 50%; padding: 20px;">
+                                
+
+                                <div id="statcontainer" style="display: flex; flex-direction: row; justify-content: space-between; padding-left: 20%; padding-right: 20%;">
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+3</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">KUV</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+6</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">ÇEV</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">0</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">DAY</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">0</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">İRD</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+2</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">ZEK</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+2</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">İRF</label>
+                                    </div>
+
+                                </div>
+
+                                <h2>Temeller</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Dayanıklılıklar:
+                                    </strong> 
+                                    Karanlık büyüler ve psişik etkilerle yapılan saldırılar.
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kırılganlıklar:
+                                    </strong> 
+                                    Doğrudan güneş ışığı ve ışık tabanlı büyüler.
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Bağışıklıklar:
+                                    </strong> 
+                                    Zihinsel manipülasyon ve duyusal yanıltma büyüleri. 
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kondisyon Bağışıklıkları:
+                                    </strong> 
+                                    Görsel yanılsama veya körlük.
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Diller:
+                                    </strong> 
+                                    Kara Lisan
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Hareket Kabiliyeti:
+                                    </strong> 
+                                    8 Kare Yürüme (40ft.)
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Hisler:
+                                    </strong> 
+                                    Karanlıkta mükemmel görüş, gölgeler arasındaki en hafif hareketleri bile algılayabilir.
+                                </span>
+
+
+                                <h2>Kabiliyetler</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Gölge Kayması.
+                                    </strong> 
+                                    Karafaran hareketi sırasında bir gölgeden diğerine anında geçebilir. Gölgeler arasında 4 kareden (20ft.) uzun mesafe varsa bunu başaramaz.
+
+
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kara Görünmezlik.
+                                    </strong> 
+                                    Karafaran, alçak ışık koşullarında, konturunu kaybederek neredeyse görünmez hale gelir.                                
+                                </span>       
+
+                                <br><br><br>
+                                
+                                
+
+
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; width: 50%; padding: 20px;">
+
+                                <h2 style="margin-top: 0;">Eylemler</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Çoklu Saldırı.
+                                    </strong> 
+                                    Karafaran, toplamda iki adet saldırı gerçekleştirir: Aşağıdakilerden herhangi birini bu sayıyı tamamlamak üzere seçebilir (Sadece pençelerini 2 kere kullanabilir).
+
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Gölge Pençesi.
+                                    </strong> 
+                                    Karafaran keskin pençelerinden birini savurur (Saplama ya da kesme). İsabet için +6 alır.
+
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Tırtıklı Kuyruk.
+                                    </strong> 
+                                    Karafaran, kuyruğunu rakibine kırbaç gibi savurarak hızla geri çeker. Kuyruğundaki tırtıklar kısmi bir testere etkisi yaratarak çıplak deriyi parçalayabilir.
+
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Gölge Sarmalı.
+                                    </strong> 
+                                    Karafaran, çevresindeki gölgeleri düşmanına doğru yönlendirir. Eğer rakibi dayanıklılık kurtulmasını başaramazsa, Karafaran’nın sonraki turunun sonuna kadar gölgeler tarafından hareketsiz  bırakılır.
+                                    
+                                </span>
+
+                                
+                                <h2>Karafaran'ın Doğası</h2>
+
+                                <span style="text-align: left;">
+                                    Karafaran, ormanın en eski ve en karanlık bölümlerinde, özellikle insan eli değmemiş, gür ve yoğun ağaçlık alanlarda yaşar. Bu varlıklar, karanlığın kendisi kadar eski ve gizemli olduklarına inanılan, mitolojik kökenleri olan yaratıklardır. Onların varlığı, ormanın karanlık köşelerinde fısıldanan efsanelerde ve yerel halk arasında korku dolu hikâyelerde yaşar.
+
+                                    <br><br>Karafaranlar, gece avcısıdır; gündüzleri ise genellikle hareketsiz, gözle görülmeyen gölgeler olarak kalırlar. Ay ışığı ve yıldızların soluk ışığı altında, onları görmek neredeyse imkansızdır. Onların yaşam döngüsü, doğal çevrelerine o kadar bağlıdır ki, onlar olmadan ormanın karanlık kısımları eksik kalır gibi görünür. Bu varlıklar, ormanın doğal dengeleyicisi olarak işlev görür; zayıf, hasta ya da yaralı hayvanları avlayarak ekosistemi sağlıklı tutarlar.
+                                    
+                                    <br><br>Bir Karafaranı gözlemlemek veya onun varlığını hissetmek, sadece en usta iz sürücülerine veya büyücülere nasip olur. Onların sessizliği, ani hareketleri ve neredeyse doğaüstü yetenekleri, onları sadece fiziksel varlıklar değil, aynı zamanda ormanın mistik koruyucuları yapar. Onları anlamak ve onlarla etkileşime geçmek, derin bir doğa bilgisi ve karanlık sanatlara olan hakimiyet gerektirir. Gölge Kıvrakları ile temas kurmanın en güvenilir yolu, ormanın karanlık tarafıyla uyumlu olmak ve onların güvenini kazanmaktır. Ancak bu, sadece cesur ve bilge olanlar için bir seçenektir, çünkü bu gizemli varlıklar aynı zamanda korkunç öfkeye sahip olabilirler ve ormanın sırlarını koruma görevlerini ciddiye alırlar.
+
+
+                                </span>
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="indurog-details" class="creature-details">
+                        <div class="creature-image" style="
+                                    background-image: url(resources/images/monsters/indurog.png);
+                                    position: sticky;
+                                    top: 0;
+                                    padding-bottom: 20px;
+                                    " onclick="showImageModal(event)">
+
+                                    <h1> İNDUROG</h1>
+                                    <span> BÜYÜK ATEŞ İBLİSİ</span>
+                                    <small>ENDER</small>
+
+                        </div>
+
+                        <div style="display: flex; flex-direction: row;">
+                            <div style="display: flex; flex-direction: column; width: 50%; padding: 20px;">
+                                
+
+                                <div id="statcontainer" style="display: flex; flex-direction: row; justify-content: space-between; padding-left: 20%; padding-right: 20%;">
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+4</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">KUV</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+3</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">ÇEV</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+4</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">DAY</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+1</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">İRD</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+1</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">ZEK</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+1</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">İRF</label>
+                                    </div>
+
+                                </div>
+
+                                <h2>Temeller</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Dayanıklılıklar:
+                                    </strong> 
+                                    Lav, su, yıldırım.
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kırılganlıklar:
+                                    </strong> 
+                                    Buz, asit.
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Bağışıklıklar:
+                                    </strong> 
+                                    Ateş, zehir. 
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kondisyon Bağışıklıkları:
+                                    </strong> 
+                                    Cezbedilme, korkma.
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Diller:
+                                    </strong> 
+                                    İnfernal
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Hareket Kabiliyeti:
+                                    </strong> 
+                                    6 Kare Yürüme (30ft.)
+                                </span>
+
+
+                                <h2>Kabiliyetler</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Ateşin Çocuğu:
+                                    </strong> 
+                                    İndurog için ateş bir arkadaştır; Ateşten zarar görmez, tam tersine ateş onun için bir şifa aracıdır. Eğer bir İndurog ateş ile temasa geçerse, yaraları iyileşir ve onu güçlendirir.
+
+
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Yakıcı Vücut:
+                                    </strong> 
+                                    İndurogun bedeni ateşten yaratıldığı için her zaman normalden yüksek sıcaklıktadır. İndurogun vücudu ile temasa geçen bir varlık yanma hasarı alır.
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Yakıcı Silahlar:
+                                    </strong> 
+                                    İndurogun silahları ateşten ya da lavdan çıkardığı aşırı sıcak materyallerdir. Silahlarıyla gerçekleştireceği saldırılar da fiziksel hasarına ek olarak yakma hasarı verir. İndurgo’un silahı basit savaş silahı olabilir: Kılıç, balta ya da çekiç.                                </span>
+
+                                
+
+
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; width: 50%; padding: 20px;">
+
+
+                                <h2 style="margin-top: 0;">Eylemler</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Çoklu Saldırı.
+                                    </strong> 
+                                    İndurog, bir turda iki farklı saldırı gerçekleştirebilir: Bir saldırı silahıyla, bir diğeri ise kuyruğuyla.
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Yakın Mesafe Saldırısı.
+                                    </strong> 
+                                    İndurog, ateşten oluşan silahını rakibine savurur. Yukarıda belirtilen silahlar için isabet: (Kılıç:+5, Balta/Çekiç:+3) 
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kuyruk.
+                                    </strong> 
+                                    İndurog, kuyruğunu bir rakibe savurmak, çelme takıp yere düşürmek ya da ulaşabildiği bir nesneyi kavrayıp çekmek için kullanabilir. İsabete +3 alır.
+                                
+                                </span>
+
+                                
+                                <h2>İndurog'un Doğası</h2>
+
+                                <span style="text-align: left;">
+                                    Bir İndurog, çoğunlukla sıcaklığın yüksek olduğu ve ateş/lav olaylarının gerçekleştiği bölgelerde görülebilir. Bu bölgeler açık alanlar ya da kapalı yer altı bölgeleri olabilir. Ancak bir İndurog, muhakkak daha üst bir iblis tarafından kullanılmak üzere yaratılır. Bundan dolayı bir bölgede eğer bir İndurog görülürse, muhtemelen o bölgede tek başına olmadığı bilinmelidir. Genellikle daha ufak iblis gruplarına liderlik ya da öncülük etmek üzere görevlendirilirler.
+
+                                </span>
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="mukur-details" class="creature-details">
+                        <div class="creature-image" style="
+                                    background-image: url(resources/images/monsters/mukur.png);
+                                    position: sticky;
+                                    top: 0;
+                                    padding-bottom: 20px;
+                                    " onclick="showImageModal(event)">
+
+                                    <h1> MUKUR</h1>
+                                    <span> NORMAL DOĞAL CANAVAR</span>
+                                    <small>BAYAĞI</small>
+
+                        </div>
+
+                        <div style="display: flex; flex-direction: row;">
+                            <div style="display: flex; flex-direction: column; width: 50%; padding: 20px;">
+                                
+
+                                <div id="statcontainer" style="display: flex; flex-direction: row; justify-content: space-between; padding-left: 20%; padding-right: 20%;">
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+3</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">KUV</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+3</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">ÇEV</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+2</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">DAY</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">-2</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">İRD</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">-2</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">ZEK</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">0</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">İRF</label>
+                                    </div>
+
+                                </div>
+
+                                <h2>Temeller</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Dayanıklılıklar:
+                                    </strong> 
+                                    -
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kırılganlıklar:
+                                    </strong> 
+                                    Delme Hasarı
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Bağışıklıklar:
+                                    </strong> 
+                                    Zehir 
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kondisyon Bağışıklıkları:
+                                    </strong> 
+                                    -
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Diller:
+                                    </strong> 
+                                    -
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Hareket Kabiliyeti:
+                                    </strong> 
+                                    5 Kare Yürüme (25ft.), 8 kare yüzme (40ft.)
+                                </span>
+
+
+                                <h2>Kabiliyetler</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Üstün Ciğerler:
+                                    </strong> 
+                                    Bir Mukur nefesini 2 saate kadar tutabilme kabiliyetine sahiptir. Bu şekilde su altında uzun süre bulunabilir.
+
+
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Zehirli Deri:
+                                    </strong> 
+                                    Mukurların derileri hafif nörotoksinle kaplıdır. Bundan dolayı saldırıları rakipte bir yara açacak olursa/yaraya temas edecek olursa, yavaş yavaş biriken bir nörotoksin zehirlenmesi etkisi biriktirir.
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kaygan Deri:
+                                    </strong> 
+                                    Mukurların derisi oldukça kaygandır. Bundan dolayı fiziksel olarak üstünde denenecek kavrama eylemlerine karşı avantajlı mücadele eder.
+                                </span>
+
+                                
+
+
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; width: 50%; padding: 20px;">
+
+
+                                <h2 style="margin-top: 0;">Eylemler</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Çoklu Saldırı.
+                                    </strong> 
+                                    Mukur, turu içinde iki tane saldırı gerçekleştirebilir. Pençe iki kere olabilmek üzere, aşağıdakilerden ikisini kullanır:
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Isırık.
+                                    </strong> 
+                                    Mukur, ağzı ile rakibini ısırmaya çalışır. Dişleri keskindir; Bu sebeple çıplak deriyi ısırması halinde eti rahatlıkla koparabilir. +3 ile gerçekleştirir.
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Pençe.
+                                    </strong> 
+                                    Mukur, pençesini rakibine savurur. +4 ile isabet zarı kullanır.
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Dil.
+                                    </strong> 
+                                    Mukur, kuyruğunu bir kırbaç gibi rakibine savurur. Rakibinin elinde tuttuğu uzun bir silah vb. nesne varsa, vurmak yerine kuyruğu ile bu nesneyi kavrayıp çekmeyi de tercih edebilir. +3 isabet ile zar kullanır.                                </span>
+
+                                
+                                <h2>Mukur'un Doğası</h2>
+
+                                <span style="text-align: left;">
+                                    Mukurlar, genellikle sulak alanların yakınlarındaki mağaralarda, sulak alanların iç mekan oluşturduğu mağaralarda, su altı mağaralarında vb. mekanlarda görülebilirler. Küçük koloniler halinde yaşayıp çok sık çiftleşirler. Bu sebeple hayatta kalma ya da türlerini devam ettirme içgüdülerinin kuvvetli olduğu düşünülmektedir. Ancak, Mukurların spermlerinin oldukça bereketli olduğu, bundan dolayı pek çok farklı türden yaratıkla çiftleşip uyum sağlayabildikleri bilinmektedir. Bu yapıları sebebiyle Goblinlerin süper atası gibi de görülmektedirler. 
+
+                                    <br><br>
+
+                                    Mukurlar, kendi türünde etkileyebildikleri dişilerle birlikte olup doğum sonrasında başka dişi bulmak üzere ayrılırlar. Çoğu zaman vahşi doğada yırtıcı olmayan hayvanların dişileriyle de çiftleşip doğurana kadar onları alı koyarlar. Bu yolla doğan yavruları vahşi doğaya yayılıp hayatta kalabilirse babalarının geleneğini devam ettirirler. Ancak neyse ki Mukurlar çok zeki varlıklar olmayan ilkel canlılar olması sebebiyle bu özelliklerini avantajlarına kullanmayı düşünmezler.
+
+
+                                </span>
+
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
                     <div id="dungrug-details" class="creature-details">
                         <div class="creature-image" style="
                                     background-image: url(resources/images/monsters/dungrug.png);
                                     position: sticky;
                                     top: 0;
                                     padding-bottom: 20px;
-                                    ">
+                                    " onclick="showImageModal(event)">
 
                                     <h1> DUNGRUG</h1>
                                     <span> BÜYÜK LANETLİ ABERASYON</span>
@@ -386,8 +1379,12 @@
                                     <strong >
                                         Dil.
                                     </strong> 
-                                    ungrug, diliyle bir rakibi kavramaya ya da ona vurarak savurmaya çalışabilir. İsabetine +4 alırken kavramayı denerse +5 kuvvet ile mücadeleye girer.                                
+                                    Dungrug, diliyle bir rakibi kavramaya ya da ona vurarak savurmaya çalışabilir. İsabetine +4 alırken kavramayı denerse +5 kuvvet ile mücadeleye girer.                                
                                 </span>
+
+                                
+
+
 
 
 
@@ -398,11 +1395,11 @@
 
                     <div id="anfara-details" class="creature-details">
                         <div class="creature-image" style="
-                                    background-image: url(resources/images/monsters/anfara.png);
+                                    background-image: url(resources/images/monsters/anfara.png) !important;
                                     position: sticky;
                                     top: 0;
                                     padding-bottom: 20px;
-                                    ">
+                                    " onclick="showImageModal(event)">
 
                                     <h1> ANFARA</h1>
                                     <span> BÜYÜK KARANLIK EJDER</span>
@@ -602,7 +1599,7 @@
                                     position: sticky;
                                     top: 0;
                                     padding-bottom: 20px;
-                                    ">
+                                    " onclick="showImageModal(event)">
 
                                     <h1> ANDANOFARA</h1>
                                     <span> DEVASA KARANLIK EJDER</span>
@@ -888,6 +1885,21 @@
                         selectedPanel.classList.add('active');
                     }
                 }
+
+                function showImageModal(event) {
+                    var container = event.currentTarget;
+                    var modal = document.getElementById("imageModal");
+                    var modalImg = document.getElementById("modalImage");
+
+                    modal.style.display = "block";
+                    modalImg.src = container.style.backgroundImage.replace(/url\("?(.+?)"?\)/, '$1');
+                    }
+
+                    function closeImageModal() {
+                    var modal = document.getElementById("imageModal");
+                    modal.style.display = "none";
+                    }
+
             </script>
 </body>
 </html>
