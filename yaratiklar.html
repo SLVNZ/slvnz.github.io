@@ -142,7 +142,7 @@
         
     </style>
 </head>
-<body>
+<body lang="tr">
 
     <div class="main">
         <div class="header">
@@ -188,6 +188,7 @@
                             <option value="Hayvan">Hayvan</option>
                             <option value="Mahlukat">Mahlukat</option>
                         </select>
+
                     </div>
                     <table id="creatureTable">
                         <thead>
@@ -195,15 +196,28 @@
                                 <th data-column="creature" onclick="sortTable(this)">Yaratıklar</th>
                                 <th data-column="type" onclick="sortTable(this)">Yaratık Türü</th>
                                 <th data-column="subtype" onclick="sortTable(this)">Yaratık Tipi</th>
+                                <th data-column="danger" onclick="sortTable(this)">Derece</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr id="creature1" onclick="showDetails('creature1')">
+                            <tr id="creature1" onclick="showDetails('dungrug')">
+                                <td>Dungrug</td>
+                                <td>Aberasyon</td>
+                                <td>Canavar</td>
+                                <td>Tehlikeli</td>
+                            </tr>
+                            <tr id="creature1" onclick="showDetails('anfara')">
                                 <td>Anfara</td>
                                 <td>Ejder</td>
                                 <td>Canavar</td>
+                                <td>Ölümcül</td>
                             </tr>
-                            
+                            <tr id="creature1" onclick="showDetails('andanofara')">
+                                <td>Andanofara</td>
+                                <td>Ejderha</td>
+                                <td>Canavar</td>
+                                <td>Ölüm Tuzağı</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -219,7 +233,170 @@
 
 
                 <div class="right-panel">
-                    <div id="creature1-details" class="creature-details">
+
+                    <div id="dungrug-details" class="creature-details">
+                        <div class="creature-image" style="
+                                    background-image: url(resources/images/monsters/dungrug.png);
+                                    position: sticky;
+                                    top: 0;
+                                    padding-bottom: 20px;
+                                    ">
+
+                                    <h1> DUNGRUG</h1>
+                                    <span> BÜYÜK LANETLİ ABERASYON</span>
+                                    <small>ENDER</small>
+
+                        </div>
+
+                        <div style="display: flex; flex-direction: row;">
+                            <div style="display: flex; flex-direction: column; width: 50%; padding: 20px;">
+                                
+
+                                <div id="statcontainer" style="display: flex; flex-direction: row; justify-content: space-between; padding-left: 20%; padding-right: 20%;">
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+4</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">KUV</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+6</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">ÇEV</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+2</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">DAY</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">-2</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">İRD</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">-2</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">ZEK</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">0</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">İRF</label>
+                                    </div>
+
+                                </div>
+
+                                <h2>Temeller</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Dayanıklılıklar:
+                                    </strong> 
+                                    Kesme ve Saplama Hasarı (Ağız içi hariç)
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kırılganlıklar:
+                                    </strong> 
+                                    Ateş
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Bağışıklıklar:
+                                    </strong> 
+                                    Zehir, asit 
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kondisyon Bağışıklıkları:
+                                    </strong> 
+                                    Cezbedilme, korkma, körlük, hastalık
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Diller:
+                                    </strong> 
+                                    Titreşim
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Hareket Kabiliyeti:
+                                    </strong> 
+                                    12 kare yürüme (60ft.), 4 Kare Tünel Kazma (20ft.)
+                                </span>
+
+
+                                <h2>Kabiliyetler</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Süper Ciğerler:
+                                    </strong> 
+                                    Bir Dungrug nefesini 12 saate kadar tutabilme kabiliyetine sahiptir. Bu şekilde yer altında, su altında vb. havasız ortamlarda uzun süre kalabilir ve uyuyabilir.
+
+
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Alarmda:
+                                    </strong> 
+                                    Dungruglar kör yaratıklardır. Ancak kör olmalarına karşın hassas bir şekilde titreşimleri hissedebilirler. Bu özellikleri onların her daim alarmda olmasını sağlar ve herhangi bir noktadan kendilerine yaklaşan tehdidi afallamadan algılayabilmelerini sağlar. Yaratıklar süpriz kondisyonuna girmez.
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Eklem Bacaklı:
+                                    </strong> 
+                                    Dungrug, 8 adet eklem bacağa sahiptir. Bacakları sayesinde yüksek bölgelere tırmanabilir ve zorlu arazilerden etkilenmez.
+                                </span>
+
+                                
+
+
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; width: 50%; padding: 20px;">
+
+
+                                <h2 style="margin-top: 0;">Eylemler</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Çoklu Saldırı.
+                                    </strong> 
+                                    Dungrug, bir turda (Bacak Sayısı - 4) saldırı gerçekleştirebilir (Ortalama bir Dungrug 8 eklem bacaklıdır). 
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Pençe.
+                                    </strong> 
+                                    Dungrug, pençelerinden biriyle bir saldırı gerçekleştirir. İsabetine +8 alır. 
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Isırma.
+                                    </strong> 
+                                    Dungrug ağzı ile rakibinin bir uzvunu ısırmaya çalışır. Eğer kuvvetine sade 20 gelirse, uzvun ısırabildiği kadarını koparır.
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Dil.
+                                    </strong> 
+                                    ungrug, diliyle bir rakibi kavramaya ya da ona vurarak savurmaya çalışabilir. İsabetine +4 alırken kavramayı denerse +5 kuvvet ile mücadeleye girer.                                
+                                </span>
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="anfara-details" class="creature-details">
                         <div class="creature-image" style="
                                     background-image: url(resources/images/monsters/anfara.png);
                                     position: sticky;
@@ -229,7 +406,7 @@
 
                                     <h1> ANFARA</h1>
                                     <span> BÜYÜK KARANLIK EJDER</span>
-                                    <small>ENDER</small>
+                                    <small>EFSANEVİ</small>
 
                         </div>
 
@@ -416,7 +593,229 @@
 
                         </div>
                     </div>
+
+
+
+                    <div id="andanofara-details" class="creature-details">
+                        <div class="creature-image" style="
+                                    background-image: url(resources/images/monsters/andanofara.png);
+                                    position: sticky;
+                                    top: 0;
+                                    padding-bottom: 20px;
+                                    ">
+
+                                    <h1> ANDANOFARA</h1>
+                                    <span> DEVASA KARANLIK EJDER</span>
+                                    <small>MİTİK</small>
+
+                        </div>
+
+                        <div style="display: flex; flex-direction: row;">
+                            <div style="display: flex; flex-direction: column; width: 50%; padding: 20px;">
+                                
+
+                                <div id="statcontainer" style="display: flex; flex-direction: row; justify-content: space-between; padding-left: 20%; padding-right: 20%;">
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+20</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">KUV</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+4</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">ÇEV</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+15</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">DAY</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+15</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">İRD</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+20</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">ZEK</label>
+                                    </div>
+
+                                    <div style="display: flex; flex-direction: column; align-items: center;">
+                                        <label style="font-family: 'barlow'; text-align: center;">+15</label>
+                                        <label style="font-family: 'gandur-new'; font-weight: 300; text-align: center; font-size: 16pt;">İRF</label>
+                                    </div>
+
+                                </div>
+
+                                <h2>Temeller</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Dayanıklılıklar:
+                                    </strong> 
+                                    Işık, Gümüş, Lanetler, Fiziksel Hasarlar
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Zayıflıklar:
+                                    </strong> 
+                                    -
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Bağışıklıklar:
+                                    </strong> 
+                                    Kuvveti +15 üstü olmayan fiziksel saldırılar, Kuvveti +16-20 arası olan her varlık için 16’dan düşük fiziksel saldırılar, zihinsel, Karanlık, Asit, Ateş, Yıldırım, Buz, Zehir.
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kondisyon Bağışıklıkları:
+                                    </strong> 
+                                    Cezbedilme, korkutma, körleştirme, bayılma, hastalanma, lanetlenme.
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Diller:
+                                    </strong> 
+                                    Kara Lisan, Telepatik İletişim (60 Kare)
+                                </span>
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Hareket Kabiliyeti:
+                                    </strong> 
+                                    24 kare yürüme (120ft.), 48 Kare Uçma (240ft.)
+                                </span>
+
+
+                                <h2>Kabiliyetler</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Doğuştan Büyücülük:
+                                    </strong> 
+                                    Andanofara, doğasından gelen karanlık enerji yetisini kullanarak büyü kullanabilir. Bunu gerçekleştirirken Karanlık Enerjiye +20 puan alır. Bu doğa ile şu büyüler gerçekleştirilebilir:
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;İstediğinde: 6. seviyeye kadar akla gelebilecek herhangi bir kara büyü. <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10/Gün: 7.-9. seviye arası akla gelebilecek herhangi bir kara büyü.                                    <br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1/Gün (Büyü Başına): Dilek, Güç Kelimesi: Ölüm, 
+                                    Güç Kelimesi: Acı, Ruh Hapsi, Diyarlar Yarat <br>
+
+
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Mitik Dayanıklılık (15/Gün):
+                                    </strong> 
+                                    Andonafara bir kurtulma zarında başarısız olması durumunda başarılı olmayı seçebilir. 
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Büyülü Silahlar:
+                                    </strong> 
+                                    Andonafara'nın saldırıları büyü enerjisi yüklüdür. 
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Ejder Nefesi (3 Tur Bekleme Süresi).
+                                    </strong> 
+                                    Andanofara, kara alevden oluşan bir nefesi 50 kare uzun 45 derece geniş konik bir alana püskürterek yakar. 
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Dehşet Verici Duruş (3 Tur Bekleme Süresi).
+                                    </strong> 
+                                    Andanofara, Andanofara, var oluşu sebebiyle etrafına karanlık bir korku aurası yayar (Korku Büyüsü, 30 kare yarı çaplı alan). 
+                                </span>
+
+
+                            </div>
+
+                            <div style="display: flex; flex-direction: column; width: 50%; padding: 20px;">
+
+
+                                <h2 style="margin-top: 0;">Eylemler</h2>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Çoklu Saldırı.
+                                    </strong> 
+                                    Andanofara, bir tur içinde pençelerinden biri, ağzı ve kuyruklarıyla 3 farklı saldırı gerçekleştirebilir. 
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Pençe.
+                                    </strong> 
+                                    Andanofara, pençelerinden birini rakibine savurur. +14 ile isabet, 6 kare uzaklığa erişim, tek hedef. Eğer pençe ezme hareketi gerçekleştiriyorsa 3x3 kare genişliğinde ezilme alanı oluşur.
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Isırma.
+                                    </strong> 
+                                    Andanofara, büyük ağzı ile 7 kare mesafedeki bir hedefe ısırma hamlesi gerçekleştirir. +10 ile isabet, tek hedef. Isırmayı başardığı bir hedefi bırakmadan kıstırmayı seçebilir. 
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kuyruk.
+                                    </strong> 
+                                    Andanofara, sahip olduğu 3 kuyruğu ile aynı hedefe arka arkaya 3 saldırı ya da 3 farklı hedefe aynı anda bir saldırı gerçekleştirebilir. Arka arkaya yapacağı her hamle için bağımsız zarlar kullanırken, tek seferde gerçekleştireceği saldırıda tek saldırı zarı kullanır.
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Yutma.
+                                    </strong> 
+                                    Andanofara, ısırma ile kıstırdığı rakibini yutmaya çalışır. Kurban, yutulmaya karşı koymak üzere Andonafara’nın dişlerine ya da diline tutunmaya çalışabilir. Bu reaksiyon için Andonafara +10 Kuvvet ile mücadeleye girer.
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Hükümdar.
+                                    </strong> 
+                                    Andonafara, hükümdar sınıfına giren bir yaratıktır. Hükümdarlar, savaş sırasında tur alan her rakibin turunun ardından bir tam tur kullanır. 
+                                </span>
+
+
+                                <h2>Mitik Eylemler (5/Raund)</h2>
+
+                                
+
+                                
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kartograf.
+                                    </strong> 
+                                    Andanofara, her hafta bir kere 5x5km genişliğinde bir bölgeyi şekillendirebilir. Bu şekillendirme, varlığın istediği herhangi bir şey olabilir ancak doğal yollarla oluşabilecek bir yapıya sahip olmak zorundadır.
+                                </span>
+
+                                <span style="text-align: left;">
+                                    <strong >
+                                        Kara Öfke.
+                                    </strong> 
+                                    Anfara, rakibine karşı öfkelenerek iki rasgele niteliğini +6’ya kadar güçlendirebilir. Öfkesi bir şeylere vurdukça devam eder. Öfke krizinin sonunda 3 tur bütün niteliklerine aldığı bonus kadar negatif puan alır.
+                                </span>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
                 </div>
+
+                
             </div>
         
 
