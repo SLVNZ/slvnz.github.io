@@ -478,6 +478,23 @@ h4 {
 
 }
 
+.guide-card {
+	width: 300px;
+	height: 400px;
+	background-color: #ffffff14;
+	backdrop-filter: blur(50px);
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 24px;
+	transition: transform 0.1s ease, box-shadow 1s ease, scale 1s ease;
+	perspective: 1000px;
+	margin: 5px;
+	box-shadow: 0 0 0 red;
+
+}
+
 .innercard {
 	height: 100%;
 	width: 100%;
@@ -623,6 +640,54 @@ h4 {
 
 .general-card-container:hover .cardheader {
 	scale: 1.3;
+}
+
+
+
+
+
+
+
+
+
+.guide-card-container {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	box-shadow: 0 0 0 red;
+	transition: 0.5s ease;
+
+}
+
+.guide-card-container:hover {
+	box-shadow: 0 0 25px red;
+}
+
+.guide-card-container:hover .cardheader {
+	scale: 1.1;
+}
+
+
+.inner-guide-card {
+	height: 100%;
+	width: 100%;
+	box-shadow: 0 0 0 red;
+	transition: 0.5s ease;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.inner-guide-card:hover {
+	box-shadow: 0 0 25px rgb(255, 0, 0);
+}
+
+.inner-guide-card h1 {
+	text-align: center;
+	color: white !important;
 }
 
 
