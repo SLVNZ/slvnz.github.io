@@ -26,9 +26,9 @@
 
 	</div>
 
-	<section class="landing">
+	<section class="landing" style="margin-top: 0; margin-bottom: 0;">
 
-		<img src="resources/webpage/svg/slvnzfantazya.svg" alt="">
+		<img src="resources/webpage/svg/slvnzfantazya.svg" style="transform: translateX(15px);" alt="">
 
 		<p class="landing">SLVNZ 3.0 Fantazya, karanlık fantazyanın sınırlarında geçen, her kararın dünyayı geri dönülmez biçimde yaraladığı bir masaüstü rol yapma oyunudur. Gerçeğin çarpıtıldığı bu evrende kaderinizi yazın, bedelini ödeyin, karanlığın ta kendisine dalın!</p>
 
@@ -73,6 +73,12 @@
 		</a>
 
 		
+
+	</section>
+
+	<section style="display: flex; flex-direction: column; align-items: center; margin-top: 100px;">
+
+		<p style="color: firebrick; font-family: 'futura-100'; font-size: 8pt; letter-spacing: 2px;">SLVNZ © ÇAĞRI KAŞ 2026</p>
 
 	</section>
 
@@ -202,7 +208,319 @@
   });
 })();
 
+(() => {
+  "use strict";
 
+  /*
+    OPTİMİZE “kor/kıvılcım” VFX
+    Hedef: GPU/CPU yükünü düşürmek
+
+    Optimizasyonlar:
+    - FPS limiti (30 varsayılan)
+    - DPR clamp (1.0–1.5) -> yüksek çözünürlükte render yükü düşer
+    - Additive blend + shadowBlur opsiyonel ve düşük
+    - Parçacık sayısı ve spawn adaptif
+    - Parçalanma (split) kapalı varsayılan
+    - requestAnimationFrame + time slicing
+    - Sekme gizlenince tamamen durur
+  */
+
+  const CONFIG = {
+    TARGET_SELECTOR: "body",     // ".body"
+    Z_INDEX: 5,
+    BLEND_MODE: "screen",
+
+    // PERF
+    FPS: 30,                    // 24-30 arası ciddi rahatlatır
+    DPR_MAX: 1.35,              // 1.0-1.5
+    CLEAR_MODE: "clear",        // "fade" (çok az trailing isterse)
+    FADE_ALPHA: 0.18,           // CLEAR_MODE="fade" ise 0.08-0.25
+
+    // YOĞUNLUK
+    SPAWN_PER_SEC: 18,          // 12-22 iyi
+    MAX_PARTICLES: 160,         // 120-220 arası
+    SOFT_START_SEC: 2.0,        // başlangıç ramp
+
+    SPAWN_BAND_PX: 18,
+    MARGIN_X_PX: 0,
+
+    // HAREKET
+    RISE_SPEED: [180, 360],
+    DRAG: 0.99,
+    GRAVITY: -10,
+    WIND: [-25, 25],
+
+    // “Dolanma” ama ucuz
+    SWAY: [70, 140],            // px/s^2 (daha düşük)
+    SWAY_FREQ: [0.9, 1.6],      // Hz
+    JITTER: [10, 30],           // px/s^2 (daha düşük)
+
+    // GÖRÜNÜM
+    STREAK_LEN: [9, 26],
+    THICKNESS: [0.7, 1.3],
+    GLOW: [0, 8],               // 0 yaparsan shadowBlur tamamen kalkar
+    ALPHA: [0.28, 0.70],
+
+    // ÖMÜR
+    LIFE: [0.35, 0.95],
+    FADE_POWER: 1.8,
+
+    // SPLIT kapalı (çok pahalı)
+    SPLIT_ENABLED: false
+  };
+
+  const target = document.querySelector(CONFIG.TARGET_SELECTOR);
+  if (!target) return;
+
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d", { alpha: true });
+
+  const isBody = (target === document.body);
+  canvas.style.position = isBody ? "fixed" : "absolute";
+  canvas.style.left = "0";
+  canvas.style.top = "0";
+  canvas.style.width = "100%";
+  canvas.style.height = "100%";
+  canvas.style.pointerEvents = "none";
+  canvas.style.zIndex = String(CONFIG.Z_INDEX);
+  canvas.style.mixBlendMode = CONFIG.BLEND_MODE;
+
+  if (isBody) {
+    document.body.appendChild(canvas);
+  } else {
+    const cs = getComputedStyle(target);
+    if (cs.position === "static") target.style.position = "relative";
+    if (cs.overflow === "visible") target.style.overflow = "hidden";
+    target.appendChild(canvas);
+  }
+
+  let W = 0, H = 0, DPR = 1;
+
+  const resize = () => {
+    const dpr = window.devicePixelRatio || 1;
+    DPR = Math.max(1, Math.min(CONFIG.DPR_MAX, dpr));
+    if (isBody) {
+      W = window.innerWidth;
+      H = window.innerHeight;
+    } else {
+      const r = target.getBoundingClientRect();
+      W = Math.max(1, Math.floor(r.width));
+      H = Math.max(1, Math.floor(r.height));
+    }
+    canvas.width = Math.floor(W * DPR);
+    canvas.height = Math.floor(H * DPR);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  };
+  resize();
+
+  const rand = (min, max) => min + Math.random() * (max - min);
+  const clamp01 = (v) => Math.max(0, Math.min(1, v));
+
+  // Daha ucuz “sway”: tek sinüs
+  const swayFn = (t, freq, phase) => Math.sin((t * freq * Math.PI * 2) + phase);
+
+  const P = [];
+
+  function spawnSpark() {
+    if (P.length >= CONFIG.MAX_PARTICLES) return;
+
+    const x = rand(CONFIG.MARGIN_X_PX, W - CONFIG.MARGIN_X_PX);
+    const y = H + rand(0, CONFIG.SPAWN_BAND_PX);
+
+    const rise = rand(CONFIG.RISE_SPEED[0], CONFIG.RISE_SPEED[1]);
+    const wind = rand(CONFIG.WIND[0], CONFIG.WIND[1]);
+
+    const freq = rand(CONFIG.SWAY_FREQ[0], CONFIG.SWAY_FREQ[1]);
+    const phase = rand(0, Math.PI * 2);
+
+    const sway = rand(CONFIG.SWAY[0], CONFIG.SWAY[1]);
+    const jitter = rand(CONFIG.JITTER[0], CONFIG.JITTER[1]);
+
+    const streak = rand(CONFIG.STREAK_LEN[0], CONFIG.STREAK_LEN[1]);
+    const thick = rand(CONFIG.THICKNESS[0], CONFIG.THICKNESS[1]);
+    const glow = rand(CONFIG.GLOW[0], CONFIG.GLOW[1]);
+    const a0 = rand(CONFIG.ALPHA[0], CONFIG.ALPHA[1]);
+    const life = rand(CONFIG.LIFE[0], CONFIG.LIFE[1]);
+
+    // Renk (hsla string üretimini minimize etmek için değerleri tutuyoruz)
+    const hue = rand(8, 20);
+    const sat = rand(85, 100);
+    const lum = rand(45, 68);
+
+    P.push({
+      x, y,
+      vx: wind + rand(-12, 12),
+      vy: -rise,
+      t: 0, life,
+      freq, phase,
+      sway, jitter,
+      streak, thick, glow,
+      a0, hue, sat, lum,
+      flickerPhase: rand(0, Math.PI * 2)
+    });
+  }
+
+  // Soft start (ani burst yok)
+  const startAt = performance.now();
+
+  // FPS limiter
+  const frameDt = 1 / CONFIG.FPS;
+  let last = performance.now();
+  let acc = 0;
+  let spawnAcc = 0;
+
+  function clearFrame() {
+    if (CONFIG.CLEAR_MODE === "fade") {
+      ctx.globalCompositeOperation = "source-over";
+      ctx.fillStyle = `rgba(0,0,0,${CONFIG.FADE_ALPHA})`;
+      ctx.fillRect(0, 0, W, H);
+    } else {
+      ctx.clearRect(0, 0, W, H);
+    }
+  }
+
+  function step(dt, ramp) {
+    // Spawn (ramp ile)
+    const targetSpawn = CONFIG.SPAWN_PER_SEC * ramp;
+    const targetMax = Math.max(20, Math.floor(CONFIG.MAX_PARTICLES * ramp));
+
+    spawnAcc += dt * targetSpawn;
+    if (spawnAcc >= 1) {
+      const n = Math.floor(spawnAcc);
+      spawnAcc -= n;
+      for (let i = 0; i < n; i++) {
+        if (P.length >= targetMax) break;
+        spawnSpark();
+      }
+    }
+
+    // Clear
+    clearFrame();
+
+    // Draw
+    ctx.globalCompositeOperation = "lighter";
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+
+    for (let i = P.length - 1; i >= 0; i--) {
+      const s = P[i];
+      s.t += dt;
+
+      const u = s.t / s.life;
+      if (u >= 1 || s.y < -60 || s.x < -80 || s.x > W + 80) {
+        P.splice(i, 1);
+        continue;
+      }
+
+      // Cheap forces
+      const m = swayFn(s.t, s.freq, s.phase);
+
+      // jitter: daha ucuz (her frame random yerine dt ile ölçekli küçük bir itki)
+      const jx = (Math.random() - 0.5) * s.jitter;
+      const ay = CONFIG.GRAVITY;
+
+      const ax = (m * s.sway) + jx;
+
+      s.vx = (s.vx + ax * dt) * CONFIG.DRAG;
+      s.vy = (s.vy + ay * dt) * CONFIG.DRAG;
+
+      s.x += s.vx * dt;
+      s.y += s.vy * dt;
+
+      // Alpha (ramp ile)
+      const fade = Math.pow(1 - u, CONFIG.FADE_POWER);
+      const flick = 0.8 + 0.2 * Math.sin((s.t * 14) + s.flickerPhase);
+      const alpha = clamp01(s.a0 * fade * flick * (0.25 + 0.75 * ramp));
+
+      // Streak direction
+      const speed = Math.hypot(s.vx, s.vy) + 1e-6;
+      const nx = s.vx / speed;
+      const ny = s.vy / speed;
+
+      const len = s.streak * (0.75 + 0.45 * (1 - u));
+      const x2 = s.x, y2 = s.y;
+      const x1 = s.x - nx * len;
+      const y1 = s.y - ny * len;
+
+      // Glow düşük maliyetle
+      if (s.glow > 0.5) {
+        ctx.shadowBlur = s.glow;
+        ctx.shadowColor = `hsla(${s.hue}, ${s.sat}%, ${Math.min(90, s.lum + 20)}%, ${alpha})`;
+      } else {
+        ctx.shadowBlur = 0;
+      }
+
+      // Basit tek renk çizgi (gradient yerine) -> çok daha ucuz
+      ctx.strokeStyle = `hsla(${s.hue}, ${s.sat}%, ${Math.min(90, s.lum + 18)}%, ${alpha})`;
+      ctx.lineWidth = s.thick;
+
+      // Hafif “kırık” hissi: tek bir küçük kink
+      const kink = (Math.random() - 0.5) * (0.9 + (1 - u) * 1.6);
+      const mx = (x1 + x2) * 0.5 + (-ny) * kink;
+      const my = (y1 + y2) * 0.5 + (nx) * kink;
+
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.quadraticCurveTo(mx, my, x2, y2);
+      ctx.stroke();
+    }
+
+    ctx.globalCompositeOperation = "source-over";
+    ctx.shadowBlur = 0;
+  }
+
+  let raf = 0;
+
+  function loop(now) {
+    const dt = Math.min(0.05, (now - last) / 1000);
+    last = now;
+
+    // ramp (smoothstep)
+    const rt = (now - startAt) / 1000;
+    const r = clamp01(rt / CONFIG.SOFT_START_SEC);
+    const ramp = r * r * (3 - 2 * r);
+
+    acc += dt;
+    while (acc >= frameDt) {
+      step(frameDt, ramp);
+      acc -= frameDt;
+    }
+
+    raf = requestAnimationFrame(loop);
+  }
+
+  // Resize watchers
+  if (isBody) {
+    window.addEventListener("resize", resize, { passive: true });
+  } else if ("ResizeObserver" in window) {
+    const ro = new ResizeObserver(resize);
+    ro.observe(target);
+  }
+
+  // Visibility: durdur / başlat
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      if (raf) cancelAnimationFrame(raf);
+      raf = 0;
+    } else {
+      if (!raf) {
+        last = performance.now();
+        acc = 0;
+        raf = requestAnimationFrame(loop);
+      }
+    }
+  });
+
+  // Başlangıçta boş; ilk frame’de ramp ile doğmaya başlar
+  clearFrame();
+  raf = requestAnimationFrame(loop);
+
+  // dışarıdan kapatma
+  window.__embersLiteStop = () => {
+    if (raf) cancelAnimationFrame(raf);
+    canvas.remove();
+  };
+})();
 
 
 
