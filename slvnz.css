@@ -145,10 +145,11 @@ body {
 	padding-top: 15px;
 	padding-bottom: 15px;
 	cursor: pointer;
+	transform: translateY(-3px);
 }
 
 .side-menu-button.active {
-    background: #900;
+    background: #d20d0946;
     color: #d9d9d9;
 }
 
@@ -177,12 +178,27 @@ body {
 	font-size: 40pt;
 }
 
+.label-title {
+	color: #DC2E2A;
+	font-family: 'futura-100';
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
 .page-panel-content p {
 	color: #d9d9d9;
 	font-size: 10pt;
 	font-family: 'parabolica-text';
 	width: 620px;
-	line-height: 100%;
+	line-height: 125%;
+	
+}
+
+.paragraph-caption {
+	font-style: italic;
+	padding-left: 50px;
+	padding-right: 50px;
+	font-size: 8pt !important;
 }
 
 .href-nostyle {
@@ -289,7 +305,7 @@ body {
 }
 
 .pageindex tr:nth-child(even) {
-	background-color: rgba(255, 0, 0, 0.225);
+	background-color: rgba(255, 0, 0, 0.552);
 }
 
 
@@ -590,9 +606,10 @@ body {
 
 
 table {
-	border: 1px solid blueviolet;
-	font-family: "barlow";
+	border: 1px solid #DC2E2A;
+	font-family: 'futura-100';
 	border-collapse: collapse;
+	color: #d9d9d9;
 	width: 50%;
 	backdrop-filter: blur(25px);
 	background-color: rgba(0, 0, 0, 0.406);
@@ -600,7 +617,8 @@ table {
 
 td, th {
 	padding: 10px;
-	border: 1px solid blueviolet;
+	border: 1px solid #DC2E2A;
+	font-family: 'parabolica-text';
 }
 
 p {
@@ -610,7 +628,7 @@ p {
 
 h3 {
 	font-family: "barlow";
-	color: blueviolet;
+	color: #DC2E2A;
 }
 
 h2 {

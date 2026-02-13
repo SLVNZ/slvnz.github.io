@@ -44,7 +44,7 @@
 
 		<div class="menu-panel"></div>
 
-		<div class="side-menu">
+		<div class="side-menu" style="padding-top: 20px;">
 			<div class="side-menu-button" data-target="game-system">
 				<label>OYUN SİSTEMİ</label>
 			</div>
@@ -52,6 +52,19 @@
 			<div class="side-menu-button" data-target="dice-actions">
 				<label>ZARLAR & EYLEMLER</label>
 			</div>
+
+			<div class="side-menu-button" data-target="stats">
+				<label >NİTELİKLER</label>
+			</div>
+
+			<div class="side-menu-button" data-target="proficiencies">
+				<label >BECERİLER</label>
+			</div>
+
+			<div class="side-menu-button" data-target="energies">
+				<label >ENERJİLER</label>
+			</div>
+
 		</div>
 
 		<div class="page-panel-content" id="game-system" style="overflow: hidden; position: relative;">
@@ -67,12 +80,305 @@
 			
 			</p>
 
-			<img src="resources/webpage/img/support/adventurers-red.png" style="mix-blend-mode: lighten; position: absolute; bottom: 0; right: 0; width: 100%;" alt="">
+			<img src="resources/webpage/img/support/adventurers-red.png" style="mix-blend-mode: lighten; position: absolute; bottom: 0; right: 0; width: 100%; pointer-events: none;" alt="">
 
 		</div>
 
 		<div class="page-panel-content" id="dice-actions">
 			
+			<label class="content-title">ZARLAR & EYLEMLER</label>
+
+			<p>
+				
+				Oyundaki eylemler, karakterinizle gerçekleştirmek isteyeceğiniz herhangi bir girişimi ifade eder. Bazı eylemler bir beceri gerektirmeden doğrudan gerçekleşebilse de SLVNZ 2.0’da bazı eylemlerin gerçekleşmesi için zar kullanılması gerekir.
+				Kullanılacak zarlar 20 yüzlü bir zar (d20) kullanılarak gerçekleştirilebilir.
+
+				<br> <br>
+
+				Zar kullanımı ile gerçekleşen herhangi bir eylemin sonucu zarın yansıttığı sayının yüksekliği ile doğru orantılı bir şekilde değişir. 
+				Oyun yöneticisi bahsedilen sayı/sayılarla ilgili özelleştirilmiş bir sınır ya da kriter belirtmediyse, sisteme göre zarın yansıttığı sayıların doğuracağı sonuçlar şu şekilde gelişebilmektedir:
+			
+			</p>
+
+			<table>
+
+
+                <tbody><tr>
+                    <th style="text-align: center;">
+                        D20
+                    </th>
+                    <th>
+                        AÇIKLAMA
+                    </th>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">
+                        1
+                    </td>
+                    <td>
+                        Kritik Başarısızlık
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">
+                        2
+                    </td>
+                    <td>
+                        Kesin Başarısızlık
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">
+                        3-5
+                    </td>
+                    <td>
+                        Başarısızlık
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">
+                        6-10
+                    </td>
+                    <td>
+                        Şartlı Başarı
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">
+                        11-19
+                    </td>
+                    <td>
+                        Başarı
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">
+                        20
+                    </td>
+                    <td>
+                        Kritik Başarı
+                    </td>
+                </tr>
+                
+
+
+            </tbody></table>
+
+			<p>
+
+				Eylemlerin geneli, oyun yöneticisinin tercihine göre 10 yüzlü ya da 20 yüzlü zar kullanma seçimi yapılırken kurulmak istenilen denge göz önünde bulundurulmalıdır. 
+				10 yüzlü zar daha dar bir yelpazede daha dengeli bir sonuç yelpazesi oluşturabilirken, 20 yüzlü zar seçimi başarıyı daha yüksek bir ihtimale yayarken başarısızlığın denk gelmesi halinde oluşabilecek cezayı daha ağır bir hale getirebilmektedir.
+
+			</p>
+
+			<label class="content-title" style="font-size: 24pt;">ZARA GÖRE BAŞARI DURUMLARI</label>
+
+			<p>
+				Zar kullanımının sonucunu yansıtan sayıların sebep olabilecekleri durumların karşılıkları şu şekildedir:
+			</p>
+
+			<p>
+				<label class="label-title">Kritik Başarısızlık:</label> Eylem sonucunu belirlemek için nasıl bir zar kullanılırsa kullanılsın, sonucunun 1 gelmesi halinde, gerçekleştirilmeye çalışılan eylem kesin bir şekilde başarısız sonuçlanır. 
+				Bu başarısız-lığın yanı sıra ortaya çıkan sonuç, eyleme kalkışan karakter ve/veya çevresindeki karakterler için olumsuz durumlara sebebiyet verebilir. 
+				Ayrıca, kritik başarısızlık durumlarımda, karakterin sahip olduğu herhangi bir artı fazladan değer bu kritik duruma dahil edilmez.
+			</p>
+
+			<p class="paragraph-caption">
+				Usta bir hırsız olan Majik, korsan şehri Sulgaran’ın en büyük iskelesindeki “Sorvalas” isimli bir yük gemisi-ne sızmaya çalışmaktadır. 
+				Geminin kıç tarafına denizden tırmanmayı başaran Majik, yük deposuna açılan bir pencereyi dışarıdan açmaya çalışmak için 20 yüzlü bir zar kullanır. 
+				Zarın sonucu 1 gelir. Majik, camı açmaya çalışmakta başarısız olmakla kalmaz, tutunduğu yerde dengesini kaybederek suya düşer ve yüksek bir ses çıkarır. 
+				Bu ses, iskele etrafındaki sivillerin ve muha-fızların dikkatini çekecektir ki o bölgeye doğru birkaç kişi neler olduğunu görmek üzere yola koyulur.
+			</p>
+
+			<p>
+				<label class="label-title">Kesin Başarısızlık:</label> Kritik başarısızlık durumuna oldukça benzeyen kesin başarısızlık sonucunda, kritik başarısızlıktan farklı olarak karakterin başında olumsuz bir durumun oluşmadığı bir başarısızlık durumudur. 
+				Bu durumda da karakterin sahip olduğu fazladan değerler yine dahil edilmez.
+			</p>
+
+			<p>
+				<label class="label-title">Başarısızlık:</label> Başarısızlık durumunda da karakter gerçekleştirmeye çalıştığı eylemi gerçekleştiremez. 
+				Ancak, diğer iki başarısızlık durumundan da farklı olarak, karakterin gerçekleştirmeye çalıştığı eylem doğrultusunda herhangi bir fazladan değeri bulunuyorsa sayıya eklenerek zarın sonucu değiştirilebilir. 
+				Eklenen değer ile bahsedilen sınırlar aşılmıyorsa eylem gerçekleşemez ve başarısız olarak sonuçlanır.
+			</p>
+
+			<p>
+				<label class="label-title">Şartlı Başarı:</label> Gerçekleştirilmeye çalışılan eylemin kısmi olarak başarılı olması ya da gerçekleşmesiyle birlikte karakterin ve/veya etrafındaki karakterlerin başına bir bela açılmasına sebep olan bir olay ile sonuçlanmasıdır.
+			</p>
+
+			<p>
+				<label class="label-title">Başarı:</label> Karakterin gerçekleştirmeye çalıştığı eylemin başarılı bir şekilde sonuçlanmasıdır.
+			</p>
+
+			<p>
+				<label class="label-title">Kritik Başarı:</label> Gerçekleştirilmeye çalışılan eylemin kesin bir şekilde başarılı sonuçlanmasıdır. 
+				Bu başarının yanında, kritik başarısızlık sonucunda benzer bir yaklaşımda, eyleme kalkışan karakter ve/veya etrafındaki karakterlere olumlu getirisi olabilecek bir durumun bu sonuca dahil olmasını gerektirir.
+			</p>
+
+			<p class="paragraph-caption" style="padding-bottom: 50px;">
+				Usta hırsız Majik, suya düştükten sonra etrafta toplanan insanlar tarafından fark edilmemek üzere geminin ters tarafında gizlenmeye çalışır. Gizlenmeye çalışırken bir GİZLİLİK zarı kullanır. Zar sonucu 20 ile sonuçlanır. Majik, kimse fark etmeden geminin kıç tarafındaki bir çıkıntıya tutunarak kendini sudan çeker ve iskeleye tamamen ters bir noktada gözden kaybolmayı başarır. Bu sırada, geminin depo alanında bulunan bir miço, depo penceresini açıp neyin düştüğüne bakmak üzere dışarıya bakar, bir şey göremeyip pencereyi kapatmayı unutarak içeriye döner. Majik, ortamda yaşanan karışıklığı da kendine avantaj edinerek açılmış olan pencereden içeriye girer.
+			</p>
+
+		</div>
+
+		<div class="page-panel-content" id="stats">
+
+			<label class="content-title">NİTELİKLER</label>
+
+			<p>
+				Bazı durumlarda karakterlerin spesifik eylemleri gerçekleştirmelerinde onlara fayda sağlayabilecekleri nitelikleri bulunmaktadır. Bu nitelikler, herhangi bir karakterin sahip olduğu en temel özellikleri vurgular.
+			</p>
+
+			<p>
+				<label class="label-title">KUVVET <b>(KUV)</b>: </label> 
+				Karakterin kas gücü ile gerçekleştirebileceği eylemleri belirleyen niteliktir. 
+				Bu eylemler ağır bir nesneyi kaldırma, bir şeye vurma durumunda uygulanan kuvvet, mücadele sırasında bir şeye asılma vb. gibi durumları oluşturur. 
+				Bir karakterin kuvvet niteliği ne kadar yüksek ise, bu niteliği gerektiren eylemleri başarma kapasitesi de o kadar yükselir.
+			</p>
+
+			<p>
+				<label class="label-title">ÇEVİKLİK <b>(ÇEV)</b>: </label> 
+				Karakterin hızlı hareket etme, ani tepki verme, kaçınma vb. eylemlerinde ihtiyaç duyduğu niteliktir. 
+				Bir karakterin çevikliği ne kadar yüksek ise o kadar atik ve hareketli olduğu düşünülebilir. 
+				Bu nitelik aynı zamanda karakterin yakın dövüşte silahını, yumruğunu veya tekmesini rakibe isabet ettirmesinde fayda sağlayabilirken, savunma konusunda da gelen darbelerden kaçınma becerisini de etkileyebilen bir niteliktir.
+			</p>
+
+			<p>
+				<label class="label-title">DAYANIKLILIK <b>(DAY)</b>: </label> 
+				Karakterlerin darbelere dayanma, yıkıcı durumlara karşı ayakta kalabilme, ağır durumlarda bilincini koruyabilme ya da acıya dayanma gibi durumlarda ihtiyaç duyduğu niteliktir. 
+				Aynı zamanda bir karakterin STAMINA değerini de etkilemektedir. 
+			</p>
+
+			<p>
+				<label class="label-title">İRADE <b>(İRD)</b>: </label> 
+				Dayanıklılığa benzer biçimde karakterin zihinsel dayanıklılığında; yani zihinsel olarak gireceği herhangi bir mücadelede ihtiyaç duyacağı niteliktir. 
+				Bu mücadeleler herhangi bir büyü etkisi altında kalma, zihne sızma, isteği dışında telepati vb. etkilerin altında kalma gibi durumlar olarak nitelendirilebilir. 
+			</p>
+
+			<p>
+				<label class="label-title">ZEKÂ <b>(ZEK)</b>: </label> 
+				Karakterin geçmişe yönelik tarihi bilgilerini, bir konuya yönelik bilgi birikimlerini, zor bulmacalar ve bilmeceleri kavrayabilme yetilerini etkileyen bir niteliktir. 
+				Aynı zamanda yüksek zekâya sahip karakterler, bilgileri öğrenme, algılama ve aklında tutma konusunda avantaj sahibidirler. 
+				Bunun anlamı, zekâ niteliği yüksek karakterlerin bazı bilgileri öğrenme eğrilerinin normal bir karaktere göre daha yüksek olmasıdır.
+			</p>
+
+			<p>
+				<label class="label-title">İRFAN <b>(İRF)</b>: </label> 
+				Karakterlerin başka karakterlerle olan iletişimlerinde, şüpheli buldukları karakterlerin davranışlarının altında yatan gerçeği anlama, bir kişinin yalan söyleyip söylemediğini kavramaya çalışma gibi durumlarda ihtiyaç duyacağı niteliktir. 
+				Aynı zamanda irfan sahibi karakterlerin algıları daha açık olacağından, irfan niteliğinin sağlayacağı avantaj sayesinde farkındalıkları olumlu yönde etkilenmektedir. 
+				Benzer biçimde irfan sahibi karakterler enerji dolu auraları fark etme ve bu enerjilerin yoğunluğunu tanılama konusunda da daha yetkin durumdadırlar.
+			</p>
+
+		</div>
+
+		<div class="page-panel-content" id="proficiencies">
+			<label class="content-title">BECERİLER</label>
+
+			<p>
+				Niteliklere benzer olarak karakterlerin bazı özel durumlar için ihtiyaç duyacağı beceriler bulunmaktadır. Beceriler, niteliklere benzese de onlar kadar fazla durumda kullanılmayabilirler. Beceriler, <b>Temel Beceriler</b> ve <b>Özel Beceriler</b> olmak üzere ikiye ayrılır.
+			</p>
+
+			<label class="content-title" style="font-size: 24pt;">TEMEL BECERİLER</label>
+
+			<p>
+				<label class="label-title">BLOKLAMA: </label>
+				Bir karakterin kendisine yönelmiş bir saldırıyı durdurabilme becerisidir. Bu beceri, karakterin kuşandığı bir silah veya kalkan ile gerçekleştirilebilir. Kalkan ile gerçekleştirilen bir bloklama becerisi, saldırının tamamını absorbe etme imkânına sahiptir ancak kalkanın 
+				kuşanıldığı kola fiziksel bir stres bindirir. Silahla gerçekleştirilen bloklamalar ise farklı şekillerde fiziksel yeteneklerle harmanlanabilir, ancak başarısızlık durumunda karakterin saldırıyı tamamen göğüslemek durumundadır.
+			</p>
+
+			<p>
+				<label class="label-title">KAÇINMA: </label>
+				Bir karakterin kendisine yönelmiş bir saldırıdan kaçınma becerisidir. Karakter, bu beceriyi ÇEVİKLİK niteliğiyle harmanlarken, üstüne gelen saldırıdan en az hasar ile sıyrılmaya çalışır. Çoğunlukla uç uca isabetlerde kesikler ve sıyrıklar gibi hasarlarla sonuçlanırken, mücadele
+				zarlarında makasın açılmasıyla bir karakterin kaçınabildiği hasar seviyesi yükselir.
+			</p>
+
+			<p>
+				<label class="label-title">ATICILIK: </label>
+				El yordamıyla fırlatılabilen araçlar ve silahlar ile (Cirit, El Sapanı vb.) gerçekleştirilen isabet ettirme becerisidir.
+			</p>
+
+			<p>
+				<label class="label-title">Nişancılık: </label>
+				Nişangâhı olan menzilli silahlar ile (Musket, Crossbow vb.) başarılı isabet sağlamak için nişan alma becerisidir.
+			</p>
+
+			<p>
+				<label class="label-title">Okçuluk: </label>
+				Ok ve yay kullanımıyla gerçekleştirilecek atışlarda saldırıyı isabet ettirebilme becerisidir.
+			</p>
+
+			<p>
+				<label class="label-title">İsabet: </label>
+				El ve göz koordinasyonu ile işaret ederek menzildeki bir hedefe isabet ettirme becerisidir (Asa & Enerjisel odak kullanımı vb.).
+			</p>
+
+			<p>
+				<label class="label-title">Farkındalık: </label>
+				Karakterin özellikle görme ve duyma yetisiyle çevresindeki detayları fark edebilme becerisidir. Bu beceri, çoğunlukla geniş kalabalık bir görüntüdeki ufak detayların farkına varma, kalabalık bir ortamda belirli konuşmaları ayırt etme, 
+				fısıldayan birilerini dinlemeye çalışma ya da kendiliğinden duyma, gizlenmiş bir şeyleri olduğu yerde fark etme gibi durumlarda kullanılmaktadır. Aynı zamanda bu beceri, İRFAN niteliğinden de beslenmektedir.
+			</p>
+
+			<p>
+				<label class="label-title">Gizlilik: </label>
+				Farkındalık becerisine karşılık karakterlerin özellikle görme ve duyma gibi hislere karşı fark edilmeden ilerleyebilme ya da kendilerini fark edilmez kılmalarını sağlama girişimlerini ifade eden beceridir.
+			</p>
+
+			<p>
+				<label class="label-title">Araştırma: </label>
+				Karakterin belirli bir bilgi veya nesneyi ilgili bölgede arama yöntemlerine olan hakimiyeti belirler. Farkındalıktan ayrı olarak, karakterin eylem alarak detayları kurcalaması, test etmesi ve kullanması gibi süreçlerin takibinde sonuçlanır.
+				Araştırma becerisi, aynı zamanda ZEKÂ niteliğinden beslenir.
+			</p>
+
+			<p>
+				<label class="label-title">İzcilik: </label>
+				Karakterlerin hakim oldukları vahşi biyomlarda yön bulma, vahşi hayatı tanıma ve buna karşı fikir üretme, biyomlar harici genel vahşi hayatta kalmaya yönelik bilgilere hakim olma ve bunları kullanma becerisidir.
+				İzcilik becerisine sahip olan bir karakter, vahşi hayatta iz sürme, korunaklı sığınak bulma & tanımlama, ateş yakma, düğüm atma vb. becerilerin tümüne seviyesine göre bir miktar hakimdir.
+			</p>
+
+			<p>
+				<label class="label-title">Performans: </label>
+				Karakterlerin sosyal olarak farklı oyuncu harici karakterleri etkileyebilme becerisidir. Bu beceri, bilinen pek çok sistemde alışılmışın aksine doğrudan diğer karakterlerin üstünde mutlak bir etki oluşturulmasını sağlamaz.
+				Çoğunlukla karakterleri bir yalan karşısında ikna etme veya inandırıcı görünme, gerçekleştirilen bir dans hareketi ile etkileyici iz bırakma gibi destekleyici etkilere sahiptir. Ancak sistemde her karakter oyuncu karakterinin söylediği şeyler
+				veya etkileme girişiminde bulunduğu hamlelerden etkilenmeyebilir. Bu beceri, genel olarak bu denemelerde oyuncu karakterinin kendisine katabileceği etkileyiciliği artırmakla ilgilidir.
+			</p>
+
+			<p>
+				<label class="label-title">Sağaltım: </label>
+				Karakterlerin yaraya ve hastalığa müdahale ile ilgili kısmi tıbbi bilgisi ve becerisini ifade eder. Bir yarayı dikmek, cerrahi bir müdahalede bulunmak, basit bir soğuk algınlığının müdahale sürecine hakim olmak gibi durumlar bu beceriyi kapsamaktadır.
+			</p>
+
+			<p>
+				<label class="label-title">Terbiye: </label>
+				Bir karakterin vahşi veya evcil olarak bir hayvana karşı iletişim ve etkileşim becerisini ifade eder. Bu beceriye bir hayvanla iletişim kurmaya çalışmak, sürülen bir hayvanı yönlendirmek, sakinleştirmek ve evcilleştirmek dahildir.
+			</p>
+
+			<label class="content-title" style="font-size: 24pt;">ÖZEL BECERİLER</label>
+
+			<p>
+				Özel beceriler, temel becerilerin dışında kalan ve karakterin kendisini geliştirmek istediği herhangi bir beceriyi içerir. 
+				Bu beceriler tamamen oyuncunun yaratıcılığına ve karakterini kişiselleştirme kapsamında nasıl ilerletmek istediğine bağlıdır. 
+				Özel becerilere şu şekilde bazı örnekler verilebilir:
+			</p>
+
+			<p class="paragraph-caption" style="padding-bottom: 50px;">
+				Aşçılık: Bir karakterin yemek yapma konusundaki ustalığını belirler.
+				<br>
+				Simyacılık: Bir karakterin simya malzemeleri hakkında bilgisini ve bu malzemeleri kullanarak iksir oluşturabilme becerisini belirler.
+				<br>
+				Yüzücülük: Bir karakterin suda yüzme becerisini belirler.
+			</p>
+			
+
+		</div>
+
+		<div class="page-panel-content" id="energies">
+			<label class="content-title">ENERJİLER</label>
+
+			<p>
+				SLVNZ 2.0’da büyü yapmak ya da sisteme daha uygun tabiri ile enerjiyi yönlendirebilmek mümkündür. 
+				Enerjiyi yönlendirebilmek için evrende bulunan farklı enerji türlerine hâkim olmak gerekir. 
+				Bu enerji türleri Temel Enerji Türleri ve Özel Enerji Türleri olarak birbirinden ayrılırlar.
+			</p>
+
 		</div>
 
 	</section>
