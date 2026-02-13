@@ -76,6 +76,59 @@ body {
 	padding: 0;
 	background-color: black;
 	padding-bottom: 150px !important;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.page-marker {
+	position: fixed;
+	color: #DC2E2A;
+	font-family: 'futura-100';
+	letter-spacing: 10px;
+	font-size: 10pt;
+	transform: rotate(-90deg) translateY(-80px);
+	top: 55%;
+	left: 1%;
+	padding: 0;
+	margin: 0;
+	opacity: 50%;
+}
+
+.page-panel {
+	display: flex;
+	flex-direction: row;
+	width: 1280px;
+	height: 720px;
+	background: linear-gradient(0deg, #351617 0%, #141518 100%);
+	border-radius: 10px;
+	box-shadow: 0 0 100px 0 rgba(0, 0, 0, 0.509);
+	overflow: auto;
+}
+
+.menu-panel {
+	height: 720px;
+	width: 260px;
+	background: #DC2E2A;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	mix-blend-mode: multiply;
+	position: absolute;
+	backdrop-filter: blur(15px);
+	box-shadow: 0 0 100px 0 rgb(26, 0, 0);
+}
+
+.side-menu {
+	display: flex; 
+	flex-direction: column;
+	width: 260px;
+	height: 100%;
+	position: relative;
+}
+
+.side-menu-button {
+	width: 260px;
+	height: auto;
 }
 
 .href-nostyle {
@@ -221,6 +274,7 @@ body {
 	display: flex;
     flex-direction: column;
     align-items: flex-start;
+	justify-content: flex-start;
 	padding: 50px;
 }
 
