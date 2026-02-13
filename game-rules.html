@@ -42,26 +42,90 @@
 	
 	<section class="page-panel">
 
-
-		<div class="menu-panel">
-
-
-
-		</div>
+		<div class="menu-panel"></div>
 
 		<div class="side-menu">
-
-			<div class="side-menu-button">
-
+			<div class="side-menu-button" data-target="game-system">
 				<label>OYUN SİSTEMİ</label>
-
 			</div>
 
+			<div class="side-menu-button" data-target="dice-actions">
+				<label>ZARLAR & EYLEMLER</label>
+			</div>
 		</div>
-		
 
+		<div class="page-panel-content" id="game-system" style="overflow: hidden; position: relative;">
+			<label class="content-title">SLVNZ 3.0 SİSTEMİ</label>
+
+			<p>
+				
+				SLVNZ 3.0 sistemi, özünde D&D ve FATE sistemlerini baz ve ilham alınarak düşünülmüş, özelleştirilmiş ve detaylandırılmış bir masaüstü rol yapma oyunu sistemidir.
+
+				<br> <br>
+
+				Sistem mümkün olduğunca oyun etkisini barındırırken, oyuncunun sistemin ördüğü sınırlara bağlı kalmadan, yaratıcılığını ve rolünü ortaya koyarak oyunun ve savaşın gidişatına yön vermesini amaçlayan esnek gerçekçiliği sunmayı hedeflemektedir.
+			
+			</p>
+
+			<img src="resources/webpage/img/support/adventurers-red.png" style="mix-blend-mode: lighten; position: absolute; bottom: 0; right: 0; width: 100%;" alt="">
+
+		</div>
+
+		<div class="page-panel-content" id="dice-actions">
+			
+		</div>
 
 	</section>
+
+
+
+	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+			const defaultTarget = "game-system";
+			const section = document.querySelector(".page-panel");
+			if (section) {
+				const panel = section.querySelector(`.page-panel-content#${CSS.escape(defaultTarget)}`);
+				if (panel) panel.classList.add("active");
+				const btn = section.querySelector(`.side-menu-button[data-target="${defaultTarget}"]`);
+				if (btn) btn.classList.add("active");
+			}
+		});
+
+		document.addEventListener("click", (e) => {
+		const btn = e.target.closest(".side-menu-button");
+		if (!btn) return;
+
+		const section = btn.closest(".page-panel");
+		if (!section) return;
+
+		const targetId = btn.dataset.target;
+		if (!targetId) return;
+
+		// Bu section içindeki tüm panelleri kapat
+		section.querySelectorAll(".page-panel-content.active")
+			.forEach(p => p.classList.remove("active"));
+
+		// Bu section içindeki tüm butonlardan active kaldır
+		section.querySelectorAll(".side-menu-button.active")
+			.forEach(b => b.classList.remove("active"));
+
+		// Hedef paneli aç
+		const panel = section.querySelector(`.page-panel-content#${CSS.escape(targetId)}`);
+		if (panel) panel.classList.add("active");
+
+		// Hedef butonu active yap
+		btn.classList.add("active");
+		});
+	</script>
+
+
+
+	
+</body>
+
+
+
+
 
 
 </html>
