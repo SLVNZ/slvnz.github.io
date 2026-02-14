@@ -73,6 +73,20 @@
 				<label >EKİPMAN</label>
 			</div>
 
+			<div class="side-menu-button" data-target="battle_and_contest">
+				<label >SAVAŞ & MÜCADELE</label>
+			</div>
+
+			<div class="side-menu-button" data-target="battle-system">
+				<label >SAVAŞ SİSTEMİ</label>
+			</div>
+
+			<div class="side-menu-button" data-target="character-development">
+				<label >KARAKTER GELİŞİMİ</label>
+			</div>
+
+
+
 		</div>
 
 		<div class="page-panel-content" id="game-system" style="overflow: hidden; position: relative;">
@@ -1164,6 +1178,411 @@
 
 		</div>
 
+		<div class="page-panel-content" id="battle_and_contest">
+
+			<label class="content-title">SAVAŞ & MÜCADELE</label>
+
+			<p>Karakterler tek başlarına kalkıştıkları eylemlerde başarı düzeyini belirlemek için kullandıkları zar sistemini karşılıklı girdikleri savaşlar veya mücadeleler için de kullanırlar. 
+				İki karakterin birbirine kılıç savurması, belirli enerjilerin etkisi altında bırakması, güreş tutması vb. durumlarda savaş ve mücadele sistemi devreye girer. 
+				En basit hali ile bunun gibi durumlarda iki taraf da birer zar kullanır. Sayısal değeri yüksek gelen taraf karşılaşmadan galip çıkar. 
+				Ancak, silahlı mücadeleler, enerji yönlendirmenin kullanıldığı durumlar gibi özel anlarda, gerçekleştirilen eylemin niteliğine göre kullanılacak zar sayıları değişmektedir. 
+				Örneğin, birbirine karşı çift elli kılıçlarla savaşan iki karakterin mücadelesinde; kılıcı savuran taraf, kılıcın isabetini belirlemek için bir zar, kılıcı savurma kuvvetini belirlemek için ise ikinci bir zar kullanır. 
+				<b>Fiziksel zarlar ile oynanan bir ortamda bu zarların sırayla atılması tavsiye edilir</b>. 
+				Dijital çevrimiçi bir ortamda ise topluca atılabilir, ancak gelen sonuçlar soldan sağa sıralanacak şekilde önce isabet, ardından kuvvet şeklinde olmalıdır.
+			
+				<br>
+				<br>
+				Yukarıdaki anlatım ışığında, savaş ve mücadele durumlarında takip edilebilecek durumlar şu şekilde birbirinden ayrılabilir:
+			
+			</p>
+
+			<label class="content-title" style="font-size: 24pt;">SIRADAN MÜCADELE</label>
+
+			<p>
+				Sıradan mücadeleler; güreş tutma, birbirini engelleme, yalan söyleme, ikna etme gibi karşılıklı başarma ve kaybetme durumları değerlendirilir. Bu durumlarda genellikle iki taraf da birer adet zar kullanır. 
+				Yardımcı puanlarla birlikte sayısal üstünlüğe sahip olan taraf mücadelenin galibi olur.
+			</p>
+
+			<p class="paragraph-caption">
+				Majik, kalabalık bir sokakta dolaşırken dalgın yürüyen bir adamın cebinden altın kesesini almaya çalışmak için El Çabukluğu özel becerisini kullanır. Buna karşılık dalgın adam için bu durumu zamanında fark edip etmeyeceğini belirlemek için FARKINDALIK beceri zarı kullanılır.
+			</p>
+
+			<label class="content-title" style="font-size: 24pt;">SAVAŞ</label>
+
+			<p>
+				Savaş anında karakterler genellikle saldırı eylemlerini belirlemek üzere birden fazla zar kullanırlar. 
+				Bu durumlar genellikle ÇEVİKLİK, KUVVET, İSABET, KAYNAK KULLANIMI, ENERJİ gibi nitelikler üzerinden belirlenir. 
+				Bir savaş anında gelişebilecek eylemler ve bu eylemler için kullanılabilecek zar sıfatları sınıflandırılabilir.
+			</p>
+
+			<p>
+				<label class="label-title">YAKIN MENZİLLİ SALDIRILAR: </label>
+				Yakın menzilli herhangi bir silah ile saldırıda bulunan bir karakter, özel ya da ekleme bir durum olmadığı sürece iki adet zar kullanır. 
+				Bu zarlar sırayla atılmalı ya da dijital bir ortamda kullanılıyorsa gelen sonuç soldan sağa sıralanacak şekilde, ilk olarak İSABET, ikinci olarak HASAR/KUVVET olmak üzere sayısal değerlere dökülür.
+			</p>
+
+			<p>
+				<label class="label-title">UZAK MENZİLLİ SALDIRILAR: </label>
+				Yakın menzilli saldırılara benzer olarak, uzun menzilli saldırılarda da genel olarak iki zar kullanılır. 
+				Ancak, bahsedilen menzilli saldırı, enerji yönlendirmeyi içeriyorsa, bu durumda kullanılacak zarların sayısı ikiden fazla olacak şekilde enerjisel yeteneğin özelliklerine göre değişebilmektedir. 
+				Enerjisel yetenekler dışında sıradan olarak bahsedilebilecek menzilli saldırılarda (Yay kullanımı gibi) MENZİLLİ İSABET ve KUVVET zarı kullanılır. 
+				Ancak, kuvvet gerektirmeyen bazı menzilli araçlar kullanılırken (Tatar Yayı, Musket gibi) sadece atışı isabet ettirmek için bir zar kullanılır. 
+				Bunun sebebi bu tarz menzilli silahların kendilerine özgü sabit bir hasarının bulunmasıdır.
+			</p>
+
+			<p>
+				<label class="label-title">SAVUNMA: </label>
+				Karakterler kendilerine yönelmiş herhangi bir saldırıdan kaçınmak ya da korunmak üzere bir savunma zarı kullanabilirler. Bu tür zarlar genellikle KAÇINMA, BLOKLAMA ya da DAYANIKLILIK kullanılarak atılır.
+
+				<br><br>
+
+				Kaçınma durumlarında gelen saldırının isabet zarının sayısal değerini kaçınma zarı ile geçmek yeterlidir. 
+				Ancak rakibin isabet değeri ile karakterin kaçınma değeri arasındaki fark ne kadar fazla ise, karşı tarafın gerçekleştirdiği saldırının isabet ettiği nokta, rakibin saldırmak istediği noktaya o kadar yakın olmaktadır.
+
+				<br><br>
+
+				Bloklama durumlarında karakter TAM BLOK pozunda değil ise gelen saldırıdan korunma durumu kaçınmaya kıyasla daha olasıdır. 
+				Rakibin saldırısı, karakterin bloklama zarının değerinden 6 puan fazla ise kalkanın arkasına geçerek karaktere hasar verir. 
+				Ancak karakterin bloklama zarı ile rakibin isabeti arasında 6 puandan az bir fark varsa, rakibin saldırısı kalkana isabet ederek kalkana zarar verirken, karakterin STAMINA değerinin azalmasına sebep olacaktır. 
+				Bloklama değerinin karşı saldırı değerinden yüksek olması durumunda kalkan sadece yıpranma payı alır ve saldırıyı savuşturur.
+			</p>
+
+			<label class="content-title" style="font-size: 24pt;">BÜYÜ KULLANIMI</label>
+
+			<p>
+				Enerjinin yönlendirilmesi ve kullanımı basit formlarda başlasa da geliştikçe karmaşıklaşan, dolayısıyla zar kullanımı açısından da farklı yaklaşımlar isteyebilen bir durumdur. 
+				Ayrıca, büyü kullanımı neredeyse her zaman MANA, RUH ya da YAŞAM enerjilerini kaynak olarak kullanmaktadır. 
+				Çoğu büyü kullanımı için iki ya da üç zar kullanılsa da büyünün tanımı ya da işlevi özelleştikçe, bu işleve uyum sağlamak adına büyü kullanımına farklı türde zarlar eklenebilir.
+
+				<br><br>
+
+				Bir karakter büyü kullanmak için enerjisel bir odaklayıcıya ihtiyaç duyar. Bu odaklayıcılar, genellikle enerjiyi aktarma kapasitesine sahip doğal maddeler ya da farklı işlenme süreçlerinden geçerek bu kapasiteye erişmiş eşyaların bütünüdür. 
+				Enerjiyi aktarabilen asalar, odak kristalleri ve tılsımlar, odaklayıcılara verilebilecek en yaygın örneklerdendir. Herhangi bir karakter için bir odaklayıcı olmadan büyü yapmak da mümkündür. 
+				Ancak odaklayıcı olmadan büyü yapmaya çalışan bir karakterin büyünün gerçekleşmesine yönelik zarlarına <b>DEZAVANTAJI</b> bulunur.
+
+				<br><br>
+
+				Büyü kullanımı iki farklı temele dayandırılır. Bu temeller, İsabet temelli büyüler ve enerji temelli büyüler olarak nitelendirilir.
+
+				<br><br>
+
+				<label class="label-title">İsabet Temelli Büyüler: </label>
+				Tekil bir hedef belirlenerek, bu hedefe isabet ettirilmeye çalışılan büyüleri ifade eden büyü tipleridir. Bu tip büyülerde her zaman ilk olarak İSABET becerisi baz alınarak bir zar kullanılır. 
+				Sonrasında büyüye yönelik enerjisel kuvvet ve duruma yönelik element, etki süresi vb. etkenler için ayrı zarlar kullanılabilir.
+
+				<br><br>
+
+				<label class="label-title">Enerji Temelli Büyüler: </label>
+				Genel olarak isabet gerektirmeksizin bir varlığa ya da bir bölgeye yoğunlaşarak belirli bir etkinin oluşturulmaya çalışıldığı büyülerdir. 
+				Bu tür büyüler, zihinsel saldırılar, bir alanda patlama, yanma, erime vb. etkiler oluşturma, bir madde üstünde farklı etkilere sebep olma gibi büyüleri içermektedir. 
+				İsabet temelli büyülerde olduğu gibi enerji temelli büyülerde de duruma göre alan, etki süresi, mesafe gibi farklı etkenler göz önünde bulundurularak farklı zar kullanımları eklenebilir.
+
+				<br><br>
+
+				<label class="content-title" style="font-size: 24pt; margin-top: 50px;">FİZİKSEL YETENEK & SAVAŞ SANATI KULLANIMI</label>
+
+				<p>
+					Sistemsel ve mantıksal olarak fiziksel yeteneklerle savaş sanatlarının kullanımı, büyülerden çok farklı değildir. Yeteneğin özelliklerine göre, yetenek için kullanılacak zar sayısı artış gösterebilir. Genel olarak zar kullanım-ları sırasıyla İSABET, KUVVET, MESAFE, BAŞARI şeklinde gelişebilmektedir.
+				</p>
+
+				<label class="content-title" style="font-size: 24pt;">MÜCADELEDE ODAK & KONSANTRASYON</label>
+
+				<p style="padding-bottom: 50px;">
+					Fiziksek ya da enerjisel bir yeteneğini odak/konsantrasyon durumunda bulundurmak, karakterlerin bu durumlara yönelik yuvalarını dolduran eylemlerdir. İki durum da birbirine süreç olarak benzerlik gösterebilse de bu durumların korunması konusu birbirinden farklılık gösterebilir.
+				</p>
+
+
+			</p>
+
+		</div>
+
+		<div class="page-panel-content" id="battle-system">
+
+
+			<label class="content-title">SAVAŞ SİSTEMİ</label>
+
+			<div class="page-panel-content-child-menu" id="battle-system">
+
+				<button data-target="hex-battle">
+					YAKIN MESAFE
+				</button>
+
+				<button data-target="block">
+					BLOK
+				</button>
+
+				<button data-target="square">
+					KARE DÜZEN
+				</button>
+
+				<button data-target="energybattle">
+					ENERJİSEL SAVAŞ
+				</button>
+
+			</div>
+
+			<div class="page-panel-content-child" id="hex-battle">
+				<img src="resources/webpage/svg/hex-battle.svg" width="210px"  alt="">
+
+				<p>
+					SLVNZ 3.0’ın temel mücadele eylemlerinin ve hareketlerinin işlenmesinin temellerini <b>ALTIGEN</b> savaş sistemi oluşturur. 
+					Savaş sisteminde varlıkların her biri bir Altıgen içinde (Hex) yer alırlar ve birimlerin hareketleri, gerçekleşecek eylemlerin mesafeleri ve kapsayacakları alanlar <b>BİRİM</b> olarak belirlenmiş tekil altıgen yuvalar üzerinden hesaplanır.
+				</p>
+
+				<label class="content-title" style="font-size: 24pt;">SAVAŞ DÜZENİ</label>
+
+				<p>
+					Savaş düzeninde, karakterin baktığı yöndeki ve bu yönün içerdiği birimin sağ ve sol bitişiğindeki birimler <b style="color: #0DFF00;">net alan</b> olarak isimlendirilir. 
+				</p>
+
+				<ul>
+					<li>Karakter, net alandaki varlıklara normal şekilde fiziksel saldırıda bulunabilir.</li>
+					<li>Karakter, net alandan alacağı saldırılara karşı normal şekilde savunma & kaçınma hamleleri yapabilir.</li>
+				</ul>
+
+				<p>
+					Karakterin baktığı yönün sağ ve sol arkasındaki birimler <b style="color: #F6FF00;">eşik alan</b> olarak isimlenidilir.
+				</p>
+
+				<ul>
+					<li>Karakter, eşik alandan gelen yakın mesafeli fiziksel saldırılara karşı -2 negatif değer alarak savunma gerçekleştirir.</li>
+					<li>Karakter, eşik alan tarafından gelecek uzun menzilli fiziksel saldırıyı yapacak kişinin orada olduğunun farkındaysa, gelen saldırıya karşı farkındalık zarı kullanır. 
+						Farkındalık 10’dan yüksek gelirse gelen fiziksel menzilli saldırıyı fark ederek kaçınmaya çalışabilir. 
+						Saldıranın okçuluk/atıcılık/isabet/nişancılık ve kuvvet yüksekliğine bağlı olarak saldırının başarı düzeyi belirlenir.</li>
+				</ul>
+
+				<p>
+					Karakterin baktığı gönün tam tersinde - yani arkasında - kalan birim <b style="color: #DC2E2A;">kör alan</b> olarak isimlendirilir.
+				</p>
+
+				<ul style="padding-bottom: 20px;">
+					<li>Karakter, kör alandan gelen yakın mesafeli fiziksel saldırılara karşı, eğer saldırıyı yapan kişinin arkasında olduğunun farkındaysa dezavantaj ile kaçınma gerçekleştirmeye çalışır. <b>Bloklama</b> şeklinde bir savunma bu pozisyona karşı gerçekleştirilemez.</li>
+					<li>Karakter, kör alandan gelecek fiziksel bir uzak menzilli saldırıya karşı başka bir varlık tarafından tepki olarak uyarılmıyor veya buna özel bir sistemi yoksa savunma veya kaçınma gerçekleştiremez.</li>
+				</ul>
+
+				<label class="content-title" style="font-size: 24pt;">SAVAŞ EYLEMLERİ</label>
+
+				<p>Bu savaş düzenine göre karakterler varsayılan olarak şunları gerçekleştirebilir:</p>
+
+				<ul style="padding-bottom: 50px;">
+					<li>
+						İnsansı varlıkların temel hareket sınırı 4 birimdir. Niteliklerden her <b>+2 ÇEV</b> başına insansı varlıklar karasal hareketlerine <b>+1 birim hareket mesafesi</b> kazanır.
+					</li>
+					<li>
+						Çevresinde kendine gelen bir saldırıya karşı <b>TEPKİ EYLEM</b> kullanarak bakış yönünü saldırıya yönlendirebilir. Eğer <b>KÖR NOKTADAN</b> gelen bir saldırıya karşı yapıyorsa, savunma eylemine <b>-5</b> eksi değer alır.
+					</li>
+					<li>
+						Belirli bir yöne bakan bir varlık, görüş mesafesinde hareket eden bir varlığın turu boyunca gerçekleştireceği hareketi takip edecek şekilde tepki eylem olarak bakış yönünü değiştirebilir. 
+						Eğer eşik veya kör alandan yakın mesafesinde hareket eden bir varlık varsa (3-6 birim mesafe), pasif olarak kullanılacak bir <b>FARKINDALIK</b> zarı ile fark etmesi durumunda bu alanda hareket eden varlığa karşı da bakış yönünü tepki eylemle değiştirebilir.
+					</li>
+					<li>
+						Karakter, turunda <b>NET ALANDA</b> bulunan hedeflere saldırabilir. Karakterin kendi turunda yüzünü bir yöne dönmesi herhangi bir eylem türü ya da hareket puanı gerektirmez.
+					</li>
+					<li>
+						Karakter, <b>NET ALAN</b> sınırlarının dışına ayrılacak bir varlığa <b>TEPKİ EYLEM</b> olarak <b>FIRSAT SALDIRISI</b> gerçekleştirebilir. 
+						Karakter, fırsat saldırısı gerçekleştirirken yüzünü saldırdığı birim tarafına dönüp dönmeme konusunda seçim yapabilir. 
+						Fırsat saldırısı isabet eden hedefin hareketi iptal olur. Net alan dışındaki alanlarda hareket eden varlıklar fırsat saldırısını tetiklemez.
+					</li>
+				</ul>
+			</div>
+
+			<div class="page-panel-content-child" id="block">
+				<img src="resources/webpage/svg/hex-block.svg" width="210px"  alt="">
+
+				<br>
+
+				<label class="content-title" style="font-size: 24pt;">BLOKLAMA SİSTEMİ</label>
+
+				<p>
+					Fiziksel mücadelelerde kaçınma genel bir standarda sahip basit bir yapıda olsa da bir kalkanla bloklamanın koşullara bağlı değişkenlikleri bulunmaktadır. Bu değişkenler dahilinde, bloklama sistemi altıgen ve kare sistem üzerinde farklılıkarıyla incelenebilir. 
+					Kalkanlar genel kullanım şekilleriyle sol elde kuşanıldıkları için, şemalar sol kullanım üzerinden bir görsellik sunmaktadır. Kalkanın diğer tarafta kullanım durumunda, aynı sistem karakterin sağ tarafı için geçerlidir.
+				</p>
+
+				<label class="content-title" style="font-size: 24pt;">KÜÇÜK KALKANLAR & SİLAHLAR</label>
+
+				<p>
+					Küçük kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahip olmadıkları için çoğunlukla bireysel ölçekte fiziksel saldırıları engellemek ve savuşturmak üzere kullanılır. Sonuçları bire bir aynı olmasa da silahlar ve küçük kalkanlar aynı sistem yapısına tabidir. 
+				</p>
+
+				<ul>
+					<li>Küçük kalkanlar bloklamak için ek puanlarını karakterin <b>ÇEV</b> niteliğinden edinirler.</li>
+					<li>Silahlar bu ek puanı kendilerine ait özel <b>BLOK</b> niteliğinden edinirler.</li>
+					<li>Daha büyük boyutta kalkanlarda bloklama eyleminin zarı düşük kalsa bile arada oluşacak puan farkına bağlı olarak kısmi başarı sağlanabilirken, silahlar ve küçük kalkanlarda kaçınma durumundaki gibi başarısız olunur</li>
+				</ul>
+
+				<label class="content-title" style="font-size: 24pt;">ORTA KALKANLAR</label>
+
+				<p>
+					Orta kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahiptir. 
+					Bu özellikler hem ağırlıkları hem de büyüklükleri sebebiyle karakterin hareket kabiliyeti üzerinde <b>ÇEV</b> niteliğine eksi puan olarak yansımaktadır. 
+					Ancak, bu duruma karşılık olarak karaktere gelecek fiziksel hamlelerin çoğuna karşı korunak sağlamaktadır. 
+
+				</p>
+
+				<ul>
+					<li>Orta kalkan kullanan bir karakter, <b>NORMAL ALANLAR</b> tarafından gelecek yakın menzilli fiziksel saldırılara karşı normal şekilde <b>BLOK BONUSU</b> edinerek bloklama yapabilir.</li>
+					<li>Eğer karaktere gelecek saldırı <b>NET ALAN</b> tarafından geliyorsa, karakter bloklama eylemine <b>AVANTAJ</b> alır.</li>
+					<li>Eğer karaktere gelecek saldırı zor alan tarafından geliyorsa, karakter bloklama eylemine <b>DEZAVANTAJ</b> alır.</li>
+				</ul>
+
+				<label class="content-title" style="font-size: 24pt;">KULE KALKANLAR</label>
+
+				<p>
+					Kule kalkanlar, karakterlerin hareketlerini ve <b>ÇEV</b> niteliklerini önemli ölçüde düşürürken korunak durumunu aynı ölçüde yükselten yapıya sahiptir. 
+					Bir karakter, orta kalkanlarda olduğu gibi kule kalkanlarda da blok bonusu becerisi üzerinden bloklama gerçekleştirir, ancak kule kalkanı tam blok pozuna geçirdiği zaman stamina değeri tükenene ya da kalkan işlev görmez hale gelene kadar saldırıları kesinlikle bloklar. 
+				</p>
+
+				<label class="content-title" style="font-size: 24pt;">BLOKLAMADA DAYANIKLILIK</label>
+
+				<p style="padding-bottom: 50px;">
+					Bloklama, karaktere üstün korunak sağlasa da karakter tarafından kaynak kullanımı denetimi gerektiren bir süreçtir. 
+					Bir karakter, saldırı blokladıkça kalkanı üzerinde hasar alır. Kalkanın materyalinin zarar görmesinin yanı sıra, karakter arka arkaya kuvvetli saldırılar bloklamaya başlarsa DAY niteliği üzerinden bir mücadeleye girer. 
+					Bu mücadelede, bloklanan her kuvvetli saldırı sonrasında karakterin bir miktar stamina kaynağı geçici olarak tükenmeye başlar. 
+					Karakter bu kaynağı tüketene kadar bloklama yapmayı tercih ederse, stamina kaynağı 0’a düştüğü zaman karakterin gardı kırılır ve kırılgan pozuna girer. 
+					Bu pozdayken alacağı sonraki ilk yakın menzilli saldırı kritik bir isabetle gerçekleşir. 
+					Eğer karakter stamına kaynağı tükenmeden blok yapmaya ara verirse, ara verdiği turlar boyunca sabit bir şekilde kaynağın eriyen miktarı yenilenmeye başlar.
+				</p>
+
+			</div>
+
+			<div class="page-panel-content-child" id="square">
+
+				<img src="resources/webpage/svg/square-battle.svg" width="190px" style="margin-right: 100px;" alt=""> <img src="resources/webpage/svg/square-block.svg" width="190px" alt="">
+
+				<br>
+
+				<label class="content-title" style="font-size: 24pt;">KARE DÜZEN SAVAŞ SİSTEMİ</label>
+
+				<p>
+					Kare savaş sistemi, SLVNZ 3.0’ın mücadele eylemlerinin ve hareketlerinin işlenmesi için tercih edilebilecek bir alternatifi oluşturur. 
+					Savaş sisteminde varlıkların her biri bir Kare içinde yer alırlar ve birimlerin hareketleri, gerçekleşecek eylemlerin mesafeleri ve kapsayacakları alanlar birim olarak belirlenmiş tekil kare yuvalar üzerinden hesaplanır.
+				</p>
+
+				<label class="content-title" style="font-size: 24pt;">SAVAŞ DÜZENİ</label>
+
+				<p>
+					Savaş düzeninde net alan, eşik alan ve kör alan haricinde <b style="color: #00FFEA;">SOL</b> ve <b style="color: #00FFEA;">SAĞ</b> birimler bulunur.
+				</p>
+
+				<ul style="padding-bottom: 50px;">
+					<li>
+						Karakter, <b style="color: #00FFEA;">BU ALANLARDAN</b> gelen fiziksel saldırılara karşı savunma yapmak için herhangi bir eksi puan almaz. Ancak saldırıyı savuşturma veya saldırıdan kaçınma süreçleri kouşllara bağlı olarak değişiklik gösterir.
+					</li>
+					<li>
+						Karakter, elinin boş bulunduğu taraftan gelen bir saldırıya karşı kaçınma yapmak zorundadır. Saldırının geldiği taraftaki elinde en az orta boy kalkan bulunduruyorsa, bloklamayı avantajlı gerçekleştirir.
+					</li>
+					<li>
+						Karakter, altıgen sisteminde olduğu gibi sadece net alan sınırlarında bulunan varlıklara herhangi bir şekilde bakış yönünü değiştirmeden saldırıda bulunabilir. 
+						Ancak, silah bulundurduğu elinin olduğu tarafa da bakış açısını değiştirmeden saldırıda bulunabilir (Sol elinde silah bulunduran biri sol tarafa saldırabilir, ancak sağ tarafa saldırmak için o bölgeye net alan olacak şekilde yüzünü dönmelidir). 
+					</li>
+					<li>
+						Karakter, bu alanlardan gelecek menzilli fiziksel saldırıların farkındadır ve yukarıdaki kuralları gözeterek savunma & kaçınma yapabilir.
+					</li>
+				</ul>
+				
+			</div>
+
+			<div class="page-panel-content-child" id="energybattle">
+
+				<label class="content-title" style="font-size: 24pt;">ENERJİSEL SAVAŞ</label>
+
+				<p>
+					Enerjisel savaş, karakterlerin enerjisel yetenekler ile gerçekleştireceği savaş sürecidir. Enerjisel savaş süreci fiziksel yakın savaş sürecine kıyasla daha basittir ancak kendi incelikleri bulunmaktadır.
+				</p>
+
+				<label class="content-title" style="font-size: 24pt;">KAYNAK KULLANIMI</label>
+
+				<p>
+					Enerjisel savaşta kısa sürede pek çok yetenek seri olarak sıralanarak kullanılmaktadır. Bu süreçte şu kurallar izlenmektedir: 
+				</p>
+
+				<ul>
+					<li>
+						Eğer kaynak tüketimi olan, aynı enerji türüne ait bir yetenek arka arkaya 2 seferden fazla kullanılırsa harcadığı kaynak değeri <b>X2</b> olacak şekilde katlanmaya başlar. 
+						Karakter, bu katlanmayı araya aynı enerjiyi kullanan bir <b>BAZBÜYÜ</b> ile karıştırır veya <b>FARKLI ENERJİ TÜRÜNDE</b> bir yetenek kullanırsa <b>SIFIRLAR</b>.
+					</li>
+					<li>
+						Karakterlerin <b>GÖREBİLDİKLERİ</b> hedefler bulunmaktadır. Görebildikleri hedefler üstünde <b>İSABET</b> ve <b>ODAKLANMA</b> gerektiren enerjisel yetenekler kullanılabilir.
+					</li>
+					<li>
+						Bir karakter, <b>FARKINDA</b> olduğu ancak <b>GÖREMEDİĞİ</b> bir hedef üstünde - eğer arada bir fiziksel/enerjisel engel yoksa - sadece <b>İSABET</b> becerisini kullanabileceği tipte yetenekler kullanabilir.
+					</li>
+					<li>
+						Bir karakter, ancak <b>GÖREBİLDİĞİ</b> bir hedef üstünde <b>ETKİ OLUŞTURAN</b> enerjisel yetenekler kullanabilir.
+					</li>
+				</ul>
+
+				<label class="content-title" style="font-size: 24pt;">KONSANTRASYON</label>
+
+				<p style="padding-bottom: 50px;">
+					Karakterlerin uygulayacağı yeteneklerin bir kısmı, anında gerçekleşen etkiler haricinde <b>SÜREKLİ ETKİ</b> meydana getirebilir. 
+					Bu şekilde etki oluşturan yeteneklerde karakterin <b>KONSANTRASYON</b> sürecine girmesi gerekir. 
+					Konsantrasyon, bir karakterin mental olarak enerjisel etkinin varlığı sürdürmesi için ona odağını koruma sürecidir. 
+					Bu süreçte karakter farklı eylemler gerçekleştirebilir, enerjisel veya fiziksel yetenekler kullanabilir. 
+					Ancak farklı bir konsantrasyon sürecine girecek olursa, mevcut konsantrasyonu <b>BOZULUR</b>. 
+					Aynı şekilde, bir karakter konsantrasyon sürecindeyken herhangi bir şekilde hasar alırsa <b>KONSANTRASYON TESTİ</b> zarı kullanır. 
+					Zarın <b>10 DEĞERİNİN ALTINDA</b> gelmesi durumunda, konsantrasyon bozulur. Bir karakterin <b>BİRDEN FAZLA KONSANTRASYON YUVASI</b> bulunabilir. 
+					Bir konsantrasyon yuvasını geliştirme konusunda gerekli deneyim puanını hesaplamak için <br>
+					“<b>500</b> x <b>KONSANTRASYON SEVİYESİ"</b> şeklinde bir formül kullanılır.
+				</p>
+
+
+			</div>
+
+
+
+		</div>
+
+		<div class="page-panel-content" id="character-development">
+
+			<label class="content-title">KARAKTER GELİŞİMİ</label>
+
+			<p>
+				Oyuncular oyun boyunca karakterlerinin niteliklerini, becerilerini ve yeteneklerini geliştirebilirler. 
+				Bu geliştirme süreci, karakterin uygun antrenmanları gerçekleştirmesi sonucu toplayabileceği deneyim puanları ile mümkündür. 
+				Deneyim puanları, oyunun kaç yüzlü zar ile oynanmaya karar verildiği gözetilmeksizin, 20 yüzlü zar kullanılarak toplanır.
+
+				<br><br>
+
+				Karakterin gerçekleştirmek istediği antrenman türü GM tarafına önerilir ve kabul edilirse, karakter oyun süresince 6 saatlik bir çalışma süresine girer. 
+				Bu çalışma süresi boyunca arada verilen molalar haricinde bir kesinti yaşanması durumunda GM inisiyatifi ile deneyim puanı için kullanılacak zar türü değişebilir.
+
+				<br><br>
+
+				Karakterler girdikleri antrenman sonucunda +1 Yorgunluk Durumu puanı alırlar. 
+				Karakter yorgunken bir antrenman daha yapacak olursa bu durum karakter +1 Yorgun Durumu puanı daha ekler. 
+				Bir karakterin yorgunluk durumu 2 puan veya daha fazla ise, antrenman yapamaz.
+
+				<br><br>
+
+				Karakterler zihinsel ve fiziksel olarak yorgunluk durumuna girebilirler. Meditasyon gibi eylemler dışında, bir karakterin enerjisel yetenekleri üstünde çalışması da vücuttaki enerji akışından dolayı karakteri fiziksel bir yorgunluğa sürükleyebilir. 
+				Bundan dolayı GM ile anlaşılarak belirlenen belirli antrenman türleri dışında enerjisel ve fiziksel yetenekler üstünde geliştirme çalışmaları karakteri 6 saat sonunda yoracaktır.
+
+				<br><br>
+
+				Karakterlerin gelişim süreçleri iki farklı kolda ve formüle ayrılmıştır. Bunlar Temel Gelişim ve Özel Gelişimdir.
+
+			</p>
+
+			<label class="content-title" style="font-size: 24pt;">TEMEL GELİŞİM</label>
+
+			<p>
+				Temel gelişim, karakterlerin temel becerilerini, ekipman yetkinliklerini, enerjisel yetkinliklerini ve kaynak havuzlarını geliştirebileceği süreçleri kapsamaktadır. 
+				Bu süreç, karakterin gireceği en az 1 en çok 4 saatlik antrenman ya da meditasyon süreci sonunda atılan farklı yüzlü zarlar ile, SEVİYE x 100 Deneyim Puanı’na erişmeye çalışarak seviye atlayabileceği bir sistemdir.
+
+				<br><br>
+
+				<b>TEMEL NİTELİKLER</b>, temel gelişimin bu sistemi ile aynı biçimde ilerlese de gerektirdiği deneyim puanı bakımından çok daha ağırdır. Temel niteliklerde <b>KUV</b>, <b>ÇEV</b> ve <b>DAY</b>, sözü edilen antrenmanlarla geliştirilebilir. 
+				Ancak <b>İRD</b>, <b>ZEK</b> ve <b>İRF</b> nitelikleri daha özel yöntemler veya antrenmanlarla gelişir. 
+				<br><br>Temel niteliklerin gelişmesi için gerekli deneyim puanı formülü <b>SEVİYE</b> x <b>500</b> olarak işlenir.
+				<br>Özellikle temel niteliklerin geliştirilmesi oldukça uzun bir süreç alabilmektedir. Bu durum göz önünde bulundurulduğunda, bir karakterin asıl özgünlüğünü diğer becerileri ve yeteneklerinin gelişimi ile 
+				gösterebileceği belirtilebilir. Özellikle yeni bir oyuna başlanırken veya yeni bir karakter oluşturulurken, GM'in temel nitelikler için ayrı bir Deneyim Puanı havuzu belirlemesi veya oyunculara 
+				doğrudan seviye sayısıyla nitelik sınırı vermesi (2 adet +1 nitelik ve 1 adet +2 nitelik, ya da niteliklere özel 2000 Deneyim Puanı gibi...) tavsiye edilir.
+
+			</p>
+
+		</div>
+
 	</section>
 
 
@@ -1205,6 +1624,48 @@
 		// Hedef butonu active yap
 		btn.classList.add("active");
 		});
+
+		document.addEventListener("DOMContentLoaded", () => {
+		const menu = document.querySelector(".page-panel-content-child-menu");
+		if (!menu) return;
+
+		const buttons = Array.from(menu.querySelectorAll("button[data-target]"));
+		const panels  = Array.from(document.querySelectorAll(".page-panel-content-child"));
+
+		const setActive = (targetId) => {
+			// Panelleri kapat
+			panels.forEach(p => p.classList.remove("active"));
+
+			// Hedef paneli aç
+			const targetPanel = document.getElementById(targetId);
+			if (targetPanel) targetPanel.classList.add("active");
+
+			// Buton active yönetimi
+			buttons.forEach(b => b.classList.remove("active"));
+			const activeBtn = menu.querySelector(`button[data-target="${CSS.escape(targetId)}"]`);
+			if (activeBtn) activeBtn.classList.add("active");
+		};
+
+		// Tıklamalar (event delegation)
+		menu.addEventListener("click", (e) => {
+			const btn = e.target.closest("button[data-target]");
+			if (!btn || !menu.contains(btn)) return;
+
+			const targetId = btn.dataset.target;
+			if (!targetId) return;
+
+			setActive(targetId);
+		});
+
+		// Default: hex-battle (varsa), yoksa ilk buton
+		const defaultId = "hex-battle";
+		const hasDefault = !!document.getElementById(defaultId);
+		const initialId = hasDefault ? defaultId : (buttons[0]?.dataset.target);
+
+		if (initialId) setActive(initialId);
+		});
+
+
 	</script>
 
 
