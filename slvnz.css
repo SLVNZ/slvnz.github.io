@@ -80,6 +80,16 @@ body {
 	align-items: center;
 }
 
+.f-row {
+	display: flex;
+	flex-direction: row;
+}
+
+.f-col {
+	display: flex;
+	flex-direction: column;
+}
+
 .page-marker {
 	position: fixed;
 	color: #DC2E2A;
