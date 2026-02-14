@@ -147,6 +147,11 @@ body {
 	align-items: flex-start;
 	cursor: pointer;
 	padding-left: 40px;
+	transition: 0.5s ease;
+}
+
+.side-menu-button:hover {
+	background: #dc2d2a1c;
 }
 
 .side-menu-button label {
