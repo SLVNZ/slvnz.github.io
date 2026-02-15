@@ -404,7 +404,50 @@ body {
 }
 
 
+.nav-button {
+	background: transparent;
+	border: none;
+	padding: 10px;
+	color: #DC2E2A;
+	font-size: 25px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	border-radius: 100px;
+	font-family: 'futura-100';
+	padding-top: 10px;
+	padding-bottom: 5px;
+	border: 1px solid firebrick;
+	cursor: pointer;
+	transition: 0.5s ease;
+}
 
+.nav-button:hover {
+	background: #cc0000;
+	color: #d9d9d9;
+}
+
+.header-menu {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 20px;
+	font-family: 'futura-100';
+	color: #DC2E2A;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.header-menu a {
+	text-decoration: none;
+	color: #DC2E2A;
+	letter-spacing: 0.1em;
+	font-size: 10pt;
+}
+
+.header-menu a:hover {
+	color: #d9d9d9;
+}
 
 
 
@@ -414,6 +457,7 @@ body {
     align-items: flex-start;
 	justify-content: flex-start;
 	padding: 50px;
+	padding-bottom: 25px;
 }
 
 .header label {
