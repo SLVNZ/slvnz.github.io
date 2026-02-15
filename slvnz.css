@@ -115,6 +115,54 @@ body {
 	overflow: auto;
 }
 
+.page-panel-header-menu {
+	display: flex; 
+	flex-direction: row;
+	background: linear-gradient(90deg, #0f0002 0%, #0c0000 100%);
+	padding: 10px;
+	justify-content: center;
+	gap: 20px;
+}
+
+.page-panel-header-menu button {
+	color: #DC2E2A;
+	font-family: 'futura-100';
+	background: transparent;
+	border: 0;
+	cursor: pointer;
+	letter-spacing: 0.1em;
+}
+
+.page-panel-header-menu button:hover {
+	color: #d9d9d9;
+}
+
+
+
+
+.page-panel-interior-full {
+	display: none;
+	flex-direction: column;
+}
+
+.page-panel-interior-full.active {
+	display: flex;
+}
+
+.page-panel-header-menu button.active {
+	color: #d9d9d9;
+	font-weight: bold;
+}
+
+.page-panel p {
+	color: #dc2d2a6a;
+	font-family: 'parabolica-text';
+	font-size: 12px;
+	line-height: 1.2em;
+	text-align: center;
+	font-style: italic;
+}
+
 .menu-panel {
 	height: 720px;
 	width: 260px;
