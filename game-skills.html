@@ -73,7 +73,126 @@
 
 		<div class="page-panel-interior-full" id="skills-energy">
 
+			<div class="spells-div">
 			
+			
+				<div class="container">
+					<div class="filter">
+						<input type="text" id="search" placeholder="Büyü ismini ara" oninput="filterSpells()">
+							<select id="level-filter" onchange="filterSpells()">
+								<option value="">Seviye</option>
+								<option value="0">Bazbüyü</option>
+								<option value="1">Seviye 1</option>
+								<option value="2">Seviye 2</option>
+								<option value="3">Seviye 3</option>
+								<option value="4">Seviye 4</option>
+							</select>
+							<select id="energy-filter" onchange="filterSpells()">
+								<option value="">Enerji Türü</option>
+								<option value="evoc">Yıkım</option>
+								<option value="div">Kehanet</option>
+								<option value="conj">Oluşturma</option>
+								<option value="abj">Koruma</option>
+								<option value="trns">Dönüştürme</option>
+								<option value="ench">Cezbetme</option>
+								<option value="illu">İllüzyon</option>
+								<option value="necro">Nekromansi</option>
+								<option value="fth">İnanç</option>
+								<option value="pkt">Pakt</option>
+								<option value="bld">Kan</option>
+								<option value="chs">Kaos</option>
+								<option value="drk">Karanlık</option>
+								<option value="rdnt">Aydınlık</option>
+								<option value="sl">Ruh</option>
+								<option value="lf">Yaşam</option>
+							</select>
+							<select id="duration-filter" onchange="filterSpells()">
+								<option value="">Tüm Süreler</option>
+								<option value="inst">Anında</option>
+								<option value="bonus">Bonus Eylem</option>
+								<option value="react">Reaksiyon</option>
+								<option value="1min">1 dakika</option>
+								<option value="10min">10 dakika</option>
+								<option value="30min">30 dakika</option>
+								<option value="1hr">1 saat</option>
+								<option value="12hr">12 saat</option>
+								<option value="1day">1 gün</option>
+								<option value="1week">1 hafta</option>
+								<option value="2week">2 hafta</option>
+								<option value="1mnth">1 ay</option>
+							</select>
+							<input type="number" id="mana-filter" placeholder="Maksimum Mana" oninput="filterSpells()">
+							<input type="number" id="range-filter" placeholder="Minimum Menzil (metre)" oninput="filterSpells()">
+						</div>
+
+
+
+
+
+
+
+
+
+
+							<div class="main-content">
+								<div class="spell-list">
+									<table class="spells-table">
+									<thead>
+										<tr>
+											<th onclick="sortTable('name')">İsim</th>
+											<th onclick="sortTable('level')">Seviye</th>
+											<th onclick="sortTable('duration')">Süre</th>
+											<th onclick="sortTable('energy')">Enerji Türü</th>
+											<th onclick="sortTable('mana')">Mana</th>
+											<th onclick="sortTable('range')">Menzil</th>
+										</tr>
+									</thead>
+									<tbody id="spells-tbody">
+										
+
+
+
+
+									</tbody>
+									</table>
+								</div>
+
+
+
+								<div style="width: 480px;">
+
+									<div class="spell-description" id="hokkabaz">
+										<h2>Acımasız Alay <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Cezbetme Bazbüyüsü</span> </h2>
+						
+										<div class="spell-details">
+											<p><strong>Kullanıma Süresi:</strong> 1 eylem</p>
+											<p><strong>Büyü Süresi:</strong> Anlık</p>
+											<p><strong>Enerji Türü:</strong> Cezbetme</p>
+											<p><strong>Büyü Bedeli:</strong> 0 mana</p>
+											<p><strong>Büyü Menzili:</strong> 12 Kare</p>
+										</div>
+										<p class="spell-aciklama">Görebildiğin bir varlığın zihnine erişerek büyüyle çevrelenmiş bir dizi hakaret yağdırırsın. Eğer 
+											hedef varlık seni duyabiliyorsa ve zeka değeri -3'ten yüksek ise <strong>irade</strong> kurtulma zarı kullanır. Sağır ya da 
+											zeka değeri -3'ten düşük olan varlıklar otomatik olarak kurtulmada başarılı sayılır. İrade kurtulmasında başarısız olan 
+											varlıklar zihinsel hasar alır ve sonraki turunda gerçekleştireceği ilk saldırısı (yakın mesafe ya da uzak menzilli / büyü fark etmez) 
+											dezavantajlı olur.
+											
+
+										</p>
+									</div>
+										
+
+
+								</div>
+
+
+
+
+
+								
+							</div>
+				</div>
+			</div>
 
 		</div>
 
@@ -267,6 +386,260 @@
 
 
 	</script>
+
+	<script src="spells.js">
+
+
+		// spells.js
+
+		let allSpells = [];
+		let currentSort = { key: null, dir: 1 }; // dir: 1 asc, -1 desc
+
+		document.addEventListener("DOMContentLoaded", () => {
+		loadSpellsFromCSV("spells.csv");
+		});
+
+		// -------------------- CSV LOAD --------------------
+		async function loadSpellsFromCSV(url) {
+		try {
+			const res = await fetch(url, { cache: "no-store" });
+			if (!res.ok) throw new Error(`CSV fetch failed: ${res.status}`);
+			const text = await res.text();
+
+			allSpells = parseCSV(text).map(normalizeSpellRow);
+
+			renderSpellTable(allSpells);
+			// İlk yüklemede filtreyi uygula (boşsa hepsi görünür)
+			filterSpells();
+		} catch (err) {
+			console.error(err);
+		}
+		}
+
+		// Basit CSV parser (tırnaklı alanları da idare eder)
+		function parseCSV(text) {
+		const rows = [];
+		let row = [];
+		let cur = "";
+		let inQuotes = false;
+
+		for (let i = 0; i < text.length; i++) {
+			const ch = text[i];
+			const next = text[i + 1];
+
+			if (ch === '"' && inQuotes && next === '"') {
+			cur += '"';
+			i++;
+			continue;
+			}
+			if (ch === '"') {
+			inQuotes = !inQuotes;
+			continue;
+			}
+			if (ch === "," && !inQuotes) {
+			row.push(cur);
+			cur = "";
+			continue;
+			}
+			if ((ch === "\n" || ch === "\r") && !inQuotes) {
+			if (ch === "\r" && next === "\n") i++;
+			row.push(cur);
+			cur = "";
+
+			// boş satırları at
+			if (row.some(cell => cell.trim() !== "")) rows.push(row);
+			row = [];
+			continue;
+			}
+			cur += ch;
+		}
+		if (cur.length || row.length) {
+			row.push(cur);
+			if (row.some(cell => cell.trim() !== "")) rows.push(row);
+		}
+
+		if (rows.length === 0) return [];
+
+		const headers = rows[0].map(h => h.trim());
+		const data = rows.slice(1);
+
+		return data.map(cols => {
+			const obj = {};
+			headers.forEach((h, idx) => (obj[h] = (cols[idx] ?? "").trim()));
+			return obj;
+		});
+		}
+
+		function normalizeSpellRow(r) {
+		return {
+			id: r.id,
+			name: r.name,
+			level: toNumber(r.level),
+			energy: r.energy,
+			duration: r.duration,
+			mana: toNumber(r.mana),
+			range: toNumber(r.range),
+
+			// Görünen label’lar (yoksa fallback üret)
+			levelLabel: r.levelLabel || (String(r.level) === "0" ? "Bazbüyü" : `Seviye ${r.level}`),
+			energyLabel: r.energyLabel || r.energy,
+			durationLabel: r.durationLabel || r.duration,
+			rangeLabel: r.rangeLabel || String(r.range)
+		};
+		}
+
+		function toNumber(v) {
+		const n = Number(String(v).replace(",", "."));
+		return Number.isFinite(n) ? n : 0;
+		}
+
+		// -------------------- RENDER TABLE --------------------
+		function renderSpellTable(spells) {
+		const tbody = document.getElementById("spell-list");
+		if (!tbody) return;
+
+		tbody.innerHTML = "";
+
+		const frag = document.createDocumentFragment();
+		for (const s of spells) {
+			const tr = document.createElement("tr");
+
+			tr.dataset.name = (s.name || "").toLowerCase();
+			tr.dataset.level = String(s.level);
+			tr.dataset.energy = s.energy;
+			tr.dataset.duration = s.duration;
+			tr.dataset.mana = String(s.mana);
+			tr.dataset.range = String(s.range);
+
+			tr.addEventListener("click", () => showSpell(s.id));
+
+			tr.innerHTML = `
+			<td>${escapeHtml(s.name)}</td>
+			<td>${escapeHtml(s.levelLabel)}</td>
+			<td>${escapeHtml(s.durationLabel)}</td>
+			<td>${escapeHtml(s.energyLabel)}</td>
+			<td>${escapeHtml(String(s.mana))}</td>
+			<td>${escapeHtml(s.rangeLabel)}</td>
+			`;
+
+			frag.appendChild(tr);
+		}
+		tbody.appendChild(frag);
+		}
+
+		function escapeHtml(str) {
+		return String(str).replace(/[&<>"']/g, m => ({
+			"&": "&amp;",
+			"<": "&lt;",
+			">": "&gt;",
+			'"': "&quot;",
+			"'": "&#39;"
+		}[m]));
+		}
+
+		// -------------------- FILTER --------------------
+		function filterSpells() {
+		const q = (document.getElementById("search")?.value || "").trim().toLowerCase();
+		const level = document.getElementById("level-filter")?.value || "";
+		const energy = document.getElementById("energy-filter")?.value || "";
+		const duration = document.getElementById("duration-filter")?.value || "";
+		const manaMaxRaw = document.getElementById("mana-filter")?.value;
+		const rangeMinRaw = document.getElementById("range-filter")?.value;
+
+		const manaMax = manaMaxRaw === "" || manaMaxRaw == null ? null : Number(manaMaxRaw);
+		const rangeMin = rangeMinRaw === "" || rangeMinRaw == null ? null : Number(rangeMinRaw);
+
+		const tbody = document.getElementById("spell-list");
+		if (!tbody) return;
+
+		const rows = Array.from(tbody.querySelectorAll("tr"));
+		for (const tr of rows) {
+			const name = tr.dataset.name || "";
+			const trLevel = tr.dataset.level || "";
+			const trEnergy = tr.dataset.energy || "";
+			const trDuration = tr.dataset.duration || "";
+			const trMana = Number(tr.dataset.mana || 0);
+			const trRange = Number(tr.dataset.range || 0);
+
+			let ok = true;
+
+			if (q && !name.includes(q)) ok = false;
+			if (level && trLevel !== level) ok = false;
+			if (energy && trEnergy !== energy) ok = false;
+			if (duration && trDuration !== duration) ok = false;
+
+			// Maksimum Mana: trMana <= manaMax
+			if (manaMax !== null && Number.isFinite(manaMax) && trMana > manaMax) ok = false;
+
+			// Minimum Menzil: trRange >= rangeMin
+			if (rangeMin !== null && Number.isFinite(rangeMin) && trRange < rangeMin) ok = false;
+
+			tr.style.display = ok ? "" : "none";
+		}
+		}
+
+		// -------------------- SORT --------------------
+		function sortTable(key) {
+		// key: 'name' | 'level' | 'duration' | 'energy' | 'mana' | 'range'
+		if (!key) return;
+
+		if (currentSort.key === key) {
+			currentSort.dir *= -1;
+		} else {
+			currentSort.key = key;
+			currentSort.dir = 1;
+		}
+
+		const dir = currentSort.dir;
+
+		const sorted = [...allSpells].sort((a, b) => {
+			let av = a[key];
+			let bv = b[key];
+
+			// string compare
+			if (typeof av === "string" || typeof bv === "string") {
+			av = String(av).toLowerCase();
+			bv = String(bv).toLowerCase();
+			if (av < bv) return -1 * dir;
+			if (av > bv) return 1 * dir;
+			return 0;
+			}
+
+			// number compare
+			av = Number(av);
+			bv = Number(bv);
+			return (av - bv) * dir;
+		});
+
+		renderSpellTable(sorted);
+		// Sıralama sonrası aktif filtreleri tekrar uygula
+		filterSpells();
+		}
+
+		// -------------------- DETAILS PANEL --------------------
+		function showSpell(id) {
+		// tüm açıklamaları kapat
+		document.querySelectorAll(".spell-description").forEach(el => {
+			el.style.display = "none";
+		});
+
+		// seçileni aç
+		const target = document.getElementById(id);
+		if (target) target.style.display = "block";
+		}
+
+		// Global scope'a aç (HTML inline handler'lar için)
+		window.filterSpells = filterSpells;
+		window.sortTable = sortTable;
+		window.showSpell = showSpell;
+
+
+
+	</script>
+	<script src="./resources/js/spells-store.js"></script>
+	<script src="./resources/js/spells-render.js"></script>
+
+
 
 
 

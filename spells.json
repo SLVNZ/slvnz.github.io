@@ -1,0 +1,13 @@
+{
+  "id": "isik",
+  "name": "Işık",
+  "levelText": "Bazbüyü",
+  "level": 0,
+  "duration": "1 Saat",
+  "energy": "İllüzyon",
+  "resource": "Mana",
+  "cost": 0,
+  "range": "Dokunma",
+  "area": "6 Kare",
+  "description": "..."
+}

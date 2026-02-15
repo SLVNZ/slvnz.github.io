@@ -1,0 +1,10 @@
+﻿name;level;duration;energy;resource;cost;range;area;description
+Hokkabazl?k;Bazbüyü;Anlık;Dönüştürme;Mana;0;4 kare;Tekil;"30 santimetre küplük alanı (1ft.) kapsayacak bir hacimde ufak etkiler bırakabilirsin. Bu etkiler şunlarla sınırlıdır:
+
+Temizleme: Belirlediğin alandaki basit lekeleri, kirleri ya da tozu temizleyebilirsin.
+Kıvılcım Çıkarma: Belirlediğin alanda bulunan yanıcı nesenelerin birinden kıvılcım çıkarabilirsin (Saman, kuru odun, kömür, muşamba vb.).
+Yakma/Söndürme: Belirlediğin alanda bulunan mum, meşale vb. kolay yanıcı neseneleri yakıp söndürebilirsin.
+Tatlandırma: Hacmi en fazla belirtilen miktarda olan bir nesneye dokunarak onu serinletebilir, ılıtabilir ya da istediğin şekilde bir tat kazandırabilirsin.
+Sembol: En fazla 30 santimetre kare alanı kapsayacak bir sembolü bir zemine işleyebilirsin. Sembol 1 saat sonrak kaybolur.
+Sihirbazlık: 6 saniye süre boyunca elinde belirecek büyüsüz ıvır zıvır ya da çok basit bir illüzyon görüntüsü oluşturabilirsin."
+Işık;Bazbüyü;1 Saat;İllüzyon;Mana;0;Dokunma;6 Kare;Küçük sayılabilecek boyutlarda bir nesneye dokunarak nesnenin ışık saçmasını sağlarsın. Işık saçan nesne, 6 kareye kadar parlak ışık, sonraki 6 kareye kadar soluk ışık saçabilir. Bu durum, enerjinin kuvvetine bağlı olarak değişkenlik gösterir.
