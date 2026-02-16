@@ -7,14 +7,7 @@
 <link href="slvnz.css" rel="stylesheet" type="text/css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-	
-	@media screen and (max-width: 600px) {
-	#cards-contain {
-		flex-direction: column !important;
-	}
-}
-</style>
+
 
 </head>
 
@@ -66,7 +59,7 @@
 		</div>
 
 		<div style="display: flex; flex-direction: row; width: 100%; justify-content: center;">
-			<p style="width: 60%;">
+			<p style="width: 60%; text-align: center;">
 				Bu alanda yer alan bütün yetenekler, evrende yaygın olarak karşılaşılabilen arketipleri belirtir. Bir karakter seçeceği yetenekler konusunda burada göreceği sistem ve kuvvetleri baz alarak liste dışı yaratıcı fikirlerini bir yetenek olarak elde edebilir.
 			</p>
 		</div>
@@ -74,123 +67,114 @@
 		<div class="page-panel-interior-full" id="skills-energy">
 
 			<div class="spells-div">
-			
-			
 				<div class="container">
 					<div class="filter">
-						<input type="text" id="search" placeholder="Büyü ismini ara" oninput="filterSpells()">
-							<select id="level-filter" onchange="filterSpells()">
-								<option value="">Seviye</option>
-								<option value="0">Bazbüyü</option>
-								<option value="1">Seviye 1</option>
-								<option value="2">Seviye 2</option>
-								<option value="3">Seviye 3</option>
-								<option value="4">Seviye 4</option>
-							</select>
-							<select id="energy-filter" onchange="filterSpells()">
-								<option value="">Enerji Türü</option>
-								<option value="evoc">Yıkım</option>
-								<option value="div">Kehanet</option>
-								<option value="conj">Oluşturma</option>
-								<option value="abj">Koruma</option>
-								<option value="trns">Dönüştürme</option>
-								<option value="ench">Cezbetme</option>
-								<option value="illu">İllüzyon</option>
-								<option value="necro">Nekromansi</option>
-								<option value="fth">İnanç</option>
-								<option value="pkt">Pakt</option>
-								<option value="bld">Kan</option>
-								<option value="chs">Kaos</option>
-								<option value="drk">Karanlık</option>
-								<option value="rdnt">Aydınlık</option>
-								<option value="sl">Ruh</option>
-								<option value="lf">Yaşam</option>
-							</select>
-							<select id="duration-filter" onchange="filterSpells()">
-								<option value="">Tüm Süreler</option>
-								<option value="inst">Anında</option>
-								<option value="bonus">Bonus Eylem</option>
-								<option value="react">Reaksiyon</option>
-								<option value="1min">1 dakika</option>
-								<option value="10min">10 dakika</option>
-								<option value="30min">30 dakika</option>
-								<option value="1hr">1 saat</option>
-								<option value="12hr">12 saat</option>
-								<option value="1day">1 gün</option>
-								<option value="1week">1 hafta</option>
-								<option value="2week">2 hafta</option>
-								<option value="1mnth">1 ay</option>
-							</select>
-							<input type="number" id="mana-filter" placeholder="Maksimum Mana" oninput="filterSpells()">
-							<input type="number" id="range-filter" placeholder="Minimum Menzil (metre)" oninput="filterSpells()">
+						<input type="text" id="q" placeholder="Metinde ara (isim, açıklama, vb.)">
+						<select id="levelFilter">
+							<option value="">Tüm Seviyeler</option>
+							<option value="0">Bazbüyü</option>
+							<option value="1">Seviye 1</option>
+							<option value="2">Seviye 2</option>
+							<option value="3">Seviye 3</option>
+							<option value="4">Seviye 4</option>
+							<option value="5">Seviye 5</option>
+							<option value="6">Seviye 6</option>
+							<option value="7">Seviye 7</option>
+							<option value="8">Seviye 8</option>
+							<option value="9">Seviye 9</option>
+							<option value="10">Seviye 10</option>
+							<option value="11">Seviye 11</option>
+							<option value="12">Seviye 12</option>
+							<option value="13">Seviye 13</option>
+							<option value="14">Seviye 14</option>
+							<option value="15">Seviye 15</option>
+							<option value="16">Seviye 16</option>
+							<option value="17">Seviye 17</option>
+							<option value="18">Seviye 18</option>
+							<option value="19">Seviye 19</option>
+							<option value="20">Seviye 20</option>
+						</select>
+						<input type="text" id="nameFilter" placeholder="İsim">
+						<select id="energyFilter">
+							<option value="">Tüm Enerjiler</option>
+							<option value="Yıkım">Yıkım</option>
+							<option value="Kehanet">Kehanet</option>
+							<option value="Oluşturma">Oluşturma</option>
+							<option value="Koruma">Koruma</option>
+							<option value="Dönüştürme">Dönüştürme</option>
+							<option value="İllüzyon">İllüzyon</option>
+							<option value="Efsun">Efsun</option>
+							<option value="Çürüme">Çürüme</option>
+							<option value="İnanç">İnanç</option>
+							<option value="Pakt">Pakt</option>
+							<option value="Kan">Kan</option>
+							<option value="Kaos">Kaos</option>
+							<option value="Karanlık">Karanlık</option>
+							<option value="Aydınlık">Aydınlık</option>
+							<option value="Ruh">Ruh</option>
+							<option value="Yaşam">Yaşam</option>
+						</select>
+						<select id="sourceFilter">
+							<option value="">Tüm Kaynaklar</option>
+							<option value="Mana">Mana</option>
+							<option value="Ki">Ki</option>
+							<option value="Ruh">Ruh</option>
+							<option value="Yaşam">Yaşam</option>
+						</select>
+						<input type="number" id="costFilter" placeholder="Bedel" min="0" max="999" style="width:60px;">
+						<select id="actionFilter">
+							<option value="">Tüm Eylem Türleri</option>
+							<option value="Eylem">Eylem</option>
+							<option value="Ek Eylem">Ek Eylem</option>
+							<option value="Tepki Eylem">Tepki Eylem</option>
+						</select>
+						<select id="durationFilter">
+							<option value="">Tüm Süreler</option>
+							<option value="Anlık">Anlık</option>
+							<option value="10 Tur">10 Tur</option>
+							<option value="1 Dakika">1 Dakika</option>
+							<option value="10 Dakika">10 Dakika</option>
+							<option value="30 Dakika">30 Dakika</option>
+							<option value="1 Saat">1 Saat</option>
+							<option value="2 Saat">2 Saat</option>
+							<option value="4 Saat">4 Saat</option>
+							<option value="6 Saat">6 Saat</option>
+							<option value="8 Saat">8 Saat</option>
+							<option value="12 Saat">12 Saat</option>
+							<option value="24 Saat">24 Saat</option>
+							<option value="1gün+">1gün+</option>
+						</select>
+						<input type="text" id="rangeFilter" placeholder="Menzil">
+						<span id="countBadge" style="display: none;">0 kayıt</span>
+						<span id="selBadge" style="display: none;">Seçili: Yok</span>
+					</div>
+
+					<div class="main-content">
+						<div class="spell-list">
+							<table>
+								<thead>
+									<tr>
+										<th>Seviye</th>
+										<th>İsim</th>
+										<th>Enerji</th>
+										<th>Kaynak</th>
+										<th>Bedel</th>
+										<th>Eylem Türü</th>
+										<th>Süre</th>
+										<th>Menzil</th>
+										<th>Alan</th>
+									</tr>
+								</thead>
+								<tbody id="tbody">
+									<!-- Kayıtlar yetenekler.json dosyasından JavaScript ile yüklenecek -->
+								</tbody>
+							</table>
 						</div>
 
-
-
-
-
-
-
-
-
-
-							<div class="main-content">
-								<div class="spell-list">
-									<table class="spells-table">
-									<thead>
-										<tr>
-											<th onclick="sortTable('name')">İsim</th>
-											<th onclick="sortTable('level')">Seviye</th>
-											<th onclick="sortTable('duration')">Süre</th>
-											<th onclick="sortTable('energy')">Enerji Türü</th>
-											<th onclick="sortTable('mana')">Mana</th>
-											<th onclick="sortTable('range')">Menzil</th>
-										</tr>
-									</thead>
-									<tbody id="spells-tbody">
-										
-
-
-
-
-									</tbody>
-									</table>
-								</div>
-
-
-
-								<div style="width: 480px;">
-
-									<div class="spell-description" id="hokkabaz">
-										<h2>Acımasız Alay <span style="font-family: barlow; font-style: italic; font-size: 10pt;">Cezbetme Bazbüyüsü</span> </h2>
-						
-										<div class="spell-details">
-											<p><strong>Kullanıma Süresi:</strong> 1 eylem</p>
-											<p><strong>Büyü Süresi:</strong> Anlık</p>
-											<p><strong>Enerji Türü:</strong> Cezbetme</p>
-											<p><strong>Büyü Bedeli:</strong> 0 mana</p>
-											<p><strong>Büyü Menzili:</strong> 12 Kare</p>
-										</div>
-										<p class="spell-aciklama">Görebildiğin bir varlığın zihnine erişerek büyüyle çevrelenmiş bir dizi hakaret yağdırırsın. Eğer 
-											hedef varlık seni duyabiliyorsa ve zeka değeri -3'ten yüksek ise <strong>irade</strong> kurtulma zarı kullanır. Sağır ya da 
-											zeka değeri -3'ten düşük olan varlıklar otomatik olarak kurtulmada başarılı sayılır. İrade kurtulmasında başarısız olan 
-											varlıklar zihinsel hasar alır ve sonraki turunda gerçekleştireceği ilk saldırısı (yakın mesafe ya da uzak menzilli / büyü fark etmez) 
-											dezavantajlı olur.
-											
-
-										</p>
-									</div>
-										
-
-
-								</div>
-
-
-
-
-
-								
-							</div>
+						<div id="desc" class="spell-description">
+							<!-- Seçili yeteneğin detayları JavaScript ile buraya yazılacak -->
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -198,6 +182,320 @@
 
 
 	</section>
+
+	<script>
+		/***********************
+		 * AYAR: JSON yolu
+		 * yetenekler.json dosyasını spells.html ile aynı klasöre koyarsanız:
+		 * const JSON_URL = "./yetenekler.json";
+		 ************************/
+		const JSON_URL = "./yetenekler.json";
+
+		const tbody = document.getElementById("tbody");
+		const desc = document.getElementById("desc");
+		const q = document.getElementById("q");
+		const levelFilter = document.getElementById("levelFilter");
+		const nameFilter = document.getElementById("nameFilter");
+		const energyFilter = document.getElementById("energyFilter");
+		const sourceFilter = document.getElementById("sourceFilter");
+		const costFilter = document.getElementById("costFilter");
+		const actionFilter = document.getElementById("actionFilter");
+		const durationFilter = document.getElementById("durationFilter");
+		const rangeFilter = document.getElementById("rangeFilter");
+		const countBadge = document.getElementById("countBadge");
+		const selBadge = document.getElementById("selBadge");
+
+		let skills = [];
+		let selectedId = null;
+
+		function escapeHtml(s){
+		return String(s ?? "")
+			.replaceAll("&","&amp;")
+			.replaceAll("<","&lt;")
+			.replaceAll(">","&gt;")
+			.replaceAll('"',"&quot;")
+			.replaceAll("'","&#039;");
+		}
+
+		function normalizeArray(arr){
+		if(!Array.isArray(arr)) return [];
+		return arr.map(x=>({
+			id: (x.id && String(x.id)) || "",
+			name: String(x.name ?? ""),
+			level: String(x.level ?? ""),
+			duration: String(x.duration ?? ""),
+			energy: String(x.energy ?? ""),
+			source: String(x.source ?? ""),
+			sourceAmt: String(x.sourceAmt ?? ""),
+			actionType: String(x.actionType ?? ""),
+			range: String(x.range ?? ""),
+			area: String(x.area ?? ""),
+			desc: String(x.desc ?? ""),
+			note: String(x.note ?? ""),
+		})).filter(x=>x.name.trim().length>0);
+		}
+
+		function updateCount(){
+		countBadge.textContent = `${skills.length} kayıt`;
+		}
+
+		function currentFilters(){
+		return {
+			query: q.value.trim().toLowerCase(),
+			level: levelFilter.value.trim().toLowerCase(),
+			name: nameFilter.value.trim().toLowerCase(),
+			energy: energyFilter.value.trim().toLowerCase(),
+			source: sourceFilter.value.trim().toLowerCase(),
+			cost: costFilter.value.trim().toLowerCase(),
+			actionType: actionFilter.value.trim().toLowerCase(),
+			duration: durationFilter.value.trim().toLowerCase(),
+			range: rangeFilter.value.trim().toLowerCase()
+		};
+		}
+
+		let sortKey = null;   // "level" | "name" | "energy" | "source" | "cost" | "actionType" | "duration" | "range"
+		let sortDir = "asc";  // "asc" | "desc"
+
+		function filteredSkills(){
+		const f = currentFilters();
+		let rows = skills.filter(it=>{
+			const levelVal = String(it.level ?? "").toLowerCase();
+			const energyVal = String(it.energy ?? "").toLowerCase();
+			const sourceVal = String(it.source ?? "").toLowerCase();
+			const nameVal = String(it.name ?? "").toLowerCase();
+			const costVal = String(it.sourceAmt ?? "").toLowerCase();
+			const actionVal = String(it.actionType ?? "").toLowerCase();
+			const durationVal = String(it.duration ?? "").toLowerCase();
+			const rangeVal = String(it.range ?? "").toLowerCase();
+			const areaVal = String(it.area ?? "").toLowerCase();
+
+			const matchLevel = !f.level || levelVal === f.level;
+			const matchName = !f.name || nameVal.includes(f.name);
+			const matchEnergy = !f.energy || energyVal === f.energy;
+			const matchSource = !f.source || sourceVal === f.source;
+			const matchCost = !f.cost || costVal.includes(f.cost);
+			const matchAction = !f.actionType || actionVal === f.actionType;
+			const matchDuration = !f.duration || durationVal === f.duration;
+			const matchRange = !f.range || rangeVal.includes(f.range);
+			const matchArea = true; // Alan için filtre yok
+
+			const matchQuery = !f.query ? true : [
+				it.name, it.energy, it.source, it.range, it.area, it.duration, it.sourceAmt, it.actionType, it.desc, it.note
+			].join(" ").toLowerCase().includes(f.query);
+
+			return matchLevel && matchName && matchEnergy && matchSource && matchCost && matchAction &&
+				matchDuration && matchRange && matchArea && matchQuery;
+		});
+
+		if(!sortKey){
+			return rows;
+		}
+
+		const dir = sortDir === "desc" ? -1 : 1;
+
+		rows.sort((a,b)=>{
+			const mapCost = v => String(v ?? "").toLowerCase();
+			const mapStr  = v => String(v ?? "").toLowerCase();
+			const mapNum  = v => {
+				const n = Number(v);
+				return isNaN(n) ? 0 : n;
+			};
+
+			let av, bv;
+			switch(sortKey){
+				case "level":
+					av = mapNum(a.level);
+					bv = mapNum(b.level);
+					break;
+				case "name":
+					av = mapStr(a.name);
+					bv = mapStr(b.name);
+					break;
+				case "energy":
+					av = mapStr(a.energy);
+					bv = mapStr(b.energy);
+					break;
+				case "source":
+					av = mapStr(a.source);
+					bv = mapStr(b.source);
+					break;
+				case "cost":
+					av = mapCost(a.sourceAmt);
+					bv = mapCost(b.sourceAmt);
+					break;
+				case "actionType":
+					av = mapStr(a.actionType);
+					bv = mapStr(b.actionType);
+					break;
+				case "duration":
+					av = mapStr(a.duration);
+					bv = mapStr(b.duration);
+					break;
+				case "range":
+					av = mapStr(a.range);
+					bv = mapStr(b.range);
+					break;
+				default:
+					av = 0; bv = 0;
+			}
+
+			if(av < bv) return -1 * dir;
+			if(av > bv) return  1 * dir;
+			return 0;
+		});
+
+		return rows;
+		}
+
+		function renderTable(){
+		const rows = filteredSkills();
+		tbody.innerHTML = rows.map(it => `
+			<tr data-id="${escapeHtml(it.id)}" class="${it.id===selectedId ? "selected" : ""}">
+			<td>${escapeHtml(it.level || "-")}</td>
+			<td><span class="pill">${escapeHtml(it.name || "-")}</span></td>
+			<td>${escapeHtml(it.energy || "-")}</td>
+			<td>${escapeHtml(it.source || "-")}</td>
+			<td>${escapeHtml(it.sourceAmt || "-")}</td>
+			<td>${escapeHtml(it.actionType || "-")}</td>
+			<td>${escapeHtml(it.duration || "-")}</td>
+			<td>${escapeHtml(it.range || "-")}</td>
+			<td>${escapeHtml(it.area || "-")}</td>
+			</tr>
+		`).join("");
+
+		if(rows.length === 0){
+			tbody.innerHTML = `
+			<tr>
+				<td colspan="9" class="muted" style="padding:14px;">
+				Kayıt bulunamadı.
+				</td>
+			</tr>
+			`;
+		}
+		}
+
+		function renderDescription(){
+		const it = skills.find(x=>x.id===selectedId);
+		if(!it){
+			selBadge.textContent = "Seçili: Yok";
+			desc.innerHTML = `<div class="descEmpty">Bir satır seçin. Açıklama burada görünecek.</div>`;
+			desc.classList.remove("active");
+			return;
+		}
+
+		selBadge.textContent = `Seçili: ${it.name || "—"}`;
+
+		const levelText = it.level ? `${it.level}. Seviye` : "";
+		const energyText = it.energy ? `${it.energy}` : "";
+		const subLabelParts = [];
+		if (levelText) subLabelParts.push(levelText);
+		if (energyText) subLabelParts.push(`${energyText} Yeteneği`);
+		const subLabel = subLabelParts.join(" ");
+
+		const kaynakBedel = [it.sourceAmt, it.source].filter(Boolean).join(" ");
+
+		desc.innerHTML = `
+			<div class="skill-label">${escapeHtml(it.name || "İsimsiz")}</div>
+			<div class="skill-sublabel">${escapeHtml(subLabel || "")}</div>
+			<div class="skill-meta">
+				<div>${escapeHtml(kaynakBedel || "-")}</div>
+				<div>Süre: ${escapeHtml(it.duration || "-")}</div>
+				<div>Menzil: ${escapeHtml(it.range || "-")}</div>
+				<div>Alan: ${escapeHtml(it.area || "-")}</div>
+			</div>
+			<div class="skill-desc">
+				${escapeHtml(it.desc || "—")}
+			</div>
+			${it.note ? `<div class="skill-note">${escapeHtml(it.note)}</div>` : ""}
+		`;
+		desc.classList.add("active");
+		}
+
+		function selectRow(id){
+		selectedId = id;
+		renderTable();
+		renderDescription();
+		}
+
+		tbody.addEventListener("click", (e)=>{
+		const tr = e.target.closest("tr[data-id]");
+		if(!tr) return;
+		const id = tr.getAttribute("data-id");
+		if(id === selectedId) return;
+		selectRow(id);
+		});
+
+		q.addEventListener("input", ()=> renderTable());
+		levelFilter.addEventListener("change", ()=> renderTable());
+		nameFilter.addEventListener("input", ()=> renderTable());
+		energyFilter.addEventListener("change", ()=> renderTable());
+		sourceFilter.addEventListener("change", ()=> renderTable());
+		costFilter.addEventListener("input", ()=> renderTable());
+		actionFilter.addEventListener("change", ()=> renderTable());
+		durationFilter.addEventListener("change", ()=> renderTable());
+		rangeFilter.addEventListener("input", ()=> renderTable());
+
+		// Başlığa tıklayarak sıralama
+		const tableHead = document.querySelector(".spell-list thead");
+		if(tableHead){
+			const headerConfig = [
+				{ thIndex: 0, key: "level" },
+				{ thIndex: 1, key: "name" },
+				{ thIndex: 2, key: "energy" },
+				{ thIndex: 3, key: "source" },
+				{ thIndex: 4, key: "cost" },
+				{ thIndex: 5, key: "actionType" },
+				{ thIndex: 6, key: "duration" },
+				{ thIndex: 7, key: "range" },
+				// Alan için sıralama tanımlamadık
+			];
+
+			tableHead.addEventListener("click", (e)=>{
+				const th = e.target.closest("th");
+				if(!th) return;
+				const row = th.parentElement;
+				if(!row || row.parentElement !== tableHead.querySelector("tr").parentElement) return;
+
+				const idx = Array.from(th.parentElement.children).indexOf(th);
+				const conf = headerConfig.find(c => c.thIndex === idx);
+				if(!conf) return;
+
+				if(sortKey === conf.key){
+					sortDir = sortDir === "asc" ? "desc" : "asc";
+				}else{
+					sortKey = conf.key;
+					sortDir = "asc";
+				}
+				renderTable();
+			});
+		}
+
+		async function loadJson(){
+		try{
+			const res = await fetch(JSON_URL, { cache: "no-store" });
+			if(!res.ok) throw new Error(`HTTP ${res.status} (${res.statusText})`);
+			const data = await res.json();
+			skills = normalizeArray(data);
+			updateCount();
+			renderTable();
+			renderDescription();
+		}catch(err){
+			skills = [];
+			updateCount();
+			tbody.innerHTML = `
+			<tr><td colspan="8" class="error" style="padding:14px;">
+				JSON yüklenemedi: ${escapeHtml(err?.message || err)}<br/>
+				<span class="muted">
+				Not: fetch() yerel dosyada (file://) çalışmayabilir. Sayfayı bir sunucudan açın (GitHub Pages gibi)
+				ve yetenekler.json dosyasının ${escapeHtml(JSON_URL)} yolunda olduğundan emin olun.
+				</span>
+			</td></tr>
+			`;
+		}
+		}
+
+		loadJson();
+	</script>
 
 
 
@@ -387,257 +685,8 @@
 
 	</script>
 
-	<script src="spells.js">
-
-
-		// spells.js
-
-		let allSpells = [];
-		let currentSort = { key: null, dir: 1 }; // dir: 1 asc, -1 desc
-
-		document.addEventListener("DOMContentLoaded", () => {
-		loadSpellsFromCSV("spells.csv");
-		});
-
-		// -------------------- CSV LOAD --------------------
-		async function loadSpellsFromCSV(url) {
-		try {
-			const res = await fetch(url, { cache: "no-store" });
-			if (!res.ok) throw new Error(`CSV fetch failed: ${res.status}`);
-			const text = await res.text();
-
-			allSpells = parseCSV(text).map(normalizeSpellRow);
-
-			renderSpellTable(allSpells);
-			// İlk yüklemede filtreyi uygula (boşsa hepsi görünür)
-			filterSpells();
-		} catch (err) {
-			console.error(err);
-		}
-		}
-
-		// Basit CSV parser (tırnaklı alanları da idare eder)
-		function parseCSV(text) {
-		const rows = [];
-		let row = [];
-		let cur = "";
-		let inQuotes = false;
-
-		for (let i = 0; i < text.length; i++) {
-			const ch = text[i];
-			const next = text[i + 1];
-
-			if (ch === '"' && inQuotes && next === '"') {
-			cur += '"';
-			i++;
-			continue;
-			}
-			if (ch === '"') {
-			inQuotes = !inQuotes;
-			continue;
-			}
-			if (ch === "," && !inQuotes) {
-			row.push(cur);
-			cur = "";
-			continue;
-			}
-			if ((ch === "\n" || ch === "\r") && !inQuotes) {
-			if (ch === "\r" && next === "\n") i++;
-			row.push(cur);
-			cur = "";
-
-			// boş satırları at
-			if (row.some(cell => cell.trim() !== "")) rows.push(row);
-			row = [];
-			continue;
-			}
-			cur += ch;
-		}
-		if (cur.length || row.length) {
-			row.push(cur);
-			if (row.some(cell => cell.trim() !== "")) rows.push(row);
-		}
-
-		if (rows.length === 0) return [];
-
-		const headers = rows[0].map(h => h.trim());
-		const data = rows.slice(1);
-
-		return data.map(cols => {
-			const obj = {};
-			headers.forEach((h, idx) => (obj[h] = (cols[idx] ?? "").trim()));
-			return obj;
-		});
-		}
-
-		function normalizeSpellRow(r) {
-		return {
-			id: r.id,
-			name: r.name,
-			level: toNumber(r.level),
-			energy: r.energy,
-			duration: r.duration,
-			mana: toNumber(r.mana),
-			range: toNumber(r.range),
-
-			// Görünen label’lar (yoksa fallback üret)
-			levelLabel: r.levelLabel || (String(r.level) === "0" ? "Bazbüyü" : `Seviye ${r.level}`),
-			energyLabel: r.energyLabel || r.energy,
-			durationLabel: r.durationLabel || r.duration,
-			rangeLabel: r.rangeLabel || String(r.range)
-		};
-		}
-
-		function toNumber(v) {
-		const n = Number(String(v).replace(",", "."));
-		return Number.isFinite(n) ? n : 0;
-		}
-
-		// -------------------- RENDER TABLE --------------------
-		function renderSpellTable(spells) {
-		const tbody = document.getElementById("spell-list");
-		if (!tbody) return;
-
-		tbody.innerHTML = "";
-
-		const frag = document.createDocumentFragment();
-		for (const s of spells) {
-			const tr = document.createElement("tr");
-
-			tr.dataset.name = (s.name || "").toLowerCase();
-			tr.dataset.level = String(s.level);
-			tr.dataset.energy = s.energy;
-			tr.dataset.duration = s.duration;
-			tr.dataset.mana = String(s.mana);
-			tr.dataset.range = String(s.range);
-
-			tr.addEventListener("click", () => showSpell(s.id));
-
-			tr.innerHTML = `
-			<td>${escapeHtml(s.name)}</td>
-			<td>${escapeHtml(s.levelLabel)}</td>
-			<td>${escapeHtml(s.durationLabel)}</td>
-			<td>${escapeHtml(s.energyLabel)}</td>
-			<td>${escapeHtml(String(s.mana))}</td>
-			<td>${escapeHtml(s.rangeLabel)}</td>
-			`;
-
-			frag.appendChild(tr);
-		}
-		tbody.appendChild(frag);
-		}
-
-		function escapeHtml(str) {
-		return String(str).replace(/[&<>"']/g, m => ({
-			"&": "&amp;",
-			"<": "&lt;",
-			">": "&gt;",
-			'"': "&quot;",
-			"'": "&#39;"
-		}[m]));
-		}
-
-		// -------------------- FILTER --------------------
-		function filterSpells() {
-		const q = (document.getElementById("search")?.value || "").trim().toLowerCase();
-		const level = document.getElementById("level-filter")?.value || "";
-		const energy = document.getElementById("energy-filter")?.value || "";
-		const duration = document.getElementById("duration-filter")?.value || "";
-		const manaMaxRaw = document.getElementById("mana-filter")?.value;
-		const rangeMinRaw = document.getElementById("range-filter")?.value;
-
-		const manaMax = manaMaxRaw === "" || manaMaxRaw == null ? null : Number(manaMaxRaw);
-		const rangeMin = rangeMinRaw === "" || rangeMinRaw == null ? null : Number(rangeMinRaw);
-
-		const tbody = document.getElementById("spell-list");
-		if (!tbody) return;
-
-		const rows = Array.from(tbody.querySelectorAll("tr"));
-		for (const tr of rows) {
-			const name = tr.dataset.name || "";
-			const trLevel = tr.dataset.level || "";
-			const trEnergy = tr.dataset.energy || "";
-			const trDuration = tr.dataset.duration || "";
-			const trMana = Number(tr.dataset.mana || 0);
-			const trRange = Number(tr.dataset.range || 0);
-
-			let ok = true;
-
-			if (q && !name.includes(q)) ok = false;
-			if (level && trLevel !== level) ok = false;
-			if (energy && trEnergy !== energy) ok = false;
-			if (duration && trDuration !== duration) ok = false;
-
-			// Maksimum Mana: trMana <= manaMax
-			if (manaMax !== null && Number.isFinite(manaMax) && trMana > manaMax) ok = false;
-
-			// Minimum Menzil: trRange >= rangeMin
-			if (rangeMin !== null && Number.isFinite(rangeMin) && trRange < rangeMin) ok = false;
-
-			tr.style.display = ok ? "" : "none";
-		}
-		}
-
-		// -------------------- SORT --------------------
-		function sortTable(key) {
-		// key: 'name' | 'level' | 'duration' | 'energy' | 'mana' | 'range'
-		if (!key) return;
-
-		if (currentSort.key === key) {
-			currentSort.dir *= -1;
-		} else {
-			currentSort.key = key;
-			currentSort.dir = 1;
-		}
-
-		const dir = currentSort.dir;
-
-		const sorted = [...allSpells].sort((a, b) => {
-			let av = a[key];
-			let bv = b[key];
-
-			// string compare
-			if (typeof av === "string" || typeof bv === "string") {
-			av = String(av).toLowerCase();
-			bv = String(bv).toLowerCase();
-			if (av < bv) return -1 * dir;
-			if (av > bv) return 1 * dir;
-			return 0;
-			}
-
-			// number compare
-			av = Number(av);
-			bv = Number(bv);
-			return (av - bv) * dir;
-		});
-
-		renderSpellTable(sorted);
-		// Sıralama sonrası aktif filtreleri tekrar uygula
-		filterSpells();
-		}
-
-		// -------------------- DETAILS PANEL --------------------
-		function showSpell(id) {
-		// tüm açıklamaları kapat
-		document.querySelectorAll(".spell-description").forEach(el => {
-			el.style.display = "none";
-		});
-
-		// seçileni aç
-		const target = document.getElementById(id);
-		if (target) target.style.display = "block";
-		}
-
-		// Global scope'a aç (HTML inline handler'lar için)
-		window.filterSpells = filterSpells;
-		window.sortTable = sortTable;
-		window.showSpell = showSpell;
-
-
-
-	</script>
-	<script src="./resources/js/spells-store.js"></script>
-	<script src="./resources/js/spells-render.js"></script>
+	
+	
 
 
 

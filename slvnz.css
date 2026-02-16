@@ -112,7 +112,8 @@ body {
 	background: linear-gradient(0deg, #351617 0%, #141518 100%);
 	border-radius: 10px;
 	box-shadow: 0 0 100px 0 rgba(0, 0, 0, 0.509);
-	overflow: auto;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 .page-panel-header-menu {
@@ -602,15 +603,30 @@ body {
     margin: 5px;
     padding: 5px;
     font-size: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 1px solid firebrick;
+    color: #DC2E2A;
+    outline: none;
+}
+
+.filter select {
+	background-color: #000000;
+}
+
+.filter input::placeholder {
+	color: #DC2E2A;
+	opacity: 0.6;
 }
 
 .main-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
 }
 
 .spell-list {
-    width: 600px;
+    width: 650px;
     background-color: rgba(0, 0, 0, 0.37);
 	backdrop-filter: blur(15px);
     max-height: 60vh;
@@ -633,20 +649,34 @@ body {
     cursor: pointer;
 }
 
+.spell-list th:first-child,
+.spell-list td:first-child {
+    width: 40px; /* 2 haneli seviye için dar sütun */
+    text-align: center;
+    padding-left: 0;
+}
+
 .spell-list th {
-    background-color: blueviolet;
-	font-family: "barlow";
+    background-color: #DC2E2A;
+	font-family: 'futura-100';
+	font-weight: 400;
+	text-transform: uppercase;
 	text-align: start;
-	font-size: 10pt;
+	font-size: 8pt;
 	color: white;
 }
 
+.spell-list td {
+	font-family: 'parabolica-text';
+	font-size: 8pt;
+}
+
 .spell-list tr:hover {
-    background-color: blueviolet;
+    background-color: #cc0000;
 }
 
 .spell-list tr:active {
-    background-color: blueviolet;
+    background-color: #DC2E2A;
 	color: white;
 }
 
@@ -658,9 +688,53 @@ body {
     padding: 20px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     display: none;
-	font-family: "barlow";
-	width: 100%;
+	font-family: 'parabolica-text';
+    width: 450px;
+	box-sizing: border-box;
 	color: white;
+}
+
+.skill-label {
+	font-family: 'futura-100';
+	font-size: 18pt;
+	text-transform: uppercase;
+	color: #DC2E2A;
+	margin-bottom: 4px;
+
+}
+
+.skill-sublabel {
+	font-family: 'futura-100';
+	font-size: 10pt;
+	color: #d9d9d9;
+	margin-bottom: 8px;
+	font-style: italic;
+}
+
+.skill-meta {
+	font-family: 'parabolica-text';
+	font-size: 9pt;
+	color: #d9d9d9;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.skill-desc {
+	font-family: 'parabolica-text';
+	font-size: 10pt;
+	color: #d9d9d9;
+	margin-top: 10px;
+	padding-top: 10px;
+	border-top: 1px dotted firebrick;
+}
+
+.skill-note {
+	font-family: 'parabolica-text';
+	font-size: 9pt;
+	color: #d9d9d9;
+	margin-top: 6px;
+	font-style: italic;
 }
 
 .spell-description h2 {
