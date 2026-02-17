@@ -1,0 +1,13 @@
+[
+  {
+    "id": "ornek-fiziksel-1",
+    "name": "Örnek Fiziksel Yetenek",
+    "level": 0,
+    "stamina": 5,
+    "actionType": "Eylem",
+    "area": "Tek hedef",
+    "desc": "Bu, fiziksel yetenekler için örnek bir kayıttır. Kendi verilerinle değiştir.",
+    "note": ""
+  }
+]
+

@@ -177,14 +177,92 @@
 
 		</div>
 
+		<div class="page-panel-interior-full" id="skills-physical">
+
+				<div class="container">
+					<div class="filter">
+						<input type="text" id="qPhysical" placeholder="Metinde ara (isim, açıklama, vb.)">
+						<select id="levelFilterPhysical">
+							<option value="">Tüm Seviyeler</option>
+							<option value="0">Seviye 0</option>
+							<option value="1">Seviye 1</option>
+							<option value="2">Seviye 2</option>
+							<option value="3">Seviye 3</option>
+							<option value="4">Seviye 4</option>
+							<option value="5">Seviye 5</option>
+							<option value="6">Seviye 6</option>
+							<option value="7">Seviye 7</option>
+							<option value="8">Seviye 8</option>
+							<option value="9">Seviye 9</option>
+							<option value="10">Seviye 10</option>
+							<option value="11">Seviye 11</option>
+							<option value="12">Seviye 12</option>
+							<option value="13">Seviye 13</option>
+							<option value="14">Seviye 14</option>
+							<option value="15">Seviye 15</option>
+							<option value="16">Seviye 16</option>
+							<option value="17">Seviye 17</option>
+							<option value="18">Seviye 18</option>
+							<option value="19">Seviye 19</option>
+							<option value="20">Seviye 20</option>
+						</select>
+						<input type="text" id="nameFilterPhysical" placeholder="İsim">
+						<input type="number" id="staminaFilterPhysical" placeholder="Stamina" min="0" max="999" style="width:80px;">
+						<select id="actionFilterPhysical">
+							<option value="">Tüm Eylem Türleri</option>
+							<option value="Eylem">Eylem</option>
+							<option value="Ek Eylem">Ek Eylem</option>
+							<option value="Tepki Eylem">Tepki Eylem</option>
+						</select>
+						<input type="text" id="areaFilterPhysical" placeholder="Alan">
+						<span id="countBadgePhysical" style="display: none;">0 kayıt</span>
+						<span id="selBadgePhysical" style="display: none;">Seçili: Yok</span>
+					</div>
+
+					<div class="main-content">
+						<div class="spell-list">
+							<table>
+								<thead>
+									<tr>
+										<th>Seviye</th>
+										<th>İsim</th>
+										<th>Stamina</th>
+										<th>Eylem Türü</th>
+										<th>Alan</th>
+									</tr>
+								</thead>
+								<tbody id="tbodyPhysical">
+									<!-- Kayıtlar yetenekler-physical.json dosyasından JavaScript ile yüklenecek -->
+								</tbody>
+							</table>
+						</div>
+
+						<div id="descPhysical" class="spell-description">
+							<!-- Seçili fiziksel yeteneğin detayları JavaScript ile buraya yazılacak -->
+						</div>
+					</div>
+				</div>
+
+		</div>
+
 
 	</section>
 
 	<script>
 		/***********************
-		 * AYAR: JSON yolu
-		 * yetenekler.json dosyasını spells.html ile aynı klasöre koyarsanız:
-		 * const JSON_URL = "./yetenekler.json";
+		 * ORTAK: HTML escape yardımcı fonksiyonu
+		 ************************/
+		function escapeHtml(s){
+			return String(s ?? "")
+				.replaceAll("&","&amp;")
+				.replaceAll("<","&lt;")
+				.replaceAll(">","&gt;")
+				.replaceAll('"',"&quot;")
+				.replaceAll("'","&#039;");
+		}
+
+		/***********************
+		 * ENERJİSEL YETENEKLER
 		 ************************/
 		const JSON_URL = "./yetenekler.json";
 
@@ -205,252 +283,245 @@
 		let skills = [];
 		let selectedId = null;
 
-		function escapeHtml(s){
-		return String(s ?? "")
-			.replaceAll("&","&amp;")
-			.replaceAll("<","&lt;")
-			.replaceAll(">","&gt;")
-			.replaceAll('"',"&quot;")
-			.replaceAll("'","&#039;");
-		}
-
 		function normalizeArray(arr){
-		if(!Array.isArray(arr)) return [];
-		return arr.map(x=>({
-			id: (x.id && String(x.id)) || "",
-			name: String(x.name ?? ""),
-			level: String(x.level ?? ""),
-			duration: String(x.duration ?? ""),
-			energy: String(x.energy ?? ""),
-			source: String(x.source ?? ""),
-			sourceAmt: String(x.sourceAmt ?? ""),
-			actionType: String(x.actionType ?? ""),
-			range: String(x.range ?? ""),
-			area: String(x.area ?? ""),
-			desc: String(x.desc ?? ""),
-			note: String(x.note ?? ""),
-		})).filter(x=>x.name.trim().length>0);
+			if(!Array.isArray(arr)) return [];
+			return arr.map(x=>({
+				id: (x.id && String(x.id)) || "",
+				name: String(x.name ?? ""),
+				level: String(x.level ?? ""),
+				duration: String(x.duration ?? ""),
+				energy: String(x.energy ?? ""),
+				source: String(x.source ?? ""),
+				sourceAmt: String(x.sourceAmt ?? ""),
+				actionType: String(x.actionType ?? ""),
+				range: String(x.range ?? ""),
+				area: String(x.area ?? ""),
+				desc: String(x.desc ?? ""),
+				note: String(x.note ?? ""),
+			})).filter(x=>x.name.trim().length>0);
 		}
 
 		function updateCount(){
-		countBadge.textContent = `${skills.length} kayıt`;
+			countBadge.textContent = `${skills.length} kayıt`;
 		}
 
 		function currentFilters(){
-		return {
-			query: q.value.trim().toLowerCase(),
-			level: levelFilter.value.trim().toLowerCase(),
-			name: nameFilter.value.trim().toLowerCase(),
-			energy: energyFilter.value.trim().toLowerCase(),
-			source: sourceFilter.value.trim().toLowerCase(),
-			cost: costFilter.value.trim().toLowerCase(),
-			actionType: actionFilter.value.trim().toLowerCase(),
-			duration: durationFilter.value.trim().toLowerCase(),
-			range: rangeFilter.value.trim().toLowerCase()
-		};
+			return {
+				query: q.value.trim().toLowerCase(),
+				level: levelFilter.value.trim().toLowerCase(),
+				name: nameFilter.value.trim().toLowerCase(),
+				energy: energyFilter.value.trim().toLowerCase(),
+				source: sourceFilter.value.trim().toLowerCase(),
+				cost: costFilter.value.trim().toLowerCase(),
+				actionType: actionFilter.value.trim().toLowerCase(),
+				duration: durationFilter.value.trim().toLowerCase(),
+				range: rangeFilter.value.trim().toLowerCase()
+			};
 		}
 
 		let sortKey = null;   // "level" | "name" | "energy" | "source" | "cost" | "actionType" | "duration" | "range"
 		let sortDir = "asc";  // "asc" | "desc"
 
 		function filteredSkills(){
-		const f = currentFilters();
-		let rows = skills.filter(it=>{
-			const levelVal = String(it.level ?? "").toLowerCase();
-			const energyVal = String(it.energy ?? "").toLowerCase();
-			const sourceVal = String(it.source ?? "").toLowerCase();
-			const nameVal = String(it.name ?? "").toLowerCase();
-			const costVal = String(it.sourceAmt ?? "").toLowerCase();
-			const actionVal = String(it.actionType ?? "").toLowerCase();
-			const durationVal = String(it.duration ?? "").toLowerCase();
-			const rangeVal = String(it.range ?? "").toLowerCase();
-			const areaVal = String(it.area ?? "").toLowerCase();
+			const f = currentFilters();
+			let rows = skills.filter(it=>{
+				const levelVal = String(it.level ?? "").toLowerCase();
+				const energyVal = String(it.energy ?? "").toLowerCase();
+				const sourceVal = String(it.source ?? "").toLowerCase();
+				const nameVal = String(it.name ?? "").toLowerCase();
+				const costVal = String(it.sourceAmt ?? "").toLowerCase();
+				const actionVal = String(it.actionType ?? "").toLowerCase();
+				const durationVal = String(it.duration ?? "").toLowerCase();
+				const rangeVal = String(it.range ?? "").toLowerCase();
+				const areaVal = String(it.area ?? "").toLowerCase();
 
-			const matchLevel = !f.level || levelVal === f.level;
-			const matchName = !f.name || nameVal.includes(f.name);
-			const matchEnergy = !f.energy || energyVal === f.energy;
-			const matchSource = !f.source || sourceVal === f.source;
-			const matchCost = !f.cost || costVal.includes(f.cost);
-			const matchAction = !f.actionType || actionVal === f.actionType;
-			const matchDuration = !f.duration || durationVal === f.duration;
-			const matchRange = !f.range || rangeVal.includes(f.range);
-			const matchArea = true; // Alan için filtre yok
+				const matchLevel = !f.level || levelVal === f.level;
+				const matchName = !f.name || nameVal.includes(f.name);
+				const matchEnergy = !f.energy || energyVal === f.energy;
+				const matchSource = !f.source || sourceVal === f.source;
+				const matchCost = !f.cost || costVal.includes(f.cost);
+				const matchAction = !f.actionType || actionVal === f.actionType;
+				const matchDuration = !f.duration || durationVal === f.duration;
+				const matchRange = !f.range || rangeVal.includes(f.range);
+				const matchArea = true; // Alan için filtre yok
 
-			const matchQuery = !f.query ? true : [
-				it.name, it.energy, it.source, it.range, it.area, it.duration, it.sourceAmt, it.actionType, it.desc, it.note
-			].join(" ").toLowerCase().includes(f.query);
+				const matchQuery = !f.query ? true : [
+					it.name, it.energy, it.source, it.range, it.area, it.duration, it.sourceAmt, it.actionType, it.desc, it.note
+				].join(" ").toLowerCase().includes(f.query);
 
-			return matchLevel && matchName && matchEnergy && matchSource && matchCost && matchAction &&
-				matchDuration && matchRange && matchArea && matchQuery;
-		});
+				return matchLevel && matchName && matchEnergy && matchSource && matchCost && matchAction &&
+					matchDuration && matchRange && matchArea && matchQuery;
+			});
 
-		if(!sortKey){
+			if(!sortKey){
+				return rows;
+			}
+
+			const dir = sortDir === "desc" ? -1 : 1;
+
+			rows.sort((a,b)=>{
+				const mapCost = v => String(v ?? "").toLowerCase();
+				const mapStr  = v => String(v ?? "").toLowerCase();
+				const mapNum  = v => {
+					const n = Number(v);
+					return isNaN(n) ? 0 : n;
+				};
+
+				let av, bv;
+				switch(sortKey){
+					case "level":
+						av = mapNum(a.level);
+						bv = mapNum(b.level);
+						break;
+					case "name":
+						av = mapStr(a.name);
+						bv = mapStr(b.name);
+						break;
+					case "energy":
+						av = mapStr(a.energy);
+						bv = mapStr(b.energy);
+						break;
+					case "source":
+						av = mapStr(a.source);
+						bv = mapStr(b.source);
+						break;
+					case "cost":
+						av = mapCost(a.sourceAmt);
+						bv = mapCost(b.sourceAmt);
+						break;
+					case "actionType":
+						av = mapStr(a.actionType);
+						bv = mapStr(b.actionType);
+						break;
+					case "duration":
+						av = mapStr(a.duration);
+						bv = mapStr(b.duration);
+						break;
+					case "range":
+						av = mapStr(a.range);
+						bv = mapStr(b.range);
+						break;
+					default:
+						av = 0; bv = 0;
+				}
+
+				if(av < bv) return -1 * dir;
+				if(av > bv) return  1 * dir;
+				return 0;
+			});
+
 			return rows;
 		}
 
-		const dir = sortDir === "desc" ? -1 : 1;
-
-		rows.sort((a,b)=>{
-			const mapCost = v => String(v ?? "").toLowerCase();
-			const mapStr  = v => String(v ?? "").toLowerCase();
-			const mapNum  = v => {
-				const n = Number(v);
-				return isNaN(n) ? 0 : n;
-			};
-
-			let av, bv;
-			switch(sortKey){
-				case "level":
-					av = mapNum(a.level);
-					bv = mapNum(b.level);
-					break;
-				case "name":
-					av = mapStr(a.name);
-					bv = mapStr(b.name);
-					break;
-				case "energy":
-					av = mapStr(a.energy);
-					bv = mapStr(b.energy);
-					break;
-				case "source":
-					av = mapStr(a.source);
-					bv = mapStr(b.source);
-					break;
-				case "cost":
-					av = mapCost(a.sourceAmt);
-					bv = mapCost(b.sourceAmt);
-					break;
-				case "actionType":
-					av = mapStr(a.actionType);
-					bv = mapStr(b.actionType);
-					break;
-				case "duration":
-					av = mapStr(a.duration);
-					bv = mapStr(b.duration);
-					break;
-				case "range":
-					av = mapStr(a.range);
-					bv = mapStr(b.range);
-					break;
-				default:
-					av = 0; bv = 0;
-			}
-
-			if(av < bv) return -1 * dir;
-			if(av > bv) return  1 * dir;
-			return 0;
-		});
-
-		return rows;
-		}
-
 		function renderTable(){
-		const rows = filteredSkills();
-		tbody.innerHTML = rows.map(it => `
-			<tr data-id="${escapeHtml(it.id)}" class="${it.id===selectedId ? "selected" : ""}">
-			<td>${
-				escapeHtml(
-					(() => {
-						const n = Number(it.level);
-						if (!isNaN(n) && n === 0) return "Bazbüyü";
-						return it.level || "-";
-					})()
-				)
-			}</td>
-			<td><span class="pill">${escapeHtml(it.name || "-")}</span></td>
-			<td>${escapeHtml(it.energy || "-")}</td>
-			<td>${escapeHtml(it.source || "-")}</td>
-			<td>${escapeHtml(it.sourceAmt || "-")}</td>
-			<td>${escapeHtml(it.actionType || "-")}</td>
-			<td>${escapeHtml(it.duration || "-")}</td>
-			<td>${escapeHtml(it.range || "-")}</td>
-			</tr>
-		`).join("");
+			const rows = filteredSkills();
+			tbody.innerHTML = rows.map(it => `
+				<tr data-id="${escapeHtml(it.id)}" class="${it.id===selectedId ? "selected" : ""}">
+				<td>${
+					escapeHtml(
+						(() => {
+							const n = Number(it.level);
+							if (!isNaN(n) && n === 0) return "Bazbüyü";
+							return it.level || "-";
+						})()
+					)
+				}</td>
+				<td><span class="pill">${escapeHtml(it.name || "-")}</span></td>
+				<td>${escapeHtml(it.energy || "-")}</td>
+				<td>${escapeHtml(it.source || "-")}</td>
+				<td>${escapeHtml(it.sourceAmt || "-")}</td>
+				<td>${escapeHtml(it.actionType || "-")}</td>
+				<td>${escapeHtml(it.duration || "-")}</td>
+				<td>${escapeHtml(it.range || "-")}</td>
+				</tr>
+			`).join("");
 
-		if(rows.length === 0){
-			tbody.innerHTML = `
-			<tr>
-				<td colspan="8" class="muted" style="padding:14px;">
-				Kayıt bulunamadı.
-				</td>
-			</tr>
-			`;
-		}
+			if(rows.length === 0){
+				tbody.innerHTML = `
+				<tr>
+					<td colspan="8" class="muted" style="padding:14px;">
+					Kayıt bulunamadı.
+					</td>
+				</tr>
+				`;
+			}
 		}
 
 		function renderDescription(){
-		const it = skills.find(x=>x.id===selectedId);
-		if(!it){
-			selBadge.textContent = "Seçili: Yok";
-			desc.innerHTML = `<div class="descEmpty">Bir satır seçin. Açıklama burada görünecek.</div>`;
-			desc.classList.remove("active");
-			return;
-		}
-
-		selBadge.textContent = `Seçili: ${it.name || "—"}`;
-
-		let levelText = "";
-		if (it.level !== undefined && it.level !== null && it.level !== "") {
-			const n = Number(it.level);
-			if (!isNaN(n) && n === 0) {
-				levelText = "Bazbüyü";
-			} else if (!isNaN(n)) {
-				levelText = `${n}. Seviye`;
-			} else {
-				levelText = String(it.level);
+			const it = skills.find(x=>x.id===selectedId);
+			if(!it){
+				selBadge.textContent = "Seçili: Yok";
+				desc.innerHTML = `<div class="descEmpty">Bir satır seçin. Açıklama burada görünecek.</div>`;
+				desc.classList.remove("active");
+				return;
 			}
-		}
-		const energyText = it.energy ? `${it.energy}` : "";
-		const subLabelParts = [];
-		if (levelText) subLabelParts.push(levelText);
-		if (energyText) subLabelParts.push(`${energyText} Yeteneği`);
-		const subLabel = subLabelParts.join(" ");
 
-		const kaynakBedel = [it.sourceAmt, it.source].filter(Boolean).join(" ");
+			selBadge.textContent = `Seçili: ${it.name || "—"}`;
 
-		desc.innerHTML = `
-			<div class="skill-label">${escapeHtml(it.name || "İsimsiz")}</div>
-			<div class="skill-sublabel">${escapeHtml(subLabel || "")}</div>
-			<div class="skill-meta">
-				<div>${escapeHtml(kaynakBedel || "-")}</div>
-				<div>Süre: ${escapeHtml(it.duration || "-")}</div>
-				<div>Menzil: ${escapeHtml(it.range || "-")}</div>
-				<div>Alan: ${escapeHtml(it.area || "-")}</div>
-			</div>
-			<div class="skill-desc">
-				${escapeHtml(it.desc || "—")}
-			</div>
-			${it.note ? `<div class="skill-note">${escapeHtml(it.note)}</div>` : ""}
-		`;
-		desc.classList.add("active");
+			let levelText = "";
+			if (it.level !== undefined && it.level !== null && it.level !== "") {
+				const n = Number(it.level);
+				if (!isNaN(n) && n === 0) {
+					levelText = "Bazbüyü";
+				} else if (!isNaN(n)) {
+					levelText = `${n}. Seviye`;
+				} else {
+					levelText = String(it.level);
+				}
+			}
+			const energyText = it.energy ? `${it.energy}` : "";
+			const subLabelParts = [];
+			if (levelText) subLabelParts.push(levelText);
+			if (energyText) subLabelParts.push(`${energyText} Yeteneği`);
+			const subLabel = subLabelParts.join(" ");
+
+			const kaynakBedel = [it.sourceAmt, it.source].filter(Boolean).join(" ");
+
+			desc.innerHTML = `
+				<div class="skill-label">${escapeHtml(it.name || "İsimsiz")}</div>
+				<div class="skill-sublabel">${escapeHtml(subLabel || "")}</div>
+				<div class="skill-meta">
+					<div>${escapeHtml(kaynakBedel || "-")}</div>
+					<div>Süre: ${escapeHtml(it.duration || "-")}</div>
+					<div>Menzil: ${escapeHtml(it.range || "-")}</div>
+					<div>Alan: ${escapeHtml(it.area || "-")}</div>
+				</div>
+				<div class="skill-desc">
+					${escapeHtml(it.desc || "—")}
+				</div>
+				${it.note ? `<div class="skill-note">${escapeHtml(it.note)}</div>` : ""}
+			`;
+			desc.classList.add("active");
 		}
 
 		function selectRow(id){
-		selectedId = id;
-		renderTable();
-		renderDescription();
+			selectedId = id;
+			renderTable();
+			renderDescription();
 		}
 
-		tbody.addEventListener("click", (e)=>{
-		const tr = e.target.closest("tr[data-id]");
-		if(!tr) return;
-		const id = tr.getAttribute("data-id");
-		if(id === selectedId) return;
-		selectRow(id);
-		});
+		if (tbody) {
+			tbody.addEventListener("click", (e)=>{
+				const tr = e.target.closest("tr[data-id]");
+				if(!tr) return;
+				const id = tr.getAttribute("data-id");
+				if(id === selectedId) return;
+				selectRow(id);
+			});
+		}
 
-		q.addEventListener("input", ()=> renderTable());
-		levelFilter.addEventListener("change", ()=> renderTable());
-		nameFilter.addEventListener("input", ()=> renderTable());
-		energyFilter.addEventListener("change", ()=> renderTable());
-		sourceFilter.addEventListener("change", ()=> renderTable());
-		costFilter.addEventListener("input", ()=> renderTable());
-		actionFilter.addEventListener("change", ()=> renderTable());
-		durationFilter.addEventListener("change", ()=> renderTable());
-		rangeFilter.addEventListener("input", ()=> renderTable());
+		if (q) q.addEventListener("input", ()=> renderTable());
+		if (levelFilter) levelFilter.addEventListener("change", ()=> renderTable());
+		if (nameFilter) nameFilter.addEventListener("input", ()=> renderTable());
+		if (energyFilter) energyFilter.addEventListener("change", ()=> renderTable());
+		if (sourceFilter) sourceFilter.addEventListener("change", ()=> renderTable());
+		if (costFilter) costFilter.addEventListener("input", ()=> renderTable());
+		if (actionFilter) actionFilter.addEventListener("change", ()=> renderTable());
+		if (durationFilter) durationFilter.addEventListener("change", ()=> renderTable());
+		if (rangeFilter) rangeFilter.addEventListener("input", ()=> renderTable());
 
-		// Başlığa tıklayarak sıralama
-		const tableHead = document.querySelector(".spell-list thead");
+		// Başlığa tıklayarak sıralama (enerjisel tablo)
+		const tableHead = document.querySelector("#skills-energy .spell-list thead");
 		if(tableHead){
 			const headerConfig = [
 				{ thIndex: 0, key: "level" },
@@ -485,30 +556,301 @@
 		}
 
 		async function loadJson(){
-		try{
-			const res = await fetch(JSON_URL, { cache: "no-store" });
-			if(!res.ok) throw new Error(`HTTP ${res.status} (${res.statusText})`);
-			const data = await res.json();
-			skills = normalizeArray(data);
-			updateCount();
-			renderTable();
-			renderDescription();
-		}catch(err){
-			skills = [];
-			updateCount();
-			tbody.innerHTML = `
-			<tr><td colspan="8" class="error" style="padding:14px;">
-				JSON yüklenemedi: ${escapeHtml(err?.message || err)}<br/>
-				<span class="muted">
-				Not: fetch() yerel dosyada (file://) çalışmayabilir. Sayfayı bir sunucudan açın (GitHub Pages gibi)
-				ve yetenekler.json dosyasının ${escapeHtml(JSON_URL)} yolunda olduğundan emin olun.
-				</span>
-			</td></tr>
-			`;
-		}
+			try{
+				const res = await fetch(JSON_URL, { cache: "no-store" });
+				if(!res.ok) throw new Error(`HTTP ${res.status} (${res.statusText})`);
+				const data = await res.json();
+				skills = normalizeArray(data);
+				updateCount();
+				renderTable();
+				renderDescription();
+			}catch(err){
+				skills = [];
+				updateCount();
+				if (tbody) {
+					tbody.innerHTML = `
+					<tr><td colspan="8" class="error" style="padding:14px;">
+						JSON yüklenemedi: ${escapeHtml(err?.message || err)}<br/>
+						<span class="muted">
+						Not: fetch() yerel dosyada (file://) çalışmayabilir. Sayfayı bir sunucudan açın (GitHub Pages gibi)
+						ve yetenekler.json dosyasının ${escapeHtml(JSON_URL)} yolunda olduğundan emin olun.
+						</span>
+					</td></tr>
+					`;
+				}
+			}
 		}
 
 		loadJson();
+
+		/***********************
+		 * FİZİKSEL YETENEKLER
+		 ************************/
+		const JSON_URL_PHYSICAL = "./yetenekler-physical.json";
+
+		const tbodyPhysical = document.getElementById("tbodyPhysical");
+		const descPhysical = document.getElementById("descPhysical");
+		const qPhysical = document.getElementById("qPhysical");
+		const levelFilterPhysical = document.getElementById("levelFilterPhysical");
+		const nameFilterPhysical = document.getElementById("nameFilterPhysical");
+		const staminaFilterPhysical = document.getElementById("staminaFilterPhysical");
+		const actionFilterPhysical = document.getElementById("actionFilterPhysical");
+		const areaFilterPhysical = document.getElementById("areaFilterPhysical");
+		const countBadgePhysical = document.getElementById("countBadgePhysical");
+		const selBadgePhysical = document.getElementById("selBadgePhysical");
+
+		let physicalSkills = [];
+		let physicalSelectedId = null;
+		let physicalSortKey = null;  // "level" | "name" | "stamina" | "actionType" | "area"
+		let physicalSortDir = "asc";
+
+		function normalizePhysicalArray(arr){
+			if(!Array.isArray(arr)) return [];
+			return arr.map(x=>({
+				id: (x.id && String(x.id)) || "",
+				name: String(x.name ?? ""),
+				level: String(x.level ?? ""),
+				stamina: String(x.stamina ?? ""),
+				actionType: String(x.actionType ?? ""),
+				area: String(x.area ?? ""),
+				desc: String(x.desc ?? ""),
+				note: String(x.note ?? ""),
+			})).filter(x=>x.name.trim().length>0);
+		}
+
+		function updatePhysicalCount(){
+			if (countBadgePhysical) {
+				countBadgePhysical.textContent = `${physicalSkills.length} kayıt`;
+			}
+		}
+
+		function currentPhysicalFilters(){
+			return {
+				query: (qPhysical?.value || "").trim().toLowerCase(),
+				level: (levelFilterPhysical?.value || "").trim().toLowerCase(),
+				name: (nameFilterPhysical?.value || "").trim().toLowerCase(),
+				stamina: (staminaFilterPhysical?.value || "").trim().toLowerCase(),
+				actionType: (actionFilterPhysical?.value || "").trim().toLowerCase(),
+				area: (areaFilterPhysical?.value || "").trim().toLowerCase(),
+			};
+		}
+
+		function filteredPhysicalSkills(){
+			const f = currentPhysicalFilters();
+			let rows = physicalSkills.filter(it=>{
+				const levelVal = String(it.level ?? "").toLowerCase();
+				const nameVal = String(it.name ?? "").toLowerCase();
+				const staminaVal = String(it.stamina ?? "").toLowerCase();
+				const actionVal = String(it.actionType ?? "").toLowerCase();
+				const areaVal = String(it.area ?? "").toLowerCase();
+
+				const matchLevel = !f.level || levelVal === f.level;
+				const matchName = !f.name || nameVal.includes(f.name);
+				const matchStamina = !f.stamina || staminaVal.includes(f.stamina);
+				const matchAction = !f.actionType || actionVal === f.actionType;
+				const matchArea = !f.area || areaVal.includes(f.area);
+
+				const matchQuery = !f.query ? true : [
+					it.name, it.stamina, it.actionType, it.area, it.desc, it.note
+				].join(" ").toLowerCase().includes(f.query);
+
+				return matchLevel && matchName && matchStamina && matchAction && matchArea && matchQuery;
+			});
+
+			if(!physicalSortKey){
+				return rows;
+			}
+
+			const dir = physicalSortDir === "desc" ? -1 : 1;
+
+			rows.sort((a,b)=>{
+				const mapStr  = v => String(v ?? "").toLowerCase();
+				const mapNum  = v => {
+					const n = Number(v);
+					return isNaN(n) ? 0 : n;
+				};
+
+				let av, bv;
+				switch(physicalSortKey){
+					case "level":
+						av = mapNum(a.level);
+						bv = mapNum(b.level);
+						break;
+					case "name":
+						av = mapStr(a.name);
+						bv = mapStr(b.name);
+						break;
+					case "stamina":
+						av = mapNum(a.stamina);
+						bv = mapNum(b.stamina);
+						break;
+					case "actionType":
+						av = mapStr(a.actionType);
+						bv = mapStr(b.actionType);
+						break;
+					case "area":
+						av = mapStr(a.area);
+						bv = mapStr(b.area);
+						break;
+					default:
+						av = 0; bv = 0;
+				}
+
+				if(av < bv) return -1 * dir;
+				if(av > bv) return  1 * dir;
+				return 0;
+			});
+
+			return rows;
+		}
+
+		function renderPhysicalTable(){
+			if (!tbodyPhysical) return;
+			const rows = filteredPhysicalSkills();
+			tbodyPhysical.innerHTML = rows.map(it => `
+				<tr data-id="${escapeHtml(it.id)}" class="${it.id===physicalSelectedId ? "selected" : ""}">
+				<td>${escapeHtml(it.level || "-")}</td>
+				<td><span class="pill">${escapeHtml(it.name || "-")}</span></td>
+				<td>${escapeHtml(it.stamina || "-")}</td>
+				<td>${escapeHtml(it.actionType || "-")}</td>
+				<td>${escapeHtml(it.area || "-")}</td>
+				</tr>
+			`).join("");
+
+			if(rows.length === 0){
+				tbodyPhysical.innerHTML = `
+				<tr>
+					<td colspan="5" class="muted" style="padding:14px;">
+					Kayıt bulunamadı.
+					</td>
+				</tr>
+				`;
+			}
+		}
+
+		function renderPhysicalDescription(){
+			if (!descPhysical) return;
+			const it = physicalSkills.find(x=>x.id===physicalSelectedId);
+			if(!it){
+				if (selBadgePhysical) selBadgePhysical.textContent = "Seçili: Yok";
+				descPhysical.innerHTML = `<div class="descEmpty">Bir satır seçin. Açıklama burada görünecek.</div>`;
+				descPhysical.classList.remove("active");
+				return;
+			}
+
+			if (selBadgePhysical) selBadgePhysical.textContent = `Seçili: ${it.name || "—"}`;
+
+			let levelText = "";
+			if (it.level !== undefined && it.level !== null && it.level !== "") {
+				const n = Number(it.level);
+				if (!isNaN(n)) {
+					levelText = `${n}`; // burada 0 dahil doğrudan sayı göster
+				} else {
+					levelText = String(it.level);
+				}
+			}
+
+			const subLabelParts = [];
+			if (levelText) subLabelParts.push(`Seviye ${levelText}`);
+			const subLabel = subLabelParts.join(" ");
+
+			descPhysical.innerHTML = `
+				<div class="skill-label">${escapeHtml(it.name || "İsimsiz")}</div>
+				<div class="skill-sublabel">${escapeHtml(subLabel || "")}</div>
+				<div class="skill-meta">
+					<div>Stamina: ${escapeHtml(it.stamina || "-")}</div>
+					<div>Eylem Türü: ${escapeHtml(it.actionType || "-")}</div>
+					<div>Alan: ${escapeHtml(it.area || "-")}</div>
+				</div>
+				<div class="skill-desc">
+					${escapeHtml(it.desc || "—")}
+				</div>
+				${it.note ? `<div class="skill-note">${escapeHtml(it.note)}</div>` : ""}
+			`;
+			descPhysical.classList.add("active");
+		}
+
+		function selectPhysicalRow(id){
+			physicalSelectedId = id;
+			renderPhysicalTable();
+			renderPhysicalDescription();
+		}
+
+		if (tbodyPhysical) {
+			tbodyPhysical.addEventListener("click", (e)=>{
+				const tr = e.target.closest("tr[data-id]");
+				if(!tr) return;
+				const id = tr.getAttribute("data-id");
+				if(id === physicalSelectedId) return;
+				selectPhysicalRow(id);
+			});
+		}
+
+		if (qPhysical) qPhysical.addEventListener("input", ()=> renderPhysicalTable());
+		if (levelFilterPhysical) levelFilterPhysical.addEventListener("change", ()=> renderPhysicalTable());
+		if (nameFilterPhysical) nameFilterPhysical.addEventListener("input", ()=> renderPhysicalTable());
+		if (staminaFilterPhysical) staminaFilterPhysical.addEventListener("input", ()=> renderPhysicalTable());
+		if (actionFilterPhysical) actionFilterPhysical.addEventListener("change", ()=> renderPhysicalTable());
+		if (areaFilterPhysical) areaFilterPhysical.addEventListener("input", ()=> renderPhysicalTable());
+
+		// Başlığa tıklayarak sıralama (fiziksel tablo)
+		const tableHeadPhysical = document.querySelector("#skills-physical .spell-list thead");
+		if(tableHeadPhysical){
+			const headerConfigPhysical = [
+				{ thIndex: 0, key: "level" },
+				{ thIndex: 1, key: "name" },
+				{ thIndex: 2, key: "stamina" },
+				{ thIndex: 3, key: "actionType" },
+				{ thIndex: 4, key: "area" },
+			];
+
+			tableHeadPhysical.addEventListener("click", (e)=>{
+				const th = e.target.closest("th");
+				if(!th) return;
+				const row = th.parentElement;
+				if(!row || row.parentElement !== tableHeadPhysical.querySelector("tr").parentElement) return;
+
+				const idx = Array.from(th.parentElement.children).indexOf(th);
+				const conf = headerConfigPhysical.find(c => c.thIndex === idx);
+				if(!conf) return;
+
+				if(physicalSortKey === conf.key){
+					physicalSortDir = physicalSortDir === "asc" ? "desc" : "asc";
+				}else{
+					physicalSortKey = conf.key;
+					physicalSortDir = "asc";
+				}
+				renderPhysicalTable();
+			});
+		}
+
+		async function loadPhysicalJson(){
+			try{
+				const res = await fetch(JSON_URL_PHYSICAL, { cache: "no-store" });
+				if(!res.ok) throw new Error(`HTTP ${res.status} (${res.statusText})`);
+				const data = await res.json();
+				physicalSkills = normalizePhysicalArray(data);
+				updatePhysicalCount();
+				renderPhysicalTable();
+				renderPhysicalDescription();
+			}catch(err){
+				physicalSkills = [];
+				updatePhysicalCount();
+				if (tbodyPhysical) {
+					tbodyPhysical.innerHTML = `
+					<tr><td colspan="5" class="error" style="padding:14px;">
+						JSON (fiziksel) yüklenemedi: ${escapeHtml(err?.message || err)}<br/>
+						<span class="muted">
+						Not: fetch() yerel dosyada (file://) çalışmayabilir. Sayfayı bir sunucudan açın (GitHub Pages gibi)
+						ve yetenekler-physical.json dosyasının ${escapeHtml(JSON_URL_PHYSICAL)} yolunda olduğundan emin olun.
+						</span>
+					</td></tr>
+					`;
+				}
+			}
+		}
+
+		loadPhysicalJson();
 	</script>
 
 
