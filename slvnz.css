@@ -629,7 +629,7 @@ body {
     width: 650px;
     background-color: rgba(0, 0, 0, 0.37);
 	backdrop-filter: blur(15px);
-    max-height: 60vh;
+    height: 510px;
     overflow-y: auto;
 	font-family: "barlow";
 	font-size: 10pt;
