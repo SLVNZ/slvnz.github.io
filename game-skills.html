@@ -161,7 +161,6 @@
 										<th>Eylem Türü</th>
 										<th>Süre</th>
 										<th>Menzil</th>
-										<th>Alan</th>
 									</tr>
 								</thead>
 								<tbody id="tbody">
@@ -349,7 +348,15 @@
 		const rows = filteredSkills();
 		tbody.innerHTML = rows.map(it => `
 			<tr data-id="${escapeHtml(it.id)}" class="${it.id===selectedId ? "selected" : ""}">
-			<td>${escapeHtml(it.level || "-")}</td>
+			<td>${
+				escapeHtml(
+					(() => {
+						const n = Number(it.level);
+						if (!isNaN(n) && n === 0) return "Bazbüyü";
+						return it.level || "-";
+					})()
+				)
+			}</td>
 			<td><span class="pill">${escapeHtml(it.name || "-")}</span></td>
 			<td>${escapeHtml(it.energy || "-")}</td>
 			<td>${escapeHtml(it.source || "-")}</td>
@@ -357,14 +364,13 @@
 			<td>${escapeHtml(it.actionType || "-")}</td>
 			<td>${escapeHtml(it.duration || "-")}</td>
 			<td>${escapeHtml(it.range || "-")}</td>
-			<td>${escapeHtml(it.area || "-")}</td>
 			</tr>
 		`).join("");
 
 		if(rows.length === 0){
 			tbody.innerHTML = `
 			<tr>
-				<td colspan="9" class="muted" style="padding:14px;">
+				<td colspan="8" class="muted" style="padding:14px;">
 				Kayıt bulunamadı.
 				</td>
 			</tr>
@@ -383,7 +389,17 @@
 
 		selBadge.textContent = `Seçili: ${it.name || "—"}`;
 
-		const levelText = it.level ? `${it.level}. Seviye` : "";
+		let levelText = "";
+		if (it.level !== undefined && it.level !== null && it.level !== "") {
+			const n = Number(it.level);
+			if (!isNaN(n) && n === 0) {
+				levelText = "Bazbüyü";
+			} else if (!isNaN(n)) {
+				levelText = `${n}. Seviye`;
+			} else {
+				levelText = String(it.level);
+			}
+		}
 		const energyText = it.energy ? `${it.energy}` : "";
 		const subLabelParts = [];
 		if (levelText) subLabelParts.push(levelText);
