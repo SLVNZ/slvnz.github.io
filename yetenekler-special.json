@@ -22,5 +22,37 @@
     "requirement": "ÇEV 2",
     "desc": "Bir karakterin dengesini koruma, hızlı reaksiyonlar sırasında esnek davranma gibi tepkileri ve genel yeteneğine katkısını belirler.",
     "note": ""
+  },
+  {
+    "id": "4",
+    "name": "Dericilik",
+    "exp": "250",
+    "requirement": "",
+    "desc": "Karakterin deriyi işleme, tamir etme, deriden bir ürün elde etmeyle ilgili becerisidir.",
+    "note": ""
+  },
+  {
+    "id": "5",
+    "name": "Ahşap Oymacılığı",
+    "exp": "150",
+    "requirement": "",
+    "desc": "Karakterin tahta materyalleri şekillendirmesini, oyma yoluyla farklı formlar kazandırmasını sağlayan beceridir.",
+    "note": ""
+  },
+  {
+    "id": "6",
+    "name": "Simyacılık",
+    "exp": "250",
+    "requirement": "",
+    "desc": "Karakterin iksir üretme, üretim sırasında hataları tespit etme, tanıdık iksirlerin işlevini tahmin etme gibi durumlarda kullanabileceği becerisidir.",
+    "note": ""
+  },
+  {
+    "id": "7",
+    "name": "Çizerlik",
+    "exp": "100",
+    "requirement": "",
+    "desc": "Bir karakterin gördüklerini veya hayalindekileri kağıt benzeri yüzeylere çizerek aktarmasını test eden beceridir.",
+    "note": ""
   }
 ]
