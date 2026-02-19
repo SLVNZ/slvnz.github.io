@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>SLVNZ FANTAZYA - Enerji Akımları Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../slvnz.css" rel="stylesheet" type="text/css">
+  <style>
+    body { align-items: stretch; }
+    .admin-wrapper {
+      max-width: 1280px;
+      margin: 40px auto;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      backdrop-filter: blur(20px);
+      color: #d9d9d9;
+      font-family: "barlow";
+    }
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .admin-header h1 {
+      margin: 0;
+      font-family: "gandur-new";
+      font-weight: 300;
+      font-size: 24pt;
+      color: #DC2E2A;
+    }
+    .admin-actions button {
+      margin-left: 10px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      border: 1px solid #DC2E2A;
+      background: transparent;
+      color: #DC2E2A;
+      cursor: pointer;
+      font-family: "barlow";
+      font-size: 10pt;
+    }
+    .admin-actions button:hover { background: #DC2E2A; color: #fff; }
+    .admin-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+    .admin-panel {
+      background: rgba(10, 0, 0, 0.6);
+      border-radius: 8px;
+      padding: 15px;
+      border: 1px solid #331010;
+    }
+    .admin-panel h2 { margin-top: 0; font-size: 14pt; font-family: "barlow"; color: #DC2E2A; }
+    .admin-form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; font-size: 10pt; }
+    .admin-form label { display: block; margin-bottom: 2px; font-weight: 600; }
+    .admin-form input, .admin-form textarea {
+      width: 100%; box-sizing: border-box; padding: 4px 6px;
+      font-family: "barlow"; font-size: 10pt; border-radius: 4px;
+      border: 1px solid #444; background: #111; color: #d9d9d9;
+    }
+    .admin-form textarea { resize: vertical; min-height: 80px; grid-column: 1 / 3; }
+    .admin-form-row-full { grid-column: 1 / 3; }
+    .admin-form-buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; }
+    .admin-table-wrapper { max-height: 500px; overflow: auto; }
+    .admin-table-wrapper table { width: 100%; font-size: 9pt; }
+    .admin-table-wrapper th, .admin-table-wrapper td { padding: 4px 6px; white-space: nowrap; }
+    .pill { display: inline-block; padding: 2px 6px; border-radius: 999px; background: #DC2E2A; color: #fff; font-size: 8pt; }
+    tr.selected { background-color: rgba(220, 46, 42, 0.4); }
+    .muted { color: #888; font-style: italic; }
+    .badge { display: inline-block; margin-right: 10px; font-size: 9pt; color: #aaa; }
+  </style>
+</head>
+<body>
+  <div class="admin-wrapper">
+    <div class="admin-header">
+      <h1>Enerji Akımları Admin</h1>
+      <div class="admin-actions">
+        <button onclick="saveToServer()">Sunucuya kaydet</button>
+        <button onclick="downloadJson()">JSON'u indir</button>
+        <button onclick="document.getElementById('jsonFileInput').click()">JSON yükle</button>
+        <button onclick="location.href='admin-dashboard.html'">Admin Dashboard</button>
+        <button onclick="location.href='../game-skills.html'">Yetenekler Sayfasına Dön</button>
+      </div>
+    </div>
+
+    <p class="muted">
+      <code>enerji-akimlari.json</code> dosyasını düzenleyin. Akım Adı ve Deneyim Puanı alanları oyun sayfasındaki "Enerji Akımları" tablosunda kullanılır.
+    </p>
+
+    <div class="admin-layout">
+      <div class="admin-panel">
+        <h2>Akım Listesi</h2>
+        <div style="margin-bottom: 10px; font-size: 9pt;">
+          <span class="badge" id="adminCountBadge">0 kayıt</span>
+          <input type="text" id="adminSearch" placeholder="Akım adı veya açıklama ara..." style="width: 60%;" oninput="renderAdminTable()">
+        </div>
+        <div class="admin-table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Akım Adı</th>
+                <th>Bedel (Akım)</th>
+                <th>Deneyim Puanı</th>
+                <th>İşlem</th>
+              </tr>
+            </thead>
+            <tbody id="adminTbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="admin-panel">
+        <h2>Akım Ekle / Düzenle</h2>
+        <form id="skillForm" onsubmit="saveSkill(event)">
+          <div class="admin-form">
+            <div>
+              <label for="formId">ID</label>
+              <input type="text" id="formId" placeholder="Benzersiz ID">
+            </div>
+            <div class="admin-form-row-full">
+              <label for="formName">Akım Adı</label>
+              <input type="text" id="formName" required placeholder="Akım adı">
+            </div>
+            <div>
+              <label for="formCost">Bedel (Akım)</label>
+              <input type="text" id="formCost" placeholder="Örn. 1, 2">
+            </div>
+            <div>
+              <label for="formExp">Deneyim Puanı</label>
+              <input type="text" id="formExp" placeholder="Örn. 100">
+            </div>
+            <div class="admin-form-row-full">
+              <label for="formDesc">Açıklama</label>
+              <textarea id="formDesc" placeholder="Akım açıklaması..."></textarea>
+            </div>
+            <div class="admin-form-row-full">
+              <label for="formNote">Özel Not</label>
+              <textarea id="formNote" placeholder="İsteğe bağlı ek not..."></textarea>
+            </div>
+          </div>
+          <div class="admin-form-buttons">
+            <button type="button" onclick="resetForm()">Temizle</button>
+            <button type="submit">Kaydet</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <input type="file" id="jsonFileInput" accept="application/json" style="display:none">
+
+  <script>
+    const RAW_JSON_URL = "./enerji-akimlari.json";
+    const API_URL = "/api/enerji-akimlari";
+
+    let adminAkimlar = [];
+    let editingIndex = null;
+
+    function updateAdminCount() {
+      const badge = document.getElementById("adminCountBadge");
+      badge.textContent = adminAkimlar.length + " kayıt";
+    }
+
+    function renderAdminTable() {
+      const tbody = document.getElementById("adminTbody");
+      const search = (document.getElementById("adminSearch").value || "").toLowerCase().trim();
+      const rows = adminAkimlar
+        .map((s, index) => ({ s, index }))
+        .filter(({ s }) => {
+          if (!search) return true;
+          const hay = [s.id, s.name, s.cost, s.exp, s.desc, s.note].join(" ").toLowerCase();
+          return hay.includes(search);
+        });
+
+      if (rows.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="muted">Kayıt bulunamadı.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = rows.map(({ s, index }) => `
+        <tr class="${editingIndex === index ? "selected" : ""}">
+          <td>${s.id || "-"}</td>
+          <td><span class="pill">${s.name || "-"}</span></td>
+          <td>${s.cost || "-"}</td>
+          <td>${s.exp || "-"}</td>
+          <td>
+            <button type="button" onclick="editSkill(${index})">Düzenle</button>
+            <button type="button" onclick="deleteSkill(${index})">Sil</button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function editSkill(index) {
+      const s = adminAkimlar[index];
+      editingIndex = index;
+      document.getElementById("formId").value = s.id || "";
+      document.getElementById("formName").value = s.name || "";
+      document.getElementById("formCost").value = s.cost || "";
+      document.getElementById("formExp").value = s.exp || "";
+      document.getElementById("formDesc").value = s.desc || "";
+      document.getElementById("formNote").value = s.note || "";
+      renderAdminTable();
+    }
+
+    function resetForm() {
+      editingIndex = null;
+      document.getElementById("skillForm").reset();
+      renderAdminTable();
+    }
+
+    function saveSkill(event) {
+      event.preventDefault();
+      const newSkill = {
+        id: document.getElementById("formId").value.trim(),
+        name: document.getElementById("formName").value.trim(),
+        cost: document.getElementById("formCost").value.trim(),
+        exp: document.getElementById("formExp").value.trim(),
+        desc: document.getElementById("formDesc").value.trim(),
+        note: document.getElementById("formNote").value.trim()
+      };
+      if (!newSkill.name) {
+        alert("Akım Adı zorunludur.");
+        return;
+      }
+      if (!newSkill.id) {
+        const base = newSkill.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+        let candidate = base || "akim";
+        let counter = 1;
+        while (adminAkimlar.some(s => s.id === candidate)) candidate = base + "-" + counter++;
+        newSkill.id = candidate;
+      } else {
+        const exists = adminAkimlar.some((s, idx) => s.id === newSkill.id && idx !== editingIndex);
+        if (exists) {
+          alert("Bu ID zaten kullanılıyor.");
+          return;
+        }
+      }
+      if (editingIndex === null) adminAkimlar.push(newSkill);
+      else adminAkimlar[editingIndex] = newSkill;
+      updateAdminCount();
+      resetForm();
+      renderAdminTable();
+    }
+
+    function deleteSkill(index) {
+      if (!confirm("Bu akımı silmek istediğinize emin misiniz?")) return;
+      adminAkimlar.splice(index, 1);
+      if (editingIndex === index) { editingIndex = null; document.getElementById("skillForm").reset(); }
+      updateAdminCount();
+      renderAdminTable();
+    }
+
+    function downloadJson() {
+      const dataStr = JSON.stringify(adminAkimlar, null, 2);
+      const blob = new Blob([dataStr], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "enerji-akimlari.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById("jsonFileInput").addEventListener("change", (e) => {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        try {
+          const data = JSON.parse(String(evt.target?.result || ""));
+          if (!Array.isArray(data)) { alert("JSON kök öğe bir dizi olmalı."); return; }
+          adminAkimlar = data;
+          editingIndex = null;
+          document.getElementById("skillForm").reset();
+          updateAdminCount();
+          renderAdminTable();
+          alert("JSON yüklendi.");
+        } catch (err) {
+          alert("JSON okunamadı: " + (err.message || err));
+        }
+      };
+      reader.readAsText(file, "utf-8");
+      e.target.value = "";
+    });
+
+    async function saveToServer() {
+      try {
+        const res = await fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(adminAkimlar, null, 2)
+        });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        alert("Sunucuya kaydedildi.");
+      } catch (err) {
+        alert("Sunucuya kaydedilemedi: " + (err.message || err));
+      }
+    }
+
+    async function loadAdminJson() {
+      try {
+        const res = await fetch(API_URL, { cache: "no-store" });
+        if (!res.ok) throw new Error("API");
+        const data = await res.json();
+        adminAkimlar = Array.isArray(data) ? data : [];
+      } catch (e) {
+        try {
+          const res = await fetch(RAW_JSON_URL, { cache: "no-store" });
+          if (!res.ok) throw new Error("File");
+          const data = await res.json();
+          adminAkimlar = Array.isArray(data) ? data : [];
+        } catch (e2) {
+          adminAkimlar = [];
+          alert("enerji-akimlari.json yüklenemedi.");
+        }
+      }
+      updateAdminCount();
+      renderAdminTable();
+    }
+    loadAdminJson();
+  </script>
+</body>
+</html>

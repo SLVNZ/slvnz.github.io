@@ -13,6 +13,7 @@ const publicDir = __dirname;
 app.use(express.static(publicDir));
 
 const JSON_PATH = path.join(__dirname, "yetenekler.json");
+const AKIMLAR_PATH = path.join(__dirname, "admin", "enerji-akimlari.json");
 
 // Yetenekleri oku
 app.get("/api/yetenekler", (req, res) => {
@@ -46,6 +47,38 @@ app.post("/api/yetenekler", (req, res) => {
     if (err) {
       console.error("yetenekler.json yazılamadı:", err);
       return res.status(500).json({ error: "yetenekler.json yazılamadı" });
+    }
+    res.json({ ok: true });
+  });
+});
+
+// Enerji Akımları oku
+app.get("/api/enerji-akimlari", (req, res) => {
+  fs.readFile(AKIMLAR_PATH, "utf8", (err, data) => {
+    if (err) {
+      console.error("enerji-akimlari.json okunamadı:", err);
+      return res.status(500).json({ error: "enerji-akimlari.json okunamadı" });
+    }
+    try {
+      const parsed = JSON.parse(data || "[]");
+      if (!Array.isArray(parsed)) return res.status(500).json({ error: "Beklenen format bir dizi olmalı" });
+      res.json(parsed);
+    } catch (e) {
+      console.error("enerji-akimlari.json parse edilemedi:", e);
+      res.status(500).json({ error: "enerji-akimlari.json parse edilemedi" });
+    }
+  });
+});
+
+// Enerji Akımları yaz
+app.post("/api/enerji-akimlari", (req, res) => {
+  const body = req.body;
+  if (!Array.isArray(body)) return res.status(400).json({ error: "Gönderilen veri bir dizi olmalı" });
+  const json = JSON.stringify(body, null, 2);
+  fs.writeFile(AKIMLAR_PATH, json, "utf8", (err) => {
+    if (err) {
+      console.error("enerji-akimlari.json yazılamadı:", err);
+      return res.status(500).json({ error: "enerji-akimlari.json yazılamadı" });
     }
     res.json({ ok: true });
   });
