@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "name": "Alarmda",
+    "desc": "Çevrene yönelik özel bir dikkat içerisinde olduğun zamanlarda TETİKTE durumu kazanmanı sağlar.",
+    "note": "TETİKTE: Çevresel beklenti ve tepkin üst düzeydedir. Herhangi bir şekilde gafil avlanamazsın."
+  },
+  {
+    "id": "2",
+    "name": "Keskin Hafıza",
+    "desc": "1 ay önceye kadar yaşadığın olayları, gördüğün veya duyduğun şeyleri rahatça hatırlayabilirsin.",
+    "note": ""
+  },
+  {
+    "id": "3",
+    "name": "Dil Şifreleme",
+    "desc": "Konuşabildiğin dilin içine aynı sistemi bilenler tarafından anlaşılabilecek şifreleme şeklinde farklı kelime grupları veya deyimler gibi yapılar ekleyebilirsin. \n\nBu şifrelemeyi gerçekleştirirken, karşı taraf aynı düzenden çıkmış aynı hünere sahipse senin söylemek istediklerini anlar. Eğer aynı hünere sahip ancak aynı düzenden çıkmamışsa senin şifrelenmiş bir şeyler anlatmaya çalıştığının farkındadır. Böyle bir durumda, ZEKÂ testine girerek anlatmak istediğin mesajı anlamaya çalışabilir.",
+    "note": ""
+  }
+]

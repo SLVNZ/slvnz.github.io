@@ -5,6 +5,7 @@
     "level": 0,
     "stamina": 5,
     "actionType": "Eylem",
+    "branch": "Kılıç",
     "area": "Tek hedef",
     "desc": "Bu, fiziksel yetenekler için örnek bir kayıttır. Kendi verilerinle değiştir.",
     "note": ""

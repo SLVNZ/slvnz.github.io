@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>SLVNZ FANTAZYA - Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="slvnz.css" rel="stylesheet" type="text/css">
+  <style>
+    body {
+      align-items: stretch;
+      min-height: 100vh;
+    }
+    .dashboard-wrapper {
+      max-width: 1400px;
+      margin: 40px auto;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      backdrop-filter: blur(20px);
+      color: #d9d9d9;
+      font-family: "barlow";
+    }
+    .dashboard-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .dashboard-header h1 {
+      margin: 0;
+      font-family: "gandur-new";
+      font-weight: 300;
+      font-size: 32pt;
+      color: #DC2E2A;
+    }
+    .dashboard-header p {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 12pt;
+    }
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    .dashboard-card {
+      background: rgba(10, 0, 0, 0.6);
+      border-radius: 8px;
+      padding: 20px;
+      border: 1px solid #331010;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .dashboard-card:hover {
+      border-color: #DC2E2A;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(220, 46, 42, 0.2);
+    }
+    .dashboard-card h2 {
+      margin-top: 0;
+      font-size: 18pt;
+      font-family: "gandur-new";
+      color: #DC2E2A;
+      margin-bottom: 10px;
+    }
+    .dashboard-card p {
+      margin: 0;
+      color: #aaa;
+      font-size: 10pt;
+      line-height: 1.5;
+    }
+    .dashboard-card .card-icon {
+      font-size: 24pt;
+      margin-bottom: 10px;
+    }
+    .dashboard-footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #331010;
+    }
+    .dashboard-footer a {
+      color: #DC2E2A;
+      text-decoration: none;
+      font-size: 11pt;
+    }
+    .dashboard-footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard-wrapper">
+    <div class="dashboard-header">
+      <h1>Admin Dashboard</h1>
+      <p>Yetenek verilerini yönetmek için bir panel seçin</p>
+    </div>
+
+    <div class="dashboard-grid">
+      <div class="dashboard-card" onclick="location.href='skills-admin.html'">
+        <div class="card-icon">⚡</div>
+        <h2>Enerjisel Yetenekler</h2>
+        <p>Enerji tabanlı yetenekleri düzenleyin ve yönetin. yetenekler.json dosyasını yönetir.</p>
+      </div>
+
+      <div class="dashboard-card" onclick="location.href='skills-physical-admin.html'">
+        <div class="card-icon">💪</div>
+        <h2>Fiziksel Yetenekler</h2>
+        <p>Fiziksel yetenekleri düzenleyin ve yönetin. yetenekler-physical.json dosyasını yönetir.</p>
+      </div>
+
+      <div class="dashboard-card" onclick="location.href='skills-battleart-admin.html'">
+        <div class="card-icon">⚔️</div>
+        <h2>Savaş Sanatları</h2>
+        <p>Savaş sanatlarını düzenleyin ve yönetin. yetenekler-battleart.json dosyasını yönetir.</p>
+      </div>
+
+      <div class="dashboard-card" onclick="location.href='skills-special-admin.html'">
+        <div class="card-icon">⭐</div>
+        <h2>Özel Beceriler</h2>
+        <p>Özel becerileri düzenleyin ve yönetin. yetenekler-special.json dosyasını yönetir.</p>
+      </div>
+
+      <div class="dashboard-card" onclick="location.href='skills-talents-admin.html'">
+        <div class="card-icon">✨</div>
+        <h2>Hünerler</h2>
+        <p>Hünerleri düzenleyin ve yönetin. yetenekler-talents.json dosyasını yönetir.</p>
+      </div>
+    </div>
+
+    <div class="dashboard-footer">
+      <a href="game-skills.html">← Yetenekler Sayfasına Dön</a>
+    </div>
+  </div>
+</body>
+</html>

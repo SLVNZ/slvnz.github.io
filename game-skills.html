@@ -13,7 +13,7 @@
 
 <body>
 
-	<section style="display: flex; flex-direction: row; justify-content: flex-start; width: 100%;">
+	<section class="header-section">
 
 		<div class="header">
 
@@ -25,7 +25,7 @@
 
 		</div>
 
-		<div class="header-menu" style="padding-left: 50px; border-left: 1px dotted firebrick;">
+		<div class="header-menu">
 
 			<a href="game-rules.html">OYUN KURALLARI</a>
 
@@ -38,7 +38,7 @@
 	</section>
 	
 	<a href="index.html">
-		<button class="nav-button" style="position: absolute; left: 2%; top: 15%;"><span style="transform: rotate(180deg);">➜</span></button>
+		<button class="nav-button"><span style="transform: rotate(180deg);">➜</span></button>
 	</a>
 
 	<div class="page-marker">
@@ -54,12 +54,14 @@
 			<button data-target="skills-energy">ENERJİSEL YETENEKLER</button>
 			<button data-target="skills-physical">FİZİKSEL YETENEKLER</button>			
 			<button data-target="skills-battleart">SAVAŞ SANATLARI</button>
+			<button data-target="skills-special">ÖZEL BECERİLER</button>
+			<button data-target="skills-talents">HÜNERLER</button>
 
 			
 		</div>
 
-		<div style="display: flex; flex-direction: row; width: 100%; justify-content: center;">
-			<p style="width: 60%; text-align: center;">
+		<div class="page-intro-text">
+			<p>
 				Bu alanda yer alan bütün yetenekler, evrende yaygın olarak karşılaşılabilen arketipleri belirtir. Bir karakter seçeceği yetenekler konusunda burada göreceği sistem ve kuvvetleri baz alarak liste dışı yaratıcı fikirlerini bir yetenek olarak elde edebilir.
 			</p>
 		</div>
@@ -214,6 +216,7 @@
 							<option value="Ek Eylem">Ek Eylem</option>
 							<option value="Tepki Eylem">Tepki Eylem</option>
 						</select>
+						<input type="text" id="branchFilterPhysical" placeholder="Yetenek Dalı">
 						<input type="text" id="areaFilterPhysical" placeholder="Alan">
 						<span id="countBadgePhysical" style="display: none;">0 kayıt</span>
 						<span id="selBadgePhysical" style="display: none;">Seçili: Yok</span>
@@ -228,6 +231,7 @@
 										<th>İsim</th>
 										<th>Stamina</th>
 										<th>Eylem Türü</th>
+										<th>Yetenek Dalı</th>
 										<th>Alan</th>
 									</tr>
 								</thead>
@@ -245,6 +249,189 @@
 
 		</div>
 
+		<div class="page-panel-interior-full" id="skills-battleart">
+
+				<div class="container">
+					<div class="filter">
+						<input type="text" id="qBattleart" placeholder="Metinde ara (isim, açıklama, vb.)">
+						<select id="levelFilterBattleart">
+							<option value="">Tüm Seviyeler</option>
+							<option value="0">Bazbüyü</option>
+							<option value="1">Seviye 1</option>
+							<option value="2">Seviye 2</option>
+							<option value="3">Seviye 3</option>
+							<option value="4">Seviye 4</option>
+							<option value="5">Seviye 5</option>
+							<option value="6">Seviye 6</option>
+							<option value="7">Seviye 7</option>
+							<option value="8">Seviye 8</option>
+							<option value="9">Seviye 9</option>
+							<option value="10">Seviye 10</option>
+							<option value="11">Seviye 11</option>
+							<option value="12">Seviye 12</option>
+							<option value="13">Seviye 13</option>
+							<option value="14">Seviye 14</option>
+							<option value="15">Seviye 15</option>
+							<option value="16">Seviye 16</option>
+							<option value="17">Seviye 17</option>
+							<option value="18">Seviye 18</option>
+							<option value="19">Seviye 19</option>
+							<option value="20">Seviye 20</option>
+						</select>
+						<input type="text" id="nameFilterBattleart" placeholder="İsim">
+						<select id="energyFilterBattleart">
+							<option value="">Tüm Enerjiler</option>
+							<option value="Yıkım">Yıkım</option>
+							<option value="Kehanet">Kehanet</option>
+							<option value="Oluşturma">Oluşturma</option>
+							<option value="Koruma">Koruma</option>
+							<option value="Dönüştürme">Dönüştürme</option>
+							<option value="İllüzyon">İllüzyon</option>
+							<option value="Efsun">Efsun</option>
+							<option value="Çürüme">Çürüme</option>
+							<option value="İnanç">İnanç</option>
+							<option value="Pakt">Pakt</option>
+							<option value="Kan">Kan</option>
+							<option value="Kaos">Kaos</option>
+							<option value="Karanlık">Karanlık</option>
+							<option value="Aydınlık">Aydınlık</option>
+							<option value="Ruh">Ruh</option>
+							<option value="Yaşam">Yaşam</option>
+						</select>
+						<input type="number" id="staminaFilterBattleart" placeholder="Stamina" min="0" max="999" style="width:60px;">
+						<select id="sourceFilterBattleart">
+							<option value="">Tüm Kaynaklar</option>
+							<option value="Mana">Mana</option>
+							<option value="Ki">Ki</option>
+							<option value="Ruh">Ruh</option>
+							<option value="Yaşam">Yaşam</option>
+						</select>
+						<input type="number" id="costFilterBattleart" placeholder="Bedel" min="0" max="999" style="width:50px;">
+						<select id="actionFilterBattleart">
+							<option value="">Tüm Eylem Türleri</option>
+							<option value="Eylem">Eylem</option>
+							<option value="Ek Eylem">Ek Eylem</option>
+							<option value="Tepki Eylem">Tepki Eylem</option>
+						</select>
+						<select id="durationFilterBattleart">
+							<option value="">Tüm Süreler</option>
+							<option value="Anlık">Anlık</option>
+							<option value="10 Tur">10 Tur</option>
+							<option value="1 Dakika">1 Dakika</option>
+							<option value="10 Dakika">10 Dakika</option>
+							<option value="30 Dakika">30 Dakika</option>
+							<option value="1 Saat">1 Saat</option>
+							<option value="2 Saat">2 Saat</option>
+							<option value="4 Saat">4 Saat</option>
+							<option value="6 Saat">6 Saat</option>
+							<option value="8 Saat">8 Saat</option>
+							<option value="12 Saat">12 Saat</option>
+							<option value="24 Saat">24 Saat</option>
+							<option value="1gün+">1gün+</option>
+						</select>
+						<input type="text" id="rangeFilterBattleart" placeholder="Menzil" style="width:120px;">
+						<input type="text" id="areaFilterBattleart" placeholder="Alan" style="width:120px;">
+						<span id="countBadgeBattleart" style="display: none;">0 kayıt</span>
+						<span id="selBadgeBattleart" style="display: none;">Seçili: Yok</span>
+					</div>
+
+					<div class="main-content">
+						<div class="spell-list">
+							<table>
+								<thead>
+									<tr>
+										<th>Seviye</th>
+										<th>İsim</th>
+										<th>Enerji</th>
+										<th>Stamina</th>
+										<th>Kaynak</th>
+										<th>Bedel</th>
+										<th>Eylem Türü</th>
+										<th>Süre</th>
+										<th>Menzil</th>
+										<th>Alan</th>
+									</tr>
+								</thead>
+								<tbody id="tbodyBattleart">
+									<!-- Kayıtlar yetenekler-battleart.json dosyasından JavaScript ile yüklenecek -->
+								</tbody>
+							</table>
+						</div>
+
+						<div id="descBattleart" class="spell-description">
+							<!-- Seçili savaş sanatının detayları JavaScript ile buraya yazılacak -->
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<div class="page-panel-interior-full" id="skills-special">
+
+				<div class="container">
+					<div class="filter">
+						<input type="text" id="qSpecial" placeholder="Metinde ara (isim, açıklama, vb.)">
+						<input type="text" id="nameFilterSpecial" placeholder="Özel Beceri İsmi">
+						<input type="number" id="expFilterSpecial" placeholder="Temel Deneyim Puanı" min="0" max="9999" style="width:150px;">
+						<span id="countBadgeSpecial" style="display: none;">0 kayıt</span>
+						<span id="selBadgeSpecial" style="display: none;">Seçili: Yok</span>
+					</div>
+
+					<div class="main-content">
+						<div class="spell-list">
+							<table>
+								<thead>
+									<tr>
+										<th style="width: 50%;">Özel Beceri İsmi</th>
+										<th style="width: 20%;">Temel Deneyim Puanı</th>
+										<th style="width: 30%;">Gereksinim</th>
+									</tr>
+								</thead>
+								<tbody id="tbodySpecial">
+									<!-- Kayıtlar yetenekler-special.json dosyasından JavaScript ile yüklenecek -->
+								</tbody>
+							</table>
+						</div>
+
+						<div id="descSpecial" class="spell-description">
+							<!-- Seçili özel becerinin detayları JavaScript ile buraya yazılacak -->
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<div class="page-panel-interior-full" id="skills-talents">
+
+				<div class="container">
+					<div class="filter">
+						<input type="text" id="qTalents" placeholder="Metinde ara (isim, açıklama, vb.)">
+						<input type="text" id="nameFilterTalents" placeholder="Hüner İsmi">
+						<span id="countBadgeTalents" style="display: none;">0 kayıt</span>
+						<span id="selBadgeTalents" style="display: none;">Seçili: Yok</span>
+					</div>
+
+					<div class="main-content">
+						<div class="spell-list">
+							<table>
+								<thead>
+									<tr>
+										<th>Hüner İsmi</th>
+									</tr>
+								</thead>
+								<tbody id="tbodyTalents">
+									<!-- Kayıtlar yetenekler-talents.json dosyasından JavaScript ile yüklenecek -->
+								</tbody>
+							</table>
+						</div>
+
+						<div id="descTalents" class="spell-description">
+							<!-- Seçili hünerin detayları JavaScript ile buraya yazılacak -->
+						</div>
+					</div>
+				</div>
+
+		</div>
 
 	</section>
 
@@ -595,13 +782,14 @@
 		const nameFilterPhysical = document.getElementById("nameFilterPhysical");
 		const staminaFilterPhysical = document.getElementById("staminaFilterPhysical");
 		const actionFilterPhysical = document.getElementById("actionFilterPhysical");
+		const branchFilterPhysical = document.getElementById("branchFilterPhysical");
 		const areaFilterPhysical = document.getElementById("areaFilterPhysical");
 		const countBadgePhysical = document.getElementById("countBadgePhysical");
 		const selBadgePhysical = document.getElementById("selBadgePhysical");
 
 		let physicalSkills = [];
 		let physicalSelectedId = null;
-		let physicalSortKey = null;  // "level" | "name" | "stamina" | "actionType" | "area"
+		let physicalSortKey = null;  // "level" | "name" | "stamina" | "actionType" | "branch" | "area"
 		let physicalSortDir = "asc";
 
 		function normalizePhysicalArray(arr){
@@ -612,6 +800,7 @@
 				level: String(x.level ?? ""),
 				stamina: String(x.stamina ?? ""),
 				actionType: String(x.actionType ?? ""),
+				branch: String(x.branch ?? ""),
 				area: String(x.area ?? ""),
 				desc: String(x.desc ?? ""),
 				note: String(x.note ?? ""),
@@ -631,6 +820,7 @@
 				name: (nameFilterPhysical?.value || "").trim().toLowerCase(),
 				stamina: (staminaFilterPhysical?.value || "").trim().toLowerCase(),
 				actionType: (actionFilterPhysical?.value || "").trim().toLowerCase(),
+				branch: (branchFilterPhysical?.value || "").trim().toLowerCase(),
 				area: (areaFilterPhysical?.value || "").trim().toLowerCase(),
 			};
 		}
@@ -642,19 +832,21 @@
 				const nameVal = String(it.name ?? "").toLowerCase();
 				const staminaVal = String(it.stamina ?? "").toLowerCase();
 				const actionVal = String(it.actionType ?? "").toLowerCase();
+				const branchVal = String(it.branch ?? "").toLowerCase();
 				const areaVal = String(it.area ?? "").toLowerCase();
 
 				const matchLevel = !f.level || levelVal === f.level;
 				const matchName = !f.name || nameVal.includes(f.name);
 				const matchStamina = !f.stamina || staminaVal.includes(f.stamina);
 				const matchAction = !f.actionType || actionVal === f.actionType;
+				const matchBranch = !f.branch || branchVal.includes(f.branch);
 				const matchArea = !f.area || areaVal.includes(f.area);
 
 				const matchQuery = !f.query ? true : [
-					it.name, it.stamina, it.actionType, it.area, it.desc, it.note
+					it.name, it.stamina, it.actionType, it.branch, it.area, it.desc, it.note
 				].join(" ").toLowerCase().includes(f.query);
 
-				return matchLevel && matchName && matchStamina && matchAction && matchArea && matchQuery;
+				return matchLevel && matchName && matchStamina && matchAction && matchBranch && matchArea && matchQuery;
 			});
 
 			if(!physicalSortKey){
@@ -688,6 +880,10 @@
 						av = mapStr(a.actionType);
 						bv = mapStr(b.actionType);
 						break;
+					case "branch":
+						av = mapStr(a.branch);
+						bv = mapStr(b.branch);
+						break;
 					case "area":
 						av = mapStr(a.area);
 						bv = mapStr(b.area);
@@ -713,6 +909,7 @@
 				<td><span class="pill">${escapeHtml(it.name || "-")}</span></td>
 				<td>${escapeHtml(it.stamina || "-")}</td>
 				<td>${escapeHtml(it.actionType || "-")}</td>
+				<td>${escapeHtml(it.branch || "-")}</td>
 				<td>${escapeHtml(it.area || "-")}</td>
 				</tr>
 			`).join("");
@@ -720,7 +917,7 @@
 			if(rows.length === 0){
 				tbodyPhysical.innerHTML = `
 				<tr>
-					<td colspan="5" class="muted" style="padding:14px;">
+					<td colspan="6" class="muted" style="padding:14px;">
 					Kayıt bulunamadı.
 					</td>
 				</tr>
@@ -760,6 +957,7 @@
 				<div class="skill-meta">
 					<div>Stamina: ${escapeHtml(it.stamina || "-")}</div>
 					<div>Eylem Türü: ${escapeHtml(it.actionType || "-")}</div>
+					<div>Yetenek Dalı: ${escapeHtml(it.branch || "-")}</div>
 					<div>Alan: ${escapeHtml(it.area || "-")}</div>
 				</div>
 				<div class="skill-desc">
@@ -791,6 +989,7 @@
 		if (nameFilterPhysical) nameFilterPhysical.addEventListener("input", ()=> renderPhysicalTable());
 		if (staminaFilterPhysical) staminaFilterPhysical.addEventListener("input", ()=> renderPhysicalTable());
 		if (actionFilterPhysical) actionFilterPhysical.addEventListener("change", ()=> renderPhysicalTable());
+		if (branchFilterPhysical) branchFilterPhysical.addEventListener("input", ()=> renderPhysicalTable());
 		if (areaFilterPhysical) areaFilterPhysical.addEventListener("input", ()=> renderPhysicalTable());
 
 		// Başlığa tıklayarak sıralama (fiziksel tablo)
@@ -801,7 +1000,8 @@
 				{ thIndex: 1, key: "name" },
 				{ thIndex: 2, key: "stamina" },
 				{ thIndex: 3, key: "actionType" },
-				{ thIndex: 4, key: "area" },
+				{ thIndex: 4, key: "branch" },
+				{ thIndex: 5, key: "area" },
 			];
 
 			tableHeadPhysical.addEventListener("click", (e)=>{
@@ -838,7 +1038,7 @@
 				updatePhysicalCount();
 				if (tbodyPhysical) {
 					tbodyPhysical.innerHTML = `
-					<tr><td colspan="5" class="error" style="padding:14px;">
+					<tr><td colspan="6" class="error" style="padding:14px;">
 						JSON (fiziksel) yüklenemedi: ${escapeHtml(err?.message || err)}<br/>
 						<span class="muted">
 						Not: fetch() yerel dosyada (file://) çalışmayabilir. Sayfayı bir sunucudan açın (GitHub Pages gibi)
@@ -851,6 +1051,773 @@
 		}
 
 		loadPhysicalJson();
+
+		/***********************
+		 * ÖZEL BECERİLER
+		 ************************/
+		const JSON_URL_SPECIAL = "./yetenekler-special.json";
+
+		const tbodySpecial = document.getElementById("tbodySpecial");
+		const descSpecial = document.getElementById("descSpecial");
+		const qSpecial = document.getElementById("qSpecial");
+		const nameFilterSpecial = document.getElementById("nameFilterSpecial");
+		const expFilterSpecial = document.getElementById("expFilterSpecial");
+		const countBadgeSpecial = document.getElementById("countBadgeSpecial");
+		const selBadgeSpecial = document.getElementById("selBadgeSpecial");
+
+		let specialSkills = [];
+		let specialSelectedId = null;
+		let specialSortKey = null;  // "name" | "exp" | "requirement"
+		let specialSortDir = "asc";
+
+		function normalizeSpecialArray(arr){
+			if(!Array.isArray(arr)) return [];
+			return arr.map(x=>({
+				id: (x.id && String(x.id)) || "",
+				name: String(x.name ?? ""),
+				exp: String(x.exp ?? ""),
+				requirement: String(x.requirement ?? ""),
+				desc: String(x.desc ?? ""),
+				note: String(x.note ?? ""),
+			})).filter(x=>x.name.trim().length>0);
+		}
+
+		function updateSpecialCount(){
+			if (countBadgeSpecial) {
+				countBadgeSpecial.textContent = `${specialSkills.length} kayıt`;
+			}
+		}
+
+		function currentSpecialFilters(){
+			return {
+				query: (qSpecial?.value || "").trim().toLowerCase(),
+				name: (nameFilterSpecial?.value || "").trim().toLowerCase(),
+				exp: (expFilterSpecial?.value || "").trim().toLowerCase(),
+			};
+		}
+
+		function filteredSpecialSkills(){
+			const f = currentSpecialFilters();
+			let rows = specialSkills.filter(it=>{
+				const nameVal = String(it.name ?? "").toLowerCase();
+				const expVal = String(it.exp ?? "").toLowerCase();
+
+				const matchName = !f.name || nameVal.includes(f.name);
+				const matchExp = !f.exp || expVal.includes(f.exp);
+
+				const matchQuery = !f.query ? true : [
+					it.name, it.exp, it.requirement, it.desc, it.note
+				].join(" ").toLowerCase().includes(f.query);
+
+				return matchName && matchExp && matchQuery;
+			});
+
+			if(!specialSortKey){
+				return rows;
+			}
+
+			const dir = specialSortDir === "desc" ? -1 : 1;
+
+			rows.sort((a,b)=>{
+				const mapStr  = v => String(v ?? "").toLowerCase();
+				const mapNum  = v => {
+					const n = Number(v);
+					return isNaN(n) ? 0 : n;
+				};
+
+				let av, bv;
+				switch(specialSortKey){
+					case "name":
+						av = mapStr(a.name);
+						bv = mapStr(b.name);
+						break;
+					case "exp":
+						av = mapNum(a.exp);
+						bv = mapNum(b.exp);
+						break;
+					case "requirement":
+						av = mapStr(a.requirement);
+						bv = mapStr(b.requirement);
+						break;
+					default:
+						av = 0; bv = 0;
+				}
+
+				if(av < bv) return -1 * dir;
+				if(av > bv) return  1 * dir;
+				return 0;
+			});
+
+			return rows;
+		}
+
+		function renderSpecialTable(){
+			if (!tbodySpecial) return;
+			const rows = filteredSpecialSkills();
+			tbodySpecial.innerHTML = rows.map(it => `
+				<tr data-id="${escapeHtml(it.id)}" class="${it.id===specialSelectedId ? "selected" : ""}">
+				<td><span class="pill">${escapeHtml(it.name || "-")}</span></td>
+				<td>${escapeHtml(it.exp || "-")}</td>
+				<td>${escapeHtml(it.requirement || "-")}</td>
+				</tr>
+			`).join("");
+
+			if(rows.length === 0){
+				tbodySpecial.innerHTML = `
+				<tr>
+					<td colspan="3" class="muted" style="padding:14px;">
+					Kayıt bulunamadı.
+					</td>
+				</tr>
+				`;
+			}
+		}
+
+		function renderSpecialDescription(){
+			if (!descSpecial) return;
+			const it = specialSkills.find(x=>x.id===specialSelectedId);
+			if(!it){
+				if (selBadgeSpecial) selBadgeSpecial.textContent = "Seçili: Yok";
+				descSpecial.innerHTML = `<div class="descEmpty">Bir satır seçin. Açıklama burada görünecek.</div>`;
+				descSpecial.classList.remove("active");
+				return;
+			}
+
+			if (selBadgeSpecial) selBadgeSpecial.textContent = `Seçili: ${it.name || "—"}`;
+
+			descSpecial.innerHTML = `
+				<div class="skill-label">${escapeHtml(it.name || "İsimsiz")}</div>
+				<div class="skill-meta">
+					<div>Temel Deneyim Puanı: ${escapeHtml(it.exp || "-")}</div>
+					<div>Gereksinim: ${escapeHtml(it.requirement || "-")}</div>
+				</div>
+				<div class="skill-desc">
+					${escapeHtml(it.desc || "—")}
+				</div>
+				${it.note ? `<div class="skill-note">${escapeHtml(it.note)}</div>` : ""}
+			`;
+			descSpecial.classList.add("active");
+		}
+
+		function selectSpecialRow(id){
+			specialSelectedId = id;
+			renderSpecialTable();
+			renderSpecialDescription();
+		}
+
+		if (tbodySpecial) {
+			tbodySpecial.addEventListener("click", (e)=>{
+				const tr = e.target.closest("tr[data-id]");
+				if(!tr) return;
+				const id = tr.getAttribute("data-id");
+				if(id === specialSelectedId) return;
+				selectSpecialRow(id);
+			});
+		}
+
+		if (qSpecial) qSpecial.addEventListener("input", ()=> renderSpecialTable());
+		if (nameFilterSpecial) nameFilterSpecial.addEventListener("input", ()=> renderSpecialTable());
+		if (expFilterSpecial) expFilterSpecial.addEventListener("input", ()=> renderSpecialTable());
+
+		// Başlığa tıklayarak sıralama (özel beceriler tablosu)
+		const tableHeadSpecial = document.querySelector("#skills-special .spell-list thead");
+		if(tableHeadSpecial){
+			const headerConfigSpecial = [
+				{ thIndex: 0, key: "name" },
+				{ thIndex: 1, key: "exp" },
+				{ thIndex: 2, key: "requirement" },
+			];
+
+			tableHeadSpecial.addEventListener("click", (e)=>{
+				const th = e.target.closest("th");
+				if(!th) return;
+				const row = th.parentElement;
+				if(!row || row.parentElement !== tableHeadSpecial.querySelector("tr").parentElement) return;
+
+				const idx = Array.from(th.parentElement.children).indexOf(th);
+				const conf = headerConfigSpecial.find(c => c.thIndex === idx);
+				if(!conf) return;
+
+				if(specialSortKey === conf.key){
+					specialSortDir = specialSortDir === "asc" ? "desc" : "asc";
+				}else{
+					specialSortKey = conf.key;
+					specialSortDir = "asc";
+				}
+				renderSpecialTable();
+			});
+		}
+
+		async function loadSpecialJson(){
+			try{
+				const res = await fetch(JSON_URL_SPECIAL, { cache: "no-store" });
+				if(!res.ok) throw new Error(`HTTP ${res.status} (${res.statusText})`);
+				const data = await res.json();
+				specialSkills = normalizeSpecialArray(data);
+				updateSpecialCount();
+				renderSpecialTable();
+				renderSpecialDescription();
+			}catch(err){
+				specialSkills = [];
+				updateSpecialCount();
+				if (tbodySpecial) {
+					tbodySpecial.innerHTML = `
+					<tr><td colspan="3" class="error" style="padding:14px;">
+						JSON (özel beceriler) yüklenemedi: ${escapeHtml(err?.message || err)}<br/>
+						<span class="muted">
+						Not: fetch() yerel dosyada (file://) çalışmayabilir. Sayfayı bir sunucudan açın (GitHub Pages gibi)
+						ve yetenekler-special.json dosyasının ${escapeHtml(JSON_URL_SPECIAL)} yolunda olduğundan emin olun.
+						</span>
+					</td></tr>
+					`;
+				}
+			}
+		}
+
+		loadSpecialJson();
+
+		/***********************
+		 * HÜNERLER
+		 ************************/
+		const JSON_URL_TALENTS = "./yetenekler-talents.json";
+
+		const tbodyTalents = document.getElementById("tbodyTalents");
+		const descTalents = document.getElementById("descTalents");
+		const qTalents = document.getElementById("qTalents");
+		const nameFilterTalents = document.getElementById("nameFilterTalents");
+		const countBadgeTalents = document.getElementById("countBadgeTalents");
+		const selBadgeTalents = document.getElementById("selBadgeTalents");
+
+		let talents = [];
+		let talentsSelectedId = null;
+		let talentsSortKey = null;  // "name"
+		let talentsSortDir = "asc";
+
+		function normalizeTalentsArray(arr){
+			if(!Array.isArray(arr)) return [];
+			return arr.map(x=>({
+				id: (x.id && String(x.id)) || "",
+				name: String(x.name ?? ""),
+				desc: String(x.desc ?? ""),
+				note: String(x.note ?? ""),
+			})).filter(x=>x.name.trim().length>0);
+		}
+
+		function updateTalentsCount(){
+			if (countBadgeTalents) {
+				countBadgeTalents.textContent = `${talents.length} kayıt`;
+			}
+		}
+
+		function currentTalentsFilters(){
+			return {
+				query: (qTalents?.value || "").trim().toLowerCase(),
+				name: (nameFilterTalents?.value || "").trim().toLowerCase(),
+			};
+		}
+
+		function filteredTalents(){
+			const f = currentTalentsFilters();
+			let rows = talents.filter(it=>{
+				const nameVal = String(it.name ?? "").toLowerCase();
+
+				const matchName = !f.name || nameVal.includes(f.name);
+
+				const matchQuery = !f.query ? true : [
+					it.name, it.desc, it.note
+				].join(" ").toLowerCase().includes(f.query);
+
+				return matchName && matchQuery;
+			});
+
+			if(!talentsSortKey){
+				return rows;
+			}
+
+			const dir = talentsSortDir === "desc" ? -1 : 1;
+
+			rows.sort((a,b)=>{
+				const mapStr  = v => String(v ?? "").toLowerCase();
+
+				let av, bv;
+				switch(talentsSortKey){
+					case "name":
+						av = mapStr(a.name);
+						bv = mapStr(b.name);
+						break;
+					default:
+						av = 0; bv = 0;
+				}
+
+				if(av < bv) return -1 * dir;
+				if(av > bv) return  1 * dir;
+				return 0;
+			});
+
+			return rows;
+		}
+
+		function renderTalentsTable(){
+			if (!tbodyTalents) return;
+			const rows = filteredTalents();
+			tbodyTalents.innerHTML = rows.map(it => `
+				<tr data-id="${escapeHtml(it.id)}" class="${it.id===talentsSelectedId ? "selected" : ""}">
+				<td><span class="pill">${escapeHtml(it.name || "-")}</span></td>
+				</tr>
+			`).join("");
+
+			if(rows.length === 0){
+				tbodyTalents.innerHTML = `
+				<tr>
+					<td colspan="1" class="muted" style="padding:14px;">
+					Kayıt bulunamadı.
+					</td>
+				</tr>
+				`;
+			}
+		}
+
+		function renderTalentsDescription(){
+			if (!descTalents) return;
+			const it = talents.find(x=>x.id===talentsSelectedId);
+			if(!it){
+				if (selBadgeTalents) selBadgeTalents.textContent = "Seçili: Yok";
+				descTalents.innerHTML = `<div class="descEmpty">Bir satır seçin. Açıklama burada görünecek.</div>`;
+				descTalents.classList.remove("active");
+				return;
+			}
+
+			if (selBadgeTalents) selBadgeTalents.textContent = `Seçili: ${it.name || "—"}`;
+
+			descTalents.innerHTML = `
+				<div class="skill-label">${escapeHtml(it.name || "İsimsiz")}</div>
+				<div class="skill-desc">
+					${escapeHtml(it.desc || "—")}
+				</div>
+				${it.note ? `<div class="skill-note">${escapeHtml(it.note)}</div>` : ""}
+			`;
+			descTalents.classList.add("active");
+		}
+
+		function selectTalentsRow(id){
+			talentsSelectedId = id;
+			renderTalentsTable();
+			renderTalentsDescription();
+		}
+
+		if (tbodyTalents) {
+			tbodyTalents.addEventListener("click", (e)=>{
+				const tr = e.target.closest("tr[data-id]");
+				if(!tr) return;
+				const id = tr.getAttribute("data-id");
+				if(id === talentsSelectedId) return;
+				selectTalentsRow(id);
+			});
+		}
+
+		if (qTalents) qTalents.addEventListener("input", ()=> renderTalentsTable());
+		if (nameFilterTalents) nameFilterTalents.addEventListener("input", ()=> renderTalentsTable());
+
+		// Başlığa tıklayarak sıralama (hünerler tablosu)
+		const tableHeadTalents = document.querySelector("#skills-talents .spell-list thead");
+		if(tableHeadTalents){
+			const headerConfigTalents = [
+				{ thIndex: 0, key: "name" },
+			];
+
+			tableHeadTalents.addEventListener("click", (e)=>{
+				const th = e.target.closest("th");
+				if(!th) return;
+				const row = th.parentElement;
+				if(!row || row.parentElement !== tableHeadTalents.querySelector("tr").parentElement) return;
+
+				const idx = Array.from(th.parentElement.children).indexOf(th);
+				const conf = headerConfigTalents.find(c => c.thIndex === idx);
+				if(!conf) return;
+
+				if(talentsSortKey === conf.key){
+					talentsSortDir = talentsSortDir === "asc" ? "desc" : "asc";
+				}else{
+					talentsSortKey = conf.key;
+					talentsSortDir = "asc";
+				}
+				renderTalentsTable();
+			});
+		}
+
+		async function loadTalentsJson(){
+			try{
+				const res = await fetch(JSON_URL_TALENTS, { cache: "no-store" });
+				if(!res.ok) throw new Error(`HTTP ${res.status} (${res.statusText})`);
+				const data = await res.json();
+				talents = normalizeTalentsArray(data);
+				updateTalentsCount();
+				renderTalentsTable();
+				renderTalentsDescription();
+			}catch(err){
+				talents = [];
+				updateTalentsCount();
+				if (tbodyTalents) {
+					tbodyTalents.innerHTML = `
+					<tr><td colspan="1" class="error" style="padding:14px;">
+						JSON (hünerler) yüklenemedi: ${escapeHtml(err?.message || err)}<br/>
+						<span class="muted">
+						Not: fetch() yerel dosyada (file://) çalışmayabilir. Sayfayı bir sunucudan açın (GitHub Pages gibi)
+						ve yetenekler-talents.json dosyasının ${escapeHtml(JSON_URL_TALENTS)} yolunda olduğundan emin olun.
+						</span>
+					</td></tr>
+					`;
+				}
+			}
+		}
+
+		loadTalentsJson();
+
+		/***********************
+		 * SAVAŞ SANATLARI
+		 ************************/
+		const JSON_URL_BATTLEART = "./yetenekler-battleart.json";
+
+		const tbodyBattleart = document.getElementById("tbodyBattleart");
+		const descBattleart = document.getElementById("descBattleart");
+		const qBattleart = document.getElementById("qBattleart");
+		const levelFilterBattleart = document.getElementById("levelFilterBattleart");
+		const nameFilterBattleart = document.getElementById("nameFilterBattleart");
+		const energyFilterBattleart = document.getElementById("energyFilterBattleart");
+		const staminaFilterBattleart = document.getElementById("staminaFilterBattleart");
+		const sourceFilterBattleart = document.getElementById("sourceFilterBattleart");
+		const costFilterBattleart = document.getElementById("costFilterBattleart");
+		const actionFilterBattleart = document.getElementById("actionFilterBattleart");
+		const durationFilterBattleart = document.getElementById("durationFilterBattleart");
+		const rangeFilterBattleart = document.getElementById("rangeFilterBattleart");
+		const areaFilterBattleart = document.getElementById("areaFilterBattleart");
+		const countBadgeBattleart = document.getElementById("countBadgeBattleart");
+		const selBadgeBattleart = document.getElementById("selBadgeBattleart");
+
+		let battleartSkills = [];
+		let battleartSelectedId = null;
+		let battleartSortKey = null;  // "level" | "name" | "energy" | "stamina" | "source" | "cost" | "actionType" | "duration" | "range" | "area"
+		let battleartSortDir = "asc";
+
+		function normalizeBattleartArray(arr){
+			if(!Array.isArray(arr)) return [];
+			return arr.map(x=>({
+				id: (x.id && String(x.id)) || "",
+				name: String(x.name ?? ""),
+				level: String(x.level ?? ""),
+				energy: String(x.energy ?? ""),
+				stamina: String(x.stamina ?? ""),
+				source: String(x.source ?? ""),
+				sourceAmt: String(x.sourceAmt ?? ""),
+				actionType: String(x.actionType ?? ""),
+				duration: String(x.duration ?? ""),
+				range: String(x.range ?? ""),
+				area: String(x.area ?? ""),
+				desc: String(x.desc ?? ""),
+				note: String(x.note ?? ""),
+			})).filter(x=>x.name.trim().length>0);
+		}
+
+		function updateBattleartCount(){
+			if (countBadgeBattleart) {
+				countBadgeBattleart.textContent = `${battleartSkills.length} kayıt`;
+			}
+		}
+
+		function currentBattleartFilters(){
+			return {
+				query: (qBattleart?.value || "").trim().toLowerCase(),
+				level: (levelFilterBattleart?.value || "").trim().toLowerCase(),
+				name: (nameFilterBattleart?.value || "").trim().toLowerCase(),
+				energy: (energyFilterBattleart?.value || "").trim().toLowerCase(),
+				stamina: (staminaFilterBattleart?.value || "").trim().toLowerCase(),
+				source: (sourceFilterBattleart?.value || "").trim().toLowerCase(),
+				cost: (costFilterBattleart?.value || "").trim().toLowerCase(),
+				actionType: (actionFilterBattleart?.value || "").trim().toLowerCase(),
+				duration: (durationFilterBattleart?.value || "").trim().toLowerCase(),
+				range: (rangeFilterBattleart?.value || "").trim().toLowerCase(),
+				area: (areaFilterBattleart?.value || "").trim().toLowerCase(),
+			};
+		}
+
+		function filteredBattleartSkills(){
+			const f = currentBattleartFilters();
+			let rows = battleartSkills.filter(it=>{
+				const levelVal = String(it.level ?? "").toLowerCase();
+				const nameVal = String(it.name ?? "").toLowerCase();
+				const energyVal = String(it.energy ?? "").toLowerCase();
+				const staminaVal = String(it.stamina ?? "").toLowerCase();
+				const sourceVal = String(it.source ?? "").toLowerCase();
+				const costVal = String(it.sourceAmt ?? "").toLowerCase();
+				const actionVal = String(it.actionType ?? "").toLowerCase();
+				const durationVal = String(it.duration ?? "").toLowerCase();
+				const rangeVal = String(it.range ?? "").toLowerCase();
+				const areaVal = String(it.area ?? "").toLowerCase();
+
+				const matchLevel = !f.level || levelVal === f.level;
+				const matchName = !f.name || nameVal.includes(f.name);
+				const matchEnergy = !f.energy || energyVal === f.energy;
+				const matchStamina = !f.stamina || staminaVal.includes(f.stamina);
+				const matchSource = !f.source || sourceVal === f.source;
+				const matchCost = !f.cost || costVal.includes(f.cost);
+				const matchAction = !f.actionType || actionVal === f.actionType;
+				const matchDuration = !f.duration || durationVal === f.duration;
+				const matchRange = !f.range || rangeVal.includes(f.range);
+				const matchArea = !f.area || areaVal.includes(f.area);
+
+				const matchQuery = !f.query ? true : [
+					it.name, it.energy, it.stamina, it.source, it.range, it.area, it.duration, it.sourceAmt, it.actionType, it.desc, it.note
+				].join(" ").toLowerCase().includes(f.query);
+
+				return matchLevel && matchName && matchEnergy && matchStamina && matchSource && matchCost && matchAction &&
+					matchDuration && matchRange && matchArea && matchQuery;
+			});
+
+			if(!battleartSortKey){
+				return rows;
+			}
+
+			const dir = battleartSortDir === "desc" ? -1 : 1;
+
+			rows.sort((a,b)=>{
+				const mapCost = v => String(v ?? "").toLowerCase();
+				const mapStr  = v => String(v ?? "").toLowerCase();
+				const mapNum  = v => {
+					const n = Number(v);
+					return isNaN(n) ? 0 : n;
+				};
+
+				let av, bv;
+				switch(battleartSortKey){
+					case "level":
+						av = mapNum(a.level);
+						bv = mapNum(b.level);
+						break;
+					case "name":
+						av = mapStr(a.name);
+						bv = mapStr(b.name);
+						break;
+					case "energy":
+						av = mapStr(a.energy);
+						bv = mapStr(b.energy);
+						break;
+					case "stamina":
+						av = mapNum(a.stamina);
+						bv = mapNum(b.stamina);
+						break;
+					case "source":
+						av = mapStr(a.source);
+						bv = mapStr(b.source);
+						break;
+					case "cost":
+						av = mapCost(a.sourceAmt);
+						bv = mapCost(b.sourceAmt);
+						break;
+					case "actionType":
+						av = mapStr(a.actionType);
+						bv = mapStr(b.actionType);
+						break;
+					case "duration":
+						av = mapStr(a.duration);
+						bv = mapStr(b.duration);
+						break;
+					case "range":
+						av = mapStr(a.range);
+						bv = mapStr(b.range);
+						break;
+					case "area":
+						av = mapStr(a.area);
+						bv = mapStr(b.area);
+						break;
+					default:
+						av = 0; bv = 0;
+				}
+
+				if(av < bv) return -1 * dir;
+				if(av > bv) return  1 * dir;
+				return 0;
+			});
+
+			return rows;
+		}
+
+		function renderBattleartTable(){
+			if (!tbodyBattleart) return;
+			const rows = filteredBattleartSkills();
+			tbodyBattleart.innerHTML = rows.map(it => `
+				<tr data-id="${escapeHtml(it.id)}" class="${it.id===battleartSelectedId ? "selected" : ""}">
+				<td>${
+					escapeHtml(
+						(() => {
+							const n = Number(it.level);
+							if (!isNaN(n) && n === 0) return "Bazbüyü";
+							return it.level || "-";
+						})()
+					)
+				}</td>
+				<td><span class="pill">${escapeHtml(it.name || "-")}</span></td>
+				<td>${escapeHtml(it.energy || "-")}</td>
+				<td>${escapeHtml(it.stamina || "-")}</td>
+				<td>${escapeHtml(it.source || "-")}</td>
+				<td>${escapeHtml(it.sourceAmt || "-")}</td>
+				<td>${escapeHtml(it.actionType || "-")}</td>
+				<td>${escapeHtml(it.duration || "-")}</td>
+				<td>${escapeHtml(it.range || "-")}</td>
+				<td>${escapeHtml(it.area || "-")}</td>
+				</tr>
+			`).join("");
+
+			if(rows.length === 0){
+				tbodyBattleart.innerHTML = `
+				<tr>
+					<td colspan="10" class="muted" style="padding:14px;">
+					Kayıt bulunamadı.
+					</td>
+				</tr>
+				`;
+			}
+		}
+
+		function renderBattleartDescription(){
+			if (!descBattleart) return;
+			const it = battleartSkills.find(x=>x.id===battleartSelectedId);
+			if(!it){
+				if (selBadgeBattleart) selBadgeBattleart.textContent = "Seçili: Yok";
+				descBattleart.innerHTML = `<div class="descEmpty">Bir satır seçin. Açıklama burada görünecek.</div>`;
+				descBattleart.classList.remove("active");
+				return;
+			}
+
+			if (selBadgeBattleart) selBadgeBattleart.textContent = `Seçili: ${it.name || "—"}`;
+
+			let levelText = "";
+			if (it.level !== undefined && it.level !== null && it.level !== "") {
+				const n = Number(it.level);
+				if (!isNaN(n) && n === 0) {
+					levelText = "Bazbüyü";
+				} else if (!isNaN(n)) {
+					levelText = `${n}. Seviye`;
+				} else {
+					levelText = String(it.level);
+				}
+			}
+			const energyText = it.energy ? `${it.energy}` : "";
+			const subLabelParts = [];
+			if (levelText) subLabelParts.push(levelText);
+			if (energyText) subLabelParts.push(`${energyText} Yeteneği`);
+			const subLabel = subLabelParts.join(" ");
+
+			const kaynakBedel = [it.sourceAmt, it.source].filter(Boolean).join(" ");
+
+			descBattleart.innerHTML = `
+				<div class="skill-label">${escapeHtml(it.name || "İsimsiz")}</div>
+				<div class="skill-sublabel">${escapeHtml(subLabel || "")}</div>
+				<div class="skill-meta">
+					${it.stamina ? `<div>Stamina: ${escapeHtml(it.stamina || "-")}</div>` : ""}
+					${kaynakBedel ? `<div>${escapeHtml(kaynakBedel || "-")}</div>` : ""}
+					<div>Süre: ${escapeHtml(it.duration || "-")}</div>
+					<div>Menzil: ${escapeHtml(it.range || "-")}</div>
+					<div>Alan: ${escapeHtml(it.area || "-")}</div>
+				</div>
+				<div class="skill-desc">
+					${escapeHtml(it.desc || "—")}
+				</div>
+				${it.note ? `<div class="skill-note">${escapeHtml(it.note)}</div>` : ""}
+			`;
+			descBattleart.classList.add("active");
+		}
+
+		function selectBattleartRow(id){
+			battleartSelectedId = id;
+			renderBattleartTable();
+			renderBattleartDescription();
+		}
+
+		if (tbodyBattleart) {
+			tbodyBattleart.addEventListener("click", (e)=>{
+				const tr = e.target.closest("tr[data-id]");
+				if(!tr) return;
+				const id = tr.getAttribute("data-id");
+				if(id === battleartSelectedId) return;
+				selectBattleartRow(id);
+			});
+		}
+
+		if (qBattleart) qBattleart.addEventListener("input", ()=> renderBattleartTable());
+		if (levelFilterBattleart) levelFilterBattleart.addEventListener("change", ()=> renderBattleartTable());
+		if (nameFilterBattleart) nameFilterBattleart.addEventListener("input", ()=> renderBattleartTable());
+		if (energyFilterBattleart) energyFilterBattleart.addEventListener("change", ()=> renderBattleartTable());
+		if (staminaFilterBattleart) staminaFilterBattleart.addEventListener("input", ()=> renderBattleartTable());
+		if (sourceFilterBattleart) sourceFilterBattleart.addEventListener("change", ()=> renderBattleartTable());
+		if (costFilterBattleart) costFilterBattleart.addEventListener("input", ()=> renderBattleartTable());
+		if (actionFilterBattleart) actionFilterBattleart.addEventListener("change", ()=> renderBattleartTable());
+		if (durationFilterBattleart) durationFilterBattleart.addEventListener("change", ()=> renderBattleartTable());
+		if (rangeFilterBattleart) rangeFilterBattleart.addEventListener("input", ()=> renderBattleartTable());
+		if (areaFilterBattleart) areaFilterBattleart.addEventListener("input", ()=> renderBattleartTable());
+
+		// Başlığa tıklayarak sıralama (savaş sanatları tablosu)
+		const tableHeadBattleart = document.querySelector("#skills-battleart .spell-list thead");
+		if(tableHeadBattleart){
+			const headerConfigBattleart = [
+				{ thIndex: 0, key: "level" },
+				{ thIndex: 1, key: "name" },
+				{ thIndex: 2, key: "energy" },
+				{ thIndex: 3, key: "stamina" },
+				{ thIndex: 4, key: "source" },
+				{ thIndex: 5, key: "cost" },
+				{ thIndex: 6, key: "actionType" },
+				{ thIndex: 7, key: "duration" },
+				{ thIndex: 8, key: "range" },
+				{ thIndex: 9, key: "area" },
+			];
+
+			tableHeadBattleart.addEventListener("click", (e)=>{
+				const th = e.target.closest("th");
+				if(!th) return;
+				const row = th.parentElement;
+				if(!row || row.parentElement !== tableHeadBattleart.querySelector("tr").parentElement) return;
+
+				const idx = Array.from(th.parentElement.children).indexOf(th);
+				const conf = headerConfigBattleart.find(c => c.thIndex === idx);
+				if(!conf) return;
+
+				if(battleartSortKey === conf.key){
+					battleartSortDir = battleartSortDir === "asc" ? "desc" : "asc";
+				}else{
+					battleartSortKey = conf.key;
+					battleartSortDir = "asc";
+				}
+				renderBattleartTable();
+			});
+		}
+
+		async function loadBattleartJson(){
+			try{
+				const res = await fetch(JSON_URL_BATTLEART, { cache: "no-store" });
+				if(!res.ok) throw new Error(`HTTP ${res.status} (${res.statusText})`);
+				const data = await res.json();
+				battleartSkills = normalizeBattleartArray(data);
+				updateBattleartCount();
+				renderBattleartTable();
+				renderBattleartDescription();
+			}catch(err){
+				battleartSkills = [];
+				updateBattleartCount();
+				if (tbodyBattleart) {
+					tbodyBattleart.innerHTML = `
+					<tr><td colspan="10" class="error" style="padding:14px;">
+						JSON (savaş sanatları) yüklenemedi: ${escapeHtml(err?.message || err)}<br/>
+						<span class="muted">
+						Not: fetch() yerel dosyada (file://) çalışmayabilir. Sayfayı bir sunucudan açın (GitHub Pages gibi)
+						ve yetenekler-battleart.json dosyasının ${escapeHtml(JSON_URL_BATTLEART)} yolunda olduğundan emin olun.
+						</span>
+					</td></tr>
+					`;
+				}
+			}
+		}
+
+		loadBattleartJson();
 	</script>
 
 

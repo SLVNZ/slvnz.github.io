@@ -148,8 +148,9 @@
       <h1>Fiziksel Yetenek Admin Paneli</h1>
       <div class="admin-actions">
         <button onclick="saveToServer()">Sunucuya kaydet</button>
-        <button onclick="downloadJson()">JSON'u indir</button>
+        <button onclick="downloadJson()">JSON'u kaydet</button>
         <button onclick="document.getElementById('jsonFileInput').click()">JSON yükle</button>
+        <button onclick="location.href='admin-dashboard.html'">Admin Dashboard</button>
         <button onclick="location.href='game-skills.html'">Yetenekler Sayfasına Dön</button>
       </div>
     </div>
@@ -176,13 +177,14 @@
                 <th>İsim</th>
                 <th>Stamina</th>
                 <th>Eylem Türü</th>
+                <th>Yetenek Dalı</th>
                 <th>Alan</th>
                 <th>İşlem</th>
               </tr>
             </thead>
             <tbody id="adminTbody">
               <tr>
-                <td colspan="7" class="muted">Veri yükleniyor...</td>
+                <td colspan="8" class="muted">Veri yükleniyor...</td>
               </tr>
             </tbody>
           </table>
@@ -242,6 +244,10 @@
               </select>
             </div>
             <div>
+              <label for="formBranch">Yetenek Dalı</label>
+              <input type="text" id="formBranch" placeholder="Örn. Kılıç, Okçuluk, Dövüş...">
+            </div>
+            <div>
               <label for="formArea">Alan</label>
               <input type="text" id="formArea" placeholder="Tek hedef, Konik, Çizgi...">
             </div>
@@ -287,13 +293,13 @@
         .filter(({ s }) => {
           if (!search) return true;
           const hay = [
-            s.id, s.name, s.stamina, s.actionType, s.area, s.desc, s.note
+            s.id, s.name, s.stamina, s.actionType, s.branch, s.area, s.desc, s.note
           ].join(" ").toLowerCase();
           return hay.includes(search);
         });
 
       if (rows.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="muted">Kayıt bulunamadı.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" class="muted">Kayıt bulunamadı.</td></tr>';
         return;
       }
 
@@ -304,6 +310,7 @@
           <td><span class="pill">${s.name || "-"}</span></td>
           <td>${s.stamina || "-"}</td>
           <td>${s.actionType || "-"}</td>
+          <td>${s.branch || "-"}</td>
           <td>${s.area || "-"}</td>
           <td>
             <button type="button" onclick="editSkill(${index})">Düzenle</button>
@@ -322,6 +329,7 @@
       document.getElementById("formName").value = s.name || "";
       document.getElementById("formStamina").value = s.stamina || "";
       document.getElementById("formActionType").value = s.actionType || "";
+      document.getElementById("formBranch").value = s.branch || "";
       document.getElementById("formArea").value = s.area || "";
       document.getElementById("formDesc").value = s.desc || "";
       document.getElementById("formNote").value = s.note || "";
@@ -344,6 +352,7 @@
         level: document.getElementById("formLevel").value.trim(),
         stamina: document.getElementById("formStamina").value.trim(),
         actionType: document.getElementById("formActionType").value.trim(),
+        branch: document.getElementById("formBranch").value.trim(),
         area: document.getElementById("formArea").value.trim(),
         desc: document.getElementById("formDesc").value.trim(),
         note: document.getElementById("formNote").value.trim()
@@ -394,13 +403,43 @@
       renderAdminTable();
     }
 
-    function downloadJson() {
+    async function downloadJson() {
       const dataStr = JSON.stringify(adminSkills, null, 2);
       const blob = new Blob([dataStr], { type: "application/json" });
+      const filename = "yetenekler-physical.json";
+      
+      // File System Access API desteği varsa kullan (kaydetme yolu seçme)
+      if ('showSaveFilePicker' in window) {
+        try {
+          const fileHandle = await window.showSaveFilePicker({
+            suggestedName: filename,
+            types: [{
+              description: 'JSON Dosyası',
+              accept: { 'application/json': ['.json'] }
+            }]
+          });
+          const writable = await fileHandle.createWritable();
+          await writable.write(blob);
+          await writable.close();
+          alert("JSON dosyası başarıyla kaydedildi.");
+        } catch (err) {
+          if (err.name !== 'AbortError') {
+            console.error(err);
+            // Fallback: indirme
+            fallbackDownload(blob, filename);
+          }
+        }
+      } else {
+        // Fallback: indirme
+        fallbackDownload(blob, filename);
+      }
+    }
+    
+    function fallbackDownload(blob, filename) {
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = "yetenekler-physical.json";
+      a.download = filename;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

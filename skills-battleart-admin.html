@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>SLVNZ FANTAZYA - Yetenek Admin</title>
+  <title>SLVNZ FANTAZYA - Savaş Sanatı Admin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="slvnz.css" rel="stylesheet" type="text/css">
   <style>
@@ -145,7 +145,7 @@
 <body>
   <div class="admin-wrapper">
     <div class="admin-header">
-      <h1>Yetenek Admin Paneli</h1>
+      <h1>Savaş Sanatı Admin Paneli</h1>
       <div class="admin-actions">
         <button onclick="saveToServer()">Sunucuya kaydet</button>
         <button onclick="downloadJson()">JSON'u kaydet</button>
@@ -156,17 +156,17 @@
     </div>
 
     <p class="muted">
-      Bu panel ile <code>yetenekler.json</code> dosyasını düzenleyebilirsiniz. Kaydedilen değişiklikleri Git'e ekleyip
+      Bu panel ile <code>yetenekler-battleart.json</code> dosyasını düzenleyebilirsiniz. Kaydedilen değişiklikleri Git'e ekleyip
       yayınlamak için oluşturulan JSON'u indirip proje dosyanızın üzerine yazmanız gerekir (statik GitHub Pages sunucusunda
       dosyalar otomatik yazılamaz).
     </p>
 
     <div class="admin-layout">
       <div class="admin-panel">
-        <h2>Yetenek Listesi</h2>
+        <h2>Savaş Sanatı Listesi</h2>
         <div style="margin-bottom: 10px; font-size: 9pt;">
           <span class="badge" id="adminCountBadge">0 kayıt</span>
-          <input type="text" id="adminSearch" placeholder="İsim / enerji / kaynak ara..." style="width: 60%;" oninput="renderAdminTable()">
+          <input type="text" id="adminSearch" placeholder="İsim / enerji / stamina / açıklama ara..." style="width: 60%;" oninput="renderAdminTable()">
         </div>
         <div class="admin-table-wrapper">
           <table>
@@ -176,6 +176,7 @@
                 <th>Seviye</th>
                 <th>İsim</th>
                 <th>Enerji</th>
+                <th>Stamina</th>
                 <th>Kaynak</th>
                 <th>Bedel</th>
                 <th>Eylem Türü</th>
@@ -187,7 +188,7 @@
             </thead>
             <tbody id="adminTbody">
               <tr>
-                <td colspan="10" class="muted">Veri yükleniyor...</td>
+                <td colspan="12" class="muted">Veri yükleniyor...</td>
               </tr>
             </tbody>
           </table>
@@ -195,12 +196,12 @@
       </div>
 
       <div class="admin-panel">
-        <h2>Yetenek Ekle / Düzenle</h2>
+        <h2>Savaş Sanatı Ekle / Düzenle</h2>
         <form id="skillForm" onsubmit="saveSkill(event)">
           <div class="admin-form">
             <div>
               <label for="formId">ID</label>
-              <input type="text" id="formId" placeholder="Benzersiz ID (örn. fire-bolt)">
+              <input type="text" id="formId" placeholder="Benzersiz ID (örn. battle-art-1)">
             </div>
             <div>
               <label for="formLevel">Seviye</label>
@@ -256,6 +257,10 @@
               </select>
             </div>
             <div>
+              <label for="formStamina">Stamina</label>
+              <input type="number" id="formStamina" placeholder="Örn. 5" min="0" max="999">
+            </div>
+            <div>
               <label for="formSource">Kaynak</label>
               <select id="formSource">
                 <option value="">(boş)</option>
@@ -307,7 +312,7 @@
             </div>
             <div class="admin-form-row-full">
               <label for="formDesc">Açıklama</label>
-              <textarea id="formDesc" placeholder="Yetenek açıklaması..."></textarea>
+              <textarea id="formDesc" placeholder="Savaş sanatı açıklaması..."></textarea>
             </div>
             <div class="admin-form-row-full">
               <label for="formNote">Özel Not</label>
@@ -327,8 +332,8 @@
   <input type="file" id="jsonFileInput" accept="application/json" style="display:none">
 
   <script>
-    const RAW_JSON_URL = "./yetenekler.json";
-    const API_URL = "/api/yetenekler";
+    const RAW_JSON_URL = "./yetenekler-battleart.json";
+    const API_URL = "/api/yetenekler-battleart";
 
     let adminSkills = [];
     let editingIndex = null;
@@ -347,13 +352,13 @@
         .filter(({ s }) => {
           if (!search) return true;
           const hay = [
-            s.id, s.name, s.energy, s.source, s.range, s.area, s.duration, s.sourceAmt, s.actionType, s.desc, s.note
+            s.id, s.name, s.energy, s.stamina, s.source, s.range, s.area, s.duration, s.sourceAmt, s.actionType, s.desc, s.note
           ].join(" ").toLowerCase();
           return hay.includes(search);
         });
 
       if (rows.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="10" class="muted">Kayıt bulunamadı.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="12" class="muted">Kayıt bulunamadı.</td></tr>';
         return;
       }
 
@@ -363,6 +368,7 @@
           <td>${s.level || "-"}</td>
           <td><span class="pill">${s.name || "-"}</span></td>
           <td>${s.energy || "-"}</td>
+          <td>${s.stamina || "-"}</td>
           <td>${s.source || "-"}</td>
           <td>${s.sourceAmt || "-"}</td>
           <td>${s.actionType || "-"}</td>
@@ -385,6 +391,7 @@
       document.getElementById("formLevel").value = s.level || "";
       document.getElementById("formName").value = s.name || "";
       document.getElementById("formEnergy").value = s.energy || "";
+      document.getElementById("formStamina").value = s.stamina || "";
       document.getElementById("formSource").value = s.source || "";
       document.getElementById("formSourceAmt").value = s.sourceAmt || "";
       document.getElementById("formDuration").value = s.duration || "";
@@ -410,10 +417,11 @@
         id: document.getElementById("formId").value.trim(),
         name: document.getElementById("formName").value.trim(),
         level: document.getElementById("formLevel").value.trim(),
-        duration: document.getElementById("formDuration").value.trim(),
         energy: document.getElementById("formEnergy").value.trim(),
+        stamina: document.getElementById("formStamina").value.trim(),
         source: document.getElementById("formSource").value.trim(),
         sourceAmt: document.getElementById("formSourceAmt").value.trim(),
+        duration: document.getElementById("formDuration").value.trim(),
         range: document.getElementById("formRange").value.trim(),
         area: document.getElementById("formArea").value.trim(),
         actionType: document.getElementById("formActionType").value.trim(),
@@ -429,7 +437,7 @@
       // ID boşsa otomatik üret
       if (!newSkill.id) {
         const base = newSkill.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-        let candidate = base || "skill";
+        let candidate = base || "battleart-skill";
         let counter = 1;
         while (adminSkills.some(s => s.id === candidate)) {
           candidate = base + "-" + counter++;
@@ -456,7 +464,7 @@
     }
 
     function deleteSkill(index) {
-      if (!confirm("Bu yeteneği silmek istediğinize emin misiniz?")) return;
+      if (!confirm("Bu savaş sanatını silmek istediğinize emin misiniz?")) return;
       adminSkills.splice(index, 1);
       if (editingIndex === index) {
         editingIndex = null;
@@ -469,7 +477,7 @@
     async function downloadJson() {
       const dataStr = JSON.stringify(adminSkills, null, 2);
       const blob = new Blob([dataStr], { type: "application/json" });
-      const filename = "yetenekler.json";
+      const filename = "yetenekler-battleart.json";
       
       // File System Access API desteği varsa kullan (kaydetme yolu seçme)
       if ('showSaveFilePicker' in window) {
@@ -576,7 +584,7 @@
         } catch (fileErr) {
           console.error(fileErr);
           adminSkills = [];
-          alert("yetenekler.json yüklenemedi: " + (fileErr.message || fileErr));
+          alert("yetenekler-battleart.json yüklenemedi: " + (fileErr.message || fileErr));
         }
       }
       updateAdminCount();
@@ -587,4 +595,3 @@
   </script>
 </body>
 </html>
-

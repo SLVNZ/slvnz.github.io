@@ -1,0 +1,17 @@
+[
+  {
+    "id": "ornek-savas-sanati-1",
+    "name": "Örnek Savaş Sanatı",
+    "level": 0,
+    "energy": "Yıkım",
+    "stamina": 5,
+    "source": "Mana",
+    "sourceAmt": "10",
+    "actionType": "Eylem",
+    "duration": "Anlık",
+    "range": "18 m",
+    "area": "Tek hedef",
+    "desc": "Bu, savaş sanatları için örnek bir kayıttır. Kendi verilerinle değiştir.",
+    "note": ""
+  }
+]

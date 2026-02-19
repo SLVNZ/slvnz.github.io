@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "name": "Aşçılık",
+    "exp": "100",
+    "requirement": "",
+    "desc": "Karakterin yemek yapma konusundaki el hassasiyetini, tarifleri  uygulama yetisini, lezzeti oluşturma konusundaki tecrübeye bağlı deneyim ve yetkinliğidir.",
+    "note": ""
+  },
+  {
+    "id": "2",
+    "name": "Demircilik",
+    "exp": "250",
+    "requirement": "",
+    "desc": "Karakterin demiri işleme ve ondan bir ürün meydana getirebilme, var olan ürünü tamir edebilme ya da dönüştürebilme becerisi.",
+    "note": ""
+  },
+  {
+    "id": "3",
+    "name": "Akrobasi",
+    "exp": "100",
+    "requirement": "ÇEV 2",
+    "desc": "Bir karakterin dengesini koruma, hızlı reaksiyonlar sırasında esnek davranma gibi tepkileri ve genel yeteneğine katkısını belirler.",
+    "note": ""
+  }
+]
