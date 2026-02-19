@@ -2,9 +2,9 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>SLVNZ FANTAZYA - Hüner Admin</title>
+  <title>SLVNZ FANTAZYA - Özel Beceri Admin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="slvnz.css" rel="stylesheet" type="text/css">
+  <link href="../slvnz.css" rel="stylesheet" type="text/css">
   <style>
     body {
       align-items: stretch;
@@ -145,41 +145,43 @@
 <body>
   <div class="admin-wrapper">
     <div class="admin-header">
-      <h1>Hüner Admin Paneli</h1>
+      <h1>Özel Beceri Admin Paneli</h1>
       <div class="admin-actions">
         <button onclick="saveToServer()">Sunucuya kaydet</button>
         <button onclick="downloadJson()">JSON'u kaydet</button>
         <button onclick="document.getElementById('jsonFileInput').click()">JSON yükle</button>
         <button onclick="location.href='admin-dashboard.html'">Admin Dashboard</button>
-        <button onclick="location.href='game-skills.html'">Yetenekler Sayfasına Dön</button>
+        <button onclick="location.href='../game-skills.html'">Yetenekler Sayfasına Dön</button>
       </div>
     </div>
 
     <p class="muted">
-      Bu panel ile <code>yetenekler-talents.json</code> dosyasını düzenleyebilirsiniz. Kaydedilen değişiklikleri Git'e ekleyip
+      Bu panel ile <code>yetenekler-special.json</code> dosyasını düzenleyebilirsiniz. Kaydedilen değişiklikleri Git'e ekleyip
       yayınlamak için oluşturulan JSON'u indirip proje dosyanızın üzerine yazmanız gerekir (statik GitHub Pages sunucusunda
       dosyalar otomatik yazılamaz).
     </p>
 
     <div class="admin-layout">
       <div class="admin-panel">
-        <h2>Hüner Listesi</h2>
+        <h2>Özel Beceri Listesi</h2>
         <div style="margin-bottom: 10px; font-size: 9pt;">
           <span class="badge" id="adminCountBadge">0 kayıt</span>
-          <input type="text" id="adminSearch" placeholder="İsim / açıklama ara..." style="width: 60%;" oninput="renderAdminTable()">
+          <input type="text" id="adminSearch" placeholder="İsim / deneyim puanı / gereksinim / açıklama ara..." style="width: 60%;" oninput="renderAdminTable()">
         </div>
         <div class="admin-table-wrapper">
           <table>
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Hüner İsmi</th>
+                <th>Özel Beceri İsmi</th>
+                <th>Temel Deneyim Puanı</th>
+                <th>Gereksinim</th>
                 <th>İşlem</th>
               </tr>
             </thead>
             <tbody id="adminTbody">
               <tr>
-                <td colspan="3" class="muted">Veri yükleniyor...</td>
+                <td colspan="5" class="muted">Veri yükleniyor...</td>
               </tr>
             </tbody>
           </table>
@@ -187,20 +189,28 @@
       </div>
 
       <div class="admin-panel">
-        <h2>Hüner Ekle / Düzenle</h2>
+        <h2>Özel Beceri Ekle / Düzenle</h2>
         <form id="skillForm" onsubmit="saveSkill(event)">
           <div class="admin-form">
             <div>
               <label for="formId">ID</label>
-              <input type="text" id="formId" placeholder="Benzersiz ID (örn. talent-1)">
+              <input type="text" id="formId" placeholder="Benzersiz ID (örn. special-skill-1)">
             </div>
             <div class="admin-form-row-full">
-              <label for="formName">Hüner İsmi</label>
+              <label for="formName">Özel Beceri İsmi</label>
               <input type="text" id="formName" required>
+            </div>
+            <div>
+              <label for="formExp">Temel Deneyim Puanı</label>
+              <input type="number" id="formExp" placeholder="Örn. 100" min="0" max="9999">
+            </div>
+            <div class="admin-form-row-full">
+              <label for="formRequirement">Gereksinim</label>
+              <input type="text" id="formRequirement" placeholder="Örn. Seviye 5, Özel Yetenek X">
             </div>
             <div class="admin-form-row-full">
               <label for="formDesc">Açıklama</label>
-              <textarea id="formDesc" placeholder="Hüner açıklaması..."></textarea>
+              <textarea id="formDesc" placeholder="Özel beceri açıklaması..."></textarea>
             </div>
             <div class="admin-form-row-full">
               <label for="formNote">Özel Not</label>
@@ -220,33 +230,33 @@
   <input type="file" id="jsonFileInput" accept="application/json" style="display:none">
 
   <script>
-    const RAW_JSON_URL = "./yetenekler-talents.json";
-    const API_URL = "/api/yetenekler-talents";
+    const RAW_JSON_URL = "./yetenekler-special.json";
+    const API_URL = "/api/yetenekler-special";
 
-    let adminTalents = [];
+    let adminSkills = [];
     let editingIndex = null;
 
     function updateAdminCount() {
       const badge = document.getElementById("adminCountBadge");
-      badge.textContent = adminTalents.length + " kayıt";
+      badge.textContent = adminSkills.length + " kayıt";
     }
 
     function renderAdminTable() {
       const tbody = document.getElementById("adminTbody");
       const search = (document.getElementById("adminSearch").value || "").toLowerCase().trim();
 
-      const rows = adminTalents
+      const rows = adminSkills
         .map((s, index) => ({ s, index }))
         .filter(({ s }) => {
           if (!search) return true;
           const hay = [
-            s.id, s.name, s.desc, s.note
+            s.id, s.name, s.exp, s.requirement, s.desc, s.note
           ].join(" ").toLowerCase();
           return hay.includes(search);
         });
 
       if (rows.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="3" class="muted">Kayıt bulunamadı.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5" class="muted">Kayıt bulunamadı.</td></tr>';
         return;
       }
 
@@ -254,20 +264,24 @@
         <tr class="${editingIndex === index ? "selected" : ""}">
           <td>${s.id || "-"}</td>
           <td><span class="pill">${s.name || "-"}</span></td>
+          <td>${s.exp || "-"}</td>
+          <td>${s.requirement || "-"}</td>
           <td>
-            <button type="button" onclick="editTalent(${index})">Düzenle</button>
-            <button type="button" onclick="deleteTalent(${index})">Sil</button>
+            <button type="button" onclick="editSkill(${index})">Düzenle</button>
+            <button type="button" onclick="deleteSkill(${index})">Sil</button>
           </td>
         </tr>
       `).join("");
     }
 
-    function editTalent(index) {
-      const s = adminTalents[index];
+    function editSkill(index) {
+      const s = adminSkills[index];
       editingIndex = index;
 
       document.getElementById("formId").value = s.id || "";
       document.getElementById("formName").value = s.name || "";
+      document.getElementById("formExp").value = s.exp || "";
+      document.getElementById("formRequirement").value = s.requirement || "";
       document.getElementById("formDesc").value = s.desc || "";
       document.getElementById("formNote").value = s.note || "";
 
@@ -283,30 +297,32 @@
     function saveSkill(event) {
       event.preventDefault();
 
-      const newTalent = {
+      const newSkill = {
         id: document.getElementById("formId").value.trim(),
         name: document.getElementById("formName").value.trim(),
+        exp: document.getElementById("formExp").value.trim(),
+        requirement: document.getElementById("formRequirement").value.trim(),
         desc: document.getElementById("formDesc").value.trim(),
         note: document.getElementById("formNote").value.trim()
       };
 
-      if (!newTalent.name) {
-        alert("Hüner İsmi alanı zorunludur.");
+      if (!newSkill.name) {
+        alert("Özel Beceri İsmi alanı zorunludur.");
         return;
       }
 
       // ID boşsa otomatik üret
-      if (!newTalent.id) {
-        const base = newTalent.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-        let candidate = base || "talent";
+      if (!newSkill.id) {
+        const base = newSkill.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+        let candidate = base || "special-skill";
         let counter = 1;
-        while (adminTalents.some(s => s.id === candidate)) {
+        while (adminSkills.some(s => s.id === candidate)) {
           candidate = base + "-" + counter++;
         }
-        newTalent.id = candidate;
+        newSkill.id = candidate;
       } else {
         // Benzersiz ID kontrolü (düzenleme dışındaki kayıtlar için)
-        const exists = adminTalents.some((s, idx) => s.id === newTalent.id && idx !== editingIndex);
+        const exists = adminSkills.some((s, idx) => s.id === newSkill.id && idx !== editingIndex);
         if (exists) {
           alert("Bu ID zaten kullanılıyor. Lütfen farklı bir ID girin.");
           return;
@@ -314,9 +330,9 @@
       }
 
       if (editingIndex === null) {
-        adminTalents.push(newTalent);
+        adminSkills.push(newSkill);
       } else {
-        adminTalents[editingIndex] = newTalent;
+        adminSkills[editingIndex] = newSkill;
       }
 
       updateAdminCount();
@@ -324,9 +340,9 @@
       renderAdminTable();
     }
 
-    function deleteTalent(index) {
-      if (!confirm("Bu hüneri silmek istediğinize emin misiniz?")) return;
-      adminTalents.splice(index, 1);
+    function deleteSkill(index) {
+      if (!confirm("Bu özel beceriyi silmek istediğinize emin misiniz?")) return;
+      adminSkills.splice(index, 1);
       if (editingIndex === index) {
         editingIndex = null;
         document.getElementById("skillForm").reset();
@@ -336,9 +352,9 @@
     }
 
     async function downloadJson() {
-      const dataStr = JSON.stringify(adminTalents, null, 2);
+      const dataStr = JSON.stringify(adminSkills, null, 2);
       const blob = new Blob([dataStr], { type: "application/json" });
-      const filename = "yetenekler-talents.json";
+      const filename = "yetenekler-special.json";
       
       // File System Access API desteği varsa kullan (kaydetme yolu seçme)
       if ('showSaveFilePicker' in window) {
@@ -392,7 +408,7 @@
             alert("JSON formatı geçersiz. Kök öğe bir dizi olmalı.");
             return;
           }
-          adminTalents = data;
+          adminSkills = data;
           editingIndex = null;
           document.getElementById("skillForm").reset();
           updateAdminCount();
@@ -414,7 +430,7 @@
         const res = await fetch(API_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(adminTalents, null, 2)
+          body: JSON.stringify(adminSkills, null, 2)
         });
         if (!res.ok) throw new Error("HTTP " + res.status + " (" + res.statusText + ")");
         alert("Değişiklikler sunucuya kaydedildi.");
@@ -431,9 +447,9 @@
         if (!res.ok) throw new Error("HTTP " + res.status + " (" + res.statusText + ")");
         const data = await res.json();
         if (Array.isArray(data)) {
-          adminTalents = data;
+          adminSkills = data;
         } else {
-          adminTalents = [];
+          adminSkills = [];
         }
       } catch (apiErr) {
         console.warn("API'den yüklenemedi, doğrudan JSON okunacak:", apiErr);
@@ -441,11 +457,11 @@
           const res = await fetch(RAW_JSON_URL, { cache: "no-store" });
           if (!res.ok) throw new Error("HTTP " + res.status + " (" + res.statusText + ")");
           const data = await res.json();
-          adminTalents = Array.isArray(data) ? data : [];
+          adminSkills = Array.isArray(data) ? data : [];
         } catch (fileErr) {
           console.error(fileErr);
-          adminTalents = [];
-          alert("yetenekler-talents.json yüklenemedi: " + (fileErr.message || fileErr));
+          adminSkills = [];
+          alert("yetenekler-special.json yüklenemedi: " + (fileErr.message || fileErr));
         }
       }
       updateAdminCount();

@@ -2,9 +2,9 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>SLVNZ FANTAZYA - Özel Beceri Admin</title>
+  <title>SLVNZ FANTAZYA - Savaş Sanatı Admin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="slvnz.css" rel="stylesheet" type="text/css">
+  <link href="../slvnz.css" rel="stylesheet" type="text/css">
   <style>
     body {
       align-items: stretch;
@@ -145,43 +145,50 @@
 <body>
   <div class="admin-wrapper">
     <div class="admin-header">
-      <h1>Özel Beceri Admin Paneli</h1>
+      <h1>Savaş Sanatı Admin Paneli</h1>
       <div class="admin-actions">
         <button onclick="saveToServer()">Sunucuya kaydet</button>
         <button onclick="downloadJson()">JSON'u kaydet</button>
         <button onclick="document.getElementById('jsonFileInput').click()">JSON yükle</button>
         <button onclick="location.href='admin-dashboard.html'">Admin Dashboard</button>
-        <button onclick="location.href='game-skills.html'">Yetenekler Sayfasına Dön</button>
+        <button onclick="location.href='../game-skills.html'">Yetenekler Sayfasına Dön</button>
       </div>
     </div>
 
     <p class="muted">
-      Bu panel ile <code>yetenekler-special.json</code> dosyasını düzenleyebilirsiniz. Kaydedilen değişiklikleri Git'e ekleyip
+      Bu panel ile <code>yetenekler-battleart.json</code> dosyasını düzenleyebilirsiniz. Kaydedilen değişiklikleri Git'e ekleyip
       yayınlamak için oluşturulan JSON'u indirip proje dosyanızın üzerine yazmanız gerekir (statik GitHub Pages sunucusunda
       dosyalar otomatik yazılamaz).
     </p>
 
     <div class="admin-layout">
       <div class="admin-panel">
-        <h2>Özel Beceri Listesi</h2>
+        <h2>Savaş Sanatı Listesi</h2>
         <div style="margin-bottom: 10px; font-size: 9pt;">
           <span class="badge" id="adminCountBadge">0 kayıt</span>
-          <input type="text" id="adminSearch" placeholder="İsim / deneyim puanı / gereksinim / açıklama ara..." style="width: 60%;" oninput="renderAdminTable()">
+          <input type="text" id="adminSearch" placeholder="İsim / enerji / stamina / açıklama ara..." style="width: 60%;" oninput="renderAdminTable()">
         </div>
         <div class="admin-table-wrapper">
           <table>
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Özel Beceri İsmi</th>
-                <th>Temel Deneyim Puanı</th>
-                <th>Gereksinim</th>
+                <th>Seviye</th>
+                <th>İsim</th>
+                <th>Enerji</th>
+                <th>Stamina</th>
+                <th>Kaynak</th>
+                <th>Bedel</th>
+                <th>Eylem Türü</th>
+                <th>Süre</th>
+                <th>Menzil</th>
+                <th>Alan</th>
                 <th>İşlem</th>
               </tr>
             </thead>
             <tbody id="adminTbody">
               <tr>
-                <td colspan="5" class="muted">Veri yükleniyor...</td>
+                <td colspan="12" class="muted">Veri yükleniyor...</td>
               </tr>
             </tbody>
           </table>
@@ -189,28 +196,123 @@
       </div>
 
       <div class="admin-panel">
-        <h2>Özel Beceri Ekle / Düzenle</h2>
+        <h2>Savaş Sanatı Ekle / Düzenle</h2>
         <form id="skillForm" onsubmit="saveSkill(event)">
           <div class="admin-form">
             <div>
               <label for="formId">ID</label>
-              <input type="text" id="formId" placeholder="Benzersiz ID (örn. special-skill-1)">
+              <input type="text" id="formId" placeholder="Benzersiz ID (örn. battle-art-1)">
+            </div>
+            <div>
+              <label for="formLevel">Seviye</label>
+              <select id="formLevel">
+                <option value="">(boş)</option>
+                <option value="0">Bazbüyü</option>
+                <option value="1">Seviye 1</option>
+                <option value="2">Seviye 2</option>
+                <option value="3">Seviye 3</option>
+                <option value="4">Seviye 4</option>
+                <option value="5">Seviye 5</option>
+                <option value="6">Seviye 6</option>
+                <option value="7">Seviye 7</option>
+                <option value="8">Seviye 8</option>
+                <option value="9">Seviye 9</option>
+                <option value="10">Seviye 10</option>
+                <option value="11">Seviye 11</option>
+                <option value="12">Seviye 12</option>
+                <option value="13">Seviye 13</option>
+                <option value="14">Seviye 14</option>
+                <option value="15">Seviye 15</option>
+                <option value="16">Seviye 16</option>
+                <option value="17">Seviye 17</option>
+                <option value="18">Seviye 18</option>
+                <option value="19">Seviye 19</option>
+                <option value="20">Seviye 20</option>
+              </select>
             </div>
             <div class="admin-form-row-full">
-              <label for="formName">Özel Beceri İsmi</label>
+              <label for="formName">İsim</label>
               <input type="text" id="formName" required>
             </div>
             <div>
-              <label for="formExp">Temel Deneyim Puanı</label>
-              <input type="number" id="formExp" placeholder="Örn. 100" min="0" max="9999">
+              <label for="formEnergy">Enerji</label>
+              <select id="formEnergy">
+                <option value="">(boş)</option>
+                <option value="Yıkım">Yıkım</option>
+                <option value="Kehanet">Kehanet</option>
+                <option value="Oluşturma">Oluşturma</option>
+                <option value="Koruma">Koruma</option>
+                <option value="Dönüştürme">Dönüştürme</option>
+                <option value="İllüzyon">İllüzyon</option>
+                <option value="Efsun">Efsun</option>
+                <option value="Çürüme">Çürüme</option>
+                <option value="İnanç">İnanç</option>
+                <option value="Pakt">Pakt</option>
+                <option value="Kan">Kan</option>
+                <option value="Kaos">Kaos</option>
+                <option value="Karanlık">Karanlık</option>
+                <option value="Aydınlık">Aydınlık</option>
+                <option value="Ruh">Ruh</option>
+                <option value="Yaşam">Yaşam</option>
+              </select>
             </div>
-            <div class="admin-form-row-full">
-              <label for="formRequirement">Gereksinim</label>
-              <input type="text" id="formRequirement" placeholder="Örn. Seviye 5, Özel Yetenek X">
+            <div>
+              <label for="formStamina">Stamina</label>
+              <input type="number" id="formStamina" placeholder="Örn. 5" min="0" max="999">
+            </div>
+            <div>
+              <label for="formSource">Kaynak</label>
+              <select id="formSource">
+                <option value="">(boş)</option>
+                <option value="Mana">Mana</option>
+                <option value="Ki">Ki</option>
+                <option value="Ruh">Ruh</option>
+                <option value="Yaşam">Yaşam</option>
+              </select>
+            </div>
+            <div>
+              <label for="formSourceAmt">Bedel</label>
+              <input type="text" id="formSourceAmt" placeholder="Örn. 5">
+            </div>
+            <div>
+              <label for="formDuration">Süre</label>
+              <select id="formDuration">
+                <option value="">(boş)</option>
+                <option value="Anlık">Anlık</option>
+                <option value="10 Tur">10 Tur</option>
+                <option value="1 Dakika">1 Dakika</option>
+                <option value="10 Dakika">10 Dakika</option>
+                <option value="30 Dakika">30 Dakika</option>
+                <option value="1 Saat">1 Saat</option>
+                <option value="2 Saat">2 Saat</option>
+                <option value="4 Saat">4 Saat</option>
+                <option value="6 Saat">6 Saat</option>
+                <option value="8 Saat">8 Saat</option>
+                <option value="12 Saat">12 Saat</option>
+                <option value="24 Saat">24 Saat</option>
+                <option value="1gün+">1gün+</option>
+              </select>
+            </div>
+            <div>
+              <label for="formRange">Menzil</label>
+              <input type="text" id="formRange" placeholder="Örn. 18 m, Kendin">
+            </div>
+            <div>
+              <label for="formArea">Alan</label>
+              <input type="text" id="formArea" placeholder="Tek hedef, Konik, Küre...">
+            </div>
+            <div>
+              <label for="formActionType">Eylem Türü</label>
+              <select id="formActionType">
+                <option value="">(boş)</option>
+                <option value="Eylem">Eylem</option>
+                <option value="Ek Eylem">Ek Eylem</option>
+                <option value="Tepki Eylem">Tepki Eylem</option>
+              </select>
             </div>
             <div class="admin-form-row-full">
               <label for="formDesc">Açıklama</label>
-              <textarea id="formDesc" placeholder="Özel beceri açıklaması..."></textarea>
+              <textarea id="formDesc" placeholder="Savaş sanatı açıklaması..."></textarea>
             </div>
             <div class="admin-form-row-full">
               <label for="formNote">Özel Not</label>
@@ -230,8 +332,8 @@
   <input type="file" id="jsonFileInput" accept="application/json" style="display:none">
 
   <script>
-    const RAW_JSON_URL = "./yetenekler-special.json";
-    const API_URL = "/api/yetenekler-special";
+    const RAW_JSON_URL = "./yetenekler-battleart.json";
+    const API_URL = "/api/yetenekler-battleart";
 
     let adminSkills = [];
     let editingIndex = null;
@@ -250,22 +352,29 @@
         .filter(({ s }) => {
           if (!search) return true;
           const hay = [
-            s.id, s.name, s.exp, s.requirement, s.desc, s.note
+            s.id, s.name, s.energy, s.stamina, s.source, s.range, s.area, s.duration, s.sourceAmt, s.actionType, s.desc, s.note
           ].join(" ").toLowerCase();
           return hay.includes(search);
         });
 
       if (rows.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" class="muted">Kayıt bulunamadı.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="12" class="muted">Kayıt bulunamadı.</td></tr>';
         return;
       }
 
       tbody.innerHTML = rows.map(({ s, index }) => `
         <tr class="${editingIndex === index ? "selected" : ""}">
           <td>${s.id || "-"}</td>
+          <td>${s.level || "-"}</td>
           <td><span class="pill">${s.name || "-"}</span></td>
-          <td>${s.exp || "-"}</td>
-          <td>${s.requirement || "-"}</td>
+          <td>${s.energy || "-"}</td>
+          <td>${s.stamina || "-"}</td>
+          <td>${s.source || "-"}</td>
+          <td>${s.sourceAmt || "-"}</td>
+          <td>${s.actionType || "-"}</td>
+          <td>${s.duration || "-"}</td>
+          <td>${s.range || "-"}</td>
+          <td>${s.area || "-"}</td>
           <td>
             <button type="button" onclick="editSkill(${index})">Düzenle</button>
             <button type="button" onclick="deleteSkill(${index})">Sil</button>
@@ -279,9 +388,16 @@
       editingIndex = index;
 
       document.getElementById("formId").value = s.id || "";
+      document.getElementById("formLevel").value = s.level || "";
       document.getElementById("formName").value = s.name || "";
-      document.getElementById("formExp").value = s.exp || "";
-      document.getElementById("formRequirement").value = s.requirement || "";
+      document.getElementById("formEnergy").value = s.energy || "";
+      document.getElementById("formStamina").value = s.stamina || "";
+      document.getElementById("formSource").value = s.source || "";
+      document.getElementById("formSourceAmt").value = s.sourceAmt || "";
+      document.getElementById("formDuration").value = s.duration || "";
+      document.getElementById("formRange").value = s.range || "";
+      document.getElementById("formArea").value = s.area || "";
+      document.getElementById("formActionType").value = s.actionType || "";
       document.getElementById("formDesc").value = s.desc || "";
       document.getElementById("formNote").value = s.note || "";
 
@@ -300,21 +416,28 @@
       const newSkill = {
         id: document.getElementById("formId").value.trim(),
         name: document.getElementById("formName").value.trim(),
-        exp: document.getElementById("formExp").value.trim(),
-        requirement: document.getElementById("formRequirement").value.trim(),
+        level: document.getElementById("formLevel").value.trim(),
+        energy: document.getElementById("formEnergy").value.trim(),
+        stamina: document.getElementById("formStamina").value.trim(),
+        source: document.getElementById("formSource").value.trim(),
+        sourceAmt: document.getElementById("formSourceAmt").value.trim(),
+        duration: document.getElementById("formDuration").value.trim(),
+        range: document.getElementById("formRange").value.trim(),
+        area: document.getElementById("formArea").value.trim(),
+        actionType: document.getElementById("formActionType").value.trim(),
         desc: document.getElementById("formDesc").value.trim(),
         note: document.getElementById("formNote").value.trim()
       };
 
       if (!newSkill.name) {
-        alert("Özel Beceri İsmi alanı zorunludur.");
+        alert("İsim alanı zorunludur.");
         return;
       }
 
       // ID boşsa otomatik üret
       if (!newSkill.id) {
         const base = newSkill.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-        let candidate = base || "special-skill";
+        let candidate = base || "battleart-skill";
         let counter = 1;
         while (adminSkills.some(s => s.id === candidate)) {
           candidate = base + "-" + counter++;
@@ -341,7 +464,7 @@
     }
 
     function deleteSkill(index) {
-      if (!confirm("Bu özel beceriyi silmek istediğinize emin misiniz?")) return;
+      if (!confirm("Bu savaş sanatını silmek istediğinize emin misiniz?")) return;
       adminSkills.splice(index, 1);
       if (editingIndex === index) {
         editingIndex = null;
@@ -354,7 +477,7 @@
     async function downloadJson() {
       const dataStr = JSON.stringify(adminSkills, null, 2);
       const blob = new Blob([dataStr], { type: "application/json" });
-      const filename = "yetenekler-special.json";
+      const filename = "yetenekler-battleart.json";
       
       // File System Access API desteği varsa kullan (kaydetme yolu seçme)
       if ('showSaveFilePicker' in window) {
@@ -461,7 +584,7 @@
         } catch (fileErr) {
           console.error(fileErr);
           adminSkills = [];
-          alert("yetenekler-special.json yüklenemedi: " + (fileErr.message || fileErr));
+          alert("yetenekler-battleart.json yüklenemedi: " + (fileErr.message || fileErr));
         }
       }
       updateAdminCount();
