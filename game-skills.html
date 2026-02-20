@@ -60,9 +60,16 @@
 			</p>
 		</div>
 
-		<div class="page-panel-interior-full" id="skills-energy">
+		<div class="page-panel-interior-full active" id="skills-energy">
 
-				<div class="container">
+				<div class="page-panel-content energy-sub-tabs-wrapper" style="margin: 0; padding: 0;">
+					<div class="page-panel-content-child-menu energy-sub-tabs" data-default="energy-sub-yetenekler">
+						<button data-target="energy-sub-yetenekler" class="active" style="padding: 0; background: transparent;">Yetenekler</button>
+						<button data-target="energy-sub-akimlar" style="padding: 0; background: transparent;">Enerji Akımları</button>
+					</div>
+
+					<div id="energy-sub-yetenekler" class="page-panel-content-child active">
+				<div class="container" style="margin-top: 0;">
 					<div class="filter">
 						<input type="text" id="q" placeholder="Metinde ara (isim, açıklama, vb.)">
 						<select id="levelFilter">
@@ -167,6 +174,35 @@
 
 						<div id="desc" class="spell-description">
 							<!-- Seçili yeteneğin detayları JavaScript ile buraya yazılacak -->
+						</div>
+					</div>
+				</div>
+					</div>
+
+					<div id="energy-sub-akimlar" class="page-panel-content-child">
+						<div class="container" style="margin-top: 0;">
+							<div class="filter">
+								<input type="text" id="qAkimlar" placeholder="Akım adı veya açıklamada ara...">
+								<span id="countBadgeAkimlar" style="display: none;">0 kayıt</span>
+								<span id="selBadgeAkimlar" style="display: none;">Seçili: Yok</span>
+							</div>
+							<div class="main-content">
+								<div class="spell-list">
+									<table>
+										<thead>
+											<tr>
+												<th style="width: 60%;">Akım Adı</th>
+												<th style="width: 20%;">Bedel (Akım)</th>
+												<th style="width: 20%;">Deneyim Puanı</th>
+											</tr>
+										</thead>
+										<tbody id="tbodyAkimlar">
+										</tbody>
+									</table>
+								</div>
+								<div id="descAkimlar" class="spell-description">
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -763,6 +799,156 @@
 		}
 
 		loadJson();
+
+		/***********************
+		 * ENERJİ AKIMLARI (alt tab)
+		 ************************/
+		const JSON_URL_AKIMLAR = "./admin/enerji-akimlari.json";
+		const tbodyAkimlar = document.getElementById("tbodyAkimlar");
+		const descAkimlar = document.getElementById("descAkimlar");
+		const qAkimlar = document.getElementById("qAkimlar");
+		const countBadgeAkimlar = document.getElementById("countBadgeAkimlar");
+		const selBadgeAkimlar = document.getElementById("selBadgeAkimlar");
+
+		let akimlar = [];
+		let akimlarSelectedId = null;
+		let akimlarSortKey = null;  // "name" | "cost" | "exp"
+		let akimlarSortDir = "asc";
+
+		function normalizeAkimlarArray(arr){
+			if(!Array.isArray(arr)) return [];
+			return arr.map(x=>({
+				id: (x.id && String(x.id)) || "",
+				name: String(x.name ?? ""),
+				cost: String(x.cost ?? ""),
+				exp: String(x.exp ?? ""),
+				desc: String(x.desc ?? ""),
+				note: String(x.note ?? ""),
+			})).filter(x=>x.name.trim().length>0);
+		}
+
+		function filteredAkimlar(){
+			const query = (qAkimlar && qAkimlar.value || "").trim().toLowerCase();
+			let rows = query
+				? akimlar.filter(it=>{
+					const hay = [it.name, it.cost, it.exp, it.desc, it.note].join(" ").toLowerCase();
+					return hay.includes(query);
+				})
+				: [...akimlar];
+
+			if(akimlarSortKey){
+				const dir = akimlarSortDir === "desc" ? -1 : 1;
+				const mapStr = v => String(v ?? "").toLowerCase();
+				rows.sort((a,b)=>{
+					let av, bv;
+					switch(akimlarSortKey){
+						case "name": av = mapStr(a.name); bv = mapStr(b.name); break;
+						case "cost": av = mapStr(a.cost); bv = mapStr(b.cost); break;
+						case "exp":  av = mapStr(a.exp);  bv = mapStr(b.exp);  break;
+						default: av = ""; bv = "";
+					}
+					if(av < bv) return -1 * dir;
+					if(av > bv) return  1 * dir;
+					return 0;
+				});
+			}
+			return rows;
+		}
+
+		function renderTableAkimlar(){
+			if(!tbodyAkimlar) return;
+			const rows = filteredAkimlar();
+			tbodyAkimlar.innerHTML = rows.map(it => `
+				<tr data-id="${escapeHtml(it.id)}" class="${it.id===akimlarSelectedId ? "selected" : ""}">
+					<td><span class="pill">${escapeHtml(it.name || "-")}</span></td>
+					<td>${escapeHtml(it.cost || "-")}</td>
+					<td>${escapeHtml(it.exp || "-")}</td>
+				</tr>
+			`).join("");
+			if(rows.length === 0){
+				tbodyAkimlar.innerHTML = `<tr><td colspan="3" class="muted" style="padding:14px;">Kayıt bulunamadı.</td></tr>`;
+			}
+		}
+
+		function renderDescriptionAkimlar(){
+			if(!descAkimlar) return;
+			const it = akimlar.find(x=>x.id===akimlarSelectedId);
+			if(!it){
+				if(selBadgeAkimlar) selBadgeAkimlar.textContent = "Seçili: Yok";
+				descAkimlar.innerHTML = `<div class="descEmpty">Bir satır seçin. Açıklama burada görünecek.</div>`;
+				descAkimlar.classList.remove("active");
+				return;
+			}
+			if(selBadgeAkimlar) selBadgeAkimlar.textContent = `Seçili: ${it.name || "—"}`;
+			descAkimlar.innerHTML = `
+				<div class="skill-label">${escapeHtml(it.name || "İsimsiz")}</div>
+				<div class="skill-meta">
+					<div>Bedel (Akım): ${escapeHtml(it.cost || "-")}</div>
+					<div>Deneyim Puanı: ${escapeHtml(it.exp || "-")}</div>
+				</div>
+				<div class="skill-desc">${escapeHtml(it.desc || "—")}</div>
+				${it.note ? `<div class="skill-note">${escapeHtml(it.note)}</div>` : ""}
+			`;
+			descAkimlar.classList.add("active");
+		}
+
+		function selectRowAkimlar(id){
+			akimlarSelectedId = id;
+			renderTableAkimlar();
+			renderDescriptionAkimlar();
+		}
+
+		if(tbodyAkimlar){
+			tbodyAkimlar.addEventListener("click", (e)=>{
+				const tr = e.target.closest("tr[data-id]");
+				if(!tr) return;
+				const id = tr.getAttribute("data-id");
+				if(id === akimlarSelectedId) return;
+				selectRowAkimlar(id);
+			});
+		}
+		if(qAkimlar) qAkimlar.addEventListener("input", ()=> renderTableAkimlar());
+
+		// Enerji Akımları tablosu başlığına tıklayarak sıralama
+		const akimlarThead = document.querySelector("#energy-sub-akimlar .spell-list thead");
+		if(akimlarThead){
+			const akimlarHeaderConfig = [
+				{ thIndex: 0, key: "name" },
+				{ thIndex: 1, key: "cost" },
+				{ thIndex: 2, key: "exp" }
+			];
+			akimlarThead.addEventListener("click", (e)=>{
+				const th = e.target.closest("th");
+				if(!th) return;
+				const idx = Array.from(th.parentElement.children).indexOf(th);
+				const conf = akimlarHeaderConfig.find(c => c.thIndex === idx);
+				if(!conf) return;
+				if(akimlarSortKey === conf.key){
+					akimlarSortDir = akimlarSortDir === "asc" ? "desc" : "asc";
+				} else {
+					akimlarSortKey = conf.key;
+					akimlarSortDir = "asc";
+				}
+				renderTableAkimlar();
+			});
+		}
+
+		async function loadJsonAkimlar(){
+			try{
+				const res = await fetch(JSON_URL_AKIMLAR, { cache: "no-store" });
+				if(!res.ok) throw new Error(`HTTP ${res.status}`);
+				const data = await res.json();
+				akimlar = normalizeAkimlarArray(data);
+				if(countBadgeAkimlar) countBadgeAkimlar.textContent = `${akimlar.length} kayıt`;
+				renderTableAkimlar();
+				renderDescriptionAkimlar();
+			}catch(err){
+				akimlar = [];
+				if(countBadgeAkimlar) countBadgeAkimlar.textContent = "0 kayıt";
+				if(tbodyAkimlar) tbodyAkimlar.innerHTML = `<tr><td colspan="3" class="muted" style="padding:14px;">JSON yüklenemedi.</td></tr>`;
+			}
+		}
+		loadJsonAkimlar();
 
 		/***********************
 		 * FİZİKSEL YETENEKLER

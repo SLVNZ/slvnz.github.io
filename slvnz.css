@@ -285,6 +285,43 @@ body {
 	color: #d9d9d9;
 }
 
+/* ENERJİSEL YETENEKLER alt sekmeleri – ana sekme çubuğu gibi */
+.energy-sub-tabs-wrapper {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.energy-sub-tabs {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 20px;
+	margin-top: 0;
+	margin-bottom: 16px;
+	padding: 10px;
+	background: linear-gradient(90deg, #0f0002 0%, #0c0000 100%);
+	border-top: 1px dotted firebrick;
+	border-bottom: 1px dotted firebrick;
+}
+.energy-sub-tabs button {
+	color: #DC2E2A;
+	background: transparent;
+	border: none;
+	font-family: 'futura-100';
+	font-size: 12px;
+	letter-spacing: 0.1em;
+	cursor: pointer;
+	transition: 0.3s ease;
+	text-transform: uppercase;
+}
+.energy-sub-tabs button:hover {
+	color: #d9d9d9;
+}
+.energy-sub-tabs button.active {
+	color: #d9d9d9;
+	font-weight: bold;
+}
+
 .page-panel-content-child {
 	display: none;
 }
@@ -639,7 +676,7 @@ body {
     width: 650px;
     background-color: rgba(0, 0, 0, 0.37);
 	backdrop-filter: blur(15px);
-    height: 510px;
+    height: 480px;
     overflow-y: auto;
 	font-family: "barlow";
 	font-size: 10pt;
@@ -702,6 +739,8 @@ body {
     width: 450px;
 	box-sizing: border-box;
 	color: white;
+	max-height: 480px;
+	overflow: auto;
 }
 
 .skill-label {
@@ -743,9 +782,10 @@ body {
 .skill-note {
 	font-family: 'parabolica-text';
 	font-size: 9pt;
-	color: #d9d9d9;
+	color: #DC2E2A;
 	margin-top: 6px;
 	font-style: italic;
+	white-space: pre-line;
 }
 
 .spell-description h2 {
