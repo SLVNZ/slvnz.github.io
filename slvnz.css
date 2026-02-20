@@ -385,15 +385,14 @@ body {
 	cursor: pointer;
 	background-position: center;
 	transition: 0.5s ease;
-	box-shadow: 0 0 0 0 #DC2E2A;
+	box-shadow: 0 0 50px 0 #0000007f;
 	border: none;
-	border: 1px solid #DC2E2A;
 
 }
 
 .menu button:hover {
 	background-size: 125%;
-	box-shadow: 0 0 20px 0 #f0070341;
+	box-shadow: 0 0 50px 0 #f0070361;
 	scale: 101%;
 
 }
@@ -411,7 +410,7 @@ body {
 	color: #DC2E2A;
 	font-family: 'futura-100';
 	font-size: 12pt;
-	font-weight: 300;
+	font-weight: 600;
 	letter-spacing: 3px;
 	margin-bottom: 40px;
 	cursor: pointer;
