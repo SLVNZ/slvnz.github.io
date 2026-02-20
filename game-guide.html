@@ -47,11 +47,197 @@
         <button class="nav-button"><span style="transform: rotate(180deg);">➜</span></button>
     </a>
 
-        <section class="page-panel">
+   
+    <section class="landing">
+
+         <p class="landing" style="color: #DC2E2A; margin: 0; opacity: 70%;">
+
+            Evren rehberi, özellikle Oyun Kurucu'nun incelemesi için oluşturulmuş bir rehber alanıdır. Bu alandaki bilgilerin büyük bir kısmı hikâyeyi
+            keşfetme amacı olan oyuncular için spoiler içerik barındırmaktadır. Spoiler konusunda hassas bir oyuncuysanız lütfen merak ettiklerinizi
+            oyun kuruculuğunuz aracılığı ile öğrenin.
+
+        </p>
+
+    </section>
 
         
+    <section class="menu" >
 
-        </section>
+		<a class="href-nostyle" href="guide-universe.html">
+
+			<button class="menu" style="height: 500px;">
+
+				<img class="menu-img" src="resources/webpage/img/menu/universe.png" style="position: absolute; z-index: -1;">
+
+				<label>GENEL EVREN</label>
+
+			</button>
+
+		</a>
+
+		<a class="href-nostyle" href="guide-realms.html">
+
+			<button class="menu" style="height: 500px;">
+
+				<img class="menu-img" src="resources/webpage/img/menu/realms.png" style="position: absolute; z-index: -1;">
+
+				<label>DİYARLAR</label>
+
+			</button>
+
+		</a>
+
+		<a class="href-nostyle" href="guide-beings.html">
+
+			<button class="menu" style="height: 500px;">
+
+				<img class="menu-img" src="resources/webpage/img/menu/beings.png" style="position: absolute; z-index: -1;">
+
+				<label>VARLIKLAR</label>
+
+			</button>
+
+		</a>
+
+        <a class="href-nostyle" href="guide-creatures.html">
+
+			<button class="menu" style="height: 500px;">
+
+				<img class="menu-img" src="resources/webpage/img/menu/creatures.png" style="position: absolute; z-index: -1;">
+
+				<label>YARATIKLAR</label>
+
+			</button>
+
+		</a>
+
+		
+
+	</section>
+
+    <script>
+        (() => {
+  "use strict";
+
+  // Kullanım:
+  // <a class="href-nostyle" href="...">...</a>
+  // (İsteğe bağlı) <a class="href-nostyle" data-seed="123" ...>...</a>
+
+  const items = Array.from(document.querySelectorAll("a.href-nostyle"));
+  if (!items.length) return;
+
+  // Linklerin transform alabilmesi için inline-block güvenli varsayım
+  for (const el of items) {
+    const cs = getComputedStyle(el);
+    if (cs.display === "inline") el.style.display = "inline-block";
+    el.style.transformOrigin = "center";
+    el.style.willChange = "transform";
+  }
+
+  // Deterministik seed üretimi (aynı DOM sırası -> aynı hareket)
+  // data-seed varsa onu kullanır; yoksa index tabanlı üretir.
+  const xmur3 = (str) => {
+    let h = 1779033703 ^ str.length;
+    for (let i = 0; i < str.length; i++) {
+      h = Math.imul(h ^ str.charCodeAt(i), 3432918353);
+      h = (h << 13) | (h >>> 19);
+    }
+    return () => {
+      h = Math.imul(h ^ (h >>> 16), 2246822507);
+      h = Math.imul(h ^ (h >>> 13), 3266489909);
+      h ^= h >>> 16;
+      return h >>> 0;
+    };
+  };
+
+  const mulberry32 = (a) => () => {
+    a |= 0;
+    a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 24), 1 | a);
+    t ^= t + Math.imul(t ^ (t >>> 7), 61 | t);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+
+  const randRange = (r, min, max) => min + (max - min) * r();
+
+  // Her elemana farklı "seed" parametreleri
+  const configs = items.map((el, i) => {
+    const seedStr = el.dataset.seed ?? `${i}-${el.getAttribute("href") ?? ""}-${el.textContent ?? ""}`;
+    const seedFn = xmur3(seedStr);
+    const r = mulberry32(seedFn());
+
+    // Amplitüdler (px / deg)
+    const ampY = randRange(r, 3, 5);     // yukarı-aşağı
+    const ampX = randRange(r, 1, 3);      // sağ-sol
+    const ampR = randRange(r, 0.4, 1.0);  // rotation
+
+    // Frekanslar (rad/s)
+    const wY = randRange(r, 0.7, 1.4);
+    const wX = randRange(r, 0.5, 1.1);
+    const wR = randRange(r, 0.6, 1.3);
+
+    // Faz kaymaları (rad)
+    const pY = randRange(r, 0, Math.PI * 2);
+    const pX = randRange(r, 0, Math.PI * 2);
+    const pR = randRange(r, 0, Math.PI * 2);
+
+    // Küçük “organik” bozulma için ikinci dalga
+    const ampY2 = randRange(r, 0.0, 3.0);
+    const ampX2 = randRange(r, 0.0, 2.5);
+    const wY2 = randRange(r, 1.6, 2.8);
+    const wX2 = randRange(r, 1.3, 2.4);
+    const pY2 = randRange(r, 0, Math.PI * 2);
+    const pX2 = randRange(r, 0, Math.PI * 2);
+
+    // Başlangıç zaman ofseti (hepsi aynı anda başlamasın)
+    const t0 = randRange(r, 0, 10);
+
+    return { el, ampY, ampX, ampR, wY, wX, wR, pY, pX, pR, ampY2, ampX2, wY2, wX2, pY2, pX2, t0 };
+  });
+
+  let rafId = null;
+  const start = performance.now();
+
+  const tick = (now) => {
+    const t = (now - start) / 1000;
+
+    for (const c of configs) {
+      const tt = t + c.t0;
+
+      // Ana dalga
+      const y1 = Math.sin(tt * c.wY + c.pY) * c.ampY;
+      const x1 = Math.sin(tt * c.wX + c.pX) * c.ampX;
+
+      // İkinci dalga (daha doğal)
+      const y2 = Math.sin(tt * c.wY2 + c.pY2) * c.ampY2;
+      const x2 = Math.sin(tt * c.wX2 + c.pX2) * c.ampX2;
+
+      // Rotation: Y ve X ile uyumlu (hafif “süzülme” hissi)
+      const rot = Math.sin(tt * c.wR + c.pR) * c.ampR + (x1 / Math.max(1, c.ampX)) * (c.ampR * 0.35);
+
+      const x = x1 + x2;
+      const y = y1 + y2;
+
+      c.el.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0) rotate(${rot.toFixed(2)}deg)`;
+    }
+
+    rafId = requestAnimationFrame(tick);
+  };
+
+  rafId = requestAnimationFrame(tick);
+
+  // (Opsiyonel) Sekme gizlenince CPU yemesin
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = null;
+    } else {
+      if (!rafId) rafId = requestAnimationFrame(tick);
+    }
+  });
+})();
+
+    </script>
 
 </body>
 </html>
