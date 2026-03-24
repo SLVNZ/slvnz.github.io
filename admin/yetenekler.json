@@ -1440,5 +1440,19 @@
     "actionType": "Tepki Eylem",
     "desc": "Silahınla yakın menzilli saldırı isabet ettirmen halinde hasar veren hamleni takiben rakibini alevler içinde bırakabilirsin. (Her 5 kuvvet için +1 tur)\n\nKuvvetine bağlı olarak rakibin üstündeki alevler bir süre üstünde kalarak onu yakmaya devam eder. Bu alevler, fiziki yollarla söndürülemez.",
     "note": ""
+  },
+  {
+    "id": "104",
+    "name": "Yıldırım Çapası",
+    "level": "5",
+    "duration": "Anlık",
+    "energy": "Yıkım",
+    "source": "Mana",
+    "sourceAmt": "5",
+    "range": "12 Birim",
+    "area": "Hedef Çevresi 1 Birim",
+    "actionType": "Eylem",
+    "desc": "Elinde gürleyerek beliren materyalize olmuş bir yıldırım, fırlatacağın bir hedefe saplanarak dağılır ve isabet ettiği hedefle birlikte bitişiğindeki her birime sıçarayarak yıldırım hasarı uygular. Hasar alan varlıklar DAYANIKLILIK testini geçemezse d4 tur boyunca yetenek kuvvetine bağlı olarak eylemlerinde eksi ceza alırlar (Her 4 kuvvet için -1)",
+    "note": ""
   }
 ]
