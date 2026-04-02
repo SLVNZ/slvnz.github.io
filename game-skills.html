@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://use.typekit.net/jze1rws.css">
-<title>SLVNZ FANTAZYA - OYUN KURALLARI</title>
+<title>SLVNZ FANTAZYA - YETENEKLER</title>
 <link href="slvnz.css" rel="stylesheet" type="text/css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -2003,83 +2003,6 @@
 
 
 	<script>
-		document.addEventListener("DOMContentLoaded", () => {
-			const defaultTarget = "game-system";
-			const section = document.querySelector(".page-panel");
-			if (section) {
-				const panel = section.querySelector(`.page-panel-content#${CSS.escape(defaultTarget)}`);
-				if (panel) panel.classList.add("active");
-				const btn = section.querySelector(`.side-menu-button[data-target="${defaultTarget}"]`);
-				if (btn) btn.classList.add("active");
-			}
-		});
-
-		document.addEventListener("click", (e) => {
-		const btn = e.target.closest(".side-menu-button");
-		if (!btn) return;
-
-		const section = btn.closest(".page-panel");
-		if (!section) return;
-
-		const targetId = btn.dataset.target;
-		if (!targetId) return;
-
-		// Bu section içindeki tüm panelleri kapat
-		section.querySelectorAll(".page-panel-content.active")
-			.forEach(p => p.classList.remove("active"));
-
-		// Bu section içindeki tüm butonlardan active kaldır
-		section.querySelectorAll(".side-menu-button.active")
-			.forEach(b => b.classList.remove("active"));
-
-		// Hedef paneli aç
-		const panel = section.querySelector(`.page-panel-content#${CSS.escape(targetId)}`);
-		if (panel) panel.classList.add("active");
-
-		// Hedef butonu active yap
-		btn.classList.add("active");
-		});
-
-		document.addEventListener("DOMContentLoaded", () => {
-		const menu = document.querySelector(".page-panel-content-child-menu");
-		if (!menu) return;
-
-		const buttons = Array.from(menu.querySelectorAll("button[data-target]"));
-		const panels  = Array.from(document.querySelectorAll(".page-panel-content-child"));
-
-		const setActive = (targetId) => {
-			// Panelleri kapat
-			panels.forEach(p => p.classList.remove("active"));
-
-			// Hedef paneli aç
-			const targetPanel = document.getElementById(targetId);
-			if (targetPanel) targetPanel.classList.add("active");
-
-			// Buton active yönetimi
-			buttons.forEach(b => b.classList.remove("active"));
-			const activeBtn = menu.querySelector(`button[data-target="${CSS.escape(targetId)}"]`);
-			if (activeBtn) activeBtn.classList.add("active");
-		};
-
-		// Tıklamalar (event delegation)
-		menu.addEventListener("click", (e) => {
-			const btn = e.target.closest("button[data-target]");
-			if (!btn || !menu.contains(btn)) return;
-
-			const targetId = btn.dataset.target;
-			if (!targetId) return;
-
-			setActive(targetId);
-		});
-
-		// Default: hex-battle (varsa), yoksa ilk buton
-		const defaultId = "hex-battle";
-		const hasDefault = !!document.getElementById(defaultId);
-		const initialId = hasDefault ? defaultId : (buttons[0]?.dataset.target);
-
-		if (initialId) setActive(initialId);
-		});
-
 		document.addEventListener("DOMContentLoaded", () => {
 		// Her .page-panel-content kendi içinde yönetilsin (aynı sayfada birden fazla panel olsa da çalışır)
 		const containers = document.querySelectorAll(".page-panel-content");

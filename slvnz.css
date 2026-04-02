@@ -92,13 +92,15 @@ body {
 .page-panel {
 	display: flex;
 	flex-direction: row;
-	width: 1280px;
+	max-width: 1280px;
+	width: 100%;
 	height: 720px;
 	background: linear-gradient(0deg, #351617 0%, #141518 100%);
 	border-radius: 10px;
 	box-shadow: 0 0 100px 0 rgba(0, 0, 0, 0.509);
 	overflow-y: auto;
 	overflow-x: hidden;
+	box-sizing: border-box;
 }
 
 .page-panel-header-menu {
@@ -238,9 +240,10 @@ body {
 	color: #d9d9d9;
 	font-size: 10pt;
 	font-family: 'parabolica-text';
-	width: 620px;
+	max-width: 620px;
+	width: 100%;
 	line-height: 1.6em;
-	
+
 }
 
 .page-panel-content ul {
@@ -250,7 +253,8 @@ body {
 	margin: 0;
 	padding-left: 20px;
 	font-size: 10pt;
-	width: 620px;
+	max-width: 620px;
+	width: 100%;
 }
 
 .page-panel-content-child-menu {
@@ -1665,6 +1669,131 @@ h4 {
 	
 	.spell-description {
 		page-break-inside: avoid;
+	}
+}
+
+/* ============================================
+   GAME-RULES / SIDE-MENU PANELİ RESPONSİVE
+   ============================================ */
+
+/* 1280px altında page-panel tam genişliğe yayılsın, padding ekleyelim */
+@media screen and (max-width: 1300px) {
+	body {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+}
+
+/* Tablet ve mobil: side menü yatay bara dönüşür, içerik tam genişliğe gelir */
+@media screen and (max-width: 900px) {
+	.page-panel {
+		flex-direction: column;
+		height: auto;
+		min-height: 0;
+		border-radius: 8px;
+		overflow: visible;
+		margin-bottom: 20px;
+	}
+
+	/* Üst tab menüsü (game-skills) scroll edilince görünür kalsın */
+	.page-panel-header-menu {
+		position: sticky;
+		top: 0;
+		z-index: 10;
+		background: linear-gradient(90deg, #0f0002 0%, #0c0000 100%);
+	}
+
+	/* Kırmızı arka plan overlay'i: yatay bar olarak üste al */
+	.menu-panel {
+		position: static;
+		width: 100%;
+		height: auto;
+		border-radius: 0;
+		border-top-left-radius: 8px;
+		border-top-right-radius: 8px;
+		border-bottom-left-radius: 0;
+	}
+
+	/* Side menü: fixed konumdan çık, yatay kaydırılabilir sticky bara dönüş */
+	.side-menu {
+		position: sticky;
+		top: 0;
+		z-index: 10;
+		width: 100%;
+		height: auto;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+		align-items: center;
+		border-radius: 0;
+		border-top-left-radius: 8px;
+		border-top-right-radius: 8px;
+		overflow-x: auto;
+		overflow-y: visible;
+		padding: 4px 8px;
+		gap: 2px;
+		background: linear-gradient(135deg, #040304 0%, #270306 100%);
+	}
+
+	.side-menu-button {
+		width: auto;
+		flex-direction: row;
+		align-items: center;
+		padding: 4px 12px;
+		border-radius: 4px;
+	}
+
+	.side-menu-button label {
+		padding-top: 8px;
+		padding-bottom: 8px;
+		height: auto;
+		font-size: 8pt;
+		letter-spacing: 0.05em;
+		white-space: nowrap;
+	}
+
+	/* İçerik alanı: sol margin kaldır, tam genişlik */
+	.page-panel-content {
+		margin-left: 0 !important;
+		width: 100% !important;
+		box-sizing: border-box;
+	}
+
+	.page-panel-content p,
+	.page-panel-content ul {
+		max-width: 100%;
+	}
+
+	/* Tablo tam genişliğe */
+	.page-panel-content table {
+		width: 100%;
+	}
+
+	/* Başlık butonu responsive */
+	.nav-button {
+		position: relative !important;
+		left: auto !important;
+		top: auto !important;
+		margin: 10px auto;
+		display: flex;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.side-menu-button label {
+		font-size: 7pt;
+	}
+
+	.content-title {
+		font-size: 28pt;
+	}
+
+	.page-panel-content {
+		padding: 4% !important;
+	}
+
+	.page-panel-content table {
+		width: 100% !important;
 	}
 }
 
