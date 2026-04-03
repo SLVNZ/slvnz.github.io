@@ -8,11 +8,68 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-    @media screen and (max-width: 600px) {
-    #cards-contain {
-        flex-direction: column !important;
+    .guide-menu {
+        display: flex;
+        flex-direction: row;
+        gap: 70px;
+        justify-content: center;
+        align-items: flex-end;
+        padding: 10px 40px 70px;
+        flex-wrap: wrap;
     }
-}
+
+    .guide-entry {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 22px;
+        cursor: pointer;
+        text-decoration: none;
+        transform-origin: center;
+    }
+
+    .guide-entry img {
+        display: block;
+        object-fit: cover;
+        filter: brightness(0.65) saturate(0.75);
+        transition: filter 0.5s ease, scale 0.5s ease;
+    }
+
+    .guide-entry:hover img {
+        filter: brightness(1) saturate(1);
+        scale: 1.04;
+    }
+
+    .guide-entry-label {
+        font-family: 'futura-100';
+        color: #DC2E2A;
+        font-size: 11pt;
+        font-weight: bold;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        display: block;
+        text-align: center;
+        transition: color 0.5s ease;
+    }
+
+    .guide-entry:hover .guide-entry-label {
+        color: #d9d9d9;
+    }
+
+    @media screen and (max-width: 900px) {
+        .guide-menu {
+            gap: 40px;
+            padding: 10px 20px 50px;
+        }
+    }
+
+    @media screen and (max-width: 600px) {
+        .guide-menu {
+            flex-direction: column;
+            align-items: center;
+            gap: 36px;
+        }
+    }
 </style>
 
 </head>
@@ -50,7 +107,7 @@
    
     <section class="landing">
 
-         <p class="landing" style="color: #DC2E2A; margin: 0; opacity: 70%;">
+        <p class="landing" style="color: #DC2E2A; margin: 0; opacity: 70%;">
 
             Evren rehberi, özellikle Oyun Kurucu'nun incelemesi için oluşturulmuş bir rehber alanıdır. Bu alandaki bilgilerin büyük bir kısmı hikâyeyi
             keşfetme amacı olan oyuncular için spoiler içerik barındırmaktadır. Spoiler konusunda hassas bir oyuncuysanız lütfen merak ettiklerinizi
@@ -61,59 +118,29 @@
     </section>
 
         
-    <section class="menu" >
+    <section class="guide-menu">
 
-		<a class="href-nostyle" href="wip.html">
+        <a class="href-nostyle guide-entry" href="wip.html">
+            <img src="resources/webpage/img/menu/universe.png" style="width: 220px; height: 360px;" alt="">
+            <span class="guide-entry-label">GENEL EVREN</span>
+        </a>
 
-			<button class="menu" style="height: 500px;">
+        <a class="href-nostyle guide-entry" href="wip.html">
+            <img src="resources/webpage/img/menu/realms.png" style="width: 220px; height: 420px;" alt="">
+            <span class="guide-entry-label">DİYARLAR</span>
+        </a>
 
-				<img class="menu-img" src="resources/webpage/img/menu/universe.png" style="position: absolute; z-index: -1;">
+        <a class="href-nostyle guide-entry" href="wip.html">
+            <img src="resources/webpage/img/menu/beings.png" style="width: 220px; height: 390px;" alt="">
+            <span class="guide-entry-label">VARLIKLAR</span>
+        </a>
 
-				<label>GENEL EVREN</label>
+        <a class="href-nostyle guide-entry" href="wip.html">
+            <img src="resources/webpage/img/menu/creatures.png" style="width: 220px; height: 360px;" alt="">
+            <span class="guide-entry-label">YARATIKLAR</span>
+        </a>
 
-			</button>
-
-		</a>
-
-		<a class="href-nostyle" href="wip.html">
-
-			<button class="menu" style="height: 500px;">
-
-				<img class="menu-img" src="resources/webpage/img/menu/realms.png" style="position: absolute; z-index: -1;">
-
-				<label>DİYARLAR</label>
-
-			</button>
-
-		</a>
-
-		<a class="href-nostyle" href="wip.html">
-
-			<button class="menu" style="height: 500px;">
-
-				<img class="menu-img" src="resources/webpage/img/menu/beings.png" style="position: absolute; z-index: -1;">
-
-				<label>VARLIKLAR</label>
-
-			</button>
-
-		</a>
-
-        <a class="href-nostyle" href="wip.html">
-
-			<button class="menu" style="height: 500px;">
-
-				<img class="menu-img" src="resources/webpage/img/menu/creatures.png" style="position: absolute; z-index: -1;">
-
-				<label>YARATIKLAR</label>
-
-			</button>
-
-		</a>
-
-		
-
-	</section>
+    </section>
 
     <script>
         (() => {
