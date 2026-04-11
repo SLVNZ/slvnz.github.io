@@ -1,141 +1,191 @@
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  SLVNZ — Admin Hub  (admin/admin-dashboard.html)            ║
+  ╠══════════════════════════════════════════════════════════════╣
+  ║  Bu sayfa tüm admin alt-dashboardlarının giriş noktasıdır.  ║
+  ║                                                              ║
+  ║  MEVCUT YAPI:                                                ║
+  ║    admin-dashboard.html          ← bu dosya (ana hub)        ║
+  ║    └── admin-skills-dashboard.html   (yetenek editörleri)    ║
+  ║            ├── skills-admin.html                             ║
+  ║            ├── enerji-akimlari-admin.html                    ║
+  ║            ├── skills-physical-admin.html                    ║
+  ║            ├── skills-battleart-admin.html                   ║
+  ║            ├── skills-special-admin.html                     ║
+  ║            └── skills-talents-admin.html                     ║
+  ║                                                              ║
+  ║  YENİ BÖLÜM EKLEMEK İÇİN:                                   ║
+  ║    1. admin-YENİBÖLÜM-dashboard.html oluştur                 ║
+  ║    2. Aşağıdaki .card-grid içine yeni .dash-card ekle        ║
+  ║    3. Varsa ilgili "yakında" kartındaki .soon sınıfını sil   ║
+  ║                                                              ║
+  ║  NOT: Skill editörlerine giden "geri" linkleri               ║
+  ║  admin-skills-dashboard.html'e bağlıdır, bu dosyaya değil.  ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
 <!doctype html>
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>SLVNZ FANTAZYA - Admin Dashboard</title>
+  <title>SLVNZ — Admin Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../slvnz.css" rel="stylesheet" type="text/css">
   <style>
     body {
-      align-items: stretch;
       min-height: 100vh;
+      font-family: 'parabolica-text', sans-serif;
     }
-    .dashboard-wrapper {
-      max-width: 1400px;
-      margin: 40px auto;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 10px;
-      backdrop-filter: blur(20px);
-      color: #d9d9d9;
-      font-family: "barlow";
+
+    .dash-wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 24px 60px;
     }
-    .dashboard-header {
+
+    .dash-header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 52px;
     }
-    .dashboard-header h1 {
-      margin: 0;
-      font-family: "gandur-new";
+    .dash-header h1 {
+      font-family: 'futura-100', sans-serif;
       font-weight: 300;
-      font-size: 32pt;
+      font-size: 36pt;
       color: #DC2E2A;
+      margin: 0 0 10px;
+      letter-spacing: 3px;
     }
-    .dashboard-header p {
-      margin-top: 10px;
-      color: #aaa;
-      font-size: 12pt;
-    }
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-    .dashboard-card {
-      background: rgba(10, 0, 0, 0.6);
-      border-radius: 8px;
-      padding: 20px;
-      border: 1px solid #331010;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-    .dashboard-card:hover {
-      border-color: #DC2E2A;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(220, 46, 42, 0.2);
-    }
-    .dashboard-card h2 {
-      margin-top: 0;
-      font-size: 18pt;
-      font-family: "gandur-new";
-      color: #DC2E2A;
-      margin-bottom: 10px;
-    }
-    .dashboard-card p {
-      margin: 0;
-      color: #aaa;
+    .dash-header p {
+      color: #666;
       font-size: 10pt;
-      line-height: 1.5;
+      font-family: 'futura-100', sans-serif;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
     }
-    .dashboard-card .card-icon {
-      font-size: 24pt;
-      margin-bottom: 10px;
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 28px;
     }
-    .dashboard-footer {
+
+    .dash-card {
+      background: rgba(10, 0, 0, 0.6);
+      border: 1px solid #2a0c0c;
+      border-radius: 8px;
+      padding: 28px 22px;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      display: block;
+      color: inherit;
+    }
+    .dash-card:hover {
+      border-color: #DC2E2A;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(220, 46, 42, 0.2);
+    }
+    .dash-card .card-icon {
+      font-size: 28pt;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .dash-card h2 {
+      margin: 0 0 8px;
+      font-family: 'futura-100', sans-serif;
+      font-weight: 400;
+      font-size: 17pt;
+      color: #DC2E2A;
+    }
+    .dash-card p {
+      margin: 0;
+      color: #777;
+      font-size: 10pt;
+      line-height: 1.6;
+    }
+
+    /* Yakında */
+    .dash-card.soon {
+      opacity: 0.35;
+      cursor: default;
+      pointer-events: none;
+    }
+    .dash-card.soon h2 { color: #444; }
+    .soon-tag {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 8pt;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #444;
+      border: 1px solid #2a0c0c;
+      padding: 2px 9px;
+      border-radius: 10px;
+    }
+
+    .dash-footer {
       text-align: center;
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid #331010;
+      border-top: 1px solid #1e0808;
+      padding-top: 22px;
+      margin-top: 16px;
     }
-    .dashboard-footer a {
+    .dash-footer a {
       color: #DC2E2A;
       text-decoration: none;
-      font-size: 11pt;
+      font-size: 10pt;
+      letter-spacing: 1px;
+      opacity: 0.7;
     }
-    .dashboard-footer a:hover {
-      text-decoration: underline;
-    }
+    .dash-footer a:hover { opacity: 1; text-decoration: underline; }
   </style>
 </head>
 <body>
-  <div class="dashboard-wrapper">
-    <div class="dashboard-header">
-      <h1>Admin Dashboard</h1>
-      <p>Yetenek verilerini yönetmek için bir panel seçin</p>
+  <div class="dash-wrap">
+
+    <div class="dash-header">
+      <h1>Admin Hub</h1>
+      <p>Yönetmek istediğiniz bölümü seçin</p>
     </div>
 
-    <div class="dashboard-grid">
-      <div class="dashboard-card" onclick="location.href='skills-admin.html'">
-        <div class="card-icon">⚡</div>
-        <h2>Enerjisel Yetenekler</h2>
-        <p>Enerji tabanlı yetenekleri düzenleyin ve yönetin. yetenekler.json dosyasını yönetir.</p>
+    <div class="card-grid">
+
+      <a class="dash-card" href="admin-skills-dashboard.html">
+        <span class="card-icon">⚔️</span>
+        <h2>Yetenekler</h2>
+        <p>Tüm yetenek kategorilerini (enerjisel, fiziksel, savaş sanatları, hünerler…) düzenleyin.</p>
+      </a>
+
+      <!-- Yeni bir dashboard eklemek için bu bloğu kopyalayıp düzenleyin:
+
+      <a class="dash-card" href="admin-YENIBÖLÜM-dashboard.html">
+        <span class="card-icon">🔧</span>
+        <h2>Bölüm Adı</h2>
+        <p>Kısa açıklama.</p>
+      </a>
+
+      -->
+
+      <!-- Örnek "yakında" kartı — hazır olduğunda .soon sınıfını ve soon-tag'ı kaldırın -->
+      <div class="dash-card soon">
+        <span class="card-icon">📖</span>
+        <h2>Hikâye & Lore</h2>
+        <p>Evren içerikleri, hikâye notları ve lore yönetimi.</p>
+        <span class="soon-tag">Yakında</span>
       </div>
 
-      <div class="dashboard-card" onclick="location.href='enerji-akimlari-admin.html'">
-        <div class="card-icon">🌊</div>
-        <h2>Enerji Akımları</h2>
-        <p>Enerji akımlarını (Akım Adı, Deneyim Puanı) düzenleyin. enerji-akimlari.json dosyasını yönetir.</p>
+      <div class="dash-card soon">
+        <span class="card-icon">🧬</span>
+        <h2>Yaratıklar</h2>
+        <p>Yaratık istatistikleri ve lore bilgileri.</p>
+        <span class="soon-tag">Yakında</span>
       </div>
 
-      <div class="dashboard-card" onclick="location.href='skills-physical-admin.html'">
-        <div class="card-icon">💪</div>
-        <h2>Fiziksel Yetenekler</h2>
-        <p>Fiziksel yetenekleri düzenleyin ve yönetin. yetenekler-physical.json dosyasını yönetir.</p>
-      </div>
-
-      <div class="dashboard-card" onclick="location.href='skills-battleart-admin.html'">
-        <div class="card-icon">⚔️</div>
-        <h2>Savaş Sanatları</h2>
-        <p>Savaş sanatlarını düzenleyin ve yönetin. yetenekler-battleart.json dosyasını yönetir.</p>
-      </div>
-
-      <div class="dashboard-card" onclick="location.href='skills-special-admin.html'">
-        <div class="card-icon">⭐</div>
-        <h2>Özel Beceriler</h2>
-        <p>Özel becerileri düzenleyin ve yönetin. yetenekler-special.json dosyasını yönetir.</p>
-      </div>
-
-      <div class="dashboard-card" onclick="location.href='skills-talents-admin.html'">
-        <div class="card-icon">✨</div>
-        <h2>Hünerler</h2>
-        <p>Hünerleri düzenleyin ve yönetin. yetenekler-talents.json dosyasını yönetir.</p>
-      </div>
     </div>
 
-    <div class="dashboard-footer">
-      <a href="../game-skills.html">← Yetenekler Sayfasına Dön</a>
+    <div class="dash-footer">
+      <a href="../index.html">← Siteye Dön</a>
     </div>
+
   </div>
 </body>
 </html>
