@@ -1,5 +1,5 @@
 /* ============================================================
-   SLVNZ 4.0 — content.js  (editörden üretildi: 30.05.2026 01:14:24)
+   SLVNZ 4.0 — content.js  (editörden üretildi: 30.05.2026 02:21:18)
    Bu metni content.js dosyasının TAMAMIYLA değiştir.
    ============================================================ */
 
@@ -16,7 +16,7 @@ window.SLVNZ_CONTENT = {
     "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
     "description": "",
     "version": "v4.0",
-    "contentSeed": "2026-05-29-mprhbwp6"
+    "contentSeed": "2026-05-29-mprjpxxu"
   },
   "sections": {
     "oyun-kurallari": {
@@ -31,11 +31,11 @@ window.SLVNZ_CONTENT = {
             {
               "type": "heading",
               "level": 2,
-              "text": "SLVNZ 3.0 SİSTEMİ"
+              "text": "SLVNZ 4.0 SİSTEMİ"
             },
             {
               "type": "paragraph",
-              "text": "SLVNZ 3.0 sistemi, özünde D&D ve FATE sistemlerini baz ve ilham alınarak düşünülmüş, özelleştirilmiş ve detaylandırılmış bir masaüstü rol yapma oyunu sistemidir."
+              "text": "SLVNZ 4.0 sistemi, özünde D&D ve FATE sistemlerini baz ve ilham alınarak düşünülmüş, özelleştirilmiş ve detaylandırılmış bir masaüstü rol yapma oyunu sistemidir. 3.0 sistemine kıyasla \"Düşük Fantazya\" atmosferini yaşatmak üzere düzenlenmiştir."
             },
             {
               "type": "paragraph",
@@ -73,11 +73,7 @@ window.SLVNZ_CONTENT = {
                   "Kritik Başarısızlık"
                 ],
                 [
-                  "2",
-                  "Kesin Başarısızlık"
-                ],
-                [
-                  "3-5",
+                  "2-5",
                   "Başarısızlık"
                 ],
                 [
@@ -119,15 +115,6 @@ window.SLVNZ_CONTENT = {
             {
               "type": "example",
               "text": "Usta bir hırsız olan Majik, korsan şehri Sulgaran'ın en büyük iskelesindeki \"Sorvalas\" isimli bir yük gemisine sızmaya çalışmaktadır. Geminin kıç tarafına denizden tırmanmayı başaran Majik, yük deposuna açılan bir pencereyi dışarıdan açmaya çalışmak için 20 yüzlü bir zar kullanır. Zarın sonucu 1 gelir. Majik, camı açmaya çalışmakta başarısız olmakla kalmaz, tutunduğu yerde dengesini kaybederek suya düşer ve yüksek bir ses çıkarır. Bu ses, iskele etrafındaki sivillerin ve muhafızların dikkatini çekecektir ki o bölgeye doğru birkaç kişi neler olduğunu görmek üzere yola koyulur."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Kesin Başarısızlık"
-            },
-            {
-              "type": "paragraph",
-              "text": "Kritik başarısızlık durumuna oldukça benzeyen kesin başarısızlık sonucunda, kritik başarısızlıktan farklı olarak karakterin başında olumsuz bir durumun oluşmadığı bir başarısızlık durumudur. Bu durumda da karakterin sahip olduğu fazladan değerler yine dahil edilmez."
             },
             {
               "type": "heading",
@@ -210,7 +197,7 @@ window.SLVNZ_CONTENT = {
             },
             {
               "type": "paragraph",
-              "text": "Karakterlerin darbelere dayanma, yıkıcı durumlara karşı ayakta kalabilme, ağır durumlarda bilincini koruyabilme ya da acıya dayanma gibi durumlarda ihtiyaç duyduğu niteliktir. Aynı zamanda bir karakterin STAMINA değerini de etkilemektedir."
+              "text": "Karakterlerin darbelerin etkisine dayanma, yıkıcı durumlara karşı ayakta kalabilme, ağır durumlarda bilincini koruyabilme ya da acıya dayanma gibi durumlarda ihtiyaç duyduğu niteliktir. Aynı zamanda bir karakterin STAMINA değerini de etkilemektedir."
             },
             {
               "type": "heading",
@@ -219,25 +206,16 @@ window.SLVNZ_CONTENT = {
             },
             {
               "type": "paragraph",
-              "text": "Dayanıklılığa benzer biçimde karakterin zihinsel dayanıklılığında; yani zihinsel olarak gireceği herhangi bir mücadelede ihtiyaç duyacağı niteliktir. Bu mücadeleler herhangi bir büyü etkisi altında kalma, zihne sızma, isteği dışında telepati vb. etkilerin altında kalma gibi durumlar olarak nitelendirilebilir."
+              "text": "Dayanıklılığa benzer biçimde karakterin zihinsel dayanıklılığında; yani zihinsel olarak gireceği herhangi bir mücadelede ihtiyaç duyacağı niteliktir. Bu mücadeleler herhangi bir enerjisel etki altında kalma, zihne sızma, isteği dışında telepati vb. etkilerin altında kalma gibi durumlar olarak nitelendirilebilir."
             },
             {
               "type": "heading",
               "level": 3,
-              "text": "ZEKÂ (ZEK)"
+              "text": "SEZGİ (SZG)"
             },
             {
               "type": "paragraph",
-              "text": "Karakterin geçmişe yönelik tarihi bilgilerini, bir konuya yönelik bilgi birikimlerini, zor bulmacalar ve bilmeceleri kavrayabilme yetilerini etkileyen bir niteliktir. Aynı zamanda yüksek zekâya sahip karakterler, bilgileri öğrenme, algılama ve aklında tutma konusunda avantaj sahibidirler. Bunun anlamı, zekâ niteliği yüksek karakterlerin bazı bilgileri öğrenme eğrilerinin normal bir karaktere göre daha yüksek olmasıdır."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "İRFAN (İRF)"
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterlerin başka karakterlerle olan iletişimlerinde, şüpheli buldukları karakterlerin davranışlarının altında yatan gerçeği anlama, bir kişinin yalan söyleyip söylemediğini kavramaya çalışma gibi durumlarda ihtiyaç duyacağı niteliktir. Aynı zamanda irfan sahibi karakterlerin algıları daha açık olacağından, irfan niteliğinin sağlayacağı avantaj sayesinde farkındalıkları olumlu yönde etkilenmektedir. Benzer biçimde irfan sahibi karakterler enerji dolu auraları fark etme ve bu enerjilerin yoğunluğunu tanılama konusunda da daha yetkin durumdadırlar."
+              "text": "Karakterlerin sezgisel olarak çevrelerinde yaşanan olayları algılama kapasiteleridir. Bir karakterin konuşmalarındaki doğruluk payını sezebilme, çevresel faktörlerce ortamın atmosferini yoklama gibi durumlar, sezgi niteliğiyle algılanabilecek durumlardır."
             }
           ]
         },
@@ -409,11 +387,11 @@ window.SLVNZ_CONTENT = {
             },
             {
               "type": "paragraph",
-              "text": "SLVNZ 3.0'da büyü yapmak ya da sisteme daha uygun tabiri ile enerjiyi yönlendirebilmek mümkündür. Enerjiyi yönlendirebilmek için evrende bulunan farklı enerji türlerine hâkim olmak gerekir. Bu enerji türleri Temel Enerji Türleri ve Özel Enerji Türleri olarak birbirinden ayrılırlar."
+              "text": "SLVNZ 4.0'da enerjiyi yönlendirebilerek farklı etkiler meydana getirmek mümkündür. Evrendeki pek çok varlık enerjiyi yönlendirme yetisine sahip değildir. Ancak farklı etkiler ve çevresek etkenlerle varlıklar bu kabiliyete erişebilmektedir. Bu enerji türleri Temel Enerji Türleri ve Özel Enerji Türleri olarak birbirinden ayrılırlar."
             },
             {
               "type": "paragraph",
-              "text": "Temel enerjiler, evrendeki pek çok varlığın mana aracılığıyla dönüştürebileceği enerji türleridir. Özel enerjiler ise daha çok duruma bağlı olarak varlıkların sentezleyebileceği ve hissedebileceği enerjilerdir."
+              "text": "Temel enerjiler, evrende serbest olarak dolaşan etkiler, kalıntılar vb. şekillerde karşılaşılabilecek veya meydana gelebilecek yaygın türlerdir. Özel enerjiler ise daha çok duruma bağlı olarak varlıkların sentezleyebileceği ve hissedebileceği enerjilerdir."
             },
             {
               "type": "heading",
@@ -613,11 +591,7 @@ window.SLVNZ_CONTENT = {
             },
             {
               "type": "paragraph",
-              "text": "Enerjisel yetenekler (Büyüler), doğada bulunan kaotik enerjinin vücuda çekilip kontrol altına alınırken dışarıya istenilen şekilde evirilerek aktarılması sonucu ortaya çıkan yeteneklerdir. Bazı karakterler sadece enerjisel yetenekler konusunda ustalaşma yolunda gidebilse de fiziksel mücadele konusunda ilerleyen karakterler de enerjisel yetenekler konusunda kendini geliştirmek isteyebilir."
-            },
-            {
-              "type": "paragraph",
-              "text": "Bu durum, fiziksel yeteneklerdeki savaş sanatı ile karıştırılmamalıdır. Örneğin, savaş sanatı yeteneği olan bir karakter her vuruşunda bir miktar MANA harcamak kaydıyla vuruşlarını ekstra güçlendirebilir. Ancak, benzer bir karakter doğrudan enerjisel yetenek kullanarak, STAMINA harcamaya gerek kalmadan sadece MANA harcayarak silahını enerji kullanarak bir element ile efsunlayabilir."
+              "text": "Enerjisel yetenekler (Büyüler), doğada bulunan kaotik enerjinin farklı kanallarca çevreye veya kalıntılara sinmiş, belirli sembollerce nesnesel veya doğal akıştan geçirilerek meydana getirilebilen veya tamamen serbest bir biçimde olağan dışı meydana gelebilen sıradışı yeteneklerdir. Evrende herhangi bir insansı karakterin enerjisel yetenek kullanması sıradan bir durum değildir."
             },
             {
               "type": "heading",
@@ -626,7 +600,7 @@ window.SLVNZ_CONTENT = {
             },
             {
               "type": "paragraph",
-              "text": "Karakterler istisnai durumlar dışında enerjisel yetenek kullanırken sözler, hareketler ve materyallere ihtiyaç duyar. Eğer bir karakter, enerjisel odağa sahipse bu odak materyal gereksinimini ortadan kaldırır. Karakterlerin söyleyeceği sözler, *Büyü Sözleri* olarak anılır. Pek çok enerjisel yeteneğin büyülü sözü, yetenek gerçekleştirilirken vücut hareketleriyle birlikte söylenir. Bu söylem sırasında karakterin mana enerjisini topladığı kısımlarda enerjiyi somutlaştıran çemberler oluşur ve büyülü sözler yüksek tonda yankılanır. Bundan dolayı enerjisel yetenekler çoğunlukla gizlenemez."
+              "text": "Karakterler, istisnai durumlarda basit sayılabilecek enerjisel etkileri meydana getirebilirler. Bu durumlar, kalıntılar gibi karakterlerin üstünde taşıdığı nesneler aracılığıyla gerçekleşmiyorsa, çoğunlukla karakterin belirli vücut hareketleri beraberinde fonetik biçimde uyum sağlayacağı sözler ile birleştirerek gerçekleştireceği bir zincirleme yapı olarak karşılaşılır. Karakterler, bu şekilde enerjisel yetenekleri gerçekleştirebilmek için beraberlerinde MANA rezervi bulundurmalıdır. Aksi halde enerjisel yetenekleri bu şekilde kendi başlarına gerçekleştiremezler."
             },
             {
               "type": "heading",
@@ -672,7 +646,69 @@ window.SLVNZ_CONTENT = {
             },
             {
               "type": "paragraph",
-              "text": "SLVNZ 3.0'da karakterlerin ekipman kullanımlarının ayrı bir yeri bulunmaktadır. Karakterlerin sahip olduğu ekipmanlar, karakter niteliklerini doğrudan etkileyebilmektedir. Kuşanılan ağır bir zırh, üstün bir savunma sağlarken karakterin hareket kabiliyeti, çevikliği, gizlenme becerisi gibi farklı özelliklerini olumsuz şekilde etkileyebilmektedir. Benzer biçimde kuşanılan silahlar da benzer etkileri barındırabilmektedir. Bu durumlara bağlı olarak farklı ekipmanlar ve karakterin özellikleri üzerindeki etkileri tablolarda belirtilmiştir."
+              "text": "SLVNZ 4.0'da karakterlerin ekipman kullanımlarının ayrı bir yeri bulunmaktadır. Karakterlerin sahip olduğu ekipmanlar, karakter niteliklerini doğrudan etkileyebilmektedir. Karakterler, kuşandıkları ekipmanlar aracılığıyla kendilerini korunaklı veya işlevsel hallere getirebilirken, kuşandıkları ekipmanların ağırlıksal niteliklerine bağlı olarak bazı kısıntılar yaşarlar. Bu sistem, ekipman yükü ile Yük Puanı (YP) üzerinden hesaplanır."
+            },
+            {
+              "type": "heading",
+              "level": 3,
+              "text": "YÜK PUANININ HESAPLANMASI"
+            },
+            {
+              "type": "paragraph",
+              "text": "Karakterin savaş sırasında üzerinde taşıdığı zırh, kalkan, silah ve erişilebilir ekipmanlar Kuşanım Yükü oluşturur. Bu yük, yalnızca ekipmanın gerçek ağırlığını değil; ekipmanın bedene yayılışını, hareketi ne kadar kısıtladığını, savaş sırasında ne kadar yer kapladığını ve karakterin beden ritmini ne ölçüde bozduğunu temsil eder.\n\nBu nedenle Yük Puanı — YP, doğrudan kilogram karşılığı değildir. Bir tam plaka zırh, bütün bedene yayılan sürekli bir yük oluşturduğu için yüksek YP’ye sahiptir. Buna karşılık büyük bir kılıç ağır ve hantal olsa da, tam plaka zırh kadar sürekli bedensel kısıtlama yaratmaz.\n\nToplam Kuşanım Yükü = Zırh YP + Kalkan YP + Kuşanılmış Silah YP + Üstte Taşınan Ekipman YP + Modifikasyon YP\n\nHesaba katılanlar:\n\nGiyilen zırh\nKuşanılmış kalkan\nElde, belde, sırtta veya hızlı çekilebilir konumda taşınan silahlar\nSavaş sırasında üstte taşınmaya devam eden çanta, mühimmat, ağır alet, iksir çantası, kamp ekipmanı\nZırha, kalkana veya silaha sonradan eklenmiş ağır parçalar\nMetal kaplama, ek plaka, miğfer, omuzluk, zırh eteği, ikinci katman gibi modifikasyonlar"
+            },
+            {
+              "type": "heading",
+              "level": 3,
+              "text": "KUVVET İLE YÜK AZALTIMI"
+            },
+            {
+              "type": "paragraph",
+              "text": "Karakterin KUVVET niteliği, kuşanım yükünün karakter üzerindeki etkisini azaltır.\n\nKuvvet Yük Azaltımı = KUV x 3\n\nSonrasında karakterin asıl yük seviyesi şu formülle bulunur:\n\nEtkili Yük = Toplam Kuşanım Yükü - Kuvvet Yük Azaltımı\n\nEtkili Yük hiçbir zaman 0’ın altına düşmez."
+            },
+            {
+              "type": "example",
+              "text": "Karakterin toplam kuşanım yükü 32 YP olsun.\nKarakterin KUV değeri +4 ise:\nKUV x 3 = 12\n32 - 12 = 20\nKarakterin Etkili Yük değeri 20 olur."
+            },
+            {
+              "type": "heading",
+              "level": 3,
+              "text": "EKİPMAN YÜKÜ EŞİKLERİ VE ETKİLERİ"
+            },
+            {
+              "type": "table",
+              "header": [
+                "ETKİN YÜK PUANI MARJI",
+                "YÜK SEVİYESİ",
+                "ETKİLERİ"
+              ],
+              "rows": [
+                [
+                  "0-8",
+                  "Hafif Kuşanım",
+                  "Yok"
+                ],
+                [
+                  "9-16",
+                  "Orta Kuşanım",
+                  "-1 Hareket, -1 Kaçınma, -1 Atletik Eylemler"
+                ],
+                [
+                  "17-24",
+                  "Ağır Kuşanım",
+                  "-2 Hareket, -2 Kaçınma, -2 Atletik Eylemler, Atik eylemlerde STAMINA kesintisi"
+                ],
+                [
+                  "25-32",
+                  "Çok Ağır Kuşanım",
+                  "-3 Hareket, -3 Kaçınma, -5 Atletik Eylemler, Fiziksel Eylemlerde STAMINA kesintisi"
+                ],
+                [
+                  "33+",
+                  "Aşırı Yük",
+                  "-4 Hareket, -5 Kaçınma, Dezavantajlı -5 Atletik Eylemler, Her Fiziksel Eylemde daha fazla STAMINA kesintisi"
+                ]
+              ]
             },
             {
               "type": "heading",
@@ -682,51 +718,43 @@ window.SLVNZ_CONTENT = {
             {
               "type": "table",
               "header": [
-                "Zırh Tipi",
-                "ÇEVİKLİK",
-                "GİZLİLİK"
+                "ZIRH TİPİ",
+                "YÜK PUANI"
               ],
               "rows": [
                 [
                   "Zırhsız",
-                  "0",
                   "0"
                 ],
                 [
                   "Deri Zırh",
-                  "0",
-                  "0"
+                  "3"
                 ],
                 [
                   "Sertleştirilmiş Deri Zırh",
-                  "-1",
-                  "0"
+                  "5"
                 ],
                 [
                   "Yarım Plaka Zırh",
-                  "-2",
-                  "-1"
+                  "12"
                 ],
                 [
                   "Zincir Zırh",
-                  "-3",
-                  "-2"
+                  "14"
                 ],
                 [
                   "Pullu Zırh",
-                  "-3",
-                  "-2"
+                  "16"
                 ],
                 [
                   "Tam Plaka Zırh",
-                  "-4",
-                  "-3"
+                  "24"
                 ]
               ]
             },
             {
               "type": "paragraph",
-              "text": "Zırhlar, karakterlerin fiziksel saldırılardan ve birçok enerjisel saldırıdan korunmasına olanak sağlar. Ancak koruma seviyesi yükseldikçe, donanımlı korunma beraberinde bazı dezavantajları getirir. Bu dezavantajlar, tabloda gösterilen nitelik ve beceri eksileriyle sınırlı kalmayabilir. Örneğin, oyun yöneticisinin tercihine bağlı olarak, bir karakter giydiği miğferden dolayı farkındalık becerisine eksi değer alabilir."
+              "text": "Zırhlar, karakterlerin fiziksel saldırılardan ve birçok enerjisel saldırıdan korunmasına olanak sağlar. Ancak koruma seviyesi yükseldikçe, donanımlı korunma beraberinde bazı dezavantajları getirir. Bu dezavantajlar, yük puanının getireceği etkilerle sınırlı kalmayabilir. Örneğin, oyun yöneticisinin tercihine bağlı olarak, bir karakter giydiği miğferden dolayı farkındalık becerisine eksi değer alabilir."
             },
             {
               "type": "heading",
@@ -737,68 +765,104 @@ window.SLVNZ_CONTENT = {
               "type": "table",
               "header": [
                 "Silah Tipi",
-                "İSABET"
+                "İSABET",
+                "YÜK PUANI"
               ],
               "rows": [
                 [
                   "Hançer",
-                  "+3"
+                  "+3",
+                  "1"
                 ],
                 [
                   "Satır",
-                  "+2"
+                  "+2",
+                  "2"
                 ],
                 [
                   "Kısa Kılıç",
-                  "+1"
+                  "+1",
+                  "2"
                 ],
                 [
                   "Normal Kılıç",
-                  "0"
+                  "Çeviklik Bonusu",
+                  "3"
                 ],
                 [
                   "Uzun Kılıç",
-                  "-1"
+                  "-1",
+                  "3"
                 ],
                 [
                   "Büyük Kılıç",
-                  "-2"
+                  "-2",
+                  "4"
                 ],
                 [
                   "Savaş Baltası",
-                  "-1"
+                  "-1",
+                  "3"
                 ],
                 [
                   "Büyük Savaş Baltası",
-                  "-2"
+                  "-2",
+                  "4"
                 ],
                 [
                   "Topuz / Çekiç",
-                  "-2"
+                  "-2",
+                  "3"
                 ],
                 [
                   "Büyük Topuz / Çekiç",
-                  "-4"
+                  "-4",
+                  "5"
                 ],
                 [
                   "Zincirli Gürz",
-                  "-3"
+                  "-3",
+                  "4"
                 ],
                 [
                   "Büyük Zincirli Gürz",
-                  "-6"
+                  "-6",
+                  "5"
                 ],
                 [
                   "Mızrak",
-                  "0"
+                  "Çeviklik Bonusu",
+                  "3"
                 ],
                 [
                   "Uzun Mızrak",
-                  "-2"
+                  "-2",
+                  "4"
                 ],
                 [
                   "Pike",
-                  "-4"
+                  "-4",
+                  "5"
+                ],
+                [
+                  "Yay",
+                  "-",
+                  "3"
+                ],
+                [
+                  "Uzun Yay",
+                  "-",
+                  "4"
+                ],
+                [
+                  "Tatar Yayı",
+                  "-",
+                  "5"
+                ],
+                [
+                  "Musket/Tüfek",
+                  "-",
+                  "5"
                 ]
               ]
             },
@@ -816,33 +880,33 @@ window.SLVNZ_CONTENT = {
               "header": [
                 "Kalkan Tipi",
                 "BLOK",
-                "ÇEVİKLİK"
+                "YÜK PUANI"
               ],
               "rows": [
                 [
                   "Kalkansız",
                   "0",
-                  "0"
+                  "-"
                 ],
                 [
                   "Buckler",
                   "ÇEV",
-                  "0"
+                  "1"
                 ],
                 [
                   "Ufak Kalkan",
                   "ÇEV",
-                  "0"
+                  "2"
                 ],
                 [
                   "Normal Kalkan *",
                   "+3",
-                  "-1"
+                  "5"
                 ],
                 [
                   "Kule Kalkan",
                   "+6",
-                  "-3"
+                  "10"
                 ]
               ]
             },
@@ -1030,7 +1094,8 @@ window.SLVNZ_CONTENT = {
               "type": "image",
               "src": "https://slvnz.github.io/resources/webpage/svg/hex-battle.svg",
               "alt": "Altıgen savaş düzeni",
-              "caption": "Altıgen savaş düzeni"
+              "caption": "Altıgen savaş düzeni",
+              "width": "300"
             },
             {
               "type": "paragraph",
@@ -1101,7 +1166,8 @@ window.SLVNZ_CONTENT = {
               "type": "image",
               "src": "https://slvnz.github.io/resources/webpage/svg/hex-block.svg",
               "alt": "Bloklama sistemi",
-              "caption": "Bloklama sistemi"
+              "caption": "Bloklama sistemi",
+              "width": "300"
             },
             {
               "type": "heading",
@@ -1174,7 +1240,8 @@ window.SLVNZ_CONTENT = {
               "type": "image",
               "src": "https://slvnz.github.io/resources/webpage/svg/square-battle.svg",
               "alt": "Kare düzen savaş sistemi",
-              "caption": "Kare düzen savaş sistemi"
+              "caption": "Kare düzen savaş sistemi",
+              "width": "300"
             },
             {
               "type": "heading",
@@ -1259,23 +1326,15 @@ window.SLVNZ_CONTENT = {
             },
             {
               "type": "paragraph",
-              "text": "Oyuncular oyun boyunca karakterlerinin niteliklerini, becerilerini ve yeteneklerini geliştirebilirler. Bu geliştirme süreci, karakterin uygun antrenmanları gerçekleştirmesi sonucu toplayabileceği deneyim puanları ile mümkündür. Deneyim puanları, oyunun kaç yüzlü zar ile oynanmaya karar verildiği gözetilmeksizin, 20 yüzlü zar kullanılarak toplanır."
+              "text": "Oyuncular oyun boyunca karakterlerinin niteliklerini, becerilerini ve yeteneklerini geliştirebilirler. Bu geliştirme süreci, karakterin uygun antrenmanları gerçekleştirmesi sonucu toplayabileceği deneyim puanları ile mümkündür. Deneyim puanları, oyunun kaç yüzlü zar ile oynanmaya karar verildiği gözetilmeksizin, 20 yüzlü zar kullanılarak toplanır.\n\nAncak gelişim yönünde atılan zarlarda, karakterler tecrübesiz oldukları bir üst alanda antrenman gerçekleştirirken d20 zarın **1-5 değerleri gerileme**, **6-20 değerleri ilerleme** olarak sayılır.\n\nBu gerileme/ilerleme aralığında sıfır noktası olarak 5-6 kısmı belirlenir.\n\nEğer karakterler antrenman alanlarıyla ilgili bir yol gösterici edinebilirse (tekniği anlatacak birisi, temel bilgileri anlatacak dökümanlar vb.), yol göstericinin niteliğine göre karakterin antrenman zarındaki gerileme aralığı azalır."
+            },
+            {
+              "type": "example",
+              "text": "Bir karakter bir silah için yetkinlik antrenmanı yapmaktadır. \nBu karakter, silahta yetkin olmadığı için gerileme/ilerleme marjına tabiidir. Yani, d20 antrenman zarıyla gelecek 7 değeri için, +2 deneyim puanı kazanır. Eğer gelen zar 2 ise, -4 deneyim puanı azaltır.\nAncak antrenman yapacak karakter, bu temel konusunda kendisini yönlendirecek bir kaynak bulur ve bir süre bu kaynak doğrultusunda ilerlerse, gerileme marjını giderek azaltacak şekilde antrenman zarının getirisini azami 20 değere yaklaştırır."
             },
             {
               "type": "paragraph",
-              "text": "Karakterin gerçekleştirmek istediği antrenman türü GM tarafına önerilir ve kabul edilirse, karakter oyun süresince 6 saatlik bir çalışma süresine girer. Bu çalışma süresi boyunca arada verilen molalar haricinde bir kesinti yaşanması durumunda GM inisiyatifi ile deneyim puanı için kullanılacak zar türü değişebilir."
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterler girdikleri antrenman sonucunda +1 Yorgunluk Durumu puanı alırlar. Karakter yorgunken bir antrenman daha yapacak olursa bu durum karaktere +1 Yorgun Durumu puanı daha ekler. Bir karakterin yorgunluk durumu 2 puan veya daha fazla ise, antrenman yapamaz."
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterler zihinsel ve fiziksel olarak yorgunluk durumuna girebilirler. Meditasyon gibi eylemler dışında, bir karakterin enerjisel yetenekleri üstünde çalışması da vücuttaki enerji akışından dolayı karakteri fiziksel bir yorgunluğa sürükleyebilir. Bundan dolayı GM ile anlaşılarak belirlenen belirli antrenman türleri dışında enerjisel ve fiziksel yetenekler üstünde geliştirme çalışmaları karakteri 6 saat sonunda yoracaktır."
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterlerin gelişim süreçleri iki farklı kolda ve formüle ayrılmıştır. Bunlar Temel Gelişim ve Özel Gelişimdir."
+              "text": "Karakterin gerçekleştirmek istediği antrenman türü GM tarafına önerilir ve kabul edilirse, karakter oyun süresince 3 saatlik bir çalışma süresine girer. Bu çalışma süresi boyunca arada verilen molalar haricinde bir kesinti yaşanması durumunda GM inisiyatifi ile deneyim puanı için kullanılacak zar türü değişebilir.\n\nKarakterler girdikleri antrenman sonucunda +1 Yorgunluk Durumu puanı alırlar. Karakter yorgunken bir antrenman daha yapacak olursa bu durum karaktere +1 Yorgun Durumu puanı daha ekler. Bir karakterin yorgunluk durumu 2 puan veya daha fazla ise, antrenman yapamaz.\n\nKarakterler zihinsel ve fiziksel olarak yorgunluk durumuna girebilirler. Meditasyon gibi eylemler dışında, bir karakterin enerjisel yetenekleri üstünde çalışması da vücuttaki enerji akışından dolayı karakteri fiziksel bir yorgunluğa sürükleyebilir. Bundan dolayı GM ile anlaşılarak belirlenen belirli antrenman türleri dışında enerjisel ve fiziksel yetenekler üstünde geliştirme çalışmaları karakteri 6 saat sonunda yoracaktır.\n\nKarakterlerin gelişim süreçleri iki farklı kolda ve formüle ayrılmıştır. Bunlar Temel Gelişim ve Özel Gelişimdir."
             },
             {
               "type": "heading",
@@ -1284,15 +1343,7 @@ window.SLVNZ_CONTENT = {
             },
             {
               "type": "paragraph",
-              "text": "Temel gelişim, karakterlerin temel becerilerini, ekipman yetkinliklerini, enerjisel yetkinliklerini ve kaynak havuzlarını geliştirebileceği süreçleri kapsamaktadır. Bu süreç, karakterin gireceği en az 1 en çok 4 saatlik antrenman ya da meditasyon süreci sonunda atılan farklı yüzlü zarlar ile, SEVİYE x 100 Deneyim Puanı'na erişmeye çalışarak seviye atlayabileceği bir sistemdir."
-            },
-            {
-              "type": "paragraph",
-              "text": "**TEMEL NİTELİKLER**, temel gelişimin bu sistemi ile aynı biçimde ilerlese de gerektirdiği deneyim puanı bakımından çok daha ağırdır. Temel niteliklerde **KUV**, **ÇEV** ve **DAY**, sözü edilen antrenmanlarla geliştirilebilir. Ancak **İRD**, **ZEK** ve **İRF** nitelikleri daha özel yöntemler veya antrenmanlarla gelişir. Temel niteliklerin gelişmesi için gerekli deneyim puanı formülü **SEVİYE x 500** olarak işlenir."
-            },
-            {
-              "type": "paragraph",
-              "text": "Özellikle temel niteliklerin geliştirilmesi oldukça uzun bir süreç alabilmektedir. Bu durum göz önünde bulundurulduğunda, bir karakterin asıl özgünlüğünü diğer becerileri ve yeteneklerinin gelişimi ile gösterebileceği belirtilebilir. Özellikle yeni bir oyuna başlanırken veya yeni bir karakter oluşturulurken, GM'in temel nitelikler için ayrı bir Deneyim Puanı havuzu belirlemesi veya oyunculara doğrudan seviye sayısıyla nitelik sınırı vermesi (2 adet +1 nitelik ve 1 adet +2 nitelik, ya da niteliklere özel 2000 Deneyim Puanı gibi...) tavsiye edilir."
+              "text": "Temel gelişim, karakterlerin temel becerilerini, ekipman yetkinliklerini, enerjisel yetkinliklerini ve kaynak havuzlarını geliştirebileceği süreçleri kapsamaktadır. Bu süreç, karakterin gireceği en az 1 en çok 4 saatlik antrenman ya da meditasyon süreci sonunda atılan farklı yüzlü zarlar ile, SEVİYE x 100 Deneyim Puanı'na erişmeye çalışarak seviye atlayabileceği bir sistemdir.\n\n**TEMEL NİTELİKLER**, temel gelişimin bu sistemi ile aynı biçimde ilerlese de gerektirdiği deneyim puanı bakımından çok daha ağırdır. Temel niteliklerde **KUV**, **ÇEV** ve **DAY**, sözü edilen antrenmanlarla geliştirilebilir. Ancak **İRD** ve **SZG** nitelikleri daha özel yöntemler veya antrenmanlarla gelişir. Temel niteliklerin gelişmesi için gerekli deneyim puanı formülü **SEVİYE x 500** olarak işlenir.\n\nTemel Nitelikler nezdinde, istikrarlı bir antrenman süreci takip edilmezse, antrenman gerçekleştirilmeyen günlere bağlı olarak periyodik bir gerileme süreci başlar. Karakter, bu nitelik antrenman sürecinde ne kadar deneyim puanı biriktirdiyse, periyodik gerileme miktarı o kadar azalır. Yani KUV niteliğini geliştirmeye çalışan bir karakter, 1 haftalık antrenman sonucunda 120 puan elde etmişse, 3 gün antrenmanını devam ettirmemesi durumunda, sonraki her antrenmansız gün başına d10 gerileme yaşar. Ancak bu puan miktarı 300 civarındayken, periyodik gerileme d5 civarındadır. Bu durum, sadece temel nitelikler için geçerlidir.\n\nÖzellikle temel niteliklerin geliştirilmesi oldukça uzun bir süreç alabilmektedir. Bu durum göz önünde bulundurulduğunda, bir karakterin asıl özgünlüğünü diğer becerileri ve yeteneklerinin gelişimi ile gösterebileceği belirtilebilir. Özellikle yeni bir oyuna başlanırken veya yeni bir karakter oluşturulurken, GM'in temel nitelikler için ayrı bir Deneyim Puanı havuzu belirlemesi veya oyunculara doğrudan seviye sayısıyla nitelik sınırı vermesi (2 adet +1 nitelik ve 1 adet +2 nitelik, ya da niteliklere özel 2000 Deneyim Puanı gibi...) tavsiye edilir."
             },
             {
               "type": "heading",
@@ -1310,15 +1361,7 @@ window.SLVNZ_CONTENT = {
             },
             {
               "type": "paragraph",
-              "text": "Enerjisel ve fiziksel olarak pek çok yeteneğin temel seviyesinin üstüne çıkılabilecek şekilde geliştirilme kapasitesi vardır. Bu gelişim süreci, GM tarafından belirlenen özel bir biçimde olabilirken, bazı yetenekler için sistem kapsamında belirtilmiştir. Geliştirilebilir tipte olan yetenekleri, yetenek açıklamalarında bulunan özel bir belirteç dahilinde fark edebilirsiniz."
-            },
-            {
-              "type": "paragraph",
-              "text": "Bir yeteneği geliştirmek, kimi zaman belirli bir temel niteliğin, becerinin ya da başka bir yeteneğin sınır bir seviyede olmasını gerektirebilir. Bunun haricinde bir yeteneği geliştirmek için bir sınır ya da şart yok ise klasik gelişim formülü uygulanır. Örneğin, 3. Seviyede olan bir yeteneği geliştirerek yeni bir etki ya da özelliğini ortaya çıkarabilmek, diğer bir yandan bu yeteneğin gücünü de artırabilmek için, karakterin bu yeteneği 4. Seviyeye yükseltmesi gerekir. Eğer bu yükseltme için sistem ya da GM tarafından belirlenmiş özel bir şart ya da sınır (KUVVET 3 puan olmalı, YIKIM enerjisi 4 puan olmalı, ATICILIK becerisi 2 puan olmalı vb.) bulunmuyorsa, 4x100=400 Deneyim Puanı toplaması gerekir."
-            },
-            {
-              "type": "paragraph",
-              "text": "Geliştirilmiş yetenekler, temel olan alt seviyelerinde kullanılabilir, ancak yüksek seviyelerinde açığa çıkan yeni etkiler ya da güçlerden faydalanmak için bu yetenekleri gelişmiş seviyelerinde kullanmak şarttır. Örnek olarak, temel seviyesi 4. Seviye olan Ateş Topu büyüsünü öğrenmiş bir karakter, bu büyünün ulaşabileceği menzili artırmak adına geliştirme yapmış durumda. Büyünün geliştirilmiş hali ile 5. Seviyede kullanma hakkı kazanırken 4. Seviye halini kullanma konusunda da hiçbir sorun yaşamamaktadır. Ancak, geliştirilmiş Ateş Topu büyüsünü 5. Seviyeye çıkardığı zaman fazladan menzile sahip bir ateş topu ortaya çıkarabilirken, 4. Seviyede kullandığında bu etkiye sahip olamaz."
+              "text": "Enerjisel ve fiziksel olarak pek çok yeteneğin temel seviyesinin üstüne çıkılabilecek şekilde geliştirilme kapasitesi vardır. Bu gelişim süreci, GM tarafından belirlenen özel bir biçimde olabilirken, bazı yetenekler için sistem kapsamında belirtilmiştir. Geliştirilebilir tipte olan yetenekleri, yetenek açıklamalarında bulunan özel bir belirteç dahilinde fark edebilirsiniz.\n\nBir yeteneği geliştirmek, kimi zaman belirli bir temel niteliğin, becerinin ya da başka bir yeteneğin sınır bir seviyede olmasını gerektirebilir. Bunun haricinde bir yeteneği geliştirmek için bir sınır ya da şart yok ise klasik gelişim formülü uygulanır. Örneğin, 3. Seviyede olan bir yeteneği geliştirerek yeni bir etki ya da özelliğini ortaya çıkarabilmek, diğer bir yandan bu yeteneğin gücünü de artırabilmek için, karakterin bu yeteneği 4. Seviyeye yükseltmesi gerekir. Eğer bu yükseltme için sistem ya da GM tarafından belirlenmiş özel bir şart ya da sınır (KUVVET 3 puan olmalı, YIKIM enerjisi 4 puan olmalı, ATICILIK becerisi 2 puan olmalı vb.) bulunmuyorsa, 4x100=400 Deneyim Puanı toplaması gerekir.\n\nGeliştirilmiş yetenekler, temel olan alt seviyelerinde kullanılabilir, ancak yüksek seviyelerinde açığa çıkan yeni etkiler ya da güçlerden faydalanmak için bu yetenekleri gelişmiş seviyelerinde kullanmak şarttır. Örnek olarak, temel seviyesi 4. Seviye olan Ateş Topu büyüsünü öğrenmiş bir karakter, bu büyünün ulaşabileceği menzili artırmak adına geliştirme yapmış durumda. Büyünün geliştirilmiş hali ile 5. Seviyede kullanma hakkı kazanırken 4. Seviye halini kullanma konusunda da hiçbir sorun yaşamamaktadır. Ancak, geliştirilmiş Ateş Topu büyüsünü 5. Seviyeye çıkardığı zaman fazladan menzile sahip bir ateş topu ortaya çıkarabilirken, 4. Seviyede kullandığında bu etkiye sahip olamaz."
             }
           ]
         },
@@ -1370,305 +1413,7 @@ window.SLVNZ_CONTENT = {
             },
             {
               "type": "tabs",
-              "tabs": [
-                {
-                  "label": "BARBAR",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "text": "Barbarlar, genellikle saf kuvvet ve dayanıklılık üstüne kurulmuş karakterlerin oluşturduğu bir sınıftır. Bir karakterin barbar sınıfı olduğunun en büyük göstergesi, kısmi kontrollü bir öfke krizine girebilme kapasiteleridir. Bir barbar, belirli aralıklarla kendi öfkesini kontrollü olarak körükleyerek ÖFKE durumuna girebilir."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Öfke durumundayken barbar bir karakter KUVVET ve DAYANIKLILIK niteliklerine önemli fazlalıklar alırken, ZİHİN ve FARKINDALIK gibi nitelik ile becerilerine de benzer şekilde eksi değerler edinir. Tabii ki bu nitelik ve beceri değişimleri karakterin oluşturduğu barbar mekaniğine göre değişkenlik gösterebilir. Bu durum tamamen oyuncunun yaratıcılığı ile GM'in oyun dünyasında bu yaratıcılığın dengelenmesini sağlamasıyla ilgilidir."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Örneğin, bir barbar enerjiye hükmetme konusunda bazı yeteneklere sahiptir. Bu barbarın öfke patlaması durumlarında, normalde kullanma imkânı olmayan bazı büyüleri kullanabilme kabiliyeti ortaya çıkar. Öfke durumundayken YIKIM enerjisi ile ZİHİN niteliği artarken, KUVVET ve ÇEVİKLİK nitelikleri düşüş yaşayabilir. Bu ve buna benzer mekanikler tamamen karakteri oluşturan oyuncunun yaratıcılığına bağlıdır. GM ise bu yaratıcı mekaniğin oyun dünyasına ve genel güç dengelerine etkisini gözeterek mekaniği kabul etmek, reddetmek ya da farklı düzenlemelerle dengeleyerek oyuncuya yenilemekle sorumludur."
-                    }
-                  ]
-                },
-                {
-                  "label": "SAVAŞÇI",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "text": "Savaşçılar, oyun dünyasının çoğu bölgesinde karşılaşılabilecek, klasik olarak nitelendirilebilecek yakın dövüşçüler ya da menzilli maceracılardır. Ancak, savaşçı bir karakterin de kendini farklı yönlerde geliştirme ve yeteneklerini ilginçleştirme olasılığı oldukça yüksektir."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Bütün sınıflarda olduğu gibi savaşçı sınıfı oynamak isteyen bir oyuncu kendince bir mekanik geliştirip bu mekaniği GM'e sunarak oyun hayatına geçirebilir. Var olan yetenekleri ve hareket kitlerini kendince değiştirerek ya da geliştirerek yeni yaklaşımları ortaya çıkarabilir. Bir savaşçı yakın mesafede kılıç, kalkan, gürz vb. silahlarla dövüşen biri olabilirken, uzak menzilden yay, tatar yayı, tüfek vb. araçlarla ekibine destek veren birisi olabilir. Bunların yanı sıra, oyuncunun yaratıcılığına bağlı olarak farklı enerjisel yönlendirmeleri de mekaniğin içine dahil edebilir. Savaşçılar, genel yapılarıyla fiziksel yetenekleri ve yetkinlik yeteneklerini kullanarak fiziksel mücadelenin gidişatına yön verebilirler."
-                    }
-                  ]
-                },
-                {
-                  "label": "KUTBAN & RUHBAN",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "text": "Kutban ve ruhbanlar, sahip oldukları güçleri ve enerjilerini kadimlerden alan karakterlerdir. Bu karakterler, dini olarak inandıkları ve ibadet ettikleri bir kadim ile zaman zaman manevi bağlantılar kurarak onların bilgisine, gücüne ve kudretine sahip olurlar. Ancak bu güç ve kudret, yalnızca yolunda yürüdükleri kadimlerin ilkelerini uyguladıkça ve onları idame ettirdikçe bu karakterlerle birlikte olabilir."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Kutban ve ruhbanların kullandıkları büyüler, enerjilerini İNANÇ üstünden alır. İNANÇ enerjisi, karakterin ibadet ettiği kadime olan inancının kuvvetinden, bu kuvvetin kadimin varlığı ile karakterin arasında oluşan bir bağdan sağlanan bir enerji türü olarak kabul edilebilir. İNANÇ enerjisini kullanarak büyülerini gerçekleştirmek için, odaklayıcı olarak tılsımlarını kullanırlar."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Kutban ve ruhbanlar, sahip oldukları büyüleri geliştirmek ya da yeni büyüler öğrenmek için kadimleriyle manevi bir bağ kurabilecekleri ritüeller yaparlar. Bu ritüeller kimi zaman bazı materyaller ya da şartlar istese de bazen şarta ya da materyale bağlı kalmaksızın gerçekleştirilebilirler. Bu ritüellerden deneyim puanı toplanır. Karakterler topladıkları deneyim puanlarının öğrenmek istedikleri büyünün gerektirdiği miktara ulaşmasıyla, yeni yeteneklerini test eden manevi bir sınava tabi tutulurlar."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Bu sınav daha çok karakterin zihninde ya da manevi olarak çağırıldığı olağan dışı bir ortamda gerçekleşir. Gerçekleşen bu sınav sonunda karakterler başarılı bir şekilde geçmeleri durumunda yeteneği kullanılabilir biçimde öğrenmiş olurlar. Geçememeleri durumunda GM tarafından belirlenen yüzdelik bir dilim deneyim puanı karakterlerin hanelerinden silinerek yeniden denemeleri beklenir (Silinecek yüzdelik dilimin, karakterin sınavı tamamlamaya ne kadar yakın bir noktada başarısız olduğu gözetilerek belirlenmesi tavsiye edilir. Karakter başarıya ne kadar yakınsa, o kadar az miktarda deneyim puanı kaybetmelidir)."
-                    }
-                  ]
-                },
-                {
-                  "label": "SİHİRBAZ",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "text": "Sihirbazlar, evrendeki dengesiz enerjiye yön verme konusunda en temel bilgiye ve kontrole sahip olan kişilerdir. Enerjiyi yönlendirebilme yetilerini herhangi bir varlıktan ya da olağanüstü durumdan değil, doğrudan bu enerjiyi yönlendirebilmeye yönelik gelişen becerilerinden edinirler. Sihirbazlar, büyüyü öğrenme ve kullanma eğitimlerinde geçirdikleri süreçler sebebiyle büyü parşömenleri yazma konusunda yetkin olabilirler. Bu konuda yetkin olan bir Sihirbaz, enerjiyi yakalayabilen mürekkep ve parşömenler kullanarak büyü parşömeni üretebilirler."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Sihirbazlar genel eğitildikleri ya da kendilerini bir şekilde eğitebildikleri durumlarda pek çok enerji türüne hâkim olabilirler. Bu enerji türlerinde farklı büyüler yapabilir, başka Sihirbazların yazmış olacağı kitaplardan bu büyüleri öğrenebilir, normalde uzun sürebilecek büyü öğrenme sürelerini bu tipte unsurlar aracılığıyla oldukça kısaltabilirler."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Bir Sihirbaz, alacağı eğitimler yoluyla birkaç farklı konuda yetkinlik kazanabilir;"
-                    },
-                    {
-                      "type": "heading",
-                      "level": 3,
-                      "text": "Büyü Parşömeni Üretimi"
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Sihirbaz, bildiği büyüleri kâğıda dökerek başkaları tarafından kullanılabilir hale getirebilir."
-                    },
-                    {
-                      "type": "heading",
-                      "level": 3,
-                      "text": "Büyü Üretimi"
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Yeteri kadar yetkin bir Sihirbaz, var olmayan bir büyüyü üretme konusunda beceri sahibi olabilir. Ancak, var olmayan bir büyüyü ortaya çıkarmak, herhangi var olan bir büyüyü öğrenme sürecinden çok daha zorlayıcıdır. Bu süreç, bir büyü öğrenmedeki hareketlerin ve sözlerin yapılmaya çalışılması sürecine karşın büyüyü çalıştıracak sözlerin ve hareketlerin tasarlanmasını, belirlenen enerjiyi bu unsurlara entegre etmeyi ve bunu yeterli mana miktarı sağlayarak dengelemeyi kapsar."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Ayrıca bir Sihirbazın üretmek istediği büyünün enerji türüne de oldukça hâkim olması önemlidir. Bu durumu sağlamak için, Sihirbazın ilgili enerji niteliğinde en az +4 puana sahip olması gerekir. Bu duruma ilişkin şartları taşıyan Büyü Üretim Tablosu incelenebilir. Büyü üretmenin farklı aşamaları vardır. Bir Sihirbaz, eğer kapsamlı bir Sihirbaz akademisinde eğitim almışsa bu süreçler hakkında bilgilidir."
-                    },
-                    {
-                      "type": "heading",
-                      "level": 3,
-                      "text": "Büyü Konsepti Belirleme"
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Büyüyü üretmeye başlamadan önce, büyünün konsepti belirlenir. Bahsedilen konsept, büyünün işlevi, dolayısıyla kullanacağı enerji türüdür. Enerji türü belirlendikten sonra eğer büyü bir ritüel ise bu ritüelde kullanılacak malzemeler belirlenir. Büyü malzemeleri, benzer tipteki büyülerden ilham alınarak seçilebilir, benzer işlevdeki malzemeler ritüel büyüsünün üretilmesinde Sihirbaza kolaylık sağlayabilir."
-                    },
-                    {
-                      "type": "heading",
-                      "level": 3,
-                      "text": "Araştırma ve Deney"
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Gerekli belirlemeler yapıldıktan sonra enerjiyi istenilen şekilde yönlendirebilmek için araştırma ve deney safhası başlar. Araştırma kapsamında Sihirbaz, iç görü kazanmak adına büyü enerjisi ile ilgili eski metinleri inceleyebilir, bununla bilgili varlıklara danışabilir ya da doğrudan kendi başına deney yolu ile enerjiyi belirlediği konsept doğrultusunda yönlendirmeye çalışabilir. Bu süreçte oluşturmak istediği etki konusunda ne kadar başarılı olabildiğinin belirlenmesi için d20 zarlar kullanılır. Deney süreci için bir faz, klasik bir antrenman süresi olarak nitelendirilir ve büyü antrenmanının verdiği yorgunluk etkilerini verir."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Sihirbaz yukarıda bahsedilen süreçte başarılı olmak ya da bir sonuca ulaşmak için 100 deneyim puanına ulaşmalıdır. Ancak bu miktar, Sihirbazın başarmak istediği hedefin karmaşıklığına ya da enerji türüne göre GM tarafından değiştirilebilir. Örneğin, bir Sihirbaz, birden fazla enerji türünü bir arada kullanmaya çalışarak bir etki ortaya koymak isteyebilir. Böyle bir durumda deneyin bir sonuca ulaşması için Sihirbazın ulaşması gereken deneyim puanı hedefi 200 puana yükselebilir. Bir Sihirbaz nadir ya da hükmetmesi daha zor olan bir enerji türünde bir büyü ortaya çıkarmak isteyebilir; örneğin karanlık enerjiyi kullanarak bir büyü oluşturmak isteyen Sihirbazın da deney fazı için istenen değer 150 deneyim puanı gibi bir sınır olabilir."
-                    },
-                    {
-                      "type": "heading",
-                      "level": 3,
-                      "text": "Büyü Eskizleme"
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Sihirbaz, araştırmaları ve deneyleri sonucunda enerjiyi istediği kıvama sokabildikten ya da beklenmeyen bir sonuca ulaştıktan sonra belirlediği konsepte yönelik çalışacak veya ortaya çıkan beklenmeyen sonuçtan devam etme konusunda taslak oluşturacağı bir parşömen hazırlar. Bu parşömende büyünün genel etkilerini, varsa menzilini, süresini vb. unsurlarını kabaca belirler. Sihirbazın belirleyeceği bu unsurlar doğrultusunda büyünün MANA bedeli ve potansiyel seviyesi ortaya çıkar. Bu bedeli ve seviyeyi oyuncuya sunmak GM'in inisiyatifindedir."
-                    },
-                    {
-                      "type": "heading",
-                      "level": 3,
-                      "text": "Test ve Geliştirme"
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Büyünün kalan unsurları belirlendikten sonra Sihirbazın taslak olarak oluşturduğu büyüyü bir ortamda test etmesi gerekmektedir. Bu test süreci, Sihirbazın taslağı test edip geliştirerek istenmeyen etkileri değiştirdiği/geliştirdiği, istediği gibi toplanmayan enerjiyi dengelemek için taslakta farklı değişiklikler yaptığı, büyüye vermek istediği formu tekrarlayarak değiştirdiği bir süreçtir."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Sihirbazın büyüyü gerçekten üretme konusunda emek verdiği faz aslında bu aşamadır. Bütün etkileri, özellikleri, manası ve seviyesi belli olan büyünün tam anlamıyla hayata geçirilmeye başlandığı aşamadır. Bu aşamada, Sihirbaz tekrar bir antrenman sürecine girer gibi büyü üstünde çalışır ve her çalışma oturumunda d20 kullanır. Belirlenen büyü seviyesine göre 100 x Büyü Seviyesi olacak şekilde deneyim puanı toplanır. Bu sürecin sonunda, GM'in de inisiyatifi ile Sihirbazın üretmeye çalıştığı büyü bir sonuca bağlanır."
-                    },
-                    {
-                      "type": "heading",
-                      "level": 3,
-                      "text": "Büyüyü Kalıcı Hale Getirme"
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Büyüsünü üretmiş Sihirbaz isterse taslağını temiz bir parşömene geçirerek öğrenilebilir, başkaları tarafından çalışılabilir ya da geliştirilebilir bir hale getirebilir. Bu parşömenleri akademilere bağışlayabilir ya da farklı yerlere satabilir."
-                    },
-                    {
-                      "type": "table",
-                      "header": [
-                        "BÜYÜ SEVİYESİ",
-                        "GEREKLİ ENERJİ"
-                      ],
-                      "rows": [
-                        [
-                          "1-2",
-                          "+4"
-                        ],
-                        [
-                          "3",
-                          "+5"
-                        ],
-                        [
-                          "4",
-                          "+6"
-                        ],
-                        [
-                          "5",
-                          "+7"
-                        ],
-                        [
-                          "6",
-                          "+8"
-                        ],
-                        [
-                          "7",
-                          "+9"
-                        ],
-                        [
-                          "8",
-                          "+10"
-                        ],
-                        [
-                          "11+",
-                          "+11+"
-                        ]
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "label": "SAHİR & SAHİRE",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "text": "Sahirler & Sahireler, doğumlarından itibaren ya da yaşanan herhangi bir kaza/olay sonucu damarlarında akan kanın enerji taşımasıyla, herhangi bir odaklayıcıya ihtiyaç duymadan büyü yapabilme yeteneğine sahip olmuş karakterleri kapsayan bir sınıftır. Ancak, sahip oldukları bu doğayı kullanarak yapabildikleri enerji yönlendirmesinin yapısı normalin dışında olduğu için, bir büyüyü geliştirme ya da yeni bir büyü öğrenme konusunda geçirdikleri süreç, ayrıca bazı konularda büyüleri kullanma kapsamında yapabildikleri şeylerin bir kısmı normalden farklıdır."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Bir sahir/sahire, sahip olduğu doğa dolayısıyla büyü yapabilmek için herhangi bir odaklayıcı yardımıyla enerjiyi toplayıp yönlendirme işlemine ihtiyaç duymaz. Doğrudan damarlarında akan kan, dolayısıyla vücudu bu görevi üstlenir. Bu durum ise normal büyü kullanım kurallarını esneten ya da bozabilen bir yapıya sahiptir. Bahsedilen yapı sebebiyle, sahir/sahireler yeni büyüler öğrenme ya da bunları geliştirme konusunda kendi çabalarıyla sınırlıdırlar. Ancak, öğrenmeye çalıştıkları büyü ya da büyüye benzer bir yeteneği öğrenmiş başka birinden yardım alarak bu süreci hızlandırabilirler."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Sahirler ve sahireler, gelişimleri süresince vücutlarında olağan dışı etkileri uyandırabilir, bu etkileri kullandıkları büyülere işleyebilirler. Bahsedilen işlemelere ENERJİ AKIMI denir. Enerji akımları, sahir/sahirelerin kendilerini yormadan kısıtlı miktarda kullanabilecekleri becerileridir. Fiziksel ve enerjisel olarak dinlenmedikleri sürece vücutları enerji akımı için gerekli olan enerjiyi toplayamaz. Sınırından fazla kullanılması durumunda enerji akımı, karakterin vücudunu yorarak zarar vermeye başlar. Yorularak zarar gören karakterin vücudu, geri dönülemeyecek hasarlar alabilir."
-                    },
-                    {
-                      "type": "heading",
-                      "level": 3,
-                      "text": "Enerji Akımları"
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Sistemsel olarak sahir/sahirelerin yapabilecekleri enerji akımı türleri belirli sayıdadır. Ancak, oyuncunun yaratıcılığına ya da GM inisiyatifine göre yeni enerji akımları türetilebilir. Enerji akımları kullanılabilme ve takip edilebilme adına rakamlarla belirlenir. Bir sahir/sahire, temel seviyelerde 2 akım yükü barındırır."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Bu yükler, karakterin yapabildiği büyülerin seviyeleri arttıkça artar. Başlangıç olarak 2. Seviye iki büyü öğrenen bir karakter Enerji Akımlarını yapabilme kapasitesine sahip olur. Sonrasında artıracağı her büyü seviyesi için bu yüklere +2 kapasite ekler. Akım yüklerini tüketen bir karakter, yenilenmesini beklemeden diğer kaynaklarda olduğu gibi kullanımı sürdürebilir. Ancak bu durum bahsedildiği üzere karakterin vücuduna zarar vererek kalıcı hasarlara sebep olabilir."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Bu hasarlara örnek olarak kalıcı MANA azalması, zihinsel ya da bedensel zorlanmadan dolayı ZİHİN/DAYANIKLILIK niteliklerinde kalıcı eksilmeler, o anda yönlendirilmeye çalışılan enerjinin vücudu tahrip etmesi sonucu belirlenen enerji niteliğine verilen kalıcı eksi değer gibi hasarlar ortaya çıkabilir. Bu örnekler sadece GM için bir ilham niteliğindedir. Bu durumlar kullanılabilir ya da GM tarafından tamamen farklı etkiler ortaya çıkarılabilir. Sahir & Sahirelerin kullanabileceği enerji akımlarına YETENEKLER bölümünden ulaşabilirsiniz."
-                    }
-                  ]
-                },
-                {
-                  "label": "SEHHAR",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "text": "Sehharlar, yapı bakımından kutban ve ruhbanlara benzeyen, ancak sahip oldukları güçleri bir kadime olan inançları yerine üstün bir varlıkla olan anlaşmalarından edinen karakterlerdir. Bu bağlamda bir Sehhar, Patron olarak sıfatlandırılan üst varlıklarca bahşedilmiş güçleri onlarla yapacağı veya yapmış olduğu anlaşma kurallarınca kullanırlar. Sehharların kullandıkları güçlerce hükmettikleri enerji türü PAKT enerjisidir."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Sehharların anlaşma yapabilecekleri varlıkların sayısı ve nitelikleri oldukça geniş ve esnek olabilir. Bu durumda bir Sehhar oynamak isteyen oyuncu, GM ile anlaşarak oyun tarzına ve karakterinin olmasını istediği kişiliğe hitap eden bir patron talep edebilir. Bu talebe karşılık GM, hikâye dahilinde bir patronu oyuncu karakterine sunabilir ya da kendi inisiyatifinde bir patron oluşturabilir."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Bir Sehhar ile patronu arasındaki ilişki ile bağın en önemli noktası aralarında yapılmış olan anlaşmadır. Bu anlaşma, yüzlerce satırdan oluşmuş kapsamlı bir belge ya da birkaç maddeyle bağlanmış bir karar olabilir. Bu durum da doğrudan GM'in inisiyatifindedir. Ancak, evrende var olan bazı patronlar kullanılacaksa, bu patronların anlaşmalarının baz alınması önerilir."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Sehhar ile patronu arasında olan anlaşma gereği, sehhara sunulan gücün gelişimi, olağanüstü durumlar dışında sehharın patronunu tatmin etmesine bağlıdır. Bu tatmin, patronun kişiliğine bağlı olarak onu eğlendirmek, ihtiyaçlarını karşılamak, vereceği görevleri yerine getirmek gibi durumlardan geçmektedir. Bahsedilen durumlar Olay olarak nitelendirilir. Sehharın ilgilenmek durumunda kalacağı olayların zorluk seviyeleri, olayların bir sonuca kavuşması sonunda farklı türlerde ödüller olarak sehhara geri dönüş sağlayacaktır. Bu ödüller; edinilen yeni güçler, verilen önemli bilgiler, eşyalar, silahlar vb. şeyler olabilir. Genel anlamda bir fikir edinilebilmesi için aşağıdaki tablo baz alınabilir."
-                    },
-                    {
-                      "type": "table",
-                      "header": [
-                        "OLAY ZORLUĞU",
-                        "OLAY ÖDÜLÜ"
-                      ],
-                      "rows": [
-                        [
-                          "Çok Basit",
-                          "Teşekkür, bağın devamlılığı"
-                        ],
-                        [
-                          "Basit",
-                          "Basit eşyalar, az miktarda para, basit bilgi vb."
-                        ],
-                        [
-                          "Orta",
-                          "Basit büyülü eşyalar, Seviye Yükseltme, Enerji Artırma, Değerli Bilgi vb."
-                        ],
-                        [
-                          "Zor",
-                          "Nadir Büyülü Eşyalar, Seviye Yükseltme, Enerji Artırma, Nadir veya Gizli Bilgi, İyi Miktarda Para vb."
-                        ],
-                        [
-                          "Çok Zor",
-                          "Nadir ya da Efsanevi Büyülü Eşyalar, Seviye Yükseltme, Enerji Artırma, Kıdem Kazanma, Efsanevi Bilgi, Fazla Miktarda Para vb."
-                        ],
-                        [
-                          "Neredeyse İmkansız",
-                          "Akla gelemeyecek tuhaf şeyler. Kim bilir, belki de Patron ile mistik bir akşam yemeği?"
-                        ]
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "label": "CADI",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "text": "Cadılar, büyüyü öğrenme, kullanma ve geliştirme yapısı olarak büyücülere oldukça benzerlik gösterirler. Ancak, büyücülerden farklı olarak var olan bir büyünün yapısını bozarak büyüyle ilgili tamamen farklı etkileri ortaya çıkarabilirler. Bu durum, bir büyücü ile bir sahirin özelliklerinin harmanlanmış versiyonu olarak düşünülebilir fakat hem büyücü hem sahir sınıfını aynı anda barındırmakla aynı ya da ilgili değildir."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Cadılar, büyüye hükmederken onu bozmak için enerjinin doğada bulunan en vahşi ve ölümcül halini yönetmeye çalışırlar (Karanlık Enerji). Karanlık enerjiyi kontrol edebilmek için —efsanelerce öngörülen, karanlık enerjinin bir şekilde bilinç kazanıp kullanılmak istemesi sonucunda oluşturduğu bir dil olan— kara lisanı bilmek gereklidir. Kara lisanı bilmek, sadece bir dil bilmenin yanı sıra, cadının psikolojik bir çarpışmaya girmesini de gerektirir."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Çünkü bir karakter, kara lisanı kullanmaya ya da onunla etkileşime geçmeye çalıştığı her zaman, zihninin kapılarını karanlık enerjinin hüküm sürdüğü diyarlara aralayarak onu davet eder. Bu süreçte, karanlık enerji karakterin zihnine ve vücuduna erişerek manipüle etmeye çalışır. Eğer karakter kendi dışında bu enerjiyi doyurabilecek bir kaynak bulamazsa, kendisi doğrudan kaynak olur. Diğer bir söylemle, karanlık enerjinin kullanımı MANA dışında önemli farklı kaynaklar gerektirir. Bu kaynaklar genel olarak herhangi bir canlının yaşamıdır."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Bu nedenle, genellikle kara büyüyü kullanma konusunda yetkinleşmiş cadıların kara büyü kullanımları sırasında, ortamdaki ışığın solması, çevredeki canlılığın azalması gibi etkiler sıkça rastlanılan durumlardır. Eğer cadı çevredeki bir kaynak yerine kendi bedenini kaynak olarak kullanmayı tercih ederse, karanlık enerjiyi kullanarak gerçekleştirmeye çalıştığı kara büyüyü oluşturduğu bölgeden başlayacak şekilde vücudundaki yaşamı tüketerek çürütür. Bu çürüme, yine cadı tarafından öğrenilebilecek üst yöntemlerle iyileştirilebilecek bir durumdur, ancak bu yöntemlere sahip olmayan bir varlığın bu çürümeye farklı bir çare bulması neredeyse imkansızdır."
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Bir cadı ile büyücünün büyü gelişimi konusunda farklarından bahsedilmesi gereklidir. Bu farklar genel hatları ile; bir büyücü ateş topu büyüsünün menzilini artırmak, kuvvetini güçlendirmek, etki alanını yükseltmek gibi geliştirmeler yapabilirken; bir cadı ateş topunun elementini değiştirme, düştüğü alanda farklı etkiler (korku, hastalık, lanet vb.) oluşturma, isabet eden hedeflerin niteliklerini çalma gibi etkileri uyandırmak için büyünün yapısını bozar."
-                    }
-                  ]
-                }
-              ]
+              "tabs": []
             }
           ]
         }
@@ -2009,7 +1754,7 @@ window.SLVNZ_VERSIONS = {
           "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
           "description": "",
           "version": "v4.0",
-          "contentSeed": "2026-05-29-mprhbwp6"
+          "contentSeed": "2026-05-29-mprjpxxu"
         },
         "sections": {
           "oyun-kurallari": {
@@ -2024,11 +1769,11 @@ window.SLVNZ_VERSIONS = {
                   {
                     "type": "heading",
                     "level": 2,
-                    "text": "SLVNZ 3.0 SİSTEMİ"
+                    "text": "SLVNZ 4.0 SİSTEMİ"
                   },
                   {
                     "type": "paragraph",
-                    "text": "SLVNZ 3.0 sistemi, özünde D&D ve FATE sistemlerini baz ve ilham alınarak düşünülmüş, özelleştirilmiş ve detaylandırılmış bir masaüstü rol yapma oyunu sistemidir."
+                    "text": "SLVNZ 4.0 sistemi, özünde D&D ve FATE sistemlerini baz ve ilham alınarak düşünülmüş, özelleştirilmiş ve detaylandırılmış bir masaüstü rol yapma oyunu sistemidir. 3.0 sistemine kıyasla \"Düşük Fantazya\" atmosferini yaşatmak üzere düzenlenmiştir."
                   },
                   {
                     "type": "paragraph",
@@ -2066,11 +1811,7 @@ window.SLVNZ_VERSIONS = {
                         "Kritik Başarısızlık"
                       ],
                       [
-                        "2",
-                        "Kesin Başarısızlık"
-                      ],
-                      [
-                        "3-5",
+                        "2-5",
                         "Başarısızlık"
                       ],
                       [
@@ -2112,15 +1853,6 @@ window.SLVNZ_VERSIONS = {
                   {
                     "type": "example",
                     "text": "Usta bir hırsız olan Majik, korsan şehri Sulgaran'ın en büyük iskelesindeki \"Sorvalas\" isimli bir yük gemisine sızmaya çalışmaktadır. Geminin kıç tarafına denizden tırmanmayı başaran Majik, yük deposuna açılan bir pencereyi dışarıdan açmaya çalışmak için 20 yüzlü bir zar kullanır. Zarın sonucu 1 gelir. Majik, camı açmaya çalışmakta başarısız olmakla kalmaz, tutunduğu yerde dengesini kaybederek suya düşer ve yüksek bir ses çıkarır. Bu ses, iskele etrafındaki sivillerin ve muhafızların dikkatini çekecektir ki o bölgeye doğru birkaç kişi neler olduğunu görmek üzere yola koyulur."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Kesin Başarısızlık"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Kritik başarısızlık durumuna oldukça benzeyen kesin başarısızlık sonucunda, kritik başarısızlıktan farklı olarak karakterin başında olumsuz bir durumun oluşmadığı bir başarısızlık durumudur. Bu durumda da karakterin sahip olduğu fazladan değerler yine dahil edilmez."
                   },
                   {
                     "type": "heading",
@@ -2203,7 +1935,7 @@ window.SLVNZ_VERSIONS = {
                   },
                   {
                     "type": "paragraph",
-                    "text": "Karakterlerin darbelere dayanma, yıkıcı durumlara karşı ayakta kalabilme, ağır durumlarda bilincini koruyabilme ya da acıya dayanma gibi durumlarda ihtiyaç duyduğu niteliktir. Aynı zamanda bir karakterin STAMINA değerini de etkilemektedir."
+                    "text": "Karakterlerin darbelerin etkisine dayanma, yıkıcı durumlara karşı ayakta kalabilme, ağır durumlarda bilincini koruyabilme ya da acıya dayanma gibi durumlarda ihtiyaç duyduğu niteliktir. Aynı zamanda bir karakterin STAMINA değerini de etkilemektedir."
                   },
                   {
                     "type": "heading",
@@ -2212,25 +1944,16 @@ window.SLVNZ_VERSIONS = {
                   },
                   {
                     "type": "paragraph",
-                    "text": "Dayanıklılığa benzer biçimde karakterin zihinsel dayanıklılığında; yani zihinsel olarak gireceği herhangi bir mücadelede ihtiyaç duyacağı niteliktir. Bu mücadeleler herhangi bir büyü etkisi altında kalma, zihne sızma, isteği dışında telepati vb. etkilerin altında kalma gibi durumlar olarak nitelendirilebilir."
+                    "text": "Dayanıklılığa benzer biçimde karakterin zihinsel dayanıklılığında; yani zihinsel olarak gireceği herhangi bir mücadelede ihtiyaç duyacağı niteliktir. Bu mücadeleler herhangi bir enerjisel etki altında kalma, zihne sızma, isteği dışında telepati vb. etkilerin altında kalma gibi durumlar olarak nitelendirilebilir."
                   },
                   {
                     "type": "heading",
                     "level": 3,
-                    "text": "ZEKÂ (ZEK)"
+                    "text": "SEZGİ (SZG)"
                   },
                   {
                     "type": "paragraph",
-                    "text": "Karakterin geçmişe yönelik tarihi bilgilerini, bir konuya yönelik bilgi birikimlerini, zor bulmacalar ve bilmeceleri kavrayabilme yetilerini etkileyen bir niteliktir. Aynı zamanda yüksek zekâya sahip karakterler, bilgileri öğrenme, algılama ve aklında tutma konusunda avantaj sahibidirler. Bunun anlamı, zekâ niteliği yüksek karakterlerin bazı bilgileri öğrenme eğrilerinin normal bir karaktere göre daha yüksek olmasıdır."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "İRFAN (İRF)"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterlerin başka karakterlerle olan iletişimlerinde, şüpheli buldukları karakterlerin davranışlarının altında yatan gerçeği anlama, bir kişinin yalan söyleyip söylemediğini kavramaya çalışma gibi durumlarda ihtiyaç duyacağı niteliktir. Aynı zamanda irfan sahibi karakterlerin algıları daha açık olacağından, irfan niteliğinin sağlayacağı avantaj sayesinde farkındalıkları olumlu yönde etkilenmektedir. Benzer biçimde irfan sahibi karakterler enerji dolu auraları fark etme ve bu enerjilerin yoğunluğunu tanılama konusunda da daha yetkin durumdadırlar."
+                    "text": "Karakterlerin sezgisel olarak çevrelerinde yaşanan olayları algılama kapasiteleridir. Bir karakterin konuşmalarındaki doğruluk payını sezebilme, çevresel faktörlerce ortamın atmosferini yoklama gibi durumlar, sezgi niteliğiyle algılanabilecek durumlardır."
                   }
                 ]
               },
@@ -2402,11 +2125,11 @@ window.SLVNZ_VERSIONS = {
                   },
                   {
                     "type": "paragraph",
-                    "text": "SLVNZ 3.0'da büyü yapmak ya da sisteme daha uygun tabiri ile enerjiyi yönlendirebilmek mümkündür. Enerjiyi yönlendirebilmek için evrende bulunan farklı enerji türlerine hâkim olmak gerekir. Bu enerji türleri Temel Enerji Türleri ve Özel Enerji Türleri olarak birbirinden ayrılırlar."
+                    "text": "SLVNZ 4.0'da enerjiyi yönlendirebilerek farklı etkiler meydana getirmek mümkündür. Evrendeki pek çok varlık enerjiyi yönlendirme yetisine sahip değildir. Ancak farklı etkiler ve çevresek etkenlerle varlıklar bu kabiliyete erişebilmektedir. Bu enerji türleri Temel Enerji Türleri ve Özel Enerji Türleri olarak birbirinden ayrılırlar."
                   },
                   {
                     "type": "paragraph",
-                    "text": "Temel enerjiler, evrendeki pek çok varlığın mana aracılığıyla dönüştürebileceği enerji türleridir. Özel enerjiler ise daha çok duruma bağlı olarak varlıkların sentezleyebileceği ve hissedebileceği enerjilerdir."
+                    "text": "Temel enerjiler, evrende serbest olarak dolaşan etkiler, kalıntılar vb. şekillerde karşılaşılabilecek veya meydana gelebilecek yaygın türlerdir. Özel enerjiler ise daha çok duruma bağlı olarak varlıkların sentezleyebileceği ve hissedebileceği enerjilerdir."
                   },
                   {
                     "type": "heading",
@@ -2606,11 +2329,7 @@ window.SLVNZ_VERSIONS = {
                   },
                   {
                     "type": "paragraph",
-                    "text": "Enerjisel yetenekler (Büyüler), doğada bulunan kaotik enerjinin vücuda çekilip kontrol altına alınırken dışarıya istenilen şekilde evirilerek aktarılması sonucu ortaya çıkan yeteneklerdir. Bazı karakterler sadece enerjisel yetenekler konusunda ustalaşma yolunda gidebilse de fiziksel mücadele konusunda ilerleyen karakterler de enerjisel yetenekler konusunda kendini geliştirmek isteyebilir."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Bu durum, fiziksel yeteneklerdeki savaş sanatı ile karıştırılmamalıdır. Örneğin, savaş sanatı yeteneği olan bir karakter her vuruşunda bir miktar MANA harcamak kaydıyla vuruşlarını ekstra güçlendirebilir. Ancak, benzer bir karakter doğrudan enerjisel yetenek kullanarak, STAMINA harcamaya gerek kalmadan sadece MANA harcayarak silahını enerji kullanarak bir element ile efsunlayabilir."
+                    "text": "Enerjisel yetenekler (Büyüler), doğada bulunan kaotik enerjinin farklı kanallarca çevreye veya kalıntılara sinmiş, belirli sembollerce nesnesel veya doğal akıştan geçirilerek meydana getirilebilen veya tamamen serbest bir biçimde olağan dışı meydana gelebilen sıradışı yeteneklerdir. Evrende herhangi bir insansı karakterin enerjisel yetenek kullanması sıradan bir durum değildir."
                   },
                   {
                     "type": "heading",
@@ -2619,7 +2338,7 @@ window.SLVNZ_VERSIONS = {
                   },
                   {
                     "type": "paragraph",
-                    "text": "Karakterler istisnai durumlar dışında enerjisel yetenek kullanırken sözler, hareketler ve materyallere ihtiyaç duyar. Eğer bir karakter, enerjisel odağa sahipse bu odak materyal gereksinimini ortadan kaldırır. Karakterlerin söyleyeceği sözler, *Büyü Sözleri* olarak anılır. Pek çok enerjisel yeteneğin büyülü sözü, yetenek gerçekleştirilirken vücut hareketleriyle birlikte söylenir. Bu söylem sırasında karakterin mana enerjisini topladığı kısımlarda enerjiyi somutlaştıran çemberler oluşur ve büyülü sözler yüksek tonda yankılanır. Bundan dolayı enerjisel yetenekler çoğunlukla gizlenemez."
+                    "text": "Karakterler, istisnai durumlarda basit sayılabilecek enerjisel etkileri meydana getirebilirler. Bu durumlar, kalıntılar gibi karakterlerin üstünde taşıdığı nesneler aracılığıyla gerçekleşmiyorsa, çoğunlukla karakterin belirli vücut hareketleri beraberinde fonetik biçimde uyum sağlayacağı sözler ile birleştirerek gerçekleştireceği bir zincirleme yapı olarak karşılaşılır. Karakterler, bu şekilde enerjisel yetenekleri gerçekleştirebilmek için beraberlerinde MANA rezervi bulundurmalıdır. Aksi halde enerjisel yetenekleri bu şekilde kendi başlarına gerçekleştiremezler."
                   },
                   {
                     "type": "heading",
@@ -2665,7 +2384,69 @@ window.SLVNZ_VERSIONS = {
                   },
                   {
                     "type": "paragraph",
-                    "text": "SLVNZ 3.0'da karakterlerin ekipman kullanımlarının ayrı bir yeri bulunmaktadır. Karakterlerin sahip olduğu ekipmanlar, karakter niteliklerini doğrudan etkileyebilmektedir. Kuşanılan ağır bir zırh, üstün bir savunma sağlarken karakterin hareket kabiliyeti, çevikliği, gizlenme becerisi gibi farklı özelliklerini olumsuz şekilde etkileyebilmektedir. Benzer biçimde kuşanılan silahlar da benzer etkileri barındırabilmektedir. Bu durumlara bağlı olarak farklı ekipmanlar ve karakterin özellikleri üzerindeki etkileri tablolarda belirtilmiştir."
+                    "text": "SLVNZ 4.0'da karakterlerin ekipman kullanımlarının ayrı bir yeri bulunmaktadır. Karakterlerin sahip olduğu ekipmanlar, karakter niteliklerini doğrudan etkileyebilmektedir. Karakterler, kuşandıkları ekipmanlar aracılığıyla kendilerini korunaklı veya işlevsel hallere getirebilirken, kuşandıkları ekipmanların ağırlıksal niteliklerine bağlı olarak bazı kısıntılar yaşarlar. Bu sistem, ekipman yükü ile Yük Puanı (YP) üzerinden hesaplanır."
+                  },
+                  {
+                    "type": "heading",
+                    "level": 3,
+                    "text": "YÜK PUANININ HESAPLANMASI"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Karakterin savaş sırasında üzerinde taşıdığı zırh, kalkan, silah ve erişilebilir ekipmanlar Kuşanım Yükü oluşturur. Bu yük, yalnızca ekipmanın gerçek ağırlığını değil; ekipmanın bedene yayılışını, hareketi ne kadar kısıtladığını, savaş sırasında ne kadar yer kapladığını ve karakterin beden ritmini ne ölçüde bozduğunu temsil eder.\n\nBu nedenle Yük Puanı — YP, doğrudan kilogram karşılığı değildir. Bir tam plaka zırh, bütün bedene yayılan sürekli bir yük oluşturduğu için yüksek YP’ye sahiptir. Buna karşılık büyük bir kılıç ağır ve hantal olsa da, tam plaka zırh kadar sürekli bedensel kısıtlama yaratmaz.\n\nToplam Kuşanım Yükü = Zırh YP + Kalkan YP + Kuşanılmış Silah YP + Üstte Taşınan Ekipman YP + Modifikasyon YP\n\nHesaba katılanlar:\n\nGiyilen zırh\nKuşanılmış kalkan\nElde, belde, sırtta veya hızlı çekilebilir konumda taşınan silahlar\nSavaş sırasında üstte taşınmaya devam eden çanta, mühimmat, ağır alet, iksir çantası, kamp ekipmanı\nZırha, kalkana veya silaha sonradan eklenmiş ağır parçalar\nMetal kaplama, ek plaka, miğfer, omuzluk, zırh eteği, ikinci katman gibi modifikasyonlar"
+                  },
+                  {
+                    "type": "heading",
+                    "level": 3,
+                    "text": "KUVVET İLE YÜK AZALTIMI"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Karakterin KUVVET niteliği, kuşanım yükünün karakter üzerindeki etkisini azaltır.\n\nKuvvet Yük Azaltımı = KUV x 3\n\nSonrasında karakterin asıl yük seviyesi şu formülle bulunur:\n\nEtkili Yük = Toplam Kuşanım Yükü - Kuvvet Yük Azaltımı\n\nEtkili Yük hiçbir zaman 0’ın altına düşmez."
+                  },
+                  {
+                    "type": "example",
+                    "text": "Karakterin toplam kuşanım yükü 32 YP olsun.\nKarakterin KUV değeri +4 ise:\nKUV x 3 = 12\n32 - 12 = 20\nKarakterin Etkili Yük değeri 20 olur."
+                  },
+                  {
+                    "type": "heading",
+                    "level": 3,
+                    "text": "EKİPMAN YÜKÜ EŞİKLERİ VE ETKİLERİ"
+                  },
+                  {
+                    "type": "table",
+                    "header": [
+                      "ETKİN YÜK PUANI MARJI",
+                      "YÜK SEVİYESİ",
+                      "ETKİLERİ"
+                    ],
+                    "rows": [
+                      [
+                        "0-8",
+                        "Hafif Kuşanım",
+                        "Yok"
+                      ],
+                      [
+                        "9-16",
+                        "Orta Kuşanım",
+                        "-1 Hareket, -1 Kaçınma, -1 Atletik Eylemler"
+                      ],
+                      [
+                        "17-24",
+                        "Ağır Kuşanım",
+                        "-2 Hareket, -2 Kaçınma, -2 Atletik Eylemler, Atik eylemlerde STAMINA kesintisi"
+                      ],
+                      [
+                        "25-32",
+                        "Çok Ağır Kuşanım",
+                        "-3 Hareket, -3 Kaçınma, -5 Atletik Eylemler, Fiziksel Eylemlerde STAMINA kesintisi"
+                      ],
+                      [
+                        "33+",
+                        "Aşırı Yük",
+                        "-4 Hareket, -5 Kaçınma, Dezavantajlı -5 Atletik Eylemler, Her Fiziksel Eylemde daha fazla STAMINA kesintisi"
+                      ]
+                    ]
                   },
                   {
                     "type": "heading",
@@ -2675,51 +2456,43 @@ window.SLVNZ_VERSIONS = {
                   {
                     "type": "table",
                     "header": [
-                      "Zırh Tipi",
-                      "ÇEVİKLİK",
-                      "GİZLİLİK"
+                      "ZIRH TİPİ",
+                      "YÜK PUANI"
                     ],
                     "rows": [
                       [
                         "Zırhsız",
-                        "0",
                         "0"
                       ],
                       [
                         "Deri Zırh",
-                        "0",
-                        "0"
+                        "3"
                       ],
                       [
                         "Sertleştirilmiş Deri Zırh",
-                        "-1",
-                        "0"
+                        "5"
                       ],
                       [
                         "Yarım Plaka Zırh",
-                        "-2",
-                        "-1"
+                        "12"
                       ],
                       [
                         "Zincir Zırh",
-                        "-3",
-                        "-2"
+                        "14"
                       ],
                       [
                         "Pullu Zırh",
-                        "-3",
-                        "-2"
+                        "16"
                       ],
                       [
                         "Tam Plaka Zırh",
-                        "-4",
-                        "-3"
+                        "24"
                       ]
                     ]
                   },
                   {
                     "type": "paragraph",
-                    "text": "Zırhlar, karakterlerin fiziksel saldırılardan ve birçok enerjisel saldırıdan korunmasına olanak sağlar. Ancak koruma seviyesi yükseldikçe, donanımlı korunma beraberinde bazı dezavantajları getirir. Bu dezavantajlar, tabloda gösterilen nitelik ve beceri eksileriyle sınırlı kalmayabilir. Örneğin, oyun yöneticisinin tercihine bağlı olarak, bir karakter giydiği miğferden dolayı farkındalık becerisine eksi değer alabilir."
+                    "text": "Zırhlar, karakterlerin fiziksel saldırılardan ve birçok enerjisel saldırıdan korunmasına olanak sağlar. Ancak koruma seviyesi yükseldikçe, donanımlı korunma beraberinde bazı dezavantajları getirir. Bu dezavantajlar, yük puanının getireceği etkilerle sınırlı kalmayabilir. Örneğin, oyun yöneticisinin tercihine bağlı olarak, bir karakter giydiği miğferden dolayı farkındalık becerisine eksi değer alabilir."
                   },
                   {
                     "type": "heading",
@@ -2730,68 +2503,104 @@ window.SLVNZ_VERSIONS = {
                     "type": "table",
                     "header": [
                       "Silah Tipi",
-                      "İSABET"
+                      "İSABET",
+                      "YÜK PUANI"
                     ],
                     "rows": [
                       [
                         "Hançer",
-                        "+3"
+                        "+3",
+                        "1"
                       ],
                       [
                         "Satır",
-                        "+2"
+                        "+2",
+                        "2"
                       ],
                       [
                         "Kısa Kılıç",
-                        "+1"
+                        "+1",
+                        "2"
                       ],
                       [
                         "Normal Kılıç",
-                        "0"
+                        "Çeviklik Bonusu",
+                        "3"
                       ],
                       [
                         "Uzun Kılıç",
-                        "-1"
+                        "-1",
+                        "3"
                       ],
                       [
                         "Büyük Kılıç",
-                        "-2"
+                        "-2",
+                        "4"
                       ],
                       [
                         "Savaş Baltası",
-                        "-1"
+                        "-1",
+                        "3"
                       ],
                       [
                         "Büyük Savaş Baltası",
-                        "-2"
+                        "-2",
+                        "4"
                       ],
                       [
                         "Topuz / Çekiç",
-                        "-2"
+                        "-2",
+                        "3"
                       ],
                       [
                         "Büyük Topuz / Çekiç",
-                        "-4"
+                        "-4",
+                        "5"
                       ],
                       [
                         "Zincirli Gürz",
-                        "-3"
+                        "-3",
+                        "4"
                       ],
                       [
                         "Büyük Zincirli Gürz",
-                        "-6"
+                        "-6",
+                        "5"
                       ],
                       [
                         "Mızrak",
-                        "0"
+                        "Çeviklik Bonusu",
+                        "3"
                       ],
                       [
                         "Uzun Mızrak",
-                        "-2"
+                        "-2",
+                        "4"
                       ],
                       [
                         "Pike",
-                        "-4"
+                        "-4",
+                        "5"
+                      ],
+                      [
+                        "Yay",
+                        "-",
+                        "3"
+                      ],
+                      [
+                        "Uzun Yay",
+                        "-",
+                        "4"
+                      ],
+                      [
+                        "Tatar Yayı",
+                        "-",
+                        "5"
+                      ],
+                      [
+                        "Musket/Tüfek",
+                        "-",
+                        "5"
                       ]
                     ]
                   },
@@ -2809,33 +2618,33 @@ window.SLVNZ_VERSIONS = {
                     "header": [
                       "Kalkan Tipi",
                       "BLOK",
-                      "ÇEVİKLİK"
+                      "YÜK PUANI"
                     ],
                     "rows": [
                       [
                         "Kalkansız",
                         "0",
-                        "0"
+                        "-"
                       ],
                       [
                         "Buckler",
                         "ÇEV",
-                        "0"
+                        "1"
                       ],
                       [
                         "Ufak Kalkan",
                         "ÇEV",
-                        "0"
+                        "2"
                       ],
                       [
                         "Normal Kalkan *",
                         "+3",
-                        "-1"
+                        "5"
                       ],
                       [
                         "Kule Kalkan",
                         "+6",
-                        "-3"
+                        "10"
                       ]
                     ]
                   },
@@ -3023,7 +2832,8 @@ window.SLVNZ_VERSIONS = {
                     "type": "image",
                     "src": "https://slvnz.github.io/resources/webpage/svg/hex-battle.svg",
                     "alt": "Altıgen savaş düzeni",
-                    "caption": "Altıgen savaş düzeni"
+                    "caption": "Altıgen savaş düzeni",
+                    "width": "300"
                   },
                   {
                     "type": "paragraph",
@@ -3094,7 +2904,8 @@ window.SLVNZ_VERSIONS = {
                     "type": "image",
                     "src": "https://slvnz.github.io/resources/webpage/svg/hex-block.svg",
                     "alt": "Bloklama sistemi",
-                    "caption": "Bloklama sistemi"
+                    "caption": "Bloklama sistemi",
+                    "width": "300"
                   },
                   {
                     "type": "heading",
@@ -3167,7 +2978,8 @@ window.SLVNZ_VERSIONS = {
                     "type": "image",
                     "src": "https://slvnz.github.io/resources/webpage/svg/square-battle.svg",
                     "alt": "Kare düzen savaş sistemi",
-                    "caption": "Kare düzen savaş sistemi"
+                    "caption": "Kare düzen savaş sistemi",
+                    "width": "300"
                   },
                   {
                     "type": "heading",
@@ -3252,23 +3064,15 @@ window.SLVNZ_VERSIONS = {
                   },
                   {
                     "type": "paragraph",
-                    "text": "Oyuncular oyun boyunca karakterlerinin niteliklerini, becerilerini ve yeteneklerini geliştirebilirler. Bu geliştirme süreci, karakterin uygun antrenmanları gerçekleştirmesi sonucu toplayabileceği deneyim puanları ile mümkündür. Deneyim puanları, oyunun kaç yüzlü zar ile oynanmaya karar verildiği gözetilmeksizin, 20 yüzlü zar kullanılarak toplanır."
+                    "text": "Oyuncular oyun boyunca karakterlerinin niteliklerini, becerilerini ve yeteneklerini geliştirebilirler. Bu geliştirme süreci, karakterin uygun antrenmanları gerçekleştirmesi sonucu toplayabileceği deneyim puanları ile mümkündür. Deneyim puanları, oyunun kaç yüzlü zar ile oynanmaya karar verildiği gözetilmeksizin, 20 yüzlü zar kullanılarak toplanır.\n\nAncak gelişim yönünde atılan zarlarda, karakterler tecrübesiz oldukları bir üst alanda antrenman gerçekleştirirken d20 zarın **1-5 değerleri gerileme**, **6-20 değerleri ilerleme** olarak sayılır.\n\nBu gerileme/ilerleme aralığında sıfır noktası olarak 5-6 kısmı belirlenir.\n\nEğer karakterler antrenman alanlarıyla ilgili bir yol gösterici edinebilirse (tekniği anlatacak birisi, temel bilgileri anlatacak dökümanlar vb.), yol göstericinin niteliğine göre karakterin antrenman zarındaki gerileme aralığı azalır."
+                  },
+                  {
+                    "type": "example",
+                    "text": "Bir karakter bir silah için yetkinlik antrenmanı yapmaktadır. \nBu karakter, silahta yetkin olmadığı için gerileme/ilerleme marjına tabiidir. Yani, d20 antrenman zarıyla gelecek 7 değeri için, +2 deneyim puanı kazanır. Eğer gelen zar 2 ise, -4 deneyim puanı azaltır.\nAncak antrenman yapacak karakter, bu temel konusunda kendisini yönlendirecek bir kaynak bulur ve bir süre bu kaynak doğrultusunda ilerlerse, gerileme marjını giderek azaltacak şekilde antrenman zarının getirisini azami 20 değere yaklaştırır."
                   },
                   {
                     "type": "paragraph",
-                    "text": "Karakterin gerçekleştirmek istediği antrenman türü GM tarafına önerilir ve kabul edilirse, karakter oyun süresince 6 saatlik bir çalışma süresine girer. Bu çalışma süresi boyunca arada verilen molalar haricinde bir kesinti yaşanması durumunda GM inisiyatifi ile deneyim puanı için kullanılacak zar türü değişebilir."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterler girdikleri antrenman sonucunda +1 Yorgunluk Durumu puanı alırlar. Karakter yorgunken bir antrenman daha yapacak olursa bu durum karaktere +1 Yorgun Durumu puanı daha ekler. Bir karakterin yorgunluk durumu 2 puan veya daha fazla ise, antrenman yapamaz."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterler zihinsel ve fiziksel olarak yorgunluk durumuna girebilirler. Meditasyon gibi eylemler dışında, bir karakterin enerjisel yetenekleri üstünde çalışması da vücuttaki enerji akışından dolayı karakteri fiziksel bir yorgunluğa sürükleyebilir. Bundan dolayı GM ile anlaşılarak belirlenen belirli antrenman türleri dışında enerjisel ve fiziksel yetenekler üstünde geliştirme çalışmaları karakteri 6 saat sonunda yoracaktır."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterlerin gelişim süreçleri iki farklı kolda ve formüle ayrılmıştır. Bunlar Temel Gelişim ve Özel Gelişimdir."
+                    "text": "Karakterin gerçekleştirmek istediği antrenman türü GM tarafına önerilir ve kabul edilirse, karakter oyun süresince 3 saatlik bir çalışma süresine girer. Bu çalışma süresi boyunca arada verilen molalar haricinde bir kesinti yaşanması durumunda GM inisiyatifi ile deneyim puanı için kullanılacak zar türü değişebilir.\n\nKarakterler girdikleri antrenman sonucunda +1 Yorgunluk Durumu puanı alırlar. Karakter yorgunken bir antrenman daha yapacak olursa bu durum karaktere +1 Yorgun Durumu puanı daha ekler. Bir karakterin yorgunluk durumu 2 puan veya daha fazla ise, antrenman yapamaz.\n\nKarakterler zihinsel ve fiziksel olarak yorgunluk durumuna girebilirler. Meditasyon gibi eylemler dışında, bir karakterin enerjisel yetenekleri üstünde çalışması da vücuttaki enerji akışından dolayı karakteri fiziksel bir yorgunluğa sürükleyebilir. Bundan dolayı GM ile anlaşılarak belirlenen belirli antrenman türleri dışında enerjisel ve fiziksel yetenekler üstünde geliştirme çalışmaları karakteri 6 saat sonunda yoracaktır.\n\nKarakterlerin gelişim süreçleri iki farklı kolda ve formüle ayrılmıştır. Bunlar Temel Gelişim ve Özel Gelişimdir."
                   },
                   {
                     "type": "heading",
@@ -3277,15 +3081,7 @@ window.SLVNZ_VERSIONS = {
                   },
                   {
                     "type": "paragraph",
-                    "text": "Temel gelişim, karakterlerin temel becerilerini, ekipman yetkinliklerini, enerjisel yetkinliklerini ve kaynak havuzlarını geliştirebileceği süreçleri kapsamaktadır. Bu süreç, karakterin gireceği en az 1 en çok 4 saatlik antrenman ya da meditasyon süreci sonunda atılan farklı yüzlü zarlar ile, SEVİYE x 100 Deneyim Puanı'na erişmeye çalışarak seviye atlayabileceği bir sistemdir."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "**TEMEL NİTELİKLER**, temel gelişimin bu sistemi ile aynı biçimde ilerlese de gerektirdiği deneyim puanı bakımından çok daha ağırdır. Temel niteliklerde **KUV**, **ÇEV** ve **DAY**, sözü edilen antrenmanlarla geliştirilebilir. Ancak **İRD**, **ZEK** ve **İRF** nitelikleri daha özel yöntemler veya antrenmanlarla gelişir. Temel niteliklerin gelişmesi için gerekli deneyim puanı formülü **SEVİYE x 500** olarak işlenir."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Özellikle temel niteliklerin geliştirilmesi oldukça uzun bir süreç alabilmektedir. Bu durum göz önünde bulundurulduğunda, bir karakterin asıl özgünlüğünü diğer becerileri ve yeteneklerinin gelişimi ile gösterebileceği belirtilebilir. Özellikle yeni bir oyuna başlanırken veya yeni bir karakter oluşturulurken, GM'in temel nitelikler için ayrı bir Deneyim Puanı havuzu belirlemesi veya oyunculara doğrudan seviye sayısıyla nitelik sınırı vermesi (2 adet +1 nitelik ve 1 adet +2 nitelik, ya da niteliklere özel 2000 Deneyim Puanı gibi...) tavsiye edilir."
+                    "text": "Temel gelişim, karakterlerin temel becerilerini, ekipman yetkinliklerini, enerjisel yetkinliklerini ve kaynak havuzlarını geliştirebileceği süreçleri kapsamaktadır. Bu süreç, karakterin gireceği en az 1 en çok 4 saatlik antrenman ya da meditasyon süreci sonunda atılan farklı yüzlü zarlar ile, SEVİYE x 100 Deneyim Puanı'na erişmeye çalışarak seviye atlayabileceği bir sistemdir.\n\n**TEMEL NİTELİKLER**, temel gelişimin bu sistemi ile aynı biçimde ilerlese de gerektirdiği deneyim puanı bakımından çok daha ağırdır. Temel niteliklerde **KUV**, **ÇEV** ve **DAY**, sözü edilen antrenmanlarla geliştirilebilir. Ancak **İRD** ve **SZG** nitelikleri daha özel yöntemler veya antrenmanlarla gelişir. Temel niteliklerin gelişmesi için gerekli deneyim puanı formülü **SEVİYE x 500** olarak işlenir.\n\nTemel Nitelikler nezdinde, istikrarlı bir antrenman süreci takip edilmezse, antrenman gerçekleştirilmeyen günlere bağlı olarak periyodik bir gerileme süreci başlar. Karakter, bu nitelik antrenman sürecinde ne kadar deneyim puanı biriktirdiyse, periyodik gerileme miktarı o kadar azalır. Yani KUV niteliğini geliştirmeye çalışan bir karakter, 1 haftalık antrenman sonucunda 120 puan elde etmişse, 3 gün antrenmanını devam ettirmemesi durumunda, sonraki her antrenmansız gün başına d10 gerileme yaşar. Ancak bu puan miktarı 300 civarındayken, periyodik gerileme d5 civarındadır. Bu durum, sadece temel nitelikler için geçerlidir.\n\nÖzellikle temel niteliklerin geliştirilmesi oldukça uzun bir süreç alabilmektedir. Bu durum göz önünde bulundurulduğunda, bir karakterin asıl özgünlüğünü diğer becerileri ve yeteneklerinin gelişimi ile gösterebileceği belirtilebilir. Özellikle yeni bir oyuna başlanırken veya yeni bir karakter oluşturulurken, GM'in temel nitelikler için ayrı bir Deneyim Puanı havuzu belirlemesi veya oyunculara doğrudan seviye sayısıyla nitelik sınırı vermesi (2 adet +1 nitelik ve 1 adet +2 nitelik, ya da niteliklere özel 2000 Deneyim Puanı gibi...) tavsiye edilir."
                   },
                   {
                     "type": "heading",
@@ -3303,15 +3099,7 @@ window.SLVNZ_VERSIONS = {
                   },
                   {
                     "type": "paragraph",
-                    "text": "Enerjisel ve fiziksel olarak pek çok yeteneğin temel seviyesinin üstüne çıkılabilecek şekilde geliştirilme kapasitesi vardır. Bu gelişim süreci, GM tarafından belirlenen özel bir biçimde olabilirken, bazı yetenekler için sistem kapsamında belirtilmiştir. Geliştirilebilir tipte olan yetenekleri, yetenek açıklamalarında bulunan özel bir belirteç dahilinde fark edebilirsiniz."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Bir yeteneği geliştirmek, kimi zaman belirli bir temel niteliğin, becerinin ya da başka bir yeteneğin sınır bir seviyede olmasını gerektirebilir. Bunun haricinde bir yeteneği geliştirmek için bir sınır ya da şart yok ise klasik gelişim formülü uygulanır. Örneğin, 3. Seviyede olan bir yeteneği geliştirerek yeni bir etki ya da özelliğini ortaya çıkarabilmek, diğer bir yandan bu yeteneğin gücünü de artırabilmek için, karakterin bu yeteneği 4. Seviyeye yükseltmesi gerekir. Eğer bu yükseltme için sistem ya da GM tarafından belirlenmiş özel bir şart ya da sınır (KUVVET 3 puan olmalı, YIKIM enerjisi 4 puan olmalı, ATICILIK becerisi 2 puan olmalı vb.) bulunmuyorsa, 4x100=400 Deneyim Puanı toplaması gerekir."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Geliştirilmiş yetenekler, temel olan alt seviyelerinde kullanılabilir, ancak yüksek seviyelerinde açığa çıkan yeni etkiler ya da güçlerden faydalanmak için bu yetenekleri gelişmiş seviyelerinde kullanmak şarttır. Örnek olarak, temel seviyesi 4. Seviye olan Ateş Topu büyüsünü öğrenmiş bir karakter, bu büyünün ulaşabileceği menzili artırmak adına geliştirme yapmış durumda. Büyünün geliştirilmiş hali ile 5. Seviyede kullanma hakkı kazanırken 4. Seviye halini kullanma konusunda da hiçbir sorun yaşamamaktadır. Ancak, geliştirilmiş Ateş Topu büyüsünü 5. Seviyeye çıkardığı zaman fazladan menzile sahip bir ateş topu ortaya çıkarabilirken, 4. Seviyede kullandığında bu etkiye sahip olamaz."
+                    "text": "Enerjisel ve fiziksel olarak pek çok yeteneğin temel seviyesinin üstüne çıkılabilecek şekilde geliştirilme kapasitesi vardır. Bu gelişim süreci, GM tarafından belirlenen özel bir biçimde olabilirken, bazı yetenekler için sistem kapsamında belirtilmiştir. Geliştirilebilir tipte olan yetenekleri, yetenek açıklamalarında bulunan özel bir belirteç dahilinde fark edebilirsiniz.\n\nBir yeteneği geliştirmek, kimi zaman belirli bir temel niteliğin, becerinin ya da başka bir yeteneğin sınır bir seviyede olmasını gerektirebilir. Bunun haricinde bir yeteneği geliştirmek için bir sınır ya da şart yok ise klasik gelişim formülü uygulanır. Örneğin, 3. Seviyede olan bir yeteneği geliştirerek yeni bir etki ya da özelliğini ortaya çıkarabilmek, diğer bir yandan bu yeteneğin gücünü de artırabilmek için, karakterin bu yeteneği 4. Seviyeye yükseltmesi gerekir. Eğer bu yükseltme için sistem ya da GM tarafından belirlenmiş özel bir şart ya da sınır (KUVVET 3 puan olmalı, YIKIM enerjisi 4 puan olmalı, ATICILIK becerisi 2 puan olmalı vb.) bulunmuyorsa, 4x100=400 Deneyim Puanı toplaması gerekir.\n\nGeliştirilmiş yetenekler, temel olan alt seviyelerinde kullanılabilir, ancak yüksek seviyelerinde açığa çıkan yeni etkiler ya da güçlerden faydalanmak için bu yetenekleri gelişmiş seviyelerinde kullanmak şarttır. Örnek olarak, temel seviyesi 4. Seviye olan Ateş Topu büyüsünü öğrenmiş bir karakter, bu büyünün ulaşabileceği menzili artırmak adına geliştirme yapmış durumda. Büyünün geliştirilmiş hali ile 5. Seviyede kullanma hakkı kazanırken 4. Seviye halini kullanma konusunda da hiçbir sorun yaşamamaktadır. Ancak, geliştirilmiş Ateş Topu büyüsünü 5. Seviyeye çıkardığı zaman fazladan menzile sahip bir ateş topu ortaya çıkarabilirken, 4. Seviyede kullandığında bu etkiye sahip olamaz."
                   }
                 ]
               },
@@ -3363,305 +3151,7 @@ window.SLVNZ_VERSIONS = {
                   },
                   {
                     "type": "tabs",
-                    "tabs": [
-                      {
-                        "label": "BARBAR",
-                        "blocks": [
-                          {
-                            "type": "paragraph",
-                            "text": "Barbarlar, genellikle saf kuvvet ve dayanıklılık üstüne kurulmuş karakterlerin oluşturduğu bir sınıftır. Bir karakterin barbar sınıfı olduğunun en büyük göstergesi, kısmi kontrollü bir öfke krizine girebilme kapasiteleridir. Bir barbar, belirli aralıklarla kendi öfkesini kontrollü olarak körükleyerek ÖFKE durumuna girebilir."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Öfke durumundayken barbar bir karakter KUVVET ve DAYANIKLILIK niteliklerine önemli fazlalıklar alırken, ZİHİN ve FARKINDALIK gibi nitelik ile becerilerine de benzer şekilde eksi değerler edinir. Tabii ki bu nitelik ve beceri değişimleri karakterin oluşturduğu barbar mekaniğine göre değişkenlik gösterebilir. Bu durum tamamen oyuncunun yaratıcılığı ile GM'in oyun dünyasında bu yaratıcılığın dengelenmesini sağlamasıyla ilgilidir."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Örneğin, bir barbar enerjiye hükmetme konusunda bazı yeteneklere sahiptir. Bu barbarın öfke patlaması durumlarında, normalde kullanma imkânı olmayan bazı büyüleri kullanabilme kabiliyeti ortaya çıkar. Öfke durumundayken YIKIM enerjisi ile ZİHİN niteliği artarken, KUVVET ve ÇEVİKLİK nitelikleri düşüş yaşayabilir. Bu ve buna benzer mekanikler tamamen karakteri oluşturan oyuncunun yaratıcılığına bağlıdır. GM ise bu yaratıcı mekaniğin oyun dünyasına ve genel güç dengelerine etkisini gözeterek mekaniği kabul etmek, reddetmek ya da farklı düzenlemelerle dengeleyerek oyuncuya yenilemekle sorumludur."
-                          }
-                        ]
-                      },
-                      {
-                        "label": "SAVAŞÇI",
-                        "blocks": [
-                          {
-                            "type": "paragraph",
-                            "text": "Savaşçılar, oyun dünyasının çoğu bölgesinde karşılaşılabilecek, klasik olarak nitelendirilebilecek yakın dövüşçüler ya da menzilli maceracılardır. Ancak, savaşçı bir karakterin de kendini farklı yönlerde geliştirme ve yeteneklerini ilginçleştirme olasılığı oldukça yüksektir."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Bütün sınıflarda olduğu gibi savaşçı sınıfı oynamak isteyen bir oyuncu kendince bir mekanik geliştirip bu mekaniği GM'e sunarak oyun hayatına geçirebilir. Var olan yetenekleri ve hareket kitlerini kendince değiştirerek ya da geliştirerek yeni yaklaşımları ortaya çıkarabilir. Bir savaşçı yakın mesafede kılıç, kalkan, gürz vb. silahlarla dövüşen biri olabilirken, uzak menzilden yay, tatar yayı, tüfek vb. araçlarla ekibine destek veren birisi olabilir. Bunların yanı sıra, oyuncunun yaratıcılığına bağlı olarak farklı enerjisel yönlendirmeleri de mekaniğin içine dahil edebilir. Savaşçılar, genel yapılarıyla fiziksel yetenekleri ve yetkinlik yeteneklerini kullanarak fiziksel mücadelenin gidişatına yön verebilirler."
-                          }
-                        ]
-                      },
-                      {
-                        "label": "KUTBAN & RUHBAN",
-                        "blocks": [
-                          {
-                            "type": "paragraph",
-                            "text": "Kutban ve ruhbanlar, sahip oldukları güçleri ve enerjilerini kadimlerden alan karakterlerdir. Bu karakterler, dini olarak inandıkları ve ibadet ettikleri bir kadim ile zaman zaman manevi bağlantılar kurarak onların bilgisine, gücüne ve kudretine sahip olurlar. Ancak bu güç ve kudret, yalnızca yolunda yürüdükleri kadimlerin ilkelerini uyguladıkça ve onları idame ettirdikçe bu karakterlerle birlikte olabilir."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Kutban ve ruhbanların kullandıkları büyüler, enerjilerini İNANÇ üstünden alır. İNANÇ enerjisi, karakterin ibadet ettiği kadime olan inancının kuvvetinden, bu kuvvetin kadimin varlığı ile karakterin arasında oluşan bir bağdan sağlanan bir enerji türü olarak kabul edilebilir. İNANÇ enerjisini kullanarak büyülerini gerçekleştirmek için, odaklayıcı olarak tılsımlarını kullanırlar."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Kutban ve ruhbanlar, sahip oldukları büyüleri geliştirmek ya da yeni büyüler öğrenmek için kadimleriyle manevi bir bağ kurabilecekleri ritüeller yaparlar. Bu ritüeller kimi zaman bazı materyaller ya da şartlar istese de bazen şarta ya da materyale bağlı kalmaksızın gerçekleştirilebilirler. Bu ritüellerden deneyim puanı toplanır. Karakterler topladıkları deneyim puanlarının öğrenmek istedikleri büyünün gerektirdiği miktara ulaşmasıyla, yeni yeteneklerini test eden manevi bir sınava tabi tutulurlar."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Bu sınav daha çok karakterin zihninde ya da manevi olarak çağırıldığı olağan dışı bir ortamda gerçekleşir. Gerçekleşen bu sınav sonunda karakterler başarılı bir şekilde geçmeleri durumunda yeteneği kullanılabilir biçimde öğrenmiş olurlar. Geçememeleri durumunda GM tarafından belirlenen yüzdelik bir dilim deneyim puanı karakterlerin hanelerinden silinerek yeniden denemeleri beklenir (Silinecek yüzdelik dilimin, karakterin sınavı tamamlamaya ne kadar yakın bir noktada başarısız olduğu gözetilerek belirlenmesi tavsiye edilir. Karakter başarıya ne kadar yakınsa, o kadar az miktarda deneyim puanı kaybetmelidir)."
-                          }
-                        ]
-                      },
-                      {
-                        "label": "SİHİRBAZ",
-                        "blocks": [
-                          {
-                            "type": "paragraph",
-                            "text": "Sihirbazlar, evrendeki dengesiz enerjiye yön verme konusunda en temel bilgiye ve kontrole sahip olan kişilerdir. Enerjiyi yönlendirebilme yetilerini herhangi bir varlıktan ya da olağanüstü durumdan değil, doğrudan bu enerjiyi yönlendirebilmeye yönelik gelişen becerilerinden edinirler. Sihirbazlar, büyüyü öğrenme ve kullanma eğitimlerinde geçirdikleri süreçler sebebiyle büyü parşömenleri yazma konusunda yetkin olabilirler. Bu konuda yetkin olan bir Sihirbaz, enerjiyi yakalayabilen mürekkep ve parşömenler kullanarak büyü parşömeni üretebilirler."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Sihirbazlar genel eğitildikleri ya da kendilerini bir şekilde eğitebildikleri durumlarda pek çok enerji türüne hâkim olabilirler. Bu enerji türlerinde farklı büyüler yapabilir, başka Sihirbazların yazmış olacağı kitaplardan bu büyüleri öğrenebilir, normalde uzun sürebilecek büyü öğrenme sürelerini bu tipte unsurlar aracılığıyla oldukça kısaltabilirler."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Bir Sihirbaz, alacağı eğitimler yoluyla birkaç farklı konuda yetkinlik kazanabilir;"
-                          },
-                          {
-                            "type": "heading",
-                            "level": 3,
-                            "text": "Büyü Parşömeni Üretimi"
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Sihirbaz, bildiği büyüleri kâğıda dökerek başkaları tarafından kullanılabilir hale getirebilir."
-                          },
-                          {
-                            "type": "heading",
-                            "level": 3,
-                            "text": "Büyü Üretimi"
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Yeteri kadar yetkin bir Sihirbaz, var olmayan bir büyüyü üretme konusunda beceri sahibi olabilir. Ancak, var olmayan bir büyüyü ortaya çıkarmak, herhangi var olan bir büyüyü öğrenme sürecinden çok daha zorlayıcıdır. Bu süreç, bir büyü öğrenmedeki hareketlerin ve sözlerin yapılmaya çalışılması sürecine karşın büyüyü çalıştıracak sözlerin ve hareketlerin tasarlanmasını, belirlenen enerjiyi bu unsurlara entegre etmeyi ve bunu yeterli mana miktarı sağlayarak dengelemeyi kapsar."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Ayrıca bir Sihirbazın üretmek istediği büyünün enerji türüne de oldukça hâkim olması önemlidir. Bu durumu sağlamak için, Sihirbazın ilgili enerji niteliğinde en az +4 puana sahip olması gerekir. Bu duruma ilişkin şartları taşıyan Büyü Üretim Tablosu incelenebilir. Büyü üretmenin farklı aşamaları vardır. Bir Sihirbaz, eğer kapsamlı bir Sihirbaz akademisinde eğitim almışsa bu süreçler hakkında bilgilidir."
-                          },
-                          {
-                            "type": "heading",
-                            "level": 3,
-                            "text": "Büyü Konsepti Belirleme"
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Büyüyü üretmeye başlamadan önce, büyünün konsepti belirlenir. Bahsedilen konsept, büyünün işlevi, dolayısıyla kullanacağı enerji türüdür. Enerji türü belirlendikten sonra eğer büyü bir ritüel ise bu ritüelde kullanılacak malzemeler belirlenir. Büyü malzemeleri, benzer tipteki büyülerden ilham alınarak seçilebilir, benzer işlevdeki malzemeler ritüel büyüsünün üretilmesinde Sihirbaza kolaylık sağlayabilir."
-                          },
-                          {
-                            "type": "heading",
-                            "level": 3,
-                            "text": "Araştırma ve Deney"
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Gerekli belirlemeler yapıldıktan sonra enerjiyi istenilen şekilde yönlendirebilmek için araştırma ve deney safhası başlar. Araştırma kapsamında Sihirbaz, iç görü kazanmak adına büyü enerjisi ile ilgili eski metinleri inceleyebilir, bununla bilgili varlıklara danışabilir ya da doğrudan kendi başına deney yolu ile enerjiyi belirlediği konsept doğrultusunda yönlendirmeye çalışabilir. Bu süreçte oluşturmak istediği etki konusunda ne kadar başarılı olabildiğinin belirlenmesi için d20 zarlar kullanılır. Deney süreci için bir faz, klasik bir antrenman süresi olarak nitelendirilir ve büyü antrenmanının verdiği yorgunluk etkilerini verir."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Sihirbaz yukarıda bahsedilen süreçte başarılı olmak ya da bir sonuca ulaşmak için 100 deneyim puanına ulaşmalıdır. Ancak bu miktar, Sihirbazın başarmak istediği hedefin karmaşıklığına ya da enerji türüne göre GM tarafından değiştirilebilir. Örneğin, bir Sihirbaz, birden fazla enerji türünü bir arada kullanmaya çalışarak bir etki ortaya koymak isteyebilir. Böyle bir durumda deneyin bir sonuca ulaşması için Sihirbazın ulaşması gereken deneyim puanı hedefi 200 puana yükselebilir. Bir Sihirbaz nadir ya da hükmetmesi daha zor olan bir enerji türünde bir büyü ortaya çıkarmak isteyebilir; örneğin karanlık enerjiyi kullanarak bir büyü oluşturmak isteyen Sihirbazın da deney fazı için istenen değer 150 deneyim puanı gibi bir sınır olabilir."
-                          },
-                          {
-                            "type": "heading",
-                            "level": 3,
-                            "text": "Büyü Eskizleme"
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Sihirbaz, araştırmaları ve deneyleri sonucunda enerjiyi istediği kıvama sokabildikten ya da beklenmeyen bir sonuca ulaştıktan sonra belirlediği konsepte yönelik çalışacak veya ortaya çıkan beklenmeyen sonuçtan devam etme konusunda taslak oluşturacağı bir parşömen hazırlar. Bu parşömende büyünün genel etkilerini, varsa menzilini, süresini vb. unsurlarını kabaca belirler. Sihirbazın belirleyeceği bu unsurlar doğrultusunda büyünün MANA bedeli ve potansiyel seviyesi ortaya çıkar. Bu bedeli ve seviyeyi oyuncuya sunmak GM'in inisiyatifindedir."
-                          },
-                          {
-                            "type": "heading",
-                            "level": 3,
-                            "text": "Test ve Geliştirme"
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Büyünün kalan unsurları belirlendikten sonra Sihirbazın taslak olarak oluşturduğu büyüyü bir ortamda test etmesi gerekmektedir. Bu test süreci, Sihirbazın taslağı test edip geliştirerek istenmeyen etkileri değiştirdiği/geliştirdiği, istediği gibi toplanmayan enerjiyi dengelemek için taslakta farklı değişiklikler yaptığı, büyüye vermek istediği formu tekrarlayarak değiştirdiği bir süreçtir."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Sihirbazın büyüyü gerçekten üretme konusunda emek verdiği faz aslında bu aşamadır. Bütün etkileri, özellikleri, manası ve seviyesi belli olan büyünün tam anlamıyla hayata geçirilmeye başlandığı aşamadır. Bu aşamada, Sihirbaz tekrar bir antrenman sürecine girer gibi büyü üstünde çalışır ve her çalışma oturumunda d20 kullanır. Belirlenen büyü seviyesine göre 100 x Büyü Seviyesi olacak şekilde deneyim puanı toplanır. Bu sürecin sonunda, GM'in de inisiyatifi ile Sihirbazın üretmeye çalıştığı büyü bir sonuca bağlanır."
-                          },
-                          {
-                            "type": "heading",
-                            "level": 3,
-                            "text": "Büyüyü Kalıcı Hale Getirme"
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Büyüsünü üretmiş Sihirbaz isterse taslağını temiz bir parşömene geçirerek öğrenilebilir, başkaları tarafından çalışılabilir ya da geliştirilebilir bir hale getirebilir. Bu parşömenleri akademilere bağışlayabilir ya da farklı yerlere satabilir."
-                          },
-                          {
-                            "type": "table",
-                            "header": [
-                              "BÜYÜ SEVİYESİ",
-                              "GEREKLİ ENERJİ"
-                            ],
-                            "rows": [
-                              [
-                                "1-2",
-                                "+4"
-                              ],
-                              [
-                                "3",
-                                "+5"
-                              ],
-                              [
-                                "4",
-                                "+6"
-                              ],
-                              [
-                                "5",
-                                "+7"
-                              ],
-                              [
-                                "6",
-                                "+8"
-                              ],
-                              [
-                                "7",
-                                "+9"
-                              ],
-                              [
-                                "8",
-                                "+10"
-                              ],
-                              [
-                                "11+",
-                                "+11+"
-                              ]
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "label": "SAHİR & SAHİRE",
-                        "blocks": [
-                          {
-                            "type": "paragraph",
-                            "text": "Sahirler & Sahireler, doğumlarından itibaren ya da yaşanan herhangi bir kaza/olay sonucu damarlarında akan kanın enerji taşımasıyla, herhangi bir odaklayıcıya ihtiyaç duymadan büyü yapabilme yeteneğine sahip olmuş karakterleri kapsayan bir sınıftır. Ancak, sahip oldukları bu doğayı kullanarak yapabildikleri enerji yönlendirmesinin yapısı normalin dışında olduğu için, bir büyüyü geliştirme ya da yeni bir büyü öğrenme konusunda geçirdikleri süreç, ayrıca bazı konularda büyüleri kullanma kapsamında yapabildikleri şeylerin bir kısmı normalden farklıdır."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Bir sahir/sahire, sahip olduğu doğa dolayısıyla büyü yapabilmek için herhangi bir odaklayıcı yardımıyla enerjiyi toplayıp yönlendirme işlemine ihtiyaç duymaz. Doğrudan damarlarında akan kan, dolayısıyla vücudu bu görevi üstlenir. Bu durum ise normal büyü kullanım kurallarını esneten ya da bozabilen bir yapıya sahiptir. Bahsedilen yapı sebebiyle, sahir/sahireler yeni büyüler öğrenme ya da bunları geliştirme konusunda kendi çabalarıyla sınırlıdırlar. Ancak, öğrenmeye çalıştıkları büyü ya da büyüye benzer bir yeteneği öğrenmiş başka birinden yardım alarak bu süreci hızlandırabilirler."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Sahirler ve sahireler, gelişimleri süresince vücutlarında olağan dışı etkileri uyandırabilir, bu etkileri kullandıkları büyülere işleyebilirler. Bahsedilen işlemelere ENERJİ AKIMI denir. Enerji akımları, sahir/sahirelerin kendilerini yormadan kısıtlı miktarda kullanabilecekleri becerileridir. Fiziksel ve enerjisel olarak dinlenmedikleri sürece vücutları enerji akımı için gerekli olan enerjiyi toplayamaz. Sınırından fazla kullanılması durumunda enerji akımı, karakterin vücudunu yorarak zarar vermeye başlar. Yorularak zarar gören karakterin vücudu, geri dönülemeyecek hasarlar alabilir."
-                          },
-                          {
-                            "type": "heading",
-                            "level": 3,
-                            "text": "Enerji Akımları"
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Sistemsel olarak sahir/sahirelerin yapabilecekleri enerji akımı türleri belirli sayıdadır. Ancak, oyuncunun yaratıcılığına ya da GM inisiyatifine göre yeni enerji akımları türetilebilir. Enerji akımları kullanılabilme ve takip edilebilme adına rakamlarla belirlenir. Bir sahir/sahire, temel seviyelerde 2 akım yükü barındırır."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Bu yükler, karakterin yapabildiği büyülerin seviyeleri arttıkça artar. Başlangıç olarak 2. Seviye iki büyü öğrenen bir karakter Enerji Akımlarını yapabilme kapasitesine sahip olur. Sonrasında artıracağı her büyü seviyesi için bu yüklere +2 kapasite ekler. Akım yüklerini tüketen bir karakter, yenilenmesini beklemeden diğer kaynaklarda olduğu gibi kullanımı sürdürebilir. Ancak bu durum bahsedildiği üzere karakterin vücuduna zarar vererek kalıcı hasarlara sebep olabilir."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Bu hasarlara örnek olarak kalıcı MANA azalması, zihinsel ya da bedensel zorlanmadan dolayı ZİHİN/DAYANIKLILIK niteliklerinde kalıcı eksilmeler, o anda yönlendirilmeye çalışılan enerjinin vücudu tahrip etmesi sonucu belirlenen enerji niteliğine verilen kalıcı eksi değer gibi hasarlar ortaya çıkabilir. Bu örnekler sadece GM için bir ilham niteliğindedir. Bu durumlar kullanılabilir ya da GM tarafından tamamen farklı etkiler ortaya çıkarılabilir. Sahir & Sahirelerin kullanabileceği enerji akımlarına YETENEKLER bölümünden ulaşabilirsiniz."
-                          }
-                        ]
-                      },
-                      {
-                        "label": "SEHHAR",
-                        "blocks": [
-                          {
-                            "type": "paragraph",
-                            "text": "Sehharlar, yapı bakımından kutban ve ruhbanlara benzeyen, ancak sahip oldukları güçleri bir kadime olan inançları yerine üstün bir varlıkla olan anlaşmalarından edinen karakterlerdir. Bu bağlamda bir Sehhar, Patron olarak sıfatlandırılan üst varlıklarca bahşedilmiş güçleri onlarla yapacağı veya yapmış olduğu anlaşma kurallarınca kullanırlar. Sehharların kullandıkları güçlerce hükmettikleri enerji türü PAKT enerjisidir."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Sehharların anlaşma yapabilecekleri varlıkların sayısı ve nitelikleri oldukça geniş ve esnek olabilir. Bu durumda bir Sehhar oynamak isteyen oyuncu, GM ile anlaşarak oyun tarzına ve karakterinin olmasını istediği kişiliğe hitap eden bir patron talep edebilir. Bu talebe karşılık GM, hikâye dahilinde bir patronu oyuncu karakterine sunabilir ya da kendi inisiyatifinde bir patron oluşturabilir."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Bir Sehhar ile patronu arasındaki ilişki ile bağın en önemli noktası aralarında yapılmış olan anlaşmadır. Bu anlaşma, yüzlerce satırdan oluşmuş kapsamlı bir belge ya da birkaç maddeyle bağlanmış bir karar olabilir. Bu durum da doğrudan GM'in inisiyatifindedir. Ancak, evrende var olan bazı patronlar kullanılacaksa, bu patronların anlaşmalarının baz alınması önerilir."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Sehhar ile patronu arasında olan anlaşma gereği, sehhara sunulan gücün gelişimi, olağanüstü durumlar dışında sehharın patronunu tatmin etmesine bağlıdır. Bu tatmin, patronun kişiliğine bağlı olarak onu eğlendirmek, ihtiyaçlarını karşılamak, vereceği görevleri yerine getirmek gibi durumlardan geçmektedir. Bahsedilen durumlar Olay olarak nitelendirilir. Sehharın ilgilenmek durumunda kalacağı olayların zorluk seviyeleri, olayların bir sonuca kavuşması sonunda farklı türlerde ödüller olarak sehhara geri dönüş sağlayacaktır. Bu ödüller; edinilen yeni güçler, verilen önemli bilgiler, eşyalar, silahlar vb. şeyler olabilir. Genel anlamda bir fikir edinilebilmesi için aşağıdaki tablo baz alınabilir."
-                          },
-                          {
-                            "type": "table",
-                            "header": [
-                              "OLAY ZORLUĞU",
-                              "OLAY ÖDÜLÜ"
-                            ],
-                            "rows": [
-                              [
-                                "Çok Basit",
-                                "Teşekkür, bağın devamlılığı"
-                              ],
-                              [
-                                "Basit",
-                                "Basit eşyalar, az miktarda para, basit bilgi vb."
-                              ],
-                              [
-                                "Orta",
-                                "Basit büyülü eşyalar, Seviye Yükseltme, Enerji Artırma, Değerli Bilgi vb."
-                              ],
-                              [
-                                "Zor",
-                                "Nadir Büyülü Eşyalar, Seviye Yükseltme, Enerji Artırma, Nadir veya Gizli Bilgi, İyi Miktarda Para vb."
-                              ],
-                              [
-                                "Çok Zor",
-                                "Nadir ya da Efsanevi Büyülü Eşyalar, Seviye Yükseltme, Enerji Artırma, Kıdem Kazanma, Efsanevi Bilgi, Fazla Miktarda Para vb."
-                              ],
-                              [
-                                "Neredeyse İmkansız",
-                                "Akla gelemeyecek tuhaf şeyler. Kim bilir, belki de Patron ile mistik bir akşam yemeği?"
-                              ]
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "label": "CADI",
-                        "blocks": [
-                          {
-                            "type": "paragraph",
-                            "text": "Cadılar, büyüyü öğrenme, kullanma ve geliştirme yapısı olarak büyücülere oldukça benzerlik gösterirler. Ancak, büyücülerden farklı olarak var olan bir büyünün yapısını bozarak büyüyle ilgili tamamen farklı etkileri ortaya çıkarabilirler. Bu durum, bir büyücü ile bir sahirin özelliklerinin harmanlanmış versiyonu olarak düşünülebilir fakat hem büyücü hem sahir sınıfını aynı anda barındırmakla aynı ya da ilgili değildir."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Cadılar, büyüye hükmederken onu bozmak için enerjinin doğada bulunan en vahşi ve ölümcül halini yönetmeye çalışırlar (Karanlık Enerji). Karanlık enerjiyi kontrol edebilmek için —efsanelerce öngörülen, karanlık enerjinin bir şekilde bilinç kazanıp kullanılmak istemesi sonucunda oluşturduğu bir dil olan— kara lisanı bilmek gereklidir. Kara lisanı bilmek, sadece bir dil bilmenin yanı sıra, cadının psikolojik bir çarpışmaya girmesini de gerektirir."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Çünkü bir karakter, kara lisanı kullanmaya ya da onunla etkileşime geçmeye çalıştığı her zaman, zihninin kapılarını karanlık enerjinin hüküm sürdüğü diyarlara aralayarak onu davet eder. Bu süreçte, karanlık enerji karakterin zihnine ve vücuduna erişerek manipüle etmeye çalışır. Eğer karakter kendi dışında bu enerjiyi doyurabilecek bir kaynak bulamazsa, kendisi doğrudan kaynak olur. Diğer bir söylemle, karanlık enerjinin kullanımı MANA dışında önemli farklı kaynaklar gerektirir. Bu kaynaklar genel olarak herhangi bir canlının yaşamıdır."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Bu nedenle, genellikle kara büyüyü kullanma konusunda yetkinleşmiş cadıların kara büyü kullanımları sırasında, ortamdaki ışığın solması, çevredeki canlılığın azalması gibi etkiler sıkça rastlanılan durumlardır. Eğer cadı çevredeki bir kaynak yerine kendi bedenini kaynak olarak kullanmayı tercih ederse, karanlık enerjiyi kullanarak gerçekleştirmeye çalıştığı kara büyüyü oluşturduğu bölgeden başlayacak şekilde vücudundaki yaşamı tüketerek çürütür. Bu çürüme, yine cadı tarafından öğrenilebilecek üst yöntemlerle iyileştirilebilecek bir durumdur, ancak bu yöntemlere sahip olmayan bir varlığın bu çürümeye farklı bir çare bulması neredeyse imkansızdır."
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Bir cadı ile büyücünün büyü gelişimi konusunda farklarından bahsedilmesi gereklidir. Bu farklar genel hatları ile; bir büyücü ateş topu büyüsünün menzilini artırmak, kuvvetini güçlendirmek, etki alanını yükseltmek gibi geliştirmeler yapabilirken; bir cadı ateş topunun elementini değiştirme, düştüğü alanda farklı etkiler (korku, hastalık, lanet vb.) oluşturma, isabet eden hedeflerin niteliklerini çalma gibi etkileri uyandırmak için büyünün yapısını bozar."
-                          }
-                        ]
-                      }
-                    ]
+                    "tabs": []
                   }
                 ]
               }
@@ -4000,7 +3490,7 @@ window.SLVNZ_VERSIONS = {
           "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
           "description": "",
           "version": "v3.0",
-          "contentSeed": "2026-05-29-mprhbwp6"
+          "contentSeed": "2026-05-29-mprjpxxu"
         },
         "sections": {
           "oyun-kurallari": {
