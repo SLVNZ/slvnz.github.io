@@ -27,6 +27,11 @@
         if (s && Array.isArray(s.versions) && s.versions.length) return s;
       }
     } catch (e) {}
+    // content.js'e gömülü versiyon arşivini oku (yeni cihaz / temiz tarayıcı)
+    if (window.SLVNZ_VERSIONS && Array.isArray(window.SLVNZ_VERSIONS.versions) && window.SLVNZ_VERSIONS.versions.length) {
+      try { localStorage.setItem(STORE_VERSIONS, JSON.stringify(window.SLVNZ_VERSIONS)); } catch (e4) {}
+      return window.SLVNZ_VERSIONS;
+    }
     // İlk çalıştırma: mevcut içerikten tek versiyon oluştur
     var base = defaults;
     try {

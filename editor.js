@@ -27,6 +27,11 @@
       var raw = localStorage.getItem(STORE_VERSIONS);
       if (raw) { var s = JSON.parse(raw); if (s && Array.isArray(s.versions) && s.versions.length) return s; }
     } catch (e) {}
+    // content.js'e gömülü versiyon arşivini oku (yeni cihaz / temiz tarayıcı)
+    if (window.SLVNZ_VERSIONS && Array.isArray(window.SLVNZ_VERSIONS.versions) && window.SLVNZ_VERSIONS.versions.length) {
+      try { localStorage.setItem(STORE_VERSIONS, JSON.stringify(window.SLVNZ_VERSIONS)); } catch (e2) {}
+      return window.SLVNZ_VERSIONS;
+    }
     return null;
   }
   function vEdStoreSave(store) {
@@ -143,10 +148,27 @@
     renderAll(); toast("VARSAYILANA SIFIRLANDI — KAYDETMEYİ UNUTMA");
   }
   function exportJSON() {
-    var blob = new Blob([JSON.stringify(draft, null, 2)], { type: "application/json" });
+    var content = JSON.stringify(draft, null, 2);
+    var filename = "slvnz-content-" + new Date().toISOString().slice(0, 10) + ".json";
+    if (typeof window.showSaveFilePicker === "function") {
+      window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description: "JSON Dosyası", accept: { "application/json": [".json"] } }]
+      }).then(function (handle) {
+        return handle.createWritable().then(function (w) {
+          return w.write(content).then(function () { return w.close(); });
+        });
+      }).then(function () { toast("JSON KAYDEDİLDİ"); })
+        .catch(function (e) { if (e.name !== "AbortError") { exportJSONFallback(content, filename); } });
+      return;
+    }
+    exportJSONFallback(content, filename);
+  }
+  function exportJSONFallback(content, filename) {
+    var blob = new Blob([content], { type: "application/json" });
     var a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "slvnz-content-" + new Date().toISOString().slice(0, 10) + ".json";
+    a.download = filename;
     a.click(); URL.revokeObjectURL(a.href);
     toast("JSON İNDİRİLDİ");
   }
@@ -182,9 +204,25 @@
       "if(!Array.isArray(it.table.columns))it.table.columns=[];if(!Array.isArray(it.table.rows))it.table.rows=[];" +
       "it.table.rows.forEach(function(r){if(!r._id)r._id=\"r\"+(++rid)+\"_\"+Date.now().toString(36);});}" +
       "else if(!it.body){it.body=window.SLVNZ_PLACEHOLDER_BODY;}});});})(window.SLVNZ_CONTENT);\n";
+
+    // Tüm versiyonları store'a dahil et (aktif versiyon draft ile güncellenir)
+    var store = vEdStoreLoad();
+    var versionsJS = "";
+    var defaultContent = draft;
+    if (store) {
+      var exportStore = clone(store);
+      var activeId = vEdActiveId();
+      var av = activeId && exportStore.versions.find(function (x) { return x.id === activeId; });
+      if (av) av.content = clone(draft);
+      var defV = exportStore.versions.find(function (x) { return x.id === exportStore.defaultId; });
+      if (defV) defaultContent = defV.content;
+      versionsJS = "\nwindow.SLVNZ_VERSIONS = " + JSON.stringify(exportStore, null, 2) + ";\n";
+    }
+
     return header +
       "window.SLVNZ_PLACEHOLDER_BODY = " + ph + ";\n\n" +
-      "window.SLVNZ_CONTENT = " + JSON.stringify(draft, null, 2) + ";\n" +
+      "window.SLVNZ_CONTENT = " + JSON.stringify(defaultContent, null, 2) + ";\n" +
+      versionsJS +
       normalize;
   }
 
@@ -1455,6 +1493,7 @@
           '</div>' +
           '<div class="ed-modal__foot">' +
             '<button class="btn btn--sm" data-modal-close>KAPAT</button>' +
+            '<button class="btn btn--sm" id="edSaveFile">DOSYAYA KAYDET</button>' +
             '<button class="btn btn--primary btn--sm" id="edCopyClip">PANOYA KOPYALA</button>' +
           '</div>' +
         '</div>' +
@@ -1481,6 +1520,32 @@
       navigator.clipboard.writeText(ta.value).then(function () { toast("PANOYA KOPYALANDI"); })
         .catch(function () { document.execCommand("copy"); toast("PANOYA KOPYALANDI"); });
     };
+    document.getElementById("edSaveFile").onclick = saveContentJSFile;
+  }
+
+  function saveContentJSFile() {
+    var content = document.getElementById("edCode") ? document.getElementById("edCode").value : genContentJS();
+    if (typeof window.showSaveFilePicker === "function") {
+      window.showSaveFilePicker({
+        suggestedName: "content.js",
+        types: [{ description: "JavaScript Dosyası", accept: { "text/javascript": [".js"] } }]
+      }).then(function (handle) {
+        return handle.createWritable().then(function (w) {
+          return w.write(content).then(function () { return w.close(); });
+        });
+      }).then(function () {
+        toast("CONTENT.JS KAYDEDİLDİ");
+        document.getElementById("edModal").classList.remove("open");
+      }).catch(function (e) {
+        if (e.name !== "AbortError") {
+          navigator.clipboard.writeText(content).then(function () { toast("PANOYA KOPYALANDI (dosyaya yazılamadı)"); })
+            .catch(function () { toast("Tarayıcı dosya kaydetmeyi desteklemiyor."); });
+        }
+      });
+    } else {
+      navigator.clipboard.writeText(content).then(function () { toast("PANOYA KOPYALANDI"); })
+        .catch(function () { document.execCommand("copy"); toast("PANOYA KOPYALANDI"); });
+    }
   }
 
   function openCodeModal() {
