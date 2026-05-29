@@ -1,5 +1,5 @@
 /* ============================================================
-   SLVNZ 4.0 — content.js  (editörden üretildi: 29.05.2026 23:29:07)
+   SLVNZ 4.0 — content.js  (editörden üretildi: 30.05.2026 01:14:24)
    Bu metni content.js dosyasının TAMAMIYLA değiştir.
    ============================================================ */
 
@@ -16,7 +16,7 @@ window.SLVNZ_CONTENT = {
     "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
     "description": "",
     "version": "v4.0",
-    "contentSeed": "2026-05-29-mprdkijv"
+    "contentSeed": "2026-05-29-mprhbwp6"
   },
   "sections": {
     "oyun-kurallari": {
@@ -2009,7 +2009,7 @@ window.SLVNZ_VERSIONS = {
           "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
           "description": "",
           "version": "v4.0",
-          "contentSeed": "2026-05-29-mprdkijv"
+          "contentSeed": "2026-05-29-mprhbwp6"
         },
         "sections": {
           "oyun-kurallari": {
@@ -3998,9 +3998,9 @@ window.SLVNZ_VERSIONS = {
           "heroLine1": "SLVNZ",
           "heroLine2": "3.0",
           "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
-          "description": "deneme",
+          "description": "",
           "version": "v3.0",
-          "contentSeed": "2026-05-29-mprdkijv"
+          "contentSeed": "2026-05-29-mprhbwp6"
         },
         "sections": {
           "oyun-kurallari": {
@@ -5801,6 +5801,1523 @@ window.SLVNZ_VERSIONS = {
                       "yeni-alan-5": "Tekil",
                       "aciklama": "Gözünle görebileceğin ve menzilde olan bir hedefe toplam 25 kelimeden oluşabilecek bir mesaj iletirsin. Bu mesaj, senin tarafından normal konuşma şeklinde oluşur ancak hedef bu konuşmayı zihninde duyar. Konuşmayı sonlandırmanla yeteneğin etkisi tamamlanır, hedef sana karşılık veremez.",
                       "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprdoa8d1a2b",
+                      "isim": "Silah Çağır",
+                      "seviye": 0,
+                      "yeni-alan-2": "EYLEM",
+                      "tur": "OLUŞTURMA",
+                      "yeni-alan": "MANA",
+                      "maliyet": 0,
+                      "yeni-alan-3": "ANLIK",
+                      "yeni-alan-4": "KENDİN",
+                      "yeni-alan-5": "",
+                      "aciklama": "1 ay boyunca varlığı üstüne sinmiş, sürekli yanında taşımış olduğun bir silahı büyü ile kendine bağlayabilirsin. Silahla fiziksel olarak etkileşimdeyken, bu büyüyü kullanarak bağladığın silahını yok edebilir, aynı şekilde tekrar elinde oluşturabilirsin.\n\nFiziksel olarak temas halinde değilsen, silahını yok edip elinde tekrar oluşturamazsın. Bir ay boyunca başka bir silahı üstüne sindirip bağlanman halinde bir önceki silahın bağı kesilir.",
+                      "yeni-alan-6": "Özel Yetenek: Bu yeteneği kullanabilmek için hikâyesel ya da sınıfsal olarak özel bir durumda olmak gerekir. Özel durumları oyun yöneticiniz ile konuşarak öğrenebilir ve karakterinizin öğrenmesi için anlaşabilirsiniz."
+                    },
+                    {
+                      "_id": "rmprdqgzk8vx8",
+                      "isim": "Ürperten Pençe",
+                      "seviye": 0,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Çürüme",
+                      "yeni-alan": "Mana",
+                      "maliyet": 0,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "Tekil",
+                      "aciklama": "Enerjisel olarak hedefinin önünde beliren bir el ona saldırır. Hedefin saldırıyı savuşturamaması durumunda enerjisel el hedefe kancalanır ve kancalandığı noktaya çürüme hasarı uygular. Ayrıca bir sonraki tur sana gelene kadar, elin kancalandığı hedefin üstündeki iyileştirme etkileri etkisiz kalır veya zayıflar.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprdr4pzozzu",
+                      "isim": "Eldritch Patlaması",
+                      "seviye": 0,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Pakt",
+                      "yeni-alan": "Mana",
+                      "maliyet": 0,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "24 Birim",
+                      "yeni-alan-5": "Tekil",
+                      "aciklama": "Menzilinde görebileceğin bir hedefe ellerinden fırlayacak konsantre bir basınç öbeği fırlatırsın. Bu basınç öbeği çarpma halinde hedefe basınç hasarı uygular.\n\nBu büyüyü üst seviyelerde farklı etkilerini uyandırabilecek biçimde geliştirmeye çalışabilirsin.",
+                      "yeni-alan-6": "Özel Sınıflar: Sehhar, Cadı (Yıkım ya da Karanlık Enerji)"
+                    },
+                    {
+                      "_id": "rmprdrwglo8y0",
+                      "isim": "Buz Işını",
+                      "seviye": 0,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Yıkım",
+                      "yeni-alan": "Mana",
+                      "maliyet": 0,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "Tekil",
+                      "aciklama": "Menzilinde görebileceğin bir hedefe ellerinden fırlayacak bir buzul ışın yönlendirirsin. İsabet halinde hedef donma hasarı alır ve dayanıklılık zarı kullanır. Zarı senin büyü kuvvetini geçemezse hareket hızı yarıya iner.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprdsimr5mxa",
+                      "isim": "Ayaz",
+                      "seviye": 0,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Yıkım",
+                      "yeni-alan": "Mana",
+                      "maliyet": 0,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "Tekil",
+                      "aciklama": "Menzilinde görebileceğin bir hedefe yoğunlaşırsın. Yoğunlaşma sonucunda hedefin üstünde oluşan bir don, hedefe donma hasarı uygularken DAYANIKLILIK testini geçemezse bir sonraki saldırısında eksi puan almasına sebep olur.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprdt1x643sp",
+                      "isim": "Sihirbaz Eli",
+                      "seviye": 0,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Oluşturma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 0,
+                      "yeni-alan-3": "10 Dakika",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "Tekil",
+                      "aciklama": "Menzilinde seçtiğin bir noktada spektral ve süzülen bir el belirir. El süre boyunca ya da eylem olarak sen savıncaya kadar kalır. Eğer senden 6 kareden fazla uzaklaşırsa ya da sen bu büyüyü tekrar kullanırsan el kaybolur.\n\nEylemini kullanıp eli kontrol edebilirsin. Eli bir nesneyi kullanma, kilitsiz bir kapıyı ya da kabı açma, açık bir kaptan eşya alma ya da yerine koyma, veya şişenin içeriklerini dökme gibi eylemler için kullanabilirsin. Eli her kullanışında 6 kareye kadar hareket ettirebilirsin.\n\nEl saldıramaz, büyülü nesneleri etkinleştiremez ya da 5 kilodan ağır nesneleri taşıyamaz.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprdtu9fpwkf",
+                      "isim": "Rehberlik (K)",
+                      "seviye": 0,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "İnanç",
+                      "yeni-alan": "Mana",
+                      "maliyet": 0,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "Dokunma",
+                      "yeni-alan-5": "Tekil",
+                      "aciklama": "İstekli bir varlığa dokunursun. Süre bitmeden önce bir kereliğine, hedef 1d4 atıp sonucunu seçtiği bir yetenek zarına ekleyebilir. Bu d4'lük zarı yetenek zarından önce ya da sonra atabilir. Sonrasında büyü sona erer.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprdukfz3ttd",
+                      "isim": "Ufak İllüzyon",
+                      "seviye": 0,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "İllüzyon",
+                      "yeni-alan": "Mana",
+                      "maliyet": 0,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "1 Birim",
+                      "aciklama": "Menzilinde büyü süresince kalacak bir ses ya da bir nesne görüntüsü yaratırsın. İllüzyon, onu eylemini kullanıp savarsan ya da bu büyüyü yeniden kullanırsan sonlanır.\n\nEğer ses yaratırsan, bu bir fısıltıdan çığlığa kadar değişebilir. Bu senin sesin ya da başkasının sesi, bir aslan kükremesi, davul gürültüsü ya da seçeceğin herhangi bir ses olabilir. Oluşturduğun ses, süre boyunca kesilmeden devam edebilir.\n\nEğer sandalye, çamurlu ayak izleri ya da küçük bir sandık gibi nesnelerin görüntüsünü yarattıysan, bu 1 karelik küpten büyük olamaz. Görüntü ses, ışık, koku ya da herhangi bir duyusal etki yaratamaz. Görüntü ile fiziksel etkileşim onun bir illüzyon olduğunu ortaya çıkarır, çünkü nesneler içinden geçebilir.\n\nEğer bir varlık eylemini bu ses ya da görüntüyü incelemek için kullanırsa, büyünün kuvvetine karşılık araştırma zarı ile illüzyon olduğunu anlayabilir. Eğer bir varlık illüzyonun aslını farkederse, illüzyon o varlık için sönük hale gelir.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprdv8rg486j",
+                      "isim": "Kıvılcım",
+                      "seviye": 0,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Yıkım",
+                      "yeni-alan": "Mana",
+                      "maliyet": 0,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Süre boyunca, parmaklarını her şıklatışında bir kıvılcım çıkarırsın. Çıkan bu kıvılcımla tutuşabilecek farklı nesneleri ateşe verebilirsin.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprdw77kys6e",
+                      "isim": "Kutsal Alev",
+                      "seviye": 0,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "İnanç",
+                      "yeni-alan": "Mana",
+                      "maliyet": 0,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Görüş mesafende odaklanacağın bir varlığın çevresinde ışıyan alevler oluşarak hedefine akın eder. Hedefin çeviklik kurtulması kullanarak bu akından kaçınabilir. Kaçınması halinde saldırından hasar almaz.",
+                      "yeni-alan-6": "Özel Sınıflar: Ruhban, Kutban"
+                    },
+                    {
+                      "_id": "rmprdwuj6ej0f",
+                      "isim": "Kılıç Patlaması",
+                      "seviye": 0,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Oluşturma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 0,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "1 Birim Çevre",
+                      "aciklama": "Bir anlık etrafını çevreleyen kılıçlardan oluşan bir basınç alanı meydana getirirsin. Kılıçlar, sen merkezli olmak üzere 1 kare çember alanı etrafındaki herkese basınç hasarı uygular. Eğer enerji kuvveti doğal 20 gelirse, uygulanan hasar delme hasarına dönüşür.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprdxokblpaz",
+                      "isim": "Acımasız Alay",
+                      "seviye": 0,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Efsun",
+                      "yeni-alan": "Mana",
+                      "maliyet": 0,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Görebildiğin bir varlığın zihnine erişerek büyüyle çevrelenmiş bir dizi hakaret yağdırırsın. Eğer hedef varlık seni duyabiliyorsa ve zeka değeri -3'ten yüksek ise İRADE testine girer. Sağır ya da zeka değeri -3'ten düşük olan varlıklar otomatik olarak başarılı sayılır. İRADE testinde başarısız olan varlıklar zihinsel hasar alır ve sonraki turunda gerçekleştireceği ilk saldırısı (yakın mesafe ya da uzak menzilli / büyü fark etmez) 1d4 eksi değer alır.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprdyfje7aaq",
+                      "isim": "Keskin Görüş",
+                      "seviye": 0,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Kehanet",
+                      "yeni-alan": "Mana",
+                      "maliyet": 0,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "Dokunma",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Dokunacağın istekli bir varlık, süre boyunca görüşü kısıtlayacak etkileri yok sayar ve net görüş mesafesinin 2 katı uzağı görebilir.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprebfxucgpu",
+                      "isim": "Buz Bıçağı",
+                      "seviye": 1,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Oluşturma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "1 Birim Çember",
+                      "aciklama": "Elinde oluşturduğun buzdan bir bıçağı 12 kare mesafede gördüğün bir konuma ya da hedefe fırlatırsın. Eğer bir hedefe fırlattıysan, hedef kaçınma zarı kullanır. İsabet halinde bıçak anlık bir saplanma ve donma hasarı uygular, ardından 1 kare yarıçaptaki mesafeyi etkileyecek şekilde patlar. Çevrede bulunan varlıklar DAYANIKLILIK testine girerek patlamadan gelen donma hasarına dayanabilir.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprech8garzn",
+                      "isim": "Sihirbaz Zırhı",
+                      "seviye": 1,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Koruma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "8 Saat",
+                      "yeni-alan-4": "Kendin",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Dokunduğun bir varlığın etrafını saracak mana ve enerjiden oluşma bir zırh örersin. Bu zırh, fiziksel hasar dahil enerjisel hasarlara karşı koruyucudur. Genellikle saldırı altında kalınması durumunda vücuduna gelecek ortalama derecede fiziksel bir darbeyi ya da büyünün bır kısmını tutarak ölümcül hasar alınmasını engeller. \n\nBu yetenek bir kullanıcı tarafından sadece bir adet olacak şekilde var edilebilir. Sihirbaz zırhını önceden kullanmış bir büyücü, başka biri üzerinde bu büyüyü uygularsa bir öncekinin etkisi ortadan kaybolur.\n\nÜst seviyelere geliştirilebilirse zırhın koruyuculuğu artar ya da birden fazla kişiye tek seferde kullanılabilir.",
+                      "yeni-alan-6": "Bu büyü vücudun çevresinde bir zırhın kaplayabileceği alanı kaplarken, ona benzer bir koruyuculuk oluşturmak üzere titreşimlerini bir zırhınkine yakın hale getirir. Bundan dolayı bu büyü, vücudun çevresini sert bir katman ile kapatan herhangi bir kıyafet/zırh varlığında kullanılırsa vücudun çevresinde yoğunlaşamayıp bozulur."
+                    },
+                    {
+                      "_id": "rmpred6n4jxde",
+                      "isim": "Dilleri Anla (K)",
+                      "seviye": 1,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Kehanet",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "1 Saat",
+                      "yeni-alan-4": "Dokunma",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Büyü süresi boyunca, çevrende konuşulan bütün dilleri anlarsın. Ancak anlayabileceğin diller, büyünün beslendiği diller ile sınırlıdır. Bundan dolayı, büyünün kapsamadığı dilleri anlayamazsın.\n\nBu yetenek, yazılı metinleri de anlamanı sağlar ancak metni anlamak için yazılı olduğu yüzeye dokunman gerekir. Bu yöntemle yaklaşık 1 sayfa metni okumak 30 dakika alır. Bu etki sadece normal şekilde yazılmış diller için geçerlidir.  Şifrelenmiş şekillerle ya da sembollerle oluşturulmuş bulmaca vb. görselleri çözmeni sağlamaz.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmpree0p2ttic",
+                      "isim": "Enerji Hissetme (K)",
+                      "seviye": 1,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Kehanet",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "10 Dakika",
+                      "yeni-alan-4": "Dokunma",
+                      "yeni-alan-5": "6 Birim",
+                      "aciklama": "Süre boyunca, senden 6 birim mesafe uzaklıktaki enerjileri hissedersin. Eğer hissedersen, bunun bir nesneden mi yoksa bir alandan mı geldiğini anlarsın. Bu enerjinin renginden hangi türde olduğunu anlayabilirsin.",
+                      "yeni-alan-6": "- Turuncu: Yıkım\n- Buz Mavisi: Kehanet\n- Mor: Oluşturma\n- Yeşil: Koruma\n- Sarı: Dönüştürme\n- Pembe: Cezbetme\n- Mavi: İllüzyon\n- Açık Yeşil: Nekromansi\n- Altın: İnanç\n- Lacivert: Pakt\n- Koyu Kırmızı: Kan\n- Spektrum: Kaos\n- Siyah: Karanlık\n- Beyaz: Aydınlık\n- Turkuaz: Ruh\n- Kızıl: Yaşam"
+                    },
+                    {
+                      "_id": "rmpreexidwq2c",
+                      "isim": "Nazar (K)",
+                      "seviye": 1,
+                      "yeni-alan-2": "Ek Eylem",
+                      "tur": "Çürüme",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "16 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Menzilde görebildiğin bir hedefi lanetlersin. Lanet süresi boyunca hedefin senden gelecek bir saldırıdan isabet alması halinde ek olarak çürüme hasarı alır. Ayrıca, büyüyü kullanırken bir nitelik ya da enerji türü seç. Hedefin, başarısız olması halinde seçtiğin nitelik ya da yetenek ile gerçekleştireceği eylemlerde eksi değer alır.\n\nBaşarılı olduğun bir hedefin üstünde kullanılacak bir lanet kaldırma yeteneği, lanet etkisinin kalkmasını sağlayabilir.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprefuxjgzys",
+                      "isim": "Hizmetkâr Bul (R)",
+                      "seviye": 1,
+                      "yeni-alan-2": "Ritüel",
+                      "tur": "Oluşturma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "24 Saat",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "1 Saatlik ritüelin ardından seçeceğin hayvan formunda oluşacak bir ruhani hizmetkar çağırırsın. Bu hizmetkar, ritüelin boyunca senin enerjisel çağrını duyarak kendi rızası ile sana bağlanır. Bulmayı arzuladığın hizmetkar türü şunlardan biri olabilir: Yarasa, kedi, yengeç, kurbağa, şahin, kertenkele, ahtapot, baykuş, yılan, sıçan, kuzgun, karga, örümcek, gelincik ya da kapibara. Beliren hizmetkar yüksek ihtimal ile arzuladığın türde olacaktır, ancak ufak bir pay ile arzuların haricinde olacak bir tür de karşına gelebilir (d20 ihtimalde 1 ve 2). \n\nHizmetkarın senden bağımsız olarak hareket eder ancak bir emir verdiğinde o emri uygular. Mücadele sırasında kendi inisiyatif sırasını alır. Saldırma eyleminde bulunamaz ancak diğer türlü eylemleri gerçekleştirebilir. Hizmetkar ölümcül hasar alması durumunda geri çağırılmamak üzere ortadan kaybolur.\n\nHizmetkarı geçici olarak savuşturabilir ve tekrar geri çağırabilirsin. Bu durumda hizmetkar, sadece kendisinin var olabileceği bir cep boyutta uykuya dalar. Bir eylem olarak hizmetkarı 6 kare mesafede tekrar çağırabilirsin. Bu durumdan ayrı olarak, hizmetkarı kalıcı olarak da savuşturabilirsin.",
+                      "yeni-alan-6": "Gerekli Malzemeler: 5 kilo kömür (10 Altın) ve tütsü otları"
+                    },
+                    {
+                      "_id": "rmpreh1mqo8vt",
+                      "isim": "Korku Sal (K)",
+                      "seviye": 1,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Efsun",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Hedefinde görebildiğin bir varlığın üzerindeki ölümlülük hissiyatını körüklersin. Hedefin irade zarı kullanır ve yetenek kuvvetini aşamazsa yetenek süresince senden korkmaya başlar. Bu korku durumu, varlığın sana karşı gerçekleştireceği eylemlerde negatif puan alması ya da -kurtulma ve kuvvet arasındaki fark 10 puandan fazla ise- doğrudan dezavantajlı zar kullanması ile sonuçlanır.\n\nBu varlık üzerinde duyguları bastıran bir büyü kullanılması, korku sal büyüsünün etkisinin sonlanmasına sebep olur.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprehlbiyvyd",
+                      "isim": "İnanç Kalkanı",
+                      "seviye": 1,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "İnanç",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Kadimine olan inancından güç alarak çevreni saracak bir bariyer meydana getirirsin. Bu bariyer, geoit şekilde vücudunun sınır alanlarına ulaşan, her yanını koruyan enerjisel bir alandır. Yeteneğin yapılma kuvveti, bu bariyerin dayanıklılığını belirler. Yetenek süresince, bariyere ya da bariyer arkasına geçme amacıyla yapılan her saldırı öncelikle inanç kalkanı tarafından bloke edilir. Eğer yapılan saldırı yeteri kadar kuvvetli ise, kuvvetinin bir kısmını kaybederek kalkanın arkasına geçip sana hasar verebilir.\n\nYeterli kuvvette olan ve kalkan arkasına geçemeyecek kadar kuvvetsiz olan her türlü saldırı, bariyerin saldırılan kısmını zayıflatarak çatlatır. Kuvvetsiz bir kalkan, bir noktasındaki çatlak kırıldığında ortadan kaybolabilirken, kuvvetli bir kalkan daha ağır durumları kaldırabilir ancak çatlağı açılan noktadan savunmasız kalır.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprei8v2v91a",
+                      "isim": "Yemek veya Su Oluştur (R)",
+                      "seviye": 1,
+                      "yeni-alan-2": "Ritüel",
+                      "tur": "İnanç",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "24 Saat",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Yetenek süresi boyunca 10 kişiye kadar doyurucu nitelikte yemek veya su oluşturursun. Bu besinler, süre sonuna veya metabolik olarak sindirilene kadar enerjisel nitelik taşır ve yeteneğin enerjisine bağlı durumda bulunur. Süre bitmeden veya sindirilmeden bu yetenek yeniden kullanılırsa, önceden yapılmış besinler ortadan kaybolur, yerine yenileri oluşur.\n\nBu durum, besinler tüketildikten sonra yaşanırsa, besinleri tüketmiş varlıklar aç hissetmeye başlarlar.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprejegnb70i",
+                      "isim": "Cadı Oku (K)",
+                      "seviye": 1,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Yıkım",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "10 Tur",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Menzilinde görebildiğin bir hedefe elinden çıkan yıldırımlar ile bağlanmaya çalışırsın. Hedef, kaçınma zarında başarısız olursa senden gelen yıldırımlar ile bağlanarak yıldırım hasarı alır. Süre boyunca turlarında eylemini bu etkiyi sürdürmek için kullanabilir ve bağlandığın hedefe otomatik olarak yıldırım hasarı vurmaya devam edebilirsin.\n\nYetenek, hedefin menzilden çıkması ya da konsantrasyonunu bozacak bir etki alman ile süresinden önce sonlanabilir.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprek2x49ig9",
+                      "isim": "Sis Bulutu (K)",
+                      "seviye": 1,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Oluşturma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "10 Tur",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "2 Birim Yarıçap",
+                      "aciklama": "Menzilinde bulunan bir alanın merkezinden parlayarak anında yayılan bir sis bulutu oluşturursun. Bu bulut fiziksel yollarla dağıtılamaz.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprel48zlqw4",
+                      "isim": "Emir",
+                      "seviye": 1,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "İnanç",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Menzilinde görebildiğin bir varlığın iradesine hükmetmeye çalışarak ona bir emir verirsin. Bu emir şunlardan biri veya basit bir komut olabilir:\n- Bekle: Varlık turunda bir şey yapmaz ve turunu geçer.\n- Silah Bırak: Varlık, silahını yere bırakır.\n- Kaç: Varlık, senden aksi yöne koşar, mevcutsa depar atar.\n- Yere Yat: Varlık yere yatar.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprelujwyh90",
+                      "isim": "Sihirli Misil",
+                      "seviye": 1,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Yıkım",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "24 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "3 parmağından hızla fırlayarak eşzamanlı olarak vuracak misiller fırlatırsın. Misiller aynı anda çıktıkları için eşit kuvvet ve isabet niteliğine sahiptir. Ancak misilleri birden fazla varlığa gidecek şekilde fırlatabilirsin. Farklı rakibe isabet edecek her misil için varlıklar ayrı kaçınma kullanır, ancak bir varlığa birden fazla isabet edecek misiller için tek kaçınma kullanılır.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmpremk8lvy4b",
+                      "isim": "Basınç Dalgası",
+                      "seviye": 1,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Yıkım",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "1 Birim",
+                      "aciklama": "Sen merkezli olacak şekilde bitişiğindeki karelere yayılacak bir basınç dalgası patlatırsın. Alanda bulunan varlıklar DAYANIKLILIK testine girer. Testte başarısız olan varlıklar kuvvete bağlı olarak senden 3 kare kadar uzağa savrulurken basınç hasarı alır.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmpren3vadih5",
+                      "isim": "Cezbet",
+                      "seviye": 2,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Efsun",
+                      "yeni-alan": "Mana",
+                      "maliyet": 2,
+                      "yeni-alan-3": "1 Saat",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Menzilindeki bir insansı varlığı enerjinle cezbedersin. Cezbedeceğin varlık, doğadışı ve kendisinin fark edemeyeceği bir sıradışılıkla kendisini sana yakın ve dosyane hisseder. Bu varlığa zarar vermediğin sürece sana karşı iyimser yaklaşır. Ancak onunla kurmaya çalışacağın iletişim ya da çevresinde yapacağın eylemler, bu dosyaneliği sorgulamasına sebep olabilir.  Yeteneğin etkisi sona erdiğinde bu varlık senin tarafından cezbedildiğinin farkında olur.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprenm9lrvud",
+                      "isim": "Kavurucu Işın",
+                      "seviye": 2,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Yıkım",
+                      "yeni-alan": "Mana",
+                      "maliyet": 2,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Parmaklarından sırayla fırlayarak hedeflerine sırayla akın eden 3 adet ışın fırlatırsın. Bu ışınlar, aynı anda fırlamadığı için birbirinden bağımsız isabet değerlerine sahiptir. Çıkacak her bir ışını farklı hedeflere yönlendirebilirsin. Ancak birden fazla ışını aynı hedefe yönlendirmen durumunda hedefin tek kaçınma zarı üzerinden isabet etkileşimi hesaplanır. Yani rakip bir kaçınma kullanır ve ışınların bağımsız isabet zarları bu eşiği geçmeye çalışır.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmpreoe95rcc5",
+                      "isim": "Kart Spreyi",
+                      "seviye": 2,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Oluşturma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 2,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "3 Birim 90 Derece Koni",
+                      "aciklama": "Baktığın yöndeki alanda enerjisel olarak oluşmuş kartlar fırlatırsın. Alan içinde KAÇINMA testi başarısız olan varlıklar kartların isabeti ve patlamasıyla birlikte basıç hasarı alarak KÖRLEŞİRLER. Kaçınabilenler basıncın bir kısmından etkilenirler.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprep1058roq",
+                      "isim": "Sisli Adım",
+                      "seviye": 2,
+                      "yeni-alan-2": "Ek Eylem",
+                      "tur": "Oluşturma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 2,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Menzil mesafende görebildiğin bir noktaya sisler içinde kaybolup belirerek ışınlanırsın.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprepjajw958",
+                      "isim": "Fırtına Adımı",
+                      "seviye": 3,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Oluşturma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "18 Birim",
+                      "yeni-alan-5": "1 Birim",
+                      "aciklama": "Görebildiğin bir noktaya fırtına gibi ışınlanarak konarsın. Konduğun ve ayrıldığın bölgenin merkezinin 2'şer birim bitişiğinde kalan alanda yüksek bir basınç patlaması oluşturursun. Bu bölgedeki alanlarda kalan varlıklar DAYANIKLILIK testini geçemezse kuvvete bağlı olarak 3 birime kadar uzağa fırlayarak yere serilirler.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmpreq85e7k3f",
+                      "isim": "Kan Laneti: Maruzat",
+                      "seviye": 2,
+                      "yeni-alan-2": "Tepki Eylem",
+                      "tur": "Karanlık",
+                      "yeni-alan": "Mana",
+                      "maliyet": 2,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Görüşündeki bir yaratık hasar aldığında reaksiyon olarak yaratığın o hasara dayanıklılığının azalmasını sağlarsın.",
+                      "yeni-alan-6": "Özel Yetenek: Bu yeteneği kullanabilmek için hikâyesel ya da sınıfsal olarak özel bir durumda olmak gerekir. Özel durumları oyun yöneticiniz ile konuşarak öğrenebilir ve karakterinizin öğrenmesi için anlaşabilirsiniz."
+                    },
+                    {
+                      "_id": "rmprer62x4laf",
+                      "isim": "Gümüş Ayin (K)",
+                      "seviye": 3,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Karanlık",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Silahını kanınla lekeleyerek aydınlıkla kuvvetlendirirsin. Silahın bir miktar ışık yansıtır. Çürüme hasarına karşı dayanıklı hale gelirsin. Çürümeyle ilgili varlıklar, ışıktan rahatsız olarak saldırılarından yanma hasarı alır.",
+                      "yeni-alan-6": "Özel Yetenek: Bu yeteneği kullanabilmek için hikâyesel ya da sınıfsal olarak özel bir durumda olmak gerekir. Özel durumları oyun yöneticiniz ile konuşarak öğrenebilir ve karakterinizin öğrenmesi için anlaşabilirsiniz."
+                    },
+                    {
+                      "_id": "rmprerzkuny49",
+                      "isim": "Kan Laneti: Bağlama (K)",
+                      "seviye": 3,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Karanlık",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Görebildiğin bir yaratığa hükmederek hareketini keser, reaksiyon almasını engellersin. Yaratık, irade testini geçememesi halinde her turunun başında otomatik olarak bu denemeyi tekrarlar.",
+                      "yeni-alan-6": "Özel Yetenek: Bu yeteneği kullanabilmek için hikâyesel ya da sınıfsal olarak özel bir durumda olmak gerekir. Özel durumları oyun yöneticiniz ile konuşarak öğrenebilir ve karakterinizin öğrenmesi için anlaşabilirsiniz."
+                    },
+                    {
+                      "_id": "rmpresqoj0f9w",
+                      "isim": "Kan Laneti: Mahvoluş",
+                      "seviye": 4,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Karanlık",
+                      "yeni-alan": "Mana",
+                      "maliyet": 4,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Bir yara açmış olduğun varlığa odaklanarak açtığın yaradaki kanın kaynamasını sağlarsın. Kan kaynarken yarayı dağlar, ancak kaynadıkça yanık etkisini artırarak yakma hasarı verir.",
+                      "yeni-alan-6": "Özel Yetenek: Bu yeteneği kullanabilmek için hikâyesel ya da sınıfsal olarak özel bir durumda olmak gerekir. Özel durumları oyun yöneticiniz ile konuşarak öğrenebilir ve karakterinizin öğrenmesi için anlaşabilirsiniz."
+                    },
+                    {
+                      "_id": "rmpreu1prw9h3",
+                      "isim": "Yara Tesiri",
+                      "seviye": 1,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Çürüme",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "Dokunma",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Dokunma veya kavrama saldırısı gerçekleştireceğin bir varlığa isabet edebilmen halinde doğrudan açılmış yaralarının genişlemesi veya derinlemesi için bir çürüme enerjisi tesir ettirirsin.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmpreunj8g2fc",
+                      "isim": "Körlük & Sağırlık",
+                      "seviye": 2,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Çürüme",
+                      "yeni-alan": "Mana",
+                      "maliyet": 2,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Menzilde görebildiğin bir varlığın duyularına tesir etmeye çalışıp onu körleştirebilir veya sağırlaştırabilirsin. Varlık İRADE testinde başarısız olması durumunda bu etkiye kapılır.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprewgmx6mb7",
+                      "isim": "Ölülerle Konuş (R)",
+                      "seviye": 3,
+                      "yeni-alan-2": "Ritüel",
+                      "tur": "Çürüme",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "10 Dakika",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Konuşturmak üzere bir ceset seç. Bu cesdin konuşabilecek bir ağzı olmalı ve seni düşmanı olarak görmüyor olmalı. 1 dakikalık ritüelin ardından cesedin ruhu kısa süreliğine geri döner ve bu süreçte 5 soru sorma hakkın vardır.\n\nCeset, konuştuğun dili biliyorsa, soracağın sorulara kısa ve genel cevaplar verir. Süre veya 5 soru sonunda yeteneğin etkisi kendiliğinden sonlanır.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprexioksuat",
+                      "isim": "Hayvan Hareketlendir (R)",
+                      "seviye": 3,
+                      "yeni-alan-2": "Ritüel",
+                      "tur": "Çürüme",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "24 Saat",
+                      "yeni-alan-4": "1 Km.",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Giriş seviyesi olarak belirleyeceğin küçük veya minik boyutlarda bir hayvan seç. Bu hayvan üzerinde gerçekleştireceğin ritüel sonunda enerjin yönlenerek bir ruhu taklit eder. Bu taklit sayesinde ölü hayvanın bedenini hareketlendirir ve basit komutlarına uyacak bir hizmetkâra dönüştürürsün. Süre sonunda, vücut işlev görmeyecek derecede parçalandığında, menzil dışında çıkıldığında veya sen istediğinde yeteneğin etkisi sonlanır.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmpreym1iek0c",
+                      "isim": "Kamp Ateşi (K)",
+                      "seviye": 0,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Oluşturma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 0,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Enerjiden meydana gelen bir kamp ateşi oluşturursun. Kamp ateşi, süre boyunca çevresini ısıtır ve tutuşturma özelliğine sahiptir. Enerjisel bir ateş olduğu için fiziksel yollarla söndürülemez.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprez7fj97an",
+                      "isim": "Elemental Silah",
+                      "seviye": 3,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Dönüştürme",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "1 Saat",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Kuşanmakta olduğun silahın üstünde elementsel etkiler uyandırırsın. Bu etkiler, silahınla birine vurdukça element hasarı vermeni sağlar. Uygulayabileceğin elementsel etkiler:\n\n- Asit\n- Buz\n- Ateş\n- Yıldırım\n- Ses\n\nBüyü süresince silahının elinden herhangi bir şekilde ayrılması, elementsel etkinin sonlanmasına sebep olur.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprezycsr5gh",
+                      "isim": "Şifa Alanı (K)",
+                      "seviye": 3,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "İnanç",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "3 Birim Yarıçap",
+                      "aciklama": "Süre boyunca bir iyileştirme alanı salgılarsın. Bu alan içinde bulunan varlıklar, Basit Yara İyileştirme etkisi altındadır. Ancak bu etki, vücutlarındaki derin yaraları da kapsayacak şekildedir.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprf0m8ndorl",
+                      "isim": "İyi ve Kötüyü Sapta (K)",
+                      "seviye": 1,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "İnanç",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "10 Dakika",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Yetenek süresi boyunca, menzilinde bulunan varlıklar arasında Kutsal, Lanetli, Aydınlık, Karanlık niteliğe sahip olanları fark edersin.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprf19mkinas",
+                      "isim": "Göksel Pelerin",
+                      "seviye": 4,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Pakt",
+                      "yeni-alan": "-",
+                      "maliyet": "",
+                      "yeni-alan-3": "10 Dakika",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Enerjisi tükenene kadar etrafını göksel enerjiden oluşan bir pelerinle kaplarsın. Pelerinin üstünde d6 miktarda parlak yıldız belirir. Birisi sana başarılı bir saldırı yaptığında bu yıldızlardan biri patlayarak saldırgana bir miktar ışıma hasarı verirken onu körleştirir",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprf2hi8ebdi",
+                      "isim": "Kozmos Duvarı",
+                      "seviye": 3,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Pakt",
+                      "yeni-alan": "-",
+                      "maliyet": "",
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "",
+                      "aciklama": "En fazla 6 birim genişliğinde, 2 birim yüksekliğinde ve kalınlığında uzayı aynalayan bir duvar oluşturursun. Duvar arka tarafın görülmesini engeller fakat hareketi engellemez. Duvarın içinden geçmeye çalışan, aptal olarak sayılmayacak yüksek zeka seviyesine sahip her varlık zihinsel olarak duvara dayanmak zorundadır. Zihinsel dayanıklılığı yetersiz kalan varlıklar her tur zihinsel kurtulmayı geçene kadar duvarın içindeki karanlıkta kaybolup sınırlarından çıkmayacak şekilde rastgele hareket eder ve süre boyunca zihinsel hasar alır. Zihinsel dayanıklılığı yeterli olan varlıklar karanlıkta kaybolmadan karşı tarafa geçebilir fakat geçiş esnasında bir miktar zihinsel hasar alırlar.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprf36kreykb",
+                      "isim": "Düzlem Geçidi",
+                      "seviye": 4,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Oluşturma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 4,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "100 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Menzilde görebildiğin veya arkasını hayal edebildiğin bir engelin ardında, yanında 3 kişiye kadar orta-büyük boyutta varlıkla birlikte ışınlanabilirsin.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprf3vq1clwf",
+                      "isim": "Vampirik Dokunuş",
+                      "seviye": 3,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Karanlık",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "Dokunma",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Yakın mesafe menzilindeki bir hedefe elinle yakın dövüş saldırısı gerçekleştirirsin. Elin hamle sırasında enerjiyle bezenir. Temas edebilmen halinde hedefin yaşam enerjisini kendi yaralarını iyileştirmek üzere dönüştürürsün.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprf4my375i1",
+                      "isim": "Gönderi",
+                      "seviye": 3,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Dönüştürme",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Tanıdığın ve aynı düzlemde olduğun bir varlığa en fazla 25 kelimeden oluşan bir mesaj gönderirsin. Bu varlık, mesajın senden geldiğini anlar ve anında aynı kelime sınırında bir karşılık verebilir. Anında karşılık vermezse yeteneğin etkisi sonlanır.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprf5koqj42r",
+                      "isim": "Paramparça Et",
+                      "seviye": 2,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Yıkım",
+                      "yeni-alan": "Mana",
+                      "maliyet": 2,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "3 Birim Yarıçap",
+                      "aciklama": "Menzilinde seçeceğin bir alanda, 3 birim yarıçaplı ve 2 birim yüksekliğinde bir silindirik alanda aşağı doğru şiddetli bir basınç kuvveti oluşturursun. Alan içinde kalan varlıklar DAYANIKLILIK testini geçemezse yere serilerek mıhlanırlar. DAYANIKLILIK testini geçebilen varlıklar yere serilmez ancak basınç hasarından yine de etkilenirler.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprf6gbkbyyg",
+                      "isim": "Bulanıklık (K)",
+                      "seviye": 2,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "İllüzyon",
+                      "yeni-alan": "Mana",
+                      "maliyet": 2,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Bedenin seni görebilen herkes için titreşerek bulanıklaşır. Süre boyunca tüm varlıklar sana karşı saldırılarının isabetlerini dezavantajlı gerçekleştirirler. Eğer saldıran varlık, duyu olarak görüşe ihtiyaç duymuyorsa ya da illüzyonu fark etme durumuna sahipse yetenekten etkilenmez.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprf6xiyyqwo",
+                      "isim": "Karanlık (K)",
+                      "seviye": 2,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Oluşturma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 2,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "4 Birim Küre",
+                      "aciklama": "Menzilinde seçeceğin bir noktanın çevresine yayılacak enerjisel bir karanlık alan meydana getirirsin. Bu alan, duvarlar gibi fiziksel engellerin ötesine taşabilir. \n\nDoğal olarak karanlıkta görme yetisi bulunan varlıklar bu yeteneğin içinde göremez ve fiziksel ışık bu alanın içini aydınlatamaz.\n\nEğer seçilen nokta hareket halinde bir nokta ise, oluşan karanlık alan bu noktayla birlikte hareket eder.",
+                      "yeni-alan-6": "Bu yeteneğin alanı 2. seviye ya da daha düşük seviye bir yetenek ile oluşturulmuş ışık etkisiyle örtüşürse, ışığı oluşturan yetenek def edilir. Ancak kritik başarı ile oluşturulmuş alt bir ışık yeteneği karanlığın içinde var olabilir. Bu durumda, ışığın aydınlatabileceği alan 2 Birimdir."
+                    },
+                    {
+                      "_id": "rmprf7q1a61aj",
+                      "isim": "Ateş Topu",
+                      "seviye": 3,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Yıkım",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "2 Birim Yarıçap",
+                      "aciklama": "Menzilinde gördüğün bir hedef ya da noktaya gürleyen bir ateş topu fırlatırsın. Ateş topu düştüğü noktadan 2 birim uzağa hasar verecek şekilde patlar ve çevrede tutuşabilecek şeyleri ateşe verir.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprf8b924skv",
+                      "isim": "Korku",
+                      "seviye": 3,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Efsun",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Menzilinde görebileceğin bir varlığın zihnine dalarak sana karşı yoğun bir korkuya kapılmasını sağlamaya çalışırsın. İRADE testinde başarısız olursa, varlık turundaki hareketinin tamamını senden aksi yöne kaçmak için kullanmak zorundadır. İRADE testinin farkının 6'dan fazla gelmesi durumunda, korkan varlık kuşandığı silahını elinden düşürür.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprf8tg3967c",
+                      "isim": "Akıl Karışıklığı",
+                      "seviye": 4,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Efsun",
+                      "yeni-alan": "Mana",
+                      "maliyet": 4,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "2 Birim Yarıçap",
+                      "aciklama": "Menzilinde seçeceğin bir noktanın 2 birim çevresinde bulunan bütün varlıkların zihinlerine sızarak bir akıl karışıklığı meydana getirmeye çalışırsın. Alanın içinde kalan varlıklar İRADE testini geçemezse varlıkların her biri için bağımsız olarak şu etkilerden biri gerçekleşir:\n\n1d10 Sonucunda,\n1.\tVarlık tüm hareketini rastgele bir yöne hareket etmek için kullanır. Yönü belirlemek için 1d8 at ve zarın her yüzüne bir yön belirle. Varlık bu sırasında eylem kullanmaz.\n2-6.\tVarlık bu sırasında hareket etmez ve eylem kullanmaz.\n7-8.\tVarlık eylemini kullanıp menzilindeki rastgele bir varlığa yakın dövüş saldırısı yapar. Eğer menzilinde bir varlık yoksa, bu sırasında hiçbir şey yapmaz.\n9-10.\tVarlık normal bir şekilde davranıp hareket edebilir.\n\nYetenek etkisindeki varlıklar her tur sonunda, bu etkiden kurtulmak için yeniden İRADE testine girebilir.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprf9hifwdej",
+                      "isim": "Hançer Bulutu (K)",
+                      "seviye": 2,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Oluşturma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 2,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "1 Birim",
+                      "aciklama": "Menzilinde seçeceğin bir alanda havada uçuşan hançerler meydana getirirsin. Bir varlık bu alana girerse veya bu alan varlığın bulunduğu alanda oluşursa ÇEVİKLİK testine girer. Testi geçmesi halinde hançerlerin bir kısmından kaçınmayı başarabilir, ancak her türlü hançerlerden kesme hasarı alır.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfa24yy5j8",
+                      "isim": "Basit Yaraları İyileştir",
+                      "seviye": 1,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Yıkım",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "Dokunma",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Açık yarası bulunan bir varlığın yarasına dokunarak yarayı kapanacak şekilde iyileştirmeye çalışırsın. \n\nEğer yara derinse yetenek işlevsiz kalır. Ancak derin değil ve genişse, yaranın bir kısmı iyileşir.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfaq8pu4n0",
+                      "isim": "Tamirat (R)",
+                      "seviye": 0,
+                      "yeni-alan-2": "Ritüel",
+                      "tur": "Dönüştürme",
+                      "yeni-alan": "Mana",
+                      "maliyet": 0,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Süre boyunca odaklanarak gerçekleştireceğin bir ritüel sonucunda genel materyallerden yapılmış bir nesnedeki basit hasarı tamir edersin. Bu hasar bir kılıçtaki çatlak, kırılmış bir anahtar (kilit kısmı harici), bir matarada sızdıran bir çatlak gibi şeyler olabilir. Bu hasarın boyutu 30 santimetreden düşükse iz bırakmadan tamir olur.\n\nBu yetenek, kırılmış enerjisel bir eşyayı tamir edebilir ancak kaybettiği enerjisel özelliği geri getiremez.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfbhcsoiwz",
+                      "isim": "Görünmez Hizmetkâr (R)",
+                      "seviye": 1,
+                      "yeni-alan-2": "Ritüel",
+                      "tur": "Oluşturma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "1 Saat",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Ritüel süresi sonunda vereceğin basit görevleri yerine getirecek görünmez, akılsız ve şekilsiz bir hizmetkâr meydana getirirsin. Hizmetkâr görünmez olsa da enerjisel ve fiziksel olarak engellere takılıp hasar alabilecek niteliktedir.\n\nMücadelede her turunda bir ek eylem olarak hizmetçine 3 birime kadar hareket etmesi ve bir nesneyle etkileşime geçebilmesi üzerine komut verebilirsin. Hizmetkâr bir şeyleri getirme, temizlik, tamir, kıyafet katlama, ateş yakma, yemek servis etme gibi insan bir hizmetkârın yapabileceği görevleri yerine getirebilir. Bir emir verdiğinde, hizmetkâr görevi yapabildiği en iyi şekilde yerine getirmeye çalışıp bitirir, sonrasında yeni emri bekler.\n\nHizmetkâr 12 bitim (60ft.) mesafeden fazla uzaklaşmasına sebep olacak bir harekette bulunursa yetenek sonlanır.",
+                      "yeni-alan-6": "Materyal Gereksinimi: Avuçta sıkılabilecek büyüklükte bir tutam halat ve yarı kesilmiş bir odun."
+                    },
+                    {
+                      "_id": "rmprfcb54w608",
+                      "isim": "Şifa Ateşi",
+                      "seviye": 2,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Yıkım",
+                      "yeni-alan": "Mana",
+                      "maliyet": 2,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "Dokunma",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Elinde gürleyen bir alev oluşturarak alevin temas ettiği bütün yaraları iyileştirmeye çalışırsın. Alev, vücuda temas ettiği ve hacimsel olarak kapladığı alandaki kanamaya sebep olan yaraların hepsini iyileştirme özelliğine sahiptir. Kemik kırığı gibi yaraları iyileştiremez.",
+                      "yeni-alan-6": "Özel Yetenek: Bu yeteneği kullanabilmek için hikâyesel ya da sınıfsal olarak özel bir durumda olmak gerekir. Özel durumları oyun yöneticiniz ile konuşarak öğrenebilir ve karakterinizin öğrenmesi için anlaşabilirsiniz."
+                    },
+                    {
+                      "_id": "rmprfcyq5pex4",
+                      "isim": "Zehirden Korunma",
+                      "seviye": 2,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Koruma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 2,
+                      "yeni-alan-3": "1 Saat",
+                      "yeni-alan-4": "Dokunma",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Bir varlığa dokunursun. Eğer zehirlenme etkisi altındaysa vücuduna tesir eden zehir ortadan kalkar. Eğer varlık birden çok zehirden etkileniyorsa, tesir ettiğini bildiğin veya rasgele bir tanesini ortadan kaldırırsın.\n\nSüre boyunca, hedefin zehirlenmeye karşı gireceği testlerde avantajlı olur ve zehir etkilerine karşı dirençli olur.",
+                      "yeni-alan-6": "Bu yetenek sadece bir valrık üzerinde etkin olabilir. Mevcut olarak etkinken başka bir varlıkta kullanılması halinde, bir önceki varlıktaki etkinliği sonlanır."
+                    },
+                    {
+                      "_id": "rmprfdnexfy6o",
+                      "isim": "Rüya (R)",
+                      "seviye": 5,
+                      "yeni-alan-2": "Ritüel",
+                      "tur": "Efsun",
+                      "yeni-alan": "Mana",
+                      "maliyet": 5,
+                      "yeni-alan-3": "8 Saat",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Aynı düzlemde bulunan ve tanıdığın bir varlığı hedef alırsın. 1 dakikalık ritüelin ardından kendin veya dokunduğun istekli bir varlık, bir rüya habercisi olarak hareket etmek üzere trans haline girer.\n\nEğer hedef uykudaysa, haberci hedefin rüyalarında belirir ve yetenek süresi boyunca uykuda kaldığı sürece hedefle sohbet edebilir. Aynı zamanda, haberci rüyayı şekillendirme yetisine sahiptir. Bu şekilde manzaralar, nesneler ve başka görüntüler meydana getirebilir. Haberci istediği zaman trans halinden çıkarak yeteneği sonlandırabilir. Rüyayı gören hedef, uyandığı zaman gördüklerini eksiksiz hatırlar. \n\nEğer yetenek kullanıldığında hedef uyanıksa, haberci bunu bilir ve transı sonlandırabilir ya da hedefin uykuya dalmasını trans halinde bekleyebilir.\n\nHaberci, bir mesaj iletmek yerine doğrudan hedefe bir kâbus gördürebilir. Bu durumda en fazla on kelimelik bir mesaj iletilir ve hedef İRADE testine girer. Testte başarısız olunması durumunda görülen kâbusun etkisinden dolayı dinlenme durumunda hiçbir toparlanma etkisi elde edemez.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfeaduyk1g",
+                      "isim": "Binek Oluştur (R)",
+                      "seviye": 2,
+                      "yeni-alan-2": "Ritüel",
+                      "tur": "Oluşturma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 2,
+                      "yeni-alan-3": "1 Saat",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Yerden enerjisel olarak meydana gelecen bir binek meydana getirirsin. Bu binek, herhangi bir savaş özelliğine sahip değildir, fiziksel ve enerjisel olarak etkileşime geçilebilir yapıdadır. Binek ölene veya sen yeteneği sonlandırana kadar varlığını korur.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfeuio7b64",
+                      "isim": "Dondurucu Koni",
+                      "seviye": 9,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Yıkım",
+                      "yeni-alan": "Mana",
+                      "maliyet": 12,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "12 Birim 60 Derece Koni",
+                      "aciklama": "Ellerini doğrulttuğun alanda aniden oluşacak bir soğuk dalgası, alan içindekileri doğru fırlayarak önüne çarptığı hedeflere yüksek soğuk hasarı uygular. Alan içinde kalan varlıklar DAYANIKLILIK testine girerek soğuğun bir kısmına dayanabilirler. Alan sınırında kalan varlıklar kaçınma testlerinde başarılı olursa soğuk dalgasının bir kısmından kaçınabilirler.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprffmting6b",
+                      "isim": "Karşı Büyü",
+                      "seviye": 3,
+                      "yeni-alan-2": "Tepki Eylem",
+                      "tur": "Koruma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "12 birim menzilindeki bir varlık enerjisel yetenek kullanırken, tepki olarak yeteneğini engelleyebilirsin. Engellemeye çalıştığın yetenek, seviye olarak 3 veya daha alt bir seviyedeyse, enerji değeri 1-2 gelmediği sürece anında sonlanır. 3. seviyeden yüksek bir etkiyi kaldırmak için, gerçekleştirilen yetenek seviyesiyle kuvvetinin dahil olduğu bir sınırı geçmen gerekir. Bu sınır şu şekilde hesaplanır:\n\nSınır = (Yetenek Seviyesi - Lanet Kaldırma Yeteneği Seviyesi) + (Bedel Manası - Lanet Kaldırma Manası) + Yetenek Kuvvet Miktarı\n\nÖrneğin, 5. Seviye 7 Mana ve 12 kuvvetle kullanan bir yeteneğin etkisini 3. Seviye Lanet Kaldırma ile kaldırmak için:\n(5-3) + (7-3) + 12 = 2 + 4 + 12 = 18 sınırı aşılmalıdır.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfg3xtj23b",
+                      "isim": "Enerjiyi Defet",
+                      "seviye": 3,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Koruma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "Dokunma",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Anlık dokunma şeklinde enerjisel bir etkiyi sonlandırmaya çalışırsın. Bu etki, bir yeteneğin sebep olduğu varlık üstünde, alanda veya doğrudan farklı sebeplerce bir yerde bulunan bir etki olabilir. Etkiyi kaldırmak için şu kurallar izlenir:\n\nKaldırmaya çalıştığın etki, seviye olarak 3 veya daha alt bir seviyedeyse, enerji değeri 1-2 gelmediği sürece anında sonlanır. 3. seviyeden yüksek bir etkiyi kaldırmak için, gerçekleştirilen yetenek seviyesiyle kuvvetinin dahil olduğu bir sınırı geçmen gerekir. Bu sınır şu şekilde hesaplanır:\n\nSınır = (Yetenek Seviyesi - Lanet Kaldırma Yeteneği Seviyesi) + (Bedel Manası - Lanet Kaldırma Manası) + Yetenek Kuvvet Miktarı\n\nÖrneğin, 5. Seviye 7 Mana ve 12 kuvvetle kullanan bir yeteneğin etkisini 3. Seviye Lanet Kaldırma ile kaldırmak için:\n(5-3) + (7-3) + 12 = 2 + 4 + 12 = 18 sınırı aşılmalıdır.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfgpjetjv8",
+                      "isim": "Bariyer",
+                      "seviye": 3,
+                      "yeni-alan-2": "Tepki Eylem",
+                      "tur": "Koruma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Menzilinde görebildiğin bir varlık herhangi bir şekilde saldırıya uğrarken, saldırıdan onu korumak üzere sonraki turuna kadar var olacak bir koruyucu bariyeri varlığın çevresinde meydana getirirsin.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfh7pm6fh1",
+                      "isim": "Yenilenme",
+                      "seviye": 5,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Yıkım",
+                      "yeni-alan": "Mana",
+                      "maliyet": 5,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Bir varlığa dokunarak doğal iyileşme hızını artırırsın. Bu sayede varlığın vücudunda iyileşmekte olan yaralar normale kıyasla olağanüstü derecede hızlı iyileşmeye başlar. Yaralar kapanır, kemikler kaynar, zedelenmiş sinirler özelliğini toparlar.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfhpbe1csz",
+                      "isim": "Ruh Kafesi",
+                      "seviye": 6,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Çürüme",
+                      "yeni-alan": "Mana",
+                      "maliyet": 10,
+                      "yeni-alan-3": "8 Saat",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Çevrende bir varlık öldüğü zaman, materyal bileşen olarak kulalndığın bir kafesin içine hapsetmek üzere ruhunu kancalarsın. İRADE testine giren ruh, testte başarısız olursa belirlediğin kafesin içine hapsolacak şekilde süre boyunca kancalanır.\n\nKancalanmış bir ruh, yetenek süresi boyunca ruhun enerjisini 6 kez kullanabilirsin. Bu kullanım şunlardan biri olabilir:\n\n- Yaşam Çal: Ek Eylem olarak ruhun bütünlüğünün 1/6'sını kullanarak yaralarını iyileştirebilir veya yaşam enerjini yenileyebilirsin.\n- Sorgula: Ruha bir soru sorarak kısa bir telepatik cevap alırsın. Bu cevap hangi dil kullanılırsa kullanılsın anlaşılabilir seviyededir. Ruh, sadece hayatta bildiklerini bilir, ancak dürüstçe ve elinden gelen en iyi şekilde cevap verir. Cevap birkaç cümleden fazla olamaz ve kriptik olabilir.\n- Öngörü: Ek eylem kullanarak ruhun belirli parçasını feda ederek algılarını olağanüstü düzeyde yükseltirsin. Bir sonraki saldırı, yetenek ya da test zarını avantajlı olarak kullanırsın. Eğer bu etkiyi bir sonraki turuna kadar kullanmazsan, etki ortadan kaybolur.\n- Ölünün Gözleri: Eylemini kullanarak ruhunu kancaladığın varlığın hayatında görmüş olduğu bir yerin adını verirsin. Eğer tanımladığın yer aynı düzlemde ise bu bölgede görünmez bir sensör meydana gelir. Sen konsantre olduğun sürece 10 dakika boyunca sensör bu alanda kalır. Trans haline girerek bu sensörden görüp duyabilirsin. Sensörü görebilen bir varlık, ruhunu kancaladığın varlığın acı içindeki halini görür.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfi74ajhnh",
+                      "isim": "Gerçek Görüş",
+                      "seviye": 5,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Kehanet",
+                      "yeni-alan": "Mana",
+                      "maliyet": 5,
+                      "yeni-alan-3": "1 Saat",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Ruhlar ötesi alemler ve kozmik enerjiden oluşan, normal gözün göremediği enerjileri görmeye başlarsın. Bu duruma görünmezlik etkisindeki şeyleri, illüzyonları görmek gibi durumlar da dahildir.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfj1ojy5t7",
+                      "isim": "Düzlem Kayması",
+                      "seviye": 8,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Oluşturma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 14,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Sen ve el ele tutuşarak çember oluşturabileceğin 8 farklı varlık, bilgisine sahip olduğun bir düzleme geçiş yapabilirsiniz. \n\nGeçiş yapmak için bilgin dahilindeki konumu belirtmen yeterlidir (İskidya'daki Bereket Ağacı, Moria Madenleri, Cehennemin 4. Katı gibi...). \n\nAlternatif olarak, farklı bir düzlemde sembolünü bildiğin bir ışınlanma çemberinin olduğu konuma da geçiş yapmayı tercih edebilirsin.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfjmrjclcq",
+                      "isim": "Dönüş Çağrısı",
+                      "seviye": 10,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Oluşturma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 15,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Sen ve biriminin bitişiğinde bulunan belirlediğin istekli varlıklar, daha önceden belirlediğin bir güvenli alana ışınlanırsınız. \n\nGüvenli alanı belirlemek için öncelikle bu yeteneğin ritüel safhasını gerçekleştirmelisin. Ritüel, belirlediğin alanın zeminine ve varsa diğer yüzeylerine çizeceğin belirli semboller dizisi ve onların ortasında bu yeteneği belirli aralıklarla kullanarak 1 hafta boyunca hazırlaman ile gerçekleşir.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfk8346cfs",
+                      "isim": "Rejenerasyon",
+                      "seviye": 12,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Yıkım",
+                      "yeni-alan": "Mana",
+                      "maliyet": 24,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Bir hedefe dokunarak doğal iyileşme kapasitesini olağan dışı şekilde artırırsın. Yaklaşık 30 dakikalık süre içinde, varlığın açık yaraları kapanır, kırık kemikleri kaynaşır, hasar görmüş sinirleri eski haline döner. Eğer hedefin eksik bir uzvu varsa (Parmak, bacak, kuyruk vb.) yeniden oluşur. Eğer kopmuş uzuv ilgili kısma tutturulursa, uzuv yeniden çıkmak yerine kaynaşarak özelliğini yeniden kazanır.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfkp5bn8o7",
+                      "isim": "İnziva (R)",
+                      "seviye": 15,
+                      "yeni-alan-2": "Ritüel",
+                      "tur": "Kehanet",
+                      "yeni-alan": "Mana",
+                      "maliyet": 50,
+                      "yeni-alan-3": "1 Gün+",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "3 Saatlik bir ritüel sonucunda dokunacağın bir varlık ya da nesne gizlenebilir ve süre boyunca tespit edilemez.\n\nYetenek kullanılndığında dokunulan nesne görünmezlik durumuna girer ve kehanet yeteneklerinin hedefi olamaz, ya da bu yeteneklerle oluşturulan sensörlerce algılanamaz.\n\nEğer hedef bir varlıksa, hayatı askıya alınmış bir duruma geçer. Zaman onun için akmayı bırakır ve herhangi bir şekilde yaşlanmaz.\n\nYeteneğin bitmesi için bir durum belirleyebilirsin. Bu durum, istediğin her şey olabilir ancak hedefin 10km yakınında gerçekleşmeli veya görünmelidir. Örnek olarak, 1000 yıl geçince ya da bölgeye bir Kadim giriş yaptığında şeklinde bir şart konulabilir. Hedefin hasar alması halinde yetenek etkileri sonlanır.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprflex2fsxk",
+                      "isim": "Kurutma",
+                      "seviye": 4,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Çürüme",
+                      "yeni-alan": "Mana",
+                      "maliyet": 4,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Menzilindeki bir hedefin bedenindeki sıvıları kurutmaya çalışırsın. Eğer bu varlık bitki veya benzer statüde bir varlıksa, yeteneğe karşı kırılgandır.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfm2beum3o",
+                      "isim": "Gölgealev Pelerini",
+                      "seviye": 4,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Koruma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 4,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Etrafını çevreleyen gölgealevden oluşma bir pelerin meydana getirirsin. Sana karşı gerçekleştirilen her yakın mesafe saldırısına karşı pelerin tepki olarak gölgealevlerini saldırganın üzerine salar.",
+                      "yeni-alan-6": "Özel Şart: Bu yeteneğe sahip olmak için Gölgealev ile ilgili temelleri karşılıyor olmalısınız."
+                    },
+                    {
+                      "_id": "rmprfmrz6vhwa",
+                      "isim": "Kişi Zaptetme (K)",
+                      "seviye": 8,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Efsun",
+                      "yeni-alan": "Mana",
+                      "maliyet": 14,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "İki elini de kullanarak odaklanacağın bir insansıyı PARALİZ durumuna sokmaya çalışırsın. İRADE testini geçemeyen bir insansı, olduğu pozisyonda kasılıp kalır, hareket edemez veya eylemde bulunamaz. \n\nYetenekten etkilenen varlık, her turunun başında tekrar İRADE testi vererek bu etkiden kurtulmaya çalışabilir.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfnjozv0yq",
+                      "isim": "Yanan Eller",
+                      "seviye": 1,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Yıkım",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "3 Birim Koni",
+                      "aciklama": "Ellerini uzattığın bir yöne doğru gürleyecek bir alev dalgası fırlatırsın. ÇEVİKLİK testini geçemeyen varlıklar gelen alev dalgasından yanma hasarı alır, geçebilenler hasarın bir kısmından kaçınabilir.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfo2gunq1q",
+                      "isim": "Su Duvarı (K)",
+                      "seviye": 3,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Oluşturma",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "6 Birim Uzun 2 Birim Yüksek",
+                      "aciklama": "Menzilde belirlediğin bir alanda başlayıp uzanacak şekilde enerjisel bir su duvarı oluşturursun. Duvarın görüntüsü yerden yukarıya akan bir su akıntısı bloğu gibidir. Duvarın içinde kalmış ya da içine girecek olan varlıklar basınç ve soğuk hasarı alırken, dışarıdan duvara doğru gerçekleştirilen menzilli saldırılar duvarın etkisiyle kırılır.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfp0peg6v3",
+                      "isim": "Delilik Tacı (K)",
+                      "seviye": 2,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Efsun",
+                      "yeni-alan": "Mana",
+                      "maliyet": 2,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Menzilinde seçeceğin bir hedefin başında çarpık ve dikenli bir taç belirir. Varlık, İRADE testini geçememesi durumunda delirir ve mesafe olarak en yakınındaki varlığa saldırmaya meyilli hale gelir.\n\nEtki altına girmiş olan bir varlık, yetenek süresi boyunca kendi turunun sonunda bir İRADE testi ile bu etkiyi sonlandırmaya çalışabilir.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfplvy1q9p",
+                      "isim": "Öleni Esirge (K)",
+                      "seviye": 1,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Çürüme",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "1 Saat",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Dokunacağın bir varlık, kanamadan dolayı yaralı ise, yetenek süresi boyunca varlığın kanamasını baskılayarak stabilize edersin.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfq44nh35d",
+                      "isim": "Zayıflatma Işını (K)",
+                      "seviye": 2,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Çürüme",
+                      "yeni-alan": "Mana",
+                      "maliyet": 2,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Menzilindeki bir hedefe elinden çıkacak uğursuz bir enerji ışını gönderirsin. İsabet halinde, hedef isabet aldığı yerden çürüme tesirinde kalır ve seçeceğin 1 niteliği süre boyunca kuvvetine bağlı olarak eksi değer alır. (Her 5 kuvvette -1)",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfqpoy91gw",
+                      "isim": "Işık Kıskacı",
+                      "seviye": 3,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Aydınlık",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "2 Birim Yarıçap & Yüksek Silindir",
+                      "aciklama": "Menzilde görebildiğin bir noktada oluşturacağın silindirik bir alanı kaplayan ışık alanı oluşturursun. Alan içinde kalan varlıklar DAYANIKLILIK testine girer. Testi geçemeyen varlıklar IŞIMA YANIĞI hasarı alırken KÖRLÜK etkisinde kalırlar. (Kuvvete bağlı her 5 kuvvet için +1 tur)",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfrstrd4au",
+                      "isim": "Gölge Kıskacı (K)",
+                      "seviye": 3,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Karanlık",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "2 Birim Geniş & Yüksek Silindir",
+                      "aciklama": "Menzilde görebildiğin noktada silindirik bir alan oluşturmak üzere yoğunlaşırsın. Alan içinde kalan varlıklar, alanda belirerek onları sarmalamaya çalışan gölge dokunaçlara karşı ÇEVİKLİK testine girer. \n\nDokunmayı başaran dokunaçlar, varlıkları sarmalayarak basınç ve karanlık hasarı uygulayarak yere sabitler. Sabitlenen varlıklar her tur KUVVET testine girerek bu kavramadan kurtulabilir.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfsups0bsa",
+                      "isim": "Feda",
+                      "seviye": 1,
+                      "yeni-alan-2": "Tepki Eylem",
+                      "tur": "Kan",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Kan akıtmak suretiyle verdiğin bir yakın mesafe saldırısı sonucunda hızlı tepki olarak rakibin yarasından kanı çekip kendi yarana aktararak iyileştirici bir yama etkisi göstermesini sağlayabilirsin.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprftkzv8g3r",
+                      "isim": "Kan Kaynat",
+                      "seviye": 2,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Kan",
+                      "yeni-alan": "Mana",
+                      "maliyet": 2,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Kendi vücudundaki kanı kaynatarak belirlediğin bir niteliğine artı değer alabilirsin. (Her 5 kuvvet için +1)\n\nBu yeteneği tekrar kullanman halinde, diğer etki ortadan kaybolur.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfu258mqbn",
+                      "isim": "Kan Duyusu (K)",
+                      "seviye": 1,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Kan",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "10 Dakika",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "6 Birim Yarıçap",
+                      "aciklama": "Süre boyunca menzil alanında bulunan serbest kan kaynaklarını ve vücudunda kan dolaşan canlıları konum ve hacim olarak fark edebilirsin.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfupsj9zjx",
+                      "isim": "Kan Şifası",
+                      "seviye": 2,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Kan",
+                      "yeni-alan": "Mana",
+                      "maliyet": 2,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Açık bir yaraya odaklanıp yaradaki kanın özelliğini orayı iyileştirip kapatacak şekilde dönüştürürsün.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfv4fumso6",
+                      "isim": "Kan Alevi",
+                      "seviye": 2,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Kan",
+                      "yeni-alan": "Mana",
+                      "maliyet": 2,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Menzilinde açık yarası olan bir varlığın yaralarındaki kanı kaynatarak yanma yasarı uygularsın.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfvn57rlq7",
+                      "isim": "Kan Tuzağı",
+                      "seviye": 3,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Kan",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Menzilde bulunan bir noktaya belirlediğin bir kan miktarı ile oluşacak bir mühür yerleştirirsin. \n\nMühür, 1 saat boyunca bu alanda kalır ve senin tetiklemen ile patlayarak basınç ve şarapnel hasarı uygular.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfw3ygp74v",
+                      "isim": "Kan Aynası",
+                      "seviye": 4,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Kan",
+                      "yeni-alan": "Mana",
+                      "maliyet": 4,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Menzilinde boş bir noktada havada süzülen bir kandan ayna meydana getirirsin. Bu aynanın karşısında duracak bir varlığın yansıması o anda arzuladığı şeyin görsel bir tasfirini oluşturur.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfwp7purqd",
+                      "isim": "Zihin Dikeni",
+                      "seviye": 0,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Efsun",
+                      "yeni-alan": "Mana",
+                      "maliyet": 0,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Menzilindeki bir varlığın zihinsel olarak dikkatini kırmaya çalışırsın. Odaklanacağın bir varlık İRADE testinde başarısız olursa, bir sonraki test zarında 1d4 eksi tesir alır.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfx3si3krr",
+                      "isim": "Esinti",
+                      "seviye": 0,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Dönüştürme",
+                      "yeni-alan": "Mana",
+                      "maliyet": 0,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "6 Birim",
+                      "yeni-alan-5": "1 Birim",
+                      "aciklama": "Menzilinde görebildiğin bir alandaki havayı manüple etmeye çalışırsın. Bu alanda şu etkilerden biri meydana gelebilir:\n\n\n- Seçtiğiniz Orta veya daha küçük bir varlık, KUVVET testinde başarısız olursa senin tarafından 1 birim geriye doğru itilir. \n- Ne tutulan ne de taşınan ve 2 kilodan daha ağır olmayan bir nesneyi hareket ettirebilecek küçük bir hava patlaması meydana getirirsin. Nesne senden 2 Birim uzağa itilir. Hasara neden olacak kadar güçlü bir şekilde itilmez.\n- Havayı kullanarak yaprakların hışırdamasına, rüzgarın kepenkleri çarparak kapatmasına veya giysilerinizin bir esintide dalgalanmasına neden olmak gibi zararsız bir duyusal etki meydana getirirsin.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfxoenvc8g",
+                      "isim": "Uçuş (K)",
+                      "seviye": 3,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Dönüştürme",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "10 Dakika",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Kendin veya istekli bir varlığa dokunarak uçuş niteliği kazandırırsın. Süre boyunca etki altındaki varlık 12 Birimlik uçuş hızı kazanır ve havada asılı kalabilir. Yetenek sona erdiğinde varlık havadaysa ve düşüşü durdurabilecek ek bir özelliği yoksa düşmeye başlar.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfy6b27j0d",
+                      "isim": "Kromatik Küre",
+                      "seviye": 1,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Yıkım",
+                      "yeni-alan": "Mana",
+                      "maliyet": 1,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Menzilinde görebildiğin bir hedefe rasgele hasar türüne sahip olacak bir küre fırlatırsın. Bu küre, şu hasar türlerine sahip olabilir:\n\n- Ateş\n- Soğuk\n- Basınç\n- Yıldırım\n- Asit",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprfztkx9dpv",
+                      "isim": "Duyguları Bastır (K)",
+                      "seviye": 2,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Efsun",
+                      "yeni-alan": "Mana",
+                      "maliyet": 2,
+                      "yeni-alan-3": "1 Dakika",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Dokunacağın bir varlığın üstündeki korkma ve cezbedilme etkilerini dindirirsin. Süre boyunca etki altındaki varlık, korkma ve cezbedilme etkilerine karşı bağışıklı halde olur.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprg0djbac9b",
+                      "isim": "Yıldırım Mızrağı",
+                      "seviye": 4,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Yıkım",
+                      "yeni-alan": "Mana",
+                      "maliyet": 4,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "24 Birim",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Menzilde göreceğin bir hedefe elinde beliren yıldırımdan bir mızrak fırlatırsın. İsabet halinde hedef DAYANIKLILIK testine girerek yıldırım hasarı alır. Testi başarısız olan varlık SPAZM etkisi altında kalarak kuvvete bağlı olacak şekilde tur sayısı boyunca vücut hareketi gerektiren eylemlerine eksi değer alır. (Her 5 kuvvet için +1 tur)",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprg134uu35z",
+                      "isim": "Sersemleten Çarpma",
+                      "seviye": 3,
+                      "yeni-alan-2": "Tepki Eylem",
+                      "tur": "İnanç",
+                      "yeni-alan": "Mana",
+                      "maliyet": 3,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Bir hedefe silahınla yakın menzilli saldırı isabet ettirmen durumunda anlık tepki olarak rakibi çarparak sersemletebilirsin. Sersemletmen karşılığında basıç hasarı alarak DAYANIKLILIK testine giren hedef, başarısız olması durumunda kuvvete bağlı olarak belirli tur sayısı kadar süre boyunca eylemlerine 1d4 değerde eksi alır. (her 5 kuvvet için +1 tur).\n\nYetenek kuvvetinin kritik başarılı gelmesi durumunda, hedef sonraki turunun sonuna kadar SERSEMLEMİŞ kondisyonunda olur.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprg1r1ck1hs",
+                      "isim": "Yakan Çarpma",
+                      "seviye": 4,
+                      "yeni-alan-2": "Tepki Eylem",
+                      "tur": "İnanç",
+                      "yeni-alan": "Mana",
+                      "maliyet": 4,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "aciklama": "Silahınla yakın menzilli saldırı isabet ettirmen halinde hasar veren hamleni takiben rakibini alevler içinde bırakabilirsin. (Her 5 kuvvet için +1 tur)\n\nKuvvetine bağlı olarak rakibin üstündeki alevler bir süre üstünde kalarak onu yakmaya devam eder. Bu alevler, fiziki yollarla söndürülemez.",
+                      "yeni-alan-6": ""
+                    },
+                    {
+                      "_id": "rmprg27arw2qu",
+                      "isim": "Yıldırım Çapası",
+                      "seviye": 5,
+                      "yeni-alan-2": "Eylem",
+                      "tur": "Yıkım",
+                      "yeni-alan": "Mana",
+                      "maliyet": 5,
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "12 Birim",
+                      "yeni-alan-5": "1 Birim (Hedef Çevresi)",
+                      "aciklama": "Elinde gürleyerek beliren materyalize olmuş bir yıldırım, fırlatacağın bir hedefe saplanarak dağılır ve isabet ettiği hedefle birlikte bitişiğindeki her birime sıçarayarak yıldırım hasarı uygular. Hasar alan varlıklar DAYANIKLILIK testini geçemezse d4 tur boyunca yetenek kuvvetine bağlı olarak eylemlerinde eksi ceza alırlar (Her 4 kuvvet için -1)",
+                      "yeni-alan-6": ""
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "enerji-akimlari",
+                "title": "ENERJİ AKIMLARI",
+                "body": "",
+                "mode": "table",
+                "table": {
+                  "columns": [
+                    {
+                      "id": "isim",
+                      "label": "İSİM",
+                      "type": "text",
+                      "showInTable": true,
+                      "snapZone": "none"
+                    },
+                    {
+                      "id": "yeni-alan",
+                      "label": "BEDEL (AKIM)",
+                      "type": "text",
+                      "showInTable": true,
+                      "snapZone": "top"
+                    },
+                    {
+                      "id": "yeni-alan-2",
+                      "label": "DENEYİM PUANI",
+                      "type": "number",
+                      "showInTable": true,
+                      "snapZone": "top"
+                    },
+                    {
+                      "id": "yeni-alan-3",
+                      "label": "AÇIKLAMA",
+                      "type": "textarea",
+                      "showInTable": false
+                    },
+                    {
+                      "id": "yeni-alan-4",
+                      "label": "NOT",
+                      "type": "textarea",
+                      "showInTable": false
+                    }
+                  ],
+                  "rows": [
+                    {
+                      "_id": "rmprh8l17nrem",
+                      "isim": "Sessiz Akım",
+                      "yeni-alan": "1",
+                      "yeni-alan-2": 300,
+                      "yeni-alan-3": "Gerçekleştireceğin enerjisel yeteneklerde yetenek sözlerini sarf etmezsin. Etkiyi uyandırmak için 1 akım harcarsın.",
+                      "yeni-alan-4": ""
+                    },
+                    {
+                      "_id": "rmprh8v94mkp8",
+                      "isim": "Dikkatli Akım",
+                      "yeni-alan": "1/Karakter",
+                      "yeni-alan-2": 400,
+                      "yeni-alan-3": "Karakterin gerçekleştireceği alan etkili ya da rasgele hedef seçen enerjisel yetenekler, dost olarak belirlenen karakterleri hedef almaz, etkilemez. Bu etkinin uyandırılmasında muaf tutulan her karakter başına bir enerji akımı harcanır.",
+                      "yeni-alan-4": ""
+                    },
+                    {
+                      "_id": "rmprh98qsfvey",
+                      "isim": "İkiz Akım",
+                      "yeni-alan": "Yetenek Seviyesi",
+                      "yeni-alan-2": 400,
+                      "yeni-alan-3": "Karakterin gerçekleştirdiği enerjisel yetenek ikiye bölünerek fazladan bir hedefe daha yönlenir. Bu etkinin uyanabilmesi için karakterin kullandığı yeteneğin seviyesine eşdeğer miktarda Enerji Akımı kullanması gerekir.",
+                      "yeni-alan-4": ""
+                    },
+                    {
+                      "_id": "rmprh9jzs0wng",
+                      "isim": "Akım Ayarlama",
+                      "yeni-alan": "1",
+                      "yeni-alan-2": 300,
+                      "yeni-alan-3": "Karakterin yaptığı enerjisel yeteneğin kuvvetini belirlemek için kullanılmış zarı yeniden kullanmasını sağlar. Bu etkiyi uyandırmak için 1 Akım Yükü kullanılır. Yeniden kullanılan zarın değeri geçerli kabul edilir.",
+                      "yeni-alan-4": ""
+                    },
+                    {
+                      "_id": "rmprh9u96g5uj",
+                      "isim": "Akım Kuvvetlendirme",
+                      "yeni-alan": "2",
+                      "yeni-alan-2": 400,
+                      "yeni-alan-3": "Gerçekleştirdiğin bir enerjisel yeteneğin kuvvet zarına d10 eklersin. Etkiyi meydana getirmek için 2 Akım puanı harcarsın.\n\nBilinen sahir yeteneklerin arasında bilinen en yüksek seviyenin her 4 yükselişinde bu akım yeteneğine seviye atlatabilirsin. Seviye atlatmak için aynı deneyim puanı tekrar gereklidir. Seviye atlattığın zaman harcayacağın enerji akımı 2 katına çıkarken +1d10 zar eklenir.",
+                      "yeni-alan-4": "Özel Gereksinim: En az 1 adet 4. Seviye Sahir yeteneği."
+                    },
+                    {
+                      "_id": "rmprha7nxyg7v",
+                      "isim": "Uzak Akım",
+                      "yeni-alan": "1",
+                      "yeni-alan-2": 300,
+                      "yeni-alan-3": "Karakterin yaptığı enerjisel yeteneğin ulaşabileceği menzilin uzaklığı, -sistemde kullanılması tercih edilen zar türüne göre- atılacak bir d10 ya da d20 ile belirlenerek en fazla 2'ye katlanarak artar. Bu etkiyi uyandırmak için 1 Akım Yükü harcanır.",
+                      "yeni-alan-4": ""
+                    },
+                    {
+                      "_id": "rmprhagjj9dh4",
+                      "isim": "Uzun Akım",
+                      "yeni-alan": "1",
+                      "yeni-alan-2": 300,
+                      "yeni-alan-3": "Karakterin gerçekleştirdiği süreli yeteneklerin süresi, zar ile belirlenerek iki katına çıkarılabilir. Bu etki katlanarak artabilir. Ancak, temeli 1 dakika, 10 dakika, 30 dakika ve 1 saat olan büyülerde en fazla 24 saate dayanacak kadar katlanabilir. Süresi 1 günden fazla olan büyülerde ise bu etki en fazla 1 aya kadar; 1 ay olan büyülerde ise 6 aya kadar katlanabilir. Süre bakımından katlanacak zamanın temeli ne kadar uzunsa, GM tarafından harcanacak enerji akımı miktarı artırılarak dengelenmelidir. Bu etkiyi uyandırmak için 1 Akım Yükü harcanır.",
+                      "yeni-alan-4": ""
+                    },
+                    {
+                      "_id": "rmprhasqxaqs1",
+                      "isim": "Seri Akım",
+                      "yeni-alan": "2",
+                      "yeni-alan-2": 400,
+                      "yeni-alan-3": "Karakterin gerçekleştirmeye çalıştığı yeteneği hızlandırarak ek eylemde kullanılmasını sağlayabilir. Bu etkiyi uyandırmak için 2 Akım Yükü harcanır.",
+                      "yeni-alan-4": "Özel Gereksinim: En az 1 adet 4. Seviye Sahir yeteneği."
+                    },
+                    {
+                      "_id": "rmprhb48401al",
+                      "isim": "Hareketsiz Akım",
+                      "yeni-alan": "1",
+                      "yeni-alan-2": 300,
+                      "yeni-alan-3": "Gerçekleştireceğin enerjisel yeteneği kullanmak için hareket gereksiniminden muaf olursun. Etkiyi meydana getirmek için 1 akım harcarsın.",
+                      "yeni-alan-4": ""
                     }
                   ]
                 }
@@ -5819,13 +7336,6 @@ window.SLVNZ_VERSIONS = {
                       "snapZone": "none"
                     },
                     {
-                      "id": "tur",
-                      "label": "TÜR",
-                      "type": "text",
-                      "showInTable": true,
-                      "snapZone": "top"
-                    },
-                    {
                       "id": "seviye",
                       "label": "SEVİYE",
                       "type": "number",
@@ -5833,9 +7343,37 @@ window.SLVNZ_VERSIONS = {
                       "snapZone": "top"
                     },
                     {
+                      "id": "tur",
+                      "label": "EYLEM TÜRÜ",
+                      "type": "text",
+                      "showInTable": true,
+                      "snapZone": "top"
+                    },
+                    {
                       "id": "maliyet",
-                      "label": "MALİYET",
+                      "label": "STAMİNA",
                       "type": "number",
+                      "showInTable": true,
+                      "snapZone": "top"
+                    },
+                    {
+                      "id": "yeni-alan",
+                      "label": "YETENEK DALI",
+                      "type": "text",
+                      "showInTable": true,
+                      "snapZone": "top"
+                    },
+                    {
+                      "id": "yeni-alan-2",
+                      "label": "ALAN",
+                      "type": "text",
+                      "showInTable": true,
+                      "snapZone": "top"
+                    },
+                    {
+                      "id": "yeni-alan-3",
+                      "label": "GEREKSİNİM",
+                      "type": "text",
                       "showInTable": true,
                       "snapZone": "top"
                     },
@@ -5845,9 +7383,181 @@ window.SLVNZ_VERSIONS = {
                       "type": "textarea",
                       "showInTable": false,
                       "snapZone": "bottom"
+                    },
+                    {
+                      "id": "yeni-alan-4",
+                      "label": "NOT",
+                      "type": "textarea",
+                      "showInTable": false
                     }
                   ],
-                  "rows": []
+                  "rows": [
+                    {
+                      "_id": "rmprgks1xuu06",
+                      "isim": "Depar",
+                      "seviye": 1,
+                      "tur": "Eylem",
+                      "maliyet": 1,
+                      "yeni-alan": "Genel",
+                      "yeni-alan-2": "-",
+                      "aciklama": "Turunda kullanacağın hareket tipinin mesafesini ikiye katlarsın."
+                    },
+                    {
+                      "_id": "rmprglcm6cp25",
+                      "isim": "Sıvışma",
+                      "seviye": 2,
+                      "tur": "Eylem",
+                      "maliyet": 2,
+                      "yeni-alan": "Genel",
+                      "yeni-alan-2": "-",
+                      "aciklama": "Hareketlerin çevrendeki varlıkların fırsat saldırılarını tetiklemez.",
+                      "yeni-alan-3": ""
+                    },
+                    {
+                      "_id": "rmprgmek3k2ku",
+                      "isim": "Ağır Saldırı",
+                      "seviye": 2,
+                      "tur": "Eylem",
+                      "maliyet": 2,
+                      "yeni-alan": "Genel",
+                      "yeni-alan-2": "-",
+                      "yeni-alan-3": "-",
+                      "aciklama": "Birincil silahınla ağır bir saldırı gerçekleştirirsin. Bu saldırı, d6 ek kuvvet olacak şekilde fazladan bir kuvvet uygulamanı sağlar.",
+                      "yeni-alan-4": "Geliştirilebilir Yetenek: Bu yeteneğe seviye atlatmak, kullanılacak ek kuvvet zarının azami değerinin +2 artmasını sağlar. Ek kuvvet zarının değer d12'ye ulaştığı zaman, zar miktarı ikiye bölünür ve bölünen zarlar da d12'ye ulaştıktan sonra aynı düzende bölünerek devam eder. Örneğin, 5. Seviye yetenekteki ek kuvvet zarı 2d6 olarak atılır, 6. seviye olduğunda 1d8+1d6 şeklinde devam eder."
+                    },
+                    {
+                      "_id": "rmprgnqh6o7ar",
+                      "isim": "Ek Saldırı",
+                      "seviye": 2,
+                      "tur": "Ek Eylem",
+                      "maliyet": 2,
+                      "yeni-alan": "Genel",
+                      "yeni-alan-2": "-",
+                      "yeni-alan-3": "-",
+                      "aciklama": "Eylem olarak tekil hedefe uygulanan bir yakın mesafe saldırısı gerçekleştirdikten sonra, saldırıdan aldığın momentum ile aynı veya net alanında erişebileceğin bir hedefe fazladan bir saldırı gerçekleştirirsin.",
+                      "yeni-alan-4": ""
+                    },
+                    {
+                      "_id": "rmprgo8mdvomq",
+                      "isim": "Karşı Saldırı",
+                      "seviye": 3,
+                      "tur": "Tepki Eylem",
+                      "maliyet": 3,
+                      "yeni-alan": "Genel",
+                      "yeni-alan-2": "-",
+                      "yeni-alan-3": "-",
+                      "aciklama": "Rakibinden gelen bir yakın mezilli saldırıyı savuşturman durumunda, rakibin turunun arasına girerek tepki olarak birincil silahın ile bir saldırı gerçekleştirirsin.",
+                      "yeni-alan-4": ""
+                    },
+                    {
+                      "_id": "rmprgon0io64b",
+                      "isim": "Kırıcı Karşılama",
+                      "seviye": 3,
+                      "tur": "Tepki Eylem",
+                      "maliyet": 3,
+                      "yeni-alan": "Genel",
+                      "yeni-alan-2": "-",
+                      "yeni-alan-3": "-",
+                      "aciklama": "Rakibinden gelen bir yakın mezilli saldırıyı silahınla bloklayarak karşılamaya çalışırsın. Başarılı bir karşılama sonucunda rakibinin gardını kıracak şekilde bir hamle meydana gelir. Gardı kırılan rakibinin turu sonlanır ve tur ona gelene kadar alacağı ilk saldırıya karşı ek puanlarından arındırılmış şekilde dezavantajlı savuşturma yapmaya çalışır.",
+                      "yeni-alan-4": ""
+                    },
+                    {
+                      "_id": "rmprgp2uzbpbz",
+                      "isim": "Seri Darbe",
+                      "seviye": 4,
+                      "tur": "Eylem",
+                      "maliyet": 4,
+                      "yeni-alan": "Kılıç Sanatları",
+                      "yeni-alan-2": "-",
+                      "yeni-alan-3": "-",
+                      "aciklama": "Kılıcınla seri bir şekilde birbirini takip eden iki hamle gerçekleştirirsin. Bu hamleler rakibin savuşturmasına arka arkaya eksi puan verebilir.",
+                      "yeni-alan-4": ""
+                    },
+                    {
+                      "_id": "rmprgq2kfgef8",
+                      "isim": "Sıyrılma",
+                      "seviye": 4,
+                      "tur": "Tepki Eylem",
+                      "maliyet": 4,
+                      "yeni-alan": "Çeviklik",
+                      "yeni-alan-2": "-",
+                      "yeni-alan-3": "Çeviklik 3. Seviye",
+                      "aciklama": "Bir yakın mesafe saldırısıyla isabet aldığın zaman, saldırının sana temas ettiği anda reflekslerini konuşturarak alacağın hamlenin bir kısmından sıyrılarak hasarı azaltmaya çalışırsın.",
+                      "yeni-alan-4": ""
+                    },
+                    {
+                      "_id": "rmprgqt5z1jkl",
+                      "isim": "Silahsızlandır",
+                      "seviye": 3,
+                      "tur": "Tepki Eylem",
+                      "maliyet": 2,
+                      "yeni-alan": "Genel",
+                      "yeni-alan-2": "-",
+                      "yeni-alan-3": "-",
+                      "aciklama": "Rakibine başarılı bir şekilde gerçekleştirdiğin fiziksel saldırının ardından tepki olarak rakibinin silahını kancalayarak elinden çekip fırlatmaya çalışırsın. KUVVET mücadelesinde galip gelirsen, rakibin silahını 2 birim uzaklıkta bir noktaya fırlatırsın.",
+                      "yeni-alan-4": ""
+                    },
+                    {
+                      "_id": "rmprgrfvktm0o",
+                      "isim": "Süpürme Saldırısı",
+                      "seviye": 3,
+                      "tur": "Eylem",
+                      "maliyet": 3,
+                      "yeni-alan": "Genel",
+                      "yeni-alan-2": "Net Alan",
+                      "yeni-alan-3": "-",
+                      "aciklama": "Net saldırı alanlarını kapsayan, Birincil silahını tuttuğun elinin tarafından başlatacağın ve bu alanı diğer tarafa doğru süpürecek şekilde bir silah savurma hamlesi gerçekleştirirsin. Saldırın için sırada olan her varlık bir savuşturma hamlesi kullanır. Hamlesi başarısız olan varlık kuvvete bağlı olarak hamleden etkilenir, saldırı bir sonraki hedefe devam eder. Eğer bir varlık saldırıyı durduracak bir savuşturma uygularsa süpürme tamamlanmadan sonlanabilir.",
+                      "yeni-alan-4": ""
+                    },
+                    {
+                      "_id": "rmprgrvvuixi1",
+                      "isim": "Duruş: Geçitkıran (O)",
+                      "seviye": 4,
+                      "tur": "Odaklanma",
+                      "maliyet": 2,
+                      "yeni-alan": "Genel",
+                      "yeni-alan-2": "-",
+                      "yeni-alan-3": "-",
+                      "aciklama": "Gardını alıp kendini odaklayarak, menziline giren varlıklara sınırlandırma olmadan fırsat saldırısı gerçekleştirebilirsin. Gerçekleştirdiğin her fırsat saldırısı 2 STAMINA tüketir.",
+                      "yeni-alan-4": ""
+                    },
+                    {
+                      "_id": "rmprgsgwcduol",
+                      "isim": "Manevra: Hassas Saldırı",
+                      "seviye": 2,
+                      "tur": "Tepki Eylem",
+                      "maliyet": 2,
+                      "yeni-alan": "Kılıç Sanatları",
+                      "yeni-alan-2": "-",
+                      "yeni-alan-3": "-",
+                      "aciklama": "Yakın menzilli saldırının başarısız olması durumunda, ek bir d6 kullanarak mevcut isabet zarına sonucu ekleyebilirsin.",
+                      "yeni-alan-4": ""
+                    },
+                    {
+                      "_id": "rmprgt3oshtgp",
+                      "isim": "Geçit Kesen",
+                      "seviye": 4,
+                      "tur": "Tepki Eylem",
+                      "maliyet": 3,
+                      "yeni-alan": "Genel",
+                      "yeni-alan-2": "-",
+                      "yeni-alan-3": "Silah Yetkinliği 3. Seviye",
+                      "aciklama": "Fırsat saldırısını görmezden gelen yeteneklere karşı özel bir fırsat saldırısı gerçekleştirebilirsin.",
+                      "yeni-alan-4": ""
+                    },
+                    {
+                      "_id": "rmprgty6rg1g9",
+                      "isim": "Manevra: Çelme",
+                      "seviye": 2,
+                      "tur": "Tepki Eylem",
+                      "maliyet": 2,
+                      "yeni-alan": "Genel",
+                      "yeni-alan-2": "-",
+                      "yeni-alan-3": "-",
+                      "aciklama": "Bir rakibe yakın menzilli saldırınla vurman durumunda, ek bir kuvvet zarı kullanarak anında karaktere çelme takıp yere düşürmeyi denersin. KUVVET testinde başarısız olması durumunda rakip yere serilir.",
+                      "yeni-alan-4": ""
+                    }
+                  ]
                 }
               },
               {
@@ -5864,13 +7574,6 @@ window.SLVNZ_VERSIONS = {
                       "snapZone": "none"
                     },
                     {
-                      "id": "tur",
-                      "label": "TÜR",
-                      "type": "text",
-                      "showInTable": true,
-                      "snapZone": "top"
-                    },
-                    {
                       "id": "seviye",
                       "label": "SEVİYE",
                       "type": "number",
@@ -5878,21 +7581,111 @@ window.SLVNZ_VERSIONS = {
                       "snapZone": "top"
                     },
                     {
+                      "id": "yeni-alan",
+                      "label": "ENERJİ",
+                      "type": "text",
+                      "showInTable": true,
+                      "snapZone": "top"
+                    },
+                    {
+                      "id": "tur",
+                      "label": "EYLEM TÜRÜ",
+                      "type": "text",
+                      "showInTable": true,
+                      "snapZone": "top"
+                    },
+                    {
                       "id": "maliyet",
-                      "label": "MALİYET",
+                      "label": "STAMİNA",
                       "type": "number",
                       "showInTable": true,
                       "snapZone": "top"
                     },
                     {
-                      "id": "aciklama",
+                      "id": "yeni-alan-2",
+                      "label": "BEDEL",
+                      "type": "text",
+                      "showInTable": true,
+                      "snapZone": "top"
+                    },
+                    {
+                      "id": "yeni-alan-3",
+                      "label": "SÜRE",
+                      "type": "text",
+                      "showInTable": true,
+                      "snapZone": "top"
+                    },
+                    {
+                      "id": "yeni-alan-4",
+                      "label": "MENZİL",
+                      "type": "text",
+                      "showInTable": true,
+                      "snapZone": "top"
+                    },
+                    {
+                      "id": "yeni-alan-5",
+                      "label": "ALAN",
+                      "type": "text",
+                      "showInTable": false,
+                      "snapZone": "top"
+                    },
+                    {
+                      "id": "yeni-alan-6",
                       "label": "AÇIKLAMA",
                       "type": "textarea",
-                      "showInTable": false,
-                      "snapZone": "bottom"
+                      "showInTable": false
+                    },
+                    {
+                      "id": "yeni-alan-7",
+                      "label": "NOT",
+                      "type": "textarea",
+                      "showInTable": false
                     }
                   ],
-                  "rows": []
+                  "rows": [
+                    {
+                      "_id": "rmprgxq8tot3p",
+                      "isim": "Basınç Patlaması",
+                      "seviye": 1,
+                      "yeni-alan": "Yıkım",
+                      "tur": "Eylem",
+                      "maliyet": 1,
+                      "yeni-alan-2": "1 Mana",
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "-",
+                      "yeni-alan-6": "Silahınla veya yumruğunla vuracağın bir hedefe vuruş anında patlama alıştıracak bir etki yaratırsın. Oluşan etki ile hedef hasarı alır ve DAYANIKLILIK testine girer. Testi geçememesi durumunda hedef 1 birim geriye kayar. Kritik başarı durumunda bu mesafe 2'ye yükselir.",
+                      "yeni-alan-7": ""
+                    },
+                    {
+                      "_id": "rmprgykoybhj7",
+                      "isim": "Çatlayan Yerler",
+                      "seviye": 2,
+                      "yeni-alan": "Yıkım",
+                      "tur": "Eylem",
+                      "maliyet": 2,
+                      "yeni-alan-2": "2 Mana",
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "4 Birim Doğrusal",
+                      "yeni-alan-6": "Silahını yere saplayarak yıkım enerjisini doğrusal şekilde tesir ettirirsin. 4 birim mesafeye kadar doğrusal bir mesafede zemin çatlar ve yukarıya doğru basınçla patlar. Patlamanın etkisinde kalan varlıklar kaçınmazlarsa, basınç hasarı alarak ÇEVİKLİK testine girerler. Testi geçemeyen varlıklar yere serilir.",
+                      "yeni-alan-7": ""
+                    },
+                    {
+                      "_id": "rmprgzfvavqvu",
+                      "isim": "Alev Şeridi",
+                      "seviye": 2,
+                      "yeni-alan": "Yıkım",
+                      "tur": "Eylem",
+                      "maliyet": 2,
+                      "yeni-alan-2": "3",
+                      "yeni-alan-3": "Anlık",
+                      "yeni-alan-4": "-",
+                      "yeni-alan-5": "3 Birim Doğrusal",
+                      "yeni-alan-6": "Tutuğun keskin uçlu bir silahı savurmanla 3 birim ileriye doğru yayılarak 3 birim doğrusal ilerleyecek şekilde hücum eden bir alev dalgası oluşturursun. Bu dalga, silahınla gerçekleştirdiğin kesme doğrultusunu takip eden çizgisel bir yapıdadır. Şerit bir rakibe isabet etmesi halinde ona çarparak dağılır.",
+                      "yeni-alan-7": ""
+                    }
+                  ]
                 }
               },
               {
@@ -5910,22 +7703,15 @@ window.SLVNZ_VERSIONS = {
                     },
                     {
                       "id": "tur",
-                      "label": "TÜR",
-                      "type": "text",
+                      "label": "TEMEL DENEYİM PUANI",
+                      "type": "number",
                       "showInTable": true,
                       "snapZone": "top"
                     },
                     {
                       "id": "seviye",
-                      "label": "SEVİYE",
-                      "type": "number",
-                      "showInTable": true,
-                      "snapZone": "top"
-                    },
-                    {
-                      "id": "maliyet",
-                      "label": "MALİYET",
-                      "type": "number",
+                      "label": "GEREKSİNİM",
+                      "type": "text",
                       "showInTable": true,
                       "snapZone": "top"
                     },
@@ -5935,9 +7721,72 @@ window.SLVNZ_VERSIONS = {
                       "type": "textarea",
                       "showInTable": false,
                       "snapZone": "bottom"
+                    },
+                    {
+                      "id": "yeni-alan",
+                      "label": "NOT",
+                      "type": "textarea",
+                      "showInTable": false
                     }
                   ],
-                  "rows": []
+                  "rows": [
+                    {
+                      "_id": "rmprh1rufbvd0",
+                      "isim": "Aşçılık",
+                      "tur": 100,
+                      "seviye": "-",
+                      "aciklama": "Karakterin yemek yapma konusundaki el hassasiyetini, tarifleri  uygulama yetisini, lezzeti oluşturma konusundaki tecrübeye bağlı deneyim ve yetkinliğidir.",
+                      "yeni-alan": ""
+                    },
+                    {
+                      "_id": "rmprh24hvp1k1",
+                      "isim": "Demircilik",
+                      "tur": 250,
+                      "seviye": "-",
+                      "aciklama": "Karakterin demiri işleme ve ondan bir ürün meydana getirebilme, var olan ürünü tamir edebilme ya da dönüştürebilme becerisi.",
+                      "yeni-alan": ""
+                    },
+                    {
+                      "_id": "rmprh2durgzml",
+                      "isim": "Akrobasi",
+                      "tur": 100,
+                      "seviye": "Çeviklik: 2",
+                      "aciklama": "Bir karakterin dengesini koruma, hızlı reaksiyonlar sırasında esnek davranma gibi tepkileri ve genel yeteneğine katkısını belirler.",
+                      "yeni-alan": ""
+                    },
+                    {
+                      "_id": "rmprh2zrqgs9w",
+                      "isim": "Dericilik",
+                      "tur": 250,
+                      "seviye": "-",
+                      "aciklama": "Karakterin deriyi işleme, tamir etme, deriden bir ürün elde etmeyle ilgili becerisidir.",
+                      "yeni-alan": ""
+                    },
+                    {
+                      "_id": "rmprh3952xnly",
+                      "isim": "Ahşap Oymacılığı",
+                      "tur": 150,
+                      "seviye": "-",
+                      "aciklama": "Karakterin tahta materyalleri şekillendirmesini, oyma yoluyla farklı formlar kazandırmasını sağlayan beceridir.",
+                      "yeni-alan": ""
+                    },
+                    {
+                      "_id": "rmprh3mqajkh5",
+                      "isim": "Simyacılık",
+                      "tur": 250,
+                      "seviye": "-",
+                      "aciklama": "Karakterin iksir üretme, üretim sırasında hataları tespit etme, tanıdık iksirlerin işlevini tahmin etme gibi durumlarda kullanabileceği becerisidir.",
+                      "yeni-alan": ""
+                    },
+                    {
+                      "_id": "rmprh3wicwxnc",
+                      "isim": "Çizerlik",
+                      "tur": 100,
+                      "seviye": "-",
+                      "aciklama": "Bir karakterin gördüklerini veya hayalindekileri kağıt benzeri yüzeylere çizerek aktarmasını test eden beceridir.",
+                      "yeni-alan": "Bu beceri geliştirilmek istendiğinde, çizim ya da sanatsal faaliyetin hangi dalında ilerleneceği belirlenmelidir."
+                    }
+                  ]
                 }
               },
               {
@@ -5948,31 +7797,10 @@ window.SLVNZ_VERSIONS = {
                   "columns": [
                     {
                       "id": "isim",
-                      "label": "İSİM",
+                      "label": "HÜNER İSMİ",
                       "type": "text",
                       "showInTable": true,
                       "snapZone": "none"
-                    },
-                    {
-                      "id": "tur",
-                      "label": "TÜR",
-                      "type": "text",
-                      "showInTable": true,
-                      "snapZone": "top"
-                    },
-                    {
-                      "id": "seviye",
-                      "label": "SEVİYE",
-                      "type": "number",
-                      "showInTable": true,
-                      "snapZone": "top"
-                    },
-                    {
-                      "id": "maliyet",
-                      "label": "MALİYET",
-                      "type": "number",
-                      "showInTable": true,
-                      "snapZone": "top"
                     },
                     {
                       "id": "aciklama",
@@ -5980,9 +7808,34 @@ window.SLVNZ_VERSIONS = {
                       "type": "textarea",
                       "showInTable": false,
                       "snapZone": "bottom"
+                    },
+                    {
+                      "id": "yeni-alan",
+                      "label": "NOT",
+                      "type": "textarea",
+                      "showInTable": false
                     }
                   ],
-                  "rows": []
+                  "rows": [
+                    {
+                      "_id": "rmprh5p1mdx1i",
+                      "isim": "Alarmda",
+                      "aciklama": "Çevrene yönelik özel bir dikkat içerisinde olduğun zamanlarda TETİKTE durumu kazanmanı sağlar.",
+                      "yeni-alan": "TETİKTE: Çevresel beklenti ve tepkin üst düzeydedir. Herhangi bir şekilde gafil avlanamazsın."
+                    },
+                    {
+                      "_id": "rmprh5yc004c4",
+                      "isim": "Keskin Hafıza",
+                      "aciklama": "1 ay önceye kadar yaşadığın olayları, gördüğün veya duyduğun şeyleri rahatça hatırlayabilirsin.",
+                      "yeni-alan": ""
+                    },
+                    {
+                      "_id": "rmprh67o2ds9k",
+                      "isim": "Dil Şifreleme",
+                      "aciklama": "Konuşabildiğin dilin içine aynı sistemi bilenler tarafından anlaşılabilecek şifreleme şeklinde farklı kelime grupları veya deyimler gibi yapılar ekleyebilirsin. \n\nBu şifrelemeyi gerçekleştirirken, karşı taraf aynı düzenden çıkmış aynı hünere sahipse senin söylemek istediklerini anlar. Eğer aynı hünere sahip ancak aynı düzenden çıkmamışsa senin şifrelenmiş bir şeyler anlatmaya çalıştığının farkındadır. Böyle bir durumda, ZEKÂ testine girerek anlatmak istediğin mesajı anlamaya çalışabilir.",
+                      "yeni-alan": ""
+                    }
+                  ]
                 }
               }
             ]

@@ -589,22 +589,31 @@ h1, h2, h3, h4 {
 
 .abtable__grid { display: grid; grid-template-columns: 1fr 380px; border: 1px solid var(--line); }
 .abtable__scroll { overflow: auto; max-height: 66vh; border-right: 1px solid var(--line); }
-.abtbl { width: 100%; border-collapse: collapse; font-family: var(--font-display); font-weight: 400; font-stretch: 100%; font-size: 12px; }
+.abtbl { width: 100%; border-collapse: collapse; font-family: var(--font-display); font-weight: 400; font-stretch: 100%; font-size: 10px; }
 .abtbl thead th { position: sticky; top: 0; background: var(--surface); z-index: 2; }
 .abth {
   text-align: left; padding: 14px 16px;
   font-family: var(--font-display); font-weight: 700; font-stretch: 105%;
-  text-transform: uppercase; font-size: 12px; letter-spacing: 0.04em;
+  text-transform: uppercase; font-size: 10px; letter-spacing: 0.04em;
   color: var(--text-dim); border-bottom: 1px solid var(--line);
   cursor: pointer; white-space: nowrap; user-select: none;
   transition: color .15s var(--ease);
 }
 .abth:hover { color: var(--text); }
 .abth.sorted { color: var(--accent); }
-.abth.num { text-align: right; }
+.abth.num {
+  text-align: center; font-size: 10px;
+  width: 52px; padding-left: 8px; padding-right: 8px;
+  white-space: normal; overflow-wrap: break-word;
+  line-height: 1.4; vertical-align: bottom;
+}
 .abth__ar { color: var(--accent); margin-left: 6px; font-family: var(--font-mono); }
 .abtbl td { padding: 10px 14px; border-bottom: 1px solid var(--line-soft); color: var(--text); vertical-align: top; }
-.abtbl td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.abtbl td.num {
+  text-align: center; font-size: 10px;
+  font-variant-numeric: tabular-nums; white-space: nowrap;
+  padding-left: 8px; padding-right: 8px;
+}
 .abrow { cursor: pointer; transition: background-color .14s var(--ease); }
 .abrow:hover { background: var(--surface); }
 .abrow.is-sel { background: var(--surface); }
@@ -618,12 +627,12 @@ h1, h2, h3, h4 {
 .snapshot__head { border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 22px; }
 .snapshot__title { font-size: clamp(28px, 3vw, 42px); font-stretch: 115%; margin-top: 12px; word-break: break-word; }
 /* Üst zone: başlık altı meta satırı */
-.snap-top { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 12px; }
+.snap-top { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
 .snap-top__item { display: inline-flex; align-items: center; gap: 6px; }
 .snap-top__label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-dim); }
 .snap-top__val { font-family: var(--font-display); font-weight: 700; font-size: 13px; color: var(--text); }
 .snap-top__val.num { font-variant-numeric: tabular-nums; color: var(--accent); }
-.snap-top__sep { color: var(--text-faint); font-size: 11px; }
+.snap-top__sep { display: none; }
 /* Alt zone: alan/değer çiftleri */
 .snapshot__fields { display: flex; flex-direction: column; gap: 18px; }
 .snapfield .label { display: block; margin-bottom: 6px; }
