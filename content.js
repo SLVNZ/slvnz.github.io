@@ -1,5 +1,5 @@
 /* ============================================================
-   SLVNZ 4.0 — content.js  (editörden üretildi: 29.05.2026 22:54:30)
+   SLVNZ 4.0 — content.js  (editörden üretildi: 29.05.2026 23:03:15)
    Bu metni content.js dosyasının TAMAMIYLA değiştir.
    ============================================================ */
 
@@ -7,15 +7,15 @@ window.SLVNZ_PLACEHOLDER_BODY = "Bu bölümün açıklaması henüz yazılmadı.
 
 window.SLVNZ_CONTENT = {
   "meta": {
-    "title": "SLVNZ 4.0",
+    "title": "SLVNZ 3.0",
     "brandName": "SLVNZ",
-    "brandAccent": "4.0",
+    "brandAccent": "3.0",
     "brandLogo": "",
     "heroLine1": "SLVNZ",
-    "heroLine2": "4.0",
+    "heroLine2": "3.0",
     "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
     "description": "",
-    "version": "v4.0",
+    "version": "v3.0",
     "contentSeed": "2026-05-creatures-1"
   },
   "sections": {
@@ -1692,13 +1692,6 @@ window.SLVNZ_CONTENT = {
                 "snapZone": "none"
               },
               {
-                "id": "tur",
-                "label": "TÜR",
-                "type": "text",
-                "showInTable": true,
-                "snapZone": "top"
-              },
-              {
                 "id": "seviye",
                 "label": "SEVİYE",
                 "type": "number",
@@ -1706,10 +1699,52 @@ window.SLVNZ_CONTENT = {
                 "snapZone": "top"
               },
               {
+                "id": "yeni-alan-2",
+                "label": "EYLEM TÜRÜ",
+                "type": "text",
+                "showInTable": true,
+                "snapZone": "top"
+              },
+              {
+                "id": "tur",
+                "label": "TÜR",
+                "type": "text",
+                "showInTable": true,
+                "snapZone": "top"
+              },
+              {
+                "id": "yeni-alan",
+                "label": "KAYNAK",
+                "type": "text",
+                "showInTable": true,
+                "snapZone": "top"
+              },
+              {
                 "id": "maliyet",
-                "label": "MALİYET",
+                "label": "BEDEL",
                 "type": "number",
                 "showInTable": true,
+                "snapZone": "top"
+              },
+              {
+                "id": "yeni-alan-3",
+                "label": "SÜRE",
+                "type": "text",
+                "showInTable": true,
+                "snapZone": "top"
+              },
+              {
+                "id": "yeni-alan-4",
+                "label": "MENZİL",
+                "type": "text",
+                "showInTable": true,
+                "snapZone": "top"
+              },
+              {
+                "id": "yeni-alan-5",
+                "label": "ALAN",
+                "type": "text",
+                "showInTable": false,
                 "snapZone": "top"
               },
               {
@@ -1718,32 +1753,70 @@ window.SLVNZ_CONTENT = {
                 "type": "textarea",
                 "showInTable": false,
                 "snapZone": "bottom"
+              },
+              {
+                "id": "yeni-alan-6",
+                "label": "NOT",
+                "type": "textarea",
+                "showInTable": false
               }
             ],
             "rows": [
               {
                 "_id": "r1",
-                "isim": "Alev Çağrısı",
-                "tur": "Saldırı",
-                "seviye": 2,
-                "maliyet": 15,
-                "aciklama": "Hedefe yoğun bir alev hüzmesi fırlatır. Temas ettiği yüzeyde kısa süreli yangın bırakır."
+                "isim": "Alev Oku",
+                "tur": "Yıkım",
+                "seviye": 0,
+                "maliyet": 0,
+                "aciklama": "İşaret ettiğin hedefe doğru fırlayacak basit bir ateşten ok fırlatırsın. Bu okun delici niteliği olmasa da, çarptığı zaman Ateş Hasarı verir.",
+                "yeni-alan-2": "Eylem",
+                "yeni-alan": "Mana",
+                "yeni-alan-3": "Anlık",
+                "yeni-alan-4": "12 Birim",
+                "yeni-alan-5": "Tekil",
+                "yeni-alan-6": ""
               },
               {
                 "_id": "r2",
-                "isim": "Akı Kalkanı",
-                "tur": "Savunma",
-                "seviye": 1,
-                "maliyet": 8,
-                "aciklama": "Vücudun çevresinde enerji bir kalkan oluşturur ve gelen ilk darbeyi emer."
+                "isim": "Temizlik (R)",
+                "tur": "Dönüştürme",
+                "seviye": 0,
+                "maliyet": 0,
+                "aciklama": "Bir süre odaklanacağın bir alandaki kirler, lekeler, tozlar gibi etkileri ortadan kaldırmak üzere yoğunlaşırsın. Basit lekeler veya kirler (Tozlar, hafif lekeler vb.) 1 dakialık yoğunlaşma sonucunda alandan temizlenir. Çıkarması daha zor olarak değerlendirilebilecek lekeler için GM tercihinde yoğunlaşma süresi değişebilir, hatta bazı lekeler veya kirler bu yetenekle temizlenemeyebilir.",
+                "yeni-alan-2": "Eylem",
+                "yeni-alan": "Mana",
+                "yeni-alan-3": "1 Dakika",
+                "yeni-alan-4": "1 Birim",
+                "yeni-alan-5": "1 Birim Kare",
+                "yeni-alan-6": ""
               },
               {
                 "_id": "r3",
-                "isim": "Boşluk Adımı",
-                "tur": "Hareket",
-                "seviye": 3,
-                "maliyet": 22,
-                "aciklama": "Kısa mesafeli anlık ışınlanma. Görüş hattındaki bir noktaya sıçrar."
+                "isim": "Işık (K)",
+                "tur": "İllüzyon",
+                "seviye": 0,
+                "maliyet": 0,
+                "aciklama": "En fazla yarım insan hacminde dokunacağın bir nesne, süre boyunca ışık yaymaya başlar. Işık yayma sırasında, nesnen 6 birim yarıçaplı çevresi Aydınlık Işık olarak, bu sınırdan uzaklaşan 3 birim uzaklıktaki çevresi ise Loş Işık olarak aydınlanır.",
+                "yeni-alan-2": "Eylem",
+                "yeni-alan": "Mana",
+                "yeni-alan-3": "10 Dakika",
+                "yeni-alan-4": "Dokunma",
+                "yeni-alan-5": "6 Birim Yarıçaplı Küre",
+                "yeni-alan-6": ""
+              },
+              {
+                "_id": "rmprclpkrb8fq",
+                "isim": "Mesaj",
+                "seviye": 0,
+                "yeni-alan-2": "Eylem",
+                "tur": "Dönüştürme",
+                "yeni-alan": "Mana",
+                "maliyet": 0,
+                "yeni-alan-3": "Anlık",
+                "yeni-alan-4": "12 Birim",
+                "yeni-alan-5": "Tekil",
+                "aciklama": "Gözünle görebileceğin ve menzilde olan bir hedefe toplam 25 kelimeden oluşabilecek bir mesaj iletirsin. Bu mesaj, senin tarafından normal konuşma şeklinde oluşur ancak hedef bu konuşmayı zihninde duyar. Konuşmayı sonlandırmanla yeteneğin etkisi tamamlanır, hedef sana karşılık veremez.",
+                "yeni-alan-6": ""
               }
             ]
           }
