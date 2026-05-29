@@ -524,7 +524,8 @@
         inp = '<input class="ed-input" type="text" data-rf-field="' + esc(c.id) + '" value="' + esc(v) + '">';
       }
       var snapHint = c.snapZone === "top" ? " · kart üst" : c.snapZone === "none" ? " · gizli" : " · kart alt";
-      return '<div class="ed-field ed-rf-field">' +
+      var longCls = c.type === "textarea" ? " ed-rf-field--long" : "";
+      return '<div class="ed-field ed-rf-field' + longCls + '">' +
         '<label>' + esc(c.label) + '<span class="hint">' + (c.showInTable ? "tabloda" : "tabloda gizli") + snapHint + '</span></label>' +
         inp + '</div>';
     }).join("");

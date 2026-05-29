@@ -1,5 +1,5 @@
 /* ============================================================
-   SLVNZ 4.0 — content.js  (editörden üretildi: 29.05.2026 23:16:03)
+   SLVNZ 4.0 — content.js  (editörden üretildi: 29.05.2026 23:22:25)
    Bu metni content.js dosyasının TAMAMIYLA değiştir.
    ============================================================ */
 
@@ -3998,7 +3998,7 @@ window.SLVNZ_VERSIONS = {
           "heroLine1": "SLVNZ",
           "heroLine2": "3.0",
           "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
-          "description": "",
+          "description": "deneme",
           "version": "v3.0",
           "contentSeed": "2026-05-creatures-1"
         },
