@@ -215,15 +215,25 @@
       "it.table.rows.forEach(function(r){if(!r._id)r._id=\"r\"+(++rid)+\"_\"+Date.now().toString(36);});}" +
       "else if(!it.body){it.body=window.SLVNZ_PLACEHOLDER_BODY;}});});})(window.SLVNZ_CONTENT);\n";
 
+    // Her export'ta yeni bir contentSeed üret → tarayıcı cache'ini geçersiz kılar
+    var newSeed = new Date().toISOString().slice(0, 10) + "-" + Date.now().toString(36);
+
     // Tüm versiyonları store'a dahil et (aktif versiyon draft ile güncellenir)
     var store = vEdStoreLoad();
     var versionsJS = "";
-    var defaultContent = draft;
+    var defaultContent = clone(draft);
+    defaultContent.meta = defaultContent.meta || {};
+    defaultContent.meta.contentSeed = newSeed;
+
     if (store) {
       var exportStore = clone(store);
       var activeId = vEdActiveId();
       var av = activeId && exportStore.versions.find(function (x) { return x.id === activeId; });
-      if (av) av.content = clone(draft);
+      if (av) { av.content = clone(draft); av.content.meta = av.content.meta || {}; av.content.meta.contentSeed = newSeed; }
+      // Tüm versiyonların seed'ini güncelle — store tutarlı olsun
+      exportStore.versions.forEach(function (v) {
+        if (v.content && v.content.meta) v.content.meta.contentSeed = newSeed;
+      });
       var defV = exportStore.versions.find(function (x) { return x.id === exportStore.defaultId; });
       if (defV) defaultContent = defV.content;
       versionsJS = "\nwindow.SLVNZ_VERSIONS = " + JSON.stringify(exportStore, null, 2) + ";\n";
