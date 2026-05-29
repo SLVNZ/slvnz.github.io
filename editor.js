@@ -23,9 +23,19 @@
 
   /* --- Versiyon arşivi (editör) ------------------------------------------- */
   function vEdStoreLoad() {
+    var freshSeed = window.SLVNZ_CONTENT && window.SLVNZ_CONTENT.meta && window.SLVNZ_CONTENT.meta.contentSeed;
     try {
       var raw = localStorage.getItem(STORE_VERSIONS);
-      if (raw) { var s = JSON.parse(raw); if (s && Array.isArray(s.versions) && s.versions.length) return s; }
+      if (raw) {
+        var s = JSON.parse(raw);
+        if (s && Array.isArray(s.versions) && s.versions.length) {
+          var dv = s.versions.find(function (v) { return v.id === s.defaultId; }) || s.versions[0];
+          var storedSeed = dv && dv.content && dv.content.meta && dv.content.meta.contentSeed;
+          if (!freshSeed || storedSeed === freshSeed) return s;
+          localStorage.removeItem(STORE_VERSIONS);
+          localStorage.removeItem(STORE_CONTENT);
+        }
+      }
     } catch (e) {}
     // content.js'e gömülü versiyon arşivini oku (yeni cihaz / temiz tarayıcı)
     if (window.SLVNZ_VERSIONS && Array.isArray(window.SLVNZ_VERSIONS.versions) && window.SLVNZ_VERSIONS.versions.length) {
