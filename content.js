@@ -1,5 +1,5 @@
 /* ============================================================
-   SLVNZ 4.0 — content.js  (editörden üretildi: 29.05.2026 23:22:25)
+   SLVNZ 4.0 — content.js  (editörden üretildi: 29.05.2026 23:29:07)
    Bu metni content.js dosyasının TAMAMIYLA değiştir.
    ============================================================ */
 
@@ -16,7 +16,7 @@ window.SLVNZ_CONTENT = {
     "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
     "description": "",
     "version": "v4.0",
-    "contentSeed": "2026-05-creatures-1"
+    "contentSeed": "2026-05-29-mprdkijv"
   },
   "sections": {
     "oyun-kurallari": {
@@ -2009,7 +2009,7 @@ window.SLVNZ_VERSIONS = {
           "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
           "description": "",
           "version": "v4.0",
-          "contentSeed": "2026-05-creatures-1"
+          "contentSeed": "2026-05-29-mprdkijv"
         },
         "sections": {
           "oyun-kurallari": {
@@ -4000,7 +4000,7 @@ window.SLVNZ_VERSIONS = {
           "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
           "description": "deneme",
           "version": "v3.0",
-          "contentSeed": "2026-05-creatures-1"
+          "contentSeed": "2026-05-29-mprdkijv"
         },
         "sections": {
           "oyun-kurallari": {
