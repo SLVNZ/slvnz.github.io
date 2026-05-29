@@ -169,6 +169,34 @@
 .ed-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
 /* ============================================================================
+   VERSİYON GÖSTERGESİ & YÖNETİM PANELİ
+   ========================================================================== */
+.ed-ver-indicator {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-dim);
+  display: inline-flex; align-items: center; gap: 7px;
+}
+.ed-ver-indicator--preview { color: var(--accent); }
+.ed-ver-preview-tag {
+  font-size: 9px; letter-spacing: 0.12em; border: 1px solid var(--accent);
+  color: var(--accent); padding: 2px 5px;
+}
+.ed-ver-intro {
+  font-family: var(--font-mono); font-size: 12px; color: var(--text-dim);
+  max-width: 540px; line-height: 1.7; margin: 0 0 28px;
+}
+.ed-ver-list { display: flex; flex-direction: column; gap: 10px; max-width: 820px; }
+.ed-ver-item {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+  padding: 14px 16px; border: 1px solid var(--line); background: var(--surface);
+}
+.ed-ver-item--active { border-color: var(--accent); background: var(--surface-2); }
+.ed-ver-item__left { display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 0; }
+.ed-ver-item__label { font-size: 15px; font-stretch: 110%; max-width: 260px; }
+.ed-ver-item__meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.ed-ver-item__btns { display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-start; flex-shrink: 0; }
+
+/* ============================================================================
    YARATIK EDİTÖRÜ
    ========================================================================== */
 

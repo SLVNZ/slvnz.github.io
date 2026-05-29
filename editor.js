@@ -16,8 +16,42 @@
 (function () {
   "use strict";
 
-  var STORE_CONTENT = "slvnz_content";
-  var STORE_THEME = "slvnz_theme";
+  var STORE_CONTENT   = "slvnz_content";
+  var STORE_VERSIONS  = "slvnz_versions";
+  var STORE_EDITOR_VER = "slvnz_editor_ver"; // editörde hangi versiyon aktif
+  var STORE_THEME     = "slvnz_theme";
+
+  /* --- Versiyon arşivi (editör) ------------------------------------------- */
+  function vEdStoreLoad() {
+    try {
+      var raw = localStorage.getItem(STORE_VERSIONS);
+      if (raw) { var s = JSON.parse(raw); if (s && Array.isArray(s.versions) && s.versions.length) return s; }
+    } catch (e) {}
+    return null;
+  }
+  function vEdStoreSave(store) {
+    try { localStorage.setItem(STORE_VERSIONS, JSON.stringify(store)); } catch (e) {}
+    // Legacy uyum: varsayılan versiyonun içeriğini slvnz_content'e de yaz
+    var dv = store.versions.find(function (v) { return v.id === store.defaultId; });
+    if (dv) { try { localStorage.setItem(STORE_CONTENT, JSON.stringify(dv.content)); } catch (e2) {} }
+  }
+  function vEdUID() { return "ver_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 4); }
+  function vEdActiveId() {
+    var store = vEdStoreLoad(); if (!store) return null;
+    var saved = localStorage.getItem(STORE_EDITOR_VER);
+    if (saved && store.versions.find(function (v) { return v.id === saved; })) return saved;
+    return store.defaultId || (store.versions[0] && store.versions[0].id);
+  }
+  function vEdActiveLabel() {
+    var store = vEdStoreLoad(); if (!store) return "—";
+    var id = vEdActiveId();
+    var v = store.versions.find(function (x) { return x.id === id; }) || store.versions[0];
+    return v ? v.label : "—";
+  }
+  function vEdIsDefault() {
+    var store = vEdStoreLoad(); if (!store) return true;
+    return vEdActiveId() === store.defaultId;
+  }
   var SECTION_ORDER = ["oyun-kurallari", "yetenekler", "evren-rehberi"];
 
   /* --- Yardımcılar -------------------------------------------------------- */
@@ -36,9 +70,15 @@
   }
 
   /* --- Durum (state) ------------------------------------------------------ */
-  // localStorage kaydını kullan; ancak içerik tohumu (contentSeed) değişmişse
-  // yeni varsayılan içeriği (content.js + content-rules.js) baz al.
   function loadDraft() {
+    var store = vEdStoreLoad();
+    if (store) {
+      var id = vEdActiveId();
+      var v = id && store.versions.find(function (x) { return x.id === id; });
+      if (!v) v = store.versions[0];
+      if (v) return clone(v.content);
+    }
+    // Versiyon arşivi yoksa: legacy slvnz_content veya defaults
     var defaults = window.SLVNZ_CONTENT;
     var seed = defaults.meta && defaults.meta.contentSeed;
     try {
@@ -46,8 +86,7 @@
       if (raw) {
         var p = JSON.parse(raw);
         if (p && p.sections) {
-          var savedSeed = p.meta && p.meta.contentSeed;
-          if (seed && savedSeed !== seed) return clone(defaults);
+          if (seed && p.meta && p.meta.contentSeed !== seed) return clone(defaults);
           return p;
         }
       }
@@ -76,16 +115,32 @@
 
   /* --- Kaydet / dışa-içe aktar -------------------------------------------- */
   function save() {
-    localStorage.setItem(STORE_CONTENT, JSON.stringify(draft));
+    var store = vEdStoreLoad();
+    if (!store) {
+      // Henüz arşiv yok: ilk versiyonu oluştur
+      var nid = vEdUID();
+      store = { versions: [{ id: nid, label: (draft.meta && draft.meta.version) || "v4.0", createdAt: new Date().toISOString().slice(0, 10), content: clone(draft) }], defaultId: nid };
+      localStorage.setItem(STORE_EDITOR_VER, nid);
+    } else {
+      var activeId = vEdActiveId();
+      var v = activeId && store.versions.find(function (x) { return x.id === activeId; });
+      if (v) { v.content = clone(draft); }
+      else {
+        var bid = vEdUID();
+        store.versions.push({ id: bid, label: (draft.meta && draft.meta.version) || "v4.0", createdAt: new Date().toISOString().slice(0, 10), content: clone(draft) });
+        if (!store.defaultId) store.defaultId = bid;
+        localStorage.setItem(STORE_EDITOR_VER, bid);
+      }
+    }
+    vEdStoreSave(store);
     dirty = false; renderStatus();
     toast("KAYDEDİLDİ");
   }
   function resetDefaults() {
-    if (!confirm("Tüm değişiklikler silinip content.js varsayılanlarına dönülecek. Emin misin?")) return;
-    localStorage.removeItem(STORE_CONTENT);
+    if (!confirm("Bu versiyonun içeriği content.js varsayılanlarına sıfırlanacak. Emin misin?")) return;
     draft = clone(window.SLVNZ_CONTENT);
-    dirty = false; sel = { type: "meta" };
-    renderAll(); toast("VARSAYILANA SIFIRLANDI");
+    dirty = true; sel = { type: "meta" };
+    renderAll(); toast("VARSAYILANA SIFIRLANDI — KAYDETMEYİ UNUTMA");
   }
   function exportJSON() {
     var blob = new Blob([JSON.stringify(draft, null, 2)], { type: "application/json" });
@@ -168,6 +223,10 @@
     html += '<div class="ed-tree__meta' + (sel.type === "meta" ? " active" : "") + '" data-sel="meta">' +
               '⚙ GENEL & LANDING' +
             '</div>';
+    // Versiyon arşivi düğümü
+    html += '<div class="ed-tree__meta' + (sel.type === "versions" ? " active" : "") + '" data-sel="versions" style="margin-bottom:2px">' +
+              '⊛ VERSİYONLAR' +
+            '</div>';
 
     SECTION_ORDER.forEach(function (key) {
       var sec = draft.sections[key];
@@ -225,6 +284,7 @@
 
   function renderForm() {
     if (sel.type === "meta") return renderMetaForm();
+    if (sel.type === "versions") return renderVersionsForm();
     if (sel.type === "section") return renderSectionForm();
     if (sel.type === "page") return renderPageForm();
     if (sel.type === "item") return renderItemForm();
@@ -1214,6 +1274,132 @@
     wireDk();
   }
 
+  /* --- VERSİYON YÖNETİMİ -------------------------------------------------- */
+  function renderVersionsForm() {
+    var store = vEdStoreLoad();
+    var activeId = vEdActiveId();
+    if (!store) {
+      return '<div class="ed-form__head"><div>' +
+        '<div class="ed-form__kicker label label--accent">VERSİYON ARŞİVİ</div>' +
+        '<h1 class="ed-form__title">VERSİYONLAR</h1></div></div>' +
+        '<p style="font-family:var(--font-mono);font-size:12px;color:var(--text-dim)">Henüz versiyon yok. İlk kayıt yapınca otomatik oluşturulur.</p>';
+    }
+    var list = store.versions.map(function (v) {
+      var isActive = v.id === activeId;
+      var isDef    = v.id === store.defaultId;
+      return '<div class="ed-ver-item' + (isActive ? " ed-ver-item--active" : "") + (isDef ? " ed-ver-item--default" : "") + '" data-ver-id="' + esc(v.id) + '">' +
+        '<div class="ed-ver-item__left">' +
+          '<input class="ed-input ed-ver-item__label" data-ver-rename="' + esc(v.id) + '" value="' + esc(v.label) + '" placeholder="Versiyon etiketi">' +
+          '<div class="ed-ver-item__meta">' +
+            '<span class="label">' + esc(v.createdAt) + '</span>' +
+            (isDef    ? '<span class="label label--accent">★ VARSAYILAN</span>' : '') +
+            (isActive ? '<span class="label">● DÜZENLENİYOR</span>' : '') +
+          '</div>' +
+        '</div>' +
+        '<div class="ed-ver-item__btns">' +
+          (!isActive ? '<button class="btn btn--sm" data-ver-edit="' + esc(v.id) + '">DÜZENLE</button>' : '') +
+          (!isDef    ? '<button class="btn btn--sm" data-ver-setdefault="' + esc(v.id) + '">VARSAYILAN YAP</button>' : '') +
+          '<button class="btn btn--sm" data-ver-duplicate="' + esc(v.id) + '">KOPYALA</button>' +
+          (store.versions.length > 1 && !isDef ? '<button class="btn btn--sm btn--danger" data-ver-delete="' + esc(v.id) + '">SİL</button>' : '') +
+        '</div>' +
+      '</div>';
+    }).join("");
+    return '<div class="ed-form__head"><div>' +
+      '<div class="ed-form__kicker label label--accent">VERSİYON ARŞİVİ</div>' +
+      '<h1 class="ed-form__title">VERSİYONLAR</h1></div></div>' +
+      '<p class="ed-ver-intro">Her versiyon bağımsız bir içerik kümesidir. <strong>Varsayılan</strong> olarak işaretlenen versiyon ziyaretçilere gösterilir. ' +
+      'Düzenlemek istediğin versiyona geçip değişikliklerini kaydet.</p>' +
+      '<div class="ed-ver-list">' + list + '</div>' +
+      '<div class="ed-rowbtns" style="margin-top:20px">' +
+        '<button class="btn btn--primary btn--sm" data-ver-new>+ YENİ VERSİYON</button>' +
+      '</div>';
+  }
+
+  function wireVersions() {
+    var form = document.getElementById("edForm");
+    if (!form || sel.type !== "versions") return;
+
+    // Yeniden adlandır
+    form.querySelectorAll("[data-ver-rename]").forEach(function (el) {
+      el.oninput = function () {
+        var store = vEdStoreLoad(); if (!store) return;
+        var v = store.versions.find(function (x) { return x.id === el.getAttribute("data-ver-rename"); });
+        if (v) { v.label = el.value; vEdStoreSave(store); renderStatus(); }
+      };
+    });
+
+    // Versiyona geç (düzenle)
+    form.querySelectorAll("[data-ver-edit]").forEach(function (btn) {
+      btn.onclick = function () {
+        if (dirty && !confirm("Kaydedilmemiş değişiklikler var. Geçmeden önce kaydetmek ister misin?\n\nDevam et = kaydetmeden geç.")) return;
+        localStorage.setItem(STORE_EDITOR_VER, btn.getAttribute("data-ver-edit"));
+        draft = loadDraft(); dirty = false; sel = { type: "meta" };
+        renderAll(); toast("VERSİYON DEĞİŞTİRİLDİ");
+      };
+    });
+
+    // Varsayılan yap
+    form.querySelectorAll("[data-ver-setdefault]").forEach(function (btn) {
+      btn.onclick = function () {
+        var store = vEdStoreLoad(); if (!store) return;
+        store.defaultId = btn.getAttribute("data-ver-setdefault");
+        vEdStoreSave(store);
+        toast("VARSAYILAN GÜNCELLENDI"); refresh();
+      };
+    });
+
+    // Kopyala
+    form.querySelectorAll("[data-ver-duplicate]").forEach(function (btn) {
+      btn.onclick = function () {
+        var store = vEdStoreLoad(); if (!store) return;
+        var src = store.versions.find(function (x) { return x.id === btn.getAttribute("data-ver-duplicate"); });
+        if (!src) return;
+        var nid = vEdUID();
+        store.versions.push({ id: nid, label: src.label + " (kopya)", createdAt: new Date().toISOString().slice(0, 10), content: clone(src.content) });
+        vEdStoreSave(store);
+        localStorage.setItem(STORE_EDITOR_VER, nid);
+        draft = clone(src.content); dirty = false; sel = { type: "meta" };
+        renderAll(); toast("VERSİYON KOPYALANDI");
+      };
+    });
+
+    // Sil
+    form.querySelectorAll("[data-ver-delete]").forEach(function (btn) {
+      btn.onclick = function () {
+        var store = vEdStoreLoad(); if (!store) return;
+        var vid = btn.getAttribute("data-ver-delete");
+        var v = store.versions.find(function (x) { return x.id === vid; });
+        if (!v || !confirm('"' + v.label + '" versiyonu kalıcı olarak silinecek. Emin misin?')) return;
+        store.versions = store.versions.filter(function (x) { return x.id !== vid; });
+        if (store.defaultId === vid) store.defaultId = store.versions[0] && store.versions[0].id;
+        vEdStoreSave(store);
+        if (vEdActiveId() === vid || !store.versions.find(function (x) { return x.id === localStorage.getItem(STORE_EDITOR_VER); })) {
+          localStorage.setItem(STORE_EDITOR_VER, store.defaultId || "");
+          draft = loadDraft(); dirty = false;
+        }
+        toast("VERSİYON SİLİNDİ"); refresh();
+      };
+    });
+
+    // Yeni versiyon
+    var newBtn = form.querySelector("[data-ver-new]");
+    if (newBtn) newBtn.onclick = function () {
+      var store = vEdStoreLoad();
+      var nid = vEdUID();
+      var base = clone(draft);
+      if (!store) {
+        store = { versions: [], defaultId: nid };
+      }
+      var n = store.versions.length + 1;
+      store.versions.push({ id: nid, label: "v" + n + ".0", createdAt: new Date().toISOString().slice(0, 10), content: base });
+      if (!store.defaultId) store.defaultId = nid;
+      vEdStoreSave(store);
+      localStorage.setItem(STORE_EDITOR_VER, nid);
+      draft = base; dirty = false; sel = { type: "meta" };
+      renderAll(); toast("YENİ VERSİYON OLUŞTURULDU");
+    };
+  }
+
   /* --- Tüm sayfayı kur ---------------------------------------------------- */
   function renderAll() {
     var root = document.getElementById("edRoot");
@@ -1225,6 +1411,7 @@
         '</div>' +
         '<div class="ed-top__right">' +
           '<span class="ed-status saved" id="edStatus"><span class="dot"></span><span class="txt">KAYDEDİLDİ</span></span>' +
+          '<span class="ed-ver-indicator' + (!vEdIsDefault() ? " ed-ver-indicator--preview" : "") + '">' + esc(vEdActiveLabel()) + (!vEdIsDefault() ? ' <span class="ed-ver-preview-tag">ÖNİZLEME</span>' : "") + '</span>' +
           '<a class="btn btn--ghost btn--sm" href="index.html" target="_blank">SİTEYİ AÇ ↗</a>' +
           '<button class="btn btn--sm" id="edTheme">' + I.moon + ' <span id="edThemeLbl">' + getTheme().toUpperCase() + '</span></button>' +
           '<button class="btn btn--primary" id="edSave">KAYDET</button>' +
@@ -1309,6 +1496,7 @@
         if (type === "meta") sel = { type: "meta" };
         else if (type === "section") sel = { type: "section", section: el.getAttribute("data-sec") };
         else if (type === "page") sel = { type: "page", section: el.getAttribute("data-sec"), pageId: el.getAttribute("data-page") };
+        else if (type === "versions") { sel = { type: "versions" }; }
         else if (type === "item") {
           var pg = el.getAttribute("data-page");
           sel = pg
@@ -1405,6 +1593,8 @@
     wireRichEditor(form);
     // Yaratık editörü
     wireCreatureEditor(form, curItem());
+    // Versiyon yönetimi
+    wireVersions();
   }
 
   /* --- Tablo editörü olay bağlama ----------------------------------------- */

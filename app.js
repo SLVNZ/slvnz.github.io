@@ -12,8 +12,75 @@
   "use strict";
 
   /* --- Sabitler ----------------------------------------------------------- */
-  var STORE_CONTENT = "slvnz_content"; // editörün kaydettiği içerik
-  var STORE_THEME = "slvnz_theme";     // seçili tema
+  var STORE_CONTENT  = "slvnz_content";   // editörün kaydettiği içerik (legacy)
+  var STORE_VERSIONS = "slvnz_versions";  // versiyon arşivi
+  var STORE_VIEWING  = "slvnz_viewing_ver"; // sessionStorage — önizleme versiyonu
+  var STORE_THEME    = "slvnz_theme";     // seçili tema
+
+  /* --- Versiyon arşivi ---------------------------------------------------- */
+  function vStoreLoad() {
+    var defaults = window.SLVNZ_CONTENT;
+    try {
+      var raw = localStorage.getItem(STORE_VERSIONS);
+      if (raw) {
+        var s = JSON.parse(raw);
+        if (s && Array.isArray(s.versions) && s.versions.length) return s;
+      }
+    } catch (e) {}
+    // İlk çalıştırma: mevcut içerikten tek versiyon oluştur
+    var base = defaults;
+    try {
+      var ex = localStorage.getItem(STORE_CONTENT);
+      if (ex) {
+        var p = JSON.parse(ex);
+        if (p && p.sections) {
+          var sd = defaults.meta && defaults.meta.contentSeed;
+          if (!sd || (p.meta && p.meta.contentSeed === sd)) base = p;
+        }
+      }
+    } catch (e2) {}
+    var vid = "ver_" + Date.now().toString(36);
+    var store = {
+      versions: [{ id: vid, label: (base.meta && base.meta.version) || "v4.0", createdAt: new Date().toISOString().slice(0, 10), content: JSON.parse(JSON.stringify(base)) }],
+      defaultId: vid
+    };
+    try { localStorage.setItem(STORE_VERSIONS, JSON.stringify(store)); } catch (e3) {}
+    return store;
+  }
+  function vActiveId(store) {
+    var sv = sessionStorage.getItem(STORE_VIEWING);
+    if (sv && store.versions.find(function (v) { return v.id === sv; })) return sv;
+    return store.defaultId;
+  }
+  function vActiveContent() {
+    var store = vStoreLoad();
+    var v = store.versions.find(function (x) { return x.id === vActiveId(store); }) || store.versions[0];
+    return v ? v.content : window.SLVNZ_CONTENT;
+  }
+  function renderVerSelector() {
+    var store = vStoreLoad();
+    var activeId = vActiveId(store);
+    var isDefault = activeId === store.defaultId;
+    var v = store.versions.find(function (x) { return x.id === activeId; }) || store.versions[0];
+    if (!v) return '<span class="brand__ver">' + esc(CONTENT.meta.version || "v4.0") + '</span>';
+    var items = store.versions.map(function (sv) {
+      var isCurr = sv.id === activeId;
+      var isDef  = sv.id === store.defaultId;
+      return '<button class="ver-item' + (isCurr ? " ver-item--curr" : "") + '" data-ver-switch="' + esc(sv.id) + '">' +
+        '<span class="ver-dot' + (isDef ? " ver-dot--def" : "") + '"></span>' +
+        '<span class="ver-name">' + esc(sv.label) + '</span>' +
+        (isDef ? '<span class="label ver-def-tag">VARSAYILAN</span>' : '') +
+      '</button>';
+    }).join("");
+    return '<div class="ver-wrap" id="verWrap">' +
+      '<button class="brand__ver ver-trigger' + (!isDefault ? " ver-trigger--preview" : "") + '" id="verTrigger">' +
+        esc(v.label) +
+        (!isDefault ? '<span class="ver-preview-dot"></span>' : '') +
+        '<span class="ver-caret">▾</span>' +
+      '</button>' +
+      '<div class="ver-panel" id="verPanel">' + items + '</div>' +
+    '</div>';
+  }
 
   /* Bölüm sırası ve landing kartları bu diziye göre çizilir. */
   var SECTION_ORDER = ["oyun-kurallari", "yetenekler", "evren-rehberi"];
@@ -49,11 +116,11 @@
     return defaults;
   }
 
-  var CONTENT = loadContent();
+  var CONTENT = vActiveContent();
 
-  // localStorage değiştiğinde (örn. editör başka sekmede kaydetti) yeniden yükle
+  // Versiyon arşivi veya legacy içerik başka sekmede değiştiğinde yenile
   window.addEventListener("storage", function (e) {
-    if (e.key === STORE_CONTENT) { CONTENT = loadContent(); render(); }
+    if (e.key === STORE_VERSIONS || e.key === STORE_CONTENT) { CONTENT = vActiveContent(); render(); }
   });
 
   /* --- Tema --------------------------------------------------------------- */
@@ -148,11 +215,10 @@
       '<header class="topbar">' +
         '<a class="brand" href="#/">' +
           renderBrandMark() +
-          '<span class="brand__ver">' + esc(CONTENT.meta.version || "v4.0") + '</span>' +
+          renderVerSelector() +
         '</a>' +
         '<nav class="topbar__nav">' + links + '</nav>' +
         '<div class="topbar__right">' +
-          '<a class="topbar__link" href="editor.html">EDİTÖR</a>' +
           '<button class="theme-toggle" data-theme-toggle>' +
             '<span class="theme-toggle__icon"></span>' +
             '<span class="theme-toggle__label">DARK</span>' +
@@ -870,6 +936,34 @@
     }
     root.innerHTML = html;
 
+    // Versiyon seçici
+    if (!document._verDocWired) {
+      document._verDocWired = true;
+      document.addEventListener("click", function (e) {
+        var vw = document.getElementById("verWrap");
+        if (vw && !vw.contains(e.target)) {
+          var vp = document.getElementById("verPanel");
+          if (vp) vp.classList.remove("open");
+        }
+      });
+    }
+    var verTrigger = document.getElementById("verTrigger");
+    var verPanel   = document.getElementById("verPanel");
+    if (verTrigger && verPanel) {
+      verTrigger.addEventListener("click", function (e) {
+        e.preventDefault(); e.stopPropagation();
+        verPanel.classList.toggle("open");
+      });
+      verPanel.querySelectorAll("[data-ver-switch]").forEach(function (btn) {
+        btn.addEventListener("click", function (e) {
+          e.stopPropagation();
+          sessionStorage.setItem(STORE_VIEWING, btn.getAttribute("data-ver-switch"));
+          CONTENT = vActiveContent();
+          verPanel.classList.remove("open");
+          render();
+        });
+      });
+    }
     // Tema toggle olayları
     updateThemeToggle(getTheme());
     document.querySelectorAll("[data-theme-toggle]").forEach(function (b) {
