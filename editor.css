@@ -408,6 +408,14 @@
   padding: 8px 12px; border-bottom: 1px solid var(--line); background: var(--surface-2);
 }
 .ed-rb-type { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+.ed-rb-typesel {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.08em;
+  color: var(--accent); background: transparent; border: 1px solid transparent;
+  border-radius: 3px; padding: 2px 4px; cursor: pointer; outline: none;
+  appearance: none; -webkit-appearance: none;
+}
+.ed-rb-typesel:hover { border-color: var(--accent); background: rgba(255,255,255,0.04); }
+.ed-rb-typesel option { background: var(--bg, #111); color: var(--text, #eee); letter-spacing: 0; }
 .ed-rb-actions { display: flex; gap: 4px; }
 .ed-rb-body { padding: 12px; display: flex; flex-direction: column; gap: 8px; }
 .ed-rb-body .ed-textarea { min-height: 90px; }
@@ -420,6 +428,14 @@
 .ed-rb-check input { accent-color: var(--accent); width: 15px; height: 15px; }
 .ed-rb-add { display: flex; gap: 10px; margin-top: 12px; align-items: center; }
 .ed-rb-add__sel { width: 200px; padding: 9px 10px; font-size: 12px; cursor: pointer; }
+
+.ed-rb-between { display: flex; align-items: center; gap: 6px; min-height: 12px; margin: 1px 0; }
+.ed-rb-between__line { flex: 1; height: 1px; background: var(--line); opacity: 0.15; transition: opacity 0.1s; }
+.ed-rb-between:hover .ed-rb-between__line { opacity: 0.6; }
+.ed-rb-between__ctrl { display: none; align-items: center; gap: 4px; flex-shrink: 0; }
+.ed-rb-between:hover .ed-rb-between__ctrl { display: flex; }
+.ed-rb-between__sel { padding: 3px 8px !important; font-size: 11px !important; height: auto !important; width: auto !important; cursor: pointer; }
+.ed-rb-between__btn { white-space: nowrap; font-size: 11px !important; padding: 3px 8px !important; }
 .ed-rb-poswrap { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .ed-rb-poslabel { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim); }
 .ed-seg--sm .ed-seg__btn { padding: 7px 14px; font-size: 10px; }

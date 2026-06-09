@@ -638,19 +638,55 @@
     return f ? f.name : t;
   }
 
+  function migrateBlock(old, newType) {
+    var nb = newBlock(newType);
+    var textLike = { heading: 1, paragraph: 1, example: 1 };
+    if (textLike[old.type] && textLike[newType]) {
+      nb.text = old.text || "";
+    } else if (old.type === "list" && textLike[newType]) {
+      nb.text = (old.items || []).join("\n");
+    } else if (textLike[old.type] && newType === "list") {
+      nb.items = (old.text || "").split("\n");
+      if (!nb.items.length) nb.items = [""];
+    } else if (old.type === "figuretext" && textLike[newType]) {
+      nb.text = old.text || "";
+    } else if (textLike[old.type] && newType === "figuretext") {
+      nb.text = old.text || "";
+    }
+    return nb;
+  }
+
   var tabUI = new WeakMap(); // tabs bloğu -> editörde aktif sekme indeksi
+
+  function renderBlockInsert(idx, allowTabs) {
+    var opts = BLOCK_TYPES.filter(function (b) { return allowTabs || b.t !== "tabs"; })
+      .map(function (b) { return '<option value="' + b.t + '">' + b.name + '</option>'; }).join('');
+    return '<div class="ed-rb-between" data-rb-before="' + idx + '">' +
+      '<div class="ed-rb-between__line"></div>' +
+      '<div class="ed-rb-between__ctrl">' +
+        '<select class="ed-input ed-rb-between__sel">' + opts + '</select>' +
+        '<button class="btn btn--sm ed-rb-between__btn">↑ BURAYA EKLE</button>' +
+      '</div>' +
+      '<div class="ed-rb-between__line"></div>' +
+    '</div>';
+  }
 
   function renderBlockList(blocks, allowTabs) {
     var addOpts = BLOCK_TYPES.filter(function (b) { return allowTabs || b.t !== "tabs"; })
       .map(function (b) { return '<option value="' + b.t + '">' + b.name + '</option>'; }).join("");
-    var list = blocks.length
-      ? blocks.map(function (b, i) { return renderBlockCard(b, i, blocks.length); }).join("")
-      : '<div class="ed-rb-empty">Henüz blok yok. Aşağıdan blok ekleyerek başla.</div>';
+    var list;
+    if (blocks.length) {
+      list = blocks.map(function (b, i) {
+        return renderBlockInsert(i, allowTabs) + renderBlockCard(b, i, blocks.length);
+      }).join("");
+    } else {
+      list = '<div class="ed-rb-empty">Henüz blok yok. Aşağıdan blok ekleyerek başla.</div>';
+    }
     return '<div class="ed-rb-listwrap">' +
       '<div class="ed-rb-list">' + list + '</div>' +
       '<div class="ed-rb-add">' +
         '<select class="ed-input ed-rb-add__sel" data-rb-newtype>' + addOpts + '</select>' +
-        '<button class="btn btn--sm" data-rb-add>+ BLOK EKLE</button>' +
+        '<button class="btn btn--sm" data-rb-add>+ SONA EKLE</button>' +
       '</div>' +
     '</div>';
   }
@@ -739,10 +775,13 @@
         '<input class="ed-input" data-rb-field="heading" value="' + esc(b.heading || "") + '" placeholder="Metin başlığı (opsiyonel)">' +
         '<textarea class="ed-textarea" data-rb-field="text" placeholder="Gövde metni… (**kalın** *italik*)">' + esc(b.text || "") + '</textarea>';
     }
+    var typeOpts = BLOCK_TYPES.map(function (bt) {
+      return '<option value="' + bt.t + '"' + (b.type === bt.t ? ' selected' : '') + '>' + bt.name + '</option>';
+    }).join('');
     return '' +
       '<div class="ed-rb-card" data-rb-i="' + i + '">' +
         '<div class="ed-rb-head">' +
-          '<span class="ed-rb-type">' + esc(blockTypeName(b.type)) + '</span>' +
+          '<select class="ed-rb-typesel" data-rb-typesel>' + typeOpts + '</select>' +
           '<div class="ed-rb-actions">' +
             '<button class="ed-mini" data-rb-up' + (i === 0 ? " disabled" : "") + '>↑</button>' +
             '<button class="ed-mini" data-rb-down' + (i === total - 1 ? " disabled" : "") + '>↓</button>' +
@@ -793,6 +832,17 @@
       };
     }
     if (!listEl) return;
+
+    // Araya ekleme bölgeleri
+    listEl.querySelectorAll(":scope > .ed-rb-between").forEach(function (zone) {
+      var insertIdx = parseInt(zone.getAttribute("data-rb-before"), 10);
+      var zsel = zone.querySelector(".ed-rb-between__sel");
+      var zbtn = zone.querySelector(".ed-rb-between__btn");
+      if (zbtn) zbtn.onclick = function () {
+        blocks.splice(insertIdx, 0, newBlock(zsel ? zsel.value : "paragraph"));
+        markDirty(); refresh();
+      };
+    });
     listEl.querySelectorAll(":scope > .ed-rb-card").forEach(function (card) {
       var i = parseInt(card.getAttribute("data-rb-i"), 10);
       var b = blocks[i];
@@ -806,6 +856,17 @@
       if (up) up.onclick = function () { if (i > 0) { var t = blocks[i - 1]; blocks[i - 1] = blocks[i]; blocks[i] = t; markDirty(); refresh(); } };
       if (down) down.onclick = function () { if (i < blocks.length - 1) { var t = blocks[i + 1]; blocks[i + 1] = blocks[i]; blocks[i] = t; markDirty(); refresh(); } };
       if (del) del.onclick = function () { if (confirm("Bu blok silinsin mi?")) { blocks.splice(i, 1); markDirty(); refresh(); } };
+
+      // Tür değiştir
+      var typesel = head.querySelector("[data-rb-typesel]");
+      if (typesel) typesel.onchange = (function (bi) {
+        return function () {
+          var newType = typesel.value;
+          if (newType === blocks[bi].type) return;
+          blocks[bi] = migrateBlock(blocks[bi], newType);
+          markDirty(); refresh();
+        };
+      })(i);
 
       // Tabs bloğu: kendi alanlarını bağla + iç listeye özyinele
       if (b.type === "tabs") { wireTabsCard(card, b); return; }

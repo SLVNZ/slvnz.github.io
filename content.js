@@ -1,5 +1,5 @@
 /* ============================================================
-   SLVNZ 4.0 — content.js  (editörden üretildi: 30.05.2026 02:21:18)
+   SLVNZ 4.0 — content.js  (editörden üretildi: 09.06.2026 15:54:22)
    Bu metni content.js dosyasının TAMAMIYLA değiştir.
    ============================================================ */
 
@@ -16,7 +16,7 @@ window.SLVNZ_CONTENT = {
     "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
     "description": "",
     "version": "v4.0",
-    "contentSeed": "2026-05-29-mprjpxxu"
+    "contentSeed": "2026-06-09-mq6n62xd"
   },
   "sections": {
     "oyun-kurallari": {
@@ -961,7 +961,7 @@ window.SLVNZ_CONTENT = {
               "text": "En basit hali ile bunun gibi durumlarda iki taraf da birer zar kullanır. Sayısal değeri yüksek gelen taraf karşılaşmadan galip çıkar. Ancak, silahlı mücadeleler, enerji yönlendirmenin kullanıldığı durumlar gibi özel anlarda, gerçekleştirilen eylemin niteliğine göre kullanılacak zar sayıları değişmektedir."
             },
             {
-              "type": "paragraph",
+              "type": "example",
               "text": "Örneğin, birbirine karşı çift elli kılıçlarla savaşan iki karakterin mücadelesinde; kılıcı savuran taraf, kılıcın isabetini belirlemek için bir zar, kılıcı savurma kuvvetini belirlemek için ise ikinci bir zar kullanır. **Fiziksel zarlar ile oynanan bir ortamda bu zarların sırayla atılması tavsiye edilir.** Dijital çevrimiçi bir ortamda ise topluca atılabilir, ancak gelen sonuçlar soldan sağa sıralanacak şekilde önce isabet, ardından kuvvet şeklinde olmalıdır."
             },
             {
@@ -988,7 +988,7 @@ window.SLVNZ_CONTENT = {
             },
             {
               "type": "paragraph",
-              "text": "Savaş anında karakterler genellikle saldırı eylemlerini belirlemek üzere birden fazla zar kullanırlar. Bu durumlar genellikle ÇEVİKLİK, KUVVET, İSABET, KAYNAK KULLANIMI, ENERJİ gibi nitelikler üzerinden belirlenir. Bir savaş anında gelişebilecek eylemler ve bu eylemler için kullanılabilecek zar sıfatları sınıflandırılabilir."
+              "text": "Savaş anında karakterler genellikle saldırı eylemlerini belirlemek üzere birden fazla zar kullanırlar. Bu durumlar genellikle **ÇEVİKLİK, KUVVET, İSABET, KAYNAK KULLANIMI, ENERJİ** gibi nitelikler üzerinden belirlenir. Bir savaş anında gelişebilecek eylemler ve bu eylemler için kullanılabilecek zar sıfatları sınıflandırılabilir."
             },
             {
               "type": "heading",
@@ -1015,59 +1015,88 @@ window.SLVNZ_CONTENT = {
             },
             {
               "type": "paragraph",
-              "text": "Karakterler kendilerine yönelmiş herhangi bir saldırıdan kaçınmak ya da korunmak üzere bir savunma zarı kullanabilirler. Bu tür zarlar genellikle KAÇINMA, BLOKLAMA ya da DAYANIKLILIK kullanılarak atılır."
+              "text": "Karakterler kendilerine yönelmiş herhangi bir saldırıdan kaçınmak ya da korunmak üzere bir savunma zarı kullanabilirler. Bu tür zarlar genellikle **KAÇINMA, BLOKLAMA** ya da **DAYANIKLILIK** kullanılarak atılır."
+            },
+            {
+              "type": "heading",
+              "level": 3,
+              "text": "KAÇINMA"
             },
             {
               "type": "paragraph",
               "text": "Kaçınma durumlarında gelen saldırının isabet zarının sayısal değerini kaçınma zarı ile geçmek yeterlidir. Ancak rakibin isabet değeri ile karakterin kaçınma değeri arasındaki fark ne kadar fazla ise, karşı tarafın gerçekleştirdiği saldırının isabet ettiği nokta, rakibin saldırmak istediği noktaya o kadar yakın olmaktadır."
             },
             {
+              "type": "heading",
+              "level": 3,
+              "text": "BLOKLAMA"
+            },
+            {
               "type": "paragraph",
-              "text": "Bloklama durumlarında karakter TAM BLOK pozunda değil ise gelen saldırıdan korunma durumu kaçınmaya kıyasla daha olasıdır. Rakibin saldırısı, karakterin bloklama zarının değerinden 6 puan fazla ise kalkanın arkasına geçerek karaktere hasar verir. Ancak karakterin bloklama zarı ile rakibin isabeti arasında 6 puandan az bir fark varsa, rakibin saldırısı kalkana isabet ederek kalkana zarar verirken, karakterin STAMINA değerinin azalmasına sebep olacaktır. Bloklama değerinin karşı saldırı değerinden yüksek olması durumunda kalkan sadece yıpranma payı alır ve saldırıyı savuşturur."
+              "text": "Savaşta bloklama iki farklı temele dayanır: Silahla Bloklama & Kalkanla bloklama"
+            },
+            {
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "SİLAHLA BLOKLAMA",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Karakterler kendilerine yönelen yakın menzilli saldırıları silahlarıyla bloklamayı tercih edebilirler. Bir karakterin silahla bloklama yapabilmesi için bu beceri konusunda yetkinlik sahibi olması gerekir. \n\nSilahla gerçekleştirilecek bloklama hamleleri, karakterlerin **çeviklik** ve ilgili silaha yönelik **blok becerisi** üzerinden hesaplanır. Bir karakter, silahıyla bir saldırıyı bloklayabilmesi durumunda *soluk* tüketir."
+                    }
+                  ]
+                },
+                {
+                  "label": "KALKANLA BLOKLAMA",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Bir karakter, kuşanmış olduğu kalkan türüne göre farklı şekillerde bloklama gerçekleştirebilir. Buckler ve küçük boyutta karakteri tamamen kapatmayan hafif kalkanlar, karakterin *çeviklik* niteliği ve *kalkan blok* becerilerinin toplamıyla belirlenir. Bu kalkan türlerinde mevcut blok zarının aşılması durumunda darbe doğrudan karaktere ulaşır.\n\nAncak Orta, Büyük ve Kule Kalkan gibi daha büyük kalkan türlerinde, çeviklik değeri alınmadan sadece ilgili kalkanın blok becerisi ile bir hesaplama gerçekleştirilir. Bloklama durumunda, bloklayan karakter *soluk tüketir* ancak saldırının kendisine ulaşmasını engellemiş olur. Bloklama yapan karakterin blok zarının aşılması durumunda, 6 puanlık farka kadar karakter bloklamayı gerçekleştirebilir, uygulanan kuvvetten bağımsız olarak aşılan fark sebebiyle fazladan soluk tüketir."
+                    },
+                    {
+                      "type": "heading",
+                      "level": 3,
+                      "text": "TAM BLOK POZU"
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Karakterler, Orta ve daha büyük kalkan türleri ile *tam blok* pozuna geçiş yapabilirler. Bu poza geçiş yapmak bir eylemdir. Bir karakter tam blok pozundayken,\n\n- Hareket mesafesi yarıya düşer.\n- Çevresel farkındalığı azalır.\n- Soluğunu toparlayamaz.\n- Gerçekleştireceği yakın mesafeli fiziksel saldırılar dezavantajlı kuvvet ve isabet alır.\n- Uzak menzilli enerjisel veya fiziksel saldırı gerçekleştiremez.\n+ Kalkanıyla baktığı yönden gelecek bütün fiziksel saldırıları garanti bir şekilde bloklar.\n\nKarakter, soluğu kesilene veya kendisi bozana kadar turlar boyunca tam blok pozunu koruyabilir. Ancak kendi isteğiyle tam blok pozundan çıkması durumunda, bir sonraki turuna kadar tam blok pozuna tekrar giremez (Pozdan çıkmak ek eylemdir)."
+                    }
+                  ]
+                }
+              ]
             },
             {
               "type": "heading",
               "level": 3,
-              "text": "BÜYÜ KULLANIMI"
+              "text": "ENERJİSEL YETENEK KULLANIMI"
             },
             {
               "type": "paragraph",
-              "text": "Enerjinin yönlendirilmesi ve kullanımı basit formlarda başlasa da geliştikçe karmaşıklaşan, dolayısıyla zar kullanımı açısından da farklı yaklaşımlar isteyebilen bir durumdur. Ayrıca, büyü kullanımı neredeyse her zaman MANA, RUH ya da YAŞAM enerjilerini kaynak olarak kullanmaktadır. Çoğu büyü kullanımı için iki ya da üç zar kullanılsa da büyünün tanımı ya da işlevi özelleştikçe, bu işleve uyum sağlamak adına büyü kullanımına farklı türde zarlar eklenebilir."
+              "text": "Enerjinin yönlendirilmesi ve kullanımı basit formlarda başlasa da geliştikçe karmaşıklaşan, dolayısıyla zar kullanımı açısından da farklı yaklaşımlar isteyebilen bir durumdur. Çoğu enerji kullanımı için iki ya da üç zar kullanılsa da büyünün tanımı ya da işlevi özelleştikçe, bu işleve uyum sağlamak adına enerji kullanımına farklı türde zarlar eklenebilir."
             },
             {
               "type": "paragraph",
-              "text": "Bir karakter büyü kullanmak için enerjisel bir odaklayıcıya ihtiyaç duyar. Bu odaklayıcılar, genellikle enerjiyi aktarma kapasitesine sahip doğal maddeler ya da farklı işlenme süreçlerinden geçerek bu kapasiteye erişmiş eşyaların bütünüdür. Enerjiyi aktarabilen asalar, odak kristalleri ve tılsımlar, odaklayıcılara verilebilecek en yaygın örneklerdendir. Herhangi bir karakter için bir odaklayıcı olmadan büyü yapmak da mümkündür. Ancak odaklayıcı olmadan büyü yapmaya çalışan bir karakterin büyünün gerçekleşmesine yönelik zarlarına **DEZAVANTAJI** bulunur."
-            },
-            {
-              "type": "paragraph",
-              "text": "Büyü kullanımı iki farklı temele dayandırılır. Bu temeller, İsabet temelli büyüler ve enerji temelli büyüler olarak nitelendirilir."
+              "text": "*Enerji kullanımı iki farklı temele dayandırılır. Bu temeller, İsabet temelli ve yoğunluk temelli enerjiler olarak nitelendirilir.*"
             },
             {
               "type": "heading",
               "level": 3,
-              "text": "İsabet Temelli Büyüler"
+              "text": "İsabet Temelli Enerjiler"
             },
             {
               "type": "paragraph",
-              "text": "Tekil bir hedef belirlenerek, bu hedefe isabet ettirilmeye çalışılan büyüleri ifade eden büyü tipleridir. Bu tip büyülerde her zaman ilk olarak İSABET becerisi baz alınarak bir zar kullanılır. Sonrasında büyüye yönelik enerjisel kuvvet ve duruma yönelik element, etki süresi vb. etkenler için ayrı zarlar kullanılabilir."
+              "text": "Tekil bir hedef belirlenerek, bu hedefe isabet ettirilmeye çalışılan enerjileri ifade eden yetenek tipleridir. Bu tip enerjilerde her zaman ilk olarak **İSABET** becerisi baz alınarak bir zar kullanılır. Sonrasında enerjiye yönelik yoğunluk ve duruma yönelik element, etki süresi vb. etkenler için ayrı zarlar kullanılabilir."
             },
             {
               "type": "heading",
               "level": 3,
-              "text": "Enerji Temelli Büyüler"
+              "text": "Yoğunluk Temelli Enerjiler"
             },
             {
               "type": "paragraph",
-              "text": "Genel olarak isabet gerektirmeksizin bir varlığa ya da bir bölgeye yoğunlaşarak belirli bir etkinin oluşturulmaya çalışıldığı büyülerdir. Bu tür büyüler, zihinsel saldırılar, bir alanda patlama, yanma, erime vb. etkiler oluşturma, bir madde üstünde farklı etkilere sebep olma gibi büyüleri içermektedir. İsabet temelli büyülerde olduğu gibi enerji temelli büyülerde de duruma göre alan, etki süresi, mesafe gibi farklı etkenler göz önünde bulundurularak farklı zar kullanımları eklenebilir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "FİZİKSEL YETENEK & SAVAŞ SANATI KULLANIMI"
-            },
-            {
-              "type": "paragraph",
-              "text": "Sistemsel ve mantıksal olarak fiziksel yeteneklerle savaş sanatlarının kullanımı, büyülerden çok farklı değildir. Yeteneğin özelliklerine göre, yetenek için kullanılacak zar sayısı artış gösterebilir. Genel olarak zar kullanımları sırasıyla İSABET, KUVVET, MESAFE, BAŞARI şeklinde gelişebilmektedir."
+              "text": "Genel olarak isabet gerektirmeksizin bir varlığa ya da bir bölgeye yoğunlaşarak belirli bir etkinin oluşturulmaya çalışıldığı enerjilerdir. Bu tür enerjiler, zihinsel saldırılar, bir alanda patlama, yanma, erime vb. etkiler oluşturma, bir madde üstünde farklı etkilere sebep olma gibi durumları içermektedir. İsabet temelli enerjilerde olduğu gibi yoğunluk temelli enerjilerde de duruma göre alan, etki süresi, mesafe gibi farklı etkenler göz önünde bulundurularak farklı zar kullanımları eklenebilir."
             },
             {
               "type": "heading",
@@ -1754,7 +1783,7 @@ window.SLVNZ_VERSIONS = {
           "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
           "description": "",
           "version": "v4.0",
-          "contentSeed": "2026-05-29-mprjpxxu"
+          "contentSeed": "2026-06-09-mq6n62xd"
         },
         "sections": {
           "oyun-kurallari": {
@@ -2699,7 +2728,7 @@ window.SLVNZ_VERSIONS = {
                     "text": "En basit hali ile bunun gibi durumlarda iki taraf da birer zar kullanır. Sayısal değeri yüksek gelen taraf karşılaşmadan galip çıkar. Ancak, silahlı mücadeleler, enerji yönlendirmenin kullanıldığı durumlar gibi özel anlarda, gerçekleştirilen eylemin niteliğine göre kullanılacak zar sayıları değişmektedir."
                   },
                   {
-                    "type": "paragraph",
+                    "type": "example",
                     "text": "Örneğin, birbirine karşı çift elli kılıçlarla savaşan iki karakterin mücadelesinde; kılıcı savuran taraf, kılıcın isabetini belirlemek için bir zar, kılıcı savurma kuvvetini belirlemek için ise ikinci bir zar kullanır. **Fiziksel zarlar ile oynanan bir ortamda bu zarların sırayla atılması tavsiye edilir.** Dijital çevrimiçi bir ortamda ise topluca atılabilir, ancak gelen sonuçlar soldan sağa sıralanacak şekilde önce isabet, ardından kuvvet şeklinde olmalıdır."
                   },
                   {
@@ -2726,7 +2755,7 @@ window.SLVNZ_VERSIONS = {
                   },
                   {
                     "type": "paragraph",
-                    "text": "Savaş anında karakterler genellikle saldırı eylemlerini belirlemek üzere birden fazla zar kullanırlar. Bu durumlar genellikle ÇEVİKLİK, KUVVET, İSABET, KAYNAK KULLANIMI, ENERJİ gibi nitelikler üzerinden belirlenir. Bir savaş anında gelişebilecek eylemler ve bu eylemler için kullanılabilecek zar sıfatları sınıflandırılabilir."
+                    "text": "Savaş anında karakterler genellikle saldırı eylemlerini belirlemek üzere birden fazla zar kullanırlar. Bu durumlar genellikle **ÇEVİKLİK, KUVVET, İSABET, KAYNAK KULLANIMI, ENERJİ** gibi nitelikler üzerinden belirlenir. Bir savaş anında gelişebilecek eylemler ve bu eylemler için kullanılabilecek zar sıfatları sınıflandırılabilir."
                   },
                   {
                     "type": "heading",
@@ -2753,59 +2782,88 @@ window.SLVNZ_VERSIONS = {
                   },
                   {
                     "type": "paragraph",
-                    "text": "Karakterler kendilerine yönelmiş herhangi bir saldırıdan kaçınmak ya da korunmak üzere bir savunma zarı kullanabilirler. Bu tür zarlar genellikle KAÇINMA, BLOKLAMA ya da DAYANIKLILIK kullanılarak atılır."
+                    "text": "Karakterler kendilerine yönelmiş herhangi bir saldırıdan kaçınmak ya da korunmak üzere bir savunma zarı kullanabilirler. Bu tür zarlar genellikle **KAÇINMA, BLOKLAMA** ya da **DAYANIKLILIK** kullanılarak atılır."
+                  },
+                  {
+                    "type": "heading",
+                    "level": 3,
+                    "text": "KAÇINMA"
                   },
                   {
                     "type": "paragraph",
                     "text": "Kaçınma durumlarında gelen saldırının isabet zarının sayısal değerini kaçınma zarı ile geçmek yeterlidir. Ancak rakibin isabet değeri ile karakterin kaçınma değeri arasındaki fark ne kadar fazla ise, karşı tarafın gerçekleştirdiği saldırının isabet ettiği nokta, rakibin saldırmak istediği noktaya o kadar yakın olmaktadır."
                   },
                   {
+                    "type": "heading",
+                    "level": 3,
+                    "text": "BLOKLAMA"
+                  },
+                  {
                     "type": "paragraph",
-                    "text": "Bloklama durumlarında karakter TAM BLOK pozunda değil ise gelen saldırıdan korunma durumu kaçınmaya kıyasla daha olasıdır. Rakibin saldırısı, karakterin bloklama zarının değerinden 6 puan fazla ise kalkanın arkasına geçerek karaktere hasar verir. Ancak karakterin bloklama zarı ile rakibin isabeti arasında 6 puandan az bir fark varsa, rakibin saldırısı kalkana isabet ederek kalkana zarar verirken, karakterin STAMINA değerinin azalmasına sebep olacaktır. Bloklama değerinin karşı saldırı değerinden yüksek olması durumunda kalkan sadece yıpranma payı alır ve saldırıyı savuşturur."
+                    "text": "Savaşta bloklama iki farklı temele dayanır: Silahla Bloklama & Kalkanla bloklama"
+                  },
+                  {
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "SİLAHLA BLOKLAMA",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Karakterler kendilerine yönelen yakın menzilli saldırıları silahlarıyla bloklamayı tercih edebilirler. Bir karakterin silahla bloklama yapabilmesi için bu beceri konusunda yetkinlik sahibi olması gerekir. \n\nSilahla gerçekleştirilecek bloklama hamleleri, karakterlerin **çeviklik** ve ilgili silaha yönelik **blok becerisi** üzerinden hesaplanır. Bir karakter, silahıyla bir saldırıyı bloklayabilmesi durumunda *soluk* tüketir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "KALKANLA BLOKLAMA",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Bir karakter, kuşanmış olduğu kalkan türüne göre farklı şekillerde bloklama gerçekleştirebilir. Buckler ve küçük boyutta karakteri tamamen kapatmayan hafif kalkanlar, karakterin *çeviklik* niteliği ve *kalkan blok* becerilerinin toplamıyla belirlenir. Bu kalkan türlerinde mevcut blok zarının aşılması durumunda darbe doğrudan karaktere ulaşır.\n\nAncak Orta, Büyük ve Kule Kalkan gibi daha büyük kalkan türlerinde, çeviklik değeri alınmadan sadece ilgili kalkanın blok becerisi ile bir hesaplama gerçekleştirilir. Bloklama durumunda, bloklayan karakter *soluk tüketir* ancak saldırının kendisine ulaşmasını engellemiş olur. Bloklama yapan karakterin blok zarının aşılması durumunda, 6 puanlık farka kadar karakter bloklamayı gerçekleştirebilir, uygulanan kuvvetten bağımsız olarak aşılan fark sebebiyle fazladan soluk tüketir."
+                          },
+                          {
+                            "type": "heading",
+                            "level": 3,
+                            "text": "TAM BLOK POZU"
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Karakterler, Orta ve daha büyük kalkan türleri ile *tam blok* pozuna geçiş yapabilirler. Bu poza geçiş yapmak bir eylemdir. Bir karakter tam blok pozundayken,\n\n- Hareket mesafesi yarıya düşer.\n- Çevresel farkındalığı azalır.\n- Soluğunu toparlayamaz.\n- Gerçekleştireceği yakın mesafeli fiziksel saldırılar dezavantajlı kuvvet ve isabet alır.\n- Uzak menzilli enerjisel veya fiziksel saldırı gerçekleştiremez.\n+ Kalkanıyla baktığı yönden gelecek bütün fiziksel saldırıları garanti bir şekilde bloklar.\n\nKarakter, soluğu kesilene veya kendisi bozana kadar turlar boyunca tam blok pozunu koruyabilir. Ancak kendi isteğiyle tam blok pozundan çıkması durumunda, bir sonraki turuna kadar tam blok pozuna tekrar giremez (Pozdan çıkmak ek eylemdir)."
+                          }
+                        ]
+                      }
+                    ]
                   },
                   {
                     "type": "heading",
                     "level": 3,
-                    "text": "BÜYÜ KULLANIMI"
+                    "text": "ENERJİSEL YETENEK KULLANIMI"
                   },
                   {
                     "type": "paragraph",
-                    "text": "Enerjinin yönlendirilmesi ve kullanımı basit formlarda başlasa da geliştikçe karmaşıklaşan, dolayısıyla zar kullanımı açısından da farklı yaklaşımlar isteyebilen bir durumdur. Ayrıca, büyü kullanımı neredeyse her zaman MANA, RUH ya da YAŞAM enerjilerini kaynak olarak kullanmaktadır. Çoğu büyü kullanımı için iki ya da üç zar kullanılsa da büyünün tanımı ya da işlevi özelleştikçe, bu işleve uyum sağlamak adına büyü kullanımına farklı türde zarlar eklenebilir."
+                    "text": "Enerjinin yönlendirilmesi ve kullanımı basit formlarda başlasa da geliştikçe karmaşıklaşan, dolayısıyla zar kullanımı açısından da farklı yaklaşımlar isteyebilen bir durumdur. Çoğu enerji kullanımı için iki ya da üç zar kullanılsa da büyünün tanımı ya da işlevi özelleştikçe, bu işleve uyum sağlamak adına enerji kullanımına farklı türde zarlar eklenebilir."
                   },
                   {
                     "type": "paragraph",
-                    "text": "Bir karakter büyü kullanmak için enerjisel bir odaklayıcıya ihtiyaç duyar. Bu odaklayıcılar, genellikle enerjiyi aktarma kapasitesine sahip doğal maddeler ya da farklı işlenme süreçlerinden geçerek bu kapasiteye erişmiş eşyaların bütünüdür. Enerjiyi aktarabilen asalar, odak kristalleri ve tılsımlar, odaklayıcılara verilebilecek en yaygın örneklerdendir. Herhangi bir karakter için bir odaklayıcı olmadan büyü yapmak da mümkündür. Ancak odaklayıcı olmadan büyü yapmaya çalışan bir karakterin büyünün gerçekleşmesine yönelik zarlarına **DEZAVANTAJI** bulunur."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Büyü kullanımı iki farklı temele dayandırılır. Bu temeller, İsabet temelli büyüler ve enerji temelli büyüler olarak nitelendirilir."
+                    "text": "*Enerji kullanımı iki farklı temele dayandırılır. Bu temeller, İsabet temelli ve yoğunluk temelli enerjiler olarak nitelendirilir.*"
                   },
                   {
                     "type": "heading",
                     "level": 3,
-                    "text": "İsabet Temelli Büyüler"
+                    "text": "İsabet Temelli Enerjiler"
                   },
                   {
                     "type": "paragraph",
-                    "text": "Tekil bir hedef belirlenerek, bu hedefe isabet ettirilmeye çalışılan büyüleri ifade eden büyü tipleridir. Bu tip büyülerde her zaman ilk olarak İSABET becerisi baz alınarak bir zar kullanılır. Sonrasında büyüye yönelik enerjisel kuvvet ve duruma yönelik element, etki süresi vb. etkenler için ayrı zarlar kullanılabilir."
+                    "text": "Tekil bir hedef belirlenerek, bu hedefe isabet ettirilmeye çalışılan enerjileri ifade eden yetenek tipleridir. Bu tip enerjilerde her zaman ilk olarak **İSABET** becerisi baz alınarak bir zar kullanılır. Sonrasında enerjiye yönelik yoğunluk ve duruma yönelik element, etki süresi vb. etkenler için ayrı zarlar kullanılabilir."
                   },
                   {
                     "type": "heading",
                     "level": 3,
-                    "text": "Enerji Temelli Büyüler"
+                    "text": "Yoğunluk Temelli Enerjiler"
                   },
                   {
                     "type": "paragraph",
-                    "text": "Genel olarak isabet gerektirmeksizin bir varlığa ya da bir bölgeye yoğunlaşarak belirli bir etkinin oluşturulmaya çalışıldığı büyülerdir. Bu tür büyüler, zihinsel saldırılar, bir alanda patlama, yanma, erime vb. etkiler oluşturma, bir madde üstünde farklı etkilere sebep olma gibi büyüleri içermektedir. İsabet temelli büyülerde olduğu gibi enerji temelli büyülerde de duruma göre alan, etki süresi, mesafe gibi farklı etkenler göz önünde bulundurularak farklı zar kullanımları eklenebilir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "FİZİKSEL YETENEK & SAVAŞ SANATI KULLANIMI"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Sistemsel ve mantıksal olarak fiziksel yeteneklerle savaş sanatlarının kullanımı, büyülerden çok farklı değildir. Yeteneğin özelliklerine göre, yetenek için kullanılacak zar sayısı artış gösterebilir. Genel olarak zar kullanımları sırasıyla İSABET, KUVVET, MESAFE, BAŞARI şeklinde gelişebilmektedir."
+                    "text": "Genel olarak isabet gerektirmeksizin bir varlığa ya da bir bölgeye yoğunlaşarak belirli bir etkinin oluşturulmaya çalışıldığı enerjilerdir. Bu tür enerjiler, zihinsel saldırılar, bir alanda patlama, yanma, erime vb. etkiler oluşturma, bir madde üstünde farklı etkilere sebep olma gibi durumları içermektedir. İsabet temelli enerjilerde olduğu gibi yoğunluk temelli enerjilerde de duruma göre alan, etki süresi, mesafe gibi farklı etkenler göz önünde bulundurularak farklı zar kullanımları eklenebilir."
                   },
                   {
                     "type": "heading",
@@ -3490,7 +3548,7 @@ window.SLVNZ_VERSIONS = {
           "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
           "description": "",
           "version": "v3.0",
-          "contentSeed": "2026-05-29-mprjpxxu"
+          "contentSeed": "2026-06-09-mq6n62xd"
         },
         "sections": {
           "oyun-kurallari": {
