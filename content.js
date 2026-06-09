@@ -1,5 +1,5 @@
 /* ============================================================
-   SLVNZ 4.0 — content.js  (editörden üretildi: 09.06.2026 15:54:22)
+   SLVNZ 4.0 — content.js  (editörden üretildi: 09.06.2026 16:06:13)
    Bu metni content.js dosyasının TAMAMIYLA değiştir.
    ============================================================ */
 
@@ -16,7 +16,7 @@ window.SLVNZ_CONTENT = {
     "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
     "description": "",
     "version": "v4.0",
-    "contentSeed": "2026-06-09-mq6n62xd"
+    "contentSeed": "2026-06-09-mq6nlaxq"
   },
   "sections": {
     "oyun-kurallari": {
@@ -1120,13 +1120,6 @@ window.SLVNZ_CONTENT = {
               "text": "SAVAŞ SİSTEMİ"
             },
             {
-              "type": "image",
-              "src": "https://slvnz.github.io/resources/webpage/svg/hex-battle.svg",
-              "alt": "Altıgen savaş düzeni",
-              "caption": "Altıgen savaş düzeni",
-              "width": "300"
-            },
-            {
               "type": "paragraph",
               "text": "SLVNZ 3.0'ın temel mücadele eylemlerinin ve hareketlerinin işlenmesinin temellerini **ALTIGEN** savaş sistemi oluşturur. Savaş sisteminde varlıkların her biri bir Altıgen içinde (Hex) yer alırlar ve birimlerin hareketleri, gerçekleşecek eylemlerin mesafeleri ve kapsayacakları alanlar **BİRİM** olarak belirlenmiş tekil altıgen yuvalar üzerinden hesaplanır."
             },
@@ -1134,6 +1127,23 @@ window.SLVNZ_CONTENT = {
               "type": "heading",
               "level": 3,
               "text": "SAVAŞ DÜZENİ"
+            },
+            {
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "ALTIGEN SAVAŞ DÜZENİ",
+                  "blocks": [
+                    {
+                      "type": "image",
+                      "src": "https://slvnz.github.io/resources/webpage/svg/hex-battle.svg",
+                      "alt": "",
+                      "caption": "Altıgen savaş düzeni",
+                      "width": "300"
+                    }
+                  ]
+                }
+              ]
             },
             {
               "type": "paragraph",
@@ -1232,13 +1242,13 @@ window.SLVNZ_CONTENT = {
             },
             {
               "type": "paragraph",
-              "text": "Orta kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahiptir. Bu özellikler hem ağırlıkları hem de büyüklükleri sebebiyle karakterin hareket kabiliyeti üzerinde **ÇEV** niteliğine eksi puan olarak yansımaktadır. Ancak, bu duruma karşılık olarak karaktere gelecek fiziksel hamlelerin çoğuna karşı korunak sağlamaktadır."
+              "text": "Orta kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahiptir. Bu özellikler hem ağırlıkları hem de büyüklükleri sebebiyle karakterin hareket kabiliyeti üzerinde olumsuz etkilere sebep olmaktadır. Ancak, bu duruma karşılık karaktere gelecek fiziksel hamlelere karşı korunak sağlamaktadır."
             },
             {
               "type": "list",
               "ordered": false,
               "items": [
-                "Orta kalkan kullanan bir karakter, **NORMAL ALANLAR** tarafından gelecek yakın menzilli fiziksel saldırılara karşı normal şekilde **BLOK BONUSU** edinerek bloklama yapabilir.",
+                "Orta kalkan kullanan bir karakter, **NORMAL ALANLAR** tarafından gelecek yakın menzilli fiziksel saldırılara karşı normal şekilde **BLOK BONUSU** edinerek bloklama yapabilir (Kalkandan gelecek blok aşırtma sınırı).",
                 "Eğer karaktere gelecek saldırı **NET ALAN** tarafından geliyorsa, karakter bloklama eylemine **AVANTAJ** alır.",
                 "Eğer karaktere gelecek saldırı zor alan tarafından geliyorsa, karakter bloklama eylemine **DEZAVANTAJ** alır."
               ]
@@ -1783,7 +1793,7 @@ window.SLVNZ_VERSIONS = {
           "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
           "description": "",
           "version": "v4.0",
-          "contentSeed": "2026-06-09-mq6n62xd"
+          "contentSeed": "2026-06-09-mq6nlaxq"
         },
         "sections": {
           "oyun-kurallari": {
@@ -2887,13 +2897,6 @@ window.SLVNZ_VERSIONS = {
                     "text": "SAVAŞ SİSTEMİ"
                   },
                   {
-                    "type": "image",
-                    "src": "https://slvnz.github.io/resources/webpage/svg/hex-battle.svg",
-                    "alt": "Altıgen savaş düzeni",
-                    "caption": "Altıgen savaş düzeni",
-                    "width": "300"
-                  },
-                  {
                     "type": "paragraph",
                     "text": "SLVNZ 3.0'ın temel mücadele eylemlerinin ve hareketlerinin işlenmesinin temellerini **ALTIGEN** savaş sistemi oluşturur. Savaş sisteminde varlıkların her biri bir Altıgen içinde (Hex) yer alırlar ve birimlerin hareketleri, gerçekleşecek eylemlerin mesafeleri ve kapsayacakları alanlar **BİRİM** olarak belirlenmiş tekil altıgen yuvalar üzerinden hesaplanır."
                   },
@@ -2901,6 +2904,23 @@ window.SLVNZ_VERSIONS = {
                     "type": "heading",
                     "level": 3,
                     "text": "SAVAŞ DÜZENİ"
+                  },
+                  {
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "ALTIGEN SAVAŞ DÜZENİ",
+                        "blocks": [
+                          {
+                            "type": "image",
+                            "src": "https://slvnz.github.io/resources/webpage/svg/hex-battle.svg",
+                            "alt": "",
+                            "caption": "Altıgen savaş düzeni",
+                            "width": "300"
+                          }
+                        ]
+                      }
+                    ]
                   },
                   {
                     "type": "paragraph",
@@ -2999,13 +3019,13 @@ window.SLVNZ_VERSIONS = {
                   },
                   {
                     "type": "paragraph",
-                    "text": "Orta kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahiptir. Bu özellikler hem ağırlıkları hem de büyüklükleri sebebiyle karakterin hareket kabiliyeti üzerinde **ÇEV** niteliğine eksi puan olarak yansımaktadır. Ancak, bu duruma karşılık olarak karaktere gelecek fiziksel hamlelerin çoğuna karşı korunak sağlamaktadır."
+                    "text": "Orta kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahiptir. Bu özellikler hem ağırlıkları hem de büyüklükleri sebebiyle karakterin hareket kabiliyeti üzerinde olumsuz etkilere sebep olmaktadır. Ancak, bu duruma karşılık karaktere gelecek fiziksel hamlelere karşı korunak sağlamaktadır."
                   },
                   {
                     "type": "list",
                     "ordered": false,
                     "items": [
-                      "Orta kalkan kullanan bir karakter, **NORMAL ALANLAR** tarafından gelecek yakın menzilli fiziksel saldırılara karşı normal şekilde **BLOK BONUSU** edinerek bloklama yapabilir.",
+                      "Orta kalkan kullanan bir karakter, **NORMAL ALANLAR** tarafından gelecek yakın menzilli fiziksel saldırılara karşı normal şekilde **BLOK BONUSU** edinerek bloklama yapabilir (Kalkandan gelecek blok aşırtma sınırı).",
                       "Eğer karaktere gelecek saldırı **NET ALAN** tarafından geliyorsa, karakter bloklama eylemine **AVANTAJ** alır.",
                       "Eğer karaktere gelecek saldırı zor alan tarafından geliyorsa, karakter bloklama eylemine **DEZAVANTAJ** alır."
                     ]
@@ -3548,7 +3568,7 @@ window.SLVNZ_VERSIONS = {
           "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
           "description": "",
           "version": "v3.0",
-          "contentSeed": "2026-06-09-mq6n62xd"
+          "contentSeed": "2026-06-09-mq6nlaxq"
         },
         "sections": {
           "oyun-kurallari": {
