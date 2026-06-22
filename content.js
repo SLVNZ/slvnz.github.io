@@ -1,5 +1,5 @@
 /* ============================================================
-   SLVNZ 4.0 — content.js  (editörden üretildi: 09.06.2026 16:06:13)
+   SLVNZ 4.0 — content.js  (editörden üretildi: 23.06.2026 01:37:10)
    Bu metni content.js dosyasının TAMAMIYLA değiştir.
    ============================================================ */
 
@@ -16,7 +16,7 @@ window.SLVNZ_CONTENT = {
     "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
     "description": "",
     "version": "v4.0",
-    "contentSeed": "2026-06-09-mq6nlaxq"
+    "contentSeed": "2026-06-22-mqpspn2p"
   },
   "sections": {
     "oyun-kurallari": {
@@ -711,234 +711,215 @@ window.SLVNZ_CONTENT = {
               ]
             },
             {
-              "type": "heading",
-              "level": 3,
-              "text": "ZIRH NİTELİKLERİ"
-            },
-            {
-              "type": "table",
-              "header": [
-                "ZIRH TİPİ",
-                "YÜK PUANI"
-              ],
-              "rows": [
-                [
-                  "Zırhsız",
-                  "0"
-                ],
-                [
-                  "Deri Zırh",
-                  "3"
-                ],
-                [
-                  "Sertleştirilmiş Deri Zırh",
-                  "5"
-                ],
-                [
-                  "Yarım Plaka Zırh",
-                  "12"
-                ],
-                [
-                  "Zincir Zırh",
-                  "14"
-                ],
-                [
-                  "Pullu Zırh",
-                  "16"
-                ],
-                [
-                  "Tam Plaka Zırh",
-                  "24"
-                ]
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "ZIRHLAR",
+                  "blocks": [
+                    {
+                      "type": "table",
+                      "header": [
+                        "ZIRH TİPİ",
+                        "YÜK PUANI"
+                      ],
+                      "rows": [
+                        [
+                          "ZIRHSIZ",
+                          "0"
+                        ],
+                        [
+                          "DERİ",
+                          "3"
+                        ],
+                        [
+                          "SERTLEŞTİRİLMİŞ DERİ",
+                          "5"
+                        ],
+                        [
+                          "YARIM PLAKA",
+                          "12"
+                        ],
+                        [
+                          "ZİNCİR",
+                          "14"
+                        ],
+                        [
+                          "PULLU",
+                          "16"
+                        ],
+                        [
+                          "TAM PLAKA",
+                          "24"
+                        ]
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Zırhlar, karakterlerin fiziksel saldırılardan ve birçok enerjisel saldırıdan korunmasına olanak sağlar. Ancak koruma seviyesi yükseldikçe, donanımlı korunma beraberinde bazı dezavantajları getirir. Bu dezavantajlar, yük puanının getireceği etkilerle sınırlı kalmayabilir. Örneğin, oyun yöneticisinin tercihine bağlı olarak, bir karakter giydiği miğferden dolayı farkındalık becerisine eksi değer alabilir."
+                    }
+                  ]
+                },
+                {
+                  "label": "SİLAHLAR",
+                  "blocks": [
+                    {
+                      "type": "table",
+                      "header": [
+                        "SİLAH TİPİ",
+                        "YÜK PUANI"
+                      ],
+                      "rows": [
+                        [
+                          "HANÇER",
+                          "1"
+                        ],
+                        [
+                          "SATIR",
+                          "2"
+                        ],
+                        [
+                          "KISA KILIÇ",
+                          "2"
+                        ],
+                        [
+                          "NORMAL KILIÇ",
+                          "3"
+                        ],
+                        [
+                          "UZUN KILIÇ",
+                          "3"
+                        ],
+                        [
+                          "BÜYÜK KILIÇ",
+                          "4"
+                        ],
+                        [
+                          "SAVAŞ BALTASI",
+                          "3"
+                        ],
+                        [
+                          "BÜYÜK SAVAŞ BALTASI",
+                          "4"
+                        ],
+                        [
+                          "TOPUZ / ÇEKİÇ",
+                          "3"
+                        ],
+                        [
+                          "BÜYÜK TOPUZ / ÇEKİÇ",
+                          "5"
+                        ],
+                        [
+                          "ZİNCİRLİ GÜRZ",
+                          "4"
+                        ],
+                        [
+                          "BÜYÜK ZİNCİRLİ GÜRZ",
+                          "6"
+                        ],
+                        [
+                          "MIZRAK",
+                          "3"
+                        ],
+                        [
+                          "UZUN MIZRAK",
+                          "4"
+                        ],
+                        [
+                          "PIKE",
+                          "5"
+                        ],
+                        [
+                          "YAY",
+                          "3"
+                        ],
+                        [
+                          "UZUN YAY",
+                          "4"
+                        ],
+                        [
+                          "TATAR YAYI",
+                          "5"
+                        ],
+                        [
+                          "MUSKET / TÜFEK",
+                          "5"
+                        ]
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Her silah tipinin kendine özgü niteliklerinin bulunmasının yanı sıra karakterler bu silah tipleri üzerinde antrenman yaparak kendilerini geliştirebilir, silahları daha isabetli savurma konusunda ve ileride silah tiplerine özgü farklı yeteneklere sahip olmak için ilerleyebilirler."
+                    }
+                  ]
+                },
+                {
+                  "label": "KALKANLAR",
+                  "blocks": [
+                    {
+                      "type": "table",
+                      "header": [
+                        "KALKAN TİPİ",
+                        "BLOK PAYI",
+                        "YÜK PUANI"
+                      ],
+                      "rows": [
+                        [
+                          "KALKANSIZ",
+                          "0",
+                          "0"
+                        ],
+                        [
+                          "BUCKLER",
+                          "ÇEV",
+                          "1"
+                        ],
+                        [
+                          "UFAK KALKAN",
+                          "ÇEV",
+                          "2"
+                        ],
+                        [
+                          "NORMAL KALKAN*",
+                          "3",
+                          "5"
+                        ],
+                        [
+                          "KULE KALKAN",
+                          "6",
+                          "10"
+                        ]
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "(*) Tam Blok Pozu yapabilen kalkan tipi."
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Kalkanlar, zırhların yanı sıra karakterlere ekstra korunma imkânı tanıyan ekipman türüdür. Bir karakter kalkanla kullanım tarzını şekillendirerek iki farklı şekilde korunabilir. Kalkanda ve birçok yetenek içeriğinde kullanılabilecek bu ve buna benzer durumlara Poz ismi verilir. Kalkan için kullanılabilen pozlar Savaş Pozu ve Tam Blok Pozudur. Bu pozların kullanılabileceği kalkan tipleri Normal Kalkan ve Kule Kalkan tipleridir. Bunların dışında kalan diğer kalkan türleri blok için karakterin çeviklik niteliğini baz alır."
+                    },
+                    {
+                      "type": "heading",
+                      "level": 3,
+                      "text": "SAVAŞ POZU"
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Karakterin kalkanı tuttuğu normal savaş duruşudur. Bu duruşta karakter gelen saldırıyı bloke etmek için kuşanmış olduğu kalkanın blok niteliğini ve kendi sahip olduğu blok becerisini birleştirerek kullanır."
+                    },
+                    {
+                      "type": "heading",
+                      "level": 3,
+                      "text": "TAM BLOK POZU"
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Tam blok pozunda karakter, kalkanını önünü kapatacak biçimde tutacak şekilde bir duruşa geçer. Bu şekilde karakterin vücudunun dönük olduğu yönden gelen saldırılar NET BLOK gerçekleştirir. NET BLOK, karakterin bütün fiziksel saldırılardan zarar görmemesine, kalkanın hasar alması ve kolun baskı altında kalmasına sebep olur. Aşağıdan gelebilecek saldırılara karşı yine de bir savunma refleksi gerektirir.\n\nTAM BLOK pozundayken karakterin hareket kabiliyeti yarıya iner, gerçekleştireceği fiziksel saldırılara alacağı KUVVET BONUSU yok sayılır. TAM BLOK pozundayken karakter önüne, sağ çaprazına ve sağına fiziksel saldırı gerçekleştirebilir."
+                    }
+                  ]
+                }
               ]
-            },
-            {
-              "type": "paragraph",
-              "text": "Zırhlar, karakterlerin fiziksel saldırılardan ve birçok enerjisel saldırıdan korunmasına olanak sağlar. Ancak koruma seviyesi yükseldikçe, donanımlı korunma beraberinde bazı dezavantajları getirir. Bu dezavantajlar, yük puanının getireceği etkilerle sınırlı kalmayabilir. Örneğin, oyun yöneticisinin tercihine bağlı olarak, bir karakter giydiği miğferden dolayı farkındalık becerisine eksi değer alabilir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "SİLAH NİTELİKLERİ"
-            },
-            {
-              "type": "table",
-              "header": [
-                "Silah Tipi",
-                "İSABET",
-                "YÜK PUANI"
-              ],
-              "rows": [
-                [
-                  "Hançer",
-                  "+3",
-                  "1"
-                ],
-                [
-                  "Satır",
-                  "+2",
-                  "2"
-                ],
-                [
-                  "Kısa Kılıç",
-                  "+1",
-                  "2"
-                ],
-                [
-                  "Normal Kılıç",
-                  "Çeviklik Bonusu",
-                  "3"
-                ],
-                [
-                  "Uzun Kılıç",
-                  "-1",
-                  "3"
-                ],
-                [
-                  "Büyük Kılıç",
-                  "-2",
-                  "4"
-                ],
-                [
-                  "Savaş Baltası",
-                  "-1",
-                  "3"
-                ],
-                [
-                  "Büyük Savaş Baltası",
-                  "-2",
-                  "4"
-                ],
-                [
-                  "Topuz / Çekiç",
-                  "-2",
-                  "3"
-                ],
-                [
-                  "Büyük Topuz / Çekiç",
-                  "-4",
-                  "5"
-                ],
-                [
-                  "Zincirli Gürz",
-                  "-3",
-                  "4"
-                ],
-                [
-                  "Büyük Zincirli Gürz",
-                  "-6",
-                  "5"
-                ],
-                [
-                  "Mızrak",
-                  "Çeviklik Bonusu",
-                  "3"
-                ],
-                [
-                  "Uzun Mızrak",
-                  "-2",
-                  "4"
-                ],
-                [
-                  "Pike",
-                  "-4",
-                  "5"
-                ],
-                [
-                  "Yay",
-                  "-",
-                  "3"
-                ],
-                [
-                  "Uzun Yay",
-                  "-",
-                  "4"
-                ],
-                [
-                  "Tatar Yayı",
-                  "-",
-                  "5"
-                ],
-                [
-                  "Musket/Tüfek",
-                  "-",
-                  "5"
-                ]
-              ]
-            },
-            {
-              "type": "paragraph",
-              "text": "Her silah tipinin kendine özgü niteliklerinin bulunmasının yanı sıra karakterler bu silah tipleri üzerinde antrenman yaparak kendilerini geliştirebilir, silahları daha isabetli savurma konusunda ve ileride silah tiplerine özgü farklı yeteneklere sahip olmak için ilerleyebilirler."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "KALKAN NİTELİKLERİ"
-            },
-            {
-              "type": "table",
-              "header": [
-                "Kalkan Tipi",
-                "BLOK",
-                "YÜK PUANI"
-              ],
-              "rows": [
-                [
-                  "Kalkansız",
-                  "0",
-                  "-"
-                ],
-                [
-                  "Buckler",
-                  "ÇEV",
-                  "1"
-                ],
-                [
-                  "Ufak Kalkan",
-                  "ÇEV",
-                  "2"
-                ],
-                [
-                  "Normal Kalkan *",
-                  "+3",
-                  "5"
-                ],
-                [
-                  "Kule Kalkan",
-                  "+6",
-                  "10"
-                ]
-              ]
-            },
-            {
-              "type": "paragraph",
-              "text": "(*) Tam Blok Pozu yapabilen kalkan tipi."
-            },
-            {
-              "type": "paragraph",
-              "text": "Kalkanlar, zırhların yanı sıra karakterlere ekstra korunma imkânı tanıyan ekipman türüdür. Bir karakter kalkanla kullanım tarzını şekillendirerek iki farklı şekilde korunabilir. Kalkanda ve birçok yetenek içeriğinde kullanılabilecek bu ve buna benzer durumlara Poz ismi verilir. Kalkan için kullanılabilen pozlar Savaş Pozu ve Tam Blok Pozudur. Bu pozların kullanılabileceği kalkan tipleri Normal Kalkan ve Kule Kalkan tipleridir. Bunların dışında kalan diğer kalkan türleri blok için karakterin çeviklik niteliğini baz alır."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "SAVAŞ POZU"
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterin kalkanı tuttuğu normal savaş duruşudur. Bu duruşta karakter gelen saldırıyı bloke etmek için kuşanmış olduğu kalkanın blok niteliğini ve kendi sahip olduğu blok becerisini birleştirerek kullanır."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "TAM BLOK POZU"
-            },
-            {
-              "type": "paragraph",
-              "text": "Tam blok pozunda karakter, kalkanını önünü kapatacak biçimde tutacak şekilde bir duruşa geçer. Bu şekilde karakterin vücudunun dönük olduğu yönden gelen saldırılar NET BLOK gerçekleştirir. NET BLOK, karakterin bütün fiziksel saldırılardan zarar görmemesine, kalkanın hasar alması ve kolun baskı altında kalmasına sebep olur. Aşağıdan gelebilecek saldırılara karşı yine de bir savunma refleksi gerektirir."
-            },
-            {
-              "type": "paragraph",
-              "text": "TAM BLOK pozundayken karakterin hareket kabiliyeti yarıya iner, gerçekleştireceği fiziksel saldırılara alacağı KUVVET BONUSU yok sayılır. TAM BLOK pozundayken karakter önüne, sağ çaprazına ve sağına fiziksel saldırı gerçekleştirebilir."
             }
           ]
         },
@@ -954,11 +935,7 @@ window.SLVNZ_CONTENT = {
             },
             {
               "type": "paragraph",
-              "text": "Karakterler tek başlarına kalkıştıkları eylemlerde başarı düzeyini belirlemek için kullandıkları zar sistemini karşılıklı girdikleri savaşlar veya mücadeleler için de kullanırlar. İki karakterin birbirine kılıç savurması, belirli enerjilerin etkisi altında bırakması, güreş tutması vb. durumlarda savaş ve mücadele sistemi devreye girer."
-            },
-            {
-              "type": "paragraph",
-              "text": "En basit hali ile bunun gibi durumlarda iki taraf da birer zar kullanır. Sayısal değeri yüksek gelen taraf karşılaşmadan galip çıkar. Ancak, silahlı mücadeleler, enerji yönlendirmenin kullanıldığı durumlar gibi özel anlarda, gerçekleştirilen eylemin niteliğine göre kullanılacak zar sayıları değişmektedir."
+              "text": "Karakterler tek başlarına kalkıştıkları eylemlerde başarı düzeyini belirlemek için kullandıkları zar sistemini karşılıklı girdikleri savaşlar veya mücadeleler için de kullanırlar. İki karakterin birbirine kılıç savurması, belirli enerjilerin etkisi altında bırakması, güreş tutması vb. durumlarda savaş ve mücadele sistemi devreye girer.\n\nEn basit hali ile bunun gibi durumlarda iki taraf da birer zar kullanır. Sayısal değeri yüksek gelen taraf karşılaşmadan galip çıkar. Ancak, silahlı mücadeleler, enerji yönlendirmenin kullanıldığı durumlar gibi özel anlarda, gerçekleştirilen eylemin niteliğine göre kullanılacak zar sayıları değişmektedir."
             },
             {
               "type": "example",
@@ -991,22 +968,27 @@ window.SLVNZ_CONTENT = {
               "text": "Savaş anında karakterler genellikle saldırı eylemlerini belirlemek üzere birden fazla zar kullanırlar. Bu durumlar genellikle **ÇEVİKLİK, KUVVET, İSABET, KAYNAK KULLANIMI, ENERJİ** gibi nitelikler üzerinden belirlenir. Bir savaş anında gelişebilecek eylemler ve bu eylemler için kullanılabilecek zar sıfatları sınıflandırılabilir."
             },
             {
-              "type": "heading",
-              "level": 3,
-              "text": "Yakın Menzilli Saldırılar"
-            },
-            {
-              "type": "paragraph",
-              "text": "Yakın menzilli herhangi bir silah ile saldırıda bulunan bir karakter, özel ya da ekleme bir durum olmadığı sürece iki adet zar kullanır. Bu zarlar sırayla atılmalı ya da dijital bir ortamda kullanılıyorsa gelen sonuç soldan sağa sıralanacak şekilde, ilk olarak İSABET, ikinci olarak HASAR/KUVVET olmak üzere sayısal değerlere dökülür."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Uzak Menzilli Saldırılar"
-            },
-            {
-              "type": "paragraph",
-              "text": "Yakın menzilli saldırılara benzer olarak, uzun menzilli saldırılarda da genel olarak iki zar kullanılır. Ancak, bahsedilen menzilli saldırı enerji yönlendirmeyi içeriyorsa, bu durumda kullanılacak zarların sayısı ikiden fazla olacak şekilde enerjisel yeteneğin özelliklerine göre değişebilmektedir. Enerjisel yetenekler dışında sıradan olarak bahsedilebilecek menzilli saldırılarda (Yay kullanımı gibi) MENZİLLİ İSABET ve KUVVET zarı kullanılır. Ancak, kuvvet gerektirmeyen bazı menzilli araçlar kullanılırken (Tatar Yayı, Musket gibi) sadece atışı isabet ettirmek için bir zar kullanılır. Bunun sebebi bu tarz menzilli silahların kendilerine özgü sabit bir hasarının bulunmasıdır."
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "YAKIN MENZİLLİ SALDIRILAR",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Yakın menzilli herhangi bir silah ile saldırıda bulunan bir karakter, özel ya da ekleme bir durum olmadığı sürece iki adet zar kullanır. Bu zarlar sırayla atılmalı ya da dijital bir ortamda kullanılıyorsa gelen sonuç soldan sağa sıralanacak şekilde, ilk olarak İSABET, ikinci olarak HASAR/KUVVET olmak üzere sayısal değerlere dökülür."
+                    }
+                  ]
+                },
+                {
+                  "label": "UZAK MENZİLLİ SALDIRILAR",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Yakın menzilli saldırılara benzer olarak, uzun menzilli saldırılarda da genel olarak iki zar kullanılır. Ancak, bahsedilen menzilli saldırı enerji yönlendirmeyi içeriyorsa, bu durumda kullanılacak zarların sayısı ikiden fazla olacak şekilde enerjisel yeteneğin özelliklerine göre değişebilmektedir. Enerjisel yetenekler dışında sıradan olarak bahsedilebilecek menzilli saldırılarda (Yay kullanımı gibi) MENZİLLİ İSABET ve KUVVET zarı kullanılır. Ancak, kuvvet gerektirmeyen bazı menzilli araçlar kullanılırken (Tatar Yayı, Musket gibi) sadece atışı isabet ettirmek için bir zar kullanılır. Bunun sebebi bu tarz menzilli silahların kendilerine özgü sabit bir hasarının bulunmasıdır."
+                    }
+                  ]
+                }
+              ]
             },
             {
               "type": "heading",
@@ -1018,22 +1000,27 @@ window.SLVNZ_CONTENT = {
               "text": "Karakterler kendilerine yönelmiş herhangi bir saldırıdan kaçınmak ya da korunmak üzere bir savunma zarı kullanabilirler. Bu tür zarlar genellikle **KAÇINMA, BLOKLAMA** ya da **DAYANIKLILIK** kullanılarak atılır."
             },
             {
-              "type": "heading",
-              "level": 3,
-              "text": "KAÇINMA"
-            },
-            {
-              "type": "paragraph",
-              "text": "Kaçınma durumlarında gelen saldırının isabet zarının sayısal değerini kaçınma zarı ile geçmek yeterlidir. Ancak rakibin isabet değeri ile karakterin kaçınma değeri arasındaki fark ne kadar fazla ise, karşı tarafın gerçekleştirdiği saldırının isabet ettiği nokta, rakibin saldırmak istediği noktaya o kadar yakın olmaktadır."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "BLOKLAMA"
-            },
-            {
-              "type": "paragraph",
-              "text": "Savaşta bloklama iki farklı temele dayanır: Silahla Bloklama & Kalkanla bloklama"
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "KAÇINMA",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Kaçınma durumlarında gelen saldırının isabet zarının sayısal değerini kaçınma zarı ile geçmek yeterlidir. Ancak rakibin isabet değeri ile karakterin kaçınma değeri arasındaki fark ne kadar fazla ise, karşı tarafın gerçekleştirdiği saldırının isabet ettiği nokta, rakibin saldırmak istediği noktaya o kadar yakın olmaktadır."
+                    }
+                  ]
+                },
+                {
+                  "label": "BLOKLAMA",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Savaşta bloklama iki farklı temele dayanır: Silahla Bloklama & Kalkanla bloklama"
+                    }
+                  ]
+                }
+              ]
             },
             {
               "type": "tabs",
@@ -1081,22 +1068,27 @@ window.SLVNZ_CONTENT = {
               "text": "*Enerji kullanımı iki farklı temele dayandırılır. Bu temeller, İsabet temelli ve yoğunluk temelli enerjiler olarak nitelendirilir.*"
             },
             {
-              "type": "heading",
-              "level": 3,
-              "text": "İsabet Temelli Enerjiler"
-            },
-            {
-              "type": "paragraph",
-              "text": "Tekil bir hedef belirlenerek, bu hedefe isabet ettirilmeye çalışılan enerjileri ifade eden yetenek tipleridir. Bu tip enerjilerde her zaman ilk olarak **İSABET** becerisi baz alınarak bir zar kullanılır. Sonrasında enerjiye yönelik yoğunluk ve duruma yönelik element, etki süresi vb. etkenler için ayrı zarlar kullanılabilir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Yoğunluk Temelli Enerjiler"
-            },
-            {
-              "type": "paragraph",
-              "text": "Genel olarak isabet gerektirmeksizin bir varlığa ya da bir bölgeye yoğunlaşarak belirli bir etkinin oluşturulmaya çalışıldığı enerjilerdir. Bu tür enerjiler, zihinsel saldırılar, bir alanda patlama, yanma, erime vb. etkiler oluşturma, bir madde üstünde farklı etkilere sebep olma gibi durumları içermektedir. İsabet temelli enerjilerde olduğu gibi yoğunluk temelli enerjilerde de duruma göre alan, etki süresi, mesafe gibi farklı etkenler göz önünde bulundurularak farklı zar kullanımları eklenebilir."
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "İSABET TEMELLİ ENERJİLER",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Tekil bir hedef belirlenerek, bu hedefe isabet ettirilmeye çalışılan enerjileri ifade eden yetenek tipleridir. Bu tip enerjilerde her zaman ilk olarak **İSABET** becerisi baz alınarak bir zar kullanılır. Sonrasında enerjiye yönelik yoğunluk ve duruma yönelik element, etki süresi vb. etkenler için ayrı zarlar kullanılabilir."
+                    }
+                  ]
+                },
+                {
+                  "label": "YOĞUNLUK TEMELLİ ENERJİLER",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Genel olarak isabet gerektirmeksizin bir varlığa ya da bir bölgeye yoğunlaşarak belirli bir etkinin oluşturulmaya çalışıldığı enerjilerdir. Bu tür enerjiler, zihinsel saldırılar, bir alanda patlama, yanma, erime vb. etkiler oluşturma, bir madde üstünde farklı etkilere sebep olma gibi durumları içermektedir. İsabet temelli enerjilerde olduğu gibi yoğunluk temelli enerjilerde de duruma göre alan, etki süresi, mesafe gibi farklı etkenler göz önünde bulundurularak farklı zar kullanımları eklenebilir."
+                    }
+                  ]
+                }
+              ]
             },
             {
               "type": "heading",
@@ -1121,7 +1113,7 @@ window.SLVNZ_CONTENT = {
             },
             {
               "type": "paragraph",
-              "text": "SLVNZ 3.0'ın temel mücadele eylemlerinin ve hareketlerinin işlenmesinin temellerini **ALTIGEN** savaş sistemi oluşturur. Savaş sisteminde varlıkların her biri bir Altıgen içinde (Hex) yer alırlar ve birimlerin hareketleri, gerçekleşecek eylemlerin mesafeleri ve kapsayacakları alanlar **BİRİM** olarak belirlenmiş tekil altıgen yuvalar üzerinden hesaplanır."
+              "text": "SLVNZ 4.0'ın temel mücadele eylemlerinin ve hareketlerinin işlenmesinin temellerini **ALTIGEN** savaş sistemi oluşturur. Savaş sisteminde varlıkların her biri bir Altıgen içinde (Hex) yer alırlar ve birimlerin hareketleri, gerçekleşecek eylemlerin mesafeleri ve kapsayacakları alanlar **BİRİM** olarak belirlenmiş tekil altıgen yuvalar üzerinden hesaplanır."
             },
             {
               "type": "heading",
@@ -1376,31 +1368,36 @@ window.SLVNZ_CONTENT = {
               "text": "Karakterin gerçekleştirmek istediği antrenman türü GM tarafına önerilir ve kabul edilirse, karakter oyun süresince 3 saatlik bir çalışma süresine girer. Bu çalışma süresi boyunca arada verilen molalar haricinde bir kesinti yaşanması durumunda GM inisiyatifi ile deneyim puanı için kullanılacak zar türü değişebilir.\n\nKarakterler girdikleri antrenman sonucunda +1 Yorgunluk Durumu puanı alırlar. Karakter yorgunken bir antrenman daha yapacak olursa bu durum karaktere +1 Yorgun Durumu puanı daha ekler. Bir karakterin yorgunluk durumu 2 puan veya daha fazla ise, antrenman yapamaz.\n\nKarakterler zihinsel ve fiziksel olarak yorgunluk durumuna girebilirler. Meditasyon gibi eylemler dışında, bir karakterin enerjisel yetenekleri üstünde çalışması da vücuttaki enerji akışından dolayı karakteri fiziksel bir yorgunluğa sürükleyebilir. Bundan dolayı GM ile anlaşılarak belirlenen belirli antrenman türleri dışında enerjisel ve fiziksel yetenekler üstünde geliştirme çalışmaları karakteri 6 saat sonunda yoracaktır.\n\nKarakterlerin gelişim süreçleri iki farklı kolda ve formüle ayrılmıştır. Bunlar Temel Gelişim ve Özel Gelişimdir."
             },
             {
-              "type": "heading",
-              "level": 3,
-              "text": "TEMEL GELİŞİM"
-            },
-            {
-              "type": "paragraph",
-              "text": "Temel gelişim, karakterlerin temel becerilerini, ekipman yetkinliklerini, enerjisel yetkinliklerini ve kaynak havuzlarını geliştirebileceği süreçleri kapsamaktadır. Bu süreç, karakterin gireceği en az 1 en çok 4 saatlik antrenman ya da meditasyon süreci sonunda atılan farklı yüzlü zarlar ile, SEVİYE x 100 Deneyim Puanı'na erişmeye çalışarak seviye atlayabileceği bir sistemdir.\n\n**TEMEL NİTELİKLER**, temel gelişimin bu sistemi ile aynı biçimde ilerlese de gerektirdiği deneyim puanı bakımından çok daha ağırdır. Temel niteliklerde **KUV**, **ÇEV** ve **DAY**, sözü edilen antrenmanlarla geliştirilebilir. Ancak **İRD** ve **SZG** nitelikleri daha özel yöntemler veya antrenmanlarla gelişir. Temel niteliklerin gelişmesi için gerekli deneyim puanı formülü **SEVİYE x 500** olarak işlenir.\n\nTemel Nitelikler nezdinde, istikrarlı bir antrenman süreci takip edilmezse, antrenman gerçekleştirilmeyen günlere bağlı olarak periyodik bir gerileme süreci başlar. Karakter, bu nitelik antrenman sürecinde ne kadar deneyim puanı biriktirdiyse, periyodik gerileme miktarı o kadar azalır. Yani KUV niteliğini geliştirmeye çalışan bir karakter, 1 haftalık antrenman sonucunda 120 puan elde etmişse, 3 gün antrenmanını devam ettirmemesi durumunda, sonraki her antrenmansız gün başına d10 gerileme yaşar. Ancak bu puan miktarı 300 civarındayken, periyodik gerileme d5 civarındadır. Bu durum, sadece temel nitelikler için geçerlidir.\n\nÖzellikle temel niteliklerin geliştirilmesi oldukça uzun bir süreç alabilmektedir. Bu durum göz önünde bulundurulduğunda, bir karakterin asıl özgünlüğünü diğer becerileri ve yeteneklerinin gelişimi ile gösterebileceği belirtilebilir. Özellikle yeni bir oyuna başlanırken veya yeni bir karakter oluşturulurken, GM'in temel nitelikler için ayrı bir Deneyim Puanı havuzu belirlemesi veya oyunculara doğrudan seviye sayısıyla nitelik sınırı vermesi (2 adet +1 nitelik ve 1 adet +2 nitelik, ya da niteliklere özel 2000 Deneyim Puanı gibi...) tavsiye edilir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "ÖZEL GELİŞİM"
-            },
-            {
-              "type": "paragraph",
-              "text": "Özel gelişim, karakterlerin özel becerilerini geliştirebilecekleri bir gelişim sürecini kapsamaktadır. Bu süreç, temel gelişimdeki özel antrenmanlardan farklı olarak yaptıkça öğrenme ve gelişme modeli üstüne kuruludur. Yani, bir karakter özel becerisini kullandığı zaman attığı zar ile deneyim puanı kazanır. Bu bağlamda, temel olarak özel becerileri geliştirmek için gerekli deneyim formülü ise SEVİYE x 100 Deneyim Puanı şeklindedir. Ancak bütün özel beceriler karmaşıklık ve özellik bakımından eş olamayacağı üzere, üst seviyeler için gereken çarpan sayısı değişkendir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "YETENEK GELİŞİMİ"
-            },
-            {
-              "type": "paragraph",
-              "text": "Enerjisel ve fiziksel olarak pek çok yeteneğin temel seviyesinin üstüne çıkılabilecek şekilde geliştirilme kapasitesi vardır. Bu gelişim süreci, GM tarafından belirlenen özel bir biçimde olabilirken, bazı yetenekler için sistem kapsamında belirtilmiştir. Geliştirilebilir tipte olan yetenekleri, yetenek açıklamalarında bulunan özel bir belirteç dahilinde fark edebilirsiniz.\n\nBir yeteneği geliştirmek, kimi zaman belirli bir temel niteliğin, becerinin ya da başka bir yeteneğin sınır bir seviyede olmasını gerektirebilir. Bunun haricinde bir yeteneği geliştirmek için bir sınır ya da şart yok ise klasik gelişim formülü uygulanır. Örneğin, 3. Seviyede olan bir yeteneği geliştirerek yeni bir etki ya da özelliğini ortaya çıkarabilmek, diğer bir yandan bu yeteneğin gücünü de artırabilmek için, karakterin bu yeteneği 4. Seviyeye yükseltmesi gerekir. Eğer bu yükseltme için sistem ya da GM tarafından belirlenmiş özel bir şart ya da sınır (KUVVET 3 puan olmalı, YIKIM enerjisi 4 puan olmalı, ATICILIK becerisi 2 puan olmalı vb.) bulunmuyorsa, 4x100=400 Deneyim Puanı toplaması gerekir.\n\nGeliştirilmiş yetenekler, temel olan alt seviyelerinde kullanılabilir, ancak yüksek seviyelerinde açığa çıkan yeni etkiler ya da güçlerden faydalanmak için bu yetenekleri gelişmiş seviyelerinde kullanmak şarttır. Örnek olarak, temel seviyesi 4. Seviye olan Ateş Topu büyüsünü öğrenmiş bir karakter, bu büyünün ulaşabileceği menzili artırmak adına geliştirme yapmış durumda. Büyünün geliştirilmiş hali ile 5. Seviyede kullanma hakkı kazanırken 4. Seviye halini kullanma konusunda da hiçbir sorun yaşamamaktadır. Ancak, geliştirilmiş Ateş Topu büyüsünü 5. Seviyeye çıkardığı zaman fazladan menzile sahip bir ateş topu ortaya çıkarabilirken, 4. Seviyede kullandığında bu etkiye sahip olamaz."
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "TEMEL GELİŞİM",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Temel gelişim, karakterlerin temel becerilerini, ekipman yetkinliklerini, enerjisel yetkinliklerini ve kaynak havuzlarını geliştirebileceği süreçleri kapsamaktadır. Bu süreç, karakterin gireceği en az 1 en çok 4 saatlik antrenman ya da meditasyon süreci sonunda atılan farklı yüzlü zarlar ile, SEVİYE x 100 Deneyim Puanı'na erişmeye çalışarak seviye atlayabileceği bir sistemdir.\n\n**TEMEL NİTELİKLER**, temel gelişimin bu sistemi ile aynı biçimde ilerlese de gerektirdiği deneyim puanı bakımından çok daha ağırdır. Temel niteliklerde **KUV**, **ÇEV** ve **DAY**, sözü edilen antrenmanlarla geliştirilebilir. Ancak **İRD** ve **SZG** nitelikleri daha özel yöntemler veya antrenmanlarla gelişir. Temel niteliklerin gelişmesi için gerekli deneyim puanı formülü **SEVİYE x 500** olarak işlenir.\n\nTemel Nitelikler nezdinde, istikrarlı bir antrenman süreci takip edilmezse, antrenman gerçekleştirilmeyen günlere bağlı olarak periyodik bir gerileme süreci başlar. Karakter, bu nitelik antrenman sürecinde ne kadar deneyim puanı biriktirdiyse, periyodik gerileme miktarı o kadar azalır. Yani KUV niteliğini geliştirmeye çalışan bir karakter, 1 haftalık antrenman sonucunda 120 puan elde etmişse, 3 gün antrenmanını devam ettirmemesi durumunda, sonraki her antrenmansız gün başına d10 gerileme yaşar. Ancak bu puan miktarı 300 civarındayken, periyodik gerileme d5 civarındadır. Bu durum, sadece temel nitelikler için geçerlidir.\n\nÖzellikle temel niteliklerin geliştirilmesi oldukça uzun bir süreç alabilmektedir. Bu durum göz önünde bulundurulduğunda, bir karakterin asıl özgünlüğünü diğer becerileri ve yeteneklerinin gelişimi ile gösterebileceği belirtilebilir. Özellikle yeni bir oyuna başlanırken veya yeni bir karakter oluşturulurken, GM'in temel nitelikler için ayrı bir Deneyim Puanı havuzu belirlemesi veya oyunculara doğrudan seviye sayısıyla nitelik sınırı vermesi (2 adet +1 nitelik ve 1 adet +2 nitelik, ya da niteliklere özel 2000 Deneyim Puanı gibi...) tavsiye edilir."
+                    }
+                  ]
+                },
+                {
+                  "label": "ÖZEL GELİŞİM",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Özel gelişim, karakterlerin özel becerilerini geliştirebilecekleri bir gelişim sürecini kapsamaktadır. Bu süreç, temel gelişimdeki özel antrenmanlardan farklı olarak yaptıkça öğrenme ve gelişme modeli üstüne kuruludur. Yani, bir karakter özel becerisini kullandığı zaman attığı zar ile deneyim puanı kazanır. Bu bağlamda, temel olarak özel becerileri geliştirmek için gerekli deneyim formülü ise SEVİYE x 100 Deneyim Puanı şeklindedir. Ancak bütün özel beceriler karmaşıklık ve özellik bakımından eş olamayacağı üzere, üst seviyeler için gereken çarpan sayısı değişkendir."
+                    }
+                  ]
+                },
+                {
+                  "label": "YETENEK GELİŞİMİ",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Özel gelişim, karakterlerin özel becerilerini geliştirebilecekleri bir gelişim sürecini kapsamaktadır. Bu süreç, temel gelişimdeki özel antrenmanlardan farklı olarak yaptıkça öğrenme ve gelişme modeli üstüne kuruludur. Yani, bir karakter özel becerisini kullandığı zaman attığı zar ile deneyim puanı kazanır. Bu bağlamda, temel olarak özel becerileri geliştirmek için gerekli deneyim formülü ise SEVİYE x 100 Deneyim Puanı şeklindedir. Ancak bütün özel beceriler karmaşıklık ve özellik bakımından eş olamayacağı üzere, üst seviyeler için gereken çarpan sayısı değişkendir."
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -1444,7 +1441,7 @@ window.SLVNZ_CONTENT = {
             },
             {
               "type": "paragraph",
-              "text": "SLVNZ 3.0'da keskin hatlarıyla sınıflar bulunmasa da oyun dünyasında becerileri ve gerçekleştirebildikleri yeteneklerin sistemleri sebebiyle birbirinden ayrılabilecek sınıfsal yapılar mevcuttur. Farklı TTRPG sistemlerindeki gibi çok net ilerleme yolları olmayan bu sınıflar birbiriyle harmanlanabilir."
+              "text": "SLVNZ 4.0'da keskin hatlarıyla sınıflar bulunmasa da oyun dünyasında becerileri ve gerçekleştirebildikleri yeteneklerin sistemleri sebebiyle birbirinden ayrılabilecek sınıfsal yapılar mevcuttur. Farklı TTRPG sistemlerindeki gibi çok net ilerleme yolları olmayan bu sınıflar birbiriyle harmanlanabilir."
             },
             {
               "type": "paragraph",
@@ -1793,7 +1790,7 @@ window.SLVNZ_VERSIONS = {
           "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
           "description": "",
           "version": "v4.0",
-          "contentSeed": "2026-06-09-mq6nlaxq"
+          "contentSeed": "2026-06-22-mqpspn2p"
         },
         "sections": {
           "oyun-kurallari": {
@@ -2488,234 +2485,215 @@ window.SLVNZ_VERSIONS = {
                     ]
                   },
                   {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "ZIRH NİTELİKLERİ"
-                  },
-                  {
-                    "type": "table",
-                    "header": [
-                      "ZIRH TİPİ",
-                      "YÜK PUANI"
-                    ],
-                    "rows": [
-                      [
-                        "Zırhsız",
-                        "0"
-                      ],
-                      [
-                        "Deri Zırh",
-                        "3"
-                      ],
-                      [
-                        "Sertleştirilmiş Deri Zırh",
-                        "5"
-                      ],
-                      [
-                        "Yarım Plaka Zırh",
-                        "12"
-                      ],
-                      [
-                        "Zincir Zırh",
-                        "14"
-                      ],
-                      [
-                        "Pullu Zırh",
-                        "16"
-                      ],
-                      [
-                        "Tam Plaka Zırh",
-                        "24"
-                      ]
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "ZIRHLAR",
+                        "blocks": [
+                          {
+                            "type": "table",
+                            "header": [
+                              "ZIRH TİPİ",
+                              "YÜK PUANI"
+                            ],
+                            "rows": [
+                              [
+                                "ZIRHSIZ",
+                                "0"
+                              ],
+                              [
+                                "DERİ",
+                                "3"
+                              ],
+                              [
+                                "SERTLEŞTİRİLMİŞ DERİ",
+                                "5"
+                              ],
+                              [
+                                "YARIM PLAKA",
+                                "12"
+                              ],
+                              [
+                                "ZİNCİR",
+                                "14"
+                              ],
+                              [
+                                "PULLU",
+                                "16"
+                              ],
+                              [
+                                "TAM PLAKA",
+                                "24"
+                              ]
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Zırhlar, karakterlerin fiziksel saldırılardan ve birçok enerjisel saldırıdan korunmasına olanak sağlar. Ancak koruma seviyesi yükseldikçe, donanımlı korunma beraberinde bazı dezavantajları getirir. Bu dezavantajlar, yük puanının getireceği etkilerle sınırlı kalmayabilir. Örneğin, oyun yöneticisinin tercihine bağlı olarak, bir karakter giydiği miğferden dolayı farkındalık becerisine eksi değer alabilir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "SİLAHLAR",
+                        "blocks": [
+                          {
+                            "type": "table",
+                            "header": [
+                              "SİLAH TİPİ",
+                              "YÜK PUANI"
+                            ],
+                            "rows": [
+                              [
+                                "HANÇER",
+                                "1"
+                              ],
+                              [
+                                "SATIR",
+                                "2"
+                              ],
+                              [
+                                "KISA KILIÇ",
+                                "2"
+                              ],
+                              [
+                                "NORMAL KILIÇ",
+                                "3"
+                              ],
+                              [
+                                "UZUN KILIÇ",
+                                "3"
+                              ],
+                              [
+                                "BÜYÜK KILIÇ",
+                                "4"
+                              ],
+                              [
+                                "SAVAŞ BALTASI",
+                                "3"
+                              ],
+                              [
+                                "BÜYÜK SAVAŞ BALTASI",
+                                "4"
+                              ],
+                              [
+                                "TOPUZ / ÇEKİÇ",
+                                "3"
+                              ],
+                              [
+                                "BÜYÜK TOPUZ / ÇEKİÇ",
+                                "5"
+                              ],
+                              [
+                                "ZİNCİRLİ GÜRZ",
+                                "4"
+                              ],
+                              [
+                                "BÜYÜK ZİNCİRLİ GÜRZ",
+                                "6"
+                              ],
+                              [
+                                "MIZRAK",
+                                "3"
+                              ],
+                              [
+                                "UZUN MIZRAK",
+                                "4"
+                              ],
+                              [
+                                "PIKE",
+                                "5"
+                              ],
+                              [
+                                "YAY",
+                                "3"
+                              ],
+                              [
+                                "UZUN YAY",
+                                "4"
+                              ],
+                              [
+                                "TATAR YAYI",
+                                "5"
+                              ],
+                              [
+                                "MUSKET / TÜFEK",
+                                "5"
+                              ]
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Her silah tipinin kendine özgü niteliklerinin bulunmasının yanı sıra karakterler bu silah tipleri üzerinde antrenman yaparak kendilerini geliştirebilir, silahları daha isabetli savurma konusunda ve ileride silah tiplerine özgü farklı yeteneklere sahip olmak için ilerleyebilirler."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "KALKANLAR",
+                        "blocks": [
+                          {
+                            "type": "table",
+                            "header": [
+                              "KALKAN TİPİ",
+                              "BLOK PAYI",
+                              "YÜK PUANI"
+                            ],
+                            "rows": [
+                              [
+                                "KALKANSIZ",
+                                "0",
+                                "0"
+                              ],
+                              [
+                                "BUCKLER",
+                                "ÇEV",
+                                "1"
+                              ],
+                              [
+                                "UFAK KALKAN",
+                                "ÇEV",
+                                "2"
+                              ],
+                              [
+                                "NORMAL KALKAN*",
+                                "3",
+                                "5"
+                              ],
+                              [
+                                "KULE KALKAN",
+                                "6",
+                                "10"
+                              ]
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "(*) Tam Blok Pozu yapabilen kalkan tipi."
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Kalkanlar, zırhların yanı sıra karakterlere ekstra korunma imkânı tanıyan ekipman türüdür. Bir karakter kalkanla kullanım tarzını şekillendirerek iki farklı şekilde korunabilir. Kalkanda ve birçok yetenek içeriğinde kullanılabilecek bu ve buna benzer durumlara Poz ismi verilir. Kalkan için kullanılabilen pozlar Savaş Pozu ve Tam Blok Pozudur. Bu pozların kullanılabileceği kalkan tipleri Normal Kalkan ve Kule Kalkan tipleridir. Bunların dışında kalan diğer kalkan türleri blok için karakterin çeviklik niteliğini baz alır."
+                          },
+                          {
+                            "type": "heading",
+                            "level": 3,
+                            "text": "SAVAŞ POZU"
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Karakterin kalkanı tuttuğu normal savaş duruşudur. Bu duruşta karakter gelen saldırıyı bloke etmek için kuşanmış olduğu kalkanın blok niteliğini ve kendi sahip olduğu blok becerisini birleştirerek kullanır."
+                          },
+                          {
+                            "type": "heading",
+                            "level": 3,
+                            "text": "TAM BLOK POZU"
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Tam blok pozunda karakter, kalkanını önünü kapatacak biçimde tutacak şekilde bir duruşa geçer. Bu şekilde karakterin vücudunun dönük olduğu yönden gelen saldırılar NET BLOK gerçekleştirir. NET BLOK, karakterin bütün fiziksel saldırılardan zarar görmemesine, kalkanın hasar alması ve kolun baskı altında kalmasına sebep olur. Aşağıdan gelebilecek saldırılara karşı yine de bir savunma refleksi gerektirir.\n\nTAM BLOK pozundayken karakterin hareket kabiliyeti yarıya iner, gerçekleştireceği fiziksel saldırılara alacağı KUVVET BONUSU yok sayılır. TAM BLOK pozundayken karakter önüne, sağ çaprazına ve sağına fiziksel saldırı gerçekleştirebilir."
+                          }
+                        ]
+                      }
                     ]
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Zırhlar, karakterlerin fiziksel saldırılardan ve birçok enerjisel saldırıdan korunmasına olanak sağlar. Ancak koruma seviyesi yükseldikçe, donanımlı korunma beraberinde bazı dezavantajları getirir. Bu dezavantajlar, yük puanının getireceği etkilerle sınırlı kalmayabilir. Örneğin, oyun yöneticisinin tercihine bağlı olarak, bir karakter giydiği miğferden dolayı farkındalık becerisine eksi değer alabilir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "SİLAH NİTELİKLERİ"
-                  },
-                  {
-                    "type": "table",
-                    "header": [
-                      "Silah Tipi",
-                      "İSABET",
-                      "YÜK PUANI"
-                    ],
-                    "rows": [
-                      [
-                        "Hançer",
-                        "+3",
-                        "1"
-                      ],
-                      [
-                        "Satır",
-                        "+2",
-                        "2"
-                      ],
-                      [
-                        "Kısa Kılıç",
-                        "+1",
-                        "2"
-                      ],
-                      [
-                        "Normal Kılıç",
-                        "Çeviklik Bonusu",
-                        "3"
-                      ],
-                      [
-                        "Uzun Kılıç",
-                        "-1",
-                        "3"
-                      ],
-                      [
-                        "Büyük Kılıç",
-                        "-2",
-                        "4"
-                      ],
-                      [
-                        "Savaş Baltası",
-                        "-1",
-                        "3"
-                      ],
-                      [
-                        "Büyük Savaş Baltası",
-                        "-2",
-                        "4"
-                      ],
-                      [
-                        "Topuz / Çekiç",
-                        "-2",
-                        "3"
-                      ],
-                      [
-                        "Büyük Topuz / Çekiç",
-                        "-4",
-                        "5"
-                      ],
-                      [
-                        "Zincirli Gürz",
-                        "-3",
-                        "4"
-                      ],
-                      [
-                        "Büyük Zincirli Gürz",
-                        "-6",
-                        "5"
-                      ],
-                      [
-                        "Mızrak",
-                        "Çeviklik Bonusu",
-                        "3"
-                      ],
-                      [
-                        "Uzun Mızrak",
-                        "-2",
-                        "4"
-                      ],
-                      [
-                        "Pike",
-                        "-4",
-                        "5"
-                      ],
-                      [
-                        "Yay",
-                        "-",
-                        "3"
-                      ],
-                      [
-                        "Uzun Yay",
-                        "-",
-                        "4"
-                      ],
-                      [
-                        "Tatar Yayı",
-                        "-",
-                        "5"
-                      ],
-                      [
-                        "Musket/Tüfek",
-                        "-",
-                        "5"
-                      ]
-                    ]
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Her silah tipinin kendine özgü niteliklerinin bulunmasının yanı sıra karakterler bu silah tipleri üzerinde antrenman yaparak kendilerini geliştirebilir, silahları daha isabetli savurma konusunda ve ileride silah tiplerine özgü farklı yeteneklere sahip olmak için ilerleyebilirler."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "KALKAN NİTELİKLERİ"
-                  },
-                  {
-                    "type": "table",
-                    "header": [
-                      "Kalkan Tipi",
-                      "BLOK",
-                      "YÜK PUANI"
-                    ],
-                    "rows": [
-                      [
-                        "Kalkansız",
-                        "0",
-                        "-"
-                      ],
-                      [
-                        "Buckler",
-                        "ÇEV",
-                        "1"
-                      ],
-                      [
-                        "Ufak Kalkan",
-                        "ÇEV",
-                        "2"
-                      ],
-                      [
-                        "Normal Kalkan *",
-                        "+3",
-                        "5"
-                      ],
-                      [
-                        "Kule Kalkan",
-                        "+6",
-                        "10"
-                      ]
-                    ]
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "(*) Tam Blok Pozu yapabilen kalkan tipi."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Kalkanlar, zırhların yanı sıra karakterlere ekstra korunma imkânı tanıyan ekipman türüdür. Bir karakter kalkanla kullanım tarzını şekillendirerek iki farklı şekilde korunabilir. Kalkanda ve birçok yetenek içeriğinde kullanılabilecek bu ve buna benzer durumlara Poz ismi verilir. Kalkan için kullanılabilen pozlar Savaş Pozu ve Tam Blok Pozudur. Bu pozların kullanılabileceği kalkan tipleri Normal Kalkan ve Kule Kalkan tipleridir. Bunların dışında kalan diğer kalkan türleri blok için karakterin çeviklik niteliğini baz alır."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "SAVAŞ POZU"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterin kalkanı tuttuğu normal savaş duruşudur. Bu duruşta karakter gelen saldırıyı bloke etmek için kuşanmış olduğu kalkanın blok niteliğini ve kendi sahip olduğu blok becerisini birleştirerek kullanır."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "TAM BLOK POZU"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Tam blok pozunda karakter, kalkanını önünü kapatacak biçimde tutacak şekilde bir duruşa geçer. Bu şekilde karakterin vücudunun dönük olduğu yönden gelen saldırılar NET BLOK gerçekleştirir. NET BLOK, karakterin bütün fiziksel saldırılardan zarar görmemesine, kalkanın hasar alması ve kolun baskı altında kalmasına sebep olur. Aşağıdan gelebilecek saldırılara karşı yine de bir savunma refleksi gerektirir."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "TAM BLOK pozundayken karakterin hareket kabiliyeti yarıya iner, gerçekleştireceği fiziksel saldırılara alacağı KUVVET BONUSU yok sayılır. TAM BLOK pozundayken karakter önüne, sağ çaprazına ve sağına fiziksel saldırı gerçekleştirebilir."
                   }
                 ]
               },
@@ -2731,11 +2709,7 @@ window.SLVNZ_VERSIONS = {
                   },
                   {
                     "type": "paragraph",
-                    "text": "Karakterler tek başlarına kalkıştıkları eylemlerde başarı düzeyini belirlemek için kullandıkları zar sistemini karşılıklı girdikleri savaşlar veya mücadeleler için de kullanırlar. İki karakterin birbirine kılıç savurması, belirli enerjilerin etkisi altında bırakması, güreş tutması vb. durumlarda savaş ve mücadele sistemi devreye girer."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "En basit hali ile bunun gibi durumlarda iki taraf da birer zar kullanır. Sayısal değeri yüksek gelen taraf karşılaşmadan galip çıkar. Ancak, silahlı mücadeleler, enerji yönlendirmenin kullanıldığı durumlar gibi özel anlarda, gerçekleştirilen eylemin niteliğine göre kullanılacak zar sayıları değişmektedir."
+                    "text": "Karakterler tek başlarına kalkıştıkları eylemlerde başarı düzeyini belirlemek için kullandıkları zar sistemini karşılıklı girdikleri savaşlar veya mücadeleler için de kullanırlar. İki karakterin birbirine kılıç savurması, belirli enerjilerin etkisi altında bırakması, güreş tutması vb. durumlarda savaş ve mücadele sistemi devreye girer.\n\nEn basit hali ile bunun gibi durumlarda iki taraf da birer zar kullanır. Sayısal değeri yüksek gelen taraf karşılaşmadan galip çıkar. Ancak, silahlı mücadeleler, enerji yönlendirmenin kullanıldığı durumlar gibi özel anlarda, gerçekleştirilen eylemin niteliğine göre kullanılacak zar sayıları değişmektedir."
                   },
                   {
                     "type": "example",
@@ -2768,22 +2742,27 @@ window.SLVNZ_VERSIONS = {
                     "text": "Savaş anında karakterler genellikle saldırı eylemlerini belirlemek üzere birden fazla zar kullanırlar. Bu durumlar genellikle **ÇEVİKLİK, KUVVET, İSABET, KAYNAK KULLANIMI, ENERJİ** gibi nitelikler üzerinden belirlenir. Bir savaş anında gelişebilecek eylemler ve bu eylemler için kullanılabilecek zar sıfatları sınıflandırılabilir."
                   },
                   {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Yakın Menzilli Saldırılar"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Yakın menzilli herhangi bir silah ile saldırıda bulunan bir karakter, özel ya da ekleme bir durum olmadığı sürece iki adet zar kullanır. Bu zarlar sırayla atılmalı ya da dijital bir ortamda kullanılıyorsa gelen sonuç soldan sağa sıralanacak şekilde, ilk olarak İSABET, ikinci olarak HASAR/KUVVET olmak üzere sayısal değerlere dökülür."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Uzak Menzilli Saldırılar"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Yakın menzilli saldırılara benzer olarak, uzun menzilli saldırılarda da genel olarak iki zar kullanılır. Ancak, bahsedilen menzilli saldırı enerji yönlendirmeyi içeriyorsa, bu durumda kullanılacak zarların sayısı ikiden fazla olacak şekilde enerjisel yeteneğin özelliklerine göre değişebilmektedir. Enerjisel yetenekler dışında sıradan olarak bahsedilebilecek menzilli saldırılarda (Yay kullanımı gibi) MENZİLLİ İSABET ve KUVVET zarı kullanılır. Ancak, kuvvet gerektirmeyen bazı menzilli araçlar kullanılırken (Tatar Yayı, Musket gibi) sadece atışı isabet ettirmek için bir zar kullanılır. Bunun sebebi bu tarz menzilli silahların kendilerine özgü sabit bir hasarının bulunmasıdır."
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "YAKIN MENZİLLİ SALDIRILAR",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Yakın menzilli herhangi bir silah ile saldırıda bulunan bir karakter, özel ya da ekleme bir durum olmadığı sürece iki adet zar kullanır. Bu zarlar sırayla atılmalı ya da dijital bir ortamda kullanılıyorsa gelen sonuç soldan sağa sıralanacak şekilde, ilk olarak İSABET, ikinci olarak HASAR/KUVVET olmak üzere sayısal değerlere dökülür."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "UZAK MENZİLLİ SALDIRILAR",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Yakın menzilli saldırılara benzer olarak, uzun menzilli saldırılarda da genel olarak iki zar kullanılır. Ancak, bahsedilen menzilli saldırı enerji yönlendirmeyi içeriyorsa, bu durumda kullanılacak zarların sayısı ikiden fazla olacak şekilde enerjisel yeteneğin özelliklerine göre değişebilmektedir. Enerjisel yetenekler dışında sıradan olarak bahsedilebilecek menzilli saldırılarda (Yay kullanımı gibi) MENZİLLİ İSABET ve KUVVET zarı kullanılır. Ancak, kuvvet gerektirmeyen bazı menzilli araçlar kullanılırken (Tatar Yayı, Musket gibi) sadece atışı isabet ettirmek için bir zar kullanılır. Bunun sebebi bu tarz menzilli silahların kendilerine özgü sabit bir hasarının bulunmasıdır."
+                          }
+                        ]
+                      }
+                    ]
                   },
                   {
                     "type": "heading",
@@ -2795,22 +2774,27 @@ window.SLVNZ_VERSIONS = {
                     "text": "Karakterler kendilerine yönelmiş herhangi bir saldırıdan kaçınmak ya da korunmak üzere bir savunma zarı kullanabilirler. Bu tür zarlar genellikle **KAÇINMA, BLOKLAMA** ya da **DAYANIKLILIK** kullanılarak atılır."
                   },
                   {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "KAÇINMA"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Kaçınma durumlarında gelen saldırının isabet zarının sayısal değerini kaçınma zarı ile geçmek yeterlidir. Ancak rakibin isabet değeri ile karakterin kaçınma değeri arasındaki fark ne kadar fazla ise, karşı tarafın gerçekleştirdiği saldırının isabet ettiği nokta, rakibin saldırmak istediği noktaya o kadar yakın olmaktadır."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "BLOKLAMA"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Savaşta bloklama iki farklı temele dayanır: Silahla Bloklama & Kalkanla bloklama"
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "KAÇINMA",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Kaçınma durumlarında gelen saldırının isabet zarının sayısal değerini kaçınma zarı ile geçmek yeterlidir. Ancak rakibin isabet değeri ile karakterin kaçınma değeri arasındaki fark ne kadar fazla ise, karşı tarafın gerçekleştirdiği saldırının isabet ettiği nokta, rakibin saldırmak istediği noktaya o kadar yakın olmaktadır."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "BLOKLAMA",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Savaşta bloklama iki farklı temele dayanır: Silahla Bloklama & Kalkanla bloklama"
+                          }
+                        ]
+                      }
+                    ]
                   },
                   {
                     "type": "tabs",
@@ -2858,22 +2842,27 @@ window.SLVNZ_VERSIONS = {
                     "text": "*Enerji kullanımı iki farklı temele dayandırılır. Bu temeller, İsabet temelli ve yoğunluk temelli enerjiler olarak nitelendirilir.*"
                   },
                   {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "İsabet Temelli Enerjiler"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Tekil bir hedef belirlenerek, bu hedefe isabet ettirilmeye çalışılan enerjileri ifade eden yetenek tipleridir. Bu tip enerjilerde her zaman ilk olarak **İSABET** becerisi baz alınarak bir zar kullanılır. Sonrasında enerjiye yönelik yoğunluk ve duruma yönelik element, etki süresi vb. etkenler için ayrı zarlar kullanılabilir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Yoğunluk Temelli Enerjiler"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Genel olarak isabet gerektirmeksizin bir varlığa ya da bir bölgeye yoğunlaşarak belirli bir etkinin oluşturulmaya çalışıldığı enerjilerdir. Bu tür enerjiler, zihinsel saldırılar, bir alanda patlama, yanma, erime vb. etkiler oluşturma, bir madde üstünde farklı etkilere sebep olma gibi durumları içermektedir. İsabet temelli enerjilerde olduğu gibi yoğunluk temelli enerjilerde de duruma göre alan, etki süresi, mesafe gibi farklı etkenler göz önünde bulundurularak farklı zar kullanımları eklenebilir."
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "İSABET TEMELLİ ENERJİLER",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Tekil bir hedef belirlenerek, bu hedefe isabet ettirilmeye çalışılan enerjileri ifade eden yetenek tipleridir. Bu tip enerjilerde her zaman ilk olarak **İSABET** becerisi baz alınarak bir zar kullanılır. Sonrasında enerjiye yönelik yoğunluk ve duruma yönelik element, etki süresi vb. etkenler için ayrı zarlar kullanılabilir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "YOĞUNLUK TEMELLİ ENERJİLER",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Genel olarak isabet gerektirmeksizin bir varlığa ya da bir bölgeye yoğunlaşarak belirli bir etkinin oluşturulmaya çalışıldığı enerjilerdir. Bu tür enerjiler, zihinsel saldırılar, bir alanda patlama, yanma, erime vb. etkiler oluşturma, bir madde üstünde farklı etkilere sebep olma gibi durumları içermektedir. İsabet temelli enerjilerde olduğu gibi yoğunluk temelli enerjilerde de duruma göre alan, etki süresi, mesafe gibi farklı etkenler göz önünde bulundurularak farklı zar kullanımları eklenebilir."
+                          }
+                        ]
+                      }
+                    ]
                   },
                   {
                     "type": "heading",
@@ -2898,7 +2887,7 @@ window.SLVNZ_VERSIONS = {
                   },
                   {
                     "type": "paragraph",
-                    "text": "SLVNZ 3.0'ın temel mücadele eylemlerinin ve hareketlerinin işlenmesinin temellerini **ALTIGEN** savaş sistemi oluşturur. Savaş sisteminde varlıkların her biri bir Altıgen içinde (Hex) yer alırlar ve birimlerin hareketleri, gerçekleşecek eylemlerin mesafeleri ve kapsayacakları alanlar **BİRİM** olarak belirlenmiş tekil altıgen yuvalar üzerinden hesaplanır."
+                    "text": "SLVNZ 4.0'ın temel mücadele eylemlerinin ve hareketlerinin işlenmesinin temellerini **ALTIGEN** savaş sistemi oluşturur. Savaş sisteminde varlıkların her biri bir Altıgen içinde (Hex) yer alırlar ve birimlerin hareketleri, gerçekleşecek eylemlerin mesafeleri ve kapsayacakları alanlar **BİRİM** olarak belirlenmiş tekil altıgen yuvalar üzerinden hesaplanır."
                   },
                   {
                     "type": "heading",
@@ -3153,31 +3142,36 @@ window.SLVNZ_VERSIONS = {
                     "text": "Karakterin gerçekleştirmek istediği antrenman türü GM tarafına önerilir ve kabul edilirse, karakter oyun süresince 3 saatlik bir çalışma süresine girer. Bu çalışma süresi boyunca arada verilen molalar haricinde bir kesinti yaşanması durumunda GM inisiyatifi ile deneyim puanı için kullanılacak zar türü değişebilir.\n\nKarakterler girdikleri antrenman sonucunda +1 Yorgunluk Durumu puanı alırlar. Karakter yorgunken bir antrenman daha yapacak olursa bu durum karaktere +1 Yorgun Durumu puanı daha ekler. Bir karakterin yorgunluk durumu 2 puan veya daha fazla ise, antrenman yapamaz.\n\nKarakterler zihinsel ve fiziksel olarak yorgunluk durumuna girebilirler. Meditasyon gibi eylemler dışında, bir karakterin enerjisel yetenekleri üstünde çalışması da vücuttaki enerji akışından dolayı karakteri fiziksel bir yorgunluğa sürükleyebilir. Bundan dolayı GM ile anlaşılarak belirlenen belirli antrenman türleri dışında enerjisel ve fiziksel yetenekler üstünde geliştirme çalışmaları karakteri 6 saat sonunda yoracaktır.\n\nKarakterlerin gelişim süreçleri iki farklı kolda ve formüle ayrılmıştır. Bunlar Temel Gelişim ve Özel Gelişimdir."
                   },
                   {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "TEMEL GELİŞİM"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Temel gelişim, karakterlerin temel becerilerini, ekipman yetkinliklerini, enerjisel yetkinliklerini ve kaynak havuzlarını geliştirebileceği süreçleri kapsamaktadır. Bu süreç, karakterin gireceği en az 1 en çok 4 saatlik antrenman ya da meditasyon süreci sonunda atılan farklı yüzlü zarlar ile, SEVİYE x 100 Deneyim Puanı'na erişmeye çalışarak seviye atlayabileceği bir sistemdir.\n\n**TEMEL NİTELİKLER**, temel gelişimin bu sistemi ile aynı biçimde ilerlese de gerektirdiği deneyim puanı bakımından çok daha ağırdır. Temel niteliklerde **KUV**, **ÇEV** ve **DAY**, sözü edilen antrenmanlarla geliştirilebilir. Ancak **İRD** ve **SZG** nitelikleri daha özel yöntemler veya antrenmanlarla gelişir. Temel niteliklerin gelişmesi için gerekli deneyim puanı formülü **SEVİYE x 500** olarak işlenir.\n\nTemel Nitelikler nezdinde, istikrarlı bir antrenman süreci takip edilmezse, antrenman gerçekleştirilmeyen günlere bağlı olarak periyodik bir gerileme süreci başlar. Karakter, bu nitelik antrenman sürecinde ne kadar deneyim puanı biriktirdiyse, periyodik gerileme miktarı o kadar azalır. Yani KUV niteliğini geliştirmeye çalışan bir karakter, 1 haftalık antrenman sonucunda 120 puan elde etmişse, 3 gün antrenmanını devam ettirmemesi durumunda, sonraki her antrenmansız gün başına d10 gerileme yaşar. Ancak bu puan miktarı 300 civarındayken, periyodik gerileme d5 civarındadır. Bu durum, sadece temel nitelikler için geçerlidir.\n\nÖzellikle temel niteliklerin geliştirilmesi oldukça uzun bir süreç alabilmektedir. Bu durum göz önünde bulundurulduğunda, bir karakterin asıl özgünlüğünü diğer becerileri ve yeteneklerinin gelişimi ile gösterebileceği belirtilebilir. Özellikle yeni bir oyuna başlanırken veya yeni bir karakter oluşturulurken, GM'in temel nitelikler için ayrı bir Deneyim Puanı havuzu belirlemesi veya oyunculara doğrudan seviye sayısıyla nitelik sınırı vermesi (2 adet +1 nitelik ve 1 adet +2 nitelik, ya da niteliklere özel 2000 Deneyim Puanı gibi...) tavsiye edilir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "ÖZEL GELİŞİM"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Özel gelişim, karakterlerin özel becerilerini geliştirebilecekleri bir gelişim sürecini kapsamaktadır. Bu süreç, temel gelişimdeki özel antrenmanlardan farklı olarak yaptıkça öğrenme ve gelişme modeli üstüne kuruludur. Yani, bir karakter özel becerisini kullandığı zaman attığı zar ile deneyim puanı kazanır. Bu bağlamda, temel olarak özel becerileri geliştirmek için gerekli deneyim formülü ise SEVİYE x 100 Deneyim Puanı şeklindedir. Ancak bütün özel beceriler karmaşıklık ve özellik bakımından eş olamayacağı üzere, üst seviyeler için gereken çarpan sayısı değişkendir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "YETENEK GELİŞİMİ"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Enerjisel ve fiziksel olarak pek çok yeteneğin temel seviyesinin üstüne çıkılabilecek şekilde geliştirilme kapasitesi vardır. Bu gelişim süreci, GM tarafından belirlenen özel bir biçimde olabilirken, bazı yetenekler için sistem kapsamında belirtilmiştir. Geliştirilebilir tipte olan yetenekleri, yetenek açıklamalarında bulunan özel bir belirteç dahilinde fark edebilirsiniz.\n\nBir yeteneği geliştirmek, kimi zaman belirli bir temel niteliğin, becerinin ya da başka bir yeteneğin sınır bir seviyede olmasını gerektirebilir. Bunun haricinde bir yeteneği geliştirmek için bir sınır ya da şart yok ise klasik gelişim formülü uygulanır. Örneğin, 3. Seviyede olan bir yeteneği geliştirerek yeni bir etki ya da özelliğini ortaya çıkarabilmek, diğer bir yandan bu yeteneğin gücünü de artırabilmek için, karakterin bu yeteneği 4. Seviyeye yükseltmesi gerekir. Eğer bu yükseltme için sistem ya da GM tarafından belirlenmiş özel bir şart ya da sınır (KUVVET 3 puan olmalı, YIKIM enerjisi 4 puan olmalı, ATICILIK becerisi 2 puan olmalı vb.) bulunmuyorsa, 4x100=400 Deneyim Puanı toplaması gerekir.\n\nGeliştirilmiş yetenekler, temel olan alt seviyelerinde kullanılabilir, ancak yüksek seviyelerinde açığa çıkan yeni etkiler ya da güçlerden faydalanmak için bu yetenekleri gelişmiş seviyelerinde kullanmak şarttır. Örnek olarak, temel seviyesi 4. Seviye olan Ateş Topu büyüsünü öğrenmiş bir karakter, bu büyünün ulaşabileceği menzili artırmak adına geliştirme yapmış durumda. Büyünün geliştirilmiş hali ile 5. Seviyede kullanma hakkı kazanırken 4. Seviye halini kullanma konusunda da hiçbir sorun yaşamamaktadır. Ancak, geliştirilmiş Ateş Topu büyüsünü 5. Seviyeye çıkardığı zaman fazladan menzile sahip bir ateş topu ortaya çıkarabilirken, 4. Seviyede kullandığında bu etkiye sahip olamaz."
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "TEMEL GELİŞİM",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Temel gelişim, karakterlerin temel becerilerini, ekipman yetkinliklerini, enerjisel yetkinliklerini ve kaynak havuzlarını geliştirebileceği süreçleri kapsamaktadır. Bu süreç, karakterin gireceği en az 1 en çok 4 saatlik antrenman ya da meditasyon süreci sonunda atılan farklı yüzlü zarlar ile, SEVİYE x 100 Deneyim Puanı'na erişmeye çalışarak seviye atlayabileceği bir sistemdir.\n\n**TEMEL NİTELİKLER**, temel gelişimin bu sistemi ile aynı biçimde ilerlese de gerektirdiği deneyim puanı bakımından çok daha ağırdır. Temel niteliklerde **KUV**, **ÇEV** ve **DAY**, sözü edilen antrenmanlarla geliştirilebilir. Ancak **İRD** ve **SZG** nitelikleri daha özel yöntemler veya antrenmanlarla gelişir. Temel niteliklerin gelişmesi için gerekli deneyim puanı formülü **SEVİYE x 500** olarak işlenir.\n\nTemel Nitelikler nezdinde, istikrarlı bir antrenman süreci takip edilmezse, antrenman gerçekleştirilmeyen günlere bağlı olarak periyodik bir gerileme süreci başlar. Karakter, bu nitelik antrenman sürecinde ne kadar deneyim puanı biriktirdiyse, periyodik gerileme miktarı o kadar azalır. Yani KUV niteliğini geliştirmeye çalışan bir karakter, 1 haftalık antrenman sonucunda 120 puan elde etmişse, 3 gün antrenmanını devam ettirmemesi durumunda, sonraki her antrenmansız gün başına d10 gerileme yaşar. Ancak bu puan miktarı 300 civarındayken, periyodik gerileme d5 civarındadır. Bu durum, sadece temel nitelikler için geçerlidir.\n\nÖzellikle temel niteliklerin geliştirilmesi oldukça uzun bir süreç alabilmektedir. Bu durum göz önünde bulundurulduğunda, bir karakterin asıl özgünlüğünü diğer becerileri ve yeteneklerinin gelişimi ile gösterebileceği belirtilebilir. Özellikle yeni bir oyuna başlanırken veya yeni bir karakter oluşturulurken, GM'in temel nitelikler için ayrı bir Deneyim Puanı havuzu belirlemesi veya oyunculara doğrudan seviye sayısıyla nitelik sınırı vermesi (2 adet +1 nitelik ve 1 adet +2 nitelik, ya da niteliklere özel 2000 Deneyim Puanı gibi...) tavsiye edilir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "ÖZEL GELİŞİM",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Özel gelişim, karakterlerin özel becerilerini geliştirebilecekleri bir gelişim sürecini kapsamaktadır. Bu süreç, temel gelişimdeki özel antrenmanlardan farklı olarak yaptıkça öğrenme ve gelişme modeli üstüne kuruludur. Yani, bir karakter özel becerisini kullandığı zaman attığı zar ile deneyim puanı kazanır. Bu bağlamda, temel olarak özel becerileri geliştirmek için gerekli deneyim formülü ise SEVİYE x 100 Deneyim Puanı şeklindedir. Ancak bütün özel beceriler karmaşıklık ve özellik bakımından eş olamayacağı üzere, üst seviyeler için gereken çarpan sayısı değişkendir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "YETENEK GELİŞİMİ",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Özel gelişim, karakterlerin özel becerilerini geliştirebilecekleri bir gelişim sürecini kapsamaktadır. Bu süreç, temel gelişimdeki özel antrenmanlardan farklı olarak yaptıkça öğrenme ve gelişme modeli üstüne kuruludur. Yani, bir karakter özel becerisini kullandığı zaman attığı zar ile deneyim puanı kazanır. Bu bağlamda, temel olarak özel becerileri geliştirmek için gerekli deneyim formülü ise SEVİYE x 100 Deneyim Puanı şeklindedir. Ancak bütün özel beceriler karmaşıklık ve özellik bakımından eş olamayacağı üzere, üst seviyeler için gereken çarpan sayısı değişkendir."
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               },
@@ -3221,7 +3215,7 @@ window.SLVNZ_VERSIONS = {
                   },
                   {
                     "type": "paragraph",
-                    "text": "SLVNZ 3.0'da keskin hatlarıyla sınıflar bulunmasa da oyun dünyasında becerileri ve gerçekleştirebildikleri yeteneklerin sistemleri sebebiyle birbirinden ayrılabilecek sınıfsal yapılar mevcuttur. Farklı TTRPG sistemlerindeki gibi çok net ilerleme yolları olmayan bu sınıflar birbiriyle harmanlanabilir."
+                    "text": "SLVNZ 4.0'da keskin hatlarıyla sınıflar bulunmasa da oyun dünyasında becerileri ve gerçekleştirebildikleri yeteneklerin sistemleri sebebiyle birbirinden ayrılabilecek sınıfsal yapılar mevcuttur. Farklı TTRPG sistemlerindeki gibi çok net ilerleme yolları olmayan bu sınıflar birbiriyle harmanlanabilir."
                   },
                   {
                     "type": "paragraph",
@@ -3568,7 +3562,7 @@ window.SLVNZ_VERSIONS = {
           "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
           "description": "",
           "version": "v3.0",
-          "contentSeed": "2026-06-09-mq6nlaxq"
+          "contentSeed": "2026-06-22-mqpspn2p"
         },
         "sections": {
           "oyun-kurallari": {
