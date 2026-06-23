@@ -1,5 +1,5 @@
 /* ============================================================
-   SLVNZ 4.0 — content.js  (editörden üretildi: 23.06.2026 15:18:15)
+   SLVNZ 4.0 — content.js  (editörden üretildi: 24.06.2026 00:53:51)
    Bu metni content.js dosyasının TAMAMIYLA değiştir.
    ============================================================ */
 
@@ -16,7 +16,7 @@ window.SLVNZ_CONTENT = {
     "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
     "description": "",
     "version": "v4.0",
-    "contentSeed": "2026-06-23-mqqm1jy1"
+    "contentSeed": "2026-06-23-mqr6lrtp"
   },
   "sections": {
     "oyun-kurallari": {
@@ -1646,6 +1646,399 @@ window.SLVNZ_CONTENT = {
           ]
         },
         {
+          "id": "savas-mucadele",
+          "title": "SAVAŞ & MÜCADELE",
+          "mode": "rich",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "SAVAŞ & MÜCADELE"
+            },
+            {
+              "type": "paragraph",
+              "text": "Karakterler tek başlarına kalkıştıkları eylemlerde başarı düzeyini belirlemek için kullandıkları zar sistemini karşılıklı girdikleri savaşlar veya mücadeleler için de kullanırlar. İki karakterin birbirine kılıç savurması, belirli enerjilerin etkisi altında bırakması, güreş tutması vb. durumlarda savaş ve mücadele sistemi devreye girer.\n\nEn basit hali ile bunun gibi durumlarda iki taraf da birer zar kullanır. Sayısal değeri yüksek gelen taraf karşılaşmadan galip çıkar. Ancak, silahlı mücadeleler, enerji yönlendirmenin kullanıldığı durumlar gibi özel anlarda, gerçekleştirilen eylemin niteliğine göre kullanılacak zar sayıları değişmektedir."
+            },
+            {
+              "type": "example",
+              "text": "Örneğin, birbirine karşı çift elli kılıçlarla savaşan iki karakterin mücadelesinde; kılıcı savuran taraf, kılıcın isabetini belirlemek için bir zar, kılıcı savurma kuvvetini belirlemek için ise ikinci bir zar kullanır. **Fiziksel zarlar ile oynanan bir ortamda bu zarların sırayla atılması tavsiye edilir.** Dijital çevrimiçi bir ortamda ise topluca atılabilir, ancak gelen sonuçlar soldan sağa sıralanacak şekilde önce isabet, ardından kuvvet şeklinde olmalıdır."
+            },
+            {
+              "type": "paragraph",
+              "text": "Yukarıdaki anlatım ışığında, savaş ve mücadele durumlarında takip edilebilecek durumlar şu şekilde birbirinden ayrılabilir:"
+            },
+            {
+              "type": "heading",
+              "level": 3,
+              "text": "SIRADAN MÜCADELE"
+            },
+            {
+              "type": "paragraph",
+              "text": "Sıradan mücadeleler; güreş tutma, birbirini engelleme, yalan söyleme, ikna etme gibi karşılıklı başarma ve kaybetme durumları değerlendirilir. Bu durumlarda genellikle iki taraf da birer adet zar kullanır. Yardımcı puanlarla birlikte sayısal üstünlüğe sahip olan taraf mücadelenin galibi olur."
+            },
+            {
+              "type": "example",
+              "text": "Majik, kalabalık bir sokakta dolaşırken dalgın yürüyen bir adamın cebinden altın kesesini almaya çalışmak için El Çabukluğu özel becerisini kullanır. Buna karşılık dalgın adam için bu durumu zamanında fark edip etmeyeceğini belirlemek için FARKINDALIK beceri zarı kullanılır."
+            },
+            {
+              "type": "heading",
+              "level": 3,
+              "text": "SAVAŞ"
+            },
+            {
+              "type": "paragraph",
+              "text": "Savaş anında karakterler genellikle saldırı eylemlerini belirlemek üzere birden fazla zar kullanırlar. Bu durumlar genellikle **ÇEVİKLİK, KUVVET, İSABET, KAYNAK KULLANIMI, ENERJİ** gibi nitelikler üzerinden belirlenir. Bir savaş anında gelişebilecek eylemler ve bu eylemler için kullanılabilecek zar sıfatları sınıflandırılabilir."
+            },
+            {
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "YAKIN MENZİLLİ SALDIRILAR",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Yakın menzilli herhangi bir silah ile saldırıda bulunan bir karakter, özel ya da ekleme bir durum olmadığı sürece iki adet zar kullanır. Bu zarlar sırayla atılmalı ya da dijital bir ortamda kullanılıyorsa gelen sonuç soldan sağa sıralanacak şekilde, ilk olarak İSABET, ikinci olarak HASAR/KUVVET olmak üzere sayısal değerlere dökülür."
+                    }
+                  ]
+                },
+                {
+                  "label": "UZAK MENZİLLİ SALDIRILAR",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Yakın menzilli saldırılara benzer olarak, uzun menzilli saldırılarda da genel olarak iki zar kullanılır. Ancak, bahsedilen menzilli saldırı enerji yönlendirmeyi içeriyorsa, bu durumda kullanılacak zarların sayısı ikiden fazla olacak şekilde enerjisel yeteneğin özelliklerine göre değişebilmektedir. Enerjisel yetenekler dışında sıradan olarak bahsedilebilecek menzilli saldırılarda (Yay kullanımı gibi) MENZİLLİ İSABET ve KUVVET zarı kullanılır. Ancak, kuvvet gerektirmeyen bazı menzilli araçlar kullanılırken (Tatar Yayı, Musket gibi) sadece atışı isabet ettirmek için bir zar kullanılır. Bunun sebebi bu tarz menzilli silahların kendilerine özgü sabit bir hasarının bulunmasıdır."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 3,
+              "text": "Savunma"
+            },
+            {
+              "type": "paragraph",
+              "text": "Karakterler kendilerine yönelmiş herhangi bir saldırıdan kaçınmak ya da korunmak üzere bir savunma zarı kullanabilirler. Bu tür zarlar genellikle **KAÇINMA, BLOKLAMA** ya da **DAYANIKLILIK** kullanılarak atılır."
+            },
+            {
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "KAÇINMA",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Kaçınma durumlarında gelen saldırının isabet zarının sayısal değerini kaçınma zarı ile geçmek yeterlidir. Ancak rakibin isabet değeri ile karakterin kaçınma değeri arasındaki fark ne kadar fazla ise, karşı tarafın gerçekleştirdiği saldırının isabet ettiği nokta, rakibin saldırmak istediği noktaya o kadar yakın olmaktadır."
+                    }
+                  ]
+                },
+                {
+                  "label": "BLOKLAMA",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Savaşta bloklama iki farklı temele dayanır: Silahla Bloklama & Kalkanla bloklama"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "SİLAHLA BLOKLAMA",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Karakterler kendilerine yönelen yakın menzilli saldırıları silahlarıyla bloklamayı tercih edebilirler. Bir karakterin silahla bloklama yapabilmesi için bu beceri konusunda yetkinlik sahibi olması gerekir. \n\nSilahla gerçekleştirilecek bloklama hamleleri, karakterlerin **çeviklik** ve ilgili silaha yönelik **blok becerisi** üzerinden hesaplanır. Bir karakter, silahıyla bir saldırıyı bloklayabilmesi durumunda *soluk* tüketir."
+                    }
+                  ]
+                },
+                {
+                  "label": "KALKANLA BLOKLAMA",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Bir karakter, kuşanmış olduğu kalkan türüne göre farklı şekillerde bloklama gerçekleştirebilir. Buckler ve küçük boyutta karakteri tamamen kapatmayan hafif kalkanlar, karakterin *çeviklik* niteliği ve *kalkan blok* becerilerinin toplamıyla belirlenir. Bu kalkan türlerinde mevcut blok zarının aşılması durumunda darbe doğrudan karaktere ulaşır.\n\nAncak Orta, Büyük ve Kule Kalkan gibi daha büyük kalkan türlerinde, çeviklik değeri alınmadan sadece ilgili kalkanın blok becerisi ile bir hesaplama gerçekleştirilir. Bloklama durumunda, bloklayan karakter *soluk tüketir* ancak saldırının kendisine ulaşmasını engellemiş olur. Bloklama yapan karakterin blok zarının aşılması durumunda, 6 puanlık farka kadar karakter bloklamayı gerçekleştirebilir, uygulanan kuvvetten bağımsız olarak aşılan fark sebebiyle fazladan soluk tüketir."
+                    },
+                    {
+                      "type": "heading",
+                      "level": 3,
+                      "text": "TAM BLOK POZU"
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Karakterler, Orta ve daha büyük kalkan türleri ile *tam blok* pozuna geçiş yapabilirler. Bu poza geçiş yapmak bir eylemdir. Bir karakter tam blok pozundayken,\n\n- Hareket mesafesi yarıya düşer.\n- Çevresel farkındalığı azalır.\n- Soluğunu toparlayamaz.\n- Gerçekleştireceği yakın mesafeli fiziksel saldırılar dezavantajlı kuvvet ve isabet alır.\n- Uzak menzilli enerjisel veya fiziksel saldırı gerçekleştiremez.\n+ Kalkanıyla baktığı yönden gelecek bütün fiziksel saldırıları garanti bir şekilde bloklar.\n\nKarakter, soluğu kesilene veya kendisi bozana kadar turlar boyunca tam blok pozunu koruyabilir. Ancak kendi isteğiyle tam blok pozundan çıkması durumunda, bir sonraki turuna kadar tam blok pozuna tekrar giremez (Pozdan çıkmak ek eylemdir)."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 3,
+              "text": "ENERJİSEL YETENEK KULLANIMI"
+            },
+            {
+              "type": "paragraph",
+              "text": "Enerjinin yönlendirilmesi ve kullanımı basit formlarda başlasa da geliştikçe karmaşıklaşan, dolayısıyla zar kullanımı açısından da farklı yaklaşımlar isteyebilen bir durumdur. Çoğu enerji kullanımı için iki ya da üç zar kullanılsa da büyünün tanımı ya da işlevi özelleştikçe, bu işleve uyum sağlamak adına enerji kullanımına farklı türde zarlar eklenebilir."
+            },
+            {
+              "type": "paragraph",
+              "text": "*Enerji kullanımı iki farklı temele dayandırılır. Bu temeller, İsabet temelli ve yoğunluk temelli enerjiler olarak nitelendirilir.*"
+            },
+            {
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "İSABET TEMELLİ ENERJİLER",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Tekil bir hedef belirlenerek, bu hedefe isabet ettirilmeye çalışılan enerjileri ifade eden yetenek tipleridir. Bu tip enerjilerde her zaman ilk olarak **İSABET** becerisi baz alınarak bir zar kullanılır. Sonrasında enerjiye yönelik yoğunluk ve duruma yönelik element, etki süresi vb. etkenler için ayrı zarlar kullanılabilir."
+                    }
+                  ]
+                },
+                {
+                  "label": "YOĞUNLUK TEMELLİ ENERJİLER",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Genel olarak isabet gerektirmeksizin bir varlığa ya da bir bölgeye yoğunlaşarak belirli bir etkinin oluşturulmaya çalışıldığı enerjilerdir. Bu tür enerjiler, zihinsel saldırılar, bir alanda patlama, yanma, erime vb. etkiler oluşturma, bir madde üstünde farklı etkilere sebep olma gibi durumları içermektedir. İsabet temelli enerjilerde olduğu gibi yoğunluk temelli enerjilerde de duruma göre alan, etki süresi, mesafe gibi farklı etkenler göz önünde bulundurularak farklı zar kullanımları eklenebilir."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 3,
+              "text": "MÜCADELEDE ODAK & KONSANTRASYON"
+            },
+            {
+              "type": "paragraph",
+              "text": "Fiziksel ya da enerjisel bir yeteneğini odak/konsantrasyon durumunda bulundurmak, karakterlerin bu durumlara yönelik yuvalarını dolduran eylemlerdir. İki durum da birbirine süreç olarak benzerlik gösterebilse de bu durumların korunması konusu birbirinden farklılık gösterebilir."
+            }
+          ]
+        },
+        {
+          "id": "savas-sistemi",
+          "title": "SAVAŞ SİSTEMİ",
+          "mode": "rich",
+          "blocks": [
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "SAVAŞ SİSTEMİ"
+            },
+            {
+              "type": "heading",
+              "level": 3,
+              "text": "SAVAŞ DÜZENİ"
+            },
+            {
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "KARE SAVAŞ DÜZENİ",
+                  "blocks": [
+                    {
+                      "type": "image",
+                      "src": "https://slvnz.github.io/resources/webpage/svg/square-battle.svg",
+                      "alt": "",
+                      "caption": "Kare savaş düzeni",
+                      "width": "300"
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Kare savaş sistemi, SLVNZ 4.0'ın mücadele eylemlerinin ve hareketlerinin işlenmesi için temeli oluşturur. Savaş sisteminde varlıkların her biri bir Kare içinde yer alırlar ve birimlerin hareketleri, gerçekleşecek eylemlerin mesafeleri ve kapsayacakları alanlar birim olarak belirlenmiş tekil kare yuvalar üzerinden hesaplanır.\n\nSavaş düzeninde, karakterin baktığı yöndeki ve bu yönün içerdiği birimin sağ ve sol bitişiğindeki birimler **net alan** olarak isimlendirilir."
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Karakter, net alandaki varlıklara normal şekilde fiziksel saldırıda bulunabilir.",
+                        "Karakter, net alandan alacağı saldırılara karşı normal şekilde savunma & kaçınma hamleleri yapabilir."
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Savaş düzeninde net alan, net alanlardan karakterin çevresine doğru dolaşırken **SOL** ve **SAĞ** birimler bulunur."
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Karakter, **BU ALANLARDAN** gelen fiziksel saldırılara karşı savunma yapmak için herhangi bir eksi puan almaz. Ancak saldırıyı savuşturma veya saldırıdan kaçınma süreçleri koşullara bağlı olarak değişiklik gösterir.",
+                        "Karakter, elinin boş bulunduğu taraftan gelen bir saldırıya karşı kaçınma yapmak zorundadır. Saldırının geldiği taraftaki elinde en az orta boy kalkan bulunduruyorsa, bloklamayı avantajlı gerçekleştirir.",
+                        "Karakter, altıgen sisteminde olduğu gibi sadece net alan sınırlarında bulunan varlıklara herhangi bir şekilde bakış yönünü değiştirmeden saldırıda bulunabilir. Ancak, silah bulundurduğu elinin olduğu tarafa da bakış açısını değiştirmeden saldırıda bulunabilir (Sol elinde silah bulunduran biri sol tarafa saldırabilir, ancak sağ tarafa saldırmak için o bölgeye net alan olacak şekilde yüzünü dönmelidir).",
+                        "Karakter, bu alanlardan gelecek menzilli fiziksel saldırıların farkındadır ve yukarıdaki kuralları gözeterek savunma & kaçınma yapabilir."
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Karakterin baktığı yönün sağ ve sol arkasındaki birimler **eşik alan** olarak isimlendirilir."
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Karakter, eşik alandan gelen yakın mesafeli fiziksel saldırılara karşı -2 negatif değer alarak savunma gerçekleştirir.",
+                        "Karakter, eşik alan tarafından gelecek uzun menzilli fiziksel saldırıyı yapacak kişinin orada olduğunun farkındaysa, gelen saldırıya karşı farkındalık zarı kullanır. Farkındalık 10'dan yüksek gelirse gelen fiziksel menzilli saldırıyı fark ederek kaçınmaya çalışabilir. Saldıranın okçuluk/atıcılık/isabet/nişancılık ve kuvvet yüksekliğine bağlı olarak saldırının başarı düzeyi belirlenir."
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Karakterin baktığı yönün tam tersinde — yani arkasında — kalan birim **kör alan** olarak isimlendirilir."
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Karakter, kör alandan gelen yakın mesafeli fiziksel saldırılara karşı, eğer saldırıyı yapan kişinin arkasında olduğunun farkındaysa dezavantaj ile kaçınma gerçekleştirmeye çalışır. **Bloklama** şeklinde bir savunma bu pozisyona karşı gerçekleştirilemez.",
+                        "Karakter, kör alandan gelecek fiziksel bir uzak menzilli saldırıya karşı başka bir varlık tarafından tepki olarak uyarılmıyor veya buna özel bir sistemi yoksa savunma veya kaçınma gerçekleştiremez."
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "BLOK SİSTEMİ",
+                  "blocks": [
+                    {
+                      "type": "image",
+                      "src": "https://slvnz.github.io/resources/webpage/svg/square-block.svg",
+                      "alt": "",
+                      "caption": "Kare blok sistemi",
+                      "width": "300"
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Fiziksel mücadelelerde kaçınma genel bir standarda sahip basit bir yapıda olsa da bir kalkanla bloklamanın koşullara bağlı değişkenlikleri bulunmaktadır. Bu değişkenler dahilinde, bloklama sistemi kare ve altıgen sistem üzerinde farklılıklarıyla incelenebilir. Kalkanlar genel kullanım şekilleriyle sol elde kuşanıldıkları için, şemalar sol kullanım üzerinden bir görsellik sunmaktadır. Kalkanın diğer tarafta kullanım durumunda, aynı sistem karakterin sağ tarafı için geçerlidir."
+                    },
+                    {
+                      "type": "heading",
+                      "level": 3,
+                      "text": "KÜÇÜK KALKANLAR & SİLAHLAR"
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Küçük kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahip olmadıkları için çoğunlukla bireysel ölçekte fiziksel saldırıları engellemek ve savuşturmak üzere kullanılır. Sonuçları bire bir aynı olmasa da silahlar ve küçük kalkanlar aynı sistem yapısına tabidir."
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Küçük kalkanlar bloklamak için ek puanlarını karakterin **ÇEV** niteliğinden edinirler.",
+                        "Silahlar bu ek puanı kendilerine ait özel **BLOK** niteliğinden edinirler.",
+                        "Daha büyük boyutta kalkanlarda bloklama eyleminin zarı düşük kalsa bile arada oluşacak puan farkına bağlı olarak kısmi başarı sağlanabilirken, silahlar ve küçük kalkanlarda kaçınma durumundaki gibi başarısız olunur."
+                      ]
+                    },
+                    {
+                      "type": "heading",
+                      "level": 3,
+                      "text": "ORTA KALKANLAR"
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Orta kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahiptir. Bu özellikler hem ağırlıkları hem de büyüklükleri sebebiyle karakterin hareket kabiliyeti üzerinde olumsuz etkilere sebep olmaktadır. Ancak, bu duruma karşılık karaktere gelecek fiziksel hamlelere karşı korunak sağlamaktadır."
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Orta kalkan kullanan bir karakter, **NORMAL ALANLAR** tarafından gelecek yakın menzilli fiziksel saldırılara karşı normal şekilde **BLOK BONUSU** edinerek bloklama yapabilir (Kalkandan gelecek blok aşırtma sınırı).",
+                        "Eğer karaktere gelecek saldırı **NET ALAN** tarafından geliyorsa, karakter bloklama eylemine **AVANTAJ** alır.",
+                        "Eğer karaktere gelecek saldırı zor alan tarafından geliyorsa, karakter bloklama eylemine **DEZAVANTAJ** alır."
+                      ]
+                    },
+                    {
+                      "type": "heading",
+                      "level": 3,
+                      "text": "KULE KALKANLAR"
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Kule kalkanlar, karakterlerin hareketlerini ve **ÇEV** niteliklerini önemli ölçüde düşürürken korunak durumunu aynı ölçüde yükselten yapıya sahiptir. Bir karakter, orta kalkanlarda olduğu gibi kule kalkanlarda da blok bonusu becerisi üzerinden bloklama gerçekleştirir, ancak kule kalkanı tam blok pozuna geçirdiği zaman stamina değeri tükenene ya da kalkan işlev görmez hale gelene kadar saldırıları kesinlikle bloklar."
+                    },
+                    {
+                      "type": "heading",
+                      "level": 3,
+                      "text": "BLOKLAMADA DAYANIKLILIK"
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Bloklama, karaktere üstün korunak sağlasa da karakter tarafından kaynak kullanımı denetimi gerektiren bir süreçtir. Bir karakter, saldırı blokladıkça kalkanı üzerinde hasar alır. Kalkanın materyalinin zarar görmesinin yanı sıra, karakter arka arkaya kuvvetli saldırılar bloklamaya başlarsa DAY niteliği üzerinden bir mücadeleye girer. Bu mücadelede, bloklanan her kuvvetli saldırı sonrasında karakterin bir miktar soluk kaynağı geçici olarak tükenmeye başlar.\n\nKarakter bu kaynağı tüketene kadar bloklama yapmayı tercih ederse, soluk kaynağı 0'a düştüğü veya dengesi bozulduğu zaman karakterin gardı kırılır ve kırılgan pozuna girer. Bu pozdayken alacağı sonraki ilk yakın menzilli saldırı kritik bir isabetle gerçekleşir. Eğer karakter stamina kaynağı tükenmeden blok yapmaya ara verirse, ara verdiği turlar boyunca sabit bir şekilde kaynağın eriyen miktarı yenilenmeye başlar."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 3,
+              "text": "SAVAŞ EYLEMLERİ"
+            },
+            {
+              "type": "paragraph",
+              "text": "Bu savaş düzenine göre karakterler varsayılan olarak şunları gerçekleştirebilir:"
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "İnsansı varlıkların temel hareket sınırı 4 birimdir. Niteliklerden her **+2 ÇEV** başına insansı varlıklar karasal hareketlerine **+1 birim hareket mesafesi** kazanır.",
+                "Çevresinde kendine gelen bir saldırıya karşı **TEPKİ EYLEM** kullanarak bakış yönünü saldırıya yönlendirebilir. Eğer **KÖR NOKTADAN** gelen bir saldırıya karşı yapıyorsa, sadece kaçınma hareketi gerçekleştirebilir. Bu durumda kaçınma eylemine dezavantaj alır.",
+                "Belirli bir yöne bakan bir varlık, görüş mesafesinde hareket eden bir varlığın turu boyunca gerçekleştireceği hareketi takip edecek şekilde tepki eylem olarak bakış yönünü değiştirebilir. Eğer eşik veya kör alandan yakın mesafesinde hareket eden bir varlık varsa (3-6 birim mesafe), pasif olarak kullanılacak bir **FARKINDALIK** zarı ile fark etmesi durumunda bu alanda hareket eden varlığa karşı da bakış yönünü tepki eylemle değiştirebilir.",
+                "Karakter, turunda **NET ALANDA** ve **silah tuttan elinin tarafında** (Eşik alan hariç) bulunan hedeflere saldırabilir. Karakterin kendi turunda yüzünü bir yöne dönmesi herhangi bir eylem türü ya da hareket puanı gerektirmez.",
+                "Karakter, **NET ALAN** sınırlarının dışına ayrılacak bir varlığa **TEPKİ EYLEM** olarak **FIRSAT SALDIRISI** gerçekleştirebilir. Karakter, fırsat saldırısı gerçekleştirirken yüzünü saldırdığı birim tarafına dönüp dönmeme konusunda seçim yapabilir. Fırsat saldırısı isabet eden hedefin hareketi iptal olur. Net alan dışındaki alanlarda hareket eden varlıklar fırsat saldırısını tetiklemez."
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 3,
+              "text": "ENERJİSEL SAVAŞ"
+            },
+            {
+              "type": "paragraph",
+              "text": "Enerjisel savaş, karakterlerin enerjisel yetenekler ile gerçekleştireceği savaş sürecidir. Enerjisel savaş süreci fiziksel yakın savaş sürecine kıyasla daha basittir ancak kendi incelikleri bulunmaktadır."
+            },
+            {
+              "type": "heading",
+              "level": 3,
+              "text": "Kaynak Kullanımı"
+            },
+            {
+              "type": "paragraph",
+              "text": "Enerjisel savaşta kısa sürede pek çok yetenek seri olarak sıralanarak kullanılmaktadır. Bu süreçte şu kurallar izlenmektedir:"
+            },
+            {
+              "type": "list",
+              "ordered": false,
+              "items": [
+                "Eğer kaynak tüketimi olan, aynı enerji türüne ait bir yetenek arka arkaya 2 seferden fazla kullanılırsa harcadığı kaynak değeri **X2** olacak şekilde katlanmaya başlar. Karakter, bu katlanmayı araya aynı enerjiyi kullanan bir **BAZBÜYÜ** ile karıştırır veya **FARKLI ENERJİ TÜRÜNDE** bir yetenek kullanırsa **SIFIRLAR**.",
+                "Karakterlerin **GÖREBİLDİKLERİ** hedefler bulunmaktadır. Görebildikleri hedefler üstünde **İSABET** ve **ODAKLANMA** gerektiren enerjisel yetenekler kullanılabilir.",
+                "Bir karakter, **FARKINDA** olduğu ancak **GÖREMEDİĞİ** bir hedef üstünde — eğer arada bir fiziksel/enerjisel engel yoksa — sadece **İSABET** becerisini kullanabileceği tipte yetenekler kullanabilir.",
+                "Bir karakter, ancak **GÖREBİLDİĞİ** bir hedef üstünde **ETKİ OLUŞTURAN** enerjisel yetenekler kullanabilir."
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 3,
+              "text": "Konsantrasyon"
+            },
+            {
+              "type": "paragraph",
+              "text": "Karakterlerin uygulayacağı yeteneklerin bir kısmı, anında gerçekleşen etkiler haricinde **SÜREKLİ ETKİ** meydana getirebilir. Bu şekilde etki oluşturan yeteneklerde karakterin **KONSANTRASYON** sürecine girmesi gerekir. Konsantrasyon, bir karakterin mental olarak enerjisel etkinin varlığını sürdürmesi için ona odağını koruma sürecidir."
+            },
+            {
+              "type": "paragraph",
+              "text": "Bu süreçte karakter farklı eylemler gerçekleştirebilir, enerjisel veya fiziksel yetenekler kullanabilir. Ancak farklı bir konsantrasyon sürecine girecek olursa, mevcut konsantrasyonu **BOZULUR**. Aynı şekilde, bir karakter konsantrasyon sürecindeyken herhangi bir şekilde hasar alırsa **KONSANTRASYON TESTİ** zarı kullanır. Zarın **10 DEĞERİNİN ALTINDA** gelmesi durumunda, konsantrasyon bozulur. Bir karakterin **BİRDEN FAZLA KONSANTRASYON YUVASI** bulunabilir. Bir konsantrasyon yuvasını geliştirme konusunda gerekli deneyim puanını hesaplamak için \"**500** x **KONSANTRASYON SEVİYESİ**\" şeklinde bir formül kullanılır."
+            }
+          ]
+        },
+        {
           "id": "ekipman",
           "title": "EKİPMAN",
           "mode": "rich",
@@ -1935,399 +2328,6 @@ window.SLVNZ_CONTENT = {
           ]
         },
         {
-          "id": "savas-mucadele",
-          "title": "SAVAŞ & MÜCADELE",
-          "mode": "rich",
-          "blocks": [
-            {
-              "type": "heading",
-              "level": 2,
-              "text": "SAVAŞ & MÜCADELE"
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterler tek başlarına kalkıştıkları eylemlerde başarı düzeyini belirlemek için kullandıkları zar sistemini karşılıklı girdikleri savaşlar veya mücadeleler için de kullanırlar. İki karakterin birbirine kılıç savurması, belirli enerjilerin etkisi altında bırakması, güreş tutması vb. durumlarda savaş ve mücadele sistemi devreye girer.\n\nEn basit hali ile bunun gibi durumlarda iki taraf da birer zar kullanır. Sayısal değeri yüksek gelen taraf karşılaşmadan galip çıkar. Ancak, silahlı mücadeleler, enerji yönlendirmenin kullanıldığı durumlar gibi özel anlarda, gerçekleştirilen eylemin niteliğine göre kullanılacak zar sayıları değişmektedir."
-            },
-            {
-              "type": "example",
-              "text": "Örneğin, birbirine karşı çift elli kılıçlarla savaşan iki karakterin mücadelesinde; kılıcı savuran taraf, kılıcın isabetini belirlemek için bir zar, kılıcı savurma kuvvetini belirlemek için ise ikinci bir zar kullanır. **Fiziksel zarlar ile oynanan bir ortamda bu zarların sırayla atılması tavsiye edilir.** Dijital çevrimiçi bir ortamda ise topluca atılabilir, ancak gelen sonuçlar soldan sağa sıralanacak şekilde önce isabet, ardından kuvvet şeklinde olmalıdır."
-            },
-            {
-              "type": "paragraph",
-              "text": "Yukarıdaki anlatım ışığında, savaş ve mücadele durumlarında takip edilebilecek durumlar şu şekilde birbirinden ayrılabilir:"
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "SIRADAN MÜCADELE"
-            },
-            {
-              "type": "paragraph",
-              "text": "Sıradan mücadeleler; güreş tutma, birbirini engelleme, yalan söyleme, ikna etme gibi karşılıklı başarma ve kaybetme durumları değerlendirilir. Bu durumlarda genellikle iki taraf da birer adet zar kullanır. Yardımcı puanlarla birlikte sayısal üstünlüğe sahip olan taraf mücadelenin galibi olur."
-            },
-            {
-              "type": "example",
-              "text": "Majik, kalabalık bir sokakta dolaşırken dalgın yürüyen bir adamın cebinden altın kesesini almaya çalışmak için El Çabukluğu özel becerisini kullanır. Buna karşılık dalgın adam için bu durumu zamanında fark edip etmeyeceğini belirlemek için FARKINDALIK beceri zarı kullanılır."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "SAVAŞ"
-            },
-            {
-              "type": "paragraph",
-              "text": "Savaş anında karakterler genellikle saldırı eylemlerini belirlemek üzere birden fazla zar kullanırlar. Bu durumlar genellikle **ÇEVİKLİK, KUVVET, İSABET, KAYNAK KULLANIMI, ENERJİ** gibi nitelikler üzerinden belirlenir. Bir savaş anında gelişebilecek eylemler ve bu eylemler için kullanılabilecek zar sıfatları sınıflandırılabilir."
-            },
-            {
-              "type": "tabs",
-              "tabs": [
-                {
-                  "label": "YAKIN MENZİLLİ SALDIRILAR",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "text": "Yakın menzilli herhangi bir silah ile saldırıda bulunan bir karakter, özel ya da ekleme bir durum olmadığı sürece iki adet zar kullanır. Bu zarlar sırayla atılmalı ya da dijital bir ortamda kullanılıyorsa gelen sonuç soldan sağa sıralanacak şekilde, ilk olarak İSABET, ikinci olarak HASAR/KUVVET olmak üzere sayısal değerlere dökülür."
-                    }
-                  ]
-                },
-                {
-                  "label": "UZAK MENZİLLİ SALDIRILAR",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "text": "Yakın menzilli saldırılara benzer olarak, uzun menzilli saldırılarda da genel olarak iki zar kullanılır. Ancak, bahsedilen menzilli saldırı enerji yönlendirmeyi içeriyorsa, bu durumda kullanılacak zarların sayısı ikiden fazla olacak şekilde enerjisel yeteneğin özelliklerine göre değişebilmektedir. Enerjisel yetenekler dışında sıradan olarak bahsedilebilecek menzilli saldırılarda (Yay kullanımı gibi) MENZİLLİ İSABET ve KUVVET zarı kullanılır. Ancak, kuvvet gerektirmeyen bazı menzilli araçlar kullanılırken (Tatar Yayı, Musket gibi) sadece atışı isabet ettirmek için bir zar kullanılır. Bunun sebebi bu tarz menzilli silahların kendilerine özgü sabit bir hasarının bulunmasıdır."
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Savunma"
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterler kendilerine yönelmiş herhangi bir saldırıdan kaçınmak ya da korunmak üzere bir savunma zarı kullanabilirler. Bu tür zarlar genellikle **KAÇINMA, BLOKLAMA** ya da **DAYANIKLILIK** kullanılarak atılır."
-            },
-            {
-              "type": "tabs",
-              "tabs": [
-                {
-                  "label": "KAÇINMA",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "text": "Kaçınma durumlarında gelen saldırının isabet zarının sayısal değerini kaçınma zarı ile geçmek yeterlidir. Ancak rakibin isabet değeri ile karakterin kaçınma değeri arasındaki fark ne kadar fazla ise, karşı tarafın gerçekleştirdiği saldırının isabet ettiği nokta, rakibin saldırmak istediği noktaya o kadar yakın olmaktadır."
-                    }
-                  ]
-                },
-                {
-                  "label": "BLOKLAMA",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "text": "Savaşta bloklama iki farklı temele dayanır: Silahla Bloklama & Kalkanla bloklama"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "tabs",
-              "tabs": [
-                {
-                  "label": "SİLAHLA BLOKLAMA",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "text": "Karakterler kendilerine yönelen yakın menzilli saldırıları silahlarıyla bloklamayı tercih edebilirler. Bir karakterin silahla bloklama yapabilmesi için bu beceri konusunda yetkinlik sahibi olması gerekir. \n\nSilahla gerçekleştirilecek bloklama hamleleri, karakterlerin **çeviklik** ve ilgili silaha yönelik **blok becerisi** üzerinden hesaplanır. Bir karakter, silahıyla bir saldırıyı bloklayabilmesi durumunda *soluk* tüketir."
-                    }
-                  ]
-                },
-                {
-                  "label": "KALKANLA BLOKLAMA",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "text": "Bir karakter, kuşanmış olduğu kalkan türüne göre farklı şekillerde bloklama gerçekleştirebilir. Buckler ve küçük boyutta karakteri tamamen kapatmayan hafif kalkanlar, karakterin *çeviklik* niteliği ve *kalkan blok* becerilerinin toplamıyla belirlenir. Bu kalkan türlerinde mevcut blok zarının aşılması durumunda darbe doğrudan karaktere ulaşır.\n\nAncak Orta, Büyük ve Kule Kalkan gibi daha büyük kalkan türlerinde, çeviklik değeri alınmadan sadece ilgili kalkanın blok becerisi ile bir hesaplama gerçekleştirilir. Bloklama durumunda, bloklayan karakter *soluk tüketir* ancak saldırının kendisine ulaşmasını engellemiş olur. Bloklama yapan karakterin blok zarının aşılması durumunda, 6 puanlık farka kadar karakter bloklamayı gerçekleştirebilir, uygulanan kuvvetten bağımsız olarak aşılan fark sebebiyle fazladan soluk tüketir."
-                    },
-                    {
-                      "type": "heading",
-                      "level": 3,
-                      "text": "TAM BLOK POZU"
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Karakterler, Orta ve daha büyük kalkan türleri ile *tam blok* pozuna geçiş yapabilirler. Bu poza geçiş yapmak bir eylemdir. Bir karakter tam blok pozundayken,\n\n- Hareket mesafesi yarıya düşer.\n- Çevresel farkındalığı azalır.\n- Soluğunu toparlayamaz.\n- Gerçekleştireceği yakın mesafeli fiziksel saldırılar dezavantajlı kuvvet ve isabet alır.\n- Uzak menzilli enerjisel veya fiziksel saldırı gerçekleştiremez.\n+ Kalkanıyla baktığı yönden gelecek bütün fiziksel saldırıları garanti bir şekilde bloklar.\n\nKarakter, soluğu kesilene veya kendisi bozana kadar turlar boyunca tam blok pozunu koruyabilir. Ancak kendi isteğiyle tam blok pozundan çıkması durumunda, bir sonraki turuna kadar tam blok pozuna tekrar giremez (Pozdan çıkmak ek eylemdir)."
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "ENERJİSEL YETENEK KULLANIMI"
-            },
-            {
-              "type": "paragraph",
-              "text": "Enerjinin yönlendirilmesi ve kullanımı basit formlarda başlasa da geliştikçe karmaşıklaşan, dolayısıyla zar kullanımı açısından da farklı yaklaşımlar isteyebilen bir durumdur. Çoğu enerji kullanımı için iki ya da üç zar kullanılsa da büyünün tanımı ya da işlevi özelleştikçe, bu işleve uyum sağlamak adına enerji kullanımına farklı türde zarlar eklenebilir."
-            },
-            {
-              "type": "paragraph",
-              "text": "*Enerji kullanımı iki farklı temele dayandırılır. Bu temeller, İsabet temelli ve yoğunluk temelli enerjiler olarak nitelendirilir.*"
-            },
-            {
-              "type": "tabs",
-              "tabs": [
-                {
-                  "label": "İSABET TEMELLİ ENERJİLER",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "text": "Tekil bir hedef belirlenerek, bu hedefe isabet ettirilmeye çalışılan enerjileri ifade eden yetenek tipleridir. Bu tip enerjilerde her zaman ilk olarak **İSABET** becerisi baz alınarak bir zar kullanılır. Sonrasında enerjiye yönelik yoğunluk ve duruma yönelik element, etki süresi vb. etkenler için ayrı zarlar kullanılabilir."
-                    }
-                  ]
-                },
-                {
-                  "label": "YOĞUNLUK TEMELLİ ENERJİLER",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "text": "Genel olarak isabet gerektirmeksizin bir varlığa ya da bir bölgeye yoğunlaşarak belirli bir etkinin oluşturulmaya çalışıldığı enerjilerdir. Bu tür enerjiler, zihinsel saldırılar, bir alanda patlama, yanma, erime vb. etkiler oluşturma, bir madde üstünde farklı etkilere sebep olma gibi durumları içermektedir. İsabet temelli enerjilerde olduğu gibi yoğunluk temelli enerjilerde de duruma göre alan, etki süresi, mesafe gibi farklı etkenler göz önünde bulundurularak farklı zar kullanımları eklenebilir."
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "MÜCADELEDE ODAK & KONSANTRASYON"
-            },
-            {
-              "type": "paragraph",
-              "text": "Fiziksel ya da enerjisel bir yeteneğini odak/konsantrasyon durumunda bulundurmak, karakterlerin bu durumlara yönelik yuvalarını dolduran eylemlerdir. İki durum da birbirine süreç olarak benzerlik gösterebilse de bu durumların korunması konusu birbirinden farklılık gösterebilir."
-            }
-          ]
-        },
-        {
-          "id": "savas-sistemi",
-          "title": "SAVAŞ SİSTEMİ",
-          "mode": "rich",
-          "blocks": [
-            {
-              "type": "heading",
-              "level": 2,
-              "text": "SAVAŞ SİSTEMİ"
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "SAVAŞ DÜZENİ"
-            },
-            {
-              "type": "tabs",
-              "tabs": [
-                {
-                  "label": "KARE SAVAŞ DÜZENİ",
-                  "blocks": [
-                    {
-                      "type": "image",
-                      "src": "https://slvnz.github.io/resources/webpage/svg/hex-battle.svg",
-                      "alt": "",
-                      "caption": "Kare savaş düzeni",
-                      "width": "300"
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Kare savaş sistemi, SLVNZ 4.0'ın mücadele eylemlerinin ve hareketlerinin işlenmesi için temeli oluşturur. Savaş sisteminde varlıkların her biri bir Kare içinde yer alırlar ve birimlerin hareketleri, gerçekleşecek eylemlerin mesafeleri ve kapsayacakları alanlar birim olarak belirlenmiş tekil kare yuvalar üzerinden hesaplanır.\n\nSavaş düzeninde, karakterin baktığı yöndeki ve bu yönün içerdiği birimin sağ ve sol bitişiğindeki birimler **net alan** olarak isimlendirilir."
-                    },
-                    {
-                      "type": "list",
-                      "ordered": false,
-                      "items": [
-                        "Karakter, net alandaki varlıklara normal şekilde fiziksel saldırıda bulunabilir.",
-                        "Karakter, net alandan alacağı saldırılara karşı normal şekilde savunma & kaçınma hamleleri yapabilir."
-                      ]
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Savaş düzeninde net alan, net alanlardan karakterin çevresine doğru dolaşırken **SOL** ve **SAĞ** birimler bulunur."
-                    },
-                    {
-                      "type": "list",
-                      "ordered": false,
-                      "items": [
-                        "Karakter, **BU ALANLARDAN** gelen fiziksel saldırılara karşı savunma yapmak için herhangi bir eksi puan almaz. Ancak saldırıyı savuşturma veya saldırıdan kaçınma süreçleri koşullara bağlı olarak değişiklik gösterir.",
-                        "Karakter, elinin boş bulunduğu taraftan gelen bir saldırıya karşı kaçınma yapmak zorundadır. Saldırının geldiği taraftaki elinde en az orta boy kalkan bulunduruyorsa, bloklamayı avantajlı gerçekleştirir.",
-                        "Karakter, altıgen sisteminde olduğu gibi sadece net alan sınırlarında bulunan varlıklara herhangi bir şekilde bakış yönünü değiştirmeden saldırıda bulunabilir. Ancak, silah bulundurduğu elinin olduğu tarafa da bakış açısını değiştirmeden saldırıda bulunabilir (Sol elinde silah bulunduran biri sol tarafa saldırabilir, ancak sağ tarafa saldırmak için o bölgeye net alan olacak şekilde yüzünü dönmelidir).",
-                        "Karakter, bu alanlardan gelecek menzilli fiziksel saldırıların farkındadır ve yukarıdaki kuralları gözeterek savunma & kaçınma yapabilir."
-                      ]
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Karakterin baktığı yönün sağ ve sol arkasındaki birimler **eşik alan** olarak isimlendirilir."
-                    },
-                    {
-                      "type": "list",
-                      "ordered": false,
-                      "items": [
-                        "Karakter, eşik alandan gelen yakın mesafeli fiziksel saldırılara karşı -2 negatif değer alarak savunma gerçekleştirir.",
-                        "Karakter, eşik alan tarafından gelecek uzun menzilli fiziksel saldırıyı yapacak kişinin orada olduğunun farkındaysa, gelen saldırıya karşı farkındalık zarı kullanır. Farkındalık 10'dan yüksek gelirse gelen fiziksel menzilli saldırıyı fark ederek kaçınmaya çalışabilir. Saldıranın okçuluk/atıcılık/isabet/nişancılık ve kuvvet yüksekliğine bağlı olarak saldırının başarı düzeyi belirlenir."
-                      ]
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Karakterin baktığı yönün tam tersinde — yani arkasında — kalan birim **kör alan** olarak isimlendirilir."
-                    },
-                    {
-                      "type": "list",
-                      "ordered": false,
-                      "items": [
-                        "Karakter, kör alandan gelen yakın mesafeli fiziksel saldırılara karşı, eğer saldırıyı yapan kişinin arkasında olduğunun farkındaysa dezavantaj ile kaçınma gerçekleştirmeye çalışır. **Bloklama** şeklinde bir savunma bu pozisyona karşı gerçekleştirilemez.",
-                        "Karakter, kör alandan gelecek fiziksel bir uzak menzilli saldırıya karşı başka bir varlık tarafından tepki olarak uyarılmıyor veya buna özel bir sistemi yoksa savunma veya kaçınma gerçekleştiremez."
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "label": "BLOK SİSTEMİ",
-                  "blocks": [
-                    {
-                      "type": "image",
-                      "src": "https://slvnz.github.io/resources/webpage/svg/square-block.svg",
-                      "alt": "",
-                      "caption": "Kare blok sistemi",
-                      "width": "300"
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Fiziksel mücadelelerde kaçınma genel bir standarda sahip basit bir yapıda olsa da bir kalkanla bloklamanın koşullara bağlı değişkenlikleri bulunmaktadır. Bu değişkenler dahilinde, bloklama sistemi kare ve altıgen sistem üzerinde farklılıklarıyla incelenebilir. Kalkanlar genel kullanım şekilleriyle sol elde kuşanıldıkları için, şemalar sol kullanım üzerinden bir görsellik sunmaktadır. Kalkanın diğer tarafta kullanım durumunda, aynı sistem karakterin sağ tarafı için geçerlidir."
-                    },
-                    {
-                      "type": "heading",
-                      "level": 3,
-                      "text": "KÜÇÜK KALKANLAR & SİLAHLAR"
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Küçük kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahip olmadıkları için çoğunlukla bireysel ölçekte fiziksel saldırıları engellemek ve savuşturmak üzere kullanılır. Sonuçları bire bir aynı olmasa da silahlar ve küçük kalkanlar aynı sistem yapısına tabidir."
-                    },
-                    {
-                      "type": "list",
-                      "ordered": false,
-                      "items": [
-                        "Küçük kalkanlar bloklamak için ek puanlarını karakterin **ÇEV** niteliğinden edinirler.",
-                        "Silahlar bu ek puanı kendilerine ait özel **BLOK** niteliğinden edinirler.",
-                        "Daha büyük boyutta kalkanlarda bloklama eyleminin zarı düşük kalsa bile arada oluşacak puan farkına bağlı olarak kısmi başarı sağlanabilirken, silahlar ve küçük kalkanlarda kaçınma durumundaki gibi başarısız olunur."
-                      ]
-                    },
-                    {
-                      "type": "heading",
-                      "level": 3,
-                      "text": "ORTA KALKANLAR"
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Orta kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahiptir. Bu özellikler hem ağırlıkları hem de büyüklükleri sebebiyle karakterin hareket kabiliyeti üzerinde olumsuz etkilere sebep olmaktadır. Ancak, bu duruma karşılık karaktere gelecek fiziksel hamlelere karşı korunak sağlamaktadır."
-                    },
-                    {
-                      "type": "list",
-                      "ordered": false,
-                      "items": [
-                        "Orta kalkan kullanan bir karakter, **NORMAL ALANLAR** tarafından gelecek yakın menzilli fiziksel saldırılara karşı normal şekilde **BLOK BONUSU** edinerek bloklama yapabilir (Kalkandan gelecek blok aşırtma sınırı).",
-                        "Eğer karaktere gelecek saldırı **NET ALAN** tarafından geliyorsa, karakter bloklama eylemine **AVANTAJ** alır.",
-                        "Eğer karaktere gelecek saldırı zor alan tarafından geliyorsa, karakter bloklama eylemine **DEZAVANTAJ** alır."
-                      ]
-                    },
-                    {
-                      "type": "heading",
-                      "level": 3,
-                      "text": "KULE KALKANLAR"
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Kule kalkanlar, karakterlerin hareketlerini ve **ÇEV** niteliklerini önemli ölçüde düşürürken korunak durumunu aynı ölçüde yükselten yapıya sahiptir. Bir karakter, orta kalkanlarda olduğu gibi kule kalkanlarda da blok bonusu becerisi üzerinden bloklama gerçekleştirir, ancak kule kalkanı tam blok pozuna geçirdiği zaman stamina değeri tükenene ya da kalkan işlev görmez hale gelene kadar saldırıları kesinlikle bloklar."
-                    },
-                    {
-                      "type": "heading",
-                      "level": 3,
-                      "text": "BLOKLAMADA DAYANIKLILIK"
-                    },
-                    {
-                      "type": "paragraph",
-                      "text": "Bloklama, karaktere üstün korunak sağlasa da karakter tarafından kaynak kullanımı denetimi gerektiren bir süreçtir. Bir karakter, saldırı blokladıkça kalkanı üzerinde hasar alır. Kalkanın materyalinin zarar görmesinin yanı sıra, karakter arka arkaya kuvvetli saldırılar bloklamaya başlarsa DAY niteliği üzerinden bir mücadeleye girer. Bu mücadelede, bloklanan her kuvvetli saldırı sonrasında karakterin bir miktar soluk kaynağı geçici olarak tükenmeye başlar.\n\nKarakter bu kaynağı tüketene kadar bloklama yapmayı tercih ederse, soluk kaynağı 0'a düştüğü veya dengesi bozulduğu zaman karakterin gardı kırılır ve kırılgan pozuna girer. Bu pozdayken alacağı sonraki ilk yakın menzilli saldırı kritik bir isabetle gerçekleşir. Eğer karakter stamina kaynağı tükenmeden blok yapmaya ara verirse, ara verdiği turlar boyunca sabit bir şekilde kaynağın eriyen miktarı yenilenmeye başlar."
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "SAVAŞ EYLEMLERİ"
-            },
-            {
-              "type": "paragraph",
-              "text": "Bu savaş düzenine göre karakterler varsayılan olarak şunları gerçekleştirebilir:"
-            },
-            {
-              "type": "list",
-              "ordered": false,
-              "items": [
-                "İnsansı varlıkların temel hareket sınırı 4 birimdir. Niteliklerden her **+2 ÇEV** başına insansı varlıklar karasal hareketlerine **+1 birim hareket mesafesi** kazanır.",
-                "Çevresinde kendine gelen bir saldırıya karşı **TEPKİ EYLEM** kullanarak bakış yönünü saldırıya yönlendirebilir. Eğer **KÖR NOKTADAN** gelen bir saldırıya karşı yapıyorsa, sadece kaçınma hareketi gerçekleştirebilir. Bu durumda kaçınma eylemine dezavantaj alır.",
-                "Belirli bir yöne bakan bir varlık, görüş mesafesinde hareket eden bir varlığın turu boyunca gerçekleştireceği hareketi takip edecek şekilde tepki eylem olarak bakış yönünü değiştirebilir. Eğer eşik veya kör alandan yakın mesafesinde hareket eden bir varlık varsa (3-6 birim mesafe), pasif olarak kullanılacak bir **FARKINDALIK** zarı ile fark etmesi durumunda bu alanda hareket eden varlığa karşı da bakış yönünü tepki eylemle değiştirebilir.",
-                "Karakter, turunda **NET ALANDA** ve **silah tuttan elinin tarafında** (Eşik alan hariç) bulunan hedeflere saldırabilir. Karakterin kendi turunda yüzünü bir yöne dönmesi herhangi bir eylem türü ya da hareket puanı gerektirmez.",
-                "Karakter, **NET ALAN** sınırlarının dışına ayrılacak bir varlığa **TEPKİ EYLEM** olarak **FIRSAT SALDIRISI** gerçekleştirebilir. Karakter, fırsat saldırısı gerçekleştirirken yüzünü saldırdığı birim tarafına dönüp dönmeme konusunda seçim yapabilir. Fırsat saldırısı isabet eden hedefin hareketi iptal olur. Net alan dışındaki alanlarda hareket eden varlıklar fırsat saldırısını tetiklemez."
-              ]
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "ENERJİSEL SAVAŞ"
-            },
-            {
-              "type": "paragraph",
-              "text": "Enerjisel savaş, karakterlerin enerjisel yetenekler ile gerçekleştireceği savaş sürecidir. Enerjisel savaş süreci fiziksel yakın savaş sürecine kıyasla daha basittir ancak kendi incelikleri bulunmaktadır."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Kaynak Kullanımı"
-            },
-            {
-              "type": "paragraph",
-              "text": "Enerjisel savaşta kısa sürede pek çok yetenek seri olarak sıralanarak kullanılmaktadır. Bu süreçte şu kurallar izlenmektedir:"
-            },
-            {
-              "type": "list",
-              "ordered": false,
-              "items": [
-                "Eğer kaynak tüketimi olan, aynı enerji türüne ait bir yetenek arka arkaya 2 seferden fazla kullanılırsa harcadığı kaynak değeri **X2** olacak şekilde katlanmaya başlar. Karakter, bu katlanmayı araya aynı enerjiyi kullanan bir **BAZBÜYÜ** ile karıştırır veya **FARKLI ENERJİ TÜRÜNDE** bir yetenek kullanırsa **SIFIRLAR**.",
-                "Karakterlerin **GÖREBİLDİKLERİ** hedefler bulunmaktadır. Görebildikleri hedefler üstünde **İSABET** ve **ODAKLANMA** gerektiren enerjisel yetenekler kullanılabilir.",
-                "Bir karakter, **FARKINDA** olduğu ancak **GÖREMEDİĞİ** bir hedef üstünde — eğer arada bir fiziksel/enerjisel engel yoksa — sadece **İSABET** becerisini kullanabileceği tipte yetenekler kullanabilir.",
-                "Bir karakter, ancak **GÖREBİLDİĞİ** bir hedef üstünde **ETKİ OLUŞTURAN** enerjisel yetenekler kullanabilir."
-              ]
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Konsantrasyon"
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterlerin uygulayacağı yeteneklerin bir kısmı, anında gerçekleşen etkiler haricinde **SÜREKLİ ETKİ** meydana getirebilir. Bu şekilde etki oluşturan yeteneklerde karakterin **KONSANTRASYON** sürecine girmesi gerekir. Konsantrasyon, bir karakterin mental olarak enerjisel etkinin varlığını sürdürmesi için ona odağını koruma sürecidir."
-            },
-            {
-              "type": "paragraph",
-              "text": "Bu süreçte karakter farklı eylemler gerçekleştirebilir, enerjisel veya fiziksel yetenekler kullanabilir. Ancak farklı bir konsantrasyon sürecine girecek olursa, mevcut konsantrasyonu **BOZULUR**. Aynı şekilde, bir karakter konsantrasyon sürecindeyken herhangi bir şekilde hasar alırsa **KONSANTRASYON TESTİ** zarı kullanır. Zarın **10 DEĞERİNİN ALTINDA** gelmesi durumunda, konsantrasyon bozulur. Bir karakterin **BİRDEN FAZLA KONSANTRASYON YUVASI** bulunabilir. Bir konsantrasyon yuvasını geliştirme konusunda gerekli deneyim puanını hesaplamak için \"**500** x **KONSANTRASYON SEVİYESİ**\" şeklinde bir formül kullanılır."
-            }
-          ]
-        },
-        {
           "id": "karakter-gelisimi",
           "title": "KARAKTER GELİŞİMİ",
           "mode": "rich",
@@ -2357,21 +2357,12 @@ window.SLVNZ_CONTENT = {
                   "blocks": [
                     {
                       "type": "paragraph",
-                      "text": "Temel gelişim, karakterlerin temel becerilerini, ekipman yetkinliklerini, enerjisel yetkinliklerini ve kaynak havuzlarını geliştirebileceği süreçleri kapsamaktadır. Bu süreç, karakterin gireceği en az 1 en çok 4 saatlik antrenman ya da meditasyon süreci sonunda atılan farklı yüzlü zarlar ile, SEVİYE x 100 Deneyim Puanı'na erişmeye çalışarak seviye atlayabileceği bir sistemdir.\n\n**TEMEL NİTELİKLER**, temel gelişimin bu sistemi ile aynı biçimde ilerlese de gerektirdiği deneyim puanı bakımından çok daha ağırdır. Temel niteliklerde **KUV**, **ÇEV** ve **DAY**, sözü edilen antrenmanlarla geliştirilebilir. Ancak **İRD** ve **SZG** nitelikleri daha özel yöntemler veya antrenmanlarla gelişir. Temel niteliklerin gelişmesi için gerekli deneyim puanı formülü **SEVİYE x 500** olarak işlenir.\n\nTemel Nitelikler nezdinde, istikrarlı bir antrenman süreci takip edilmezse, antrenman gerçekleştirilmeyen günlere bağlı olarak periyodik bir gerileme süreci başlar. Karakter, bu nitelik antrenman sürecinde ne kadar deneyim puanı biriktirdiyse, periyodik gerileme miktarı o kadar azalır. Yani KUV niteliğini geliştirmeye çalışan bir karakter, 1 haftalık antrenman sonucunda 120 puan elde etmişse, 3 gün antrenmanını devam ettirmemesi durumunda, sonraki her antrenmansız gün başına d10 gerileme yaşar. Ancak bu puan miktarı 300 civarındayken, periyodik gerileme d5 civarındadır. Bu durum, sadece temel nitelikler için geçerlidir.\n\nÖzellikle temel niteliklerin geliştirilmesi oldukça uzun bir süreç alabilmektedir. Bu durum göz önünde bulundurulduğunda, bir karakterin asıl özgünlüğünü diğer becerileri ve yeteneklerinin gelişimi ile gösterebileceği belirtilebilir. Özellikle yeni bir oyuna başlanırken veya yeni bir karakter oluşturulurken, GM'in temel nitelikler için ayrı bir Deneyim Puanı havuzu belirlemesi veya oyunculara doğrudan seviye sayısıyla nitelik sınırı vermesi (2 adet +1 nitelik ve 1 adet +2 nitelik, ya da niteliklere özel 2000 Deneyim Puanı gibi...) tavsiye edilir."
+                      "text": "Temel gelişim, karakterlerin temel becerilerini, ekipman yetkinliklerini, enerjisel yetkinliklerini ve kaynak havuzlarını geliştirebileceği süreçleri kapsamaktadır. Bu süreç, karakterin gireceği en az 1 en çok 4 saatlik antrenman ya da meditasyon süreci sonunda atılan farklı yüzlü zarlar ile, belirlenmiş deneyim puanına erişmeye çalışarak seviye atlayabileceği bir sistemdir.\n\n**TEMEL NİTELİKLER**, temel gelişimin bu sistemi ile aynı biçimde ilerlese de gerektirdiği deneyim puanı bakımından çok daha ağırdır. Temel niteliklerde **KUV**, **ÇEV** ve **DAY**, sözü edilen antrenmanlarla geliştirilebilir. Ancak **İRD** ve **SZG** nitelikleri daha özel yöntemler veya antrenmanlarla gelişir. Temel niteliklerin gelişmesi için gerekli deneyim puanı formülü **SEVİYE x 500** olarak işlenir.\n\nTemel Nitelikler nezdinde, istikrarlı bir antrenman süreci takip edilmezse, antrenman gerçekleştirilmeyen günlere bağlı olarak periyodik bir gerileme süreci başlar. Karakter, bu nitelik antrenman sürecinde ne kadar deneyim puanı biriktirdiyse, periyodik gerileme miktarı o kadar azalır. Yani KUV niteliğini geliştirmeye çalışan bir karakter, 1 haftalık antrenman sonucunda 120 puan elde etmişse, 3 gün antrenmanını devam ettirmemesi durumunda, sonraki her antrenmansız gün başına d10 gerileme yaşar. Ancak bu puan miktarı 300 civarındayken, periyodik gerileme d5 civarındadır. Bu durum, sadece temel nitelikler için geçerlidir.\n\nÖzellikle temel niteliklerin geliştirilmesi oldukça uzun bir süreç alabilmektedir. Bu durum göz önünde bulundurulduğunda, bir karakterin asıl özgünlüğünü diğer becerileri ve yeteneklerinin gelişimi ile gösterebileceği belirtilebilir. Özellikle yeni bir oyuna başlanırken veya yeni bir karakter oluşturulurken, GM'in temel nitelikler için ayrı bir Deneyim Puanı havuzu belirlemesi veya oyunculara doğrudan seviye sayısıyla nitelik sınırı vermesi (2 adet +1 nitelik ve 1 adet +2 nitelik, ya da niteliklere özel 2000 Deneyim Puanı gibi...) tavsiye edilir."
                     }
                   ]
                 },
                 {
                   "label": "ÖZEL GELİŞİM",
-                  "blocks": [
-                    {
-                      "type": "paragraph",
-                      "text": "Özel gelişim, karakterlerin özel becerilerini geliştirebilecekleri bir gelişim sürecini kapsamaktadır. Bu süreç, temel gelişimdeki özel antrenmanlardan farklı olarak yaptıkça öğrenme ve gelişme modeli üstüne kuruludur. Yani, bir karakter özel becerisini kullandığı zaman attığı zar ile deneyim puanı kazanır. Bu bağlamda, temel olarak özel becerileri geliştirmek için gerekli deneyim formülü ise SEVİYE x 100 Deneyim Puanı şeklindedir. Ancak bütün özel beceriler karmaşıklık ve özellik bakımından eş olamayacağı üzere, üst seviyeler için gereken çarpan sayısı değişkendir."
-                    }
-                  ]
-                },
-                {
-                  "label": "YETENEK GELİŞİMİ",
                   "blocks": [
                     {
                       "type": "paragraph",
@@ -2432,23 +2423,44 @@ window.SLVNZ_CONTENT = {
               },
               {
                 "id": "tur",
-                "label": "TÜR",
-                "type": "text",
-                "showInTable": true,
-                "snapZone": "top"
-              },
-              {
-                "id": "seviye",
                 "label": "SEVİYE",
                 "type": "number",
                 "showInTable": true,
                 "snapZone": "top"
               },
               {
+                "id": "seviye",
+                "label": "ELEMENT",
+                "type": "text",
+                "showInTable": true,
+                "snapZone": "top"
+              },
+              {
                 "id": "maliyet",
-                "label": "MALİYET",
+                "label": "KAYNAK",
+                "type": "text",
+                "showInTable": true,
+                "snapZone": "top"
+              },
+              {
+                "id": "yeni-alan",
+                "label": "ENERJİ",
+                "type": "text",
+                "showInTable": true,
+                "snapZone": "top"
+              },
+              {
+                "id": "yeni-alan-2",
+                "label": "Kaynak Bedeli",
                 "type": "number",
                 "showInTable": true,
+                "snapZone": "top"
+              },
+              {
+                "id": "yeni-alan-3",
+                "label": "MENZİL",
+                "type": "text",
+                "showInTable": false,
                 "snapZone": "top"
               },
               {
@@ -2462,11 +2474,14 @@ window.SLVNZ_CONTENT = {
             "rows": [
               {
                 "_id": "r1",
-                "isim": "Alev Çağrısı",
-                "tur": "Saldırı",
-                "seviye": 2,
-                "maliyet": 15,
-                "aciklama": "Hedefe yoğun bir alev hüzmesi fırlatır. Temas ettiği yüzeyde kısa süreli yangın bırakır."
+                "isim": "Ateş Oku",
+                "tur": 0,
+                "seviye": "Ateş",
+                "maliyet": "Mana",
+                "aciklama": "Menzilde görebildiğin bir hedefe elinden fırlayan bir ateş oku fırlatırsın. İsabet halinde hedef basınç ve yanma hasarı alır.",
+                "yeni-alan": "Yıkım",
+                "yeni-alan-2": 0,
+                "yeni-alan-3": "12 Birim"
               },
               {
                 "_id": "r2",
@@ -2725,6 +2740,2687 @@ window.SLVNZ_CONTENT = {
               "creatures": []
             }
           ]
+        },
+        {
+          "id": "genel-ekonomi",
+          "title": "GENEL EKONOMİ",
+          "blurb": "",
+          "pages": [
+            {
+              "id": "ekonomi-ecosystem",
+              "title": "EKONOMİ EKOSİSTEMİ",
+              "body": "",
+              "mode": "rich",
+              "blocks": [
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "text": "GENEL EKONOMİ EKOSİSTEMİ"
+                },
+                {
+                  "type": "table",
+                  "header": [
+                    "BİRİM",
+                    "DENKLİĞİ",
+                    "KULLANIM ALANI"
+                  ],
+                  "rows": [
+                    [
+                      "Bakır",
+                      "1 Bakır",
+                      "Günlük küçük harcamalar"
+                    ],
+                    [
+                      "Gümüş",
+                      "10 Bakır",
+                      "Halkın ana alışveriş birimi"
+                    ],
+                    [
+                      "Altın",
+                      "10 Gümüş / 100 Bakır",
+                      "Büyük Ödemeler, lonca işleri, silah-zırh-kira-ticaret"
+                    ]
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "text": "PARA BİRİMLERİNİN SOSYAL KARŞILIĞI"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Ekonominin hissini belirleyen asıl şey dönüşüm oranı değil, bu paraların dünyada ne kadar “ağır” hissettirdiğidir. **Bakır**, sıradan insanların günlük küçük ihtiyaçları için kullandığı paradır."
+                },
+                {
+                  "type": "table",
+                  "header": [
+                    "HARCAMA",
+                    "ORTALAMA DEĞER"
+                  ],
+                  "rows": [
+                    [
+                      "Bir parça ekmek",
+                      "1-2 Bakır"
+                    ],
+                    [
+                      "Bir kupa bayağı bira",
+                      "2-4 Bakır"
+                    ],
+                    [
+                      "Pazarda küçük meyve sebze alımı",
+                      "2-5 Bakır"
+                    ],
+                    [
+                      "Ucuz yatakhane yatağı",
+                      "4-6 Bakır"
+                    ]
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "text": "GÜMÜŞ: GERÇEK ALIŞVERİŞ BİRİMİ"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Gümüş, halkın asıl ticaret parasıdır. Günlük yemek, işçilik, basit hizmetler, küçük ekipmanlar gümüşle döner."
+                },
+                {
+                  "type": "table",
+                  "header": [
+                    "HARCAMA",
+                    "ORTALAMA DEĞER"
+                  ],
+                  "rows": [
+                    [
+                      "Basit sıcak yemek",
+                      "1 Gümüş"
+                    ],
+                    [
+                      "Doyurucu han yemeği",
+                      "2-3 Gümüş"
+                    ],
+                    [
+                      "Basit bıçak / Gündelik alet",
+                      "2-5 Gümüş"
+                    ],
+                    [
+                      "Ucuz han odası",
+                      "2-4 Gümüş"
+                    ]
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "text": "ALTIN: CİDDİ PARA"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Altın, sıradan halkın her gün cebinde taşıdığı bir para birimi değildir. Altın; tüccarların, loncaların, askerî ödemelerin, soyluların ve maceracıların para birimi olarak yerini almaktadır."
+                },
+                {
+                  "type": "table",
+                  "header": [
+                    "HARCAMA",
+                    "ORTALAMA DEĞER"
+                  ],
+                  "rows": [
+                    [
+                      "Handa tek kişilik iyi bir oda",
+                      "1 Altın"
+                    ],
+                    [
+                      "Basit silah",
+                      "1-5 Altın"
+                    ],
+                    [
+                      "Kaliteli Silah",
+                      "5-15 Altın"
+                    ],
+                    [
+                      "Hafif Zırh",
+                      "5-20 Altın"
+                    ],
+                    [
+                      "Hafif-Orta Zırh",
+                      "20-40 Altın"
+                    ],
+                    [
+                      "Eğitimli binek hayvanı",
+                      "20-80 Altın"
+                    ],
+                    [
+                      "Küçük dükkan aylık kirası",
+                      "10-30 altın"
+                    ]
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "text": "EKONOMİK YAŞAM KALİTELERİ"
+                },
+                {
+                  "type": "table",
+                  "header": [
+                    "YAŞAM DÜZEYİ",
+                    "GÜNLÜK MASRAF",
+                    "AÇIKLAMA"
+                  ],
+                  "rows": [
+                    [
+                      "Sefil",
+                      "5-10 Bakır",
+                      "Açlık sınırı, sokak, dilencilik"
+                    ],
+                    [
+                      "Yoksul",
+                      "1-2 Gümüş",
+                      "Ekmek, çorba, ortak yatakhane"
+                    ],
+                    [
+                      "Mütevazı",
+                      "3-5 Gümüş",
+                      "Basit ama düzenli yaşam"
+                    ],
+                    [
+                      "Rahat",
+                      "1 Altın",
+                      "İyi yemek, özel oda, temiz hizmet"
+                    ],
+                    [
+                      "Varlıklı",
+                      "3-5 Altın",
+                      "Hizmetâr, kaliteli konaklama"
+                    ],
+                    [
+                      "Soylu / Tüccar",
+                      "10+ Altın",
+                      "Gösterişli yaşam"
+                    ]
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 2,
+                  "text": "MACERACI EKONOMİSİ"
+                },
+                {
+                  "type": "paragraph",
+                  "text": "Maceracılar ve paralı askerler gibi işleri tehlike içinde geçen mesleklerin çoğu, atıldıkları tehlikenin karşılığı olarak doğru orantılı ödemeler alabilmektedir. Ancak alınacak ödüller, görev türünden başlayarak maceracının görevdeki performansı, ödeme yapan kişinin davranışı, ücretlendirmeyi etkileyen farklı faktörler vb. etkenlerle değişebilmektedir. Ancak genel olarak şöyle bir liste oluşturulabilir:"
+                },
+                {
+                  "type": "table",
+                  "header": [
+                    "GÖREV TİPİ",
+                    "ÖDÜL"
+                  ],
+                  "rows": [
+                    [
+                      "Kayıp Eşya / Küçük Arama",
+                      "3-10 Gümüş"
+                    ],
+                    [
+                      "Hayvan Kovma / Basit Koruma",
+                      "1-3 Altın"
+                    ],
+                    [
+                      "Kervan Refakati",
+                      "5-20 Altın"
+                    ],
+                    [
+                      "Tehlikeli Yaratık Avı",
+                      "10-50 Altın"
+                    ],
+                    [
+                      "Sınır Bölgesi Keşfi",
+                      "25-100 Altın"
+                    ],
+                    [
+                      "Kadim Kalıntı / Tesir noktası görevleri",
+                      "100+ Altın veya özel ödemeler"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "yasam-ekonomisi",
+              "title": "YAŞAM EKONOMİSİ",
+              "body": "",
+              "mode": "rich",
+              "table": {
+                "columns": [
+                  {
+                    "id": "isim",
+                    "label": "İSİM",
+                    "type": "text",
+                    "showInTable": true
+                  }
+                ],
+                "rows": []
+              },
+              "blocks": [
+                {
+                  "type": "tabs",
+                  "tabs": [
+                    {
+                      "label": "BESİNLER",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "YEMEK",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "EKMEK+ÇORBA",
+                              "5 BAKIR"
+                            ],
+                            [
+                              "BASİT SICAK YEMEK",
+                              "1 GÜMÜŞ"
+                            ],
+                            [
+                              "DOYURUCU HAN YEMEĞİ",
+                              "2 GÜMÜŞ"
+                            ],
+                            [
+                              "ETLİ YEMEK",
+                              "3 GÜMÜŞ"
+                            ],
+                            [
+                              "İYİ HAZIRLANMIŞ ETLİ YEMEK",
+                              "5 GÜMÜŞ"
+                            ],
+                            [
+                              "BALIK YEMEĞİ",
+                              "2-4 GÜMÜŞ"
+                            ],
+                            [
+                              "AV ETİ / ÖZEL TABAK",
+                              "5-8 GÜMÜŞ"
+                            ],
+                            [
+                              "BÜYÜK SOFRA, KİŞİ BAŞI",
+                              "1 ALTIN"
+                            ],
+                            [
+                              "SOYLU SOFRASI, KİŞİ BAŞI",
+                              "3 ALTIN"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "İÇECEKLER",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "İÇECEK",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "TEMİZ KUYU SUYU/ MATARA DOLUMU",
+                              "1 BAKIR"
+                            ],
+                            [
+                              "KAYNATILMIŞ GÜVENLİ SU",
+                              "2 BAKIR"
+                            ],
+                            [
+                              "AYRAN/EKŞİ SÜT/HAFİF İÇECEK",
+                              "2-3 BAKIR"
+                            ],
+                            [
+                              "BAYAĞI BİRA",
+                              "4 BAKIR"
+                            ],
+                            [
+                              "NORMAL BİRA, 0.5L",
+                              "1 GÜMÜŞ"
+                            ],
+                            [
+                              "SERT BİRA, KOYU BİRA",
+                              "2 GÜMÜŞ"
+                            ],
+                            [
+                              "BASİT ŞARAP KADEHİ",
+                              "2 GÜMÜŞ"
+                            ],
+                            [
+                              "İYİ ŞARAP KADEHİ",
+                              "5 GÜMÜŞ"
+                            ],
+                            [
+                              "ŞİŞE ŞARAP",
+                              "1 ALTIN"
+                            ],
+                            [
+                              "KALİTELİ ŞİŞE ŞARAP",
+                              "3 ALTIN+"
+                            ],
+                            [
+                              "NADİR İÇKİ",
+                              "5 ALTIN+"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "YOL ERZAKLARI",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "ERZAK",
+                            "FİYAT",
+                            "AÇIKLAMA"
+                          ],
+                          "rows": [
+                            [
+                              "1 GÜNLÜK KÖTÜ ERZAK",
+                              "5 BAKIR",
+                              "KARIN DOYURUR AMA UZUN YOLDA MORAL BOZAR"
+                            ],
+                            [
+                              "1 GÜNLÜK BASİT ERZAK",
+                              "1 GÜMÜŞ",
+                              "STANDART YOLCU MALZEMESİ"
+                            ],
+                            [
+                              "1 GÜNLÜK DÜZGÜN YOL ERZAĞI",
+                              "2 GÜMÜŞ",
+                              "DAHA DAYANIKLI, BESLEYİCİ"
+                            ],
+                            [
+                              "1 HAFTALIK BASİT ERZAK",
+                              "5 GÜMÜŞ",
+                              "STANDART YOLCU MALZEMESİ"
+                            ],
+                            [
+                              "1 HAFTALIK KALİTELİ ERZAK",
+                              "1 ALTIN",
+                              "DAHA DAYANIKLI, BESLEYİCİ"
+                            ],
+                            [
+                              "1 HAFTALIK ASKERİ/KERVAN ERZAĞI",
+                              "2 ALTIN",
+                              "UZUN YOL İÇİN HAZIRLANMIŞ ERZAK"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "KONAKLAMA ",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "KONAKLAMA",
+                            "FİYAT",
+                            "AÇIKLAMA"
+                          ],
+                          "rows": [
+                            [
+                              "AHIR KÖŞESİ",
+                              "2 BAKIR",
+                              "HAYVANLARLA AYNI YERDE"
+                            ],
+                            [
+                              "HAN ORTAK ZEMİNİ",
+                              "4-5 BAKIR",
+                              "KALABALIK"
+                            ],
+                            [
+                              "ORTAK YATAKHANE",
+                              "1 GÜMÜŞ",
+                              "YOLCULAR, İŞÇİLER, ÇIRAKLAR"
+                            ],
+                            [
+                              "UCUZ ODA",
+                              "2-3 GÜMÜŞ",
+                              "KÜÇÜK TEK KİŞİLİK ODA"
+                            ],
+                            [
+                              "STANDART ODA",
+                              "5 GÜMÜŞ",
+                              "TEMİZ YATAK, KAPI, TEMEL GÜVENLİK"
+                            ],
+                            [
+                              "İYİ ODA",
+                              "1 ALTIN",
+                              "ÖZEL ODA, SICAK YEMEK DAHİL OLABİLİR"
+                            ],
+                            [
+                              "KALİTELİ ODA",
+                              "3 ALTIN",
+                              "TEMİZ ÇARŞAF, BANYO, HİZMET"
+                            ],
+                            [
+                              "SOYLU SÜİTİ",
+                              "10 ALTIN+",
+                              "GENİŞ ODA, ÖZEL HİZMET, GÜVENLİK"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "HAN PAKETLERİ",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "PAKET ADI",
+                            "İÇERİK",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "UCUZ HAN PAKETİ",
+                              "ORTAK YATAKHANE, BASİT ÇORBA, SU VE ZAYIF İÇECEK",
+                              "1 GÜMÜŞ/GÜN"
+                            ],
+                            [
+                              "YOLCU PAKETİ",
+                              "BASİT ODA VEYA İYİ YATAKHANE, 2 BASİT ÖĞÜN, NORMAL İÇECEK",
+                              "3 GÜMÜŞ/GÜN"
+                            ],
+                            [
+                              "STANDART MACERACI PAKETİ",
+                              "STANDART ODA, DOYURUCU YEMEK, BİRA/İÇECEK, EŞYALAR İÇİN MAKUL GÜVENLİK",
+                              "5 GÜMÜŞ/GÜN"
+                            ],
+                            [
+                              "RAHAT MACERACI PAKETİ",
+                              "ÖZEL ODA, İYİ YEMEK, TEMİZLENME İMKÂNI, EŞYA GÜVENLİĞİ",
+                              "1 ALTIN/GÜN"
+                            ],
+                            [
+                              "VARLIKLI PAKET",
+                              "KALİTELİ ODA, BANYO, İYİ İÇKİ, HİZMET, GÜVENLİK, TÜCCAR/LONCA ÇEVRELERİNE ERİŞİM",
+                              "3+ ALTIN/GÜN"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "HAYVAN VE BİNEK KONAKLAMASI",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "HİZMET",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "HAYVANI DIŞARI BAĞLAMA",
+                              "ÜCRETSİZ-1 BAKIR"
+                            ],
+                            [
+                              "AHIRDA YER",
+                              "3 BAKIR"
+                            ],
+                            [
+                              "YEM+SU",
+                              "5 BAKIR"
+                            ],
+                            [
+                              "BİNEK İÇİN TAM BAKIM",
+                              "1 GÜMÜŞ"
+                            ],
+                            [
+                              "DEĞERLİ BİNEK İÇİN GÜVENLİ AHIR",
+                              "3 GÜMÜŞ"
+                            ],
+                            [
+                              "EGZOTİK BİNEK BAKIMI",
+                              "1+ ALTIN"
+                            ]
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "text": "ŞEHİR TİPİNE GÖRE FİYAT ÇARPANLARI"
+                },
+                {
+                  "type": "table",
+                  "header": [
+                    "BÖLGE TİPİ",
+                    "ÇARPAN",
+                    "AÇIKLAMA"
+                  ],
+                  "rows": [
+                    [
+                      "Köy",
+                      "x0.5",
+                      "Yemek ucuz, konaklama basit"
+                    ],
+                    [
+                      "Normal Kasaba",
+                      "x1",
+                      "Standart Fiyat"
+                    ],
+                    [
+                      "Büyük Şehir",
+                      "x1.5",
+                      "Kira ve hizmet pahalı"
+                    ],
+                    [
+                      "Başkent / Zengin merkez",
+                      "x2",
+                      "Kalite yüksek, fiyat yüksek"
+                    ],
+                    [
+                      "Sınır Yerleşimi",
+                      "x2",
+                      "Malzeme az, tehlike fazla"
+                    ],
+                    [
+                      "Kuşatma / Kıtlık",
+                      "x3-x5",
+                      "Fiyatlar Bozulur"
+                    ]
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "text": "ORTALAMA SOSYAL TABAKA GELİRLERİ"
+                },
+                {
+                  "type": "table",
+                  "header": [
+                    "KİŞİ / MESLEK",
+                    "GÜNLÜK GELİR"
+                  ],
+                  "rows": [
+                    [
+                      "Dilenci",
+                      "1-5 Bakır"
+                    ],
+                    [
+                      "Tarla İşçisi",
+                      "1-2 Gümüş"
+                    ],
+                    [
+                      "Hamal",
+                      "2-3 Gümüş"
+                    ],
+                    [
+                      "Hizmetçi",
+                      "2-4 Gümüş"
+                    ],
+                    [
+                      "Çırak Zanaatkâr",
+                      "2-5 Gümüş"
+                    ],
+                    [
+                      "Usta Zanaatkâr",
+                      "5 Gümüş - 1 Altın"
+                    ],
+                    [
+                      "Sıradan Asker",
+                      "3-6 Gümüş"
+                    ],
+                    [
+                      "Deneyimli Muhafız",
+                      "1 Altın"
+                    ],
+                    [
+                      "Kervan Koruması",
+                      "1-3 Altın"
+                    ],
+                    [
+                      "Lonca Uzmanı",
+                      "3-10 Altın"
+                    ],
+                    [
+                      "Soylu Hizmetlisi",
+                      "5 Gümüş - 2 Altın"
+                    ],
+                    [
+                      "Küçük Tüccar",
+                      "1-5 Altın"
+                    ],
+                    [
+                      "Büyük Tüccar",
+                      "10+ Altın"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "yolculuk-lojistik",
+              "title": "YOLCULUK-LOJİSTİK",
+              "body": "",
+              "mode": "rich",
+              "blocks": [
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "text": "TEMEL YOL BİRİMİ"
+                },
+                {
+                  "type": "table",
+                  "header": [
+                    "YOLCULUK BİÇİMİ",
+                    "GÜNLÜK MESAFE",
+                    "AÇIKLAMA"
+                  ],
+                  "rows": [
+                    [
+                      "Yaya, Yavaş/güvenli",
+                      "15-20km",
+                      "Yaralı, yükl, tehlikeli arazi"
+                    ],
+                    [
+                      "Yaya, Normal",
+                      "25-30km",
+                      "Standart maceracı yürüyüşü"
+                    ],
+                    [
+                      "Yaya, hızlı",
+                      "35-40km ",
+                      "Yorucu, soluk/dayanıklılık baskısı yaratır"
+                    ],
+                    [
+                      "Binekli, normal",
+                      "40-50km",
+                      "At, deve, iri binek"
+                    ],
+                    [
+                      "Binekli, hızlı",
+                      "60-70km",
+                      "Hayvan yıpranır, bakım gerekir"
+                    ],
+                    [
+                      "Yük arabası",
+                      "20-30km",
+                      "Mal ve yolcu taşıma"
+                    ],
+                    [
+                      "Kervan",
+                      "15-25km",
+                      "Güvenli ama yavaş"
+                    ],
+                    [
+                      "Nehir teknesi",
+                      "40-80km",
+                      "Akıntıya göre değişken"
+                    ],
+                    [
+                      "Deniz/kıyı gemisi",
+                      "80-150km",
+                      "Hava ve rota belirleyici"
+                    ]
+                  ]
+                },
+                {
+                  "type": "tabs",
+                  "tabs": [
+                    {
+                      "label": "ERZAK VE YOL MALZEMELERİ",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "ERSAK",
+                            "FİYAT",
+                            "KULLANIM"
+                          ],
+                          "rows": [
+                            [
+                              "1 günlük kötü erzak",
+                              "5 Bakır",
+                              "Aç bırakmaz, moral düşürür"
+                            ],
+                            [
+                              "1 günlük basit erzak",
+                              "1 Gümüş",
+                              "Standart yolcu erzağı"
+                            ],
+                            [
+                              "1 günlük kaliteli erzak",
+                              "2 Gümüş",
+                              "Daha besleyici, uzun yürüyüşe uygun"
+                            ],
+                            [
+                              "1 haftalık basit erzak",
+                              "5 Gümüş",
+                              "Yaya yolculuk standardı"
+                            ],
+                            [
+                              "1 haftalık kaliteli erzak",
+                              "1 Altın",
+                              "Maceracı standardı"
+                            ],
+                            [
+                              "1 haftalık askerî/kervan erzağı",
+                              "2 Altın",
+                              "Zorlu rota, nöbet, keşif"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "BİNEK HAYVAN MASRAFLARI",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "HİZMET",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "Sadece su",
+                              "1 Bakır"
+                            ],
+                            [
+                              "Basit yem",
+                              "3 Bakır"
+                            ],
+                            [
+                              "Yem + su",
+                              "5 Bakır"
+                            ],
+                            [
+                              "Normal binek bakımı",
+                              "1 Gümüş"
+                            ],
+                            [
+                              "Değerli binek bakımı",
+                              "3 Gümüş"
+                            ],
+                            [
+                              "Savaş bineği bakımı",
+                              "5 Gümüş"
+                            ],
+                            [
+                              "Egzotik binek bakımı",
+                              "1+ altın"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "BİNEK KİRALAMA",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "BİNEK",
+                            "GÜNLÜK KİRA",
+                            "DEPOZİTO"
+                          ],
+                          "rows": [
+                            [
+                              "Katır/Eşek",
+                              "2 Gümüş",
+                              "1 Altın"
+                            ],
+                            [
+                              "Sıradan At",
+                              "5 Gümüş",
+                              "5 Altın"
+                            ],
+                            [
+                              "Hızlı At",
+                              "1 Altın",
+                              "10 Altın"
+                            ],
+                            [
+                              "Dayanıklı Yol Atı",
+                              "1 Altın",
+                              "15 Altın"
+                            ],
+                            [
+                              "Savaş Atı",
+                              "3 Altın",
+                              "30 Altın"
+                            ],
+                            [
+                              "Deve / Çöl Bineği",
+                              "1 Altın",
+                              "10 Altın"
+                            ],
+                            [
+                              "Kızak Hayvanı",
+                              "5 Gümüş - 1 Altın",
+                              "5 - 10 Altın"
+                            ],
+                            [
+                              "Egzotik Binek",
+                              "5+ Altın",
+                              "50+ Altın"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "BİNEK FİYATLARI",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "BİNEK",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "Eşek",
+                              "5 Altın"
+                            ],
+                            [
+                              "Katır",
+                              "10 Altın"
+                            ],
+                            [
+                              "Sıradan At",
+                              "25 Altın"
+                            ],
+                            [
+                              "Dayanıklı Yol Atı",
+                              "40 Altın"
+                            ],
+                            [
+                              "Hızlı At",
+                              "60 Altın"
+                            ],
+                            [
+                              "Savaş Atı",
+                              "150 Altın"
+                            ],
+                            [
+                              "Deve / Çöl Bineği",
+                              "50 Altın"
+                            ],
+                            [
+                              "Eğitimli Savaş Bineği",
+                              "250+ Altın"
+                            ],
+                            [
+                              "Egzotik Binek",
+                              "500+ veya para dışı bedel"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "ARAÇ VE TAŞIMA",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "ARAÇ",
+                            "GÜNLÜK KİRA",
+                            "SATIN ALMA",
+                            "AÇIKLAMA"
+                          ],
+                          "rows": [
+                            [
+                              "El Arabası",
+                              "5 Bakır",
+                              "1 Altın",
+                              "Şehir/Pazar içi"
+                            ],
+                            [
+                              "Küçük Yük Arabası",
+                              "2 Gümüş",
+                              "5 Altın",
+                              "Bir Hayvan Çeker"
+                            ],
+                            [
+                              "Yolcu Arabası",
+                              "5 Gümüş",
+                              "15 Altın",
+                              "2-4 Yolcu"
+                            ],
+                            [
+                              "Büyük Yük Arabası",
+                              "1 Altın",
+                              "40 Altın",
+                              "Kervan Malı"
+                            ],
+                            [
+                              "Kapalı Yolcu Arabası",
+                              "2 Altın",
+                              "80 Altın",
+                              "Rahat ve Güvenli"
+                            ],
+                            [
+                              "Zırhlı / Korumalı Araba",
+                              "5+ Altın",
+                              "200+ Altın",
+                              "Askerî / Lonca kullanımı"
+                            ],
+                            [
+                              "Kızak",
+                              "5 Gümüş - 1 Altın",
+                              "20 Altın",
+                              "Kar, Buz, Çöl kızağı varyantı"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "YOLCU TAŞIMA",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "HİZMET",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "Köyler arası kısa yolculuk",
+                              "2-5 Gümüş"
+                            ],
+                            [
+                              "Kasabalar arası yolcu arabası",
+                              "1 Altın"
+                            ],
+                            [
+                              "Büyük şehirler arası ortak araba",
+                              "3-5 Altın"
+                            ],
+                            [
+                              "Özel araba kiralama, günlük",
+                              "5 Altın"
+                            ],
+                            [
+                              "Soylu/varlıklı kapalı araba, günlük",
+                              "10+ Altın"
+                            ],
+                            [
+                              "Tehlikeli rota yolcu ücreti",
+                              "x2-x5"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "KERVAN SİSTEMİ",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "KATILIM TİPİ",
+                            "GÜNLÜK FİYAT",
+                            "AÇIKLAMA"
+                          ],
+                          "rows": [
+                            [
+                              "Yaya eşlikçi",
+                              "1 Gümüş",
+                              "Kervanla yürür, koruma beklemez"
+                            ],
+                            [
+                              "Sıradan yolcu",
+                              "3 Gümüş",
+                              "Güvenlikten faydalanır"
+                            ],
+                            [
+                              "Arabada yolcu",
+                              "1 Altın",
+                              "Daha rahat"
+                            ],
+                            [
+                              "Kapalı arabada yolcu",
+                              "3 Altın",
+                              "Varlıklı yolcu"
+                            ],
+                            [
+                              "Gizli/özel yolcu",
+                              "10+ Altın",
+                              "Kimlik saklama, özel güvenlik"
+                            ]
+                          ]
+                        },
+                        {
+                          "type": "heading",
+                          "level": 3,
+                          "text": "KERVANA KORUMA OLARAK KATILMAK"
+                        },
+                        {
+                          "type": "table",
+                          "header": [
+                            "KORUMA SEVİYESİ",
+                            "GÜNLÜK ÜCRET"
+                          ],
+                          "rows": [
+                            [
+                              "Acemi koruma",
+                              "5 Gümüş"
+                            ],
+                            [
+                              "Sıradan koruma",
+                              "1 Altın"
+                            ],
+                            [
+                              "Deneyimli koruma",
+                              "3 Altın"
+                            ],
+                            [
+                              "Canavar tehlikesi olan rota",
+                              "5-10 Altın"
+                            ],
+                            [
+                              "Sınır bölgesi / harabe rota",
+                              "10-25 Altın"
+                            ],
+                            [
+                              "Tesir bölgesi yakınları",
+                              "25+ Altın veya özel ödeme"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "YÜK TAŞIMA",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "YÜK SINIFI",
+                            "ÖRNEK",
+                            "GÜNLÜK ÜCRET"
+                          ],
+                          "rows": [
+                            [
+                              "Hafif",
+                              "Sandık, kişisel eşya",
+                              "1 Gümüş"
+                            ],
+                            [
+                              "Orta",
+                              "Ticari mal, silah sandığı",
+                              "5 Gümüş"
+                            ],
+                            [
+                              "Ağır",
+                              "Varıl, maden, tahıl çuvalı",
+                              "1 Altın"
+                            ],
+                            [
+                              "Değerli ",
+                              "Mücevher, evrak, nadir maden",
+                              "3+ Altın"
+                            ],
+                            [
+                              "Tehlikeli",
+                              "Lanetli eşya, yaratık kalıntısı",
+                              "10+ Altın"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "GEÇİŞ ÜCRETLERİ",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "ÖDEME TÜRÜ",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "Köprü Geçişi",
+                              "1-5 Bakır"
+                            ],
+                            [
+                              "Şehir Kapısı Giriş Ücreti",
+                              "1 Gümüş"
+                            ],
+                            [
+                              "Pazar Malı Giriş Vergisi",
+                              "1-5 Gümüş"
+                            ],
+                            [
+                              "Hayvan Başı Geçiş Ücreti",
+                              "5 Bakır - 1 Gümüş"
+                            ],
+                            [
+                              "Araba Geçiş Ücreti",
+                              "1-3 Gümüş"
+                            ],
+                            [
+                              "Kervan Geçiş Vergisi",
+                              "1-10 Altın"
+                            ],
+                            [
+                              "Sınır Karakolu Geçiş İzni",
+                              "5+ Altın"
+                            ],
+                            [
+                              "Kaçak Geçiş Rüşveti",
+                              "1-20 Altın"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "REHBER, İZCİ, YOL BİLGİSİ",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "HİZMET",
+                            "GÜNLÜK FİYAT",
+                            "AÇIKLAMA"
+                          ],
+                          "rows": [
+                            [
+                              "Yerel Rehber",
+                              "5 Gümüş",
+                              "Köy, orman, yakın rota"
+                            ],
+                            [
+                              "Deneyimli Yol Rehberi",
+                              "1 Altın",
+                              "Uzun Yol"
+                            ],
+                            [
+                              "Dağ Rehberi",
+                              "2 Altın",
+                              "Zorlu Arazi"
+                            ],
+                            [
+                              "Harabe Rehberi",
+                              "5 Altın",
+                              "Riskli, nadir bulunur"
+                            ],
+                            [
+                              "Sınır İzcisi",
+                              "5-10 Altın",
+                              "Tehlikeli Bölgeler"
+                            ],
+                            [
+                              "Tesir bölgesi bilen rehber",
+                              "25+ Altın",
+                              "Para dışında da bedel isteyebilir"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "KORUMA VE MUHAFIZ ÜCRETLERİ",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "KORUMA TİPİ",
+                            "GÜNLÜK ÜCRET"
+                          ],
+                          "rows": [
+                            [
+                              "Sıradan sopa taşıyan koruma",
+                              "5 Gümüş"
+                            ],
+                            [
+                              "Silahlı Muhafız",
+                              "1 Altın"
+                            ],
+                            [
+                              "Deneyimli Muhafız",
+                              "3 Altın"
+                            ],
+                            [
+                              "Eski Asker",
+                              "5 Altın"
+                            ],
+                            [
+                              "Lonca Lisanslı Koruma",
+                              "10 Altın"
+                            ],
+                            [
+                              "Canavar Avcısı",
+                              "25+ Altın"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "DENİZ VE NEHİR TAŞIMACILIĞI",
+                      "blocks": [
+                        {
+                          "type": "heading",
+                          "level": 3,
+                          "text": "NEHİR YOLCULUĞU"
+                        },
+                        {
+                          "type": "table",
+                          "header": [
+                            "HİZMET",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "Kısa nehir geçisi",
+                              "5 Bakır - 1 Gümüş"
+                            ],
+                            [
+                              "Sal / küçük tekneyle geçiş",
+                              "1 Gümüş"
+                            ],
+                            [
+                              "Nehir teknesi yolculuğu, günlük",
+                              "3 Gümüş"
+                            ],
+                            [
+                              "Nehir yük yaşıma, 100kg/gün",
+                              "5 Bakır - 1 Gümüş"
+                            ],
+                            [
+                              "Akıntıya ters yolculuk",
+                              "x2"
+                            ],
+                            [
+                              "Tehlikeli nehir hattı",
+                              "x3"
+                            ]
+                          ]
+                        },
+                        {
+                          "type": "heading",
+                          "level": 3,
+                          "text": "DENİZ / KIYI YOLCULUĞU"
+                        },
+                        {
+                          "type": "table",
+                          "header": [
+                            "HİZMET",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "Kısa kıyı geçişi",
+                              "1 Altın"
+                            ],
+                            [
+                              "Şehirler arası gemi yolculuğu",
+                              "5-20 Altın"
+                            ],
+                            [
+                              "Güvertede yolcu",
+                              "3 Altın"
+                            ],
+                            [
+                              "Ortak kamarada yolcu",
+                              "10 Altın"
+                            ],
+                            [
+                              "Özel kamarada yolcu",
+                              "30+ Altın"
+                            ],
+                            [
+                              "100kg yük taşıma",
+                              "1 - 5 Altın"
+                            ],
+                            [
+                              "Tehlikeli rota",
+                              "x2 - x5"
+                            ]
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "ekipman-ekonomisi",
+              "title": "EKİPMAN EKONOMİSİ",
+              "body": "",
+              "mode": "rich",
+              "blocks": [
+                {
+                  "type": "tabs",
+                  "tabs": [
+                    {
+                      "label": "SİLAHLAR",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "SİLAH",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "Sopa",
+                              "1-2 Bakır"
+                            ],
+                            [
+                              "Kalın Değnek",
+                              "5 Bakır"
+                            ],
+                            [
+                              "Taş/Kurşun sapan",
+                              "5 Bakır"
+                            ],
+                            [
+                              "Hançer",
+                              "5 Gümüş"
+                            ],
+                            [
+                              "Basit Bıçak",
+                              "2 Gümüş"
+                            ],
+                            [
+                              "El Baltası",
+                              "5 Gümüş"
+                            ],
+                            [
+                              "Orak / Tarım Aleti",
+                              "2 - 5 Gümüş"
+                            ],
+                            [
+                              "Kısa Mızrak",
+                              "1 Altın"
+                            ],
+                            [
+                              "Basit Yay",
+                              "1 Altın"
+                            ],
+                            [
+                              "Basit Arbalet",
+                              "3 Altın"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "ASKERİ SİLAHLAR",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "SİLAH",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "Kısa Kılıç",
+                              "2 Altın"
+                            ],
+                            [
+                              "Uzun Kılıç",
+                              "5 Altın"
+                            ],
+                            [
+                              "Savaş Baltası",
+                              "5 Altın"
+                            ],
+                            [
+                              "Topuz",
+                              "3 Altın"
+                            ],
+                            [
+                              "Gürz",
+                              "6 Altın"
+                            ],
+                            [
+                              "Uzun Mızrak",
+                              "3 Altın"
+                            ],
+                            [
+                              "Kargı",
+                              "4 Altın"
+                            ],
+                            [
+                              "Halberd",
+                              "8 Altın"
+                            ],
+                            [
+                              "Çift Elli Balta",
+                              "10 Altın"
+                            ],
+                            [
+                              "Çift Elli Kılıç",
+                              "15 Altın"
+                            ],
+                            [
+                              "Kaliteli Savaş Yayı",
+                              "5 Altın"
+                            ],
+                            [
+                              "Ağır Arbalet",
+                              "10 Altın"
+                            ],
+                            [
+                              "Fırlatma Bıçakları, 5'li",
+                              "5 Altın"
+                            ],
+                            [
+                              "Kompozit Yay",
+                              "25 Altın"
+                            ],
+                            [
+                              "Mekanik Arbalet",
+                              "30 Altın"
+                            ],
+                            [
+                              "Gizli Bilek Bıçağı",
+                              "25 Altın"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "MÜHİMMAT",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "MÜHİMMAT",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "1 Ok",
+                              "1 Bakır"
+                            ],
+                            [
+                              "1 Kaliteli Ok",
+                              "3 Bakır"
+                            ],
+                            [
+                              "1 Zırh Delici Ok",
+                              "1 Gümüş"
+                            ],
+                            [
+                              "1 Arbalet Oku",
+                              "2 Bakır"
+                            ],
+                            [
+                              "1 Ağır Arbalet Oku",
+                              "6 Bakır"
+                            ],
+                            [
+                              "Fırlatma Bıçağı",
+                              "1 Altın"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "KALKAN",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "KALKAN",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "Basit Tahta Kalkan",
+                              "5 Gümüş"
+                            ],
+                            [
+                              "Küçük Kalkan",
+                              "1 Altın"
+                            ],
+                            [
+                              "Orta Kalkan",
+                              "3 Altın"
+                            ],
+                            [
+                              "Güçlendirilmiş Kalkan",
+                              "10 Altın"
+                            ],
+                            [
+                              "Büyük Kalkan",
+                              "13 Altın"
+                            ],
+                            [
+                              "Kule Kalkan",
+                              "25 Altın"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "ZIRHLAR",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "ZIRH",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "Kalın giysi / dolgulu kıyafet",
+                              "2 Altın"
+                            ],
+                            [
+                              "Deri Zırh",
+                              "5 Altın"
+                            ],
+                            [
+                              "Sertleştirilmiş Deri",
+                              "15 Altın"
+                            ],
+                            [
+                              "Zincir Gömlek",
+                              "25 Altın"
+                            ],
+                            [
+                              "Pul Zırh",
+                              "40 Altın"
+                            ],
+                            [
+                              "Ağır Zincir Zırh",
+                              "100 Altın"
+                            ],
+                            [
+                              "Parçalı Plaka Zırh",
+                              "150 Altın"
+                            ],
+                            [
+                              "Yarım Plaka Zırh",
+                              "200 Altın"
+                            ],
+                            [
+                              "Tam Plaka Zırh",
+                              "500 Altın"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "PARÇA ZIRHLAR",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "PARÇA",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "Deri Eldiven",
+                              "5 Gümüş"
+                            ],
+                            [
+                              "Sertleştirilmiş Deri Eldiven",
+                              "2 Altın"
+                            ],
+                            [
+                              "Metal Eldiven",
+                              "10 Altın"
+                            ],
+                            [
+                              "Deri Bot",
+                              "1 Altın"
+                            ],
+                            [
+                              "Sertleştirilmiş Deri Botlar",
+                              "5 Altın"
+                            ],
+                            [
+                              "Metal Dizlik",
+                              "5 Altın"
+                            ],
+                            [
+                              "Metal Kolluk",
+                              "5 Altın"
+                            ],
+                            [
+                              "Basit Miğfer",
+                              "3 Altın"
+                            ],
+                            [
+                              "iyi Miğfer",
+                              "10 Alın"
+                            ],
+                            [
+                              "Kapalı Savaş Miğferi",
+                              "25 Altın"
+                            ],
+                            [
+                              "Göğüs Plakası",
+                              "60 Altın"
+                            ],
+                            [
+                              "Omuzluk Seti",
+                              "20 Altın"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "TAMİR, BAKIM VE UYARLAMA",
+                      "blocks": [
+                        {
+                          "type": "heading",
+                          "level": 3,
+                          "text": "BAKIM"
+                        },
+                        {
+                          "type": "table",
+                          "header": [
+                            "HİZMET",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "Bileme",
+                              "5 Bakır - 1 Gümüş"
+                            ],
+                            [
+                              "Silah Genel Bakım",
+                              "2 Gümüş"
+                            ],
+                            [
+                              "Yay Kirişi değiştirme",
+                              "1 Gümüş"
+                            ],
+                            [
+                              "Kalkan Tamiri",
+                              "1 - 5 Gümüş"
+                            ],
+                            [
+                              "Hafif Zırh Bakımı",
+                              "5 Gümüş"
+                            ],
+                            [
+                              "Orta Zırh Bakımı",
+                              "1 Altın"
+                            ],
+                            [
+                              "Ağır Zırh Bakımı",
+                              "3 Altın"
+                            ],
+                            [
+                              "Tam Plaka Bakımı",
+                              "10 Altın"
+                            ]
+                          ]
+                        },
+                        {
+                          "type": "heading",
+                          "level": 3,
+                          "text": "TAMİR"
+                        },
+                        {
+                          "type": "table",
+                          "header": [
+                            "HASAR SEVİYESİ",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "Küçük Hasar",
+                              "Eşya fiyatının %5'i"
+                            ],
+                            [
+                              "Orta Hasar",
+                              "Eşya fiyatının %15'i"
+                            ],
+                            [
+                              "Ağır Hasar",
+                              "Eşya fiyatının %30'u"
+                            ],
+                            [
+                              "Neredeyse Kırılmış",
+                              "Eşya fiyatının %50'si"
+                            ]
+                          ]
+                        },
+                        {
+                          "type": "heading",
+                          "level": 3,
+                          "text": "ÖLÇÜYE UYARLAMA"
+                        },
+                        {
+                          "type": "table",
+                          "header": [
+                            "İŞLEM",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "Deri Zırh Uyarlama",
+                              "Zırh Fiyatının %10'u"
+                            ],
+                            [
+                              "Zincir / Pul Zırh uyarlama",
+                              "Zırh Fiyaının %20'si"
+                            ],
+                            [
+                              "Yarım Plaka Uyarlama",
+                              "Zırh Fiyatının %30'u"
+                            ],
+                            [
+                              "Tam Plaka Uyarlama",
+                              "Zırh Fiyatının %40'ı"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "AYDINLATMA EKİPMANLARI",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "EŞYA",
+                            "FİYAT",
+                            "AÇIKLAMA"
+                          ],
+                          "rows": [
+                            [
+                              "Meşale",
+                              "1 Bakır",
+                              "Kısa süreli ışık"
+                            ],
+                            [
+                              "Kaliteli Meşale ",
+                              "7 Bakır",
+                              "Daha uzun yanar, rüzgara dayanıklı"
+                            ],
+                            [
+                              "Yağ, küçük şişe",
+                              "5 Bakır",
+                              "Fener veya ateş için"
+                            ],
+                            [
+                              "Yağ, büyük şişe",
+                              "1 Gümüş",
+                              "Uzun yol için"
+                            ],
+                            [
+                              "El Feneri",
+                              "1 Altın",
+                              "Maceracı standardı"
+                            ],
+                            [
+                              "Kapalı Fener",
+                              "3 Altın",
+                              "Rüzgar ve yağmura dayanıklı"
+                            ],
+                            [
+                              "Sinyal Feneri",
+                              "15 Altın",
+                              "Uzak mesafeli işaretleme"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "KAMP EKİPMANLARI",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "EŞYA",
+                            "FİYAT",
+                            "AÇIKLAMA"
+                          ],
+                          "rows": [
+                            [
+                              "İnce battaniye",
+                              "5 Bakır",
+                              "Kötü hava için yetersiz"
+                            ],
+                            [
+                              "Kalın battaniye",
+                              "1 Gümüş",
+                              "Temel Kamp eşyası"
+                            ],
+                            [
+                              "Uyku tulumu",
+                              "5 Gümüş",
+                              "Yolcu standardı"
+                            ],
+                            [
+                              "Kaliteli uyku tulumu",
+                              "1 Altın",
+                              "Soğukta sıcak tutar"
+                            ],
+                            [
+                              "Hasır/deri mat",
+                              "5 Bakır",
+                              "Zeminden korur"
+                            ],
+                            [
+                              "Kamp Bezi",
+                              "1 Gümüş",
+                              "Yağmur ve rüzgar için"
+                            ],
+                            [
+                              "Basit çadır, 1 kişilik",
+                              "2 Altın",
+                              "Ucuz, hafif"
+                            ],
+                            [
+                              "Standart Çadır, 2 kişilik",
+                              "5 Altın",
+                              "Maceracı Standardı"
+                            ],
+                            [
+                              "Büyük Çadır, 4 kişilik",
+                              "12 altın",
+                              "Grup kampı"
+                            ],
+                            [
+                              "Kaliteli Kış Çadırı",
+                              "25 Altın",
+                              "Soğuktan korur"
+                            ],
+                            [
+                              "Askerî Çadır",
+                              "50 Altın",
+                              "Sağlam, ağır"
+                            ],
+                            [
+                              "Kamp pişirme takımı",
+                              "1 Altın",
+                              "Tencere, kap, küçük araçlar"
+                            ],
+                            [
+                              "Seyyar ocak, mangal",
+                              "3 Altın",
+                              "Uzun kamp için"
+                            ]
+                          ]
+                        },
+                        {
+                          "type": "heading",
+                          "level": 3,
+                          "text": "KAMP KONFORU"
+                        },
+                        {
+                          "type": "table",
+                          "header": [
+                            "KAMP KALİTESİ",
+                            "GEREKLİ EKİPMAN",
+                            "OYUN ETKİSİ"
+                          ],
+                          "rows": [
+                            [
+                              "Kötü Kamp",
+                              "Battaniye/açık alan",
+                              "Dinlenme zayıf, hastalık ve yorgunluk riski"
+                            ],
+                            [
+                              "Basit Kamp",
+                              "Uyku tulumu + kamp bezi",
+                              "Normal dinlenme"
+                            ],
+                            [
+                              "Standart Kamp",
+                              "Çadır + Uyku Tulumu + Pişirme Takımı",
+                              "Güvenli Dinlenme"
+                            ],
+                            [
+                              "Kaliteli Kamp",
+                              "İyi Çadır + Kaliteli Tulum + Sıcak Yemek",
+                              "Uzun yol yorgunluğu azalır"
+                            ],
+                            [
+                              "Askerî Kamp",
+                              "Büyük Çadır + Nöbet Düzeni + Araçlar",
+                              "Baskın ve hava riski azalır"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "TIRMANMA EKİPMANI",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "EŞYA",
+                            "FİYAT",
+                            "AÇIKLAMA"
+                          ],
+                          "rows": [
+                            [
+                              "Kenevir ip, 10m",
+                              "5 Bakır",
+                              "Ucuz, Ağır"
+                            ],
+                            [
+                              "Kaliteli ip, 10m ",
+                              "2 Gümüş",
+                              "Daha sağlam"
+                            ],
+                            [
+                              "Kanca",
+                              "5 Gümüş",
+                              "Tırmanma, sabitleme"
+                            ],
+                            [
+                              "Katlanır kanca",
+                              "1 Altın",
+                              "Taşınabilir"
+                            ],
+                            [
+                              "Çivi/kazık seti",
+                              "5 Altın",
+                              "Kamp ve tırmanış"
+                            ],
+                            [
+                              "Çekiç",
+                              "5 Bakır",
+                              "Genel kullanım"
+                            ],
+                            [
+                              "Tırmanma takımı",
+                              "5 Altın",
+                              "Kanca, piton, ip düzeni"
+                            ],
+                            [
+                              "Kaliteli tırmanma takımı",
+                              "15 Altın",
+                              "Daha güvenli"
+                            ],
+                            [
+                              "Mağara iniş takımı",
+                              "20 Altın",
+                              "Uzun inişler için"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "ÇANTA, KESE, SANDIK VE TAŞIMA",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "EŞYA",
+                            "FİYAT",
+                            "AÇIKLAMA"
+                          ],
+                          "rows": [
+                            [
+                              "Deri kese",
+                              "5 Bakır",
+                              "Sağlam taşıma kesesi"
+                            ],
+                            [
+                              "Omuz Çantası",
+                              "5 Bakır",
+                              "Hafif yük için"
+                            ],
+                            [
+                              "Sırt çantası",
+                              "1 Gümüş",
+                              "Standart Yolcu Çantası"
+                            ],
+                            [
+                              "Maceracı Sırt Çantası",
+                              "2 Altın",
+                              "Ekipman bölmeli"
+                            ],
+                            [
+                              "Su geçirmez çanta",
+                              "5 Altın",
+                              "Nehir, bataklık, yağmur"
+                            ],
+                            [
+                              "Ahşap Sandık",
+                              "5 Gümüş",
+                              "Depolama"
+                            ],
+                            [
+                              "Kilitli Sandık",
+                              "2 Altın",
+                              "Güvenli Saklama"
+                            ],
+                            [
+                              "Bel kemeri ekipman askısı",
+                              "5 Gümüş",
+                              "Küçük araçlara hızlı erişim"
+                            ],
+                            [
+                              "Harita tüpü",
+                              "5 Gümüş",
+                              "Harita, parşömen"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "SU, MATARA VE SIVI KABI",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "EŞYA",
+                            "FİYAT",
+                            "AÇIKLAMA"
+                          ],
+                          "rows": [
+                            [
+                              "Küçük Matara",
+                              "5 Bakır",
+                              "1 Litre"
+                            ],
+                            [
+                              "Standart Matara",
+                              "1 Gümüş",
+                              "3 Litre"
+                            ],
+                            [
+                              "Deri su tulumu",
+                              "2 Gümüş",
+                              "6 Litre"
+                            ],
+                            [
+                              "Büyük Su Tulumu",
+                              "5 Gümüş",
+                              "10 Litre"
+                            ],
+                            [
+                              "Seramik Şişe",
+                              "5 Bakır",
+                              "Kırılgan, 0.5 L"
+                            ],
+                            [
+                              "Metal Şişe",
+                              "2 Altın",
+                              "Sağlam, 0.5 L"
+                            ],
+                            [
+                              "Su Artıma Bezi",
+                              "5 Gümüş",
+                              "Basit Süzme"
+                            ],
+                            [
+                              "Varil",
+                              "1 Altın",
+                              "50 Litre"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "KİLİT, TUZAK & HIRSIZ ALETLERİ",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "EŞYA",
+                            "FİYAT",
+                            "AÇIKLAMA"
+                          ],
+                          "rows": [
+                            [
+                              "Basit Kilit",
+                              "5 Gümüş",
+                              "Sandık, kapı"
+                            ],
+                            [
+                              "İyi Kilit",
+                              "2 Altın",
+                              "Daha Zor Açılır"
+                            ],
+                            [
+                              "Kaliteli Kilit",
+                              "10 Altın",
+                              "Tüccar, Lonca seviyesi"
+                            ],
+                            [
+                              "Basit zincir",
+                              "1 Altın",
+                              ""
+                            ],
+                            [
+                              "Güçlü zincir",
+                              "5 Altın",
+                              ""
+                            ],
+                            [
+                              "Pranga",
+                              "3 Altın",
+                              "Esir taşıma"
+                            ],
+                            [
+                              "Kilit açma takımı",
+                              "20 Altın",
+                              "Uzman ekipmanı"
+                            ],
+                            [
+                              "Tuzak Kurma, Sökme takımı",
+                              "25 Altın",
+                              "Mekanik tuzaklar"
+                            ],
+                            [
+                              "İnce tel seti",
+                              "5 Altın",
+                              "Tuzak, anahtar işi"
+                            ],
+                            [
+                              "Küçük ayna",
+                              "2 Gümüş",
+                              "Köşe-kapı altı bakma"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "ŞİFACI & TIBBİ EKİPMAN",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "EŞYA",
+                            "FİYAT",
+                            "AÇIKLAMA"
+                          ],
+                          "rows": [
+                            [
+                              "Basit Bandaj",
+                              "2 Bakır",
+                              "Tek kullanımlık"
+                            ],
+                            [
+                              "Temiz bandaj seti",
+                              "1 Gümüş",
+                              "5x Bandaj"
+                            ],
+                            [
+                              "Kaliteli Bandaj Seti",
+                              "5 Gümüş",
+                              "Yaraya Müdahale için 5x"
+                            ],
+                            [
+                              "Bitkisel merhem",
+                              "5 Gümüş",
+                              "Basit yaraya müdahale 5x"
+                            ],
+                            [
+                              "Ağrı kesici ot karışımı",
+                              "1 Altın",
+                              "Ağrıyı keserek anlık kısıtlamaları kaldırır"
+                            ],
+                            [
+                              "Ateş Düşürücü Karışım",
+                              "1 Altın",
+                              "Hastalık tedavisi"
+                            ],
+                            [
+                              "Panzehir, zayıf",
+                              "5 Altın",
+                              "Basit zehirlere karşı, genel"
+                            ],
+                            [
+                              "Panzehir, standart",
+                              "15 Altın",
+                              "Tehlikeli zehirlere karşı, genel"
+                            ],
+                            [
+                              "Sıhhiye çantası",
+                              "10 Altın",
+                              "Temel tıbbi set"
+                            ],
+                            [
+                              "Cerrahi Seti",
+                              "50 Altın",
+                              "Uzman seti"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "YAZI, KAYIT, ARŞİV",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "EŞYA",
+                            "FİYAT",
+                            "AÇIKLAMA"
+                          ],
+                          "rows": [
+                            [
+                              "Kömür Kalem",
+                              "1 Bakır",
+                              "Ucuz yazım"
+                            ],
+                            [
+                              "Basit Kalem",
+                              "5 Bakır",
+                              "Günlük kayıt"
+                            ],
+                            [
+                              "Mürekkep, küçük şişe",
+                              "1 Gümüş",
+                              "Standart"
+                            ],
+                            [
+                              "Kaliteli mürekkep",
+                              "5 Gümüş",
+                              "Uzun ömürlü"
+                            ],
+                            [
+                              "Parşömen, tek yaprak",
+                              "5 Bakır",
+                              "Yazı zemini"
+                            ],
+                            [
+                              "Kağıt, 5 Yaprak",
+                              "5 Bakır",
+                              "Bölgeye göre değişken"
+                            ],
+                            [
+                              "Defter",
+                              "1 Altın",
+                              "Günlük vb."
+                            ],
+                            [
+                              "Mühür",
+                              "5 Altın",
+                              "Kimlik, statü"
+                            ],
+                            [
+                              "Belge tüpü",
+                              "5 Gümüş",
+                              "Koruma"
+                            ],
+                            [
+                              "Kâtip Seti",
+                              "10 Altın",
+                              "Kalem, mürekkep, bıçak, cetvel vb."
+                            ],
+                            [
+                              "Arşivci seti",
+                              "30 Altın",
+                              "Katalog, koruma, kopyalama araçları"
+                            ],
+                            [
+                              "Şifreli kayıt defteri",
+                              "25 Altın",
+                              "Gizli Yazım"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "ZANAAT VE MESLEK TAKIMLARI",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "TAKIM",
+                            "FİYAT",
+                            "KULLANIM"
+                          ],
+                          "rows": [
+                            [
+                              "Basit alet takımı",
+                              "2 Altın",
+                              "Genel Tamir"
+                            ],
+                            [
+                              "Marangoz takımı",
+                              "10 Altın",
+                              "Ahşap işleme"
+                            ],
+                            [
+                              "Demirci el takımı",
+                              "25 Altın",
+                              "Basit zırh tamiri"
+                            ],
+                            [
+                              "Seyyar Demirci takımı",
+                              "100 Altın",
+                              "Kervan, ordu"
+                            ],
+                            [
+                              "Derici Takımı",
+                              "15 Altın",
+                              "Deri onarımı"
+                            ],
+                            [
+                              "Terzi takımı",
+                              "5 Altın",
+                              "Kıyafet, zırh astarı vb. tamir"
+                            ],
+                            [
+                              "Aşçı Takımı",
+                              "5 Altın",
+                              "Kamp, han mutfağı"
+                            ],
+                            [
+                              "Simyacı Takımı",
+                              "75 Altın",
+                              "Nadir, dikkat çeker"
+                            ],
+                            [
+                              "Otacı, toplayıcı takımı",
+                              "15 Altın",
+                              "Bitki tanıma, kurutma vb."
+                            ],
+                            [
+                              "Haritacı Takımı",
+                              "30 Altın",
+                              "Ölçüm, çizim vb."
+                            ],
+                            [
+                              "Kuyumcu takımı",
+                              "50 Altın",
+                              "İnce işçilik"
+                            ],
+                            [
+                              "Avcı takımı",
+                              "10 Altın",
+                              "Tuzak, kesim, iz"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "KEŞİF, GÖZLEM & İŞARET",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "EŞYA",
+                            "FİYAT",
+                            "AÇIKLAMA"
+                          ],
+                          "rows": [
+                            [
+                              "Metal düdük",
+                              "1 Gümüş",
+                              "Ses çıkarma"
+                            ],
+                            [
+                              "Basit Büyüteç",
+                              "10 Altın",
+                              "İnceleme"
+                            ],
+                            [
+                              "Dürbün benzeri optik araç",
+                              "100+ Altın",
+                              "Nadir, pahalı"
+                            ],
+                            [
+                              "Bayrak, flama seti",
+                              "3 Altın",
+                              "Görsel sinyal"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "AV, TUZAK & HAYATTA KALMA",
+                      "blocks": [
+                        {
+                          "type": "table",
+                          "header": [
+                            "EŞYA",
+                            "FİYAT",
+                            "AÇIKLAMA"
+                          ],
+                          "rows": [
+                            [
+                              "Basit kapan",
+                              "5 Gümüş",
+                              "Küçük hayvan için"
+                            ],
+                            [
+                              "Güçlü kapan",
+                              "2 altın",
+                              "Orta hayvan"
+                            ],
+                            [
+                              "Büyük av kapanı",
+                              "10 Altın",
+                              "Tehlikeli, ağır"
+                            ],
+                            [
+                              "Balık Ağı",
+                              "1 Altın",
+                              "Ağır"
+                            ],
+                            [
+                              "Olta takımı",
+                              "5 Gümüş",
+                              "Hafif"
+                            ],
+                            [
+                              "Deri yüzme bıçağı",
+                              "1 Altın",
+                              "Kesim, yüzme"
+                            ],
+                            [
+                              "Deri yüzme takımı",
+                              "5 Altın",
+                              "Avcı işi"
+                            ],
+                            [
+                              "Tuzlama, kurutma seti",
+                              "2 Altın",
+                              "Et Saklama"
+                            ],
+                            [
+                              "Çakmak Taşı",
+                              "5 Bakır",
+                              "Temel"
+                            ],
+                            [
+                              "Kaliteli Ateş Başlatma Kiti",
+                              "1 Altın",
+                              "Yağmurda daha güenilir"
+                            ]
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "label": "ÖZEL BÖLGE EKİPMANLARI",
+                      "blocks": [
+                        {
+                          "type": "heading",
+                          "level": 3,
+                          "text": "SOĞUK BÖLGE / SOĞUK ÇÖL"
+                        },
+                        {
+                          "type": "table",
+                          "header": [
+                            "EŞYA",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "Kalın kürk manto",
+                              "5 Altın"
+                            ],
+                            [
+                              "Soğuk bölge botu",
+                              "3 Altın"
+                            ],
+                            [
+                              "Kürklü eldiven",
+                              "1 Altın"
+                            ],
+                            [
+                              "Kar gözlüğü",
+                              "2 Altın"
+                            ],
+                            [
+                              "Soğuk Bölge Kamp Seti",
+                              "25 Altın"
+                            ],
+                            [
+                              "Soğuk Bölge Yol Seti",
+                              "50 Altın"
+                            ]
+                          ]
+                        },
+                        {
+                          "type": "heading",
+                          "level": 3,
+                          "text": "KURAK BÖLGE"
+                        },
+                        {
+                          "type": "table",
+                          "header": [
+                            "EŞYA",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "Güneş Örtüsü",
+                              "1 Altın"
+                            ],
+                            [
+                              "İnce Çöl Pelerini ",
+                              "2 Altın"
+                            ],
+                            [
+                              "Su Filtre Seti",
+                              "3 Altın"
+                            ],
+                            [
+                              "Kum gözlüğü",
+                              "2 Altın"
+                            ],
+                            [
+                              "Çöl kamp bezi",
+                              "5 Altın"
+                            ]
+                          ]
+                        },
+                        {
+                          "type": "heading",
+                          "level": 3,
+                          "text": "BATAKLIK, YAĞMUR ORMANI"
+                        },
+                        {
+                          "type": "table",
+                          "header": [
+                            "EŞYA",
+                            "FİYAT"
+                          ],
+                          "rows": [
+                            [
+                              "Su geçirmez bot",
+                              "5 Altın"
+                            ],
+                            [
+                              "Böcek ağı",
+                              "1 Altın"
+                            ],
+                            [
+                              "Su geçirmez çanta",
+                              "5 Altın"
+                            ],
+                            [
+                              "Bataklık sırığı",
+                              "5 Gümüş"
+                            ]
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "heading",
+                  "level": 3,
+                  "text": "KALİTE SEVİYELERİ"
+                },
+                {
+                  "type": "table",
+                  "header": [
+                    "KALİTE",
+                    "FİYAT ÇARPANI",
+                    "ETKİ"
+                  ],
+                  "rows": [
+                    [
+                      "Kötü",
+                      "x0.5",
+                      "Kırılma, pas, ceza ihtimali"
+                    ],
+                    [
+                      "Sıradan",
+                      "x1",
+                      "Standart"
+                    ],
+                    [
+                      "İyi İşçilik",
+                      "x2",
+                      "Dayanıklı, dengeli"
+                    ],
+                    [
+                      "Usta İşi",
+                      "x5",
+                      "Daha hafif, daha sağlam, prestijli"
+                    ],
+                    [
+                      "Nadir Usta İşi",
+                      "x10",
+                      "Özel Sipariş, İsimli Zanaatkâr"
+                    ],
+                    [
+                      "Antik/Savaş Öncesi",
+                      "x20+",
+                      "Koleksiyon, sır, kalite veya lanet"
+                    ]
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     }
@@ -2748,7 +5444,7 @@ window.SLVNZ_VERSIONS = {
           "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
           "description": "",
           "version": "v4.0",
-          "contentSeed": "2026-06-23-mqqm1jy1"
+          "contentSeed": "2026-06-23-mqr6lrtp"
         },
         "sections": {
           "oyun-kurallari": {
@@ -4378,6 +7074,399 @@ window.SLVNZ_VERSIONS = {
                 ]
               },
               {
+                "id": "savas-mucadele",
+                "title": "SAVAŞ & MÜCADELE",
+                "mode": "rich",
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "SAVAŞ & MÜCADELE"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Karakterler tek başlarına kalkıştıkları eylemlerde başarı düzeyini belirlemek için kullandıkları zar sistemini karşılıklı girdikleri savaşlar veya mücadeleler için de kullanırlar. İki karakterin birbirine kılıç savurması, belirli enerjilerin etkisi altında bırakması, güreş tutması vb. durumlarda savaş ve mücadele sistemi devreye girer.\n\nEn basit hali ile bunun gibi durumlarda iki taraf da birer zar kullanır. Sayısal değeri yüksek gelen taraf karşılaşmadan galip çıkar. Ancak, silahlı mücadeleler, enerji yönlendirmenin kullanıldığı durumlar gibi özel anlarda, gerçekleştirilen eylemin niteliğine göre kullanılacak zar sayıları değişmektedir."
+                  },
+                  {
+                    "type": "example",
+                    "text": "Örneğin, birbirine karşı çift elli kılıçlarla savaşan iki karakterin mücadelesinde; kılıcı savuran taraf, kılıcın isabetini belirlemek için bir zar, kılıcı savurma kuvvetini belirlemek için ise ikinci bir zar kullanır. **Fiziksel zarlar ile oynanan bir ortamda bu zarların sırayla atılması tavsiye edilir.** Dijital çevrimiçi bir ortamda ise topluca atılabilir, ancak gelen sonuçlar soldan sağa sıralanacak şekilde önce isabet, ardından kuvvet şeklinde olmalıdır."
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Yukarıdaki anlatım ışığında, savaş ve mücadele durumlarında takip edilebilecek durumlar şu şekilde birbirinden ayrılabilir:"
+                  },
+                  {
+                    "type": "heading",
+                    "level": 3,
+                    "text": "SIRADAN MÜCADELE"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Sıradan mücadeleler; güreş tutma, birbirini engelleme, yalan söyleme, ikna etme gibi karşılıklı başarma ve kaybetme durumları değerlendirilir. Bu durumlarda genellikle iki taraf da birer adet zar kullanır. Yardımcı puanlarla birlikte sayısal üstünlüğe sahip olan taraf mücadelenin galibi olur."
+                  },
+                  {
+                    "type": "example",
+                    "text": "Majik, kalabalık bir sokakta dolaşırken dalgın yürüyen bir adamın cebinden altın kesesini almaya çalışmak için El Çabukluğu özel becerisini kullanır. Buna karşılık dalgın adam için bu durumu zamanında fark edip etmeyeceğini belirlemek için FARKINDALIK beceri zarı kullanılır."
+                  },
+                  {
+                    "type": "heading",
+                    "level": 3,
+                    "text": "SAVAŞ"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Savaş anında karakterler genellikle saldırı eylemlerini belirlemek üzere birden fazla zar kullanırlar. Bu durumlar genellikle **ÇEVİKLİK, KUVVET, İSABET, KAYNAK KULLANIMI, ENERJİ** gibi nitelikler üzerinden belirlenir. Bir savaş anında gelişebilecek eylemler ve bu eylemler için kullanılabilecek zar sıfatları sınıflandırılabilir."
+                  },
+                  {
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "YAKIN MENZİLLİ SALDIRILAR",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Yakın menzilli herhangi bir silah ile saldırıda bulunan bir karakter, özel ya da ekleme bir durum olmadığı sürece iki adet zar kullanır. Bu zarlar sırayla atılmalı ya da dijital bir ortamda kullanılıyorsa gelen sonuç soldan sağa sıralanacak şekilde, ilk olarak İSABET, ikinci olarak HASAR/KUVVET olmak üzere sayısal değerlere dökülür."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "UZAK MENZİLLİ SALDIRILAR",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Yakın menzilli saldırılara benzer olarak, uzun menzilli saldırılarda da genel olarak iki zar kullanılır. Ancak, bahsedilen menzilli saldırı enerji yönlendirmeyi içeriyorsa, bu durumda kullanılacak zarların sayısı ikiden fazla olacak şekilde enerjisel yeteneğin özelliklerine göre değişebilmektedir. Enerjisel yetenekler dışında sıradan olarak bahsedilebilecek menzilli saldırılarda (Yay kullanımı gibi) MENZİLLİ İSABET ve KUVVET zarı kullanılır. Ancak, kuvvet gerektirmeyen bazı menzilli araçlar kullanılırken (Tatar Yayı, Musket gibi) sadece atışı isabet ettirmek için bir zar kullanılır. Bunun sebebi bu tarz menzilli silahların kendilerine özgü sabit bir hasarının bulunmasıdır."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "heading",
+                    "level": 3,
+                    "text": "Savunma"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Karakterler kendilerine yönelmiş herhangi bir saldırıdan kaçınmak ya da korunmak üzere bir savunma zarı kullanabilirler. Bu tür zarlar genellikle **KAÇINMA, BLOKLAMA** ya da **DAYANIKLILIK** kullanılarak atılır."
+                  },
+                  {
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "KAÇINMA",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Kaçınma durumlarında gelen saldırının isabet zarının sayısal değerini kaçınma zarı ile geçmek yeterlidir. Ancak rakibin isabet değeri ile karakterin kaçınma değeri arasındaki fark ne kadar fazla ise, karşı tarafın gerçekleştirdiği saldırının isabet ettiği nokta, rakibin saldırmak istediği noktaya o kadar yakın olmaktadır."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "BLOKLAMA",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Savaşta bloklama iki farklı temele dayanır: Silahla Bloklama & Kalkanla bloklama"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "SİLAHLA BLOKLAMA",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Karakterler kendilerine yönelen yakın menzilli saldırıları silahlarıyla bloklamayı tercih edebilirler. Bir karakterin silahla bloklama yapabilmesi için bu beceri konusunda yetkinlik sahibi olması gerekir. \n\nSilahla gerçekleştirilecek bloklama hamleleri, karakterlerin **çeviklik** ve ilgili silaha yönelik **blok becerisi** üzerinden hesaplanır. Bir karakter, silahıyla bir saldırıyı bloklayabilmesi durumunda *soluk* tüketir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "KALKANLA BLOKLAMA",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Bir karakter, kuşanmış olduğu kalkan türüne göre farklı şekillerde bloklama gerçekleştirebilir. Buckler ve küçük boyutta karakteri tamamen kapatmayan hafif kalkanlar, karakterin *çeviklik* niteliği ve *kalkan blok* becerilerinin toplamıyla belirlenir. Bu kalkan türlerinde mevcut blok zarının aşılması durumunda darbe doğrudan karaktere ulaşır.\n\nAncak Orta, Büyük ve Kule Kalkan gibi daha büyük kalkan türlerinde, çeviklik değeri alınmadan sadece ilgili kalkanın blok becerisi ile bir hesaplama gerçekleştirilir. Bloklama durumunda, bloklayan karakter *soluk tüketir* ancak saldırının kendisine ulaşmasını engellemiş olur. Bloklama yapan karakterin blok zarının aşılması durumunda, 6 puanlık farka kadar karakter bloklamayı gerçekleştirebilir, uygulanan kuvvetten bağımsız olarak aşılan fark sebebiyle fazladan soluk tüketir."
+                          },
+                          {
+                            "type": "heading",
+                            "level": 3,
+                            "text": "TAM BLOK POZU"
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Karakterler, Orta ve daha büyük kalkan türleri ile *tam blok* pozuna geçiş yapabilirler. Bu poza geçiş yapmak bir eylemdir. Bir karakter tam blok pozundayken,\n\n- Hareket mesafesi yarıya düşer.\n- Çevresel farkındalığı azalır.\n- Soluğunu toparlayamaz.\n- Gerçekleştireceği yakın mesafeli fiziksel saldırılar dezavantajlı kuvvet ve isabet alır.\n- Uzak menzilli enerjisel veya fiziksel saldırı gerçekleştiremez.\n+ Kalkanıyla baktığı yönden gelecek bütün fiziksel saldırıları garanti bir şekilde bloklar.\n\nKarakter, soluğu kesilene veya kendisi bozana kadar turlar boyunca tam blok pozunu koruyabilir. Ancak kendi isteğiyle tam blok pozundan çıkması durumunda, bir sonraki turuna kadar tam blok pozuna tekrar giremez (Pozdan çıkmak ek eylemdir)."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "heading",
+                    "level": 3,
+                    "text": "ENERJİSEL YETENEK KULLANIMI"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Enerjinin yönlendirilmesi ve kullanımı basit formlarda başlasa da geliştikçe karmaşıklaşan, dolayısıyla zar kullanımı açısından da farklı yaklaşımlar isteyebilen bir durumdur. Çoğu enerji kullanımı için iki ya da üç zar kullanılsa da büyünün tanımı ya da işlevi özelleştikçe, bu işleve uyum sağlamak adına enerji kullanımına farklı türde zarlar eklenebilir."
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "*Enerji kullanımı iki farklı temele dayandırılır. Bu temeller, İsabet temelli ve yoğunluk temelli enerjiler olarak nitelendirilir.*"
+                  },
+                  {
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "İSABET TEMELLİ ENERJİLER",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Tekil bir hedef belirlenerek, bu hedefe isabet ettirilmeye çalışılan enerjileri ifade eden yetenek tipleridir. Bu tip enerjilerde her zaman ilk olarak **İSABET** becerisi baz alınarak bir zar kullanılır. Sonrasında enerjiye yönelik yoğunluk ve duruma yönelik element, etki süresi vb. etkenler için ayrı zarlar kullanılabilir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "YOĞUNLUK TEMELLİ ENERJİLER",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Genel olarak isabet gerektirmeksizin bir varlığa ya da bir bölgeye yoğunlaşarak belirli bir etkinin oluşturulmaya çalışıldığı enerjilerdir. Bu tür enerjiler, zihinsel saldırılar, bir alanda patlama, yanma, erime vb. etkiler oluşturma, bir madde üstünde farklı etkilere sebep olma gibi durumları içermektedir. İsabet temelli enerjilerde olduğu gibi yoğunluk temelli enerjilerde de duruma göre alan, etki süresi, mesafe gibi farklı etkenler göz önünde bulundurularak farklı zar kullanımları eklenebilir."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "heading",
+                    "level": 3,
+                    "text": "MÜCADELEDE ODAK & KONSANTRASYON"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Fiziksel ya da enerjisel bir yeteneğini odak/konsantrasyon durumunda bulundurmak, karakterlerin bu durumlara yönelik yuvalarını dolduran eylemlerdir. İki durum da birbirine süreç olarak benzerlik gösterebilse de bu durumların korunması konusu birbirinden farklılık gösterebilir."
+                  }
+                ]
+              },
+              {
+                "id": "savas-sistemi",
+                "title": "SAVAŞ SİSTEMİ",
+                "mode": "rich",
+                "blocks": [
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "SAVAŞ SİSTEMİ"
+                  },
+                  {
+                    "type": "heading",
+                    "level": 3,
+                    "text": "SAVAŞ DÜZENİ"
+                  },
+                  {
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "KARE SAVAŞ DÜZENİ",
+                        "blocks": [
+                          {
+                            "type": "image",
+                            "src": "https://slvnz.github.io/resources/webpage/svg/square-battle.svg",
+                            "alt": "",
+                            "caption": "Kare savaş düzeni",
+                            "width": "300"
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Kare savaş sistemi, SLVNZ 4.0'ın mücadele eylemlerinin ve hareketlerinin işlenmesi için temeli oluşturur. Savaş sisteminde varlıkların her biri bir Kare içinde yer alırlar ve birimlerin hareketleri, gerçekleşecek eylemlerin mesafeleri ve kapsayacakları alanlar birim olarak belirlenmiş tekil kare yuvalar üzerinden hesaplanır.\n\nSavaş düzeninde, karakterin baktığı yöndeki ve bu yönün içerdiği birimin sağ ve sol bitişiğindeki birimler **net alan** olarak isimlendirilir."
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Karakter, net alandaki varlıklara normal şekilde fiziksel saldırıda bulunabilir.",
+                              "Karakter, net alandan alacağı saldırılara karşı normal şekilde savunma & kaçınma hamleleri yapabilir."
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Savaş düzeninde net alan, net alanlardan karakterin çevresine doğru dolaşırken **SOL** ve **SAĞ** birimler bulunur."
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Karakter, **BU ALANLARDAN** gelen fiziksel saldırılara karşı savunma yapmak için herhangi bir eksi puan almaz. Ancak saldırıyı savuşturma veya saldırıdan kaçınma süreçleri koşullara bağlı olarak değişiklik gösterir.",
+                              "Karakter, elinin boş bulunduğu taraftan gelen bir saldırıya karşı kaçınma yapmak zorundadır. Saldırının geldiği taraftaki elinde en az orta boy kalkan bulunduruyorsa, bloklamayı avantajlı gerçekleştirir.",
+                              "Karakter, altıgen sisteminde olduğu gibi sadece net alan sınırlarında bulunan varlıklara herhangi bir şekilde bakış yönünü değiştirmeden saldırıda bulunabilir. Ancak, silah bulundurduğu elinin olduğu tarafa da bakış açısını değiştirmeden saldırıda bulunabilir (Sol elinde silah bulunduran biri sol tarafa saldırabilir, ancak sağ tarafa saldırmak için o bölgeye net alan olacak şekilde yüzünü dönmelidir).",
+                              "Karakter, bu alanlardan gelecek menzilli fiziksel saldırıların farkındadır ve yukarıdaki kuralları gözeterek savunma & kaçınma yapabilir."
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Karakterin baktığı yönün sağ ve sol arkasındaki birimler **eşik alan** olarak isimlendirilir."
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Karakter, eşik alandan gelen yakın mesafeli fiziksel saldırılara karşı -2 negatif değer alarak savunma gerçekleştirir.",
+                              "Karakter, eşik alan tarafından gelecek uzun menzilli fiziksel saldırıyı yapacak kişinin orada olduğunun farkındaysa, gelen saldırıya karşı farkındalık zarı kullanır. Farkındalık 10'dan yüksek gelirse gelen fiziksel menzilli saldırıyı fark ederek kaçınmaya çalışabilir. Saldıranın okçuluk/atıcılık/isabet/nişancılık ve kuvvet yüksekliğine bağlı olarak saldırının başarı düzeyi belirlenir."
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Karakterin baktığı yönün tam tersinde — yani arkasında — kalan birim **kör alan** olarak isimlendirilir."
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Karakter, kör alandan gelen yakın mesafeli fiziksel saldırılara karşı, eğer saldırıyı yapan kişinin arkasında olduğunun farkındaysa dezavantaj ile kaçınma gerçekleştirmeye çalışır. **Bloklama** şeklinde bir savunma bu pozisyona karşı gerçekleştirilemez.",
+                              "Karakter, kör alandan gelecek fiziksel bir uzak menzilli saldırıya karşı başka bir varlık tarafından tepki olarak uyarılmıyor veya buna özel bir sistemi yoksa savunma veya kaçınma gerçekleştiremez."
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "label": "BLOK SİSTEMİ",
+                        "blocks": [
+                          {
+                            "type": "image",
+                            "src": "https://slvnz.github.io/resources/webpage/svg/square-block.svg",
+                            "alt": "",
+                            "caption": "Kare blok sistemi",
+                            "width": "300"
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Fiziksel mücadelelerde kaçınma genel bir standarda sahip basit bir yapıda olsa da bir kalkanla bloklamanın koşullara bağlı değişkenlikleri bulunmaktadır. Bu değişkenler dahilinde, bloklama sistemi kare ve altıgen sistem üzerinde farklılıklarıyla incelenebilir. Kalkanlar genel kullanım şekilleriyle sol elde kuşanıldıkları için, şemalar sol kullanım üzerinden bir görsellik sunmaktadır. Kalkanın diğer tarafta kullanım durumunda, aynı sistem karakterin sağ tarafı için geçerlidir."
+                          },
+                          {
+                            "type": "heading",
+                            "level": 3,
+                            "text": "KÜÇÜK KALKANLAR & SİLAHLAR"
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Küçük kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahip olmadıkları için çoğunlukla bireysel ölçekte fiziksel saldırıları engellemek ve savuşturmak üzere kullanılır. Sonuçları bire bir aynı olmasa da silahlar ve küçük kalkanlar aynı sistem yapısına tabidir."
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Küçük kalkanlar bloklamak için ek puanlarını karakterin **ÇEV** niteliğinden edinirler.",
+                              "Silahlar bu ek puanı kendilerine ait özel **BLOK** niteliğinden edinirler.",
+                              "Daha büyük boyutta kalkanlarda bloklama eyleminin zarı düşük kalsa bile arada oluşacak puan farkına bağlı olarak kısmi başarı sağlanabilirken, silahlar ve küçük kalkanlarda kaçınma durumundaki gibi başarısız olunur."
+                            ]
+                          },
+                          {
+                            "type": "heading",
+                            "level": 3,
+                            "text": "ORTA KALKANLAR"
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Orta kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahiptir. Bu özellikler hem ağırlıkları hem de büyüklükleri sebebiyle karakterin hareket kabiliyeti üzerinde olumsuz etkilere sebep olmaktadır. Ancak, bu duruma karşılık karaktere gelecek fiziksel hamlelere karşı korunak sağlamaktadır."
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Orta kalkan kullanan bir karakter, **NORMAL ALANLAR** tarafından gelecek yakın menzilli fiziksel saldırılara karşı normal şekilde **BLOK BONUSU** edinerek bloklama yapabilir (Kalkandan gelecek blok aşırtma sınırı).",
+                              "Eğer karaktere gelecek saldırı **NET ALAN** tarafından geliyorsa, karakter bloklama eylemine **AVANTAJ** alır.",
+                              "Eğer karaktere gelecek saldırı zor alan tarafından geliyorsa, karakter bloklama eylemine **DEZAVANTAJ** alır."
+                            ]
+                          },
+                          {
+                            "type": "heading",
+                            "level": 3,
+                            "text": "KULE KALKANLAR"
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Kule kalkanlar, karakterlerin hareketlerini ve **ÇEV** niteliklerini önemli ölçüde düşürürken korunak durumunu aynı ölçüde yükselten yapıya sahiptir. Bir karakter, orta kalkanlarda olduğu gibi kule kalkanlarda da blok bonusu becerisi üzerinden bloklama gerçekleştirir, ancak kule kalkanı tam blok pozuna geçirdiği zaman stamina değeri tükenene ya da kalkan işlev görmez hale gelene kadar saldırıları kesinlikle bloklar."
+                          },
+                          {
+                            "type": "heading",
+                            "level": 3,
+                            "text": "BLOKLAMADA DAYANIKLILIK"
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Bloklama, karaktere üstün korunak sağlasa da karakter tarafından kaynak kullanımı denetimi gerektiren bir süreçtir. Bir karakter, saldırı blokladıkça kalkanı üzerinde hasar alır. Kalkanın materyalinin zarar görmesinin yanı sıra, karakter arka arkaya kuvvetli saldırılar bloklamaya başlarsa DAY niteliği üzerinden bir mücadeleye girer. Bu mücadelede, bloklanan her kuvvetli saldırı sonrasında karakterin bir miktar soluk kaynağı geçici olarak tükenmeye başlar.\n\nKarakter bu kaynağı tüketene kadar bloklama yapmayı tercih ederse, soluk kaynağı 0'a düştüğü veya dengesi bozulduğu zaman karakterin gardı kırılır ve kırılgan pozuna girer. Bu pozdayken alacağı sonraki ilk yakın menzilli saldırı kritik bir isabetle gerçekleşir. Eğer karakter stamina kaynağı tükenmeden blok yapmaya ara verirse, ara verdiği turlar boyunca sabit bir şekilde kaynağın eriyen miktarı yenilenmeye başlar."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "heading",
+                    "level": 3,
+                    "text": "SAVAŞ EYLEMLERİ"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Bu savaş düzenine göre karakterler varsayılan olarak şunları gerçekleştirebilir:"
+                  },
+                  {
+                    "type": "list",
+                    "ordered": false,
+                    "items": [
+                      "İnsansı varlıkların temel hareket sınırı 4 birimdir. Niteliklerden her **+2 ÇEV** başına insansı varlıklar karasal hareketlerine **+1 birim hareket mesafesi** kazanır.",
+                      "Çevresinde kendine gelen bir saldırıya karşı **TEPKİ EYLEM** kullanarak bakış yönünü saldırıya yönlendirebilir. Eğer **KÖR NOKTADAN** gelen bir saldırıya karşı yapıyorsa, sadece kaçınma hareketi gerçekleştirebilir. Bu durumda kaçınma eylemine dezavantaj alır.",
+                      "Belirli bir yöne bakan bir varlık, görüş mesafesinde hareket eden bir varlığın turu boyunca gerçekleştireceği hareketi takip edecek şekilde tepki eylem olarak bakış yönünü değiştirebilir. Eğer eşik veya kör alandan yakın mesafesinde hareket eden bir varlık varsa (3-6 birim mesafe), pasif olarak kullanılacak bir **FARKINDALIK** zarı ile fark etmesi durumunda bu alanda hareket eden varlığa karşı da bakış yönünü tepki eylemle değiştirebilir.",
+                      "Karakter, turunda **NET ALANDA** ve **silah tuttan elinin tarafında** (Eşik alan hariç) bulunan hedeflere saldırabilir. Karakterin kendi turunda yüzünü bir yöne dönmesi herhangi bir eylem türü ya da hareket puanı gerektirmez.",
+                      "Karakter, **NET ALAN** sınırlarının dışına ayrılacak bir varlığa **TEPKİ EYLEM** olarak **FIRSAT SALDIRISI** gerçekleştirebilir. Karakter, fırsat saldırısı gerçekleştirirken yüzünü saldırdığı birim tarafına dönüp dönmeme konusunda seçim yapabilir. Fırsat saldırısı isabet eden hedefin hareketi iptal olur. Net alan dışındaki alanlarda hareket eden varlıklar fırsat saldırısını tetiklemez."
+                    ]
+                  },
+                  {
+                    "type": "heading",
+                    "level": 3,
+                    "text": "ENERJİSEL SAVAŞ"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Enerjisel savaş, karakterlerin enerjisel yetenekler ile gerçekleştireceği savaş sürecidir. Enerjisel savaş süreci fiziksel yakın savaş sürecine kıyasla daha basittir ancak kendi incelikleri bulunmaktadır."
+                  },
+                  {
+                    "type": "heading",
+                    "level": 3,
+                    "text": "Kaynak Kullanımı"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Enerjisel savaşta kısa sürede pek çok yetenek seri olarak sıralanarak kullanılmaktadır. Bu süreçte şu kurallar izlenmektedir:"
+                  },
+                  {
+                    "type": "list",
+                    "ordered": false,
+                    "items": [
+                      "Eğer kaynak tüketimi olan, aynı enerji türüne ait bir yetenek arka arkaya 2 seferden fazla kullanılırsa harcadığı kaynak değeri **X2** olacak şekilde katlanmaya başlar. Karakter, bu katlanmayı araya aynı enerjiyi kullanan bir **BAZBÜYÜ** ile karıştırır veya **FARKLI ENERJİ TÜRÜNDE** bir yetenek kullanırsa **SIFIRLAR**.",
+                      "Karakterlerin **GÖREBİLDİKLERİ** hedefler bulunmaktadır. Görebildikleri hedefler üstünde **İSABET** ve **ODAKLANMA** gerektiren enerjisel yetenekler kullanılabilir.",
+                      "Bir karakter, **FARKINDA** olduğu ancak **GÖREMEDİĞİ** bir hedef üstünde — eğer arada bir fiziksel/enerjisel engel yoksa — sadece **İSABET** becerisini kullanabileceği tipte yetenekler kullanabilir.",
+                      "Bir karakter, ancak **GÖREBİLDİĞİ** bir hedef üstünde **ETKİ OLUŞTURAN** enerjisel yetenekler kullanabilir."
+                    ]
+                  },
+                  {
+                    "type": "heading",
+                    "level": 3,
+                    "text": "Konsantrasyon"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Karakterlerin uygulayacağı yeteneklerin bir kısmı, anında gerçekleşen etkiler haricinde **SÜREKLİ ETKİ** meydana getirebilir. Bu şekilde etki oluşturan yeteneklerde karakterin **KONSANTRASYON** sürecine girmesi gerekir. Konsantrasyon, bir karakterin mental olarak enerjisel etkinin varlığını sürdürmesi için ona odağını koruma sürecidir."
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Bu süreçte karakter farklı eylemler gerçekleştirebilir, enerjisel veya fiziksel yetenekler kullanabilir. Ancak farklı bir konsantrasyon sürecine girecek olursa, mevcut konsantrasyonu **BOZULUR**. Aynı şekilde, bir karakter konsantrasyon sürecindeyken herhangi bir şekilde hasar alırsa **KONSANTRASYON TESTİ** zarı kullanır. Zarın **10 DEĞERİNİN ALTINDA** gelmesi durumunda, konsantrasyon bozulur. Bir karakterin **BİRDEN FAZLA KONSANTRASYON YUVASI** bulunabilir. Bir konsantrasyon yuvasını geliştirme konusunda gerekli deneyim puanını hesaplamak için \"**500** x **KONSANTRASYON SEVİYESİ**\" şeklinde bir formül kullanılır."
+                  }
+                ]
+              },
+              {
                 "id": "ekipman",
                 "title": "EKİPMAN",
                 "mode": "rich",
@@ -4667,399 +7756,6 @@ window.SLVNZ_VERSIONS = {
                 ]
               },
               {
-                "id": "savas-mucadele",
-                "title": "SAVAŞ & MÜCADELE",
-                "mode": "rich",
-                "blocks": [
-                  {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "SAVAŞ & MÜCADELE"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterler tek başlarına kalkıştıkları eylemlerde başarı düzeyini belirlemek için kullandıkları zar sistemini karşılıklı girdikleri savaşlar veya mücadeleler için de kullanırlar. İki karakterin birbirine kılıç savurması, belirli enerjilerin etkisi altında bırakması, güreş tutması vb. durumlarda savaş ve mücadele sistemi devreye girer.\n\nEn basit hali ile bunun gibi durumlarda iki taraf da birer zar kullanır. Sayısal değeri yüksek gelen taraf karşılaşmadan galip çıkar. Ancak, silahlı mücadeleler, enerji yönlendirmenin kullanıldığı durumlar gibi özel anlarda, gerçekleştirilen eylemin niteliğine göre kullanılacak zar sayıları değişmektedir."
-                  },
-                  {
-                    "type": "example",
-                    "text": "Örneğin, birbirine karşı çift elli kılıçlarla savaşan iki karakterin mücadelesinde; kılıcı savuran taraf, kılıcın isabetini belirlemek için bir zar, kılıcı savurma kuvvetini belirlemek için ise ikinci bir zar kullanır. **Fiziksel zarlar ile oynanan bir ortamda bu zarların sırayla atılması tavsiye edilir.** Dijital çevrimiçi bir ortamda ise topluca atılabilir, ancak gelen sonuçlar soldan sağa sıralanacak şekilde önce isabet, ardından kuvvet şeklinde olmalıdır."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Yukarıdaki anlatım ışığında, savaş ve mücadele durumlarında takip edilebilecek durumlar şu şekilde birbirinden ayrılabilir:"
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "SIRADAN MÜCADELE"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Sıradan mücadeleler; güreş tutma, birbirini engelleme, yalan söyleme, ikna etme gibi karşılıklı başarma ve kaybetme durumları değerlendirilir. Bu durumlarda genellikle iki taraf da birer adet zar kullanır. Yardımcı puanlarla birlikte sayısal üstünlüğe sahip olan taraf mücadelenin galibi olur."
-                  },
-                  {
-                    "type": "example",
-                    "text": "Majik, kalabalık bir sokakta dolaşırken dalgın yürüyen bir adamın cebinden altın kesesini almaya çalışmak için El Çabukluğu özel becerisini kullanır. Buna karşılık dalgın adam için bu durumu zamanında fark edip etmeyeceğini belirlemek için FARKINDALIK beceri zarı kullanılır."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "SAVAŞ"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Savaş anında karakterler genellikle saldırı eylemlerini belirlemek üzere birden fazla zar kullanırlar. Bu durumlar genellikle **ÇEVİKLİK, KUVVET, İSABET, KAYNAK KULLANIMI, ENERJİ** gibi nitelikler üzerinden belirlenir. Bir savaş anında gelişebilecek eylemler ve bu eylemler için kullanılabilecek zar sıfatları sınıflandırılabilir."
-                  },
-                  {
-                    "type": "tabs",
-                    "tabs": [
-                      {
-                        "label": "YAKIN MENZİLLİ SALDIRILAR",
-                        "blocks": [
-                          {
-                            "type": "paragraph",
-                            "text": "Yakın menzilli herhangi bir silah ile saldırıda bulunan bir karakter, özel ya da ekleme bir durum olmadığı sürece iki adet zar kullanır. Bu zarlar sırayla atılmalı ya da dijital bir ortamda kullanılıyorsa gelen sonuç soldan sağa sıralanacak şekilde, ilk olarak İSABET, ikinci olarak HASAR/KUVVET olmak üzere sayısal değerlere dökülür."
-                          }
-                        ]
-                      },
-                      {
-                        "label": "UZAK MENZİLLİ SALDIRILAR",
-                        "blocks": [
-                          {
-                            "type": "paragraph",
-                            "text": "Yakın menzilli saldırılara benzer olarak, uzun menzilli saldırılarda da genel olarak iki zar kullanılır. Ancak, bahsedilen menzilli saldırı enerji yönlendirmeyi içeriyorsa, bu durumda kullanılacak zarların sayısı ikiden fazla olacak şekilde enerjisel yeteneğin özelliklerine göre değişebilmektedir. Enerjisel yetenekler dışında sıradan olarak bahsedilebilecek menzilli saldırılarda (Yay kullanımı gibi) MENZİLLİ İSABET ve KUVVET zarı kullanılır. Ancak, kuvvet gerektirmeyen bazı menzilli araçlar kullanılırken (Tatar Yayı, Musket gibi) sadece atışı isabet ettirmek için bir zar kullanılır. Bunun sebebi bu tarz menzilli silahların kendilerine özgü sabit bir hasarının bulunmasıdır."
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Savunma"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterler kendilerine yönelmiş herhangi bir saldırıdan kaçınmak ya da korunmak üzere bir savunma zarı kullanabilirler. Bu tür zarlar genellikle **KAÇINMA, BLOKLAMA** ya da **DAYANIKLILIK** kullanılarak atılır."
-                  },
-                  {
-                    "type": "tabs",
-                    "tabs": [
-                      {
-                        "label": "KAÇINMA",
-                        "blocks": [
-                          {
-                            "type": "paragraph",
-                            "text": "Kaçınma durumlarında gelen saldırının isabet zarının sayısal değerini kaçınma zarı ile geçmek yeterlidir. Ancak rakibin isabet değeri ile karakterin kaçınma değeri arasındaki fark ne kadar fazla ise, karşı tarafın gerçekleştirdiği saldırının isabet ettiği nokta, rakibin saldırmak istediği noktaya o kadar yakın olmaktadır."
-                          }
-                        ]
-                      },
-                      {
-                        "label": "BLOKLAMA",
-                        "blocks": [
-                          {
-                            "type": "paragraph",
-                            "text": "Savaşta bloklama iki farklı temele dayanır: Silahla Bloklama & Kalkanla bloklama"
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "type": "tabs",
-                    "tabs": [
-                      {
-                        "label": "SİLAHLA BLOKLAMA",
-                        "blocks": [
-                          {
-                            "type": "paragraph",
-                            "text": "Karakterler kendilerine yönelen yakın menzilli saldırıları silahlarıyla bloklamayı tercih edebilirler. Bir karakterin silahla bloklama yapabilmesi için bu beceri konusunda yetkinlik sahibi olması gerekir. \n\nSilahla gerçekleştirilecek bloklama hamleleri, karakterlerin **çeviklik** ve ilgili silaha yönelik **blok becerisi** üzerinden hesaplanır. Bir karakter, silahıyla bir saldırıyı bloklayabilmesi durumunda *soluk* tüketir."
-                          }
-                        ]
-                      },
-                      {
-                        "label": "KALKANLA BLOKLAMA",
-                        "blocks": [
-                          {
-                            "type": "paragraph",
-                            "text": "Bir karakter, kuşanmış olduğu kalkan türüne göre farklı şekillerde bloklama gerçekleştirebilir. Buckler ve küçük boyutta karakteri tamamen kapatmayan hafif kalkanlar, karakterin *çeviklik* niteliği ve *kalkan blok* becerilerinin toplamıyla belirlenir. Bu kalkan türlerinde mevcut blok zarının aşılması durumunda darbe doğrudan karaktere ulaşır.\n\nAncak Orta, Büyük ve Kule Kalkan gibi daha büyük kalkan türlerinde, çeviklik değeri alınmadan sadece ilgili kalkanın blok becerisi ile bir hesaplama gerçekleştirilir. Bloklama durumunda, bloklayan karakter *soluk tüketir* ancak saldırının kendisine ulaşmasını engellemiş olur. Bloklama yapan karakterin blok zarının aşılması durumunda, 6 puanlık farka kadar karakter bloklamayı gerçekleştirebilir, uygulanan kuvvetten bağımsız olarak aşılan fark sebebiyle fazladan soluk tüketir."
-                          },
-                          {
-                            "type": "heading",
-                            "level": 3,
-                            "text": "TAM BLOK POZU"
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Karakterler, Orta ve daha büyük kalkan türleri ile *tam blok* pozuna geçiş yapabilirler. Bu poza geçiş yapmak bir eylemdir. Bir karakter tam blok pozundayken,\n\n- Hareket mesafesi yarıya düşer.\n- Çevresel farkındalığı azalır.\n- Soluğunu toparlayamaz.\n- Gerçekleştireceği yakın mesafeli fiziksel saldırılar dezavantajlı kuvvet ve isabet alır.\n- Uzak menzilli enerjisel veya fiziksel saldırı gerçekleştiremez.\n+ Kalkanıyla baktığı yönden gelecek bütün fiziksel saldırıları garanti bir şekilde bloklar.\n\nKarakter, soluğu kesilene veya kendisi bozana kadar turlar boyunca tam blok pozunu koruyabilir. Ancak kendi isteğiyle tam blok pozundan çıkması durumunda, bir sonraki turuna kadar tam blok pozuna tekrar giremez (Pozdan çıkmak ek eylemdir)."
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "ENERJİSEL YETENEK KULLANIMI"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Enerjinin yönlendirilmesi ve kullanımı basit formlarda başlasa da geliştikçe karmaşıklaşan, dolayısıyla zar kullanımı açısından da farklı yaklaşımlar isteyebilen bir durumdur. Çoğu enerji kullanımı için iki ya da üç zar kullanılsa da büyünün tanımı ya da işlevi özelleştikçe, bu işleve uyum sağlamak adına enerji kullanımına farklı türde zarlar eklenebilir."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "*Enerji kullanımı iki farklı temele dayandırılır. Bu temeller, İsabet temelli ve yoğunluk temelli enerjiler olarak nitelendirilir.*"
-                  },
-                  {
-                    "type": "tabs",
-                    "tabs": [
-                      {
-                        "label": "İSABET TEMELLİ ENERJİLER",
-                        "blocks": [
-                          {
-                            "type": "paragraph",
-                            "text": "Tekil bir hedef belirlenerek, bu hedefe isabet ettirilmeye çalışılan enerjileri ifade eden yetenek tipleridir. Bu tip enerjilerde her zaman ilk olarak **İSABET** becerisi baz alınarak bir zar kullanılır. Sonrasında enerjiye yönelik yoğunluk ve duruma yönelik element, etki süresi vb. etkenler için ayrı zarlar kullanılabilir."
-                          }
-                        ]
-                      },
-                      {
-                        "label": "YOĞUNLUK TEMELLİ ENERJİLER",
-                        "blocks": [
-                          {
-                            "type": "paragraph",
-                            "text": "Genel olarak isabet gerektirmeksizin bir varlığa ya da bir bölgeye yoğunlaşarak belirli bir etkinin oluşturulmaya çalışıldığı enerjilerdir. Bu tür enerjiler, zihinsel saldırılar, bir alanda patlama, yanma, erime vb. etkiler oluşturma, bir madde üstünde farklı etkilere sebep olma gibi durumları içermektedir. İsabet temelli enerjilerde olduğu gibi yoğunluk temelli enerjilerde de duruma göre alan, etki süresi, mesafe gibi farklı etkenler göz önünde bulundurularak farklı zar kullanımları eklenebilir."
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "MÜCADELEDE ODAK & KONSANTRASYON"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Fiziksel ya da enerjisel bir yeteneğini odak/konsantrasyon durumunda bulundurmak, karakterlerin bu durumlara yönelik yuvalarını dolduran eylemlerdir. İki durum da birbirine süreç olarak benzerlik gösterebilse de bu durumların korunması konusu birbirinden farklılık gösterebilir."
-                  }
-                ]
-              },
-              {
-                "id": "savas-sistemi",
-                "title": "SAVAŞ SİSTEMİ",
-                "mode": "rich",
-                "blocks": [
-                  {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "SAVAŞ SİSTEMİ"
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "SAVAŞ DÜZENİ"
-                  },
-                  {
-                    "type": "tabs",
-                    "tabs": [
-                      {
-                        "label": "KARE SAVAŞ DÜZENİ",
-                        "blocks": [
-                          {
-                            "type": "image",
-                            "src": "https://slvnz.github.io/resources/webpage/svg/hex-battle.svg",
-                            "alt": "",
-                            "caption": "Kare savaş düzeni",
-                            "width": "300"
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Kare savaş sistemi, SLVNZ 4.0'ın mücadele eylemlerinin ve hareketlerinin işlenmesi için temeli oluşturur. Savaş sisteminde varlıkların her biri bir Kare içinde yer alırlar ve birimlerin hareketleri, gerçekleşecek eylemlerin mesafeleri ve kapsayacakları alanlar birim olarak belirlenmiş tekil kare yuvalar üzerinden hesaplanır.\n\nSavaş düzeninde, karakterin baktığı yöndeki ve bu yönün içerdiği birimin sağ ve sol bitişiğindeki birimler **net alan** olarak isimlendirilir."
-                          },
-                          {
-                            "type": "list",
-                            "ordered": false,
-                            "items": [
-                              "Karakter, net alandaki varlıklara normal şekilde fiziksel saldırıda bulunabilir.",
-                              "Karakter, net alandan alacağı saldırılara karşı normal şekilde savunma & kaçınma hamleleri yapabilir."
-                            ]
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Savaş düzeninde net alan, net alanlardan karakterin çevresine doğru dolaşırken **SOL** ve **SAĞ** birimler bulunur."
-                          },
-                          {
-                            "type": "list",
-                            "ordered": false,
-                            "items": [
-                              "Karakter, **BU ALANLARDAN** gelen fiziksel saldırılara karşı savunma yapmak için herhangi bir eksi puan almaz. Ancak saldırıyı savuşturma veya saldırıdan kaçınma süreçleri koşullara bağlı olarak değişiklik gösterir.",
-                              "Karakter, elinin boş bulunduğu taraftan gelen bir saldırıya karşı kaçınma yapmak zorundadır. Saldırının geldiği taraftaki elinde en az orta boy kalkan bulunduruyorsa, bloklamayı avantajlı gerçekleştirir.",
-                              "Karakter, altıgen sisteminde olduğu gibi sadece net alan sınırlarında bulunan varlıklara herhangi bir şekilde bakış yönünü değiştirmeden saldırıda bulunabilir. Ancak, silah bulundurduğu elinin olduğu tarafa da bakış açısını değiştirmeden saldırıda bulunabilir (Sol elinde silah bulunduran biri sol tarafa saldırabilir, ancak sağ tarafa saldırmak için o bölgeye net alan olacak şekilde yüzünü dönmelidir).",
-                              "Karakter, bu alanlardan gelecek menzilli fiziksel saldırıların farkındadır ve yukarıdaki kuralları gözeterek savunma & kaçınma yapabilir."
-                            ]
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Karakterin baktığı yönün sağ ve sol arkasındaki birimler **eşik alan** olarak isimlendirilir."
-                          },
-                          {
-                            "type": "list",
-                            "ordered": false,
-                            "items": [
-                              "Karakter, eşik alandan gelen yakın mesafeli fiziksel saldırılara karşı -2 negatif değer alarak savunma gerçekleştirir.",
-                              "Karakter, eşik alan tarafından gelecek uzun menzilli fiziksel saldırıyı yapacak kişinin orada olduğunun farkındaysa, gelen saldırıya karşı farkındalık zarı kullanır. Farkındalık 10'dan yüksek gelirse gelen fiziksel menzilli saldırıyı fark ederek kaçınmaya çalışabilir. Saldıranın okçuluk/atıcılık/isabet/nişancılık ve kuvvet yüksekliğine bağlı olarak saldırının başarı düzeyi belirlenir."
-                            ]
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Karakterin baktığı yönün tam tersinde — yani arkasında — kalan birim **kör alan** olarak isimlendirilir."
-                          },
-                          {
-                            "type": "list",
-                            "ordered": false,
-                            "items": [
-                              "Karakter, kör alandan gelen yakın mesafeli fiziksel saldırılara karşı, eğer saldırıyı yapan kişinin arkasında olduğunun farkındaysa dezavantaj ile kaçınma gerçekleştirmeye çalışır. **Bloklama** şeklinde bir savunma bu pozisyona karşı gerçekleştirilemez.",
-                              "Karakter, kör alandan gelecek fiziksel bir uzak menzilli saldırıya karşı başka bir varlık tarafından tepki olarak uyarılmıyor veya buna özel bir sistemi yoksa savunma veya kaçınma gerçekleştiremez."
-                            ]
-                          }
-                        ]
-                      },
-                      {
-                        "label": "BLOK SİSTEMİ",
-                        "blocks": [
-                          {
-                            "type": "image",
-                            "src": "https://slvnz.github.io/resources/webpage/svg/square-block.svg",
-                            "alt": "",
-                            "caption": "Kare blok sistemi",
-                            "width": "300"
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Fiziksel mücadelelerde kaçınma genel bir standarda sahip basit bir yapıda olsa da bir kalkanla bloklamanın koşullara bağlı değişkenlikleri bulunmaktadır. Bu değişkenler dahilinde, bloklama sistemi kare ve altıgen sistem üzerinde farklılıklarıyla incelenebilir. Kalkanlar genel kullanım şekilleriyle sol elde kuşanıldıkları için, şemalar sol kullanım üzerinden bir görsellik sunmaktadır. Kalkanın diğer tarafta kullanım durumunda, aynı sistem karakterin sağ tarafı için geçerlidir."
-                          },
-                          {
-                            "type": "heading",
-                            "level": 3,
-                            "text": "KÜÇÜK KALKANLAR & SİLAHLAR"
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Küçük kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahip olmadıkları için çoğunlukla bireysel ölçekte fiziksel saldırıları engellemek ve savuşturmak üzere kullanılır. Sonuçları bire bir aynı olmasa da silahlar ve küçük kalkanlar aynı sistem yapısına tabidir."
-                          },
-                          {
-                            "type": "list",
-                            "ordered": false,
-                            "items": [
-                              "Küçük kalkanlar bloklamak için ek puanlarını karakterin **ÇEV** niteliğinden edinirler.",
-                              "Silahlar bu ek puanı kendilerine ait özel **BLOK** niteliğinden edinirler.",
-                              "Daha büyük boyutta kalkanlarda bloklama eyleminin zarı düşük kalsa bile arada oluşacak puan farkına bağlı olarak kısmi başarı sağlanabilirken, silahlar ve küçük kalkanlarda kaçınma durumundaki gibi başarısız olunur."
-                            ]
-                          },
-                          {
-                            "type": "heading",
-                            "level": 3,
-                            "text": "ORTA KALKANLAR"
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Orta kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahiptir. Bu özellikler hem ağırlıkları hem de büyüklükleri sebebiyle karakterin hareket kabiliyeti üzerinde olumsuz etkilere sebep olmaktadır. Ancak, bu duruma karşılık karaktere gelecek fiziksel hamlelere karşı korunak sağlamaktadır."
-                          },
-                          {
-                            "type": "list",
-                            "ordered": false,
-                            "items": [
-                              "Orta kalkan kullanan bir karakter, **NORMAL ALANLAR** tarafından gelecek yakın menzilli fiziksel saldırılara karşı normal şekilde **BLOK BONUSU** edinerek bloklama yapabilir (Kalkandan gelecek blok aşırtma sınırı).",
-                              "Eğer karaktere gelecek saldırı **NET ALAN** tarafından geliyorsa, karakter bloklama eylemine **AVANTAJ** alır.",
-                              "Eğer karaktere gelecek saldırı zor alan tarafından geliyorsa, karakter bloklama eylemine **DEZAVANTAJ** alır."
-                            ]
-                          },
-                          {
-                            "type": "heading",
-                            "level": 3,
-                            "text": "KULE KALKANLAR"
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Kule kalkanlar, karakterlerin hareketlerini ve **ÇEV** niteliklerini önemli ölçüde düşürürken korunak durumunu aynı ölçüde yükselten yapıya sahiptir. Bir karakter, orta kalkanlarda olduğu gibi kule kalkanlarda da blok bonusu becerisi üzerinden bloklama gerçekleştirir, ancak kule kalkanı tam blok pozuna geçirdiği zaman stamina değeri tükenene ya da kalkan işlev görmez hale gelene kadar saldırıları kesinlikle bloklar."
-                          },
-                          {
-                            "type": "heading",
-                            "level": 3,
-                            "text": "BLOKLAMADA DAYANIKLILIK"
-                          },
-                          {
-                            "type": "paragraph",
-                            "text": "Bloklama, karaktere üstün korunak sağlasa da karakter tarafından kaynak kullanımı denetimi gerektiren bir süreçtir. Bir karakter, saldırı blokladıkça kalkanı üzerinde hasar alır. Kalkanın materyalinin zarar görmesinin yanı sıra, karakter arka arkaya kuvvetli saldırılar bloklamaya başlarsa DAY niteliği üzerinden bir mücadeleye girer. Bu mücadelede, bloklanan her kuvvetli saldırı sonrasında karakterin bir miktar soluk kaynağı geçici olarak tükenmeye başlar.\n\nKarakter bu kaynağı tüketene kadar bloklama yapmayı tercih ederse, soluk kaynağı 0'a düştüğü veya dengesi bozulduğu zaman karakterin gardı kırılır ve kırılgan pozuna girer. Bu pozdayken alacağı sonraki ilk yakın menzilli saldırı kritik bir isabetle gerçekleşir. Eğer karakter stamina kaynağı tükenmeden blok yapmaya ara verirse, ara verdiği turlar boyunca sabit bir şekilde kaynağın eriyen miktarı yenilenmeye başlar."
-                          }
-                        ]
-                      }
-                    ]
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "SAVAŞ EYLEMLERİ"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Bu savaş düzenine göre karakterler varsayılan olarak şunları gerçekleştirebilir:"
-                  },
-                  {
-                    "type": "list",
-                    "ordered": false,
-                    "items": [
-                      "İnsansı varlıkların temel hareket sınırı 4 birimdir. Niteliklerden her **+2 ÇEV** başına insansı varlıklar karasal hareketlerine **+1 birim hareket mesafesi** kazanır.",
-                      "Çevresinde kendine gelen bir saldırıya karşı **TEPKİ EYLEM** kullanarak bakış yönünü saldırıya yönlendirebilir. Eğer **KÖR NOKTADAN** gelen bir saldırıya karşı yapıyorsa, sadece kaçınma hareketi gerçekleştirebilir. Bu durumda kaçınma eylemine dezavantaj alır.",
-                      "Belirli bir yöne bakan bir varlık, görüş mesafesinde hareket eden bir varlığın turu boyunca gerçekleştireceği hareketi takip edecek şekilde tepki eylem olarak bakış yönünü değiştirebilir. Eğer eşik veya kör alandan yakın mesafesinde hareket eden bir varlık varsa (3-6 birim mesafe), pasif olarak kullanılacak bir **FARKINDALIK** zarı ile fark etmesi durumunda bu alanda hareket eden varlığa karşı da bakış yönünü tepki eylemle değiştirebilir.",
-                      "Karakter, turunda **NET ALANDA** ve **silah tuttan elinin tarafında** (Eşik alan hariç) bulunan hedeflere saldırabilir. Karakterin kendi turunda yüzünü bir yöne dönmesi herhangi bir eylem türü ya da hareket puanı gerektirmez.",
-                      "Karakter, **NET ALAN** sınırlarının dışına ayrılacak bir varlığa **TEPKİ EYLEM** olarak **FIRSAT SALDIRISI** gerçekleştirebilir. Karakter, fırsat saldırısı gerçekleştirirken yüzünü saldırdığı birim tarafına dönüp dönmeme konusunda seçim yapabilir. Fırsat saldırısı isabet eden hedefin hareketi iptal olur. Net alan dışındaki alanlarda hareket eden varlıklar fırsat saldırısını tetiklemez."
-                    ]
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "ENERJİSEL SAVAŞ"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Enerjisel savaş, karakterlerin enerjisel yetenekler ile gerçekleştireceği savaş sürecidir. Enerjisel savaş süreci fiziksel yakın savaş sürecine kıyasla daha basittir ancak kendi incelikleri bulunmaktadır."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Kaynak Kullanımı"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Enerjisel savaşta kısa sürede pek çok yetenek seri olarak sıralanarak kullanılmaktadır. Bu süreçte şu kurallar izlenmektedir:"
-                  },
-                  {
-                    "type": "list",
-                    "ordered": false,
-                    "items": [
-                      "Eğer kaynak tüketimi olan, aynı enerji türüne ait bir yetenek arka arkaya 2 seferden fazla kullanılırsa harcadığı kaynak değeri **X2** olacak şekilde katlanmaya başlar. Karakter, bu katlanmayı araya aynı enerjiyi kullanan bir **BAZBÜYÜ** ile karıştırır veya **FARKLI ENERJİ TÜRÜNDE** bir yetenek kullanırsa **SIFIRLAR**.",
-                      "Karakterlerin **GÖREBİLDİKLERİ** hedefler bulunmaktadır. Görebildikleri hedefler üstünde **İSABET** ve **ODAKLANMA** gerektiren enerjisel yetenekler kullanılabilir.",
-                      "Bir karakter, **FARKINDA** olduğu ancak **GÖREMEDİĞİ** bir hedef üstünde — eğer arada bir fiziksel/enerjisel engel yoksa — sadece **İSABET** becerisini kullanabileceği tipte yetenekler kullanabilir.",
-                      "Bir karakter, ancak **GÖREBİLDİĞİ** bir hedef üstünde **ETKİ OLUŞTURAN** enerjisel yetenekler kullanabilir."
-                    ]
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Konsantrasyon"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterlerin uygulayacağı yeteneklerin bir kısmı, anında gerçekleşen etkiler haricinde **SÜREKLİ ETKİ** meydana getirebilir. Bu şekilde etki oluşturan yeteneklerde karakterin **KONSANTRASYON** sürecine girmesi gerekir. Konsantrasyon, bir karakterin mental olarak enerjisel etkinin varlığını sürdürmesi için ona odağını koruma sürecidir."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Bu süreçte karakter farklı eylemler gerçekleştirebilir, enerjisel veya fiziksel yetenekler kullanabilir. Ancak farklı bir konsantrasyon sürecine girecek olursa, mevcut konsantrasyonu **BOZULUR**. Aynı şekilde, bir karakter konsantrasyon sürecindeyken herhangi bir şekilde hasar alırsa **KONSANTRASYON TESTİ** zarı kullanır. Zarın **10 DEĞERİNİN ALTINDA** gelmesi durumunda, konsantrasyon bozulur. Bir karakterin **BİRDEN FAZLA KONSANTRASYON YUVASI** bulunabilir. Bir konsantrasyon yuvasını geliştirme konusunda gerekli deneyim puanını hesaplamak için \"**500** x **KONSANTRASYON SEVİYESİ**\" şeklinde bir formül kullanılır."
-                  }
-                ]
-              },
-              {
                 "id": "karakter-gelisimi",
                 "title": "KARAKTER GELİŞİMİ",
                 "mode": "rich",
@@ -5089,21 +7785,12 @@ window.SLVNZ_VERSIONS = {
                         "blocks": [
                           {
                             "type": "paragraph",
-                            "text": "Temel gelişim, karakterlerin temel becerilerini, ekipman yetkinliklerini, enerjisel yetkinliklerini ve kaynak havuzlarını geliştirebileceği süreçleri kapsamaktadır. Bu süreç, karakterin gireceği en az 1 en çok 4 saatlik antrenman ya da meditasyon süreci sonunda atılan farklı yüzlü zarlar ile, SEVİYE x 100 Deneyim Puanı'na erişmeye çalışarak seviye atlayabileceği bir sistemdir.\n\n**TEMEL NİTELİKLER**, temel gelişimin bu sistemi ile aynı biçimde ilerlese de gerektirdiği deneyim puanı bakımından çok daha ağırdır. Temel niteliklerde **KUV**, **ÇEV** ve **DAY**, sözü edilen antrenmanlarla geliştirilebilir. Ancak **İRD** ve **SZG** nitelikleri daha özel yöntemler veya antrenmanlarla gelişir. Temel niteliklerin gelişmesi için gerekli deneyim puanı formülü **SEVİYE x 500** olarak işlenir.\n\nTemel Nitelikler nezdinde, istikrarlı bir antrenman süreci takip edilmezse, antrenman gerçekleştirilmeyen günlere bağlı olarak periyodik bir gerileme süreci başlar. Karakter, bu nitelik antrenman sürecinde ne kadar deneyim puanı biriktirdiyse, periyodik gerileme miktarı o kadar azalır. Yani KUV niteliğini geliştirmeye çalışan bir karakter, 1 haftalık antrenman sonucunda 120 puan elde etmişse, 3 gün antrenmanını devam ettirmemesi durumunda, sonraki her antrenmansız gün başına d10 gerileme yaşar. Ancak bu puan miktarı 300 civarındayken, periyodik gerileme d5 civarındadır. Bu durum, sadece temel nitelikler için geçerlidir.\n\nÖzellikle temel niteliklerin geliştirilmesi oldukça uzun bir süreç alabilmektedir. Bu durum göz önünde bulundurulduğunda, bir karakterin asıl özgünlüğünü diğer becerileri ve yeteneklerinin gelişimi ile gösterebileceği belirtilebilir. Özellikle yeni bir oyuna başlanırken veya yeni bir karakter oluşturulurken, GM'in temel nitelikler için ayrı bir Deneyim Puanı havuzu belirlemesi veya oyunculara doğrudan seviye sayısıyla nitelik sınırı vermesi (2 adet +1 nitelik ve 1 adet +2 nitelik, ya da niteliklere özel 2000 Deneyim Puanı gibi...) tavsiye edilir."
+                            "text": "Temel gelişim, karakterlerin temel becerilerini, ekipman yetkinliklerini, enerjisel yetkinliklerini ve kaynak havuzlarını geliştirebileceği süreçleri kapsamaktadır. Bu süreç, karakterin gireceği en az 1 en çok 4 saatlik antrenman ya da meditasyon süreci sonunda atılan farklı yüzlü zarlar ile, belirlenmiş deneyim puanına erişmeye çalışarak seviye atlayabileceği bir sistemdir.\n\n**TEMEL NİTELİKLER**, temel gelişimin bu sistemi ile aynı biçimde ilerlese de gerektirdiği deneyim puanı bakımından çok daha ağırdır. Temel niteliklerde **KUV**, **ÇEV** ve **DAY**, sözü edilen antrenmanlarla geliştirilebilir. Ancak **İRD** ve **SZG** nitelikleri daha özel yöntemler veya antrenmanlarla gelişir. Temel niteliklerin gelişmesi için gerekli deneyim puanı formülü **SEVİYE x 500** olarak işlenir.\n\nTemel Nitelikler nezdinde, istikrarlı bir antrenman süreci takip edilmezse, antrenman gerçekleştirilmeyen günlere bağlı olarak periyodik bir gerileme süreci başlar. Karakter, bu nitelik antrenman sürecinde ne kadar deneyim puanı biriktirdiyse, periyodik gerileme miktarı o kadar azalır. Yani KUV niteliğini geliştirmeye çalışan bir karakter, 1 haftalık antrenman sonucunda 120 puan elde etmişse, 3 gün antrenmanını devam ettirmemesi durumunda, sonraki her antrenmansız gün başına d10 gerileme yaşar. Ancak bu puan miktarı 300 civarındayken, periyodik gerileme d5 civarındadır. Bu durum, sadece temel nitelikler için geçerlidir.\n\nÖzellikle temel niteliklerin geliştirilmesi oldukça uzun bir süreç alabilmektedir. Bu durum göz önünde bulundurulduğunda, bir karakterin asıl özgünlüğünü diğer becerileri ve yeteneklerinin gelişimi ile gösterebileceği belirtilebilir. Özellikle yeni bir oyuna başlanırken veya yeni bir karakter oluşturulurken, GM'in temel nitelikler için ayrı bir Deneyim Puanı havuzu belirlemesi veya oyunculara doğrudan seviye sayısıyla nitelik sınırı vermesi (2 adet +1 nitelik ve 1 adet +2 nitelik, ya da niteliklere özel 2000 Deneyim Puanı gibi...) tavsiye edilir."
                           }
                         ]
                       },
                       {
                         "label": "ÖZEL GELİŞİM",
-                        "blocks": [
-                          {
-                            "type": "paragraph",
-                            "text": "Özel gelişim, karakterlerin özel becerilerini geliştirebilecekleri bir gelişim sürecini kapsamaktadır. Bu süreç, temel gelişimdeki özel antrenmanlardan farklı olarak yaptıkça öğrenme ve gelişme modeli üstüne kuruludur. Yani, bir karakter özel becerisini kullandığı zaman attığı zar ile deneyim puanı kazanır. Bu bağlamda, temel olarak özel becerileri geliştirmek için gerekli deneyim formülü ise SEVİYE x 100 Deneyim Puanı şeklindedir. Ancak bütün özel beceriler karmaşıklık ve özellik bakımından eş olamayacağı üzere, üst seviyeler için gereken çarpan sayısı değişkendir."
-                          }
-                        ]
-                      },
-                      {
-                        "label": "YETENEK GELİŞİMİ",
                         "blocks": [
                           {
                             "type": "paragraph",
@@ -5164,23 +7851,44 @@ window.SLVNZ_VERSIONS = {
                     },
                     {
                       "id": "tur",
-                      "label": "TÜR",
-                      "type": "text",
-                      "showInTable": true,
-                      "snapZone": "top"
-                    },
-                    {
-                      "id": "seviye",
                       "label": "SEVİYE",
                       "type": "number",
                       "showInTable": true,
                       "snapZone": "top"
                     },
                     {
+                      "id": "seviye",
+                      "label": "ELEMENT",
+                      "type": "text",
+                      "showInTable": true,
+                      "snapZone": "top"
+                    },
+                    {
                       "id": "maliyet",
-                      "label": "MALİYET",
+                      "label": "KAYNAK",
+                      "type": "text",
+                      "showInTable": true,
+                      "snapZone": "top"
+                    },
+                    {
+                      "id": "yeni-alan",
+                      "label": "ENERJİ",
+                      "type": "text",
+                      "showInTable": true,
+                      "snapZone": "top"
+                    },
+                    {
+                      "id": "yeni-alan-2",
+                      "label": "Kaynak Bedeli",
                       "type": "number",
                       "showInTable": true,
+                      "snapZone": "top"
+                    },
+                    {
+                      "id": "yeni-alan-3",
+                      "label": "MENZİL",
+                      "type": "text",
+                      "showInTable": false,
                       "snapZone": "top"
                     },
                     {
@@ -5194,11 +7902,14 @@ window.SLVNZ_VERSIONS = {
                   "rows": [
                     {
                       "_id": "r1",
-                      "isim": "Alev Çağrısı",
-                      "tur": "Saldırı",
-                      "seviye": 2,
-                      "maliyet": 15,
-                      "aciklama": "Hedefe yoğun bir alev hüzmesi fırlatır. Temas ettiği yüzeyde kısa süreli yangın bırakır."
+                      "isim": "Ateş Oku",
+                      "tur": 0,
+                      "seviye": "Ateş",
+                      "maliyet": "Mana",
+                      "aciklama": "Menzilde görebildiğin bir hedefe elinden fırlayan bir ateş oku fırlatırsın. İsabet halinde hedef basınç ve yanma hasarı alır.",
+                      "yeni-alan": "Yıkım",
+                      "yeni-alan-2": 0,
+                      "yeni-alan-3": "12 Birim"
                     },
                     {
                       "_id": "r2",
@@ -5457,6 +8168,2687 @@ window.SLVNZ_VERSIONS = {
                     "creatures": []
                   }
                 ]
+              },
+              {
+                "id": "genel-ekonomi",
+                "title": "GENEL EKONOMİ",
+                "blurb": "",
+                "pages": [
+                  {
+                    "id": "ekonomi-ecosystem",
+                    "title": "EKONOMİ EKOSİSTEMİ",
+                    "body": "",
+                    "mode": "rich",
+                    "blocks": [
+                      {
+                        "type": "heading",
+                        "level": 2,
+                        "text": "GENEL EKONOMİ EKOSİSTEMİ"
+                      },
+                      {
+                        "type": "table",
+                        "header": [
+                          "BİRİM",
+                          "DENKLİĞİ",
+                          "KULLANIM ALANI"
+                        ],
+                        "rows": [
+                          [
+                            "Bakır",
+                            "1 Bakır",
+                            "Günlük küçük harcamalar"
+                          ],
+                          [
+                            "Gümüş",
+                            "10 Bakır",
+                            "Halkın ana alışveriş birimi"
+                          ],
+                          [
+                            "Altın",
+                            "10 Gümüş / 100 Bakır",
+                            "Büyük Ödemeler, lonca işleri, silah-zırh-kira-ticaret"
+                          ]
+                        ]
+                      },
+                      {
+                        "type": "heading",
+                        "level": 3,
+                        "text": "PARA BİRİMLERİNİN SOSYAL KARŞILIĞI"
+                      },
+                      {
+                        "type": "paragraph",
+                        "text": "Ekonominin hissini belirleyen asıl şey dönüşüm oranı değil, bu paraların dünyada ne kadar “ağır” hissettirdiğidir. **Bakır**, sıradan insanların günlük küçük ihtiyaçları için kullandığı paradır."
+                      },
+                      {
+                        "type": "table",
+                        "header": [
+                          "HARCAMA",
+                          "ORTALAMA DEĞER"
+                        ],
+                        "rows": [
+                          [
+                            "Bir parça ekmek",
+                            "1-2 Bakır"
+                          ],
+                          [
+                            "Bir kupa bayağı bira",
+                            "2-4 Bakır"
+                          ],
+                          [
+                            "Pazarda küçük meyve sebze alımı",
+                            "2-5 Bakır"
+                          ],
+                          [
+                            "Ucuz yatakhane yatağı",
+                            "4-6 Bakır"
+                          ]
+                        ]
+                      },
+                      {
+                        "type": "heading",
+                        "level": 3,
+                        "text": "GÜMÜŞ: GERÇEK ALIŞVERİŞ BİRİMİ"
+                      },
+                      {
+                        "type": "paragraph",
+                        "text": "Gümüş, halkın asıl ticaret parasıdır. Günlük yemek, işçilik, basit hizmetler, küçük ekipmanlar gümüşle döner."
+                      },
+                      {
+                        "type": "table",
+                        "header": [
+                          "HARCAMA",
+                          "ORTALAMA DEĞER"
+                        ],
+                        "rows": [
+                          [
+                            "Basit sıcak yemek",
+                            "1 Gümüş"
+                          ],
+                          [
+                            "Doyurucu han yemeği",
+                            "2-3 Gümüş"
+                          ],
+                          [
+                            "Basit bıçak / Gündelik alet",
+                            "2-5 Gümüş"
+                          ],
+                          [
+                            "Ucuz han odası",
+                            "2-4 Gümüş"
+                          ]
+                        ]
+                      },
+                      {
+                        "type": "heading",
+                        "level": 3,
+                        "text": "ALTIN: CİDDİ PARA"
+                      },
+                      {
+                        "type": "paragraph",
+                        "text": "Altın, sıradan halkın her gün cebinde taşıdığı bir para birimi değildir. Altın; tüccarların, loncaların, askerî ödemelerin, soyluların ve maceracıların para birimi olarak yerini almaktadır."
+                      },
+                      {
+                        "type": "table",
+                        "header": [
+                          "HARCAMA",
+                          "ORTALAMA DEĞER"
+                        ],
+                        "rows": [
+                          [
+                            "Handa tek kişilik iyi bir oda",
+                            "1 Altın"
+                          ],
+                          [
+                            "Basit silah",
+                            "1-5 Altın"
+                          ],
+                          [
+                            "Kaliteli Silah",
+                            "5-15 Altın"
+                          ],
+                          [
+                            "Hafif Zırh",
+                            "5-20 Altın"
+                          ],
+                          [
+                            "Hafif-Orta Zırh",
+                            "20-40 Altın"
+                          ],
+                          [
+                            "Eğitimli binek hayvanı",
+                            "20-80 Altın"
+                          ],
+                          [
+                            "Küçük dükkan aylık kirası",
+                            "10-30 altın"
+                          ]
+                        ]
+                      },
+                      {
+                        "type": "heading",
+                        "level": 2,
+                        "text": "EKONOMİK YAŞAM KALİTELERİ"
+                      },
+                      {
+                        "type": "table",
+                        "header": [
+                          "YAŞAM DÜZEYİ",
+                          "GÜNLÜK MASRAF",
+                          "AÇIKLAMA"
+                        ],
+                        "rows": [
+                          [
+                            "Sefil",
+                            "5-10 Bakır",
+                            "Açlık sınırı, sokak, dilencilik"
+                          ],
+                          [
+                            "Yoksul",
+                            "1-2 Gümüş",
+                            "Ekmek, çorba, ortak yatakhane"
+                          ],
+                          [
+                            "Mütevazı",
+                            "3-5 Gümüş",
+                            "Basit ama düzenli yaşam"
+                          ],
+                          [
+                            "Rahat",
+                            "1 Altın",
+                            "İyi yemek, özel oda, temiz hizmet"
+                          ],
+                          [
+                            "Varlıklı",
+                            "3-5 Altın",
+                            "Hizmetâr, kaliteli konaklama"
+                          ],
+                          [
+                            "Soylu / Tüccar",
+                            "10+ Altın",
+                            "Gösterişli yaşam"
+                          ]
+                        ]
+                      },
+                      {
+                        "type": "heading",
+                        "level": 2,
+                        "text": "MACERACI EKONOMİSİ"
+                      },
+                      {
+                        "type": "paragraph",
+                        "text": "Maceracılar ve paralı askerler gibi işleri tehlike içinde geçen mesleklerin çoğu, atıldıkları tehlikenin karşılığı olarak doğru orantılı ödemeler alabilmektedir. Ancak alınacak ödüller, görev türünden başlayarak maceracının görevdeki performansı, ödeme yapan kişinin davranışı, ücretlendirmeyi etkileyen farklı faktörler vb. etkenlerle değişebilmektedir. Ancak genel olarak şöyle bir liste oluşturulabilir:"
+                      },
+                      {
+                        "type": "table",
+                        "header": [
+                          "GÖREV TİPİ",
+                          "ÖDÜL"
+                        ],
+                        "rows": [
+                          [
+                            "Kayıp Eşya / Küçük Arama",
+                            "3-10 Gümüş"
+                          ],
+                          [
+                            "Hayvan Kovma / Basit Koruma",
+                            "1-3 Altın"
+                          ],
+                          [
+                            "Kervan Refakati",
+                            "5-20 Altın"
+                          ],
+                          [
+                            "Tehlikeli Yaratık Avı",
+                            "10-50 Altın"
+                          ],
+                          [
+                            "Sınır Bölgesi Keşfi",
+                            "25-100 Altın"
+                          ],
+                          [
+                            "Kadim Kalıntı / Tesir noktası görevleri",
+                            "100+ Altın veya özel ödemeler"
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "yasam-ekonomisi",
+                    "title": "YAŞAM EKONOMİSİ",
+                    "body": "",
+                    "mode": "rich",
+                    "table": {
+                      "columns": [
+                        {
+                          "id": "isim",
+                          "label": "İSİM",
+                          "type": "text",
+                          "showInTable": true
+                        }
+                      ],
+                      "rows": []
+                    },
+                    "blocks": [
+                      {
+                        "type": "tabs",
+                        "tabs": [
+                          {
+                            "label": "BESİNLER",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "YEMEK",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "EKMEK+ÇORBA",
+                                    "5 BAKIR"
+                                  ],
+                                  [
+                                    "BASİT SICAK YEMEK",
+                                    "1 GÜMÜŞ"
+                                  ],
+                                  [
+                                    "DOYURUCU HAN YEMEĞİ",
+                                    "2 GÜMÜŞ"
+                                  ],
+                                  [
+                                    "ETLİ YEMEK",
+                                    "3 GÜMÜŞ"
+                                  ],
+                                  [
+                                    "İYİ HAZIRLANMIŞ ETLİ YEMEK",
+                                    "5 GÜMÜŞ"
+                                  ],
+                                  [
+                                    "BALIK YEMEĞİ",
+                                    "2-4 GÜMÜŞ"
+                                  ],
+                                  [
+                                    "AV ETİ / ÖZEL TABAK",
+                                    "5-8 GÜMÜŞ"
+                                  ],
+                                  [
+                                    "BÜYÜK SOFRA, KİŞİ BAŞI",
+                                    "1 ALTIN"
+                                  ],
+                                  [
+                                    "SOYLU SOFRASI, KİŞİ BAŞI",
+                                    "3 ALTIN"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "İÇECEKLER",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "İÇECEK",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "TEMİZ KUYU SUYU/ MATARA DOLUMU",
+                                    "1 BAKIR"
+                                  ],
+                                  [
+                                    "KAYNATILMIŞ GÜVENLİ SU",
+                                    "2 BAKIR"
+                                  ],
+                                  [
+                                    "AYRAN/EKŞİ SÜT/HAFİF İÇECEK",
+                                    "2-3 BAKIR"
+                                  ],
+                                  [
+                                    "BAYAĞI BİRA",
+                                    "4 BAKIR"
+                                  ],
+                                  [
+                                    "NORMAL BİRA, 0.5L",
+                                    "1 GÜMÜŞ"
+                                  ],
+                                  [
+                                    "SERT BİRA, KOYU BİRA",
+                                    "2 GÜMÜŞ"
+                                  ],
+                                  [
+                                    "BASİT ŞARAP KADEHİ",
+                                    "2 GÜMÜŞ"
+                                  ],
+                                  [
+                                    "İYİ ŞARAP KADEHİ",
+                                    "5 GÜMÜŞ"
+                                  ],
+                                  [
+                                    "ŞİŞE ŞARAP",
+                                    "1 ALTIN"
+                                  ],
+                                  [
+                                    "KALİTELİ ŞİŞE ŞARAP",
+                                    "3 ALTIN+"
+                                  ],
+                                  [
+                                    "NADİR İÇKİ",
+                                    "5 ALTIN+"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "YOL ERZAKLARI",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "ERZAK",
+                                  "FİYAT",
+                                  "AÇIKLAMA"
+                                ],
+                                "rows": [
+                                  [
+                                    "1 GÜNLÜK KÖTÜ ERZAK",
+                                    "5 BAKIR",
+                                    "KARIN DOYURUR AMA UZUN YOLDA MORAL BOZAR"
+                                  ],
+                                  [
+                                    "1 GÜNLÜK BASİT ERZAK",
+                                    "1 GÜMÜŞ",
+                                    "STANDART YOLCU MALZEMESİ"
+                                  ],
+                                  [
+                                    "1 GÜNLÜK DÜZGÜN YOL ERZAĞI",
+                                    "2 GÜMÜŞ",
+                                    "DAHA DAYANIKLI, BESLEYİCİ"
+                                  ],
+                                  [
+                                    "1 HAFTALIK BASİT ERZAK",
+                                    "5 GÜMÜŞ",
+                                    "STANDART YOLCU MALZEMESİ"
+                                  ],
+                                  [
+                                    "1 HAFTALIK KALİTELİ ERZAK",
+                                    "1 ALTIN",
+                                    "DAHA DAYANIKLI, BESLEYİCİ"
+                                  ],
+                                  [
+                                    "1 HAFTALIK ASKERİ/KERVAN ERZAĞI",
+                                    "2 ALTIN",
+                                    "UZUN YOL İÇİN HAZIRLANMIŞ ERZAK"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "KONAKLAMA ",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "KONAKLAMA",
+                                  "FİYAT",
+                                  "AÇIKLAMA"
+                                ],
+                                "rows": [
+                                  [
+                                    "AHIR KÖŞESİ",
+                                    "2 BAKIR",
+                                    "HAYVANLARLA AYNI YERDE"
+                                  ],
+                                  [
+                                    "HAN ORTAK ZEMİNİ",
+                                    "4-5 BAKIR",
+                                    "KALABALIK"
+                                  ],
+                                  [
+                                    "ORTAK YATAKHANE",
+                                    "1 GÜMÜŞ",
+                                    "YOLCULAR, İŞÇİLER, ÇIRAKLAR"
+                                  ],
+                                  [
+                                    "UCUZ ODA",
+                                    "2-3 GÜMÜŞ",
+                                    "KÜÇÜK TEK KİŞİLİK ODA"
+                                  ],
+                                  [
+                                    "STANDART ODA",
+                                    "5 GÜMÜŞ",
+                                    "TEMİZ YATAK, KAPI, TEMEL GÜVENLİK"
+                                  ],
+                                  [
+                                    "İYİ ODA",
+                                    "1 ALTIN",
+                                    "ÖZEL ODA, SICAK YEMEK DAHİL OLABİLİR"
+                                  ],
+                                  [
+                                    "KALİTELİ ODA",
+                                    "3 ALTIN",
+                                    "TEMİZ ÇARŞAF, BANYO, HİZMET"
+                                  ],
+                                  [
+                                    "SOYLU SÜİTİ",
+                                    "10 ALTIN+",
+                                    "GENİŞ ODA, ÖZEL HİZMET, GÜVENLİK"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "HAN PAKETLERİ",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "PAKET ADI",
+                                  "İÇERİK",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "UCUZ HAN PAKETİ",
+                                    "ORTAK YATAKHANE, BASİT ÇORBA, SU VE ZAYIF İÇECEK",
+                                    "1 GÜMÜŞ/GÜN"
+                                  ],
+                                  [
+                                    "YOLCU PAKETİ",
+                                    "BASİT ODA VEYA İYİ YATAKHANE, 2 BASİT ÖĞÜN, NORMAL İÇECEK",
+                                    "3 GÜMÜŞ/GÜN"
+                                  ],
+                                  [
+                                    "STANDART MACERACI PAKETİ",
+                                    "STANDART ODA, DOYURUCU YEMEK, BİRA/İÇECEK, EŞYALAR İÇİN MAKUL GÜVENLİK",
+                                    "5 GÜMÜŞ/GÜN"
+                                  ],
+                                  [
+                                    "RAHAT MACERACI PAKETİ",
+                                    "ÖZEL ODA, İYİ YEMEK, TEMİZLENME İMKÂNI, EŞYA GÜVENLİĞİ",
+                                    "1 ALTIN/GÜN"
+                                  ],
+                                  [
+                                    "VARLIKLI PAKET",
+                                    "KALİTELİ ODA, BANYO, İYİ İÇKİ, HİZMET, GÜVENLİK, TÜCCAR/LONCA ÇEVRELERİNE ERİŞİM",
+                                    "3+ ALTIN/GÜN"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "HAYVAN VE BİNEK KONAKLAMASI",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "HİZMET",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "HAYVANI DIŞARI BAĞLAMA",
+                                    "ÜCRETSİZ-1 BAKIR"
+                                  ],
+                                  [
+                                    "AHIRDA YER",
+                                    "3 BAKIR"
+                                  ],
+                                  [
+                                    "YEM+SU",
+                                    "5 BAKIR"
+                                  ],
+                                  [
+                                    "BİNEK İÇİN TAM BAKIM",
+                                    "1 GÜMÜŞ"
+                                  ],
+                                  [
+                                    "DEĞERLİ BİNEK İÇİN GÜVENLİ AHIR",
+                                    "3 GÜMÜŞ"
+                                  ],
+                                  [
+                                    "EGZOTİK BİNEK BAKIMI",
+                                    "1+ ALTIN"
+                                  ]
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "heading",
+                        "level": 3,
+                        "text": "ŞEHİR TİPİNE GÖRE FİYAT ÇARPANLARI"
+                      },
+                      {
+                        "type": "table",
+                        "header": [
+                          "BÖLGE TİPİ",
+                          "ÇARPAN",
+                          "AÇIKLAMA"
+                        ],
+                        "rows": [
+                          [
+                            "Köy",
+                            "x0.5",
+                            "Yemek ucuz, konaklama basit"
+                          ],
+                          [
+                            "Normal Kasaba",
+                            "x1",
+                            "Standart Fiyat"
+                          ],
+                          [
+                            "Büyük Şehir",
+                            "x1.5",
+                            "Kira ve hizmet pahalı"
+                          ],
+                          [
+                            "Başkent / Zengin merkez",
+                            "x2",
+                            "Kalite yüksek, fiyat yüksek"
+                          ],
+                          [
+                            "Sınır Yerleşimi",
+                            "x2",
+                            "Malzeme az, tehlike fazla"
+                          ],
+                          [
+                            "Kuşatma / Kıtlık",
+                            "x3-x5",
+                            "Fiyatlar Bozulur"
+                          ]
+                        ]
+                      },
+                      {
+                        "type": "heading",
+                        "level": 3,
+                        "text": "ORTALAMA SOSYAL TABAKA GELİRLERİ"
+                      },
+                      {
+                        "type": "table",
+                        "header": [
+                          "KİŞİ / MESLEK",
+                          "GÜNLÜK GELİR"
+                        ],
+                        "rows": [
+                          [
+                            "Dilenci",
+                            "1-5 Bakır"
+                          ],
+                          [
+                            "Tarla İşçisi",
+                            "1-2 Gümüş"
+                          ],
+                          [
+                            "Hamal",
+                            "2-3 Gümüş"
+                          ],
+                          [
+                            "Hizmetçi",
+                            "2-4 Gümüş"
+                          ],
+                          [
+                            "Çırak Zanaatkâr",
+                            "2-5 Gümüş"
+                          ],
+                          [
+                            "Usta Zanaatkâr",
+                            "5 Gümüş - 1 Altın"
+                          ],
+                          [
+                            "Sıradan Asker",
+                            "3-6 Gümüş"
+                          ],
+                          [
+                            "Deneyimli Muhafız",
+                            "1 Altın"
+                          ],
+                          [
+                            "Kervan Koruması",
+                            "1-3 Altın"
+                          ],
+                          [
+                            "Lonca Uzmanı",
+                            "3-10 Altın"
+                          ],
+                          [
+                            "Soylu Hizmetlisi",
+                            "5 Gümüş - 2 Altın"
+                          ],
+                          [
+                            "Küçük Tüccar",
+                            "1-5 Altın"
+                          ],
+                          [
+                            "Büyük Tüccar",
+                            "10+ Altın"
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "yolculuk-lojistik",
+                    "title": "YOLCULUK-LOJİSTİK",
+                    "body": "",
+                    "mode": "rich",
+                    "blocks": [
+                      {
+                        "type": "heading",
+                        "level": 3,
+                        "text": "TEMEL YOL BİRİMİ"
+                      },
+                      {
+                        "type": "table",
+                        "header": [
+                          "YOLCULUK BİÇİMİ",
+                          "GÜNLÜK MESAFE",
+                          "AÇIKLAMA"
+                        ],
+                        "rows": [
+                          [
+                            "Yaya, Yavaş/güvenli",
+                            "15-20km",
+                            "Yaralı, yükl, tehlikeli arazi"
+                          ],
+                          [
+                            "Yaya, Normal",
+                            "25-30km",
+                            "Standart maceracı yürüyüşü"
+                          ],
+                          [
+                            "Yaya, hızlı",
+                            "35-40km ",
+                            "Yorucu, soluk/dayanıklılık baskısı yaratır"
+                          ],
+                          [
+                            "Binekli, normal",
+                            "40-50km",
+                            "At, deve, iri binek"
+                          ],
+                          [
+                            "Binekli, hızlı",
+                            "60-70km",
+                            "Hayvan yıpranır, bakım gerekir"
+                          ],
+                          [
+                            "Yük arabası",
+                            "20-30km",
+                            "Mal ve yolcu taşıma"
+                          ],
+                          [
+                            "Kervan",
+                            "15-25km",
+                            "Güvenli ama yavaş"
+                          ],
+                          [
+                            "Nehir teknesi",
+                            "40-80km",
+                            "Akıntıya göre değişken"
+                          ],
+                          [
+                            "Deniz/kıyı gemisi",
+                            "80-150km",
+                            "Hava ve rota belirleyici"
+                          ]
+                        ]
+                      },
+                      {
+                        "type": "tabs",
+                        "tabs": [
+                          {
+                            "label": "ERZAK VE YOL MALZEMELERİ",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "ERSAK",
+                                  "FİYAT",
+                                  "KULLANIM"
+                                ],
+                                "rows": [
+                                  [
+                                    "1 günlük kötü erzak",
+                                    "5 Bakır",
+                                    "Aç bırakmaz, moral düşürür"
+                                  ],
+                                  [
+                                    "1 günlük basit erzak",
+                                    "1 Gümüş",
+                                    "Standart yolcu erzağı"
+                                  ],
+                                  [
+                                    "1 günlük kaliteli erzak",
+                                    "2 Gümüş",
+                                    "Daha besleyici, uzun yürüyüşe uygun"
+                                  ],
+                                  [
+                                    "1 haftalık basit erzak",
+                                    "5 Gümüş",
+                                    "Yaya yolculuk standardı"
+                                  ],
+                                  [
+                                    "1 haftalık kaliteli erzak",
+                                    "1 Altın",
+                                    "Maceracı standardı"
+                                  ],
+                                  [
+                                    "1 haftalık askerî/kervan erzağı",
+                                    "2 Altın",
+                                    "Zorlu rota, nöbet, keşif"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "BİNEK HAYVAN MASRAFLARI",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "HİZMET",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "Sadece su",
+                                    "1 Bakır"
+                                  ],
+                                  [
+                                    "Basit yem",
+                                    "3 Bakır"
+                                  ],
+                                  [
+                                    "Yem + su",
+                                    "5 Bakır"
+                                  ],
+                                  [
+                                    "Normal binek bakımı",
+                                    "1 Gümüş"
+                                  ],
+                                  [
+                                    "Değerli binek bakımı",
+                                    "3 Gümüş"
+                                  ],
+                                  [
+                                    "Savaş bineği bakımı",
+                                    "5 Gümüş"
+                                  ],
+                                  [
+                                    "Egzotik binek bakımı",
+                                    "1+ altın"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "BİNEK KİRALAMA",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "BİNEK",
+                                  "GÜNLÜK KİRA",
+                                  "DEPOZİTO"
+                                ],
+                                "rows": [
+                                  [
+                                    "Katır/Eşek",
+                                    "2 Gümüş",
+                                    "1 Altın"
+                                  ],
+                                  [
+                                    "Sıradan At",
+                                    "5 Gümüş",
+                                    "5 Altın"
+                                  ],
+                                  [
+                                    "Hızlı At",
+                                    "1 Altın",
+                                    "10 Altın"
+                                  ],
+                                  [
+                                    "Dayanıklı Yol Atı",
+                                    "1 Altın",
+                                    "15 Altın"
+                                  ],
+                                  [
+                                    "Savaş Atı",
+                                    "3 Altın",
+                                    "30 Altın"
+                                  ],
+                                  [
+                                    "Deve / Çöl Bineği",
+                                    "1 Altın",
+                                    "10 Altın"
+                                  ],
+                                  [
+                                    "Kızak Hayvanı",
+                                    "5 Gümüş - 1 Altın",
+                                    "5 - 10 Altın"
+                                  ],
+                                  [
+                                    "Egzotik Binek",
+                                    "5+ Altın",
+                                    "50+ Altın"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "BİNEK FİYATLARI",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "BİNEK",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "Eşek",
+                                    "5 Altın"
+                                  ],
+                                  [
+                                    "Katır",
+                                    "10 Altın"
+                                  ],
+                                  [
+                                    "Sıradan At",
+                                    "25 Altın"
+                                  ],
+                                  [
+                                    "Dayanıklı Yol Atı",
+                                    "40 Altın"
+                                  ],
+                                  [
+                                    "Hızlı At",
+                                    "60 Altın"
+                                  ],
+                                  [
+                                    "Savaş Atı",
+                                    "150 Altın"
+                                  ],
+                                  [
+                                    "Deve / Çöl Bineği",
+                                    "50 Altın"
+                                  ],
+                                  [
+                                    "Eğitimli Savaş Bineği",
+                                    "250+ Altın"
+                                  ],
+                                  [
+                                    "Egzotik Binek",
+                                    "500+ veya para dışı bedel"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "ARAÇ VE TAŞIMA",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "ARAÇ",
+                                  "GÜNLÜK KİRA",
+                                  "SATIN ALMA",
+                                  "AÇIKLAMA"
+                                ],
+                                "rows": [
+                                  [
+                                    "El Arabası",
+                                    "5 Bakır",
+                                    "1 Altın",
+                                    "Şehir/Pazar içi"
+                                  ],
+                                  [
+                                    "Küçük Yük Arabası",
+                                    "2 Gümüş",
+                                    "5 Altın",
+                                    "Bir Hayvan Çeker"
+                                  ],
+                                  [
+                                    "Yolcu Arabası",
+                                    "5 Gümüş",
+                                    "15 Altın",
+                                    "2-4 Yolcu"
+                                  ],
+                                  [
+                                    "Büyük Yük Arabası",
+                                    "1 Altın",
+                                    "40 Altın",
+                                    "Kervan Malı"
+                                  ],
+                                  [
+                                    "Kapalı Yolcu Arabası",
+                                    "2 Altın",
+                                    "80 Altın",
+                                    "Rahat ve Güvenli"
+                                  ],
+                                  [
+                                    "Zırhlı / Korumalı Araba",
+                                    "5+ Altın",
+                                    "200+ Altın",
+                                    "Askerî / Lonca kullanımı"
+                                  ],
+                                  [
+                                    "Kızak",
+                                    "5 Gümüş - 1 Altın",
+                                    "20 Altın",
+                                    "Kar, Buz, Çöl kızağı varyantı"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "YOLCU TAŞIMA",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "HİZMET",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "Köyler arası kısa yolculuk",
+                                    "2-5 Gümüş"
+                                  ],
+                                  [
+                                    "Kasabalar arası yolcu arabası",
+                                    "1 Altın"
+                                  ],
+                                  [
+                                    "Büyük şehirler arası ortak araba",
+                                    "3-5 Altın"
+                                  ],
+                                  [
+                                    "Özel araba kiralama, günlük",
+                                    "5 Altın"
+                                  ],
+                                  [
+                                    "Soylu/varlıklı kapalı araba, günlük",
+                                    "10+ Altın"
+                                  ],
+                                  [
+                                    "Tehlikeli rota yolcu ücreti",
+                                    "x2-x5"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "KERVAN SİSTEMİ",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "KATILIM TİPİ",
+                                  "GÜNLÜK FİYAT",
+                                  "AÇIKLAMA"
+                                ],
+                                "rows": [
+                                  [
+                                    "Yaya eşlikçi",
+                                    "1 Gümüş",
+                                    "Kervanla yürür, koruma beklemez"
+                                  ],
+                                  [
+                                    "Sıradan yolcu",
+                                    "3 Gümüş",
+                                    "Güvenlikten faydalanır"
+                                  ],
+                                  [
+                                    "Arabada yolcu",
+                                    "1 Altın",
+                                    "Daha rahat"
+                                  ],
+                                  [
+                                    "Kapalı arabada yolcu",
+                                    "3 Altın",
+                                    "Varlıklı yolcu"
+                                  ],
+                                  [
+                                    "Gizli/özel yolcu",
+                                    "10+ Altın",
+                                    "Kimlik saklama, özel güvenlik"
+                                  ]
+                                ]
+                              },
+                              {
+                                "type": "heading",
+                                "level": 3,
+                                "text": "KERVANA KORUMA OLARAK KATILMAK"
+                              },
+                              {
+                                "type": "table",
+                                "header": [
+                                  "KORUMA SEVİYESİ",
+                                  "GÜNLÜK ÜCRET"
+                                ],
+                                "rows": [
+                                  [
+                                    "Acemi koruma",
+                                    "5 Gümüş"
+                                  ],
+                                  [
+                                    "Sıradan koruma",
+                                    "1 Altın"
+                                  ],
+                                  [
+                                    "Deneyimli koruma",
+                                    "3 Altın"
+                                  ],
+                                  [
+                                    "Canavar tehlikesi olan rota",
+                                    "5-10 Altın"
+                                  ],
+                                  [
+                                    "Sınır bölgesi / harabe rota",
+                                    "10-25 Altın"
+                                  ],
+                                  [
+                                    "Tesir bölgesi yakınları",
+                                    "25+ Altın veya özel ödeme"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "YÜK TAŞIMA",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "YÜK SINIFI",
+                                  "ÖRNEK",
+                                  "GÜNLÜK ÜCRET"
+                                ],
+                                "rows": [
+                                  [
+                                    "Hafif",
+                                    "Sandık, kişisel eşya",
+                                    "1 Gümüş"
+                                  ],
+                                  [
+                                    "Orta",
+                                    "Ticari mal, silah sandığı",
+                                    "5 Gümüş"
+                                  ],
+                                  [
+                                    "Ağır",
+                                    "Varıl, maden, tahıl çuvalı",
+                                    "1 Altın"
+                                  ],
+                                  [
+                                    "Değerli ",
+                                    "Mücevher, evrak, nadir maden",
+                                    "3+ Altın"
+                                  ],
+                                  [
+                                    "Tehlikeli",
+                                    "Lanetli eşya, yaratık kalıntısı",
+                                    "10+ Altın"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "GEÇİŞ ÜCRETLERİ",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "ÖDEME TÜRÜ",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "Köprü Geçişi",
+                                    "1-5 Bakır"
+                                  ],
+                                  [
+                                    "Şehir Kapısı Giriş Ücreti",
+                                    "1 Gümüş"
+                                  ],
+                                  [
+                                    "Pazar Malı Giriş Vergisi",
+                                    "1-5 Gümüş"
+                                  ],
+                                  [
+                                    "Hayvan Başı Geçiş Ücreti",
+                                    "5 Bakır - 1 Gümüş"
+                                  ],
+                                  [
+                                    "Araba Geçiş Ücreti",
+                                    "1-3 Gümüş"
+                                  ],
+                                  [
+                                    "Kervan Geçiş Vergisi",
+                                    "1-10 Altın"
+                                  ],
+                                  [
+                                    "Sınır Karakolu Geçiş İzni",
+                                    "5+ Altın"
+                                  ],
+                                  [
+                                    "Kaçak Geçiş Rüşveti",
+                                    "1-20 Altın"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "REHBER, İZCİ, YOL BİLGİSİ",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "HİZMET",
+                                  "GÜNLÜK FİYAT",
+                                  "AÇIKLAMA"
+                                ],
+                                "rows": [
+                                  [
+                                    "Yerel Rehber",
+                                    "5 Gümüş",
+                                    "Köy, orman, yakın rota"
+                                  ],
+                                  [
+                                    "Deneyimli Yol Rehberi",
+                                    "1 Altın",
+                                    "Uzun Yol"
+                                  ],
+                                  [
+                                    "Dağ Rehberi",
+                                    "2 Altın",
+                                    "Zorlu Arazi"
+                                  ],
+                                  [
+                                    "Harabe Rehberi",
+                                    "5 Altın",
+                                    "Riskli, nadir bulunur"
+                                  ],
+                                  [
+                                    "Sınır İzcisi",
+                                    "5-10 Altın",
+                                    "Tehlikeli Bölgeler"
+                                  ],
+                                  [
+                                    "Tesir bölgesi bilen rehber",
+                                    "25+ Altın",
+                                    "Para dışında da bedel isteyebilir"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "KORUMA VE MUHAFIZ ÜCRETLERİ",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "KORUMA TİPİ",
+                                  "GÜNLÜK ÜCRET"
+                                ],
+                                "rows": [
+                                  [
+                                    "Sıradan sopa taşıyan koruma",
+                                    "5 Gümüş"
+                                  ],
+                                  [
+                                    "Silahlı Muhafız",
+                                    "1 Altın"
+                                  ],
+                                  [
+                                    "Deneyimli Muhafız",
+                                    "3 Altın"
+                                  ],
+                                  [
+                                    "Eski Asker",
+                                    "5 Altın"
+                                  ],
+                                  [
+                                    "Lonca Lisanslı Koruma",
+                                    "10 Altın"
+                                  ],
+                                  [
+                                    "Canavar Avcısı",
+                                    "25+ Altın"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "DENİZ VE NEHİR TAŞIMACILIĞI",
+                            "blocks": [
+                              {
+                                "type": "heading",
+                                "level": 3,
+                                "text": "NEHİR YOLCULUĞU"
+                              },
+                              {
+                                "type": "table",
+                                "header": [
+                                  "HİZMET",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "Kısa nehir geçisi",
+                                    "5 Bakır - 1 Gümüş"
+                                  ],
+                                  [
+                                    "Sal / küçük tekneyle geçiş",
+                                    "1 Gümüş"
+                                  ],
+                                  [
+                                    "Nehir teknesi yolculuğu, günlük",
+                                    "3 Gümüş"
+                                  ],
+                                  [
+                                    "Nehir yük yaşıma, 100kg/gün",
+                                    "5 Bakır - 1 Gümüş"
+                                  ],
+                                  [
+                                    "Akıntıya ters yolculuk",
+                                    "x2"
+                                  ],
+                                  [
+                                    "Tehlikeli nehir hattı",
+                                    "x3"
+                                  ]
+                                ]
+                              },
+                              {
+                                "type": "heading",
+                                "level": 3,
+                                "text": "DENİZ / KIYI YOLCULUĞU"
+                              },
+                              {
+                                "type": "table",
+                                "header": [
+                                  "HİZMET",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "Kısa kıyı geçişi",
+                                    "1 Altın"
+                                  ],
+                                  [
+                                    "Şehirler arası gemi yolculuğu",
+                                    "5-20 Altın"
+                                  ],
+                                  [
+                                    "Güvertede yolcu",
+                                    "3 Altın"
+                                  ],
+                                  [
+                                    "Ortak kamarada yolcu",
+                                    "10 Altın"
+                                  ],
+                                  [
+                                    "Özel kamarada yolcu",
+                                    "30+ Altın"
+                                  ],
+                                  [
+                                    "100kg yük taşıma",
+                                    "1 - 5 Altın"
+                                  ],
+                                  [
+                                    "Tehlikeli rota",
+                                    "x2 - x5"
+                                  ]
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "ekipman-ekonomisi",
+                    "title": "EKİPMAN EKONOMİSİ",
+                    "body": "",
+                    "mode": "rich",
+                    "blocks": [
+                      {
+                        "type": "tabs",
+                        "tabs": [
+                          {
+                            "label": "SİLAHLAR",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "SİLAH",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "Sopa",
+                                    "1-2 Bakır"
+                                  ],
+                                  [
+                                    "Kalın Değnek",
+                                    "5 Bakır"
+                                  ],
+                                  [
+                                    "Taş/Kurşun sapan",
+                                    "5 Bakır"
+                                  ],
+                                  [
+                                    "Hançer",
+                                    "5 Gümüş"
+                                  ],
+                                  [
+                                    "Basit Bıçak",
+                                    "2 Gümüş"
+                                  ],
+                                  [
+                                    "El Baltası",
+                                    "5 Gümüş"
+                                  ],
+                                  [
+                                    "Orak / Tarım Aleti",
+                                    "2 - 5 Gümüş"
+                                  ],
+                                  [
+                                    "Kısa Mızrak",
+                                    "1 Altın"
+                                  ],
+                                  [
+                                    "Basit Yay",
+                                    "1 Altın"
+                                  ],
+                                  [
+                                    "Basit Arbalet",
+                                    "3 Altın"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "ASKERİ SİLAHLAR",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "SİLAH",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "Kısa Kılıç",
+                                    "2 Altın"
+                                  ],
+                                  [
+                                    "Uzun Kılıç",
+                                    "5 Altın"
+                                  ],
+                                  [
+                                    "Savaş Baltası",
+                                    "5 Altın"
+                                  ],
+                                  [
+                                    "Topuz",
+                                    "3 Altın"
+                                  ],
+                                  [
+                                    "Gürz",
+                                    "6 Altın"
+                                  ],
+                                  [
+                                    "Uzun Mızrak",
+                                    "3 Altın"
+                                  ],
+                                  [
+                                    "Kargı",
+                                    "4 Altın"
+                                  ],
+                                  [
+                                    "Halberd",
+                                    "8 Altın"
+                                  ],
+                                  [
+                                    "Çift Elli Balta",
+                                    "10 Altın"
+                                  ],
+                                  [
+                                    "Çift Elli Kılıç",
+                                    "15 Altın"
+                                  ],
+                                  [
+                                    "Kaliteli Savaş Yayı",
+                                    "5 Altın"
+                                  ],
+                                  [
+                                    "Ağır Arbalet",
+                                    "10 Altın"
+                                  ],
+                                  [
+                                    "Fırlatma Bıçakları, 5'li",
+                                    "5 Altın"
+                                  ],
+                                  [
+                                    "Kompozit Yay",
+                                    "25 Altın"
+                                  ],
+                                  [
+                                    "Mekanik Arbalet",
+                                    "30 Altın"
+                                  ],
+                                  [
+                                    "Gizli Bilek Bıçağı",
+                                    "25 Altın"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "MÜHİMMAT",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "MÜHİMMAT",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "1 Ok",
+                                    "1 Bakır"
+                                  ],
+                                  [
+                                    "1 Kaliteli Ok",
+                                    "3 Bakır"
+                                  ],
+                                  [
+                                    "1 Zırh Delici Ok",
+                                    "1 Gümüş"
+                                  ],
+                                  [
+                                    "1 Arbalet Oku",
+                                    "2 Bakır"
+                                  ],
+                                  [
+                                    "1 Ağır Arbalet Oku",
+                                    "6 Bakır"
+                                  ],
+                                  [
+                                    "Fırlatma Bıçağı",
+                                    "1 Altın"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "KALKAN",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "KALKAN",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "Basit Tahta Kalkan",
+                                    "5 Gümüş"
+                                  ],
+                                  [
+                                    "Küçük Kalkan",
+                                    "1 Altın"
+                                  ],
+                                  [
+                                    "Orta Kalkan",
+                                    "3 Altın"
+                                  ],
+                                  [
+                                    "Güçlendirilmiş Kalkan",
+                                    "10 Altın"
+                                  ],
+                                  [
+                                    "Büyük Kalkan",
+                                    "13 Altın"
+                                  ],
+                                  [
+                                    "Kule Kalkan",
+                                    "25 Altın"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "ZIRHLAR",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "ZIRH",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "Kalın giysi / dolgulu kıyafet",
+                                    "2 Altın"
+                                  ],
+                                  [
+                                    "Deri Zırh",
+                                    "5 Altın"
+                                  ],
+                                  [
+                                    "Sertleştirilmiş Deri",
+                                    "15 Altın"
+                                  ],
+                                  [
+                                    "Zincir Gömlek",
+                                    "25 Altın"
+                                  ],
+                                  [
+                                    "Pul Zırh",
+                                    "40 Altın"
+                                  ],
+                                  [
+                                    "Ağır Zincir Zırh",
+                                    "100 Altın"
+                                  ],
+                                  [
+                                    "Parçalı Plaka Zırh",
+                                    "150 Altın"
+                                  ],
+                                  [
+                                    "Yarım Plaka Zırh",
+                                    "200 Altın"
+                                  ],
+                                  [
+                                    "Tam Plaka Zırh",
+                                    "500 Altın"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "PARÇA ZIRHLAR",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "PARÇA",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "Deri Eldiven",
+                                    "5 Gümüş"
+                                  ],
+                                  [
+                                    "Sertleştirilmiş Deri Eldiven",
+                                    "2 Altın"
+                                  ],
+                                  [
+                                    "Metal Eldiven",
+                                    "10 Altın"
+                                  ],
+                                  [
+                                    "Deri Bot",
+                                    "1 Altın"
+                                  ],
+                                  [
+                                    "Sertleştirilmiş Deri Botlar",
+                                    "5 Altın"
+                                  ],
+                                  [
+                                    "Metal Dizlik",
+                                    "5 Altın"
+                                  ],
+                                  [
+                                    "Metal Kolluk",
+                                    "5 Altın"
+                                  ],
+                                  [
+                                    "Basit Miğfer",
+                                    "3 Altın"
+                                  ],
+                                  [
+                                    "iyi Miğfer",
+                                    "10 Alın"
+                                  ],
+                                  [
+                                    "Kapalı Savaş Miğferi",
+                                    "25 Altın"
+                                  ],
+                                  [
+                                    "Göğüs Plakası",
+                                    "60 Altın"
+                                  ],
+                                  [
+                                    "Omuzluk Seti",
+                                    "20 Altın"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "TAMİR, BAKIM VE UYARLAMA",
+                            "blocks": [
+                              {
+                                "type": "heading",
+                                "level": 3,
+                                "text": "BAKIM"
+                              },
+                              {
+                                "type": "table",
+                                "header": [
+                                  "HİZMET",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "Bileme",
+                                    "5 Bakır - 1 Gümüş"
+                                  ],
+                                  [
+                                    "Silah Genel Bakım",
+                                    "2 Gümüş"
+                                  ],
+                                  [
+                                    "Yay Kirişi değiştirme",
+                                    "1 Gümüş"
+                                  ],
+                                  [
+                                    "Kalkan Tamiri",
+                                    "1 - 5 Gümüş"
+                                  ],
+                                  [
+                                    "Hafif Zırh Bakımı",
+                                    "5 Gümüş"
+                                  ],
+                                  [
+                                    "Orta Zırh Bakımı",
+                                    "1 Altın"
+                                  ],
+                                  [
+                                    "Ağır Zırh Bakımı",
+                                    "3 Altın"
+                                  ],
+                                  [
+                                    "Tam Plaka Bakımı",
+                                    "10 Altın"
+                                  ]
+                                ]
+                              },
+                              {
+                                "type": "heading",
+                                "level": 3,
+                                "text": "TAMİR"
+                              },
+                              {
+                                "type": "table",
+                                "header": [
+                                  "HASAR SEVİYESİ",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "Küçük Hasar",
+                                    "Eşya fiyatının %5'i"
+                                  ],
+                                  [
+                                    "Orta Hasar",
+                                    "Eşya fiyatının %15'i"
+                                  ],
+                                  [
+                                    "Ağır Hasar",
+                                    "Eşya fiyatının %30'u"
+                                  ],
+                                  [
+                                    "Neredeyse Kırılmış",
+                                    "Eşya fiyatının %50'si"
+                                  ]
+                                ]
+                              },
+                              {
+                                "type": "heading",
+                                "level": 3,
+                                "text": "ÖLÇÜYE UYARLAMA"
+                              },
+                              {
+                                "type": "table",
+                                "header": [
+                                  "İŞLEM",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "Deri Zırh Uyarlama",
+                                    "Zırh Fiyatının %10'u"
+                                  ],
+                                  [
+                                    "Zincir / Pul Zırh uyarlama",
+                                    "Zırh Fiyaının %20'si"
+                                  ],
+                                  [
+                                    "Yarım Plaka Uyarlama",
+                                    "Zırh Fiyatının %30'u"
+                                  ],
+                                  [
+                                    "Tam Plaka Uyarlama",
+                                    "Zırh Fiyatının %40'ı"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "AYDINLATMA EKİPMANLARI",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "EŞYA",
+                                  "FİYAT",
+                                  "AÇIKLAMA"
+                                ],
+                                "rows": [
+                                  [
+                                    "Meşale",
+                                    "1 Bakır",
+                                    "Kısa süreli ışık"
+                                  ],
+                                  [
+                                    "Kaliteli Meşale ",
+                                    "7 Bakır",
+                                    "Daha uzun yanar, rüzgara dayanıklı"
+                                  ],
+                                  [
+                                    "Yağ, küçük şişe",
+                                    "5 Bakır",
+                                    "Fener veya ateş için"
+                                  ],
+                                  [
+                                    "Yağ, büyük şişe",
+                                    "1 Gümüş",
+                                    "Uzun yol için"
+                                  ],
+                                  [
+                                    "El Feneri",
+                                    "1 Altın",
+                                    "Maceracı standardı"
+                                  ],
+                                  [
+                                    "Kapalı Fener",
+                                    "3 Altın",
+                                    "Rüzgar ve yağmura dayanıklı"
+                                  ],
+                                  [
+                                    "Sinyal Feneri",
+                                    "15 Altın",
+                                    "Uzak mesafeli işaretleme"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "KAMP EKİPMANLARI",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "EŞYA",
+                                  "FİYAT",
+                                  "AÇIKLAMA"
+                                ],
+                                "rows": [
+                                  [
+                                    "İnce battaniye",
+                                    "5 Bakır",
+                                    "Kötü hava için yetersiz"
+                                  ],
+                                  [
+                                    "Kalın battaniye",
+                                    "1 Gümüş",
+                                    "Temel Kamp eşyası"
+                                  ],
+                                  [
+                                    "Uyku tulumu",
+                                    "5 Gümüş",
+                                    "Yolcu standardı"
+                                  ],
+                                  [
+                                    "Kaliteli uyku tulumu",
+                                    "1 Altın",
+                                    "Soğukta sıcak tutar"
+                                  ],
+                                  [
+                                    "Hasır/deri mat",
+                                    "5 Bakır",
+                                    "Zeminden korur"
+                                  ],
+                                  [
+                                    "Kamp Bezi",
+                                    "1 Gümüş",
+                                    "Yağmur ve rüzgar için"
+                                  ],
+                                  [
+                                    "Basit çadır, 1 kişilik",
+                                    "2 Altın",
+                                    "Ucuz, hafif"
+                                  ],
+                                  [
+                                    "Standart Çadır, 2 kişilik",
+                                    "5 Altın",
+                                    "Maceracı Standardı"
+                                  ],
+                                  [
+                                    "Büyük Çadır, 4 kişilik",
+                                    "12 altın",
+                                    "Grup kampı"
+                                  ],
+                                  [
+                                    "Kaliteli Kış Çadırı",
+                                    "25 Altın",
+                                    "Soğuktan korur"
+                                  ],
+                                  [
+                                    "Askerî Çadır",
+                                    "50 Altın",
+                                    "Sağlam, ağır"
+                                  ],
+                                  [
+                                    "Kamp pişirme takımı",
+                                    "1 Altın",
+                                    "Tencere, kap, küçük araçlar"
+                                  ],
+                                  [
+                                    "Seyyar ocak, mangal",
+                                    "3 Altın",
+                                    "Uzun kamp için"
+                                  ]
+                                ]
+                              },
+                              {
+                                "type": "heading",
+                                "level": 3,
+                                "text": "KAMP KONFORU"
+                              },
+                              {
+                                "type": "table",
+                                "header": [
+                                  "KAMP KALİTESİ",
+                                  "GEREKLİ EKİPMAN",
+                                  "OYUN ETKİSİ"
+                                ],
+                                "rows": [
+                                  [
+                                    "Kötü Kamp",
+                                    "Battaniye/açık alan",
+                                    "Dinlenme zayıf, hastalık ve yorgunluk riski"
+                                  ],
+                                  [
+                                    "Basit Kamp",
+                                    "Uyku tulumu + kamp bezi",
+                                    "Normal dinlenme"
+                                  ],
+                                  [
+                                    "Standart Kamp",
+                                    "Çadır + Uyku Tulumu + Pişirme Takımı",
+                                    "Güvenli Dinlenme"
+                                  ],
+                                  [
+                                    "Kaliteli Kamp",
+                                    "İyi Çadır + Kaliteli Tulum + Sıcak Yemek",
+                                    "Uzun yol yorgunluğu azalır"
+                                  ],
+                                  [
+                                    "Askerî Kamp",
+                                    "Büyük Çadır + Nöbet Düzeni + Araçlar",
+                                    "Baskın ve hava riski azalır"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "TIRMANMA EKİPMANI",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "EŞYA",
+                                  "FİYAT",
+                                  "AÇIKLAMA"
+                                ],
+                                "rows": [
+                                  [
+                                    "Kenevir ip, 10m",
+                                    "5 Bakır",
+                                    "Ucuz, Ağır"
+                                  ],
+                                  [
+                                    "Kaliteli ip, 10m ",
+                                    "2 Gümüş",
+                                    "Daha sağlam"
+                                  ],
+                                  [
+                                    "Kanca",
+                                    "5 Gümüş",
+                                    "Tırmanma, sabitleme"
+                                  ],
+                                  [
+                                    "Katlanır kanca",
+                                    "1 Altın",
+                                    "Taşınabilir"
+                                  ],
+                                  [
+                                    "Çivi/kazık seti",
+                                    "5 Altın",
+                                    "Kamp ve tırmanış"
+                                  ],
+                                  [
+                                    "Çekiç",
+                                    "5 Bakır",
+                                    "Genel kullanım"
+                                  ],
+                                  [
+                                    "Tırmanma takımı",
+                                    "5 Altın",
+                                    "Kanca, piton, ip düzeni"
+                                  ],
+                                  [
+                                    "Kaliteli tırmanma takımı",
+                                    "15 Altın",
+                                    "Daha güvenli"
+                                  ],
+                                  [
+                                    "Mağara iniş takımı",
+                                    "20 Altın",
+                                    "Uzun inişler için"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "ÇANTA, KESE, SANDIK VE TAŞIMA",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "EŞYA",
+                                  "FİYAT",
+                                  "AÇIKLAMA"
+                                ],
+                                "rows": [
+                                  [
+                                    "Deri kese",
+                                    "5 Bakır",
+                                    "Sağlam taşıma kesesi"
+                                  ],
+                                  [
+                                    "Omuz Çantası",
+                                    "5 Bakır",
+                                    "Hafif yük için"
+                                  ],
+                                  [
+                                    "Sırt çantası",
+                                    "1 Gümüş",
+                                    "Standart Yolcu Çantası"
+                                  ],
+                                  [
+                                    "Maceracı Sırt Çantası",
+                                    "2 Altın",
+                                    "Ekipman bölmeli"
+                                  ],
+                                  [
+                                    "Su geçirmez çanta",
+                                    "5 Altın",
+                                    "Nehir, bataklık, yağmur"
+                                  ],
+                                  [
+                                    "Ahşap Sandık",
+                                    "5 Gümüş",
+                                    "Depolama"
+                                  ],
+                                  [
+                                    "Kilitli Sandık",
+                                    "2 Altın",
+                                    "Güvenli Saklama"
+                                  ],
+                                  [
+                                    "Bel kemeri ekipman askısı",
+                                    "5 Gümüş",
+                                    "Küçük araçlara hızlı erişim"
+                                  ],
+                                  [
+                                    "Harita tüpü",
+                                    "5 Gümüş",
+                                    "Harita, parşömen"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "SU, MATARA VE SIVI KABI",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "EŞYA",
+                                  "FİYAT",
+                                  "AÇIKLAMA"
+                                ],
+                                "rows": [
+                                  [
+                                    "Küçük Matara",
+                                    "5 Bakır",
+                                    "1 Litre"
+                                  ],
+                                  [
+                                    "Standart Matara",
+                                    "1 Gümüş",
+                                    "3 Litre"
+                                  ],
+                                  [
+                                    "Deri su tulumu",
+                                    "2 Gümüş",
+                                    "6 Litre"
+                                  ],
+                                  [
+                                    "Büyük Su Tulumu",
+                                    "5 Gümüş",
+                                    "10 Litre"
+                                  ],
+                                  [
+                                    "Seramik Şişe",
+                                    "5 Bakır",
+                                    "Kırılgan, 0.5 L"
+                                  ],
+                                  [
+                                    "Metal Şişe",
+                                    "2 Altın",
+                                    "Sağlam, 0.5 L"
+                                  ],
+                                  [
+                                    "Su Artıma Bezi",
+                                    "5 Gümüş",
+                                    "Basit Süzme"
+                                  ],
+                                  [
+                                    "Varil",
+                                    "1 Altın",
+                                    "50 Litre"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "KİLİT, TUZAK & HIRSIZ ALETLERİ",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "EŞYA",
+                                  "FİYAT",
+                                  "AÇIKLAMA"
+                                ],
+                                "rows": [
+                                  [
+                                    "Basit Kilit",
+                                    "5 Gümüş",
+                                    "Sandık, kapı"
+                                  ],
+                                  [
+                                    "İyi Kilit",
+                                    "2 Altın",
+                                    "Daha Zor Açılır"
+                                  ],
+                                  [
+                                    "Kaliteli Kilit",
+                                    "10 Altın",
+                                    "Tüccar, Lonca seviyesi"
+                                  ],
+                                  [
+                                    "Basit zincir",
+                                    "1 Altın",
+                                    ""
+                                  ],
+                                  [
+                                    "Güçlü zincir",
+                                    "5 Altın",
+                                    ""
+                                  ],
+                                  [
+                                    "Pranga",
+                                    "3 Altın",
+                                    "Esir taşıma"
+                                  ],
+                                  [
+                                    "Kilit açma takımı",
+                                    "20 Altın",
+                                    "Uzman ekipmanı"
+                                  ],
+                                  [
+                                    "Tuzak Kurma, Sökme takımı",
+                                    "25 Altın",
+                                    "Mekanik tuzaklar"
+                                  ],
+                                  [
+                                    "İnce tel seti",
+                                    "5 Altın",
+                                    "Tuzak, anahtar işi"
+                                  ],
+                                  [
+                                    "Küçük ayna",
+                                    "2 Gümüş",
+                                    "Köşe-kapı altı bakma"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "ŞİFACI & TIBBİ EKİPMAN",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "EŞYA",
+                                  "FİYAT",
+                                  "AÇIKLAMA"
+                                ],
+                                "rows": [
+                                  [
+                                    "Basit Bandaj",
+                                    "2 Bakır",
+                                    "Tek kullanımlık"
+                                  ],
+                                  [
+                                    "Temiz bandaj seti",
+                                    "1 Gümüş",
+                                    "5x Bandaj"
+                                  ],
+                                  [
+                                    "Kaliteli Bandaj Seti",
+                                    "5 Gümüş",
+                                    "Yaraya Müdahale için 5x"
+                                  ],
+                                  [
+                                    "Bitkisel merhem",
+                                    "5 Gümüş",
+                                    "Basit yaraya müdahale 5x"
+                                  ],
+                                  [
+                                    "Ağrı kesici ot karışımı",
+                                    "1 Altın",
+                                    "Ağrıyı keserek anlık kısıtlamaları kaldırır"
+                                  ],
+                                  [
+                                    "Ateş Düşürücü Karışım",
+                                    "1 Altın",
+                                    "Hastalık tedavisi"
+                                  ],
+                                  [
+                                    "Panzehir, zayıf",
+                                    "5 Altın",
+                                    "Basit zehirlere karşı, genel"
+                                  ],
+                                  [
+                                    "Panzehir, standart",
+                                    "15 Altın",
+                                    "Tehlikeli zehirlere karşı, genel"
+                                  ],
+                                  [
+                                    "Sıhhiye çantası",
+                                    "10 Altın",
+                                    "Temel tıbbi set"
+                                  ],
+                                  [
+                                    "Cerrahi Seti",
+                                    "50 Altın",
+                                    "Uzman seti"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "YAZI, KAYIT, ARŞİV",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "EŞYA",
+                                  "FİYAT",
+                                  "AÇIKLAMA"
+                                ],
+                                "rows": [
+                                  [
+                                    "Kömür Kalem",
+                                    "1 Bakır",
+                                    "Ucuz yazım"
+                                  ],
+                                  [
+                                    "Basit Kalem",
+                                    "5 Bakır",
+                                    "Günlük kayıt"
+                                  ],
+                                  [
+                                    "Mürekkep, küçük şişe",
+                                    "1 Gümüş",
+                                    "Standart"
+                                  ],
+                                  [
+                                    "Kaliteli mürekkep",
+                                    "5 Gümüş",
+                                    "Uzun ömürlü"
+                                  ],
+                                  [
+                                    "Parşömen, tek yaprak",
+                                    "5 Bakır",
+                                    "Yazı zemini"
+                                  ],
+                                  [
+                                    "Kağıt, 5 Yaprak",
+                                    "5 Bakır",
+                                    "Bölgeye göre değişken"
+                                  ],
+                                  [
+                                    "Defter",
+                                    "1 Altın",
+                                    "Günlük vb."
+                                  ],
+                                  [
+                                    "Mühür",
+                                    "5 Altın",
+                                    "Kimlik, statü"
+                                  ],
+                                  [
+                                    "Belge tüpü",
+                                    "5 Gümüş",
+                                    "Koruma"
+                                  ],
+                                  [
+                                    "Kâtip Seti",
+                                    "10 Altın",
+                                    "Kalem, mürekkep, bıçak, cetvel vb."
+                                  ],
+                                  [
+                                    "Arşivci seti",
+                                    "30 Altın",
+                                    "Katalog, koruma, kopyalama araçları"
+                                  ],
+                                  [
+                                    "Şifreli kayıt defteri",
+                                    "25 Altın",
+                                    "Gizli Yazım"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "ZANAAT VE MESLEK TAKIMLARI",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "TAKIM",
+                                  "FİYAT",
+                                  "KULLANIM"
+                                ],
+                                "rows": [
+                                  [
+                                    "Basit alet takımı",
+                                    "2 Altın",
+                                    "Genel Tamir"
+                                  ],
+                                  [
+                                    "Marangoz takımı",
+                                    "10 Altın",
+                                    "Ahşap işleme"
+                                  ],
+                                  [
+                                    "Demirci el takımı",
+                                    "25 Altın",
+                                    "Basit zırh tamiri"
+                                  ],
+                                  [
+                                    "Seyyar Demirci takımı",
+                                    "100 Altın",
+                                    "Kervan, ordu"
+                                  ],
+                                  [
+                                    "Derici Takımı",
+                                    "15 Altın",
+                                    "Deri onarımı"
+                                  ],
+                                  [
+                                    "Terzi takımı",
+                                    "5 Altın",
+                                    "Kıyafet, zırh astarı vb. tamir"
+                                  ],
+                                  [
+                                    "Aşçı Takımı",
+                                    "5 Altın",
+                                    "Kamp, han mutfağı"
+                                  ],
+                                  [
+                                    "Simyacı Takımı",
+                                    "75 Altın",
+                                    "Nadir, dikkat çeker"
+                                  ],
+                                  [
+                                    "Otacı, toplayıcı takımı",
+                                    "15 Altın",
+                                    "Bitki tanıma, kurutma vb."
+                                  ],
+                                  [
+                                    "Haritacı Takımı",
+                                    "30 Altın",
+                                    "Ölçüm, çizim vb."
+                                  ],
+                                  [
+                                    "Kuyumcu takımı",
+                                    "50 Altın",
+                                    "İnce işçilik"
+                                  ],
+                                  [
+                                    "Avcı takımı",
+                                    "10 Altın",
+                                    "Tuzak, kesim, iz"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "KEŞİF, GÖZLEM & İŞARET",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "EŞYA",
+                                  "FİYAT",
+                                  "AÇIKLAMA"
+                                ],
+                                "rows": [
+                                  [
+                                    "Metal düdük",
+                                    "1 Gümüş",
+                                    "Ses çıkarma"
+                                  ],
+                                  [
+                                    "Basit Büyüteç",
+                                    "10 Altın",
+                                    "İnceleme"
+                                  ],
+                                  [
+                                    "Dürbün benzeri optik araç",
+                                    "100+ Altın",
+                                    "Nadir, pahalı"
+                                  ],
+                                  [
+                                    "Bayrak, flama seti",
+                                    "3 Altın",
+                                    "Görsel sinyal"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "AV, TUZAK & HAYATTA KALMA",
+                            "blocks": [
+                              {
+                                "type": "table",
+                                "header": [
+                                  "EŞYA",
+                                  "FİYAT",
+                                  "AÇIKLAMA"
+                                ],
+                                "rows": [
+                                  [
+                                    "Basit kapan",
+                                    "5 Gümüş",
+                                    "Küçük hayvan için"
+                                  ],
+                                  [
+                                    "Güçlü kapan",
+                                    "2 altın",
+                                    "Orta hayvan"
+                                  ],
+                                  [
+                                    "Büyük av kapanı",
+                                    "10 Altın",
+                                    "Tehlikeli, ağır"
+                                  ],
+                                  [
+                                    "Balık Ağı",
+                                    "1 Altın",
+                                    "Ağır"
+                                  ],
+                                  [
+                                    "Olta takımı",
+                                    "5 Gümüş",
+                                    "Hafif"
+                                  ],
+                                  [
+                                    "Deri yüzme bıçağı",
+                                    "1 Altın",
+                                    "Kesim, yüzme"
+                                  ],
+                                  [
+                                    "Deri yüzme takımı",
+                                    "5 Altın",
+                                    "Avcı işi"
+                                  ],
+                                  [
+                                    "Tuzlama, kurutma seti",
+                                    "2 Altın",
+                                    "Et Saklama"
+                                  ],
+                                  [
+                                    "Çakmak Taşı",
+                                    "5 Bakır",
+                                    "Temel"
+                                  ],
+                                  [
+                                    "Kaliteli Ateş Başlatma Kiti",
+                                    "1 Altın",
+                                    "Yağmurda daha güenilir"
+                                  ]
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "label": "ÖZEL BÖLGE EKİPMANLARI",
+                            "blocks": [
+                              {
+                                "type": "heading",
+                                "level": 3,
+                                "text": "SOĞUK BÖLGE / SOĞUK ÇÖL"
+                              },
+                              {
+                                "type": "table",
+                                "header": [
+                                  "EŞYA",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "Kalın kürk manto",
+                                    "5 Altın"
+                                  ],
+                                  [
+                                    "Soğuk bölge botu",
+                                    "3 Altın"
+                                  ],
+                                  [
+                                    "Kürklü eldiven",
+                                    "1 Altın"
+                                  ],
+                                  [
+                                    "Kar gözlüğü",
+                                    "2 Altın"
+                                  ],
+                                  [
+                                    "Soğuk Bölge Kamp Seti",
+                                    "25 Altın"
+                                  ],
+                                  [
+                                    "Soğuk Bölge Yol Seti",
+                                    "50 Altın"
+                                  ]
+                                ]
+                              },
+                              {
+                                "type": "heading",
+                                "level": 3,
+                                "text": "KURAK BÖLGE"
+                              },
+                              {
+                                "type": "table",
+                                "header": [
+                                  "EŞYA",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "Güneş Örtüsü",
+                                    "1 Altın"
+                                  ],
+                                  [
+                                    "İnce Çöl Pelerini ",
+                                    "2 Altın"
+                                  ],
+                                  [
+                                    "Su Filtre Seti",
+                                    "3 Altın"
+                                  ],
+                                  [
+                                    "Kum gözlüğü",
+                                    "2 Altın"
+                                  ],
+                                  [
+                                    "Çöl kamp bezi",
+                                    "5 Altın"
+                                  ]
+                                ]
+                              },
+                              {
+                                "type": "heading",
+                                "level": 3,
+                                "text": "BATAKLIK, YAĞMUR ORMANI"
+                              },
+                              {
+                                "type": "table",
+                                "header": [
+                                  "EŞYA",
+                                  "FİYAT"
+                                ],
+                                "rows": [
+                                  [
+                                    "Su geçirmez bot",
+                                    "5 Altın"
+                                  ],
+                                  [
+                                    "Böcek ağı",
+                                    "1 Altın"
+                                  ],
+                                  [
+                                    "Su geçirmez çanta",
+                                    "5 Altın"
+                                  ],
+                                  [
+                                    "Bataklık sırığı",
+                                    "5 Gümüş"
+                                  ]
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "heading",
+                        "level": 3,
+                        "text": "KALİTE SEVİYELERİ"
+                      },
+                      {
+                        "type": "table",
+                        "header": [
+                          "KALİTE",
+                          "FİYAT ÇARPANI",
+                          "ETKİ"
+                        ],
+                        "rows": [
+                          [
+                            "Kötü",
+                            "x0.5",
+                            "Kırılma, pas, ceza ihtimali"
+                          ],
+                          [
+                            "Sıradan",
+                            "x1",
+                            "Standart"
+                          ],
+                          [
+                            "İyi İşçilik",
+                            "x2",
+                            "Dayanıklı, dengeli"
+                          ],
+                          [
+                            "Usta İşi",
+                            "x5",
+                            "Daha hafif, daha sağlam, prestijli"
+                          ],
+                          [
+                            "Nadir Usta İşi",
+                            "x10",
+                            "Özel Sipariş, İsimli Zanaatkâr"
+                          ],
+                          [
+                            "Antik/Savaş Öncesi",
+                            "x20+",
+                            "Koleksiyon, sır, kalite veya lanet"
+                          ]
+                        ]
+                      }
+                    ]
+                  }
+                ]
               }
             ]
           }
@@ -5478,7 +10870,7 @@ window.SLVNZ_VERSIONS = {
           "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
           "description": "",
           "version": "v3.0",
-          "contentSeed": "2026-06-23-mqqm1jy1"
+          "contentSeed": "2026-06-23-mqr6lrtp"
         },
         "sections": {
           "oyun-kurallari": {
