@@ -1,5 +1,5 @@
 /* ============================================================
-   SLVNZ 4.0 — content.js  (editörden üretildi: 23.06.2026 01:37:10)
+   SLVNZ 4.0 — content.js  (editörden üretildi: 23.06.2026 15:18:15)
    Bu metni content.js dosyasının TAMAMIYLA değiştir.
    ============================================================ */
 
@@ -16,7 +16,7 @@ window.SLVNZ_CONTENT = {
     "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
     "description": "",
     "version": "v4.0",
-    "contentSeed": "2026-06-22-mqpspn2p"
+    "contentSeed": "2026-06-23-mqqm1jy1"
   },
   "sections": {
     "oyun-kurallari": {
@@ -173,49 +173,297 @@ window.SLVNZ_CONTENT = {
               "text": "Bazı durumlarda karakterlerin spesifik eylemleri gerçekleştirmelerinde onlara fayda sağlayabilecekleri nitelikleri bulunmaktadır. Bu nitelikler, herhangi bir karakterin sahip olduğu en temel özellikleri vurgular."
             },
             {
-              "type": "heading",
-              "level": 3,
-              "text": "KUVVET (KUV)"
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterin kas gücü ile gerçekleştirebileceği eylemleri belirleyen niteliktir. Bu eylemler ağır bir nesneyi kaldırma, bir şeye vurma durumunda uygulanan kuvvet, mücadele sırasında bir şeye asılma vb. gibi durumları oluşturur. Bir karakterin kuvvet niteliği ne kadar yüksek ise, bu niteliği gerektiren eylemleri başarma kapasitesi de o kadar yükselir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "ÇEVİKLİK (ÇEV)"
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterin hızlı hareket etme, ani tepki verme, kaçınma vb. eylemlerinde ihtiyaç duyduğu niteliktir. Bir karakterin çevikliği ne kadar yüksek ise o kadar atik ve hareketli olduğu düşünülebilir. Bu nitelik aynı zamanda karakterin yakın dövüşte silahını, yumruğunu veya tekmesini rakibe isabet ettirmesinde fayda sağlayabilirken, savunma konusunda da gelen darbelerden kaçınma becerisini de etkileyebilen bir niteliktir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "DAYANIKLILIK (DAY)"
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterlerin darbelerin etkisine dayanma, yıkıcı durumlara karşı ayakta kalabilme, ağır durumlarda bilincini koruyabilme ya da acıya dayanma gibi durumlarda ihtiyaç duyduğu niteliktir. Aynı zamanda bir karakterin STAMINA değerini de etkilemektedir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "İRADE (İRD)"
-            },
-            {
-              "type": "paragraph",
-              "text": "Dayanıklılığa benzer biçimde karakterin zihinsel dayanıklılığında; yani zihinsel olarak gireceği herhangi bir mücadelede ihtiyaç duyacağı niteliktir. Bu mücadeleler herhangi bir enerjisel etki altında kalma, zihne sızma, isteği dışında telepati vb. etkilerin altında kalma gibi durumlar olarak nitelendirilebilir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "SEZGİ (SZG)"
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterlerin sezgisel olarak çevrelerinde yaşanan olayları algılama kapasiteleridir. Bir karakterin konuşmalarındaki doğruluk payını sezebilme, çevresel faktörlerce ortamın atmosferini yoklama gibi durumlar, sezgi niteliğiyle algılanabilecek durumlardır."
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "KUVVET (KUV)",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Kuvvet, karakterin dış dünyaya doğrudan fiziksel güç uygulama kapasitesidir. Kas gücü, itme, çekme, kaldırma, kırma, savurma, zorlama ve fiziksel baskı kurma gibi eylemlerde kullanılır.\n\nKUV yüksek olan karakter, dünyayı bedeniyle zorlayabilen karakterdir. Ağır bir kapıyı omuzlamak, bir yaratığı geri itmek, bir kalkan hattını yarmak, ağır silahı etkili savurmak veya rakibi boğuşmada bastırmak KUV alanına girer.\n\nKUV şunları yönetir:"
+                    },
+                    {
+                      "type": "table",
+                      "header": [
+                        "ALAN",
+                        "AÇIKLAMA"
+                      ],
+                      "rows": [
+                        [
+                          "Ham fiziksel güç",
+                          "Kırma, kaldırma, itme, çekme, ezme"
+                        ],
+                        [
+                          "Yakın dövüş baskısı",
+                          "Ağır silahlar, darbe kuvveti, silah savurma"
+                        ],
+                        [
+                          "Boğuşma ve kontrol",
+                          "Rakibi tutma, sürükleme, yere serme"
+                        ],
+                        [
+                          "Taşıma kapasitesi",
+                          "Ağır ekipman, yük, zırh toleransı"
+                        ],
+                        [
+                          "Fiziksel engel aşma",
+                          "Kapı kırma, zincir koparma, moloz kaldırma"
+                        ]
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "KUV şunları yapmaz:"
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Uzun süre dayanmayı belirlemez; bu DAY alanıdır.",
+                        "Hızlı kaçınmayı veya dengeyi belirlemez; bu ÇEV alanıdır.",
+                        "Korkuya, büyüye veya zihinsel baskıya direnmez; bu İRD alanıdır."
+                      ]
+                    },
+                    {
+                      "type": "example",
+                      "text": "Örnek zar durumları:\n\n“Kapıyı kırıyorum.” → KUV\n“Rakibi omzumla geri itiyorum.” → KUV\n“Büyük baltayı tam güçle indiriyorum.” → KUV + ilgili silah becerisi\n“Çöken kirişi kaldırıp altından birini çıkarıyorum.” → KUV veya KUV + DAY, durumun süresine göre"
+                    }
+                  ]
+                },
+                {
+                  "label": "ÇEVİKLİK (ÇEV)",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Çeviklik, karakterin bedenini hızlı, dengeli, hassas ve kontrollü biçimde kullanma kapasitesidir. Refleks, kaçınma, denge, ince hareket, ani pozisyon alma, sessiz hareket ve hızlı saldırı koordinasyonu bu niteliğin alanına girer.\n\nÇEV yüksek olan karakter güçlü olmak zorunda değildir; fakat bedenini doğru anda doğru yere koyabilir. Saldırıdan sıyrılmak, dar bir çıkıntıda dengede kalmak, hızlı hamle yapmak, hafif silahla isabetli saldırmak veya düşmeden yuvarlanmak ÇEV ile ilgilidir.\n\nÇEV şunları yönetir:"
+                    },
+                    {
+                      "type": "table",
+                      "header": [
+                        "ALAN",
+                        "AÇIKLAMA"
+                      ],
+                      "rows": [
+                        [
+                          "Refleks",
+                          "Ani tehlikeye tepki verme"
+                        ],
+                        [
+                          "Kaçınma",
+                          "Saldırıdan sıyrılma, yön değiştirme"
+                        ],
+                        [
+                          "Denge",
+                          "Dar zemin, kaygan yüzey, düşme riski"
+                        ],
+                        [
+                          "İnce bedensel kontrol",
+                          "Sessiz hareket, akrobatik manevra"
+                        ],
+                        [
+                          "Hafif silah kullanımı",
+                          "Hançer, kısa kılıç, çevik saldırı stilleri"
+                        ],
+                        [
+                          "Hareket kapasitesi",
+                          "Savaş alanında pozisyon alma, temel hareket artışı"
+                        ]
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "ÇEV şunları yapmaz:"
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Darbenin gücünü belirlemez; bu KUV alanıdır.",
+                        "Darbe yedikten sonra ayakta kalmayı belirlemez; bu DAY alanıdır.",
+                        "Tehlikeyi önceden hissetmeyi belirlemez; bu SZG alanıdır."
+                      ]
+                    },
+                    {
+                      "type": "example",
+                      "text": "Örnek zar durumları:\n\n“Okun altından yuvarlanıyorum.” → ÇEV + Kaçınma\n“İnce taş köprüden koşarak geçiyorum.” → ÇEV\n“Sessizce muhafızın arkasından ilerliyorum.” → ÇEV + Gizlilik\n“Hançerle hızlı bir açık yakalamaya çalışıyorum.” → ÇEV + İsabet / ilgili silah becerisi"
+                    }
+                  ]
+                },
+                {
+                  "label": "DAYANIKLILIK (DAY)",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Dayanıklılık, karakterin bedensel baskıya, hasara, acıya, yorgunluğa, hastalığa, zehre ve uzun süreli fiziksel zorlanmaya direnme kapasitesidir. DAY, yalnızca “can” değildir; karakterin bedensel bütünlüğünü ne kadar süre koruyabildiğini ifade eder.\n\nDAY yüksek olan karakter her zaman iri veya güçlü olmak zorunda değildir; fakat kolay yıkılmaz. Zehre direnmek, kan kaybına rağmen ayakta kalmak, uzun yürüyüşe devam etmek, bloklama sırasında gelen darbeyi bedeniyle taşımak veya acı altında bilincini korumak DAY alanına girer.\n\nDAY şunları yönetir:"
+                    },
+                    {
+                      "type": "table",
+                      "header": [
+                        "ALAN",
+                        "AÇIKLAMA"
+                      ],
+                      "rows": [
+                        [
+                          "Fiziksel direnç",
+                          "Darbe, düşme, ezilme, yanma, soğuk"
+                        ],
+                        [
+                          "Acı toleransı",
+                          "Yaralanmaya rağmen eylemi sürdürme"
+                        ],
+                        [
+                          "Yorgunluk direnci",
+                          "Uzun yürüyüş, antrenman, zor koşullar"
+                        ],
+                        [
+                          "Zehir/hastalık direnci",
+                          "Bedeni bozan dış etkilere karşı koyma"
+                        ],
+                        [
+                          "Soluk temeli",
+                          "Fiziksel kaynak havuzunun ana dayanağı"
+                        ],
+                        [
+                          "Blok baskısı",
+                          "Kalkan veya silahla gelen kuvveti taşıma"
+                        ]
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "DAY şunları yapmaz:"
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Ağır nesne kaldırmayı belirlemez; bu KUV alanıdır.",
+                        "Saldırıdan kaçmayı belirlemez; bu ÇEV alanıdır.",
+                        "Zihinsel veya ruhsal baskıya direnmez; bu İRD alanıdır."
+                      ]
+                    },
+                    {
+                      "type": "example",
+                      "text": "Örnek zar durumları:\n\n“Zehre direniyorum.” → DAY\n“Darbe yedim ama ayakta kalmaya çalışıyorum.” → DAY\n“Kalkanıma çarpan devasa darbeyi taşıyorum.” → DAY + Bloklama\n“Saatlerdir çölde yürüyorum, devam edebilir miyim?” → DAY"
+                    }
+                  ]
+                },
+                {
+                  "label": "İRADE (İRD)",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "İrade, karakterin zihinsel, ruhsal ve duygusal baskı altında kendi benliğini koruma kapasitesidir. Korkuya, panik etkisine, zihin manipülasyonuna, acımasız sorguya, büyüsel telkine, lanete, saplantıya, ayartmaya ve konsantrasyon bozucu etkilere karşı kullanılır.\n\nİRD yüksek olan karakter her şeyi bilmek zorunda değildir; fakat kendi zihninin direksiyonunu kolay bırakmaz. Korkunç bir varlığın huzurunda geri çekilmemek, zihinsel büyüye direnmek, işkence altında sır vermemek, karanlık enerjinin fısıltılarını bastırmak veya konsantrasyonunu korumak İRD alanına girer.\n\nİRD şunları yönetir:"
+                    },
+                    {
+                      "type": "table",
+                      "header": [
+                        "ALAN",
+                        "AÇIKLAMA"
+                      ],
+                      "rows": [
+                        [
+                          "Zihinsel direnç",
+                          "Korku, panik, baskı, yıldırma"
+                        ],
+                        [
+                          "Ruhsal savunma",
+                          "Lanet, musallat, karanlık tesir"
+                        ],
+                        [
+                          "Benlik koruma",
+                          "Zihin kontrolü, telkin, efsun"
+                        ],
+                        [
+                          "Konsantrasyon",
+                          "Büyü veya süreli etkiyi sürdürme"
+                        ],
+                        [
+                          "Kararlılık",
+                          "Vazgeçmeme, baskı altında kararını koruma"
+                        ],
+                        [
+                          "Acıya rağmen odak",
+                          "Bedensel acının zihni dağıtmasını engelleme"
+                        ]
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "İRD şunları yapmaz:"
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Bilgi hatırlamayı veya akademik çözümlemeyi doğrudan belirlemez.",
+                        "Çevresel detayı fark etmeyi belirlemez; bu çoğunlukla SZG veya ilgili beceridir.",
+                        "Sosyal ikna gücü değildir; ikna hâlâ beceri, rol yapma ve bağlama bağlıdır."
+                      ]
+                    },
+                    {
+                      "type": "example",
+                      "text": "Örnek zar durumları:\n\n“Beni korkutmaya çalışan varlığa direniyorum.” → İRD\n“Zihin kontrolüne karşı koyuyorum.” → İRD\n“Hasar aldım ama büyünün konsantrasyonunu koruyorum.” → İRD + Konsantrasyon\n“Karanlık bir yadigâr zihnime fısıldıyor, etkilenmemeye çalışıyorum.” → İRD"
+                    }
+                  ]
+                },
+                {
+                  "label": "SEZGİ (SZG)",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Sezgi, karakterin açık bilgiye, ham mantığa veya doğrudan gözleme dayanmadan örüntü, niyet, tehlike, yalan, aura, enerji izi ve durumun görünmeyen tarafını kavrama kapasitesidir. SZG, ZEK’in yerine geçen “akıllılık” niteliği değildir; İRF’in yerine geçen “mistik bilgelik” niteliği de değildir. Daha net biçimde: karakterin dünya ile arasında kurduğu içgüdüsel okuma yeteneğidir.\n\nSZG yüksek olan karakter, bir şeylerin yanlış olduğunu erken fark eder. Birinin yalan söylediğini kesin kanıtla değil davranış boşluğuyla hisseder. Bir odada görünürde hiçbir şey yokken mekânın “ölü” olduğunu anlar. Bir büyünün matematiğini bilmez ama enerjinin nerede yoğunlaştığını sezebilir. Bir haritadaki sembolü akademik olarak çözemeyebilir ama sembolün tehdit, çağrı veya uyarı taşıdığını anlayabilir.\n\nSZG şunları yönetir:"
+                    },
+                    {
+                      "type": "table",
+                      "header": [
+                        "ALAN",
+                        "AÇIKLAMA"
+                      ],
+                      "rows": [
+                        [
+                          "Tehlike Hissi",
+                          "Pusu, tuzak, takip, yaklaşan tehdit"
+                        ],
+                        [
+                          "Sosyal sezgi",
+                          "Yalan, niyet, bastırılmış duygu, sahte tavır"
+                        ],
+                        [
+                          "Örüntü kavrama",
+                          "Bağlantı kurma, eksik parçayı hissetme"
+                        ],
+                        [
+                          "Aura/Enerji Algısı",
+                          "Enerji yoğunluğu, büyüsel iz, varlık hissi (Enerji yetkinliği ile bağlantılıdır)"
+                        ],
+                        [
+                          "Pasif farkındalık",
+                          "Aktif arama yapmadan tersliği sezme"
+                        ]
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "SZG şunları yapmaz:"
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Kitabi bilgi vermez. “Bu sembol hangi antik dile ait?” sorusu SZG değil, ilgili bilgi/araştırma becerisidir.",
+                        "Kesin gelecek bilgisi vermez. Kehanet enerjisi veya özel yetenek olmadan SZG yalnızca his ve ipucu üretir.",
+                        "İnsanları otomatik kandırmayı veya ikna etmeyi sağlamaz.",
+                        "Her şeyi fark eden pasif radar değildir; GM sezgiyi ipucu, rahatsızlık, yönelim veya şüphe olarak vermelidir."
+                      ]
+                    },
+                    {
+                      "type": "example",
+                      "text": "Örnek zar durumları:\n\n“Bu adamın yalan söyleyip söylemediğini anlamaya çalışıyorum.” → SZG + sosyal beceri / Farkındalık\n“Bu odada bir terslik var mı?” → SZG veya SZG + Farkındalık\n“Büyüsel bir iz hissedebilir miyim?” → SZG + ilgili enerji bilgisi\n“Hangi tünel daha tehlikeli geliyor?” → SZG\n“Bu yaratığın saldırmadan önceki niyetini okuyabilir miyim?” → SZG + Farkındalık"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -231,7 +479,7 @@ window.SLVNZ_CONTENT = {
             },
             {
               "type": "paragraph",
-              "text": "Niteliklere benzer olarak karakterlerin bazı özel durumlar için ihtiyaç duyacağı beceriler bulunmaktadır. Beceriler, niteliklere benzese de onlar kadar fazla durumda kullanılmayabilirler. Beceriler, **Temel Beceriler** ve **Özel Beceriler** olmak üzere ikiye ayrılır."
+              "text": "Niteliklere benzer olarak karakterlerin bazı özel durumlar için ihtiyaç duyacağı beceriler bulunmaktadır. Beceriler, niteliklere benzese de onlar kadar fazla durumda kullanılmayabilirler. Beceriler, **Temel Beceriler** ve **Özel Beceriler** olmak üzere ikiye ayrılır.\n\nTemel Beceriler, oyunun ortak eylem dilidir; Özel Beceriler ise karakterin bu ortak dili kendi geçmişi, eğitimi ve uzmanlığıyla büktüğü alanlardır."
             },
             {
               "type": "heading",
@@ -239,121 +487,359 @@ window.SLVNZ_CONTENT = {
               "text": "TEMEL BECERİLER"
             },
             {
-              "type": "heading",
-              "level": 3,
-              "text": "Bloklama"
-            },
-            {
               "type": "paragraph",
-              "text": "Bir karakterin kendisine yönelmiş bir saldırıyı durdurabilme becerisidir. Bu beceri, karakterin kuşandığı bir silah veya kalkan ile gerçekleştirilebilir. Kalkan ile gerçekleştirilen bir bloklama becerisi, saldırının tamamını absorbe etme imkânına sahiptir ancak kalkanın kuşanıldığı kola fiziksel bir stres bindirir. Silahla gerçekleştirilen bloklamalar ise farklı şekillerde fiziksel yeteneklerle harmanlanabilir, ancak başarısızlık durumunda karakter saldırıyı tamamen göğüslemek durumundadır."
+              "text": "Temel Beceriler, SLVNZ 4.0’ın varsayılan eylem alanlarıdır. Her karakter bu becerilerin bir kısmını teorik olarak kullanabilir; ancak eğitimli karakterler aynı eylemleri daha güvenilir, daha kontrollü ve daha az riskli yapar."
             },
             {
-              "type": "heading",
-              "level": 3,
-              "text": "Kaçınma"
-            },
-            {
-              "type": "paragraph",
-              "text": "Bir karakterin kendisine yönelmiş bir saldırıdan kaçınma becerisidir. Karakter, bu beceriyi ÇEVİKLİK niteliğiyle harmanlarken, üstüne gelen saldırıdan en az hasar ile sıyrılmaya çalışır. Çoğunlukla uç uca isabetlerde kesikler ve sıyrıklar gibi hasarlarla sonuçlanırken, mücadele zarlarında makasın açılmasıyla bir karakterin kaçınabildiği hasar seviyesi yükselir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Atıcılık"
-            },
-            {
-              "type": "paragraph",
-              "text": "El yordamıyla fırlatılabilen araçlar ve silahlar ile (Cirit, El Sapanı vb.) gerçekleştirilen isabet ettirme becerisidir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Nişancılık"
-            },
-            {
-              "type": "paragraph",
-              "text": "Nişangâhı olan menzilli silahlar ile (Musket, Crossbow vb.) başarılı isabet sağlamak için nişan alma becerisidir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Okçuluk"
-            },
-            {
-              "type": "paragraph",
-              "text": "Ok ve yay kullanımıyla gerçekleştirilecek atışlarda saldırıyı isabet ettirebilme becerisidir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "İsabet"
-            },
-            {
-              "type": "paragraph",
-              "text": "El ve göz koordinasyonu ile işaret ederek menzildeki bir hedefe isabet ettirme becerisidir (Asa & Enerjisel odak kullanımı vb.)."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Farkındalık"
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterin özellikle görme ve duyma yetisiyle çevresindeki detayları fark edebilme becerisidir. Bu beceri, çoğunlukla geniş kalabalık bir görüntüdeki ufak detayların farkına varma, kalabalık bir ortamda belirli konuşmaları ayırt etme, fısıldayan birilerini dinlemeye çalışma ya da kendiliğinden duyma, gizlenmiş bir şeyleri olduğu yerde fark etme gibi durumlarda kullanılmaktadır. Aynı zamanda bu beceri, İRFAN niteliğinden de beslenmektedir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Gizlilik"
-            },
-            {
-              "type": "paragraph",
-              "text": "Farkındalık becerisine karşılık karakterlerin özellikle görme ve duyma gibi hislere karşı fark edilmeden ilerleyebilme ya da kendilerini fark edilmez kılmalarını sağlama girişimlerini ifade eden beceridir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Araştırma"
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterin belirli bir bilgi veya nesneyi ilgili bölgede arama yöntemlerine olan hakimiyetini belirler. Farkındalıktan ayrı olarak, karakterin eylem alarak detayları kurcalaması, test etmesi ve kullanması gibi süreçlerin takibinde sonuçlanır. Araştırma becerisi, aynı zamanda ZEKÂ niteliğinden beslenir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "İzcilik"
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterlerin hakim oldukları vahşi biyomlarda yön bulma, vahşi hayatı tanıma ve buna karşı fikir üretme, biyomlar harici genel vahşi hayatta kalmaya yönelik bilgilere hakim olma ve bunları kullanma becerisidir. İzcilik becerisine sahip olan bir karakter, vahşi hayatta iz sürme, korunaklı sığınak bulma & tanımlama, ateş yakma, düğüm atma vb. becerilerin tümüne seviyesine göre bir miktar hakimdir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Performans"
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterlerin sosyal olarak farklı oyuncu harici karakterleri etkileyebilme becerisidir. Bu beceri, bilinen pek çok sistemde alışılmışın aksine doğrudan diğer karakterlerin üstünde mutlak bir etki oluşturulmasını sağlamaz. Çoğunlukla karakterleri bir yalan karşısında ikna etme veya inandırıcı görünme, gerçekleştirilen bir dans hareketi ile etkileyici iz bırakma gibi destekleyici etkilere sahiptir. Ancak sistemde her karakter, oyuncu karakterinin söylediği şeylerden veya etkileme girişiminde bulunduğu hamlelerden etkilenmeyebilir. Bu beceri, genel olarak bu denemelerde oyuncu karakterinin kendisine katabileceği etkileyiciliği artırmakla ilgilidir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Sağaltım"
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterlerin yaraya ve hastalığa müdahale ile ilgili kısmi tıbbi bilgisi ve becerisini ifade eder. Bir yarayı dikmek, cerrahi bir müdahalede bulunmak, basit bir soğuk algınlığının müdahale sürecine hakim olmak gibi durumlar bu beceriyi kapsamaktadır."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Terbiye"
-            },
-            {
-              "type": "paragraph",
-              "text": "Bir karakterin vahşi veya evcil olarak bir hayvana karşı iletişim ve etkileşim becerisini ifade eder. Bu beceriye bir hayvanla iletişim kurmaya çalışmak, sürülen bir hayvanı yönlendirmek, sakinleştirmek ve evcilleştirmek dahildir."
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "BLOK (SİLAH)",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Bloklama / Kılıç, karakterin kılıç veya benzeri savunmaya uygun yakın dövüş silahlarıyla gelen saldırıyı kesme, saptırma, karşı hat oluşturma veya rakibin darbe açısını bozma becerisidir.\n\nBu beceri, saldırıyı “bedenle taşımaktan” çok teknikle yön değiştirme üzerine kuruludur. Bu yüzden kalkan bloklamasına göre daha çevik, daha riskli ve daha hassastır.\n\nKullanım alanları:"
+                    },
+                    {
+                      "type": "table",
+                      "header": [
+                        "DURUM",
+                        "AÇIKLAMA"
+                      ],
+                      "rows": [
+                        [
+                          "Silahla saldırı savuşturma",
+                          "Gelen darbeyi silahla kesmek veya saptırmak"
+                        ],
+                        [
+                          "Rakibin silah hattını bozma",
+                          "Darbenin yönünü değiştirerek açık yaratmak"
+                        ],
+                        [
+                          "Karşı hamle hazırlama",
+                          "Başarılı bloktan sonra saldırı fırsatı üretme"
+                        ]
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Sınırlar:"
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Çok ağır darbelerde kalkan kadar güvenli değildir.",
+                        "Büyük yaratıkların ham kuvvet saldırılarına karşı risklidir.",
+                        "Başarısızlıkta saldırı doğrudan karaktere geçebilir.",
+                        "Silahın dayanıklılığı önemlidir; bloklama hamlesi silahı yıpratabilir veya kırabilir."
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "BLOK (KALKAN)",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Bloklama / Kalkan, karakterin kalkan kullanarak gelen saldırıyı durdurma, emme, yönlendirme veya bedeninden uzak tutma becerisidir.\n\nKılıç bloklamasından farklı olarak kalkan bloklaması daha güvenli ama daha ağırdır. Kalkan, saldırıyı doğrudan yok etmez; darbeyi karakterin koluna, omzuna, duruşuna ve **soluk** kaynağına aktarır.\n\nKullanım alanları:"
+                    },
+                    {
+                      "type": "table",
+                      "header": [
+                        "DURUM",
+                        "AÇIKLAMA"
+                      ],
+                      "rows": [
+                        [
+                          "Fiziksel saldırıyı durdurma",
+                          "Kılıç, balta, mızrak, ok, pençe vb."
+                        ],
+                        [
+                          "Darbe emme",
+                          "Saldırıyı karakter yerine kalkana bindirme"
+                        ],
+                        [
+                          "Hat tutma",
+                          "Dar geçitte, kapıda veya cephede savunma"
+                        ],
+                        [
+                          "Müttefik koruma",
+                          "Yanındaki veya arkasındaki hedefi kapatma"
+                        ],
+                        [
+                          "Tam blok imkanları",
+                          "Kapsamlı korunma olanağı"
+                        ]
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Sınırlar:"
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Bloklanan her güçlü darbe soluk baskısı yaratabilir.",
+                        "Yan, eşik ve kör alanlardan gelen saldırılara karşı pozisyon önemlidir.",
+                        "Büyük kalkanlar hareketi ve kaçınmayı azaltır.",
+                        "Kalkan kırılabilir, düşebilir veya karakterin gardını bozabilir."
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "KAÇINMA",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Kaçınma, karakterin saldırıdan, çökmeden, patlamadan, düşen nesneden veya ani tehlikeden bedensel hareketle sıyrılma becerisidir.\n\nKaçınma, her zaman geriye zıplamak anlamına gelmez. Eğilmek, yana kaymak, yuvarlanmak, ağırlık merkezini değiştirmek, darbenin içinden çıkmak veya saldırının hedef noktasını bozmak da kaçınmadır.\n\nKullanım alanları:"
+                    },
+                    {
+                      "type": "table",
+                      "header": [
+                        "DURUM",
+                        "AÇIKLAMA"
+                      ],
+                      "rows": [
+                        [
+                          "Yakın saldırılardan sıyrılma",
+                          "Kılıç, mızrak, pençe, yumruk vb."
+                        ],
+                        [
+                          "Menzilli saldırıdan kaçma",
+                          "Ok, taş, enerjisel mermi"
+                        ],
+                        [
+                          "Alan etkisinden kaçınma veya sığınma tepkisi verme",
+                          "Patlama, çökme, itme vb."
+                        ]
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Sınırlar:"
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Görülmeyen veya sezilmeyen saldırıya karşı kullanımı sınırlıdır.",
+                        "Dar alanda esnek şekilde kaçınmak zorlaşır.",
+                        "Ağır zırh, yük veya çevresel engel eksiler doğurabilir."
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "ATICILIK",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Atıcılık, karakterin elle fırlatılan silahları veya nesneleri hedefe yönlendirme becerisidir.\n\nCirit, bıçak, balta, taş, el sapanı, şişe, bomba benzeri fırlatılan nesneler bu beceri kapsamına girer. Atıcılık, nişancılık ve okçuluktan ayrıdır; çünkü burada bedenin savurma hareketi, ağırlık hissi ve mesafe sezgisi daha önemlidir."
+                    }
+                  ]
+                },
+                {
+                  "label": "NİŞANCILIK",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Nişancılık, mekanik veya nişan hattı kullanan menzilli silahları kullanma becerisidir.\n\nTatar yayı, musket, tabanca, tüfek, arbalet, mekanik fırlatıcılar veya nişangâhlı özel silahlar bu becerinin alanına girer. Nişancılık, okçuluktan farklı olarak bedensel çekiş gücünden ziyade hedefleme, sabitleme, nefes kontrolü ve zamanlama gerektirir."
+                    }
+                  ]
+                },
+                {
+                  "label": "OKÇULUK",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Okçuluk, yay ve ok kullanarak hedefe isabetli saldırı yapma becerisidir.\n\nOkçuluk, nişancılıktan ayrıdır çünkü karakterin bedeni silahın doğrudan parçasıdır. Yay çekişi, nefes, duruş, salım anı, mesafe sezgisi ve hedef takibi birlikte çalışır."
+                    }
+                  ]
+                },
+                {
+                  "label": "İSABET",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "İsabet, karakterin hedefe yöneltilmiş hassas eylemlerinde kullandığı genel hedefleme becerisidir.\n\nBu beceri, özellikle silah kategorisine girmeyen veya özel hedefleme gerektiren durumlarda kullanılır. Enerjisel odak, asa, işaret ederek büyü yönlendirme, küçük hedefe dokunma, hassas hamle veya belirli bir noktayı vurma bu becerinin alanına girer."
+                    }
+                  ]
+                },
+                {
+                  "label": "FARKINDALIK",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Farkındalık, karakterin çevresindeki duyusal ve sezgisel detayları fark etme becerisidir.\n\nGörmek, duymak, koklamak, hareket algılamak, ortamda terslik hissetmek, takip edildiğini anlamak, gizlenen birini seçmek veya yaklaşan tehlikeyi fark etmek bu becerinin alanına girer.\n\nKullanım alanları:"
+                    },
+                    {
+                      "type": "table",
+                      "header": [
+                        "DURUM",
+                        "AÇIKLAMA"
+                      ],
+                      "rows": [
+                        [
+                          "Gizlenen varlığı fark etme",
+                          "Gizliliğe karşı test"
+                        ],
+                        [
+                          "Ses veya hareket algılama",
+                          "Fısıltı, ayak sesi, kapı gıcırtısı vb."
+                        ],
+                        [
+                          "Görsel detay seçme",
+                          "Kalabalıkta kişi, yerde iz, duvarda çatlak vb."
+                        ],
+                        [
+                          "Savaş alanı takibi",
+                          "Eşik veya kör alandaki hareketi fark etme vb."
+                        ]
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "GİZLİLİK",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Gizlilik, karakterin görünmeden, duyulmadan, iz bırakmadan veya dikkat çekmeden hareket etme becerisidir.\n\nSadece sessiz yürümek değildir. Kalabalıkta sıradan görünmek, gölgede beklemek, zırh sesini bastırmak, izini saklamak, saklanacak doğru anı seçmek ve dikkat dağıtıcı unsurları kullanmak da Gizlilik kapsamındadır.\n\nKullanım alanları:"
+                    },
+                    {
+                      "type": "table",
+                      "header": [
+                        "DURUM",
+                        "AÇIKLAMA"
+                      ],
+                      "rows": [
+                        [
+                          "Sessiz hareket",
+                          "Duyulmadan ilerleme"
+                        ],
+                        [
+                          "Saklanma",
+                          "Görüş hattından çekilme"
+                        ],
+                        [
+                          "İz bırakmama",
+                          "Takip edilmeyi zorlaştırma"
+                        ],
+                        [
+                          "Kalabalığa karışma",
+                          "Dikkat çekmeden hareket etme"
+                        ],
+                        [
+                          "Pusu hazırlığı",
+                          "Uygun konumda fark edilmeden bekleme"
+                        ]
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "ARAŞTIRMA",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Araştırma, karakterin aktif şekilde bilgi, ipucu, nesne, bağlantı veya anlam arama becerisidir.\n\nFarkındalıktan farkı şudur: Farkındalık pasif veya anlık algıdır; Araştırma bilinçli inceleme, kurcalama, karşılaştırma, soru sorma, belge okuma, izleri takip etme ve çıkarım yapma sürecidir.\n\nKullanım alanları:"
+                    },
+                    {
+                      "type": "table",
+                      "header": [
+                        "DURUM",
+                        "AÇIKLAMA"
+                      ],
+                      "rows": [
+                        [
+                          "Oda inceleme",
+                          "Çekmece, duvar, zemin, gizli bölme arama vb."
+                        ],
+                        [
+                          "Belge tarama",
+                          "Kayıt, mektup, mühür, arşiv"
+                        ],
+                        [
+                          "İpucu bulma",
+                          "Suç mahalli, kamp alanı, savaş sonrası vb."
+                        ]
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "İZCİLİK",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "İzcilik, karakterin doğada yön bulma, iz sürme, kamp kurma, çevre okuma ve hayatta kalma becerisidir.\n\nBu beceri yalnızca “orman bilgisi” değildir. Çöl, dağ, bataklık, tundra, mağara, harabe çevresi ve sınır bölgelerinde hayatta kalma yöntemlerini kapsar.\n\nAncak izcilik, karakterin bu bölgelerin hepsinde hayatta kalma ve yön bulma yöntemlerini içermez. Bir karakter, hangi biyomlarda yetkinse, bu biyomlara yönelik özel izcilik bilgilerine sahiptir.\n\nKullanım alanları:"
+                    },
+                    {
+                      "type": "table",
+                      "header": [
+                        "DURUM",
+                        "AÇIKLAMA"
+                      ],
+                      "rows": [
+                        [
+                          "İz sürme",
+                          "Ayak izi, kırık dal, kamp kalıntısı"
+                        ],
+                        [
+                          "Yön bulma",
+                          "Haritasız veya kötü görüşte ilerleme"
+                        ],
+                        [
+                          "Kamp kurma",
+                          "Güvenli dinlenme alanı seçme"
+                        ],
+                        [
+                          "Biyom okuma",
+                          "Hava, zemin, hayvan hareketleri vb."
+                        ],
+                        [
+                          "Tehlike tanıma",
+                          "Yırtıcı, bataklık, zehirli bitki vb."
+                        ],
+                        [
+                          "Temel doğa üretimi",
+                          "Ateş yakma, düğüm, barınak, su bulma vb."
+                        ]
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "PERFORMANS",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Performans, karakterin bedenini, sesini, tavrını, sahne hâkimiyetini veya sosyal varlığını etkileyici biçimde kullanma becerisidir.\n\nBu beceri yalnızca sanat yapmak değildir. Kalabalığı etkilemek, dikkat çekmek, rol kesmek, yalanı daha inandırıcı sunmak, bir ritüeli görkemli icra etmek veya sosyal baskı kurmak da Performans kapsamına girebilir."
+                    }
+                  ]
+                },
+                {
+                  "label": "SAĞALTIM",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Sağaltım, karakterin yara, hastalık, kanama, kırık, zehir, enfeksiyon ve bedensel bozulmalara müdahale etme becerisidir.\n\nBu beceri hem savaş sonrası ilk yardım hem de uzun süreli bakım için kullanılır. Cerrahi, dikiş, bandaj, zehir temizleme, hastalık teşhisi ve bitkisel/ilaçsal müdahaleler Sağaltım kapsamına girebilir."
+                    }
+                  ]
+                },
+                {
+                  "label": "TERBİYE",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Terbiye, karakterin hayvanları, binekleri veya yarı-vahşi canlıları sakinleştirme, yönlendirme, eğitme ve onlarla güven ilişkisi kurma becerisidir.\n\nTerbiye, hayvan üzerinde mutlak kontrol sağlamaz. Canlının doğası, korkusu, açlığı, eğitimi, türü ve karakterle ilişkisi sonucu belirler."
+                    }
+                  ]
+                }
+              ]
             },
             {
               "type": "heading",
@@ -377,179 +863,707 @@ window.SLVNZ_CONTENT = {
         },
         {
           "id": "enerjiler",
-          "title": "ENERJİLER",
+          "title": "ENERJİLER VE ENERJİ KAYNAKLARI",
+          "body": "",
           "mode": "rich",
           "blocks": [
             {
               "type": "heading",
               "level": 2,
-              "text": "ENERJİLER"
+              "text": "BÜYÜNÜN TEMEL MANTIĞI"
             },
             {
               "type": "paragraph",
-              "text": "SLVNZ 4.0'da enerjiyi yönlendirebilerek farklı etkiler meydana getirmek mümkündür. Evrendeki pek çok varlık enerjiyi yönlendirme yetisine sahip değildir. Ancak farklı etkiler ve çevresek etkenlerle varlıklar bu kabiliyete erişebilmektedir. Bu enerji türleri Temel Enerji Türleri ve Özel Enerji Türleri olarak birbirinden ayrılırlar."
+              "text": "SLVNZ 4.0’da büyü, doğrudan “ateş atmak” veya “mana harcamak” değildir. Bir büyünün oluşması için dört ayrı katman bir araya gelir:"
+            },
+            {
+              "type": "table",
+              "header": [
+                "KATMAN",
+                "İŞLEV"
+              ],
+              "rows": [
+                [
+                  "Kaynak",
+                  "Büyünün bedelini ve yakıtını sağlar"
+                ],
+                [
+                  "Kanal",
+                  "Kaynağın kullanıcıdan veya çevreden büyüye aktarılmasını sağlar"
+                ],
+                [
+                  "Enerji",
+                  "Büyünün temel işlevini belirler"
+                ],
+                [
+                  "Element",
+                  "Büyünün dünyada hangi biçimde görüneceğini belirler"
+                ]
+              ]
+            },
+            {
+              "type": "example",
+              "text": "Bir karakter düşmana alevli bir mızrak fırlatıyorsa, büyünün elementi Ateş, enerjisi büyük ihtimalle Yıkım, kaynağı Mana, kanalı ise asa, kalıntı, ritüel, içsel yetenek veya dışsal bir odak olabilir."
             },
             {
               "type": "paragraph",
-              "text": "Temel enerjiler, evrende serbest olarak dolaşan etkiler, kalıntılar vb. şekillerde karşılaşılabilecek veya meydana gelebilecek yaygın türlerdir. Özel enerjiler ise daha çok duruma bağlı olarak varlıkların sentezleyebileceği ve hissedebileceği enerjilerdir."
+              "text": "Bu ayrım oldukça önemlidir. Çünkü aynı element, farklı enerjilerle tamamen farklı büyülere dönüşebilir."
+            },
+            {
+              "type": "table",
+              "header": [
+                "BÜYÜ",
+                "ELEMENT",
+                "ENERJİ",
+                "SONUÇ"
+              ],
+              "rows": [
+                [
+                  "Ateş Oku",
+                  "Ateş",
+                  "Yıkım",
+                  "Hasar verir"
+                ],
+                [
+                  "Ateş Duvarı",
+                  "Ateş",
+                  "Koruma",
+                  "Alanı kapatır"
+                ],
+                [
+                  "Ateş Sureti",
+                  "Ateş",
+                  "İllüzyon",
+                  "Görsel yanılsama oluşturur"
+                ],
+                [
+                  "Ateşten Elementali",
+                  "Ateş",
+                  "Oluşturma",
+                  "Geçici varlık/şekil oluşturur"
+                ],
+                [
+                  "Ateşi Söndürme",
+                  "Ateş",
+                  "Dönüştürme",
+                  "Var olan ateşi dağıtır"
+                ]
+              ]
             },
             {
               "type": "heading",
-              "level": 3,
+              "level": 2,
+              "text": "ELEMENTLER"
+            },
+            {
+              "type": "paragraph",
+              "text": "Elementler, büyünün dünyada hangi doğal veya maddesel biçimde açığa çıktığını gösterir. Element, büyünün “ne yaptığı” değil, “nasıl göründüğü / hangi doğa kuvvetiyle tezahür ettiği” sorusunun cevabıdır."
+            },
+            {
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "ATEŞ",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Ateş, ısı, yanma, köz, alev, patlama, kavurma ve tüketimle ilişkili elementtir.\n\nAteş elementi hızlı, saldırgan ve görünürdür. Gizlenmesi zordur, çevreye yayılma riski taşır ve kontrolsüz kullanıldığında büyünün hedefinden fazlasını etkileyebilir."
+                    }
+                  ]
+                },
+                {
+                  "label": "SU",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Su, akış, soğutma, basınç, arındırma, sis, buz, sıvı hareketi ve yaşam ortamlarıyla ilişkili elementtir.\n\nSu elementi doğrudan hasardan çok kontrol, yönlendirme, boğma, temizleme, soğutma ve form değiştirme alanında güçlüdür."
+                    }
+                  ]
+                },
+                {
+                  "label": "TOPRAK",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Toprak, taş, kum, metal cevheri, kil, kristal, maden, ağırlık, yapı ve sabitlikle ilişkili elementtir.\n\nToprak elementi yavaş ama güvenilirdir. Savunma, engel, yapı, sıkıştırma, alan kontrolü ve fiziksel biçimlendirme için uygundur."
+                    }
+                  ]
+                },
+                {
+                  "label": "HAVA",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Hava, rüzgâr, basınç, ses, nefes, uçuş, itme, savurma ve görünmez hareketle ilişkili elementtir.\n\nHava elementi hızlı, esnek ve taktiksel bir elementtir. Doğrudan hasardan çok hareket, konum, denge bozma, ses taşıma ve alan dağıtma üzerinde etkilidir."
+                    }
+                  ]
+                },
+                {
+                  "label": "YILDIRIM",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Yıldırım, elektrik, ani boşalma, sinirsel şok, manyetik tepki, iletkenlik ve hızlı enerji patlamasıyla ilişkili elementtir.\n\nYıldırım elementi yüksek riskli ve yüksek etkili bir elementtir. Ani hasar, sersemletme, refleks bozma ve iletken hatlardan yayılma potansiyeli taşır."
+                    }
+                  ]
+                },
+                {
+                  "label": "IŞIK",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Işık, görünürlük, parlama, yansıma, gölge bastırma, renk, sıcaklık, aydınlatma ve algı yönlendirme ile ilişkili elementtir.\n\nIşık elementi burada Aydınlık Enerjisi ile karıştırılmamalıdır. Işık bir elementtir; Aydınlık ise yasak/üst düzey bir enerjidir. Işık elementi sıradan büyülerde kullanılabilir. Aydınlık enerjisi ise varoluşsal ve kutsal düzeyde tehlikeli bir güçtür."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
               "text": "TEMEL ENERJİLER"
             },
             {
-              "type": "figuretext",
-              "position": "left",
-              "src": "https://slvnz.github.io/resources/webpage/img/support/energies/evocation.png",
-              "width": 25,
-              "showCaption": false,
-              "heading": "YIKIM",
-              "text": "Yıkım enerjisi, çoğunlukla parçalamak, yok etmek ve hasar vermek üzerine doğrudan gerçekleştirilen yeteneklerin dönüştüğü enerjidir. Diğer yandan, canlıları iyileştirmek için de kullanılabilmektedir."
+              "type": "paragraph",
+              "text": "Temel Enerjiler, büyünün işlevsel omurgasıdır. Bunlar büyünün dünyada ne yaptığına karar verir."
             },
             {
-              "type": "figuretext",
-              "position": "left",
-              "src": "https://slvnz.github.io/resources/webpage/img/support/energies/divination.png",
-              "width": 25,
-              "showCaption": false,
-              "heading": "KEHÂNET",
-              "text": "Kehanet enerjisi, çoğunlukla bir şeylerin yerini bulmak, farklı yollarla bilgi edinmek, gelecekle ilgili potansiyelleri görmek & anlamak gibi soyut işlevlere sahiptir."
-            },
-            {
-              "type": "figuretext",
-              "position": "left",
-              "src": "https://slvnz.github.io/resources/webpage/img/support/energies/conjuration.png",
-              "width": 25,
-              "showCaption": false,
-              "heading": "OLUŞTURMA",
-              "text": "Oluşturma enerjisi, doğrudan enerjiyi maddeleştirerek silah meydana getirme, hizmetkâr oluşturma, çevresel etkiler ortaya çıkarma gibi farklı etkiler oluşturma işlevlerine sahiptir."
-            },
-            {
-              "type": "figuretext",
-              "position": "left",
-              "src": "https://slvnz.github.io/resources/webpage/img/support/energies/abjuration.png",
-              "width": 25,
-              "showCaption": false,
-              "heading": "KORUMA",
-              "text": "Koruma enerjisi, kullanıcı varlık veya çevresindeki varlıklar üzerinde koruyucu, muhafaza edici ya da engelleyici etkiler oluşturma işlevine sahiptir."
-            },
-            {
-              "type": "figuretext",
-              "position": "left",
-              "src": "https://slvnz.github.io/resources/webpage/img/support/energies/transmutation.png",
-              "width": 25,
-              "showCaption": false,
-              "heading": "DÖNÜŞTÜRME",
-              "text": "Dönüştürme enerjisi, kullanıldığı çevrede, nesneler veya varlıklar üzerindeki materyal veya formu başkalaşıma uğratarak farklı hallere getirme işlevine sahiptir."
-            },
-            {
-              "type": "figuretext",
-              "position": "left",
-              "src": "https://slvnz.github.io/resources/webpage/img/support/energies/illusion.png",
-              "width": 25,
-              "showCaption": false,
-              "heading": "İLLÜZYON",
-              "text": "İllüzyon enerjisi, enerjisel olarak görünür etkiler meydana getirme, optik yanılsamalara sebep olma gibi özelliklerin meydana gelmesini sağlayan bir işleve sahiptir."
-            },
-            {
-              "type": "figuretext",
-              "position": "left",
-              "src": "https://slvnz.github.io/resources/webpage/img/support/energies/enchantment.png",
-              "width": 25,
-              "showCaption": false,
-              "heading": "EFSUN",
-              "text": "Efsun enerjisi, varlıkların zihinlerini manipüle etmeye, akıllarını karıştırmaya veya onları ikna etmeye yarayan etkileri meydana getiren bir işleve sahiptir."
-            },
-            {
-              "type": "figuretext",
-              "position": "left",
-              "src": "https://slvnz.github.io/resources/webpage/img/support/energies/necromancy.png",
-              "width": 25,
-              "showCaption": false,
-              "heading": "ÇÜRÜME",
-              "text": "Çürüme enerjisi, ölmüş varlıkların bedenlerini kontrol etmeye, onları canlandırmaya veya onların ruhlarını etkilemeye yarayan etkileri meydana getiren bir işleve sahiptir. Aynı zamanda canlı yaşamına zarar verme ve onları zayıflatma etkileri de yaratabilir."
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "YIKIM",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Yıkım, var olan yapıyı bozma, parçalama, yakma, kırma, kesme, patlatma, zayıflatma veya doğrudan hasar verme enerjisidir.\n\nYıkım enerjisi en anlaşılır ama en riskli temel enerjilerden biridir. Çünkü etkisi genellikle dışa taşar. Basit bir ateş kıvılcımı bile yanlış kullanılırsa yangına, taş patlaması çökmeye, yıldırım saldırısı zincirleme sekmeye dönüşebilir."
+                    }
+                  ]
+                },
+                {
+                  "label": "KORUMA",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Koruma, bir varlığı, alanı, nesneyi veya sınırı dış etkilerden muhafaza etme enerjisidir.\n\nKoruma yalnızca “kalkan basmak” değildir. Bir şeyi saklamak, bastırmak, ayırmak, zararı dağıtmak, saldırının şiddetini azaltmak veya belirli bir sınır çizmek de Koruma kapsamına girer."
+                    }
+                  ]
+                },
+                {
+                  "label": "OLUŞTURMA",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Oluşturma, enerjiyi geçici veya yarı-kalıcı biçime sokarak madde, şekil, araç, varlık benzeri form veya çevresel etki meydana getirme enerjisidir.\n\nOluşturma, yoktan mutlak madde yaratmak değildir. SLVNZ 4.0’da özellikle Büyük Savaş sonrası dönemde Oluşturma daha sınırlı ve bedellidir. Çoğu oluşturma etkisi geçici, kırılgan, kaynak bağımlı veya çevredeki malzemeyi kullanarak çalışır."
+                    }
+                  ]
+                },
+                {
+                  "label": "DÖNÜŞTÜRME",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Dönüştürme, var olan bir şeyin formunu, halini, yoğunluğunu, yüzeyini, hareketini veya niteliğini değiştirme enerjisidir.\n\nDönüştürme, Oluşturma’dan ayrıdır. Oluşturma yeni bir biçim meydana getirir; Dönüştürme mevcut bir varlığı veya maddeyi başka bir duruma sokar."
+                    }
+                  ]
+                },
+                {
+                  "label": "EFSUN",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Efsun, zihin, duygu, arzu, korku, yönelim ve karar süreçleri üzerinde etki kuran enerjidir.\n\nEfsun mutlak zihin kontrolü değildir. En sağlıklı kullanım biçimi; duygu eğilimi yaratma, dikkati başka yöne çekme, korkuyu büyütme, güven hissi verme, öfkeyi kışkırtma, anlık tereddüt yaratma veya bir düşünceyi daha cazip hale getirme şeklindedir. Ancak üst seviyelerde varlıkları süreli kontrol eğilimine kadar gidebilmektedir."
+                    }
+                  ]
+                },
+                {
+                  "label": "İLLÜZYON",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "İllüzyon, duyulara yönelik yanılsama, görüntü, ses, koku, hareket, parıltı, gölge veya enerjisel sahte iz oluşturma enerjisidir.\n\nİllüzyon, gerçekliği değiştirmez; algıyı değiştirir. Bu yüzden İllüzyon ile oluşturulan bir köprü üstünden yürünemez, ama hedef köprünün var olduğuna inandırılabilir. Fiziksel temas, dikkatli inceleme veya güçlü sezgi illüzyonu bozabilir."
+                    }
+                  ]
+                },
+                {
+                  "label": "KEHANET",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Kehanet, iz, olasılık, geçmiş yankısı, yön, gizli bağ, enerji izi ve muhtemel sonuçları sezme enerjisidir.\n\nKehanet kesin gelecek bilgisi vermemektedir. SLVNZ 4.0 için Kehanet’in en iyi kullanımı “bilgiye doğrudan sahip olmak” değil, eksik bilgiyi yön, sembol, rüya, titreşim veya olasılık olarak almaktır."
+                    }
+                  ]
+                },
+                {
+                  "label": "ÇÜRÜME",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Çürüme, canlı, ölü, ruhsal, bedensel veya maddesel bütünlüğün bozulmasıyla ilişkili enerjidir.\n\nÇürüme yalnızca nekromansi değildir. Paslanma, hastalık, çürüme, bedensel zayıflama, ruhsal yıpranma, ölü dokuyla etkileşim, canlılık bozumu ve eski kalıntıları uyandırma gibi alanları kapsar."
+                    }
+                  ]
+                }
+              ]
             },
             {
               "type": "heading",
-              "level": 3,
+              "level": 2,
               "text": "ÖZEL ENERJİLER"
             },
             {
               "type": "paragraph",
-              "text": "Özel enerji türleri, temel olanlara kıyasla daha özel ve erişimi zor veya bazı şartlar taşıyan enerjilerdir. Bu türde enerjiler genel olarak doğada sıklıkla karşılaşılabilen değil, nadiren ortaya çıkan ya da özel bir çaba ile ortaya çıkarılabilecek türden enerjilerdir."
+              "text": "Özel Enerjiler, doğanın sıradan mana düzeniyle kolayca yönlendirilemeyen, ilişki, anlaşma, inanç, kozmik dengesizlik veya üst varlık teması gerektiren enerji türleridir.\n\nBunlar yasak değildir; fakat herkesin erişebileceği genel büyücülük alanının dışında kalırlar."
             },
             {
-              "type": "figuretext",
-              "position": "left",
-              "src": "https://slvnz.github.io/resources/webpage/img/support/energies/faith.png",
-              "width": 25,
-              "showCaption": false,
-              "heading": "İNANÇ",
-              "text": "Genellikle Ruhbanlar ve Kutbanlar tarafından benimsenen, inançları doğrultusunda iman ettikleri ilahi varlıklardan yansıyan enerjinin bir tezahürü olarak betimlenir."
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "İNANÇ",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "İnanç, bir Kadim, kutsal ilke, yemin, tarikat, ocak veya manevi bağ üzerinden yönlendirilen enerjidir.\n\nİnanç enerjisi kullanıcının yalnızca teknik bilgisine bağlı değildir. Bağın gücü, sadakat, ritüel düzen, yemin ihlali, Kadim’in tavrı ve karakterin manevi konumu bu enerjiyi etkiler."
+                    }
+                  ]
+                },
+                {
+                  "label": "PAKT",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Pakt, bir patron, üstün varlık, kadim dışı güç, iblisvari figür, eski varlık, ejderha, gölge varlık veya bilinmeyen entiteyle yapılan anlaşmadan doğan enerjidir.\n\nPakt enerjisi öğrenilmiş bir teknikten çok, ilişkiye ve borca dayanır. Kullanıcı enerjiye sahip değildir; enerjiye erişim hakkı kazanmıştır."
+                    }
+                  ]
+                },
+                {
+                  "label": "KAOS",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Kaos, denge dışına taşmış, düzenlenmemiş, ihtimal yüklü ve sonuçları tam öngörülemeyen enerjidir.\n\nKaos enerjisi en güçlü özgürlük alanlarından biridir; fakat kontrol edildiğinde bile tamamen itaat etmez. Kullanıcı istediği etkinin yönünü belirleyebilir, ama etkinin nasıl açığa çıkacağı değişebilir."
+                    }
+                  ]
+                }
+              ]
             },
             {
-              "type": "figuretext",
-              "position": "left",
-              "src": "https://slvnz.github.io/resources/webpage/img/support/energies/pact.png",
-              "width": 25,
-              "showCaption": false,
-              "heading": "PAKT",
-              "text": "Doğrudan Sehharların (Warlock) kullandığı enerji türüdür. Bu enerji türü üstün bir varlığın kendi güçlerini başka bir varlığa lütfetmesi ile ortaya çıkar ve iki varlık arasındaki bağın güçlenmesi ile yükselir."
+              "type": "heading",
+              "level": 2,
+              "text": "YASAK ENERJİLER"
             },
             {
-              "type": "figuretext",
-              "position": "left",
-              "src": "https://slvnz.github.io/resources/webpage/img/support/energies/blood.png",
-              "width": 25,
-              "showCaption": false,
-              "heading": "KAN",
-              "text": "Fiziksel olarak ortamda bulunan kanı ana element olarak kontrol etme yetisi kazandıran enerji türüdür. Bu kan kontrolü, varlıkların kapsadıkları auralarının haricindeki dış mekanda bulunan serbest bir kaynaktan kullanılabilir. Örneğin: Yere dökülmüş bir kan öbeği, şişede duran bir miktar kan vb."
+              "type": "paragraph",
+              "text": "Yasak Enerjiler, varlığı bilinen fakat büyüyü öğreten gelenekler tarafından kullanılmaması öğütlenen enerji türleridir.\n\nBu yasak yalnızca ahlaki değildir; pratik ve varoluşsaldır. Bu enerjiler kullanıcının bedenini, ruhunu, çevresini, yaşam alanını veya kozmik düzenle ilişkisini bozabilir."
             },
             {
-              "type": "figuretext",
-              "position": "left",
-              "src": "https://slvnz.github.io/resources/webpage/img/support/energies/chaos.png",
-              "width": 25,
-              "showCaption": false,
-              "heading": "KAOS",
-              "text": "Evrende bulunan dengesiz enerjiyi kontrol altına almayı sağlayan enerji türüdür. Kaos enerjisini kontrol etmeye çalışan varlıklar, yoğun kullanımının sonucunda ortaya çıkabilecek kaotik sonuçlar çevresinde bir karmaşa içinde bulunurlar."
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "KAN",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Kan, canlı bedenin taşıdığı soy, hafıza, bedensel bağ, hastalık, ritim ve yaşam izleriyle ilişkili yasak enerjidir.\n\nKan enerjisi yalnızca kanı hareket ettirmek değildir. Kan üzerinden soy bağına, bedensel zayıflığa, hastalığa, ritüel mülkiyete, yeminlere ve bedensel kontrol alanlarına uzanabilir."
+                    }
+                  ]
+                },
+                {
+                  "label": "AYDINLIK",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Aydınlık, Işık elementinden farklıdır. Işık görünen, fiziksel veya algısal bir elementtir. Aydınlık, varoluşsal düzeyde arındırma, açığa çıkarma, hüküm verme, kutsal yakıcılık ve karanlığı reddetme enerjisidir.\n\nAydınlık, güvenli değildir. Kullanıcıya zarar vermiyor gibi görünse bile çevresindeki karanlık, çürüme, gizli bağ, gölge varlık ve mühürleri kışkırtabilir. Ayrıca Aydınlık, sıradan canlıların taşıyamayacağı kadar mutlak bir yönelim taşıyabilir."
+                    }
+                  ]
+                },
+                {
+                  "label": "KARANLIK",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Karanlık, ışığın yokluğu değildir. Enerjinin doğasını bozan, yaşamı tüketen, varoluşu içe çökerten, canlı çevreyi kurutan ve büyünün sınırlarını kirleten yasak enerjidir.\n\nKaranlık enerjisi özellikle cadı, kara ritüel, bozulmuş kalıntı, savaş sonrası yarıklar ve yasak dillerle ilişkili olabilir."
+                    }
+                  ]
+                },
+                {
+                  "label": "RUH",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Ruh Enerjisi, ölüler, hayaletler, benlik izleri, hatıra yankıları, musallatlar, ruhsal bağlar ve varlığın maddi beden dışındaki özüyle ilişkili yasak enerjidir.\n\nRuh enerjisi ile çalışmak, yalnızca ölülerle konuşmak değildir. Bir varlığın benliğine, hatırasına, ölüm sonrası izine veya ruhsal bütünlüğüne temas etmektir."
+                    }
+                  ]
+                },
+                {
+                  "label": "YAŞAM",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Yaşam Enerjisi, canlılığın büyüme, çoğalma, yenilenme, taşma, mutasyon ve varoluş gücüyle ilişkili yasak enerjidir.\n\nİlk bakışta iyileştirici gibi görünür; fakat SLVNZ 4.0’da Yaşam enerjisinin asıl tehlikesi eksikliği kadar fazlalığının da yıkıcı olmasıdır. Yaşam, kontrolsüz kaldığında iyileştirmez; sarar, büyütür, çoğaltır, ele geçirir."
+                    }
+                  ]
+                }
+              ]
             },
             {
-              "type": "figuretext",
-              "position": "left",
-              "src": "https://slvnz.github.io/resources/webpage/img/support/energies/darkmagic.png",
-              "width": 25,
-              "showCaption": false,
-              "heading": "KARANLIK",
-              "text": "Karanlık enerji, evrende bulunan bütün enerji türlerini manipüle etmeye ve onların doğalarını bozarak bambaşka etkiler uyandırılmasına sebep olan tehlikeli bir enerji türüdür. Karanlık enerjiyi kullanmak, varlığın kendi veya çevresindeki hayatı tüketmesine sebep olur."
+              "type": "heading",
+              "level": 2,
+              "text": "ENERJİSEL KAYNAKLAR"
             },
             {
-              "type": "figuretext",
-              "position": "left",
-              "src": "https://slvnz.github.io/resources/webpage/img/support/energies/radiant.png",
-              "width": 25,
-              "showCaption": false,
-              "heading": "AYDINLIK",
-              "text": "Aydınlık enerji, kutsal özellikleri taşıyan, yıkım, koruma, oluşturma, illüzyon, kehanet ve cezbetme enerjilerinin imkânlarını kapsayan bir enerji türüdür. Aydınlık enerjiyi kullanmak varlığın kendisine herhangi bir zarar vermez, ancak evrenin her yerinde bulunan karanlığı ve içinde barınan varlıkları kışkırtır."
+              "type": "paragraph",
+              "text": "Enerjisel Kaynaklar, büyünün çalışması için harcanan yakıttır. Enerji büyünün türünü, kaynak ise büyünün bedelini belirler."
             },
             {
-              "type": "figuretext",
-              "position": "left",
-              "src": "https://slvnz.github.io/resources/webpage/img/support/energies/soul.png",
-              "width": 25,
-              "showCaption": false,
-              "heading": "RUH",
-              "text": "Ruh enerjisi, varlıkların maddi bedenlerinin ötesinde var olan özlerine dokunan, ruhani düzlemle bağ kuran bir enerji türüdür."
+              "type": "table",
+              "header": [
+                "KAYNAK",
+                "GÜVENLİK",
+                "YENİLENME",
+                "ANA RİSK"
+              ],
+              "rows": [
+                [
+                  "Mana",
+                  "En güvenli",
+                  "Çevreden/kalıntıdan/kanaldan",
+                  "Vahşi tepki"
+                ],
+                [
+                  "Ki",
+                  "Görece güvenli ama sınırlı",
+                  "Dinlenme, meditasyon",
+                  "Beden-ruh yorgunluğu"
+                ],
+                [
+                  "Ruh",
+                  "Çok riskli",
+                  "Çok yavaş veya dış ruh kaynağıyla",
+                  "Ruhsal çöküş"
+                ],
+                [
+                  "Yaşam",
+                  "En tehlikeli",
+                  "Doğal varoluşsal dengeye bağlı",
+                  "Eksiklik/fazlalık felaketi"
+                ]
+              ]
             },
             {
-              "type": "figuretext",
-              "position": "left",
-              "src": "https://slvnz.github.io/resources/webpage/img/support/energies/life.png",
-              "width": 25,
-              "showCaption": false,
-              "heading": "YAŞAM",
-              "text": "Yaşam enerjisi, bir varlığın temel yapıtaşıdır. Bir varlığın ruhtan ve bedenden ayrı var oluşundaki yaşayabilme kapasitesinin varlığıdır."
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "MANA",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Mana, evrende vahşi biçimde akan temel büyüsel yakıttır.\n\nBüyük Savaş öncesinde mana daha erişilebilirken, 4.0 döneminde sıradan canlıların manayı doğrudan bedenlerinde kanalize etmesi çok daha zordur. Mana artık çoğunlukla dış kanallar, kalıntılar, eski büyü döneminden kalmış nesneler, özel bölgeler, nadir doğuştan yetenekliler veya kanal kurabilen kişiler aracılığıyla kullanılabilir.\n\nMana'nın güçlü yönleri:"
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "En yaygın ve en güvenli kaynaktır.",
+                        "Temel enerjilerle en uyumlu kaynaktır.",
+                        "Eğitimli kullanıcı için kontrol edilebilir.",
+                        "Büyü üretimi ve standart büyücülük için ana yakıttır."
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Riskleri:"
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Vahşi ve dizginsizdir.",
+                        "Dış kanal aracılığıyla kullanıldığında beklenmeyen tepki verebilir.",
+                        "Aynı sahnede ardışık ve yoğun kullanımda taşma riski artar.",
+                        "Kalıntı veya bozuk odak üzerinden kullanılırsa büyü sapabilir."
+                      ]
+                    },
+                    {
+                      "type": "table",
+                      "header": [
+                        "KULLANIM DURUMU",
+                        "MANA TEPKİ RİSKİ"
+                      ],
+                      "rows": [
+                        [
+                          "Basit büyü",
+                          "Düşük"
+                        ],
+                        [
+                          "Aynı enerjiyle ardışık kullanım",
+                          "Orta"
+                        ],
+                        [
+                          "Yüksek kaynak harcaması",
+                          "Orta/Yüksek"
+                        ],
+                        [
+                          "Bozuk kalıntı veya odak",
+                          "Yüksek"
+                        ],
+                        [
+                          "Yasak enerjiyle birlikte mana kullanımı",
+                          "Çok Yüksek"
+                        ]
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "Kİ",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Ki, varlığın beden-ruh disipliniyle açığa çıkardığı içsel enerji kaynağıdır.\n\nMana gibi vahşi değildir; fakat erişimi çok daha zordur. Ki, doğuştan sahip olunan bir havuzdan ziyade disiplin, meditasyon, nefes, çakra yönlendirme, dövüş talimi ve uzun süreli bedensel farkındalıkla kullanılabilir hale gelir.\n\nKi’nin güçlü yönleri:"
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Dış mana kanalına ihtiyaç duymaz.",
+                        "Daha kontrollüdür.",
+                        "Savaş sanatlarıyla çok iyi birleşir.",
+                        "Sessiz, sade ve düşük görünürlüklü etkiler için uygundur.",
+                        "Kullanıcının beden tekniğiyle doğrudan ilişkilidir."
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Sınırları:"
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Miktarı azdır.",
+                        "Geliştirmesi zordur.",
+                        "Patlayıcı büyük büyüler için uygun değildir.",
+                        "Tükendiğinde karakter bedensel ve ruhsal yorgunluğa girer."
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Ki Tükenme Sonuçları:"
+                    },
+                    {
+                      "type": "table",
+                      "header": [
+                        "SEVİYE",
+                        "SONUÇ"
+                      ],
+                      "rows": [
+                        [
+                          "Azalma",
+                          "Halsizlik, refleks düşüşü"
+                        ],
+                        [
+                          "Kritik Azalma",
+                          "Titreme, nefes bozulması, odak kaybı"
+                        ],
+                        [
+                          "Tükenme",
+                          "Bayılma, ruhsal boşalma, ağır yorgunluk"
+                        ],
+                        [
+                          "Aşırı zorlama",
+                          "Kalıcı hasar veya ölüm riski"
+                        ]
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "RUH",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Ruh Kaynağı, varlığın benlik özü, ruhsal bütünlüğü ve maddi bedenin ötesindeki varoluş bağından harcanan kaynaktır.\n\nKi’den daha derindir ve daha tehlikelidir. Ki dinlenme ve meditasyonla toparlanabilirken, Ruh kaynağı hızlı yenilenmez. Ruh kullanımı uzun süreli bekleme, özel ritüeller, dış ruh kaynağı veya çok nadir manevi onarım gerektirir.\n\nRuh kaynağının güçlü yönleri:"
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Ruhsal varlıklar, musallatlar, ölüler ve benlik izleri üzerinde etkilidir.",
+                        "Mana çalışmadığında bile bazı eşiklerde iş görebilir.",
+                        "Çok derin ve kalıcı etkiler yaratabilir.",
+                        "Beden dışı varlıklarla temas kurabilir."
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Riskleri:"
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Kullanıcının özünü eksiltir.",
+                        "Ruh seviyesi düştükçe karakter yorulur, donuklaşır, çöker.",
+                        "Aşırı kullanım karakterin benliğinde çatlak yaratabilir.",
+                        "Tükenirse geride boş beden kalabilir."
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Ruh Kaynağı Kullanım Tablosu:"
+                    },
+                    {
+                      "type": "table",
+                      "header": [
+                        "DURUM",
+                        "SONUÇ"
+                      ],
+                      "rows": [
+                        [
+                          "Hafif kullanım",
+                          "Ruhsal yorgunluk, soğuma, huzursuzluk"
+                        ],
+                        [
+                          "Orta kullanım",
+                          "Duygu silikleşmesi, anı bulanıklığı"
+                        ],
+                        [
+                          "Ağır kullanım",
+                          "Benlik çatlağı, musallatlara açıklık"
+                        ],
+                        [
+                          "Kritik kullanım",
+                          "Ruh kopması, bedenin boşalması"
+                        ],
+                        [
+                          "Tükenme",
+                          "Ölüm"
+                        ]
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "YAŞAM",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Yaşam Kaynağı, varlığın doğrudan varoluşsal canlılık gücüdür.\n\nBu kaynak en tehlikeli kaynaktır. Çünkü hem eksikliği hem fazlalığı ölümcül olabilir. Mana taşabilir, Ki tükenebilir, Ruh aşınabilir; fakat Yaşam kaynağı doğrudan “varlığın var olma dengesi” ile ilgilidir.\n\nYaşam kaynağının güçlü yönleri:"
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Çok güçlü iyileştirme, büyütme ve canlılık etkileri yaratabilir.",
+                        "Ölüm eşiğindeki varlıklara müdahale edebilir.",
+                        "Bitki, et, kemik, organik madde ve canlı formlar üzerinde olağanüstü etkilidir.",
+                        "Bazı yasak ritüellerde başka kaynakların yerine geçebilir."
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Riskleri:"
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Azalırsa varlık çöker.",
+                        "Fazlalaşırsa varlık kontrolsüz biçimde sarılır.",
+                        "Canlı formlara tutunup yayılabilir.",
+                        "Bilinci bastırabilir.",
+                        "Bedeni mutasyona, aşırı büyümeye veya varlık kaymasına sürükleyebilir."
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Yaşam Kaynağı Dengesizliği:"
+                    },
+                    {
+                      "type": "table",
+                      "header": [
+                        "DURUM",
+                        "SONUÇ"
+                      ],
+                      "rows": [
+                        [
+                          "Hafif eksilme",
+                          "Solgunluk, halsizlik, iyileşme yavaşlığı"
+                        ],
+                        [
+                          "Orta eksilme",
+                          "Organik zayıflama, bilinç bulanıklığı"
+                        ],
+                        [
+                          "Ağır eksilme",
+                          "Yaşamsal çöküş, ölüm riski"
+                        ],
+                        [
+                          "Hafif fazlalık",
+                          "Aşırı canlılık, ateş, büyüme sancısı"
+                        ],
+                        [
+                          "Orta fazlalık",
+                          "Doku taşması, bitkisel/organik yayılma ve yoğun acı/ağrı"
+                        ],
+                        [
+                          "Yarıya yaklaşan sarılma",
+                          "Bilinç kaybı, kontrolden çıkma"
+                        ],
+                        [
+                          "Tam sarılma",
+                          "Varlık dönüşümü veya kaybı"
+                        ]
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "heading",
+              "level": 2,
+              "text": "KANALLAR"
+            },
+            {
+              "type": "paragraph",
+              "text": "4.0’da kaynak tek başına büyüye dönüşmez. Kaynağın büyüye aktarılması için bir **kanal** gerekir."
+            },
+            {
+              "type": "table",
+              "header": [
+                "KANAL",
+                "AÇIKLAMA"
+              ],
+              "rows": [
+                [
+                  "Odaklayıcı",
+                  "Asa, tılsım, kristal, mühür, yüzük"
+                ],
+                [
+                  "Kalıntı",
+                  "Büyük savaş öncesinden kalmış enerjisel nesne"
+                ],
+                [
+                  "Ritüel",
+                  "Söz, hareket, malzeme ve zamanla kurulan geçici kanal"
+                ],
+                [
+                  "İçsel kanal",
+                  "Nadir doğuştan yetenek, Sahir/Sahire benzeri yapı"
+                ],
+                [
+                  "Dışsal kanal kurucu",
+                  "Kanal açabilen kişi, varlık veya eşya"
+                ],
+                [
+                  "Mekân kanalı",
+                  "Eski enerjisel bölgeler, enerjisel tesir noktaları, kadim izler"
+                ],
+                [
+                  "İlişki kanalı",
+                  "Pakt veya inanç gibi ilişki temelli erişim"
+                ]
+              ]
             }
           ]
         },
@@ -569,47 +1583,52 @@ window.SLVNZ_CONTENT = {
             },
             {
               "type": "paragraph",
-              "text": "Fiziksel yetenekler, kaynak olarak karakterde STAMINA tüketirken, enerjisel yetenekler MANA, RUH, Kİ ve YAŞAM enerjisi tüketebilirler. Ancak, bazı fiziksel yeteneklerin de enerjisel kaynaklar tüketmesi mümkün olabilir."
+              "text": "Fiziksel yetenekler, kaynak olarak karakterde SOLUK tüketirken, enerjisel yetenekler MANA, RUH, Kİ ve YAŞAM enerjisi tüketebilirler. Ancak, bazı fiziksel yeteneklerin de enerjisel kaynaklar tüketmesi mümkün olabilir."
             },
             {
-              "type": "heading",
-              "level": 3,
-              "text": "FİZİKSEL YETENEKLER"
-            },
-            {
-              "type": "paragraph",
-              "text": "Fiziksel yetenekler, çoğunlukla yakın dövüş konusunda ustalaşan ya da menzilli araçlar kullanan karakterlerin ihtiyaç duyduğu yeteneklerdir. Genellikle kas gücü gerektirdiği için karakterlerin STAMINA değerlerini tüketen fiziksel yetenekler, kimi zaman enerji ile harmanlanarak farklı etkiler doğurabilen yeteneklere dönüşebilmektedir. Fiziksel yeteneklerin bu şekli Savaş Sanatı olarak adlandırılmaktadır."
-            },
-            {
-              "type": "paragraph",
-              "text": "SLVNZ 3.0 sisteminde fiziksel yetenekler, genel yetenekler ve yetkinlik yetenekleri olarak ikiye ayrılır. Genel yetenekler, karakterlerin herhangi bir yetkinlik şartı gerektirmeksizin mücadelede kullanabileceği yetenekleri nitelendirirken, yetkinlik yetenekleri, yetkinlik sahibi oldukları silahlar ve beceriler çerçevesinde gerçekleştirebilecekleri daha özel yetenekleri belirtir. Her fiziksel silah yetkinliğinin kendine özgü bir yetenek ağacı ve dalları bulunmaktadır. Karakterler, bu dala giriş yapmak üzere 500 DP. toplayacakları bir sürece girerek, ağaca giriş yaptıktan sonra farklı dallara yönelebilirler."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "ENERJİSEL YETENEKLER"
-            },
-            {
-              "type": "paragraph",
-              "text": "Enerjisel yetenekler (Büyüler), doğada bulunan kaotik enerjinin farklı kanallarca çevreye veya kalıntılara sinmiş, belirli sembollerce nesnesel veya doğal akıştan geçirilerek meydana getirilebilen veya tamamen serbest bir biçimde olağan dışı meydana gelebilen sıradışı yeteneklerdir. Evrende herhangi bir insansı karakterin enerjisel yetenek kullanması sıradan bir durum değildir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "ENERJİSEL YETENEK KULLANIMI"
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterler, istisnai durumlarda basit sayılabilecek enerjisel etkileri meydana getirebilirler. Bu durumlar, kalıntılar gibi karakterlerin üstünde taşıdığı nesneler aracılığıyla gerçekleşmiyorsa, çoğunlukla karakterin belirli vücut hareketleri beraberinde fonetik biçimde uyum sağlayacağı sözler ile birleştirerek gerçekleştireceği bir zincirleme yapı olarak karşılaşılır. Karakterler, bu şekilde enerjisel yetenekleri gerçekleştirebilmek için beraberlerinde MANA rezervi bulundurmalıdır. Aksi halde enerjisel yetenekleri bu şekilde kendi başlarına gerçekleştiremezler."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "SAVAŞ SANATI"
-            },
-            {
-              "type": "paragraph",
-              "text": "Savaş sanatları, özellikle fiziksel yetenekler gibi kas gücüne dayanan ancak bu gücü enerjisel yönlendirmelerle harmanlayan özel savaş manevralarının ortaya çıkarttığı etkilere sahiptir. Bu etkiler, çoğunlukla karakterlerin savaştıkları silahların üstünden uyandırılabilecek veya yaptıkları hamleler ile birlikte meydana gelecek çevresel tepkiler şeklinde yorumlanabilir."
+              "type": "tabs",
+              "tabs": [
+                {
+                  "label": "FİZİKSEL YETENEKLER",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Fiziksel yetenekler, çoğunlukla yakın dövüş konusunda ustalaşan ya da menzilli araçlar kullanan karakterlerin ihtiyaç duyduğu yeteneklerdir. Genellikle kas gücü gerektirdiği için karakterlerin SOLUK değerlerini tüketen fiziksel yetenekler, kimi zaman enerji ile harmanlanarak farklı etkiler doğurabilen yeteneklere dönüşebilmektedir. Fiziksel yeteneklerin bu şekli Savaş Sanatı olarak adlandırılmaktadır."
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "SLVNZ 4.0 sisteminde fiziksel yetenekler, genel yetenekler ve yetkinlik yetenekleri olarak ikiye ayrılır. Genel yetenekler, karakterlerin herhangi bir yetkinlik şartı gerektirmeksizin mücadelede kullanabileceği yetenekleri nitelendirirken, yetkinlik yetenekleri, yetkinlik sahibi oldukları silahlar ve beceriler çerçevesinde gerçekleştirebilecekleri daha özel yetenekleri belirtir. Her fiziksel silah yetkinliğinin kendine özgü bir yetenek ağacı ve dalları bulunmaktadır. Karakterler, bu dala giriş yapmak üzere 500 DP. toplayacakları bir sürece girerek, ağaca giriş yaptıktan sonra farklı dallara yönelebilirler."
+                    }
+                  ]
+                },
+                {
+                  "label": "ENERJİSEL YETENEKLER",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Enerjisel yetenekler (Büyüler), doğada bulunan kaotik enerjinin farklı kanallarca çevreye veya kalıntılara sinmiş, belirli sembollerce nesnesel veya doğal akıştan geçirilerek meydana getirilebilen veya tamamen serbest bir biçimde olağan dışı meydana gelebilen sıradışı yeteneklerdir. Evrende herhangi bir insansı karakterin enerjisel yetenek kullanması sıradan bir durum değildir."
+                    },
+                    {
+                      "type": "heading",
+                      "level": 3,
+                      "text": "ENERJİSEL YETENEK KULLANIMI"
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Karakterler, istisnai durumlarda basit sayılabilecek enerjisel etkileri meydana getirebilirler. Bu durumlar, kalıntılar gibi karakterlerin üstünde taşıdığı nesneler aracılığıyla gerçekleşmiyorsa, çoğunlukla karakterin belirli vücut hareketleri beraberinde fonetik biçimde uyum sağlayacağı sözler ile birleştirerek gerçekleştireceği bir zincirleme yapı olarak karşılaşılır. Karakterler, bu şekilde enerjisel yetenekleri gerçekleştirebilmek için beraberlerinde MANA rezervi bulundurmalıdır. Aksi halde enerjisel yetenekleri bu şekilde kendi başlarına gerçekleştiremezler."
+                    }
+                  ]
+                },
+                {
+                  "label": "SAVAŞ SANATI",
+                  "blocks": [
+                    {
+                      "type": "paragraph",
+                      "text": "Savaş sanatları, özellikle fiziksel yetenekler gibi kas gücüne dayanan ancak bu gücü enerjisel yönlendirmelerle harmanlayan özel savaş manevralarının ortaya çıkarttığı etkilere sahiptir. Bu etkiler, çoğunlukla karakterlerin savaştıkları silahların üstünden uyandırılabilecek veya yaptıkları hamleler ile birlikte meydana gelecek çevresel tepkiler şeklinde yorumlanabilir."
+                    }
+                  ]
+                }
+              ]
             },
             {
               "type": "heading",
@@ -622,15 +1641,7 @@ window.SLVNZ_CONTENT = {
             },
             {
               "type": "paragraph",
-              "text": "Bir yetenek üstünde odaklanırken ya da konsantre olurken, eğer karakter bu konuda yetkin değilse birden fazla yetenek üstünde bu yoğunlaşmayı gerçekleştiremez."
-            },
-            {
-              "type": "paragraph",
-              "text": "Konsantrasyon gerektiren yeteneklerde, karakter zihnini ortaya çıkardığı enerjinin dağılmadan dışarıda kalabilmesi için kendini odaklamış olur. Odak gerektiren yeteneklerde ise karakter, algılarını yeteneğin akışına odaklayarak duruşunu korur. Karakterlerin odaklanma ya da konsantrasyon sırasında alacağı herhangi bir hasar, odaklanmayı/konsantrasyonu bozulma tehlikesine sokar. Karaktere isabet eden saldırının türüne ve kuvvetine göre GM bir sınır belirlemekle yükümlüdür. Eğer belirlenmek istenmezse Sayfa 1 üstünde bulunan başarı tablosu baz alınabilir. Ancak, bu durumda konsantrasyon/odağın sadece bozulma ve korunma durumu bulunmaktadır. Kritik başarısızlık, şartlı başarı ve kritik başarı durumları böyle bir senaryoda devre dışı bırakılmalıdır."
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterler odak ya da konsantrasyon yapabilme kapasitelerini geliştirebilirler. Bu durum, karakterlerin odak yuvası ve konsantrasyon yuvası sayılarını artırması demektir. Aktif bulunan her konsantrasyon ve odak gerektiren yetenek için bir yuva doldurulur, yetenek sona erdikten sonra boşaltılır. Konsantrasyon ve odak yuvalarının nasıl geliştirildiğine Karakter Gelişimi bölümünden bakabilirsiniz."
+              "text": "Bir yetenek üstünde odaklanırken ya da konsantre olurken, eğer karakter bu konuda yetkin değilse birden fazla yetenek üstünde bu yoğunlaşmayı gerçekleştiremez.\n\nKonsantrasyon gerektiren yeteneklerde, karakter zihnini ortaya çıkardığı enerjinin dağılmadan dışarıda kalabilmesi için kendini odaklamış olur. Odak gerektiren yeteneklerde ise karakter, algılarını yeteneğin akışına odaklayarak duruşunu korur. Karakterlerin odaklanma ya da konsantrasyon sırasında alacağı herhangi bir hasar, odaklanmayı/konsantrasyonu bozulma tehlikesine sokar. Karaktere isabet eden saldırının türüne ve kuvvetine göre GM bir sınır belirlemekle yükümlüdür. Eğer belirlenmek istenmezse Sayfa 1 üstünde bulunan başarı tablosu baz alınabilir. Ancak, bu durumda konsantrasyon/odağın sadece bozulma ve korunma durumu bulunmaktadır. Kritik başarısızlık, şartlı başarı ve kritik başarı durumları böyle bir senaryoda devre dışı bırakılmalıdır.\n\nKarakterler odak ya da konsantrasyon yapabilme kapasitelerini geliştirebilirler. Bu durum, karakterlerin odak yuvası ve konsantrasyon yuvası sayılarını artırması demektir. Aktif bulunan her konsantrasyon ve odak gerektiren yetenek için bir yuva doldurulur, yetenek sona erdikten sonra boşaltılır. Konsantrasyon ve odak yuvalarının nasıl geliştirildiğine Karakter Gelişimi bölümünden bakabilirsiniz."
             }
           ]
         },
@@ -1112,10 +2123,6 @@ window.SLVNZ_CONTENT = {
               "text": "SAVAŞ SİSTEMİ"
             },
             {
-              "type": "paragraph",
-              "text": "SLVNZ 4.0'ın temel mücadele eylemlerinin ve hareketlerinin işlenmesinin temellerini **ALTIGEN** savaş sistemi oluşturur. Savaş sisteminde varlıkların her biri bir Altıgen içinde (Hex) yer alırlar ve birimlerin hareketleri, gerçekleşecek eylemlerin mesafeleri ve kapsayacakları alanlar **BİRİM** olarak belirlenmiş tekil altıgen yuvalar üzerinden hesaplanır."
-            },
-            {
               "type": "heading",
               "level": 3,
               "text": "SAVAŞ DÜZENİ"
@@ -1124,53 +2131,137 @@ window.SLVNZ_CONTENT = {
               "type": "tabs",
               "tabs": [
                 {
-                  "label": "ALTIGEN SAVAŞ DÜZENİ",
+                  "label": "KARE SAVAŞ DÜZENİ",
                   "blocks": [
                     {
                       "type": "image",
                       "src": "https://slvnz.github.io/resources/webpage/svg/hex-battle.svg",
                       "alt": "",
-                      "caption": "Altıgen savaş düzeni",
+                      "caption": "Kare savaş düzeni",
                       "width": "300"
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Kare savaş sistemi, SLVNZ 4.0'ın mücadele eylemlerinin ve hareketlerinin işlenmesi için temeli oluşturur. Savaş sisteminde varlıkların her biri bir Kare içinde yer alırlar ve birimlerin hareketleri, gerçekleşecek eylemlerin mesafeleri ve kapsayacakları alanlar birim olarak belirlenmiş tekil kare yuvalar üzerinden hesaplanır.\n\nSavaş düzeninde, karakterin baktığı yöndeki ve bu yönün içerdiği birimin sağ ve sol bitişiğindeki birimler **net alan** olarak isimlendirilir."
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Karakter, net alandaki varlıklara normal şekilde fiziksel saldırıda bulunabilir.",
+                        "Karakter, net alandan alacağı saldırılara karşı normal şekilde savunma & kaçınma hamleleri yapabilir."
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Savaş düzeninde net alan, net alanlardan karakterin çevresine doğru dolaşırken **SOL** ve **SAĞ** birimler bulunur."
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Karakter, **BU ALANLARDAN** gelen fiziksel saldırılara karşı savunma yapmak için herhangi bir eksi puan almaz. Ancak saldırıyı savuşturma veya saldırıdan kaçınma süreçleri koşullara bağlı olarak değişiklik gösterir.",
+                        "Karakter, elinin boş bulunduğu taraftan gelen bir saldırıya karşı kaçınma yapmak zorundadır. Saldırının geldiği taraftaki elinde en az orta boy kalkan bulunduruyorsa, bloklamayı avantajlı gerçekleştirir.",
+                        "Karakter, altıgen sisteminde olduğu gibi sadece net alan sınırlarında bulunan varlıklara herhangi bir şekilde bakış yönünü değiştirmeden saldırıda bulunabilir. Ancak, silah bulundurduğu elinin olduğu tarafa da bakış açısını değiştirmeden saldırıda bulunabilir (Sol elinde silah bulunduran biri sol tarafa saldırabilir, ancak sağ tarafa saldırmak için o bölgeye net alan olacak şekilde yüzünü dönmelidir).",
+                        "Karakter, bu alanlardan gelecek menzilli fiziksel saldırıların farkındadır ve yukarıdaki kuralları gözeterek savunma & kaçınma yapabilir."
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Karakterin baktığı yönün sağ ve sol arkasındaki birimler **eşik alan** olarak isimlendirilir."
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Karakter, eşik alandan gelen yakın mesafeli fiziksel saldırılara karşı -2 negatif değer alarak savunma gerçekleştirir.",
+                        "Karakter, eşik alan tarafından gelecek uzun menzilli fiziksel saldırıyı yapacak kişinin orada olduğunun farkındaysa, gelen saldırıya karşı farkındalık zarı kullanır. Farkındalık 10'dan yüksek gelirse gelen fiziksel menzilli saldırıyı fark ederek kaçınmaya çalışabilir. Saldıranın okçuluk/atıcılık/isabet/nişancılık ve kuvvet yüksekliğine bağlı olarak saldırının başarı düzeyi belirlenir."
+                      ]
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Karakterin baktığı yönün tam tersinde — yani arkasında — kalan birim **kör alan** olarak isimlendirilir."
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Karakter, kör alandan gelen yakın mesafeli fiziksel saldırılara karşı, eğer saldırıyı yapan kişinin arkasında olduğunun farkındaysa dezavantaj ile kaçınma gerçekleştirmeye çalışır. **Bloklama** şeklinde bir savunma bu pozisyona karşı gerçekleştirilemez.",
+                        "Karakter, kör alandan gelecek fiziksel bir uzak menzilli saldırıya karşı başka bir varlık tarafından tepki olarak uyarılmıyor veya buna özel bir sistemi yoksa savunma veya kaçınma gerçekleştiremez."
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "label": "BLOK SİSTEMİ",
+                  "blocks": [
+                    {
+                      "type": "image",
+                      "src": "https://slvnz.github.io/resources/webpage/svg/square-block.svg",
+                      "alt": "",
+                      "caption": "Kare blok sistemi",
+                      "width": "300"
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Fiziksel mücadelelerde kaçınma genel bir standarda sahip basit bir yapıda olsa da bir kalkanla bloklamanın koşullara bağlı değişkenlikleri bulunmaktadır. Bu değişkenler dahilinde, bloklama sistemi kare ve altıgen sistem üzerinde farklılıklarıyla incelenebilir. Kalkanlar genel kullanım şekilleriyle sol elde kuşanıldıkları için, şemalar sol kullanım üzerinden bir görsellik sunmaktadır. Kalkanın diğer tarafta kullanım durumunda, aynı sistem karakterin sağ tarafı için geçerlidir."
+                    },
+                    {
+                      "type": "heading",
+                      "level": 3,
+                      "text": "KÜÇÜK KALKANLAR & SİLAHLAR"
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Küçük kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahip olmadıkları için çoğunlukla bireysel ölçekte fiziksel saldırıları engellemek ve savuşturmak üzere kullanılır. Sonuçları bire bir aynı olmasa da silahlar ve küçük kalkanlar aynı sistem yapısına tabidir."
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Küçük kalkanlar bloklamak için ek puanlarını karakterin **ÇEV** niteliğinden edinirler.",
+                        "Silahlar bu ek puanı kendilerine ait özel **BLOK** niteliğinden edinirler.",
+                        "Daha büyük boyutta kalkanlarda bloklama eyleminin zarı düşük kalsa bile arada oluşacak puan farkına bağlı olarak kısmi başarı sağlanabilirken, silahlar ve küçük kalkanlarda kaçınma durumundaki gibi başarısız olunur."
+                      ]
+                    },
+                    {
+                      "type": "heading",
+                      "level": 3,
+                      "text": "ORTA KALKANLAR"
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Orta kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahiptir. Bu özellikler hem ağırlıkları hem de büyüklükleri sebebiyle karakterin hareket kabiliyeti üzerinde olumsuz etkilere sebep olmaktadır. Ancak, bu duruma karşılık karaktere gelecek fiziksel hamlelere karşı korunak sağlamaktadır."
+                    },
+                    {
+                      "type": "list",
+                      "ordered": false,
+                      "items": [
+                        "Orta kalkan kullanan bir karakter, **NORMAL ALANLAR** tarafından gelecek yakın menzilli fiziksel saldırılara karşı normal şekilde **BLOK BONUSU** edinerek bloklama yapabilir (Kalkandan gelecek blok aşırtma sınırı).",
+                        "Eğer karaktere gelecek saldırı **NET ALAN** tarafından geliyorsa, karakter bloklama eylemine **AVANTAJ** alır.",
+                        "Eğer karaktere gelecek saldırı zor alan tarafından geliyorsa, karakter bloklama eylemine **DEZAVANTAJ** alır."
+                      ]
+                    },
+                    {
+                      "type": "heading",
+                      "level": 3,
+                      "text": "KULE KALKANLAR"
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Kule kalkanlar, karakterlerin hareketlerini ve **ÇEV** niteliklerini önemli ölçüde düşürürken korunak durumunu aynı ölçüde yükselten yapıya sahiptir. Bir karakter, orta kalkanlarda olduğu gibi kule kalkanlarda da blok bonusu becerisi üzerinden bloklama gerçekleştirir, ancak kule kalkanı tam blok pozuna geçirdiği zaman stamina değeri tükenene ya da kalkan işlev görmez hale gelene kadar saldırıları kesinlikle bloklar."
+                    },
+                    {
+                      "type": "heading",
+                      "level": 3,
+                      "text": "BLOKLAMADA DAYANIKLILIK"
+                    },
+                    {
+                      "type": "paragraph",
+                      "text": "Bloklama, karaktere üstün korunak sağlasa da karakter tarafından kaynak kullanımı denetimi gerektiren bir süreçtir. Bir karakter, saldırı blokladıkça kalkanı üzerinde hasar alır. Kalkanın materyalinin zarar görmesinin yanı sıra, karakter arka arkaya kuvvetli saldırılar bloklamaya başlarsa DAY niteliği üzerinden bir mücadeleye girer. Bu mücadelede, bloklanan her kuvvetli saldırı sonrasında karakterin bir miktar soluk kaynağı geçici olarak tükenmeye başlar.\n\nKarakter bu kaynağı tüketene kadar bloklama yapmayı tercih ederse, soluk kaynağı 0'a düştüğü veya dengesi bozulduğu zaman karakterin gardı kırılır ve kırılgan pozuna girer. Bu pozdayken alacağı sonraki ilk yakın menzilli saldırı kritik bir isabetle gerçekleşir. Eğer karakter stamina kaynağı tükenmeden blok yapmaya ara verirse, ara verdiği turlar boyunca sabit bir şekilde kaynağın eriyen miktarı yenilenmeye başlar."
                     }
                   ]
                 }
-              ]
-            },
-            {
-              "type": "paragraph",
-              "text": "Savaş düzeninde, karakterin baktığı yöndeki ve bu yönün içerdiği birimin sağ ve sol bitişiğindeki birimler **net alan** olarak isimlendirilir."
-            },
-            {
-              "type": "list",
-              "ordered": false,
-              "items": [
-                "Karakter, net alandaki varlıklara normal şekilde fiziksel saldırıda bulunabilir.",
-                "Karakter, net alandan alacağı saldırılara karşı normal şekilde savunma & kaçınma hamleleri yapabilir."
-              ]
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterin baktığı yönün sağ ve sol arkasındaki birimler **eşik alan** olarak isimlendirilir."
-            },
-            {
-              "type": "list",
-              "ordered": false,
-              "items": [
-                "Karakter, eşik alandan gelen yakın mesafeli fiziksel saldırılara karşı -2 negatif değer alarak savunma gerçekleştirir.",
-                "Karakter, eşik alan tarafından gelecek uzun menzilli fiziksel saldırıyı yapacak kişinin orada olduğunun farkındaysa, gelen saldırıya karşı farkındalık zarı kullanır. Farkındalık 10'dan yüksek gelirse gelen fiziksel menzilli saldırıyı fark ederek kaçınmaya çalışabilir. Saldıranın okçuluk/atıcılık/isabet/nişancılık ve kuvvet yüksekliğine bağlı olarak saldırının başarı düzeyi belirlenir."
-              ]
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakterin baktığı yönün tam tersinde — yani arkasında — kalan birim **kör alan** olarak isimlendirilir."
-            },
-            {
-              "type": "list",
-              "ordered": false,
-              "items": [
-                "Karakter, kör alandan gelen yakın mesafeli fiziksel saldırılara karşı, eğer saldırıyı yapan kişinin arkasında olduğunun farkındaysa dezavantaj ile kaçınma gerçekleştirmeye çalışır. **Bloklama** şeklinde bir savunma bu pozisyona karşı gerçekleştirilemez.",
-                "Karakter, kör alandan gelecek fiziksel bir uzak menzilli saldırıya karşı başka bir varlık tarafından tepki olarak uyarılmıyor veya buna özel bir sistemi yoksa savunma veya kaçınma gerçekleştiremez."
               ]
             },
             {
@@ -1187,119 +2278,10 @@ window.SLVNZ_CONTENT = {
               "ordered": false,
               "items": [
                 "İnsansı varlıkların temel hareket sınırı 4 birimdir. Niteliklerden her **+2 ÇEV** başına insansı varlıklar karasal hareketlerine **+1 birim hareket mesafesi** kazanır.",
-                "Çevresinde kendine gelen bir saldırıya karşı **TEPKİ EYLEM** kullanarak bakış yönünü saldırıya yönlendirebilir. Eğer **KÖR NOKTADAN** gelen bir saldırıya karşı yapıyorsa, savunma eylemine **-5** eksi değer alır.",
+                "Çevresinde kendine gelen bir saldırıya karşı **TEPKİ EYLEM** kullanarak bakış yönünü saldırıya yönlendirebilir. Eğer **KÖR NOKTADAN** gelen bir saldırıya karşı yapıyorsa, sadece kaçınma hareketi gerçekleştirebilir. Bu durumda kaçınma eylemine dezavantaj alır.",
                 "Belirli bir yöne bakan bir varlık, görüş mesafesinde hareket eden bir varlığın turu boyunca gerçekleştireceği hareketi takip edecek şekilde tepki eylem olarak bakış yönünü değiştirebilir. Eğer eşik veya kör alandan yakın mesafesinde hareket eden bir varlık varsa (3-6 birim mesafe), pasif olarak kullanılacak bir **FARKINDALIK** zarı ile fark etmesi durumunda bu alanda hareket eden varlığa karşı da bakış yönünü tepki eylemle değiştirebilir.",
-                "Karakter, turunda **NET ALANDA** bulunan hedeflere saldırabilir. Karakterin kendi turunda yüzünü bir yöne dönmesi herhangi bir eylem türü ya da hareket puanı gerektirmez.",
+                "Karakter, turunda **NET ALANDA** ve **silah tuttan elinin tarafında** (Eşik alan hariç) bulunan hedeflere saldırabilir. Karakterin kendi turunda yüzünü bir yöne dönmesi herhangi bir eylem türü ya da hareket puanı gerektirmez.",
                 "Karakter, **NET ALAN** sınırlarının dışına ayrılacak bir varlığa **TEPKİ EYLEM** olarak **FIRSAT SALDIRISI** gerçekleştirebilir. Karakter, fırsat saldırısı gerçekleştirirken yüzünü saldırdığı birim tarafına dönüp dönmeme konusunda seçim yapabilir. Fırsat saldırısı isabet eden hedefin hareketi iptal olur. Net alan dışındaki alanlarda hareket eden varlıklar fırsat saldırısını tetiklemez."
-              ]
-            },
-            {
-              "type": "image",
-              "src": "https://slvnz.github.io/resources/webpage/svg/hex-block.svg",
-              "alt": "Bloklama sistemi",
-              "caption": "Bloklama sistemi",
-              "width": "300"
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "BLOKLAMA SİSTEMİ"
-            },
-            {
-              "type": "paragraph",
-              "text": "Fiziksel mücadelelerde kaçınma genel bir standarda sahip basit bir yapıda olsa da bir kalkanla bloklamanın koşullara bağlı değişkenlikleri bulunmaktadır. Bu değişkenler dahilinde, bloklama sistemi altıgen ve kare sistem üzerinde farklılıklarıyla incelenebilir. Kalkanlar genel kullanım şekilleriyle sol elde kuşanıldıkları için, şemalar sol kullanım üzerinden bir görsellik sunmaktadır. Kalkanın diğer tarafta kullanım durumunda, aynı sistem karakterin sağ tarafı için geçerlidir."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Küçük Kalkanlar & Silahlar"
-            },
-            {
-              "type": "paragraph",
-              "text": "Küçük kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahip olmadıkları için çoğunlukla bireysel ölçekte fiziksel saldırıları engellemek ve savuşturmak üzere kullanılır. Sonuçları bire bir aynı olmasa da silahlar ve küçük kalkanlar aynı sistem yapısına tabidir."
-            },
-            {
-              "type": "list",
-              "ordered": false,
-              "items": [
-                "Küçük kalkanlar bloklamak için ek puanlarını karakterin **ÇEV** niteliğinden edinirler.",
-                "Silahlar bu ek puanı kendilerine ait özel **BLOK** niteliğinden edinirler.",
-                "Daha büyük boyutta kalkanlarda bloklama eyleminin zarı düşük kalsa bile arada oluşacak puan farkına bağlı olarak kısmi başarı sağlanabilirken, silahlar ve küçük kalkanlarda kaçınma durumundaki gibi başarısız olunur."
-              ]
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Orta Kalkanlar"
-            },
-            {
-              "type": "paragraph",
-              "text": "Orta kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahiptir. Bu özellikler hem ağırlıkları hem de büyüklükleri sebebiyle karakterin hareket kabiliyeti üzerinde olumsuz etkilere sebep olmaktadır. Ancak, bu duruma karşılık karaktere gelecek fiziksel hamlelere karşı korunak sağlamaktadır."
-            },
-            {
-              "type": "list",
-              "ordered": false,
-              "items": [
-                "Orta kalkan kullanan bir karakter, **NORMAL ALANLAR** tarafından gelecek yakın menzilli fiziksel saldırılara karşı normal şekilde **BLOK BONUSU** edinerek bloklama yapabilir (Kalkandan gelecek blok aşırtma sınırı).",
-                "Eğer karaktere gelecek saldırı **NET ALAN** tarafından geliyorsa, karakter bloklama eylemine **AVANTAJ** alır.",
-                "Eğer karaktere gelecek saldırı zor alan tarafından geliyorsa, karakter bloklama eylemine **DEZAVANTAJ** alır."
-              ]
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Kule Kalkanlar"
-            },
-            {
-              "type": "paragraph",
-              "text": "Kule kalkanlar, karakterlerin hareketlerini ve **ÇEV** niteliklerini önemli ölçüde düşürürken korunak durumunu aynı ölçüde yükselten yapıya sahiptir. Bir karakter, orta kalkanlarda olduğu gibi kule kalkanlarda da blok bonusu becerisi üzerinden bloklama gerçekleştirir, ancak kule kalkanı tam blok pozuna geçirdiği zaman stamina değeri tükenene ya da kalkan işlev görmez hale gelene kadar saldırıları kesinlikle bloklar."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Bloklamada Dayanıklılık"
-            },
-            {
-              "type": "paragraph",
-              "text": "Bloklama, karaktere üstün korunak sağlasa da karakter tarafından kaynak kullanımı denetimi gerektiren bir süreçtir. Bir karakter, saldırı blokladıkça kalkanı üzerinde hasar alır. Kalkanın materyalinin zarar görmesinin yanı sıra, karakter arka arkaya kuvvetli saldırılar bloklamaya başlarsa DAY niteliği üzerinden bir mücadeleye girer. Bu mücadelede, bloklanan her kuvvetli saldırı sonrasında karakterin bir miktar stamina kaynağı geçici olarak tükenmeye başlar."
-            },
-            {
-              "type": "paragraph",
-              "text": "Karakter bu kaynağı tüketene kadar bloklama yapmayı tercih ederse, stamina kaynağı 0'a düştüğü zaman karakterin gardı kırılır ve kırılgan pozuna girer. Bu pozdayken alacağı sonraki ilk yakın menzilli saldırı kritik bir isabetle gerçekleşir. Eğer karakter stamina kaynağı tükenmeden blok yapmaya ara verirse, ara verdiği turlar boyunca sabit bir şekilde kaynağın eriyen miktarı yenilenmeye başlar."
-            },
-            {
-              "type": "image",
-              "src": "https://slvnz.github.io/resources/webpage/svg/square-battle.svg",
-              "alt": "Kare düzen savaş sistemi",
-              "caption": "Kare düzen savaş sistemi",
-              "width": "300"
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "KARE DÜZEN SAVAŞ SİSTEMİ"
-            },
-            {
-              "type": "paragraph",
-              "text": "Kare savaş sistemi, SLVNZ 3.0'ın mücadele eylemlerinin ve hareketlerinin işlenmesi için tercih edilebilecek bir alternatifi oluşturur. Savaş sisteminde varlıkların her biri bir Kare içinde yer alırlar ve birimlerin hareketleri, gerçekleşecek eylemlerin mesafeleri ve kapsayacakları alanlar birim olarak belirlenmiş tekil kare yuvalar üzerinden hesaplanır."
-            },
-            {
-              "type": "heading",
-              "level": 3,
-              "text": "Savaş Düzeni (Kare)"
-            },
-            {
-              "type": "paragraph",
-              "text": "Savaş düzeninde net alan, eşik alan ve kör alan haricinde **SOL** ve **SAĞ** birimler bulunur."
-            },
-            {
-              "type": "list",
-              "ordered": false,
-              "items": [
-                "Karakter, **BU ALANLARDAN** gelen fiziksel saldırılara karşı savunma yapmak için herhangi bir eksi puan almaz. Ancak saldırıyı savuşturma veya saldırıdan kaçınma süreçleri koşullara bağlı olarak değişiklik gösterir.",
-                "Karakter, elinin boş bulunduğu taraftan gelen bir saldırıya karşı kaçınma yapmak zorundadır. Saldırının geldiği taraftaki elinde en az orta boy kalkan bulunduruyorsa, bloklamayı avantajlı gerçekleştirir.",
-                "Karakter, altıgen sisteminde olduğu gibi sadece net alan sınırlarında bulunan varlıklara herhangi bir şekilde bakış yönünü değiştirmeden saldırıda bulunabilir. Ancak, silah bulundurduğu elinin olduğu tarafa da bakış açısını değiştirmeden saldırıda bulunabilir (Sol elinde silah bulunduran biri sol tarafa saldırabilir, ancak sağ tarafa saldırmak için o bölgeye net alan olacak şekilde yüzünü dönmelidir).",
-                "Karakter, bu alanlardan gelecek menzilli fiziksel saldırıların farkındadır ve yukarıdaki kuralları gözeterek savunma & kaçınma yapabilir."
               ]
             },
             {
@@ -1426,30 +2408,6 @@ window.SLVNZ_CONTENT = {
             {
               "type": "paragraph",
               "text": "Bunların dışında rolsel ya da durumsal olarak, karakterlerin hastalık durumları ve bu durumlardan zaman zaman yaşayabilecekleri sıkıntılar, bazı durumlara duyarlı oluşları sebebiyle daha etkin olabilme durumları vb. olaylar hüner, avantaj ve kusurlara dahil edilebilir."
-            }
-          ]
-        },
-        {
-          "id": "siniflar",
-          "title": "SINIFLAR",
-          "mode": "rich",
-          "blocks": [
-            {
-              "type": "heading",
-              "level": 2,
-              "text": "SINIFLAR"
-            },
-            {
-              "type": "paragraph",
-              "text": "SLVNZ 4.0'da keskin hatlarıyla sınıflar bulunmasa da oyun dünyasında becerileri ve gerçekleştirebildikleri yeteneklerin sistemleri sebebiyle birbirinden ayrılabilecek sınıfsal yapılar mevcuttur. Farklı TTRPG sistemlerindeki gibi çok net ilerleme yolları olmayan bu sınıflar birbiriyle harmanlanabilir."
-            },
-            {
-              "type": "paragraph",
-              "text": "Ancak bu sınıf tanımlamaları oyun sisteminde katı bir şekilde izlenecek sınıf sınırları çizmemektedir. Sadece oyun sistemi dahilinde ve oyun evreninde karşılaşılabilecek genel arketipleri belirtmektedir. Oyuncular GM ile ortak bir çalışma sonucunda belirtilen sınıf arketiplerinin altsınıflarını ya da tamamen yeni sınıf yapıları oluşturabilirler."
-            },
-            {
-              "type": "tabs",
-              "tabs": []
             }
           ]
         }
@@ -1790,7 +2748,7 @@ window.SLVNZ_VERSIONS = {
           "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
           "description": "",
           "version": "v4.0",
-          "contentSeed": "2026-06-22-mqpspn2p"
+          "contentSeed": "2026-06-23-mqqm1jy1"
         },
         "sections": {
           "oyun-kurallari": {
@@ -1947,49 +2905,297 @@ window.SLVNZ_VERSIONS = {
                     "text": "Bazı durumlarda karakterlerin spesifik eylemleri gerçekleştirmelerinde onlara fayda sağlayabilecekleri nitelikleri bulunmaktadır. Bu nitelikler, herhangi bir karakterin sahip olduğu en temel özellikleri vurgular."
                   },
                   {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "KUVVET (KUV)"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterin kas gücü ile gerçekleştirebileceği eylemleri belirleyen niteliktir. Bu eylemler ağır bir nesneyi kaldırma, bir şeye vurma durumunda uygulanan kuvvet, mücadele sırasında bir şeye asılma vb. gibi durumları oluşturur. Bir karakterin kuvvet niteliği ne kadar yüksek ise, bu niteliği gerektiren eylemleri başarma kapasitesi de o kadar yükselir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "ÇEVİKLİK (ÇEV)"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterin hızlı hareket etme, ani tepki verme, kaçınma vb. eylemlerinde ihtiyaç duyduğu niteliktir. Bir karakterin çevikliği ne kadar yüksek ise o kadar atik ve hareketli olduğu düşünülebilir. Bu nitelik aynı zamanda karakterin yakın dövüşte silahını, yumruğunu veya tekmesini rakibe isabet ettirmesinde fayda sağlayabilirken, savunma konusunda da gelen darbelerden kaçınma becerisini de etkileyebilen bir niteliktir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "DAYANIKLILIK (DAY)"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterlerin darbelerin etkisine dayanma, yıkıcı durumlara karşı ayakta kalabilme, ağır durumlarda bilincini koruyabilme ya da acıya dayanma gibi durumlarda ihtiyaç duyduğu niteliktir. Aynı zamanda bir karakterin STAMINA değerini de etkilemektedir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "İRADE (İRD)"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Dayanıklılığa benzer biçimde karakterin zihinsel dayanıklılığında; yani zihinsel olarak gireceği herhangi bir mücadelede ihtiyaç duyacağı niteliktir. Bu mücadeleler herhangi bir enerjisel etki altında kalma, zihne sızma, isteği dışında telepati vb. etkilerin altında kalma gibi durumlar olarak nitelendirilebilir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "SEZGİ (SZG)"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterlerin sezgisel olarak çevrelerinde yaşanan olayları algılama kapasiteleridir. Bir karakterin konuşmalarındaki doğruluk payını sezebilme, çevresel faktörlerce ortamın atmosferini yoklama gibi durumlar, sezgi niteliğiyle algılanabilecek durumlardır."
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "KUVVET (KUV)",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Kuvvet, karakterin dış dünyaya doğrudan fiziksel güç uygulama kapasitesidir. Kas gücü, itme, çekme, kaldırma, kırma, savurma, zorlama ve fiziksel baskı kurma gibi eylemlerde kullanılır.\n\nKUV yüksek olan karakter, dünyayı bedeniyle zorlayabilen karakterdir. Ağır bir kapıyı omuzlamak, bir yaratığı geri itmek, bir kalkan hattını yarmak, ağır silahı etkili savurmak veya rakibi boğuşmada bastırmak KUV alanına girer.\n\nKUV şunları yönetir:"
+                          },
+                          {
+                            "type": "table",
+                            "header": [
+                              "ALAN",
+                              "AÇIKLAMA"
+                            ],
+                            "rows": [
+                              [
+                                "Ham fiziksel güç",
+                                "Kırma, kaldırma, itme, çekme, ezme"
+                              ],
+                              [
+                                "Yakın dövüş baskısı",
+                                "Ağır silahlar, darbe kuvveti, silah savurma"
+                              ],
+                              [
+                                "Boğuşma ve kontrol",
+                                "Rakibi tutma, sürükleme, yere serme"
+                              ],
+                              [
+                                "Taşıma kapasitesi",
+                                "Ağır ekipman, yük, zırh toleransı"
+                              ],
+                              [
+                                "Fiziksel engel aşma",
+                                "Kapı kırma, zincir koparma, moloz kaldırma"
+                              ]
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "KUV şunları yapmaz:"
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Uzun süre dayanmayı belirlemez; bu DAY alanıdır.",
+                              "Hızlı kaçınmayı veya dengeyi belirlemez; bu ÇEV alanıdır.",
+                              "Korkuya, büyüye veya zihinsel baskıya direnmez; bu İRD alanıdır."
+                            ]
+                          },
+                          {
+                            "type": "example",
+                            "text": "Örnek zar durumları:\n\n“Kapıyı kırıyorum.” → KUV\n“Rakibi omzumla geri itiyorum.” → KUV\n“Büyük baltayı tam güçle indiriyorum.” → KUV + ilgili silah becerisi\n“Çöken kirişi kaldırıp altından birini çıkarıyorum.” → KUV veya KUV + DAY, durumun süresine göre"
+                          }
+                        ]
+                      },
+                      {
+                        "label": "ÇEVİKLİK (ÇEV)",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Çeviklik, karakterin bedenini hızlı, dengeli, hassas ve kontrollü biçimde kullanma kapasitesidir. Refleks, kaçınma, denge, ince hareket, ani pozisyon alma, sessiz hareket ve hızlı saldırı koordinasyonu bu niteliğin alanına girer.\n\nÇEV yüksek olan karakter güçlü olmak zorunda değildir; fakat bedenini doğru anda doğru yere koyabilir. Saldırıdan sıyrılmak, dar bir çıkıntıda dengede kalmak, hızlı hamle yapmak, hafif silahla isabetli saldırmak veya düşmeden yuvarlanmak ÇEV ile ilgilidir.\n\nÇEV şunları yönetir:"
+                          },
+                          {
+                            "type": "table",
+                            "header": [
+                              "ALAN",
+                              "AÇIKLAMA"
+                            ],
+                            "rows": [
+                              [
+                                "Refleks",
+                                "Ani tehlikeye tepki verme"
+                              ],
+                              [
+                                "Kaçınma",
+                                "Saldırıdan sıyrılma, yön değiştirme"
+                              ],
+                              [
+                                "Denge",
+                                "Dar zemin, kaygan yüzey, düşme riski"
+                              ],
+                              [
+                                "İnce bedensel kontrol",
+                                "Sessiz hareket, akrobatik manevra"
+                              ],
+                              [
+                                "Hafif silah kullanımı",
+                                "Hançer, kısa kılıç, çevik saldırı stilleri"
+                              ],
+                              [
+                                "Hareket kapasitesi",
+                                "Savaş alanında pozisyon alma, temel hareket artışı"
+                              ]
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "ÇEV şunları yapmaz:"
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Darbenin gücünü belirlemez; bu KUV alanıdır.",
+                              "Darbe yedikten sonra ayakta kalmayı belirlemez; bu DAY alanıdır.",
+                              "Tehlikeyi önceden hissetmeyi belirlemez; bu SZG alanıdır."
+                            ]
+                          },
+                          {
+                            "type": "example",
+                            "text": "Örnek zar durumları:\n\n“Okun altından yuvarlanıyorum.” → ÇEV + Kaçınma\n“İnce taş köprüden koşarak geçiyorum.” → ÇEV\n“Sessizce muhafızın arkasından ilerliyorum.” → ÇEV + Gizlilik\n“Hançerle hızlı bir açık yakalamaya çalışıyorum.” → ÇEV + İsabet / ilgili silah becerisi"
+                          }
+                        ]
+                      },
+                      {
+                        "label": "DAYANIKLILIK (DAY)",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Dayanıklılık, karakterin bedensel baskıya, hasara, acıya, yorgunluğa, hastalığa, zehre ve uzun süreli fiziksel zorlanmaya direnme kapasitesidir. DAY, yalnızca “can” değildir; karakterin bedensel bütünlüğünü ne kadar süre koruyabildiğini ifade eder.\n\nDAY yüksek olan karakter her zaman iri veya güçlü olmak zorunda değildir; fakat kolay yıkılmaz. Zehre direnmek, kan kaybına rağmen ayakta kalmak, uzun yürüyüşe devam etmek, bloklama sırasında gelen darbeyi bedeniyle taşımak veya acı altında bilincini korumak DAY alanına girer.\n\nDAY şunları yönetir:"
+                          },
+                          {
+                            "type": "table",
+                            "header": [
+                              "ALAN",
+                              "AÇIKLAMA"
+                            ],
+                            "rows": [
+                              [
+                                "Fiziksel direnç",
+                                "Darbe, düşme, ezilme, yanma, soğuk"
+                              ],
+                              [
+                                "Acı toleransı",
+                                "Yaralanmaya rağmen eylemi sürdürme"
+                              ],
+                              [
+                                "Yorgunluk direnci",
+                                "Uzun yürüyüş, antrenman, zor koşullar"
+                              ],
+                              [
+                                "Zehir/hastalık direnci",
+                                "Bedeni bozan dış etkilere karşı koyma"
+                              ],
+                              [
+                                "Soluk temeli",
+                                "Fiziksel kaynak havuzunun ana dayanağı"
+                              ],
+                              [
+                                "Blok baskısı",
+                                "Kalkan veya silahla gelen kuvveti taşıma"
+                              ]
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "DAY şunları yapmaz:"
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Ağır nesne kaldırmayı belirlemez; bu KUV alanıdır.",
+                              "Saldırıdan kaçmayı belirlemez; bu ÇEV alanıdır.",
+                              "Zihinsel veya ruhsal baskıya direnmez; bu İRD alanıdır."
+                            ]
+                          },
+                          {
+                            "type": "example",
+                            "text": "Örnek zar durumları:\n\n“Zehre direniyorum.” → DAY\n“Darbe yedim ama ayakta kalmaya çalışıyorum.” → DAY\n“Kalkanıma çarpan devasa darbeyi taşıyorum.” → DAY + Bloklama\n“Saatlerdir çölde yürüyorum, devam edebilir miyim?” → DAY"
+                          }
+                        ]
+                      },
+                      {
+                        "label": "İRADE (İRD)",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "İrade, karakterin zihinsel, ruhsal ve duygusal baskı altında kendi benliğini koruma kapasitesidir. Korkuya, panik etkisine, zihin manipülasyonuna, acımasız sorguya, büyüsel telkine, lanete, saplantıya, ayartmaya ve konsantrasyon bozucu etkilere karşı kullanılır.\n\nİRD yüksek olan karakter her şeyi bilmek zorunda değildir; fakat kendi zihninin direksiyonunu kolay bırakmaz. Korkunç bir varlığın huzurunda geri çekilmemek, zihinsel büyüye direnmek, işkence altında sır vermemek, karanlık enerjinin fısıltılarını bastırmak veya konsantrasyonunu korumak İRD alanına girer.\n\nİRD şunları yönetir:"
+                          },
+                          {
+                            "type": "table",
+                            "header": [
+                              "ALAN",
+                              "AÇIKLAMA"
+                            ],
+                            "rows": [
+                              [
+                                "Zihinsel direnç",
+                                "Korku, panik, baskı, yıldırma"
+                              ],
+                              [
+                                "Ruhsal savunma",
+                                "Lanet, musallat, karanlık tesir"
+                              ],
+                              [
+                                "Benlik koruma",
+                                "Zihin kontrolü, telkin, efsun"
+                              ],
+                              [
+                                "Konsantrasyon",
+                                "Büyü veya süreli etkiyi sürdürme"
+                              ],
+                              [
+                                "Kararlılık",
+                                "Vazgeçmeme, baskı altında kararını koruma"
+                              ],
+                              [
+                                "Acıya rağmen odak",
+                                "Bedensel acının zihni dağıtmasını engelleme"
+                              ]
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "İRD şunları yapmaz:"
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Bilgi hatırlamayı veya akademik çözümlemeyi doğrudan belirlemez.",
+                              "Çevresel detayı fark etmeyi belirlemez; bu çoğunlukla SZG veya ilgili beceridir.",
+                              "Sosyal ikna gücü değildir; ikna hâlâ beceri, rol yapma ve bağlama bağlıdır."
+                            ]
+                          },
+                          {
+                            "type": "example",
+                            "text": "Örnek zar durumları:\n\n“Beni korkutmaya çalışan varlığa direniyorum.” → İRD\n“Zihin kontrolüne karşı koyuyorum.” → İRD\n“Hasar aldım ama büyünün konsantrasyonunu koruyorum.” → İRD + Konsantrasyon\n“Karanlık bir yadigâr zihnime fısıldıyor, etkilenmemeye çalışıyorum.” → İRD"
+                          }
+                        ]
+                      },
+                      {
+                        "label": "SEZGİ (SZG)",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Sezgi, karakterin açık bilgiye, ham mantığa veya doğrudan gözleme dayanmadan örüntü, niyet, tehlike, yalan, aura, enerji izi ve durumun görünmeyen tarafını kavrama kapasitesidir. SZG, ZEK’in yerine geçen “akıllılık” niteliği değildir; İRF’in yerine geçen “mistik bilgelik” niteliği de değildir. Daha net biçimde: karakterin dünya ile arasında kurduğu içgüdüsel okuma yeteneğidir.\n\nSZG yüksek olan karakter, bir şeylerin yanlış olduğunu erken fark eder. Birinin yalan söylediğini kesin kanıtla değil davranış boşluğuyla hisseder. Bir odada görünürde hiçbir şey yokken mekânın “ölü” olduğunu anlar. Bir büyünün matematiğini bilmez ama enerjinin nerede yoğunlaştığını sezebilir. Bir haritadaki sembolü akademik olarak çözemeyebilir ama sembolün tehdit, çağrı veya uyarı taşıdığını anlayabilir.\n\nSZG şunları yönetir:"
+                          },
+                          {
+                            "type": "table",
+                            "header": [
+                              "ALAN",
+                              "AÇIKLAMA"
+                            ],
+                            "rows": [
+                              [
+                                "Tehlike Hissi",
+                                "Pusu, tuzak, takip, yaklaşan tehdit"
+                              ],
+                              [
+                                "Sosyal sezgi",
+                                "Yalan, niyet, bastırılmış duygu, sahte tavır"
+                              ],
+                              [
+                                "Örüntü kavrama",
+                                "Bağlantı kurma, eksik parçayı hissetme"
+                              ],
+                              [
+                                "Aura/Enerji Algısı",
+                                "Enerji yoğunluğu, büyüsel iz, varlık hissi (Enerji yetkinliği ile bağlantılıdır)"
+                              ],
+                              [
+                                "Pasif farkındalık",
+                                "Aktif arama yapmadan tersliği sezme"
+                              ]
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "SZG şunları yapmaz:"
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Kitabi bilgi vermez. “Bu sembol hangi antik dile ait?” sorusu SZG değil, ilgili bilgi/araştırma becerisidir.",
+                              "Kesin gelecek bilgisi vermez. Kehanet enerjisi veya özel yetenek olmadan SZG yalnızca his ve ipucu üretir.",
+                              "İnsanları otomatik kandırmayı veya ikna etmeyi sağlamaz.",
+                              "Her şeyi fark eden pasif radar değildir; GM sezgiyi ipucu, rahatsızlık, yönelim veya şüphe olarak vermelidir."
+                            ]
+                          },
+                          {
+                            "type": "example",
+                            "text": "Örnek zar durumları:\n\n“Bu adamın yalan söyleyip söylemediğini anlamaya çalışıyorum.” → SZG + sosyal beceri / Farkındalık\n“Bu odada bir terslik var mı?” → SZG veya SZG + Farkındalık\n“Büyüsel bir iz hissedebilir miyim?” → SZG + ilgili enerji bilgisi\n“Hangi tünel daha tehlikeli geliyor?” → SZG\n“Bu yaratığın saldırmadan önceki niyetini okuyabilir miyim?” → SZG + Farkındalık"
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ]
               },
@@ -2005,7 +3211,7 @@ window.SLVNZ_VERSIONS = {
                   },
                   {
                     "type": "paragraph",
-                    "text": "Niteliklere benzer olarak karakterlerin bazı özel durumlar için ihtiyaç duyacağı beceriler bulunmaktadır. Beceriler, niteliklere benzese de onlar kadar fazla durumda kullanılmayabilirler. Beceriler, **Temel Beceriler** ve **Özel Beceriler** olmak üzere ikiye ayrılır."
+                    "text": "Niteliklere benzer olarak karakterlerin bazı özel durumlar için ihtiyaç duyacağı beceriler bulunmaktadır. Beceriler, niteliklere benzese de onlar kadar fazla durumda kullanılmayabilirler. Beceriler, **Temel Beceriler** ve **Özel Beceriler** olmak üzere ikiye ayrılır.\n\nTemel Beceriler, oyunun ortak eylem dilidir; Özel Beceriler ise karakterin bu ortak dili kendi geçmişi, eğitimi ve uzmanlığıyla büktüğü alanlardır."
                   },
                   {
                     "type": "heading",
@@ -2013,121 +3219,359 @@ window.SLVNZ_VERSIONS = {
                     "text": "TEMEL BECERİLER"
                   },
                   {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Bloklama"
-                  },
-                  {
                     "type": "paragraph",
-                    "text": "Bir karakterin kendisine yönelmiş bir saldırıyı durdurabilme becerisidir. Bu beceri, karakterin kuşandığı bir silah veya kalkan ile gerçekleştirilebilir. Kalkan ile gerçekleştirilen bir bloklama becerisi, saldırının tamamını absorbe etme imkânına sahiptir ancak kalkanın kuşanıldığı kola fiziksel bir stres bindirir. Silahla gerçekleştirilen bloklamalar ise farklı şekillerde fiziksel yeteneklerle harmanlanabilir, ancak başarısızlık durumunda karakter saldırıyı tamamen göğüslemek durumundadır."
+                    "text": "Temel Beceriler, SLVNZ 4.0’ın varsayılan eylem alanlarıdır. Her karakter bu becerilerin bir kısmını teorik olarak kullanabilir; ancak eğitimli karakterler aynı eylemleri daha güvenilir, daha kontrollü ve daha az riskli yapar."
                   },
                   {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Kaçınma"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Bir karakterin kendisine yönelmiş bir saldırıdan kaçınma becerisidir. Karakter, bu beceriyi ÇEVİKLİK niteliğiyle harmanlarken, üstüne gelen saldırıdan en az hasar ile sıyrılmaya çalışır. Çoğunlukla uç uca isabetlerde kesikler ve sıyrıklar gibi hasarlarla sonuçlanırken, mücadele zarlarında makasın açılmasıyla bir karakterin kaçınabildiği hasar seviyesi yükselir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Atıcılık"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "El yordamıyla fırlatılabilen araçlar ve silahlar ile (Cirit, El Sapanı vb.) gerçekleştirilen isabet ettirme becerisidir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Nişancılık"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Nişangâhı olan menzilli silahlar ile (Musket, Crossbow vb.) başarılı isabet sağlamak için nişan alma becerisidir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Okçuluk"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Ok ve yay kullanımıyla gerçekleştirilecek atışlarda saldırıyı isabet ettirebilme becerisidir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "İsabet"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "El ve göz koordinasyonu ile işaret ederek menzildeki bir hedefe isabet ettirme becerisidir (Asa & Enerjisel odak kullanımı vb.)."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Farkındalık"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterin özellikle görme ve duyma yetisiyle çevresindeki detayları fark edebilme becerisidir. Bu beceri, çoğunlukla geniş kalabalık bir görüntüdeki ufak detayların farkına varma, kalabalık bir ortamda belirli konuşmaları ayırt etme, fısıldayan birilerini dinlemeye çalışma ya da kendiliğinden duyma, gizlenmiş bir şeyleri olduğu yerde fark etme gibi durumlarda kullanılmaktadır. Aynı zamanda bu beceri, İRFAN niteliğinden de beslenmektedir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Gizlilik"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Farkındalık becerisine karşılık karakterlerin özellikle görme ve duyma gibi hislere karşı fark edilmeden ilerleyebilme ya da kendilerini fark edilmez kılmalarını sağlama girişimlerini ifade eden beceridir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Araştırma"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterin belirli bir bilgi veya nesneyi ilgili bölgede arama yöntemlerine olan hakimiyetini belirler. Farkındalıktan ayrı olarak, karakterin eylem alarak detayları kurcalaması, test etmesi ve kullanması gibi süreçlerin takibinde sonuçlanır. Araştırma becerisi, aynı zamanda ZEKÂ niteliğinden beslenir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "İzcilik"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterlerin hakim oldukları vahşi biyomlarda yön bulma, vahşi hayatı tanıma ve buna karşı fikir üretme, biyomlar harici genel vahşi hayatta kalmaya yönelik bilgilere hakim olma ve bunları kullanma becerisidir. İzcilik becerisine sahip olan bir karakter, vahşi hayatta iz sürme, korunaklı sığınak bulma & tanımlama, ateş yakma, düğüm atma vb. becerilerin tümüne seviyesine göre bir miktar hakimdir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Performans"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterlerin sosyal olarak farklı oyuncu harici karakterleri etkileyebilme becerisidir. Bu beceri, bilinen pek çok sistemde alışılmışın aksine doğrudan diğer karakterlerin üstünde mutlak bir etki oluşturulmasını sağlamaz. Çoğunlukla karakterleri bir yalan karşısında ikna etme veya inandırıcı görünme, gerçekleştirilen bir dans hareketi ile etkileyici iz bırakma gibi destekleyici etkilere sahiptir. Ancak sistemde her karakter, oyuncu karakterinin söylediği şeylerden veya etkileme girişiminde bulunduğu hamlelerden etkilenmeyebilir. Bu beceri, genel olarak bu denemelerde oyuncu karakterinin kendisine katabileceği etkileyiciliği artırmakla ilgilidir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Sağaltım"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterlerin yaraya ve hastalığa müdahale ile ilgili kısmi tıbbi bilgisi ve becerisini ifade eder. Bir yarayı dikmek, cerrahi bir müdahalede bulunmak, basit bir soğuk algınlığının müdahale sürecine hakim olmak gibi durumlar bu beceriyi kapsamaktadır."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Terbiye"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Bir karakterin vahşi veya evcil olarak bir hayvana karşı iletişim ve etkileşim becerisini ifade eder. Bu beceriye bir hayvanla iletişim kurmaya çalışmak, sürülen bir hayvanı yönlendirmek, sakinleştirmek ve evcilleştirmek dahildir."
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "BLOK (SİLAH)",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Bloklama / Kılıç, karakterin kılıç veya benzeri savunmaya uygun yakın dövüş silahlarıyla gelen saldırıyı kesme, saptırma, karşı hat oluşturma veya rakibin darbe açısını bozma becerisidir.\n\nBu beceri, saldırıyı “bedenle taşımaktan” çok teknikle yön değiştirme üzerine kuruludur. Bu yüzden kalkan bloklamasına göre daha çevik, daha riskli ve daha hassastır.\n\nKullanım alanları:"
+                          },
+                          {
+                            "type": "table",
+                            "header": [
+                              "DURUM",
+                              "AÇIKLAMA"
+                            ],
+                            "rows": [
+                              [
+                                "Silahla saldırı savuşturma",
+                                "Gelen darbeyi silahla kesmek veya saptırmak"
+                              ],
+                              [
+                                "Rakibin silah hattını bozma",
+                                "Darbenin yönünü değiştirerek açık yaratmak"
+                              ],
+                              [
+                                "Karşı hamle hazırlama",
+                                "Başarılı bloktan sonra saldırı fırsatı üretme"
+                              ]
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Sınırlar:"
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Çok ağır darbelerde kalkan kadar güvenli değildir.",
+                              "Büyük yaratıkların ham kuvvet saldırılarına karşı risklidir.",
+                              "Başarısızlıkta saldırı doğrudan karaktere geçebilir.",
+                              "Silahın dayanıklılığı önemlidir; bloklama hamlesi silahı yıpratabilir veya kırabilir."
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "label": "BLOK (KALKAN)",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Bloklama / Kalkan, karakterin kalkan kullanarak gelen saldırıyı durdurma, emme, yönlendirme veya bedeninden uzak tutma becerisidir.\n\nKılıç bloklamasından farklı olarak kalkan bloklaması daha güvenli ama daha ağırdır. Kalkan, saldırıyı doğrudan yok etmez; darbeyi karakterin koluna, omzuna, duruşuna ve **soluk** kaynağına aktarır.\n\nKullanım alanları:"
+                          },
+                          {
+                            "type": "table",
+                            "header": [
+                              "DURUM",
+                              "AÇIKLAMA"
+                            ],
+                            "rows": [
+                              [
+                                "Fiziksel saldırıyı durdurma",
+                                "Kılıç, balta, mızrak, ok, pençe vb."
+                              ],
+                              [
+                                "Darbe emme",
+                                "Saldırıyı karakter yerine kalkana bindirme"
+                              ],
+                              [
+                                "Hat tutma",
+                                "Dar geçitte, kapıda veya cephede savunma"
+                              ],
+                              [
+                                "Müttefik koruma",
+                                "Yanındaki veya arkasındaki hedefi kapatma"
+                              ],
+                              [
+                                "Tam blok imkanları",
+                                "Kapsamlı korunma olanağı"
+                              ]
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Sınırlar:"
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Bloklanan her güçlü darbe soluk baskısı yaratabilir.",
+                              "Yan, eşik ve kör alanlardan gelen saldırılara karşı pozisyon önemlidir.",
+                              "Büyük kalkanlar hareketi ve kaçınmayı azaltır.",
+                              "Kalkan kırılabilir, düşebilir veya karakterin gardını bozabilir."
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "label": "KAÇINMA",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Kaçınma, karakterin saldırıdan, çökmeden, patlamadan, düşen nesneden veya ani tehlikeden bedensel hareketle sıyrılma becerisidir.\n\nKaçınma, her zaman geriye zıplamak anlamına gelmez. Eğilmek, yana kaymak, yuvarlanmak, ağırlık merkezini değiştirmek, darbenin içinden çıkmak veya saldırının hedef noktasını bozmak da kaçınmadır.\n\nKullanım alanları:"
+                          },
+                          {
+                            "type": "table",
+                            "header": [
+                              "DURUM",
+                              "AÇIKLAMA"
+                            ],
+                            "rows": [
+                              [
+                                "Yakın saldırılardan sıyrılma",
+                                "Kılıç, mızrak, pençe, yumruk vb."
+                              ],
+                              [
+                                "Menzilli saldırıdan kaçma",
+                                "Ok, taş, enerjisel mermi"
+                              ],
+                              [
+                                "Alan etkisinden kaçınma veya sığınma tepkisi verme",
+                                "Patlama, çökme, itme vb."
+                              ]
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Sınırlar:"
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Görülmeyen veya sezilmeyen saldırıya karşı kullanımı sınırlıdır.",
+                              "Dar alanda esnek şekilde kaçınmak zorlaşır.",
+                              "Ağır zırh, yük veya çevresel engel eksiler doğurabilir."
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "label": "ATICILIK",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Atıcılık, karakterin elle fırlatılan silahları veya nesneleri hedefe yönlendirme becerisidir.\n\nCirit, bıçak, balta, taş, el sapanı, şişe, bomba benzeri fırlatılan nesneler bu beceri kapsamına girer. Atıcılık, nişancılık ve okçuluktan ayrıdır; çünkü burada bedenin savurma hareketi, ağırlık hissi ve mesafe sezgisi daha önemlidir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "NİŞANCILIK",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Nişancılık, mekanik veya nişan hattı kullanan menzilli silahları kullanma becerisidir.\n\nTatar yayı, musket, tabanca, tüfek, arbalet, mekanik fırlatıcılar veya nişangâhlı özel silahlar bu becerinin alanına girer. Nişancılık, okçuluktan farklı olarak bedensel çekiş gücünden ziyade hedefleme, sabitleme, nefes kontrolü ve zamanlama gerektirir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "OKÇULUK",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Okçuluk, yay ve ok kullanarak hedefe isabetli saldırı yapma becerisidir.\n\nOkçuluk, nişancılıktan ayrıdır çünkü karakterin bedeni silahın doğrudan parçasıdır. Yay çekişi, nefes, duruş, salım anı, mesafe sezgisi ve hedef takibi birlikte çalışır."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "İSABET",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "İsabet, karakterin hedefe yöneltilmiş hassas eylemlerinde kullandığı genel hedefleme becerisidir.\n\nBu beceri, özellikle silah kategorisine girmeyen veya özel hedefleme gerektiren durumlarda kullanılır. Enerjisel odak, asa, işaret ederek büyü yönlendirme, küçük hedefe dokunma, hassas hamle veya belirli bir noktayı vurma bu becerinin alanına girer."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "FARKINDALIK",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Farkındalık, karakterin çevresindeki duyusal ve sezgisel detayları fark etme becerisidir.\n\nGörmek, duymak, koklamak, hareket algılamak, ortamda terslik hissetmek, takip edildiğini anlamak, gizlenen birini seçmek veya yaklaşan tehlikeyi fark etmek bu becerinin alanına girer.\n\nKullanım alanları:"
+                          },
+                          {
+                            "type": "table",
+                            "header": [
+                              "DURUM",
+                              "AÇIKLAMA"
+                            ],
+                            "rows": [
+                              [
+                                "Gizlenen varlığı fark etme",
+                                "Gizliliğe karşı test"
+                              ],
+                              [
+                                "Ses veya hareket algılama",
+                                "Fısıltı, ayak sesi, kapı gıcırtısı vb."
+                              ],
+                              [
+                                "Görsel detay seçme",
+                                "Kalabalıkta kişi, yerde iz, duvarda çatlak vb."
+                              ],
+                              [
+                                "Savaş alanı takibi",
+                                "Eşik veya kör alandaki hareketi fark etme vb."
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "label": "GİZLİLİK",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Gizlilik, karakterin görünmeden, duyulmadan, iz bırakmadan veya dikkat çekmeden hareket etme becerisidir.\n\nSadece sessiz yürümek değildir. Kalabalıkta sıradan görünmek, gölgede beklemek, zırh sesini bastırmak, izini saklamak, saklanacak doğru anı seçmek ve dikkat dağıtıcı unsurları kullanmak da Gizlilik kapsamındadır.\n\nKullanım alanları:"
+                          },
+                          {
+                            "type": "table",
+                            "header": [
+                              "DURUM",
+                              "AÇIKLAMA"
+                            ],
+                            "rows": [
+                              [
+                                "Sessiz hareket",
+                                "Duyulmadan ilerleme"
+                              ],
+                              [
+                                "Saklanma",
+                                "Görüş hattından çekilme"
+                              ],
+                              [
+                                "İz bırakmama",
+                                "Takip edilmeyi zorlaştırma"
+                              ],
+                              [
+                                "Kalabalığa karışma",
+                                "Dikkat çekmeden hareket etme"
+                              ],
+                              [
+                                "Pusu hazırlığı",
+                                "Uygun konumda fark edilmeden bekleme"
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "label": "ARAŞTIRMA",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Araştırma, karakterin aktif şekilde bilgi, ipucu, nesne, bağlantı veya anlam arama becerisidir.\n\nFarkındalıktan farkı şudur: Farkındalık pasif veya anlık algıdır; Araştırma bilinçli inceleme, kurcalama, karşılaştırma, soru sorma, belge okuma, izleri takip etme ve çıkarım yapma sürecidir.\n\nKullanım alanları:"
+                          },
+                          {
+                            "type": "table",
+                            "header": [
+                              "DURUM",
+                              "AÇIKLAMA"
+                            ],
+                            "rows": [
+                              [
+                                "Oda inceleme",
+                                "Çekmece, duvar, zemin, gizli bölme arama vb."
+                              ],
+                              [
+                                "Belge tarama",
+                                "Kayıt, mektup, mühür, arşiv"
+                              ],
+                              [
+                                "İpucu bulma",
+                                "Suç mahalli, kamp alanı, savaş sonrası vb."
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "label": "İZCİLİK",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "İzcilik, karakterin doğada yön bulma, iz sürme, kamp kurma, çevre okuma ve hayatta kalma becerisidir.\n\nBu beceri yalnızca “orman bilgisi” değildir. Çöl, dağ, bataklık, tundra, mağara, harabe çevresi ve sınır bölgelerinde hayatta kalma yöntemlerini kapsar.\n\nAncak izcilik, karakterin bu bölgelerin hepsinde hayatta kalma ve yön bulma yöntemlerini içermez. Bir karakter, hangi biyomlarda yetkinse, bu biyomlara yönelik özel izcilik bilgilerine sahiptir.\n\nKullanım alanları:"
+                          },
+                          {
+                            "type": "table",
+                            "header": [
+                              "DURUM",
+                              "AÇIKLAMA"
+                            ],
+                            "rows": [
+                              [
+                                "İz sürme",
+                                "Ayak izi, kırık dal, kamp kalıntısı"
+                              ],
+                              [
+                                "Yön bulma",
+                                "Haritasız veya kötü görüşte ilerleme"
+                              ],
+                              [
+                                "Kamp kurma",
+                                "Güvenli dinlenme alanı seçme"
+                              ],
+                              [
+                                "Biyom okuma",
+                                "Hava, zemin, hayvan hareketleri vb."
+                              ],
+                              [
+                                "Tehlike tanıma",
+                                "Yırtıcı, bataklık, zehirli bitki vb."
+                              ],
+                              [
+                                "Temel doğa üretimi",
+                                "Ateş yakma, düğüm, barınak, su bulma vb."
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "label": "PERFORMANS",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Performans, karakterin bedenini, sesini, tavrını, sahne hâkimiyetini veya sosyal varlığını etkileyici biçimde kullanma becerisidir.\n\nBu beceri yalnızca sanat yapmak değildir. Kalabalığı etkilemek, dikkat çekmek, rol kesmek, yalanı daha inandırıcı sunmak, bir ritüeli görkemli icra etmek veya sosyal baskı kurmak da Performans kapsamına girebilir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "SAĞALTIM",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Sağaltım, karakterin yara, hastalık, kanama, kırık, zehir, enfeksiyon ve bedensel bozulmalara müdahale etme becerisidir.\n\nBu beceri hem savaş sonrası ilk yardım hem de uzun süreli bakım için kullanılır. Cerrahi, dikiş, bandaj, zehir temizleme, hastalık teşhisi ve bitkisel/ilaçsal müdahaleler Sağaltım kapsamına girebilir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "TERBİYE",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Terbiye, karakterin hayvanları, binekleri veya yarı-vahşi canlıları sakinleştirme, yönlendirme, eğitme ve onlarla güven ilişkisi kurma becerisidir.\n\nTerbiye, hayvan üzerinde mutlak kontrol sağlamaz. Canlının doğası, korkusu, açlığı, eğitimi, türü ve karakterle ilişkisi sonucu belirler."
+                          }
+                        ]
+                      }
+                    ]
                   },
                   {
                     "type": "heading",
@@ -2151,179 +3595,707 @@ window.SLVNZ_VERSIONS = {
               },
               {
                 "id": "enerjiler",
-                "title": "ENERJİLER",
+                "title": "ENERJİLER VE ENERJİ KAYNAKLARI",
+                "body": "",
                 "mode": "rich",
                 "blocks": [
                   {
                     "type": "heading",
                     "level": 2,
-                    "text": "ENERJİLER"
+                    "text": "BÜYÜNÜN TEMEL MANTIĞI"
                   },
                   {
                     "type": "paragraph",
-                    "text": "SLVNZ 4.0'da enerjiyi yönlendirebilerek farklı etkiler meydana getirmek mümkündür. Evrendeki pek çok varlık enerjiyi yönlendirme yetisine sahip değildir. Ancak farklı etkiler ve çevresek etkenlerle varlıklar bu kabiliyete erişebilmektedir. Bu enerji türleri Temel Enerji Türleri ve Özel Enerji Türleri olarak birbirinden ayrılırlar."
+                    "text": "SLVNZ 4.0’da büyü, doğrudan “ateş atmak” veya “mana harcamak” değildir. Bir büyünün oluşması için dört ayrı katman bir araya gelir:"
+                  },
+                  {
+                    "type": "table",
+                    "header": [
+                      "KATMAN",
+                      "İŞLEV"
+                    ],
+                    "rows": [
+                      [
+                        "Kaynak",
+                        "Büyünün bedelini ve yakıtını sağlar"
+                      ],
+                      [
+                        "Kanal",
+                        "Kaynağın kullanıcıdan veya çevreden büyüye aktarılmasını sağlar"
+                      ],
+                      [
+                        "Enerji",
+                        "Büyünün temel işlevini belirler"
+                      ],
+                      [
+                        "Element",
+                        "Büyünün dünyada hangi biçimde görüneceğini belirler"
+                      ]
+                    ]
+                  },
+                  {
+                    "type": "example",
+                    "text": "Bir karakter düşmana alevli bir mızrak fırlatıyorsa, büyünün elementi Ateş, enerjisi büyük ihtimalle Yıkım, kaynağı Mana, kanalı ise asa, kalıntı, ritüel, içsel yetenek veya dışsal bir odak olabilir."
                   },
                   {
                     "type": "paragraph",
-                    "text": "Temel enerjiler, evrende serbest olarak dolaşan etkiler, kalıntılar vb. şekillerde karşılaşılabilecek veya meydana gelebilecek yaygın türlerdir. Özel enerjiler ise daha çok duruma bağlı olarak varlıkların sentezleyebileceği ve hissedebileceği enerjilerdir."
+                    "text": "Bu ayrım oldukça önemlidir. Çünkü aynı element, farklı enerjilerle tamamen farklı büyülere dönüşebilir."
+                  },
+                  {
+                    "type": "table",
+                    "header": [
+                      "BÜYÜ",
+                      "ELEMENT",
+                      "ENERJİ",
+                      "SONUÇ"
+                    ],
+                    "rows": [
+                      [
+                        "Ateş Oku",
+                        "Ateş",
+                        "Yıkım",
+                        "Hasar verir"
+                      ],
+                      [
+                        "Ateş Duvarı",
+                        "Ateş",
+                        "Koruma",
+                        "Alanı kapatır"
+                      ],
+                      [
+                        "Ateş Sureti",
+                        "Ateş",
+                        "İllüzyon",
+                        "Görsel yanılsama oluşturur"
+                      ],
+                      [
+                        "Ateşten Elementali",
+                        "Ateş",
+                        "Oluşturma",
+                        "Geçici varlık/şekil oluşturur"
+                      ],
+                      [
+                        "Ateşi Söndürme",
+                        "Ateş",
+                        "Dönüştürme",
+                        "Var olan ateşi dağıtır"
+                      ]
+                    ]
                   },
                   {
                     "type": "heading",
-                    "level": 3,
+                    "level": 2,
+                    "text": "ELEMENTLER"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "Elementler, büyünün dünyada hangi doğal veya maddesel biçimde açığa çıktığını gösterir. Element, büyünün “ne yaptığı” değil, “nasıl göründüğü / hangi doğa kuvvetiyle tezahür ettiği” sorusunun cevabıdır."
+                  },
+                  {
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "ATEŞ",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Ateş, ısı, yanma, köz, alev, patlama, kavurma ve tüketimle ilişkili elementtir.\n\nAteş elementi hızlı, saldırgan ve görünürdür. Gizlenmesi zordur, çevreye yayılma riski taşır ve kontrolsüz kullanıldığında büyünün hedefinden fazlasını etkileyebilir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "SU",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Su, akış, soğutma, basınç, arındırma, sis, buz, sıvı hareketi ve yaşam ortamlarıyla ilişkili elementtir.\n\nSu elementi doğrudan hasardan çok kontrol, yönlendirme, boğma, temizleme, soğutma ve form değiştirme alanında güçlüdür."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "TOPRAK",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Toprak, taş, kum, metal cevheri, kil, kristal, maden, ağırlık, yapı ve sabitlikle ilişkili elementtir.\n\nToprak elementi yavaş ama güvenilirdir. Savunma, engel, yapı, sıkıştırma, alan kontrolü ve fiziksel biçimlendirme için uygundur."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "HAVA",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Hava, rüzgâr, basınç, ses, nefes, uçuş, itme, savurma ve görünmez hareketle ilişkili elementtir.\n\nHava elementi hızlı, esnek ve taktiksel bir elementtir. Doğrudan hasardan çok hareket, konum, denge bozma, ses taşıma ve alan dağıtma üzerinde etkilidir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "YILDIRIM",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Yıldırım, elektrik, ani boşalma, sinirsel şok, manyetik tepki, iletkenlik ve hızlı enerji patlamasıyla ilişkili elementtir.\n\nYıldırım elementi yüksek riskli ve yüksek etkili bir elementtir. Ani hasar, sersemletme, refleks bozma ve iletken hatlardan yayılma potansiyeli taşır."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "IŞIK",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Işık, görünürlük, parlama, yansıma, gölge bastırma, renk, sıcaklık, aydınlatma ve algı yönlendirme ile ilişkili elementtir.\n\nIşık elementi burada Aydınlık Enerjisi ile karıştırılmamalıdır. Işık bir elementtir; Aydınlık ise yasak/üst düzey bir enerjidir. Işık elementi sıradan büyülerde kullanılabilir. Aydınlık enerjisi ise varoluşsal ve kutsal düzeyde tehlikeli bir güçtür."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "heading",
+                    "level": 2,
                     "text": "TEMEL ENERJİLER"
                   },
                   {
-                    "type": "figuretext",
-                    "position": "left",
-                    "src": "https://slvnz.github.io/resources/webpage/img/support/energies/evocation.png",
-                    "width": 25,
-                    "showCaption": false,
-                    "heading": "YIKIM",
-                    "text": "Yıkım enerjisi, çoğunlukla parçalamak, yok etmek ve hasar vermek üzerine doğrudan gerçekleştirilen yeteneklerin dönüştüğü enerjidir. Diğer yandan, canlıları iyileştirmek için de kullanılabilmektedir."
+                    "type": "paragraph",
+                    "text": "Temel Enerjiler, büyünün işlevsel omurgasıdır. Bunlar büyünün dünyada ne yaptığına karar verir."
                   },
                   {
-                    "type": "figuretext",
-                    "position": "left",
-                    "src": "https://slvnz.github.io/resources/webpage/img/support/energies/divination.png",
-                    "width": 25,
-                    "showCaption": false,
-                    "heading": "KEHÂNET",
-                    "text": "Kehanet enerjisi, çoğunlukla bir şeylerin yerini bulmak, farklı yollarla bilgi edinmek, gelecekle ilgili potansiyelleri görmek & anlamak gibi soyut işlevlere sahiptir."
-                  },
-                  {
-                    "type": "figuretext",
-                    "position": "left",
-                    "src": "https://slvnz.github.io/resources/webpage/img/support/energies/conjuration.png",
-                    "width": 25,
-                    "showCaption": false,
-                    "heading": "OLUŞTURMA",
-                    "text": "Oluşturma enerjisi, doğrudan enerjiyi maddeleştirerek silah meydana getirme, hizmetkâr oluşturma, çevresel etkiler ortaya çıkarma gibi farklı etkiler oluşturma işlevlerine sahiptir."
-                  },
-                  {
-                    "type": "figuretext",
-                    "position": "left",
-                    "src": "https://slvnz.github.io/resources/webpage/img/support/energies/abjuration.png",
-                    "width": 25,
-                    "showCaption": false,
-                    "heading": "KORUMA",
-                    "text": "Koruma enerjisi, kullanıcı varlık veya çevresindeki varlıklar üzerinde koruyucu, muhafaza edici ya da engelleyici etkiler oluşturma işlevine sahiptir."
-                  },
-                  {
-                    "type": "figuretext",
-                    "position": "left",
-                    "src": "https://slvnz.github.io/resources/webpage/img/support/energies/transmutation.png",
-                    "width": 25,
-                    "showCaption": false,
-                    "heading": "DÖNÜŞTÜRME",
-                    "text": "Dönüştürme enerjisi, kullanıldığı çevrede, nesneler veya varlıklar üzerindeki materyal veya formu başkalaşıma uğratarak farklı hallere getirme işlevine sahiptir."
-                  },
-                  {
-                    "type": "figuretext",
-                    "position": "left",
-                    "src": "https://slvnz.github.io/resources/webpage/img/support/energies/illusion.png",
-                    "width": 25,
-                    "showCaption": false,
-                    "heading": "İLLÜZYON",
-                    "text": "İllüzyon enerjisi, enerjisel olarak görünür etkiler meydana getirme, optik yanılsamalara sebep olma gibi özelliklerin meydana gelmesini sağlayan bir işleve sahiptir."
-                  },
-                  {
-                    "type": "figuretext",
-                    "position": "left",
-                    "src": "https://slvnz.github.io/resources/webpage/img/support/energies/enchantment.png",
-                    "width": 25,
-                    "showCaption": false,
-                    "heading": "EFSUN",
-                    "text": "Efsun enerjisi, varlıkların zihinlerini manipüle etmeye, akıllarını karıştırmaya veya onları ikna etmeye yarayan etkileri meydana getiren bir işleve sahiptir."
-                  },
-                  {
-                    "type": "figuretext",
-                    "position": "left",
-                    "src": "https://slvnz.github.io/resources/webpage/img/support/energies/necromancy.png",
-                    "width": 25,
-                    "showCaption": false,
-                    "heading": "ÇÜRÜME",
-                    "text": "Çürüme enerjisi, ölmüş varlıkların bedenlerini kontrol etmeye, onları canlandırmaya veya onların ruhlarını etkilemeye yarayan etkileri meydana getiren bir işleve sahiptir. Aynı zamanda canlı yaşamına zarar verme ve onları zayıflatma etkileri de yaratabilir."
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "YIKIM",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Yıkım, var olan yapıyı bozma, parçalama, yakma, kırma, kesme, patlatma, zayıflatma veya doğrudan hasar verme enerjisidir.\n\nYıkım enerjisi en anlaşılır ama en riskli temel enerjilerden biridir. Çünkü etkisi genellikle dışa taşar. Basit bir ateş kıvılcımı bile yanlış kullanılırsa yangına, taş patlaması çökmeye, yıldırım saldırısı zincirleme sekmeye dönüşebilir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "KORUMA",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Koruma, bir varlığı, alanı, nesneyi veya sınırı dış etkilerden muhafaza etme enerjisidir.\n\nKoruma yalnızca “kalkan basmak” değildir. Bir şeyi saklamak, bastırmak, ayırmak, zararı dağıtmak, saldırının şiddetini azaltmak veya belirli bir sınır çizmek de Koruma kapsamına girer."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "OLUŞTURMA",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Oluşturma, enerjiyi geçici veya yarı-kalıcı biçime sokarak madde, şekil, araç, varlık benzeri form veya çevresel etki meydana getirme enerjisidir.\n\nOluşturma, yoktan mutlak madde yaratmak değildir. SLVNZ 4.0’da özellikle Büyük Savaş sonrası dönemde Oluşturma daha sınırlı ve bedellidir. Çoğu oluşturma etkisi geçici, kırılgan, kaynak bağımlı veya çevredeki malzemeyi kullanarak çalışır."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "DÖNÜŞTÜRME",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Dönüştürme, var olan bir şeyin formunu, halini, yoğunluğunu, yüzeyini, hareketini veya niteliğini değiştirme enerjisidir.\n\nDönüştürme, Oluşturma’dan ayrıdır. Oluşturma yeni bir biçim meydana getirir; Dönüştürme mevcut bir varlığı veya maddeyi başka bir duruma sokar."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "EFSUN",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Efsun, zihin, duygu, arzu, korku, yönelim ve karar süreçleri üzerinde etki kuran enerjidir.\n\nEfsun mutlak zihin kontrolü değildir. En sağlıklı kullanım biçimi; duygu eğilimi yaratma, dikkati başka yöne çekme, korkuyu büyütme, güven hissi verme, öfkeyi kışkırtma, anlık tereddüt yaratma veya bir düşünceyi daha cazip hale getirme şeklindedir. Ancak üst seviyelerde varlıkları süreli kontrol eğilimine kadar gidebilmektedir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "İLLÜZYON",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "İllüzyon, duyulara yönelik yanılsama, görüntü, ses, koku, hareket, parıltı, gölge veya enerjisel sahte iz oluşturma enerjisidir.\n\nİllüzyon, gerçekliği değiştirmez; algıyı değiştirir. Bu yüzden İllüzyon ile oluşturulan bir köprü üstünden yürünemez, ama hedef köprünün var olduğuna inandırılabilir. Fiziksel temas, dikkatli inceleme veya güçlü sezgi illüzyonu bozabilir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "KEHANET",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Kehanet, iz, olasılık, geçmiş yankısı, yön, gizli bağ, enerji izi ve muhtemel sonuçları sezme enerjisidir.\n\nKehanet kesin gelecek bilgisi vermemektedir. SLVNZ 4.0 için Kehanet’in en iyi kullanımı “bilgiye doğrudan sahip olmak” değil, eksik bilgiyi yön, sembol, rüya, titreşim veya olasılık olarak almaktır."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "ÇÜRÜME",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Çürüme, canlı, ölü, ruhsal, bedensel veya maddesel bütünlüğün bozulmasıyla ilişkili enerjidir.\n\nÇürüme yalnızca nekromansi değildir. Paslanma, hastalık, çürüme, bedensel zayıflama, ruhsal yıpranma, ölü dokuyla etkileşim, canlılık bozumu ve eski kalıntıları uyandırma gibi alanları kapsar."
+                          }
+                        ]
+                      }
+                    ]
                   },
                   {
                     "type": "heading",
-                    "level": 3,
+                    "level": 2,
                     "text": "ÖZEL ENERJİLER"
                   },
                   {
                     "type": "paragraph",
-                    "text": "Özel enerji türleri, temel olanlara kıyasla daha özel ve erişimi zor veya bazı şartlar taşıyan enerjilerdir. Bu türde enerjiler genel olarak doğada sıklıkla karşılaşılabilen değil, nadiren ortaya çıkan ya da özel bir çaba ile ortaya çıkarılabilecek türden enerjilerdir."
+                    "text": "Özel Enerjiler, doğanın sıradan mana düzeniyle kolayca yönlendirilemeyen, ilişki, anlaşma, inanç, kozmik dengesizlik veya üst varlık teması gerektiren enerji türleridir.\n\nBunlar yasak değildir; fakat herkesin erişebileceği genel büyücülük alanının dışında kalırlar."
                   },
                   {
-                    "type": "figuretext",
-                    "position": "left",
-                    "src": "https://slvnz.github.io/resources/webpage/img/support/energies/faith.png",
-                    "width": 25,
-                    "showCaption": false,
-                    "heading": "İNANÇ",
-                    "text": "Genellikle Ruhbanlar ve Kutbanlar tarafından benimsenen, inançları doğrultusunda iman ettikleri ilahi varlıklardan yansıyan enerjinin bir tezahürü olarak betimlenir."
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "İNANÇ",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "İnanç, bir Kadim, kutsal ilke, yemin, tarikat, ocak veya manevi bağ üzerinden yönlendirilen enerjidir.\n\nİnanç enerjisi kullanıcının yalnızca teknik bilgisine bağlı değildir. Bağın gücü, sadakat, ritüel düzen, yemin ihlali, Kadim’in tavrı ve karakterin manevi konumu bu enerjiyi etkiler."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "PAKT",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Pakt, bir patron, üstün varlık, kadim dışı güç, iblisvari figür, eski varlık, ejderha, gölge varlık veya bilinmeyen entiteyle yapılan anlaşmadan doğan enerjidir.\n\nPakt enerjisi öğrenilmiş bir teknikten çok, ilişkiye ve borca dayanır. Kullanıcı enerjiye sahip değildir; enerjiye erişim hakkı kazanmıştır."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "KAOS",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Kaos, denge dışına taşmış, düzenlenmemiş, ihtimal yüklü ve sonuçları tam öngörülemeyen enerjidir.\n\nKaos enerjisi en güçlü özgürlük alanlarından biridir; fakat kontrol edildiğinde bile tamamen itaat etmez. Kullanıcı istediği etkinin yönünü belirleyebilir, ama etkinin nasıl açığa çıkacağı değişebilir."
+                          }
+                        ]
+                      }
+                    ]
                   },
                   {
-                    "type": "figuretext",
-                    "position": "left",
-                    "src": "https://slvnz.github.io/resources/webpage/img/support/energies/pact.png",
-                    "width": 25,
-                    "showCaption": false,
-                    "heading": "PAKT",
-                    "text": "Doğrudan Sehharların (Warlock) kullandığı enerji türüdür. Bu enerji türü üstün bir varlığın kendi güçlerini başka bir varlığa lütfetmesi ile ortaya çıkar ve iki varlık arasındaki bağın güçlenmesi ile yükselir."
+                    "type": "heading",
+                    "level": 2,
+                    "text": "YASAK ENERJİLER"
                   },
                   {
-                    "type": "figuretext",
-                    "position": "left",
-                    "src": "https://slvnz.github.io/resources/webpage/img/support/energies/blood.png",
-                    "width": 25,
-                    "showCaption": false,
-                    "heading": "KAN",
-                    "text": "Fiziksel olarak ortamda bulunan kanı ana element olarak kontrol etme yetisi kazandıran enerji türüdür. Bu kan kontrolü, varlıkların kapsadıkları auralarının haricindeki dış mekanda bulunan serbest bir kaynaktan kullanılabilir. Örneğin: Yere dökülmüş bir kan öbeği, şişede duran bir miktar kan vb."
+                    "type": "paragraph",
+                    "text": "Yasak Enerjiler, varlığı bilinen fakat büyüyü öğreten gelenekler tarafından kullanılmaması öğütlenen enerji türleridir.\n\nBu yasak yalnızca ahlaki değildir; pratik ve varoluşsaldır. Bu enerjiler kullanıcının bedenini, ruhunu, çevresini, yaşam alanını veya kozmik düzenle ilişkisini bozabilir."
                   },
                   {
-                    "type": "figuretext",
-                    "position": "left",
-                    "src": "https://slvnz.github.io/resources/webpage/img/support/energies/chaos.png",
-                    "width": 25,
-                    "showCaption": false,
-                    "heading": "KAOS",
-                    "text": "Evrende bulunan dengesiz enerjiyi kontrol altına almayı sağlayan enerji türüdür. Kaos enerjisini kontrol etmeye çalışan varlıklar, yoğun kullanımının sonucunda ortaya çıkabilecek kaotik sonuçlar çevresinde bir karmaşa içinde bulunurlar."
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "KAN",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Kan, canlı bedenin taşıdığı soy, hafıza, bedensel bağ, hastalık, ritim ve yaşam izleriyle ilişkili yasak enerjidir.\n\nKan enerjisi yalnızca kanı hareket ettirmek değildir. Kan üzerinden soy bağına, bedensel zayıflığa, hastalığa, ritüel mülkiyete, yeminlere ve bedensel kontrol alanlarına uzanabilir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "AYDINLIK",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Aydınlık, Işık elementinden farklıdır. Işık görünen, fiziksel veya algısal bir elementtir. Aydınlık, varoluşsal düzeyde arındırma, açığa çıkarma, hüküm verme, kutsal yakıcılık ve karanlığı reddetme enerjisidir.\n\nAydınlık, güvenli değildir. Kullanıcıya zarar vermiyor gibi görünse bile çevresindeki karanlık, çürüme, gizli bağ, gölge varlık ve mühürleri kışkırtabilir. Ayrıca Aydınlık, sıradan canlıların taşıyamayacağı kadar mutlak bir yönelim taşıyabilir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "KARANLIK",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Karanlık, ışığın yokluğu değildir. Enerjinin doğasını bozan, yaşamı tüketen, varoluşu içe çökerten, canlı çevreyi kurutan ve büyünün sınırlarını kirleten yasak enerjidir.\n\nKaranlık enerjisi özellikle cadı, kara ritüel, bozulmuş kalıntı, savaş sonrası yarıklar ve yasak dillerle ilişkili olabilir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "RUH",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Ruh Enerjisi, ölüler, hayaletler, benlik izleri, hatıra yankıları, musallatlar, ruhsal bağlar ve varlığın maddi beden dışındaki özüyle ilişkili yasak enerjidir.\n\nRuh enerjisi ile çalışmak, yalnızca ölülerle konuşmak değildir. Bir varlığın benliğine, hatırasına, ölüm sonrası izine veya ruhsal bütünlüğüne temas etmektir."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "YAŞAM",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Yaşam Enerjisi, canlılığın büyüme, çoğalma, yenilenme, taşma, mutasyon ve varoluş gücüyle ilişkili yasak enerjidir.\n\nİlk bakışta iyileştirici gibi görünür; fakat SLVNZ 4.0’da Yaşam enerjisinin asıl tehlikesi eksikliği kadar fazlalığının da yıkıcı olmasıdır. Yaşam, kontrolsüz kaldığında iyileştirmez; sarar, büyütür, çoğaltır, ele geçirir."
+                          }
+                        ]
+                      }
+                    ]
                   },
                   {
-                    "type": "figuretext",
-                    "position": "left",
-                    "src": "https://slvnz.github.io/resources/webpage/img/support/energies/darkmagic.png",
-                    "width": 25,
-                    "showCaption": false,
-                    "heading": "KARANLIK",
-                    "text": "Karanlık enerji, evrende bulunan bütün enerji türlerini manipüle etmeye ve onların doğalarını bozarak bambaşka etkiler uyandırılmasına sebep olan tehlikeli bir enerji türüdür. Karanlık enerjiyi kullanmak, varlığın kendi veya çevresindeki hayatı tüketmesine sebep olur."
+                    "type": "heading",
+                    "level": 2,
+                    "text": "ENERJİSEL KAYNAKLAR"
                   },
                   {
-                    "type": "figuretext",
-                    "position": "left",
-                    "src": "https://slvnz.github.io/resources/webpage/img/support/energies/radiant.png",
-                    "width": 25,
-                    "showCaption": false,
-                    "heading": "AYDINLIK",
-                    "text": "Aydınlık enerji, kutsal özellikleri taşıyan, yıkım, koruma, oluşturma, illüzyon, kehanet ve cezbetme enerjilerinin imkânlarını kapsayan bir enerji türüdür. Aydınlık enerjiyi kullanmak varlığın kendisine herhangi bir zarar vermez, ancak evrenin her yerinde bulunan karanlığı ve içinde barınan varlıkları kışkırtır."
+                    "type": "paragraph",
+                    "text": "Enerjisel Kaynaklar, büyünün çalışması için harcanan yakıttır. Enerji büyünün türünü, kaynak ise büyünün bedelini belirler."
                   },
                   {
-                    "type": "figuretext",
-                    "position": "left",
-                    "src": "https://slvnz.github.io/resources/webpage/img/support/energies/soul.png",
-                    "width": 25,
-                    "showCaption": false,
-                    "heading": "RUH",
-                    "text": "Ruh enerjisi, varlıkların maddi bedenlerinin ötesinde var olan özlerine dokunan, ruhani düzlemle bağ kuran bir enerji türüdür."
+                    "type": "table",
+                    "header": [
+                      "KAYNAK",
+                      "GÜVENLİK",
+                      "YENİLENME",
+                      "ANA RİSK"
+                    ],
+                    "rows": [
+                      [
+                        "Mana",
+                        "En güvenli",
+                        "Çevreden/kalıntıdan/kanaldan",
+                        "Vahşi tepki"
+                      ],
+                      [
+                        "Ki",
+                        "Görece güvenli ama sınırlı",
+                        "Dinlenme, meditasyon",
+                        "Beden-ruh yorgunluğu"
+                      ],
+                      [
+                        "Ruh",
+                        "Çok riskli",
+                        "Çok yavaş veya dış ruh kaynağıyla",
+                        "Ruhsal çöküş"
+                      ],
+                      [
+                        "Yaşam",
+                        "En tehlikeli",
+                        "Doğal varoluşsal dengeye bağlı",
+                        "Eksiklik/fazlalık felaketi"
+                      ]
+                    ]
                   },
                   {
-                    "type": "figuretext",
-                    "position": "left",
-                    "src": "https://slvnz.github.io/resources/webpage/img/support/energies/life.png",
-                    "width": 25,
-                    "showCaption": false,
-                    "heading": "YAŞAM",
-                    "text": "Yaşam enerjisi, bir varlığın temel yapıtaşıdır. Bir varlığın ruhtan ve bedenden ayrı var oluşundaki yaşayabilme kapasitesinin varlığıdır."
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "MANA",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Mana, evrende vahşi biçimde akan temel büyüsel yakıttır.\n\nBüyük Savaş öncesinde mana daha erişilebilirken, 4.0 döneminde sıradan canlıların manayı doğrudan bedenlerinde kanalize etmesi çok daha zordur. Mana artık çoğunlukla dış kanallar, kalıntılar, eski büyü döneminden kalmış nesneler, özel bölgeler, nadir doğuştan yetenekliler veya kanal kurabilen kişiler aracılığıyla kullanılabilir.\n\nMana'nın güçlü yönleri:"
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "En yaygın ve en güvenli kaynaktır.",
+                              "Temel enerjilerle en uyumlu kaynaktır.",
+                              "Eğitimli kullanıcı için kontrol edilebilir.",
+                              "Büyü üretimi ve standart büyücülük için ana yakıttır."
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Riskleri:"
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Vahşi ve dizginsizdir.",
+                              "Dış kanal aracılığıyla kullanıldığında beklenmeyen tepki verebilir.",
+                              "Aynı sahnede ardışık ve yoğun kullanımda taşma riski artar.",
+                              "Kalıntı veya bozuk odak üzerinden kullanılırsa büyü sapabilir."
+                            ]
+                          },
+                          {
+                            "type": "table",
+                            "header": [
+                              "KULLANIM DURUMU",
+                              "MANA TEPKİ RİSKİ"
+                            ],
+                            "rows": [
+                              [
+                                "Basit büyü",
+                                "Düşük"
+                              ],
+                              [
+                                "Aynı enerjiyle ardışık kullanım",
+                                "Orta"
+                              ],
+                              [
+                                "Yüksek kaynak harcaması",
+                                "Orta/Yüksek"
+                              ],
+                              [
+                                "Bozuk kalıntı veya odak",
+                                "Yüksek"
+                              ],
+                              [
+                                "Yasak enerjiyle birlikte mana kullanımı",
+                                "Çok Yüksek"
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "label": "Kİ",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Ki, varlığın beden-ruh disipliniyle açığa çıkardığı içsel enerji kaynağıdır.\n\nMana gibi vahşi değildir; fakat erişimi çok daha zordur. Ki, doğuştan sahip olunan bir havuzdan ziyade disiplin, meditasyon, nefes, çakra yönlendirme, dövüş talimi ve uzun süreli bedensel farkındalıkla kullanılabilir hale gelir.\n\nKi’nin güçlü yönleri:"
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Dış mana kanalına ihtiyaç duymaz.",
+                              "Daha kontrollüdür.",
+                              "Savaş sanatlarıyla çok iyi birleşir.",
+                              "Sessiz, sade ve düşük görünürlüklü etkiler için uygundur.",
+                              "Kullanıcının beden tekniğiyle doğrudan ilişkilidir."
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Sınırları:"
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Miktarı azdır.",
+                              "Geliştirmesi zordur.",
+                              "Patlayıcı büyük büyüler için uygun değildir.",
+                              "Tükendiğinde karakter bedensel ve ruhsal yorgunluğa girer."
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Ki Tükenme Sonuçları:"
+                          },
+                          {
+                            "type": "table",
+                            "header": [
+                              "SEVİYE",
+                              "SONUÇ"
+                            ],
+                            "rows": [
+                              [
+                                "Azalma",
+                                "Halsizlik, refleks düşüşü"
+                              ],
+                              [
+                                "Kritik Azalma",
+                                "Titreme, nefes bozulması, odak kaybı"
+                              ],
+                              [
+                                "Tükenme",
+                                "Bayılma, ruhsal boşalma, ağır yorgunluk"
+                              ],
+                              [
+                                "Aşırı zorlama",
+                                "Kalıcı hasar veya ölüm riski"
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "label": "RUH",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Ruh Kaynağı, varlığın benlik özü, ruhsal bütünlüğü ve maddi bedenin ötesindeki varoluş bağından harcanan kaynaktır.\n\nKi’den daha derindir ve daha tehlikelidir. Ki dinlenme ve meditasyonla toparlanabilirken, Ruh kaynağı hızlı yenilenmez. Ruh kullanımı uzun süreli bekleme, özel ritüeller, dış ruh kaynağı veya çok nadir manevi onarım gerektirir.\n\nRuh kaynağının güçlü yönleri:"
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Ruhsal varlıklar, musallatlar, ölüler ve benlik izleri üzerinde etkilidir.",
+                              "Mana çalışmadığında bile bazı eşiklerde iş görebilir.",
+                              "Çok derin ve kalıcı etkiler yaratabilir.",
+                              "Beden dışı varlıklarla temas kurabilir."
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Riskleri:"
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Kullanıcının özünü eksiltir.",
+                              "Ruh seviyesi düştükçe karakter yorulur, donuklaşır, çöker.",
+                              "Aşırı kullanım karakterin benliğinde çatlak yaratabilir.",
+                              "Tükenirse geride boş beden kalabilir."
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Ruh Kaynağı Kullanım Tablosu:"
+                          },
+                          {
+                            "type": "table",
+                            "header": [
+                              "DURUM",
+                              "SONUÇ"
+                            ],
+                            "rows": [
+                              [
+                                "Hafif kullanım",
+                                "Ruhsal yorgunluk, soğuma, huzursuzluk"
+                              ],
+                              [
+                                "Orta kullanım",
+                                "Duygu silikleşmesi, anı bulanıklığı"
+                              ],
+                              [
+                                "Ağır kullanım",
+                                "Benlik çatlağı, musallatlara açıklık"
+                              ],
+                              [
+                                "Kritik kullanım",
+                                "Ruh kopması, bedenin boşalması"
+                              ],
+                              [
+                                "Tükenme",
+                                "Ölüm"
+                              ]
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "label": "YAŞAM",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Yaşam Kaynağı, varlığın doğrudan varoluşsal canlılık gücüdür.\n\nBu kaynak en tehlikeli kaynaktır. Çünkü hem eksikliği hem fazlalığı ölümcül olabilir. Mana taşabilir, Ki tükenebilir, Ruh aşınabilir; fakat Yaşam kaynağı doğrudan “varlığın var olma dengesi” ile ilgilidir.\n\nYaşam kaynağının güçlü yönleri:"
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Çok güçlü iyileştirme, büyütme ve canlılık etkileri yaratabilir.",
+                              "Ölüm eşiğindeki varlıklara müdahale edebilir.",
+                              "Bitki, et, kemik, organik madde ve canlı formlar üzerinde olağanüstü etkilidir.",
+                              "Bazı yasak ritüellerde başka kaynakların yerine geçebilir."
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Riskleri:"
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Azalırsa varlık çöker.",
+                              "Fazlalaşırsa varlık kontrolsüz biçimde sarılır.",
+                              "Canlı formlara tutunup yayılabilir.",
+                              "Bilinci bastırabilir.",
+                              "Bedeni mutasyona, aşırı büyümeye veya varlık kaymasına sürükleyebilir."
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Yaşam Kaynağı Dengesizliği:"
+                          },
+                          {
+                            "type": "table",
+                            "header": [
+                              "DURUM",
+                              "SONUÇ"
+                            ],
+                            "rows": [
+                              [
+                                "Hafif eksilme",
+                                "Solgunluk, halsizlik, iyileşme yavaşlığı"
+                              ],
+                              [
+                                "Orta eksilme",
+                                "Organik zayıflama, bilinç bulanıklığı"
+                              ],
+                              [
+                                "Ağır eksilme",
+                                "Yaşamsal çöküş, ölüm riski"
+                              ],
+                              [
+                                "Hafif fazlalık",
+                                "Aşırı canlılık, ateş, büyüme sancısı"
+                              ],
+                              [
+                                "Orta fazlalık",
+                                "Doku taşması, bitkisel/organik yayılma ve yoğun acı/ağrı"
+                              ],
+                              [
+                                "Yarıya yaklaşan sarılma",
+                                "Bilinç kaybı, kontrolden çıkma"
+                              ],
+                              [
+                                "Tam sarılma",
+                                "Varlık dönüşümü veya kaybı"
+                              ]
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "heading",
+                    "level": 2,
+                    "text": "KANALLAR"
+                  },
+                  {
+                    "type": "paragraph",
+                    "text": "4.0’da kaynak tek başına büyüye dönüşmez. Kaynağın büyüye aktarılması için bir **kanal** gerekir."
+                  },
+                  {
+                    "type": "table",
+                    "header": [
+                      "KANAL",
+                      "AÇIKLAMA"
+                    ],
+                    "rows": [
+                      [
+                        "Odaklayıcı",
+                        "Asa, tılsım, kristal, mühür, yüzük"
+                      ],
+                      [
+                        "Kalıntı",
+                        "Büyük savaş öncesinden kalmış enerjisel nesne"
+                      ],
+                      [
+                        "Ritüel",
+                        "Söz, hareket, malzeme ve zamanla kurulan geçici kanal"
+                      ],
+                      [
+                        "İçsel kanal",
+                        "Nadir doğuştan yetenek, Sahir/Sahire benzeri yapı"
+                      ],
+                      [
+                        "Dışsal kanal kurucu",
+                        "Kanal açabilen kişi, varlık veya eşya"
+                      ],
+                      [
+                        "Mekân kanalı",
+                        "Eski enerjisel bölgeler, enerjisel tesir noktaları, kadim izler"
+                      ],
+                      [
+                        "İlişki kanalı",
+                        "Pakt veya inanç gibi ilişki temelli erişim"
+                      ]
+                    ]
                   }
                 ]
               },
@@ -2343,47 +4315,52 @@ window.SLVNZ_VERSIONS = {
                   },
                   {
                     "type": "paragraph",
-                    "text": "Fiziksel yetenekler, kaynak olarak karakterde STAMINA tüketirken, enerjisel yetenekler MANA, RUH, Kİ ve YAŞAM enerjisi tüketebilirler. Ancak, bazı fiziksel yeteneklerin de enerjisel kaynaklar tüketmesi mümkün olabilir."
+                    "text": "Fiziksel yetenekler, kaynak olarak karakterde SOLUK tüketirken, enerjisel yetenekler MANA, RUH, Kİ ve YAŞAM enerjisi tüketebilirler. Ancak, bazı fiziksel yeteneklerin de enerjisel kaynaklar tüketmesi mümkün olabilir."
                   },
                   {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "FİZİKSEL YETENEKLER"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Fiziksel yetenekler, çoğunlukla yakın dövüş konusunda ustalaşan ya da menzilli araçlar kullanan karakterlerin ihtiyaç duyduğu yeteneklerdir. Genellikle kas gücü gerektirdiği için karakterlerin STAMINA değerlerini tüketen fiziksel yetenekler, kimi zaman enerji ile harmanlanarak farklı etkiler doğurabilen yeteneklere dönüşebilmektedir. Fiziksel yeteneklerin bu şekli Savaş Sanatı olarak adlandırılmaktadır."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "SLVNZ 3.0 sisteminde fiziksel yetenekler, genel yetenekler ve yetkinlik yetenekleri olarak ikiye ayrılır. Genel yetenekler, karakterlerin herhangi bir yetkinlik şartı gerektirmeksizin mücadelede kullanabileceği yetenekleri nitelendirirken, yetkinlik yetenekleri, yetkinlik sahibi oldukları silahlar ve beceriler çerçevesinde gerçekleştirebilecekleri daha özel yetenekleri belirtir. Her fiziksel silah yetkinliğinin kendine özgü bir yetenek ağacı ve dalları bulunmaktadır. Karakterler, bu dala giriş yapmak üzere 500 DP. toplayacakları bir sürece girerek, ağaca giriş yaptıktan sonra farklı dallara yönelebilirler."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "ENERJİSEL YETENEKLER"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Enerjisel yetenekler (Büyüler), doğada bulunan kaotik enerjinin farklı kanallarca çevreye veya kalıntılara sinmiş, belirli sembollerce nesnesel veya doğal akıştan geçirilerek meydana getirilebilen veya tamamen serbest bir biçimde olağan dışı meydana gelebilen sıradışı yeteneklerdir. Evrende herhangi bir insansı karakterin enerjisel yetenek kullanması sıradan bir durum değildir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "ENERJİSEL YETENEK KULLANIMI"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterler, istisnai durumlarda basit sayılabilecek enerjisel etkileri meydana getirebilirler. Bu durumlar, kalıntılar gibi karakterlerin üstünde taşıdığı nesneler aracılığıyla gerçekleşmiyorsa, çoğunlukla karakterin belirli vücut hareketleri beraberinde fonetik biçimde uyum sağlayacağı sözler ile birleştirerek gerçekleştireceği bir zincirleme yapı olarak karşılaşılır. Karakterler, bu şekilde enerjisel yetenekleri gerçekleştirebilmek için beraberlerinde MANA rezervi bulundurmalıdır. Aksi halde enerjisel yetenekleri bu şekilde kendi başlarına gerçekleştiremezler."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "SAVAŞ SANATI"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Savaş sanatları, özellikle fiziksel yetenekler gibi kas gücüne dayanan ancak bu gücü enerjisel yönlendirmelerle harmanlayan özel savaş manevralarının ortaya çıkarttığı etkilere sahiptir. Bu etkiler, çoğunlukla karakterlerin savaştıkları silahların üstünden uyandırılabilecek veya yaptıkları hamleler ile birlikte meydana gelecek çevresel tepkiler şeklinde yorumlanabilir."
+                    "type": "tabs",
+                    "tabs": [
+                      {
+                        "label": "FİZİKSEL YETENEKLER",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Fiziksel yetenekler, çoğunlukla yakın dövüş konusunda ustalaşan ya da menzilli araçlar kullanan karakterlerin ihtiyaç duyduğu yeteneklerdir. Genellikle kas gücü gerektirdiği için karakterlerin SOLUK değerlerini tüketen fiziksel yetenekler, kimi zaman enerji ile harmanlanarak farklı etkiler doğurabilen yeteneklere dönüşebilmektedir. Fiziksel yeteneklerin bu şekli Savaş Sanatı olarak adlandırılmaktadır."
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "SLVNZ 4.0 sisteminde fiziksel yetenekler, genel yetenekler ve yetkinlik yetenekleri olarak ikiye ayrılır. Genel yetenekler, karakterlerin herhangi bir yetkinlik şartı gerektirmeksizin mücadelede kullanabileceği yetenekleri nitelendirirken, yetkinlik yetenekleri, yetkinlik sahibi oldukları silahlar ve beceriler çerçevesinde gerçekleştirebilecekleri daha özel yetenekleri belirtir. Her fiziksel silah yetkinliğinin kendine özgü bir yetenek ağacı ve dalları bulunmaktadır. Karakterler, bu dala giriş yapmak üzere 500 DP. toplayacakları bir sürece girerek, ağaca giriş yaptıktan sonra farklı dallara yönelebilirler."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "ENERJİSEL YETENEKLER",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Enerjisel yetenekler (Büyüler), doğada bulunan kaotik enerjinin farklı kanallarca çevreye veya kalıntılara sinmiş, belirli sembollerce nesnesel veya doğal akıştan geçirilerek meydana getirilebilen veya tamamen serbest bir biçimde olağan dışı meydana gelebilen sıradışı yeteneklerdir. Evrende herhangi bir insansı karakterin enerjisel yetenek kullanması sıradan bir durum değildir."
+                          },
+                          {
+                            "type": "heading",
+                            "level": 3,
+                            "text": "ENERJİSEL YETENEK KULLANIMI"
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Karakterler, istisnai durumlarda basit sayılabilecek enerjisel etkileri meydana getirebilirler. Bu durumlar, kalıntılar gibi karakterlerin üstünde taşıdığı nesneler aracılığıyla gerçekleşmiyorsa, çoğunlukla karakterin belirli vücut hareketleri beraberinde fonetik biçimde uyum sağlayacağı sözler ile birleştirerek gerçekleştireceği bir zincirleme yapı olarak karşılaşılır. Karakterler, bu şekilde enerjisel yetenekleri gerçekleştirebilmek için beraberlerinde MANA rezervi bulundurmalıdır. Aksi halde enerjisel yetenekleri bu şekilde kendi başlarına gerçekleştiremezler."
+                          }
+                        ]
+                      },
+                      {
+                        "label": "SAVAŞ SANATI",
+                        "blocks": [
+                          {
+                            "type": "paragraph",
+                            "text": "Savaş sanatları, özellikle fiziksel yetenekler gibi kas gücüne dayanan ancak bu gücü enerjisel yönlendirmelerle harmanlayan özel savaş manevralarının ortaya çıkarttığı etkilere sahiptir. Bu etkiler, çoğunlukla karakterlerin savaştıkları silahların üstünden uyandırılabilecek veya yaptıkları hamleler ile birlikte meydana gelecek çevresel tepkiler şeklinde yorumlanabilir."
+                          }
+                        ]
+                      }
+                    ]
                   },
                   {
                     "type": "heading",
@@ -2396,15 +4373,7 @@ window.SLVNZ_VERSIONS = {
                   },
                   {
                     "type": "paragraph",
-                    "text": "Bir yetenek üstünde odaklanırken ya da konsantre olurken, eğer karakter bu konuda yetkin değilse birden fazla yetenek üstünde bu yoğunlaşmayı gerçekleştiremez."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Konsantrasyon gerektiren yeteneklerde, karakter zihnini ortaya çıkardığı enerjinin dağılmadan dışarıda kalabilmesi için kendini odaklamış olur. Odak gerektiren yeteneklerde ise karakter, algılarını yeteneğin akışına odaklayarak duruşunu korur. Karakterlerin odaklanma ya da konsantrasyon sırasında alacağı herhangi bir hasar, odaklanmayı/konsantrasyonu bozulma tehlikesine sokar. Karaktere isabet eden saldırının türüne ve kuvvetine göre GM bir sınır belirlemekle yükümlüdür. Eğer belirlenmek istenmezse Sayfa 1 üstünde bulunan başarı tablosu baz alınabilir. Ancak, bu durumda konsantrasyon/odağın sadece bozulma ve korunma durumu bulunmaktadır. Kritik başarısızlık, şartlı başarı ve kritik başarı durumları böyle bir senaryoda devre dışı bırakılmalıdır."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterler odak ya da konsantrasyon yapabilme kapasitelerini geliştirebilirler. Bu durum, karakterlerin odak yuvası ve konsantrasyon yuvası sayılarını artırması demektir. Aktif bulunan her konsantrasyon ve odak gerektiren yetenek için bir yuva doldurulur, yetenek sona erdikten sonra boşaltılır. Konsantrasyon ve odak yuvalarının nasıl geliştirildiğine Karakter Gelişimi bölümünden bakabilirsiniz."
+                    "text": "Bir yetenek üstünde odaklanırken ya da konsantre olurken, eğer karakter bu konuda yetkin değilse birden fazla yetenek üstünde bu yoğunlaşmayı gerçekleştiremez.\n\nKonsantrasyon gerektiren yeteneklerde, karakter zihnini ortaya çıkardığı enerjinin dağılmadan dışarıda kalabilmesi için kendini odaklamış olur. Odak gerektiren yeteneklerde ise karakter, algılarını yeteneğin akışına odaklayarak duruşunu korur. Karakterlerin odaklanma ya da konsantrasyon sırasında alacağı herhangi bir hasar, odaklanmayı/konsantrasyonu bozulma tehlikesine sokar. Karaktere isabet eden saldırının türüne ve kuvvetine göre GM bir sınır belirlemekle yükümlüdür. Eğer belirlenmek istenmezse Sayfa 1 üstünde bulunan başarı tablosu baz alınabilir. Ancak, bu durumda konsantrasyon/odağın sadece bozulma ve korunma durumu bulunmaktadır. Kritik başarısızlık, şartlı başarı ve kritik başarı durumları böyle bir senaryoda devre dışı bırakılmalıdır.\n\nKarakterler odak ya da konsantrasyon yapabilme kapasitelerini geliştirebilirler. Bu durum, karakterlerin odak yuvası ve konsantrasyon yuvası sayılarını artırması demektir. Aktif bulunan her konsantrasyon ve odak gerektiren yetenek için bir yuva doldurulur, yetenek sona erdikten sonra boşaltılır. Konsantrasyon ve odak yuvalarının nasıl geliştirildiğine Karakter Gelişimi bölümünden bakabilirsiniz."
                   }
                 ]
               },
@@ -2886,10 +4855,6 @@ window.SLVNZ_VERSIONS = {
                     "text": "SAVAŞ SİSTEMİ"
                   },
                   {
-                    "type": "paragraph",
-                    "text": "SLVNZ 4.0'ın temel mücadele eylemlerinin ve hareketlerinin işlenmesinin temellerini **ALTIGEN** savaş sistemi oluşturur. Savaş sisteminde varlıkların her biri bir Altıgen içinde (Hex) yer alırlar ve birimlerin hareketleri, gerçekleşecek eylemlerin mesafeleri ve kapsayacakları alanlar **BİRİM** olarak belirlenmiş tekil altıgen yuvalar üzerinden hesaplanır."
-                  },
-                  {
                     "type": "heading",
                     "level": 3,
                     "text": "SAVAŞ DÜZENİ"
@@ -2898,53 +4863,137 @@ window.SLVNZ_VERSIONS = {
                     "type": "tabs",
                     "tabs": [
                       {
-                        "label": "ALTIGEN SAVAŞ DÜZENİ",
+                        "label": "KARE SAVAŞ DÜZENİ",
                         "blocks": [
                           {
                             "type": "image",
                             "src": "https://slvnz.github.io/resources/webpage/svg/hex-battle.svg",
                             "alt": "",
-                            "caption": "Altıgen savaş düzeni",
+                            "caption": "Kare savaş düzeni",
                             "width": "300"
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Kare savaş sistemi, SLVNZ 4.0'ın mücadele eylemlerinin ve hareketlerinin işlenmesi için temeli oluşturur. Savaş sisteminde varlıkların her biri bir Kare içinde yer alırlar ve birimlerin hareketleri, gerçekleşecek eylemlerin mesafeleri ve kapsayacakları alanlar birim olarak belirlenmiş tekil kare yuvalar üzerinden hesaplanır.\n\nSavaş düzeninde, karakterin baktığı yöndeki ve bu yönün içerdiği birimin sağ ve sol bitişiğindeki birimler **net alan** olarak isimlendirilir."
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Karakter, net alandaki varlıklara normal şekilde fiziksel saldırıda bulunabilir.",
+                              "Karakter, net alandan alacağı saldırılara karşı normal şekilde savunma & kaçınma hamleleri yapabilir."
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Savaş düzeninde net alan, net alanlardan karakterin çevresine doğru dolaşırken **SOL** ve **SAĞ** birimler bulunur."
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Karakter, **BU ALANLARDAN** gelen fiziksel saldırılara karşı savunma yapmak için herhangi bir eksi puan almaz. Ancak saldırıyı savuşturma veya saldırıdan kaçınma süreçleri koşullara bağlı olarak değişiklik gösterir.",
+                              "Karakter, elinin boş bulunduğu taraftan gelen bir saldırıya karşı kaçınma yapmak zorundadır. Saldırının geldiği taraftaki elinde en az orta boy kalkan bulunduruyorsa, bloklamayı avantajlı gerçekleştirir.",
+                              "Karakter, altıgen sisteminde olduğu gibi sadece net alan sınırlarında bulunan varlıklara herhangi bir şekilde bakış yönünü değiştirmeden saldırıda bulunabilir. Ancak, silah bulundurduğu elinin olduğu tarafa da bakış açısını değiştirmeden saldırıda bulunabilir (Sol elinde silah bulunduran biri sol tarafa saldırabilir, ancak sağ tarafa saldırmak için o bölgeye net alan olacak şekilde yüzünü dönmelidir).",
+                              "Karakter, bu alanlardan gelecek menzilli fiziksel saldırıların farkındadır ve yukarıdaki kuralları gözeterek savunma & kaçınma yapabilir."
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Karakterin baktığı yönün sağ ve sol arkasındaki birimler **eşik alan** olarak isimlendirilir."
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Karakter, eşik alandan gelen yakın mesafeli fiziksel saldırılara karşı -2 negatif değer alarak savunma gerçekleştirir.",
+                              "Karakter, eşik alan tarafından gelecek uzun menzilli fiziksel saldırıyı yapacak kişinin orada olduğunun farkındaysa, gelen saldırıya karşı farkındalık zarı kullanır. Farkındalık 10'dan yüksek gelirse gelen fiziksel menzilli saldırıyı fark ederek kaçınmaya çalışabilir. Saldıranın okçuluk/atıcılık/isabet/nişancılık ve kuvvet yüksekliğine bağlı olarak saldırının başarı düzeyi belirlenir."
+                            ]
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Karakterin baktığı yönün tam tersinde — yani arkasında — kalan birim **kör alan** olarak isimlendirilir."
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Karakter, kör alandan gelen yakın mesafeli fiziksel saldırılara karşı, eğer saldırıyı yapan kişinin arkasında olduğunun farkındaysa dezavantaj ile kaçınma gerçekleştirmeye çalışır. **Bloklama** şeklinde bir savunma bu pozisyona karşı gerçekleştirilemez.",
+                              "Karakter, kör alandan gelecek fiziksel bir uzak menzilli saldırıya karşı başka bir varlık tarafından tepki olarak uyarılmıyor veya buna özel bir sistemi yoksa savunma veya kaçınma gerçekleştiremez."
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "label": "BLOK SİSTEMİ",
+                        "blocks": [
+                          {
+                            "type": "image",
+                            "src": "https://slvnz.github.io/resources/webpage/svg/square-block.svg",
+                            "alt": "",
+                            "caption": "Kare blok sistemi",
+                            "width": "300"
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Fiziksel mücadelelerde kaçınma genel bir standarda sahip basit bir yapıda olsa da bir kalkanla bloklamanın koşullara bağlı değişkenlikleri bulunmaktadır. Bu değişkenler dahilinde, bloklama sistemi kare ve altıgen sistem üzerinde farklılıklarıyla incelenebilir. Kalkanlar genel kullanım şekilleriyle sol elde kuşanıldıkları için, şemalar sol kullanım üzerinden bir görsellik sunmaktadır. Kalkanın diğer tarafta kullanım durumunda, aynı sistem karakterin sağ tarafı için geçerlidir."
+                          },
+                          {
+                            "type": "heading",
+                            "level": 3,
+                            "text": "KÜÇÜK KALKANLAR & SİLAHLAR"
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Küçük kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahip olmadıkları için çoğunlukla bireysel ölçekte fiziksel saldırıları engellemek ve savuşturmak üzere kullanılır. Sonuçları bire bir aynı olmasa da silahlar ve küçük kalkanlar aynı sistem yapısına tabidir."
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Küçük kalkanlar bloklamak için ek puanlarını karakterin **ÇEV** niteliğinden edinirler.",
+                              "Silahlar bu ek puanı kendilerine ait özel **BLOK** niteliğinden edinirler.",
+                              "Daha büyük boyutta kalkanlarda bloklama eyleminin zarı düşük kalsa bile arada oluşacak puan farkına bağlı olarak kısmi başarı sağlanabilirken, silahlar ve küçük kalkanlarda kaçınma durumundaki gibi başarısız olunur."
+                            ]
+                          },
+                          {
+                            "type": "heading",
+                            "level": 3,
+                            "text": "ORTA KALKANLAR"
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Orta kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahiptir. Bu özellikler hem ağırlıkları hem de büyüklükleri sebebiyle karakterin hareket kabiliyeti üzerinde olumsuz etkilere sebep olmaktadır. Ancak, bu duruma karşılık karaktere gelecek fiziksel hamlelere karşı korunak sağlamaktadır."
+                          },
+                          {
+                            "type": "list",
+                            "ordered": false,
+                            "items": [
+                              "Orta kalkan kullanan bir karakter, **NORMAL ALANLAR** tarafından gelecek yakın menzilli fiziksel saldırılara karşı normal şekilde **BLOK BONUSU** edinerek bloklama yapabilir (Kalkandan gelecek blok aşırtma sınırı).",
+                              "Eğer karaktere gelecek saldırı **NET ALAN** tarafından geliyorsa, karakter bloklama eylemine **AVANTAJ** alır.",
+                              "Eğer karaktere gelecek saldırı zor alan tarafından geliyorsa, karakter bloklama eylemine **DEZAVANTAJ** alır."
+                            ]
+                          },
+                          {
+                            "type": "heading",
+                            "level": 3,
+                            "text": "KULE KALKANLAR"
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Kule kalkanlar, karakterlerin hareketlerini ve **ÇEV** niteliklerini önemli ölçüde düşürürken korunak durumunu aynı ölçüde yükselten yapıya sahiptir. Bir karakter, orta kalkanlarda olduğu gibi kule kalkanlarda da blok bonusu becerisi üzerinden bloklama gerçekleştirir, ancak kule kalkanı tam blok pozuna geçirdiği zaman stamina değeri tükenene ya da kalkan işlev görmez hale gelene kadar saldırıları kesinlikle bloklar."
+                          },
+                          {
+                            "type": "heading",
+                            "level": 3,
+                            "text": "BLOKLAMADA DAYANIKLILIK"
+                          },
+                          {
+                            "type": "paragraph",
+                            "text": "Bloklama, karaktere üstün korunak sağlasa da karakter tarafından kaynak kullanımı denetimi gerektiren bir süreçtir. Bir karakter, saldırı blokladıkça kalkanı üzerinde hasar alır. Kalkanın materyalinin zarar görmesinin yanı sıra, karakter arka arkaya kuvvetli saldırılar bloklamaya başlarsa DAY niteliği üzerinden bir mücadeleye girer. Bu mücadelede, bloklanan her kuvvetli saldırı sonrasında karakterin bir miktar soluk kaynağı geçici olarak tükenmeye başlar.\n\nKarakter bu kaynağı tüketene kadar bloklama yapmayı tercih ederse, soluk kaynağı 0'a düştüğü veya dengesi bozulduğu zaman karakterin gardı kırılır ve kırılgan pozuna girer. Bu pozdayken alacağı sonraki ilk yakın menzilli saldırı kritik bir isabetle gerçekleşir. Eğer karakter stamina kaynağı tükenmeden blok yapmaya ara verirse, ara verdiği turlar boyunca sabit bir şekilde kaynağın eriyen miktarı yenilenmeye başlar."
                           }
                         ]
                       }
-                    ]
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Savaş düzeninde, karakterin baktığı yöndeki ve bu yönün içerdiği birimin sağ ve sol bitişiğindeki birimler **net alan** olarak isimlendirilir."
-                  },
-                  {
-                    "type": "list",
-                    "ordered": false,
-                    "items": [
-                      "Karakter, net alandaki varlıklara normal şekilde fiziksel saldırıda bulunabilir.",
-                      "Karakter, net alandan alacağı saldırılara karşı normal şekilde savunma & kaçınma hamleleri yapabilir."
-                    ]
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterin baktığı yönün sağ ve sol arkasındaki birimler **eşik alan** olarak isimlendirilir."
-                  },
-                  {
-                    "type": "list",
-                    "ordered": false,
-                    "items": [
-                      "Karakter, eşik alandan gelen yakın mesafeli fiziksel saldırılara karşı -2 negatif değer alarak savunma gerçekleştirir.",
-                      "Karakter, eşik alan tarafından gelecek uzun menzilli fiziksel saldırıyı yapacak kişinin orada olduğunun farkındaysa, gelen saldırıya karşı farkındalık zarı kullanır. Farkındalık 10'dan yüksek gelirse gelen fiziksel menzilli saldırıyı fark ederek kaçınmaya çalışabilir. Saldıranın okçuluk/atıcılık/isabet/nişancılık ve kuvvet yüksekliğine bağlı olarak saldırının başarı düzeyi belirlenir."
-                    ]
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakterin baktığı yönün tam tersinde — yani arkasında — kalan birim **kör alan** olarak isimlendirilir."
-                  },
-                  {
-                    "type": "list",
-                    "ordered": false,
-                    "items": [
-                      "Karakter, kör alandan gelen yakın mesafeli fiziksel saldırılara karşı, eğer saldırıyı yapan kişinin arkasında olduğunun farkındaysa dezavantaj ile kaçınma gerçekleştirmeye çalışır. **Bloklama** şeklinde bir savunma bu pozisyona karşı gerçekleştirilemez.",
-                      "Karakter, kör alandan gelecek fiziksel bir uzak menzilli saldırıya karşı başka bir varlık tarafından tepki olarak uyarılmıyor veya buna özel bir sistemi yoksa savunma veya kaçınma gerçekleştiremez."
                     ]
                   },
                   {
@@ -2961,119 +5010,10 @@ window.SLVNZ_VERSIONS = {
                     "ordered": false,
                     "items": [
                       "İnsansı varlıkların temel hareket sınırı 4 birimdir. Niteliklerden her **+2 ÇEV** başına insansı varlıklar karasal hareketlerine **+1 birim hareket mesafesi** kazanır.",
-                      "Çevresinde kendine gelen bir saldırıya karşı **TEPKİ EYLEM** kullanarak bakış yönünü saldırıya yönlendirebilir. Eğer **KÖR NOKTADAN** gelen bir saldırıya karşı yapıyorsa, savunma eylemine **-5** eksi değer alır.",
+                      "Çevresinde kendine gelen bir saldırıya karşı **TEPKİ EYLEM** kullanarak bakış yönünü saldırıya yönlendirebilir. Eğer **KÖR NOKTADAN** gelen bir saldırıya karşı yapıyorsa, sadece kaçınma hareketi gerçekleştirebilir. Bu durumda kaçınma eylemine dezavantaj alır.",
                       "Belirli bir yöne bakan bir varlık, görüş mesafesinde hareket eden bir varlığın turu boyunca gerçekleştireceği hareketi takip edecek şekilde tepki eylem olarak bakış yönünü değiştirebilir. Eğer eşik veya kör alandan yakın mesafesinde hareket eden bir varlık varsa (3-6 birim mesafe), pasif olarak kullanılacak bir **FARKINDALIK** zarı ile fark etmesi durumunda bu alanda hareket eden varlığa karşı da bakış yönünü tepki eylemle değiştirebilir.",
-                      "Karakter, turunda **NET ALANDA** bulunan hedeflere saldırabilir. Karakterin kendi turunda yüzünü bir yöne dönmesi herhangi bir eylem türü ya da hareket puanı gerektirmez.",
+                      "Karakter, turunda **NET ALANDA** ve **silah tuttan elinin tarafında** (Eşik alan hariç) bulunan hedeflere saldırabilir. Karakterin kendi turunda yüzünü bir yöne dönmesi herhangi bir eylem türü ya da hareket puanı gerektirmez.",
                       "Karakter, **NET ALAN** sınırlarının dışına ayrılacak bir varlığa **TEPKİ EYLEM** olarak **FIRSAT SALDIRISI** gerçekleştirebilir. Karakter, fırsat saldırısı gerçekleştirirken yüzünü saldırdığı birim tarafına dönüp dönmeme konusunda seçim yapabilir. Fırsat saldırısı isabet eden hedefin hareketi iptal olur. Net alan dışındaki alanlarda hareket eden varlıklar fırsat saldırısını tetiklemez."
-                    ]
-                  },
-                  {
-                    "type": "image",
-                    "src": "https://slvnz.github.io/resources/webpage/svg/hex-block.svg",
-                    "alt": "Bloklama sistemi",
-                    "caption": "Bloklama sistemi",
-                    "width": "300"
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "BLOKLAMA SİSTEMİ"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Fiziksel mücadelelerde kaçınma genel bir standarda sahip basit bir yapıda olsa da bir kalkanla bloklamanın koşullara bağlı değişkenlikleri bulunmaktadır. Bu değişkenler dahilinde, bloklama sistemi altıgen ve kare sistem üzerinde farklılıklarıyla incelenebilir. Kalkanlar genel kullanım şekilleriyle sol elde kuşanıldıkları için, şemalar sol kullanım üzerinden bir görsellik sunmaktadır. Kalkanın diğer tarafta kullanım durumunda, aynı sistem karakterin sağ tarafı için geçerlidir."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Küçük Kalkanlar & Silahlar"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Küçük kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahip olmadıkları için çoğunlukla bireysel ölçekte fiziksel saldırıları engellemek ve savuşturmak üzere kullanılır. Sonuçları bire bir aynı olmasa da silahlar ve küçük kalkanlar aynı sistem yapısına tabidir."
-                  },
-                  {
-                    "type": "list",
-                    "ordered": false,
-                    "items": [
-                      "Küçük kalkanlar bloklamak için ek puanlarını karakterin **ÇEV** niteliğinden edinirler.",
-                      "Silahlar bu ek puanı kendilerine ait özel **BLOK** niteliğinden edinirler.",
-                      "Daha büyük boyutta kalkanlarda bloklama eyleminin zarı düşük kalsa bile arada oluşacak puan farkına bağlı olarak kısmi başarı sağlanabilirken, silahlar ve küçük kalkanlarda kaçınma durumundaki gibi başarısız olunur."
-                    ]
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Orta Kalkanlar"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Orta kalkanlar, karakteri önemli ölçüde kapatma özelliğine sahiptir. Bu özellikler hem ağırlıkları hem de büyüklükleri sebebiyle karakterin hareket kabiliyeti üzerinde olumsuz etkilere sebep olmaktadır. Ancak, bu duruma karşılık karaktere gelecek fiziksel hamlelere karşı korunak sağlamaktadır."
-                  },
-                  {
-                    "type": "list",
-                    "ordered": false,
-                    "items": [
-                      "Orta kalkan kullanan bir karakter, **NORMAL ALANLAR** tarafından gelecek yakın menzilli fiziksel saldırılara karşı normal şekilde **BLOK BONUSU** edinerek bloklama yapabilir (Kalkandan gelecek blok aşırtma sınırı).",
-                      "Eğer karaktere gelecek saldırı **NET ALAN** tarafından geliyorsa, karakter bloklama eylemine **AVANTAJ** alır.",
-                      "Eğer karaktere gelecek saldırı zor alan tarafından geliyorsa, karakter bloklama eylemine **DEZAVANTAJ** alır."
-                    ]
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Kule Kalkanlar"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Kule kalkanlar, karakterlerin hareketlerini ve **ÇEV** niteliklerini önemli ölçüde düşürürken korunak durumunu aynı ölçüde yükselten yapıya sahiptir. Bir karakter, orta kalkanlarda olduğu gibi kule kalkanlarda da blok bonusu becerisi üzerinden bloklama gerçekleştirir, ancak kule kalkanı tam blok pozuna geçirdiği zaman stamina değeri tükenene ya da kalkan işlev görmez hale gelene kadar saldırıları kesinlikle bloklar."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Bloklamada Dayanıklılık"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Bloklama, karaktere üstün korunak sağlasa da karakter tarafından kaynak kullanımı denetimi gerektiren bir süreçtir. Bir karakter, saldırı blokladıkça kalkanı üzerinde hasar alır. Kalkanın materyalinin zarar görmesinin yanı sıra, karakter arka arkaya kuvvetli saldırılar bloklamaya başlarsa DAY niteliği üzerinden bir mücadeleye girer. Bu mücadelede, bloklanan her kuvvetli saldırı sonrasında karakterin bir miktar stamina kaynağı geçici olarak tükenmeye başlar."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Karakter bu kaynağı tüketene kadar bloklama yapmayı tercih ederse, stamina kaynağı 0'a düştüğü zaman karakterin gardı kırılır ve kırılgan pozuna girer. Bu pozdayken alacağı sonraki ilk yakın menzilli saldırı kritik bir isabetle gerçekleşir. Eğer karakter stamina kaynağı tükenmeden blok yapmaya ara verirse, ara verdiği turlar boyunca sabit bir şekilde kaynağın eriyen miktarı yenilenmeye başlar."
-                  },
-                  {
-                    "type": "image",
-                    "src": "https://slvnz.github.io/resources/webpage/svg/square-battle.svg",
-                    "alt": "Kare düzen savaş sistemi",
-                    "caption": "Kare düzen savaş sistemi",
-                    "width": "300"
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "KARE DÜZEN SAVAŞ SİSTEMİ"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Kare savaş sistemi, SLVNZ 3.0'ın mücadele eylemlerinin ve hareketlerinin işlenmesi için tercih edilebilecek bir alternatifi oluşturur. Savaş sisteminde varlıkların her biri bir Kare içinde yer alırlar ve birimlerin hareketleri, gerçekleşecek eylemlerin mesafeleri ve kapsayacakları alanlar birim olarak belirlenmiş tekil kare yuvalar üzerinden hesaplanır."
-                  },
-                  {
-                    "type": "heading",
-                    "level": 3,
-                    "text": "Savaş Düzeni (Kare)"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Savaş düzeninde net alan, eşik alan ve kör alan haricinde **SOL** ve **SAĞ** birimler bulunur."
-                  },
-                  {
-                    "type": "list",
-                    "ordered": false,
-                    "items": [
-                      "Karakter, **BU ALANLARDAN** gelen fiziksel saldırılara karşı savunma yapmak için herhangi bir eksi puan almaz. Ancak saldırıyı savuşturma veya saldırıdan kaçınma süreçleri koşullara bağlı olarak değişiklik gösterir.",
-                      "Karakter, elinin boş bulunduğu taraftan gelen bir saldırıya karşı kaçınma yapmak zorundadır. Saldırının geldiği taraftaki elinde en az orta boy kalkan bulunduruyorsa, bloklamayı avantajlı gerçekleştirir.",
-                      "Karakter, altıgen sisteminde olduğu gibi sadece net alan sınırlarında bulunan varlıklara herhangi bir şekilde bakış yönünü değiştirmeden saldırıda bulunabilir. Ancak, silah bulundurduğu elinin olduğu tarafa da bakış açısını değiştirmeden saldırıda bulunabilir (Sol elinde silah bulunduran biri sol tarafa saldırabilir, ancak sağ tarafa saldırmak için o bölgeye net alan olacak şekilde yüzünü dönmelidir).",
-                      "Karakter, bu alanlardan gelecek menzilli fiziksel saldırıların farkındadır ve yukarıdaki kuralları gözeterek savunma & kaçınma yapabilir."
                     ]
                   },
                   {
@@ -3200,30 +5140,6 @@ window.SLVNZ_VERSIONS = {
                   {
                     "type": "paragraph",
                     "text": "Bunların dışında rolsel ya da durumsal olarak, karakterlerin hastalık durumları ve bu durumlardan zaman zaman yaşayabilecekleri sıkıntılar, bazı durumlara duyarlı oluşları sebebiyle daha etkin olabilme durumları vb. olaylar hüner, avantaj ve kusurlara dahil edilebilir."
-                  }
-                ]
-              },
-              {
-                "id": "siniflar",
-                "title": "SINIFLAR",
-                "mode": "rich",
-                "blocks": [
-                  {
-                    "type": "heading",
-                    "level": 2,
-                    "text": "SINIFLAR"
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "SLVNZ 4.0'da keskin hatlarıyla sınıflar bulunmasa da oyun dünyasında becerileri ve gerçekleştirebildikleri yeteneklerin sistemleri sebebiyle birbirinden ayrılabilecek sınıfsal yapılar mevcuttur. Farklı TTRPG sistemlerindeki gibi çok net ilerleme yolları olmayan bu sınıflar birbiriyle harmanlanabilir."
-                  },
-                  {
-                    "type": "paragraph",
-                    "text": "Ancak bu sınıf tanımlamaları oyun sisteminde katı bir şekilde izlenecek sınıf sınırları çizmemektedir. Sadece oyun sistemi dahilinde ve oyun evreninde karşılaşılabilecek genel arketipleri belirtmektedir. Oyuncular GM ile ortak bir çalışma sonucunda belirtilen sınıf arketiplerinin altsınıflarını ya da tamamen yeni sınıf yapıları oluşturabilirler."
-                  },
-                  {
-                    "type": "tabs",
-                    "tabs": []
                   }
                 ]
               }
@@ -3562,7 +5478,7 @@ window.SLVNZ_VERSIONS = {
           "tagline": "MASAÜSTÜ ROL YAPMA SİSTEMİ",
           "description": "",
           "version": "v3.0",
-          "contentSeed": "2026-06-22-mqpspn2p"
+          "contentSeed": "2026-06-23-mqqm1jy1"
         },
         "sections": {
           "oyun-kurallari": {
