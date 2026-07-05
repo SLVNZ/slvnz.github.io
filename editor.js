@@ -67,7 +67,72 @@
     var store = vEdStoreLoad(); if (!store) return true;
     return vEdActiveId() === store.defaultId;
   }
-  var SECTION_ORDER = ["oyun-kurallari", "yetenekler", "evren-rehberi"];
+  /* Bölüm sırası artık dinamik: draft.meta.sectionOrder (yoksa nesne anahtarları). */
+  function getSectionOrder() {
+    var keys = Object.keys(draft.sections || {});
+    var ord = (draft.meta && Array.isArray(draft.meta.sectionOrder)) ? draft.meta.sectionOrder.slice() : null;
+    if (!ord) return keys;
+    var out = ord.filter(function (k) { return draft.sections[k]; });
+    keys.forEach(function (k) { if (out.indexOf(k) === -1) out.push(k); });
+    return out;
+  }
+  function setSectionOrder(order) { draft.meta = draft.meta || {}; draft.meta.sectionOrder = order; }
+
+  function addSection() {
+    var label = prompt("Yeni bölümün adı:", "Yeni Bölüm");
+    if (label === null) return;
+    label = label.trim() || "Yeni Bölüm";
+    var order = getSectionOrder();
+    var base = slugify(label) || "bolum", key = base, k = 2;
+    while (draft.sections[key]) { key = base + "-" + (k++); }
+    draft.sections[key] = { label: label, blurb: "", items: [] };
+    order.push(key);
+    setSectionOrder(order);
+    sel = { type: "section", section: key };
+    markDirty(); renderAll();
+  }
+  function deleteSection(key) {
+    var sec = draft.sections[key];
+    if (!sec) return;
+    edConfirm('"' + sec.label + '" bölümü ve İÇİNDEKİ TÜM ÖĞELER silinecek. Emin misin?', { okLabel: "SİL" }).then(function (ok) {
+      if (!ok) return;
+      delete draft.sections[key];
+      setSectionOrder(getSectionOrder().filter(function (k) { return k !== key; }));
+      sel = { type: "meta" };
+      markDirty(); renderAll();
+    });
+  }
+  function moveSection(key, dir) {
+    var order = getSectionOrder();
+    var idx = order.indexOf(key);
+    var to = idx + dir;
+    if (idx < 0 || to < 0 || to >= order.length) return;
+    var tmp = order[idx]; order[idx] = order[to]; order[to] = tmp;
+    setSectionOrder(order);
+    markDirty(); renderAll();
+  }
+  function toggleSectionHub(key) {
+    var sec = draft.sections[key];
+    if (!sec) return;
+    if (isHub(sec)) {
+      edConfirm("HUB modundan çıkmak, sayfa yapısını düzleştirir (her sayfanın içeriği tek listeye iner). Devam edilsin mi?").then(function (ok) {
+        if (!ok) return;
+        delete sec.type;
+        var flat = [];
+        (sec.items || []).forEach(function (pg) { (pg.pages || []).forEach(function (it) { flat.push(it); }); });
+        sec.items = flat;
+        markDirty(); renderAll();
+      });
+    } else {
+      edConfirm("Bu bölüm HUB'a çevrilecek: mevcut öğeler ilk sayfanın altına taşınacak. Devam edilsin mi?").then(function (ok) {
+        if (!ok) return;
+        var oldItems = sec.items || [];
+        sec.type = "hub";
+        sec.items = [{ id: "sayfa-1", title: "Sayfa 1", blurb: "", pages: oldItems }];
+        markDirty(); renderAll();
+      });
+    }
+  }
 
   /* --- Yardımcılar -------------------------------------------------------- */
   function clone(o) { return JSON.parse(JSON.stringify(o)); }
@@ -113,7 +178,98 @@
   var dirty = false;                                  // kaydedilmemiş değişiklik var mı
   var sel = { type: "meta" };                         // seçili düzenleme hedefi
 
-  function markDirty() { dirty = true; renderStatus(); }
+  /* --- Geri al / yinele (undo/redo) ---------------------------------------
+     Hızlı ardışık düzenlemeler (yazma gibi) tek bir geri-alma adımında
+     birleştirilir: burst kapandığında (700ms sessizlik) yeni bir kontrol
+     noktası (checkpoint) belirlenir. --------------------------------------- */
+  var STORE_AUTOSAVE = "slvnz_editor_autosave";
+  var undoStack = [];
+  var redoStack = [];
+  var lastCheckpoint = clone(draft);
+  var historyBurst = false;
+  var historyBurstTimer = null;
+  var autosaveTimer = null;
+
+  function markDirty() {
+    dirty = true;
+    if (!historyBurst) {
+      undoStack.push(lastCheckpoint);
+      if (undoStack.length > 60) undoStack.shift();
+      redoStack = [];
+      historyBurst = true;
+    }
+    clearTimeout(historyBurstTimer);
+    historyBurstTimer = setTimeout(function () { lastCheckpoint = clone(draft); historyBurst = false; }, 700);
+    clearTimeout(autosaveTimer);
+    autosaveTimer = setTimeout(autosaveNow, 900);
+    renderStatus();
+    updateHistoryButtons();
+  }
+  function autosaveNow() {
+    try { localStorage.setItem(STORE_AUTOSAVE, JSON.stringify({ verId: vEdActiveId(), content: draft, ts: Date.now() })); } catch (e) {}
+  }
+  function clearAutosave() { try { localStorage.removeItem(STORE_AUTOSAVE); } catch (e) {} }
+  function checkAutosaveRecovery() {
+    try {
+      var raw = localStorage.getItem(STORE_AUTOSAVE);
+      if (!raw) return;
+      var a = JSON.parse(raw);
+      if (!a || !a.content) return;
+      if (a.verId !== vEdActiveId()) return;
+      if (JSON.stringify(a.content) === JSON.stringify(draft)) { clearAutosave(); return; }
+      edConfirm("Kaydedilmemiş bir otomatik taslak bulundu. Onu geri yüklemek ister misin?", { okLabel: "TASLAĞI YÜKLE", cancelLabel: "MEVCUTLA DEVAM ET" }).then(function (ok) {
+        if (ok) {
+          draft = a.content; lastCheckpoint = clone(draft); dirty = true;
+        } else {
+          clearAutosave();
+        }
+        renderAll();
+      });
+    } catch (e) {}
+  }
+  // sel bir öğeye işaret ediyor ama artık yoksa güvenli bir üst seviyeye düşür
+  function sanitizeSel() {
+    try {
+      if (sel.type === "section") {
+        if (!draft.sections[sel.section]) sel = { type: "meta" };
+      } else if (sel.type === "page") {
+        var sec = draft.sections[sel.section];
+        var pg = sec && (sec.items || []).find(function (p) { return p.id === sel.pageId; });
+        sel = pg ? sel : (sec ? { type: "section", section: sel.section } : { type: "meta" });
+      } else if (sel.type === "item") {
+        var items = itemListFor(sel);
+        var it = items && items.find(function (x) { return x.id === sel.itemId; });
+        if (!it) sel = { type: "meta" };
+      }
+    } catch (e) { sel = { type: "meta" }; }
+  }
+  function undo() {
+    if (!undoStack.length) return;
+    redoStack.push(clone(draft));
+    draft = undoStack.pop();
+    lastCheckpoint = clone(draft);
+    historyBurst = false;
+    dirty = true;
+    sanitizeSel();
+    renderAll();
+    toast("GERİ ALINDI");
+  }
+  function redo() {
+    if (!redoStack.length) return;
+    undoStack.push(clone(draft));
+    draft = redoStack.pop();
+    lastCheckpoint = clone(draft);
+    historyBurst = false;
+    dirty = true;
+    sanitizeSel();
+    renderAll();
+    toast("YİNELENDİ");
+  }
+  function updateHistoryButtons() {
+    var u = document.getElementById("edUndo"), r = document.getElementById("edRedo");
+    if (u) u.disabled = !undoStack.length;
+    if (r) r.disabled = !redoStack.length;
+  }
 
   /* --- Tema --------------------------------------------------------------- */
   function getTheme() {
@@ -149,13 +305,16 @@
     }
     vEdStoreSave(store);
     dirty = false; renderStatus();
+    clearAutosave();
     toast("KAYDEDİLDİ");
   }
   function resetDefaults() {
-    if (!confirm("Bu versiyonun içeriği content.js varsayılanlarına sıfırlanacak. Emin misin?")) return;
-    draft = clone(window.SLVNZ_CONTENT);
-    dirty = true; sel = { type: "meta" };
-    renderAll(); toast("VARSAYILANA SIFIRLANDI — KAYDETMEYİ UNUTMA");
+    edConfirm("Bu versiyonun içeriği content.js varsayılanlarına sıfırlanacak. Emin misin?", { okLabel: "SIFIRLA" }).then(function (ok) {
+      if (!ok) return;
+      draft = clone(window.SLVNZ_CONTENT);
+      dirty = true; sel = { type: "meta" };
+      renderAll(); toast("VARSAYILANA SIFIRLANDI — KAYDETMEYİ UNUTMA");
+    });
   }
   function exportJSON() {
     var content = JSON.stringify(draft, null, 2);
@@ -194,7 +353,7 @@
           if (!data.sections) throw new Error("Geçersiz yapı");
           draft = data; markDirty(); sel = { type: "meta" }; renderAll();
           toast("İÇE AKTARILDI — KAYDETMEYİ UNUTMA");
-        } catch (e) { alert("Dosya okunamadı: " + e.message); }
+        } catch (e) { edAlert("Dosya okunamadı: " + e.message); }
       };
       rd.readAsText(f);
     };
@@ -286,12 +445,17 @@
               '⊛ VERSİYONLAR' +
             '</div>';
 
-    SECTION_ORDER.forEach(function (key) {
+    var __secOrder = getSectionOrder();
+    __secOrder.forEach(function (key, secIdx) {
       var sec = draft.sections[key];
       if (!sec) return;
-      html += '<div class="ed-tree__group">';
+      html += '<div class="ed-tree__group" data-secgroup="' + key + '">';
       html += '<div class="ed-tree__seclabel">' +
-                '<span class="label" data-sel="section" data-sec="' + key + '" style="cursor:pointer">' + esc(sec.label) + '</span>' +
+                '<span class="label" data-sel="section" data-sec="' + key + '" style="cursor:pointer">' + esc(sec.label) + (isHub(sec) ? ' <span class="ed-hub-tag">HUB</span>' : '') + '</span>' +
+                '<span class="ed-tree__secbtns">' +
+                  '<button class="ed-mini" data-secmove="' + key + '::up"' + (secIdx === 0 ? " disabled" : "") + ' title="Yukari tasi">&uarr;</button>' +
+                  '<button class="ed-mini" data-secmove="' + key + '::down"' + (secIdx === __secOrder.length - 1 ? " disabled" : "") + ' title="Asagi tasi">&darr;</button>' +
+                '</span>' +
                 '<span class="index">' + pad(sec.items.length) + '</span>' +
               '</div>';
 
@@ -331,6 +495,7 @@
       }
       html += '</div>';
     });
+    html += '<button class="ed-addbtn ed-addbtn--section" data-addsection="1">+ YENI BOLUM EKLE</button>';
     return html;
   }
 
@@ -404,6 +569,8 @@
     var sec = draft.sections[sel.section];
     if (!sec) { sel = { type: "meta" }; return renderForm(); }
     var hub = isHub(sec);
+    var order = getSectionOrder();
+    var idx = order.indexOf(sel.section);
     return '' +
       '<div class="ed-form__head"><div>' +
         '<div class="ed-form__kicker label label--accent">SEKME AYARLARI' + (hub ? ' · HUB' : '') + '</div>' +
@@ -416,7 +583,15 @@
             '<div class="ed-rowbtns"><button class="btn btn--sm" data-addpage="' + sel.section + '">+ SAYFA EKLE</button></div></div>'
         : '<div class="ed-field"><label>ÖĞELER</label><div class="ed-rowbtns">' +
             '<button class="btn btn--sm" data-add="' + sel.section + '">+ ÖĞE EKLE</button>' +
-          '</div></div>');
+          '</div></div>') +
+      '<div class="ed-field"><label>BÖLÜM YÖNETİMİ <span class="hint">sırala, HUB\'a çevir veya sil</span></label>' +
+        '<div class="ed-rowbtns">' +
+          '<button class="btn btn--sm" data-secmoveform="up"' + (idx <= 0 ? " disabled" : "") + '>↑ SOLA / YUKARI TAŞI</button>' +
+          '<button class="btn btn--sm" data-secmoveform="down"' + (idx < 0 || idx >= order.length - 1 ? " disabled" : "") + '>↓ SAĞA / AŞAĞI TAŞI</button>' +
+          '<button class="btn btn--sm" data-sechubtoggle="1">' + (hub ? "HUB MODUNU KAPAT" : "HUB'A ÇEVİR") + '</button>' +
+          '<button class="btn btn--sm btn--danger" data-secdelete="1">✕ BÖLÜMÜ SİL</button>' +
+        '</div>' +
+      '</div>';
   }
 
   // HUB sayfası düzenleme: başlık + kart açıklaması + içerik (sub-page) listesi
@@ -451,11 +626,12 @@
     if (idx < 0) { sel = sel.pageId ? { type: "page", section: sel.section, pageId: sel.pageId } : { type: "section", section: sel.section }; return renderForm(); }
     var it = items[idx];
     var kicker = sel.pageId ? ((pageOf(sel) ? esc(pageOf(sel).title) : esc(sec.label)) + ' / ' + pad(idx + 1)) : (esc(sec.label) + ' / ' + pad(idx + 1));
-    var mode = it.mode === "table" ? "table" : it.mode === "rich" ? "rich" : it.mode === "creature-list" ? "creature" : "text";
+    var mode = it.mode === "table" ? "table" : it.mode === "rich" ? "rich" : it.mode === "creature-list" ? "creature" : it.mode === "wiki" ? "wiki" : "text";
     var modeBody;
     if (mode === "table") modeBody = renderTableEditor(it);
     else if (mode === "rich") modeBody = renderRichEditor(it);
     else if (mode === "creature") modeBody = renderCreatureEditor(it);
+    else if (mode === "wiki") modeBody = renderWikiEditor(it);
     else modeBody = field("AÇIKLAMA METNİ", "paragrafları boş satırla ayır", '<textarea class="ed-textarea tall" data-item="body">' + esc(it.body || "") + '</textarea>');
     return '' +
       '<div class="ed-form__head">' +
@@ -473,6 +649,7 @@
           '<button class="ed-seg__btn' + (mode === "rich" ? " active" : "") + '" data-mode="rich">ZENGİN</button>' +
           '<button class="ed-seg__btn' + (mode === "table" ? " active" : "") + '" data-mode="table">TABLO</button>' +
           '<button class="ed-seg__btn' + (mode === "creature" ? " active" : "") + '" data-mode="creature">YARATIK</button>' +
+          '<button class="ed-seg__btn' + (mode === "wiki" ? " active" : "") + '" data-mode="wiki">WİKİ</button>' +
         '</div>' +
       '</div>' +
       modeBody +
@@ -611,25 +788,59 @@
      Her blok yukarı/aşağı taşınabilir ve silinebilir. **kalın** *italik* yazılır.
      ---------------------------------------------------------------------- */
   var BLOCK_TYPES = [
-    { t: "heading",   name: "Başlık" },
-    { t: "paragraph", name: "Paragraf" },
-    { t: "list",      name: "Liste" },
-    { t: "table",     name: "Tablo" },
-    { t: "image",     name: "Görsel" },
-    { t: "figuretext", name: "Görsel + Metin" },
-    { t: "tabs",      name: "Sekmeler" },
-    { t: "example",   name: "Örnek Kutusu" },
+    { t: "heading",    name: "Başlık",        group: "Metin" },
+    { t: "paragraph",  name: "Paragraf",      group: "Metin" },
+    { t: "list",       name: "Liste",         group: "Metin" },
+    { t: "quote",      name: "Alıntı",        group: "Metin" },
+    { t: "callout",    name: "Bilgi Kutusu",  group: "Metin" },
+    { t: "example",    name: "Örnek Kutusu",  group: "Metin" },
+    { t: "code",       name: "Kod",           group: "Metin" },
+    { t: "image",      name: "Görsel",        group: "Medya" },
+    { t: "figuretext", name: "Görsel + Metin", group: "Medya" },
+    { t: "gallery",    name: "Galeri",        group: "Medya" },
+    { t: "video",      name: "Video / Embed", group: "Medya" },
+    { t: "table",      name: "Tablo",         group: "Veri" },
+    { t: "columns",    name: "Sütunlar",      group: "Düzen" },
+    { t: "accordion",  name: "Akordeon",      group: "Düzen" },
+    { t: "tabs",       name: "Sekmeler",      group: "Düzen" },
+    { t: "divider",    name: "Ayraç",         group: "Düzen" },
+    { t: "spacer",     name: "Boşluk",        group: "Düzen" },
+    { t: "button",     name: "Buton / CTA",   group: "Gelişmiş" },
+    { t: "html",       name: "Ham HTML",      group: "Gelişmiş" },
   ];
+  var BLOCK_GROUP_ORDER = ["Metin", "Medya", "Veri", "Düzen", "Gelişmiş"];
+  // Yerleştirme açılır menüsü — türleri gruplayarak <optgroup> üretir.
+  function blockTypeOptions(allowNested) {
+    return BLOCK_GROUP_ORDER.map(function (g) {
+      var opts = BLOCK_TYPES.filter(function (b) {
+        if (b.group !== g) return false;
+        if (!allowNested && (b.t === "tabs" || b.t === "columns" || b.t === "accordion")) return false;
+        return true;
+      }).map(function (b) { return '<option value="' + b.t + '">' + b.name + '</option>'; }).join("");
+      return opts ? '<optgroup label="' + g + '">' + opts + '</optgroup>' : "";
+    }).join("");
+  }
   function newBlock(type) {
     switch (type) {
       case "heading":   return { type: "heading", level: 2, text: "Yeni Başlık" };
       case "paragraph": return { type: "paragraph", text: "" };
       case "list":      return { type: "list", ordered: false, items: [""] };
-      case "table":     return { type: "table", header: ["Sütun 1", "Sütun 2"], rows: [["", ""]] };
-      case "image":     return { type: "image", src: "", alt: "", caption: "" };
-      case "figuretext": return { type: "figuretext", position: "left", src: "", alt: "", caption: "", showCaption: false, width: 240, heading: "", text: "" };
-      case "tabs":      return { type: "tabs", tabs: [{ label: "Sekme 1", blocks: [] }] };
+      case "quote":     return { type: "quote", text: "", cite: "" };
+      case "callout":   return { type: "callout", variant: "info", title: "", text: "" };
       case "example":   return { type: "example", text: "" };
+      case "code":      return { type: "code", lang: "", code: "" };
+      case "table":     return { type: "table", header: ["Sütun 1", "Sütun 2"], rows: [["", ""]] };
+      case "image":     return { type: "image", src: "", alt: "", caption: "", showCaption: true, width: "" };
+      case "figuretext": return { type: "figuretext", position: "left", src: "", alt: "", caption: "", showCaption: false, width: 240, heading: "", text: "" };
+      case "gallery":   return { type: "gallery", columns: 3, images: [] };
+      case "video":     return { type: "video", src: "", caption: "", showCaption: false };
+      case "columns":   return { type: "columns", ratio: "1fr 1fr", cols: [{ blocks: [] }, { blocks: [] }] };
+      case "accordion": return { type: "accordion", items: [{ title: "Başlık 1", open: false, blocks: [] }] };
+      case "tabs":      return { type: "tabs", tabs: [{ label: "Sekme 1", blocks: [] }] };
+      case "divider":   return { type: "divider", dstyle: "solid" };
+      case "spacer":    return { type: "spacer", height: 40 };
+      case "button":    return { type: "button", label: "Buton", href: "", variant: "solid", align: "left" };
+      case "html":      return { type: "html", html: "" };
       default:          return { type: "paragraph", text: "" };
     }
   }
@@ -640,7 +851,7 @@
 
   function migrateBlock(old, newType) {
     var nb = newBlock(newType);
-    var textLike = { heading: 1, paragraph: 1, example: 1 };
+    var textLike = { heading: 1, paragraph: 1, example: 1, quote: 1, callout: 1 };
     if (textLike[old.type] && textLike[newType]) {
       nb.text = old.text || "";
     } else if (old.type === "list" && textLike[newType]) {
@@ -652,32 +863,106 @@
       nb.text = old.text || "";
     } else if (textLike[old.type] && newType === "figuretext") {
       nb.text = old.text || "";
+    } else if (old.type === "code" && textLike[newType]) {
+      nb.text = old.code || "";
+    } else if (textLike[old.type] && newType === "code") {
+      nb.code = old.text || "";
     }
+    if (old.style) nb.style = old.style; // blok stilini koru
     return nb;
   }
 
-  var tabUI = new WeakMap(); // tabs bloğu -> editörde aktif sekme indeksi
+  var tabUI = new WeakMap(); // tabs/columns/accordion bloğu -> editörde aktif sekme/sütun indeksi
 
-  function renderBlockInsert(idx, allowTabs) {
-    var opts = BLOCK_TYPES.filter(function (b) { return allowTabs || b.t !== "tabs"; })
-      .map(function (b) { return '<option value="' + b.t + '">' + b.name + '</option>'; }).join('');
+  /* Gruplu tür açılır menüsü (seçili işaretli). */
+  function blockTypeSelectOptions(current, allowNested) {
+    return BLOCK_GROUP_ORDER.map(function (g) {
+      var opts = BLOCK_TYPES.filter(function (b) {
+        if (b.group !== g) return false;
+        if (!allowNested && (b.t === "tabs" || b.t === "columns" || b.t === "accordion")) return false;
+        return true;
+      }).map(function (b) { return '<option value="' + b.t + '"' + (b.t === current ? ' selected' : '') + '>' + b.name + '</option>'; }).join("");
+      return opts ? '<optgroup label="' + g + '">' + opts + '</optgroup>' : "";
+    }).join("");
+  }
+
+  /* Satır içi biçimlendirme araç çubuğu (metin alanlarının üstünde). */
+  function fmtBarHtml() {
+    var b = [
+      ['**', 'B', 'Kalın', 'ed-ft--b'],
+      ['*', 'I', 'İtalik', 'ed-ft--i'],
+      ['__', 'U', 'Altçizgi', 'ed-ft--u'],
+      ['~~', 'S', 'Üstüçizili', 'ed-ft--s'],
+      ['==', 'H', 'Vurgu', 'ed-ft--h'],
+      ['\`', '</>', 'Satır içi kod', '']
+    ].map(function (x) {
+      return '<button type="button" class="ed-ft-btn ' + x[3] + '" data-fmt-wrap="' + x[0] + '" title="' + x[2] + '">' + x[1] + '</button>';
+    }).join("");
+    b += '<button type="button" class="ed-ft-btn" data-fmt-link title="Bağlantı ekle">LINK</button>';
+    b += '<button type="button" class="ed-ft-btn" data-fmt-color title="Renk uygula">RENK</button>';
+    return '<div class="ed-fmtbar" data-fmtbar>' + b + '</div>';
+  }
+  // Biçimlendirilebilir metin alanı (araç çubuğu + textarea)
+  function fmtField(fieldName, value, placeholder, minH) {
+    return '<div class="ed-fmtfield">' + fmtBarHtml() +
+      '<textarea class="ed-textarea" data-rb-field="' + fieldName + '" placeholder="' + placeholder + '"' +
+      (minH ? ' style="min-height:' + minH + 'px"' : '') + '>' + esc(value || "") + '</textarea></div>';
+  }
+  // Görsel alanı (önizleme + URL + dosyadan yükle)
+  function imgField(b, fieldName) {
+    var f = fieldName || "src";
+    var src = b[f] || "";
+    return '<div class="ed-imgfield" data-imgfield="' + f + '">' +
+      '<div class="ed-imgfield__prev' + (src ? "" : " empty") + '" data-img-prev>' +
+        (src ? '<img src="' + esc(src) + '" alt="">' : '<span>GÖRSEL</span>') + '</div>' +
+      '<div class="ed-imgfield__ctrl">' +
+        '<input class="ed-input" data-rb-field="' + f + '" value="' + esc(src) + '" placeholder="Görsel URL (https://…) veya dosyadan yükle">' +
+        '<div class="ed-imgfield__btns"><button type="button" class="btn btn--sm" data-img-upload>DOSYADAN YÜKLE</button>' +
+        '<input type="file" accept="image/*" data-img-file style="display:none"></div>' +
+      '</div></div>';
+  }
+  function hasStyle(s) { return s && Object.keys(s).some(function (k) { return s[k]; }); }
+  // Blok başına stil & gelişmiş panel
+  function stylePanelHtml(b) {
+    var s = b.style || {};
+    var al = s.align || "";
+    var alignSeg = [["", "—"], ["left", "SOL"], ["center", "ORTA"], ["right", "SAĞ"], ["justify", "YASLA"]].map(function (a) {
+      return '<button type="button" class="ed-seg__btn' + (al === a[0] ? " active" : "") + '" data-style-align="' + a[0] + '">' + a[1] + '</button>';
+    }).join("");
+    function fld(k, ph, val) { return '<input class="ed-input" data-style="' + k + '" value="' + esc(val || "") + '" placeholder="' + ph + '">'; }
+    return '<details class="ed-stylepanel"' + (hasStyle(s) ? " open" : "") + '>' +
+      '<summary>STİL & GELİŞMİŞ</summary>' +
+      '<div class="ed-sp-grid">' +
+        '<div class="ed-sp-full"><span class="ed-sp-lbl">Hizalama</span><div class="ed-seg ed-seg--sm">' + alignSeg + '</div></div>' +
+        '<div><span class="ed-sp-lbl">Arka plan</span>' + fld("bg", "#111 / gradient", s.bg) + '</div>' +
+        '<div><span class="ed-sp-lbl">Metin rengi</span>' + fld("color", "#eee", s.color) + '</div>' +
+        '<div><span class="ed-sp-lbl">İç boşluk</span>' + fld("pad", "16px 20px", s.pad) + '</div>' +
+        '<div><span class="ed-sp-lbl">Dış boşluk</span>' + fld("margin", "24px 0", s.margin) + '</div>' +
+        '<div><span class="ed-sp-lbl">Kenarlık</span>' + fld("border", "1px solid #333", s.border) + '</div>' +
+        '<div><span class="ed-sp-lbl">Köşe yarıçapı</span>' + fld("radius", "4px", s.radius) + '</div>' +
+        '<div><span class="ed-sp-lbl">Maks. genişlik</span>' + fld("maxw", "640px", s.maxw) + '</div>' +
+        '<div><span class="ed-sp-lbl">CSS sınıfı</span>' + fld("cls", "özel-sinif", s.cls) + '</div>' +
+        '<div class="ed-sp-full"><span class="ed-sp-lbl">Özel CSS</span>' +
+          '<textarea class="ed-textarea ed-code-ta" data-style="css" placeholder="box-shadow: 0 4px 20px rgba(0,0,0,.4);" style="min-height:60px">' + esc(s.css || "") + '</textarea></div>' +
+      '</div></details>';
+  }
+
+  function renderBlockInsert(idx, allowNested) {
     return '<div class="ed-rb-between" data-rb-before="' + idx + '">' +
       '<div class="ed-rb-between__line"></div>' +
       '<div class="ed-rb-between__ctrl">' +
-        '<select class="ed-input ed-rb-between__sel">' + opts + '</select>' +
+        '<select class="ed-input ed-rb-between__sel">' + blockTypeOptions(allowNested) + '</select>' +
         '<button class="btn btn--sm ed-rb-between__btn">↑ BURAYA EKLE</button>' +
       '</div>' +
       '<div class="ed-rb-between__line"></div>' +
     '</div>';
   }
 
-  function renderBlockList(blocks, allowTabs) {
-    var addOpts = BLOCK_TYPES.filter(function (b) { return allowTabs || b.t !== "tabs"; })
-      .map(function (b) { return '<option value="' + b.t + '">' + b.name + '</option>'; }).join("");
+  function renderBlockList(blocks, allowNested) {
     var list;
     if (blocks.length) {
       list = blocks.map(function (b, i) {
-        return renderBlockInsert(i, allowTabs) + renderBlockCard(b, i, blocks.length);
+        return renderBlockInsert(i, allowNested) + renderBlockCard(b, i, blocks.length, allowNested);
       }).join("");
     } else {
       list = '<div class="ed-rb-empty">Henüz blok yok. Aşağıdan blok ekleyerek başla.</div>';
@@ -685,7 +970,7 @@
     return '<div class="ed-rb-listwrap">' +
       '<div class="ed-rb-list">' + list + '</div>' +
       '<div class="ed-rb-add">' +
-        '<select class="ed-input ed-rb-add__sel" data-rb-newtype>' + addOpts + '</select>' +
+        '<select class="ed-input ed-rb-add__sel" data-rb-newtype>' + blockTypeOptions(allowNested) + '</select>' +
         '<button class="btn btn--sm" data-rb-add>+ SONA EKLE</button>' +
       '</div>' +
     '</div>';
@@ -695,12 +980,12 @@
     var blocks = it.blocks || [];
     return '' +
       '<div class="ed-field">' +
-        '<label>İÇERİK BLOKLARI <span class="hint">' + blocks.length + ' blok · **kalın** *italik* · ↑/↓ ile sırala</span></label>' +
+        '<label>İÇERİK BLOKLARI <span class="hint">' + blocks.length + ' blok · sürükle-bırak ile sırala · **kalın** *italik* __altçizgi__ ~~üstüçizili~~ ==vurgu== [metin](url) {#e11|renkli}</span></label>' +
         renderBlockList(blocks, true) +
       '</div>';
   }
 
-  function renderBlockCard(b, i, total) {
+  function renderBlockCard(b, i, total, allowNested) {
     var inner = "";
     if (b.type === "heading") {
       inner =
@@ -712,9 +997,25 @@
           '<input class="ed-input" data-rb-field="text" value="' + esc(b.text || "") + '" placeholder="Başlık metni">' +
         '</div>';
     } else if (b.type === "paragraph") {
-      inner = '<textarea class="ed-textarea" data-rb-field="text" placeholder="Paragraf metni…">' + esc(b.text || "") + '</textarea>';
+      inner = fmtField("text", b.text, "Paragraf metni…", 90);
     } else if (b.type === "example") {
-      inner = '<textarea class="ed-textarea" data-rb-field="text" placeholder="Örnek / anlatı metni…">' + esc(b.text || "") + '</textarea>';
+      inner = fmtField("text", b.text, "Örnek / anlatı metni…", 90);
+    } else if (b.type === "quote") {
+      inner = fmtField("text", b.text, "Alıntı metni…", 80) +
+        '<input class="ed-input" data-rb-field="cite" value="' + esc(b.cite || "") + '" placeholder="Kaynak / kişi (opsiyonel)">';
+    } else if (b.type === "callout") {
+      var vr = b.variant || "info";
+      var variants = [["info", "BİLGİ"], ["note", "NOT"], ["success", "BAŞARI"], ["warning", "UYARI"], ["danger", "TEHLİKE"], ["tip", "İPUCU"]];
+      inner =
+        '<div class="ed-rb-poswrap"><span class="ed-rb-poslabel">TÜR</span><div class="ed-seg ed-seg--sm">' +
+          variants.map(function (v) { return '<button type="button" class="ed-seg__btn' + (vr === v[0] ? " active" : "") + '" data-callout-var="' + v[0] + '">' + v[1] + '</button>'; }).join("") +
+        '</div></div>' +
+        '<input class="ed-input" data-rb-field="title" value="' + esc(b.title || "") + '" placeholder="Başlık (opsiyonel)">' +
+        fmtField("text", b.text, "Kutu metni…", 70);
+    } else if (b.type === "code") {
+      inner =
+        '<input class="ed-input" data-rb-field="lang" value="' + esc(b.lang || "") + '" placeholder="Dil etiketi (opsiyonel, örn. JS)">' +
+        '<textarea class="ed-textarea ed-code-ta" data-rb-field="code" spellcheck="false" placeholder="Kod…" style="min-height:130px">' + esc(b.code || "") + '</textarea>';
     } else if (b.type === "list") {
       var lines = (b.items || []).join("\n");
       inner =
@@ -722,14 +1023,72 @@
         '<textarea class="ed-textarea" data-rb-field="items" placeholder="Her satır bir madde">' + esc(lines) + '</textarea>';
     } else if (b.type === "image") {
       inner =
-        '<input class="ed-input" data-rb-field="src" value="' + esc(b.src || "") + '" placeholder="Görsel URL (https://…)">' +
+        imgField(b, "src") +
         '<label class="ed-rb-check"><input type="checkbox" data-rb-field="showCaption"' + (b.showCaption !== false ? " checked" : "") + '> Açıklamayı göster</label>' +
         '<input class="ed-input" data-rb-field="caption" value="' + esc(b.caption || "") + '" placeholder="Açıklama metni">' +
-        '<div class="ed-rb-row2">' +
-          '<input class="ed-input" data-rb-field="width" type="number" min="0" value="' + esc(b.width || "") + '" placeholder="Genişlik (px) — boş = otomatik">' +
-        '</div>';
+        '<input class="ed-input" data-rb-field="alt" value="' + esc(b.alt || "") + '" placeholder="Alternatif metin (erişilebilirlik)">' +
+        '<div class="ed-rb-row2"><input class="ed-input" data-rb-field="width" type="number" min="0" value="' + esc(b.width || "") + '" placeholder="Genişlik (px) — boş = otomatik"></div>';
+    } else if (b.type === "video") {
+      inner =
+        '<input class="ed-input" data-rb-field="src" value="' + esc(b.src || "") + '" placeholder="YouTube / Vimeo / MP4 URL veya embed kodu">' +
+        '<div class="ed-imgfield__btns"><button type="button" class="btn btn--sm" data-vid-upload>DOSYADAN YÜKLE (MP4)</button>' +
+        '<input type="file" accept="video/*" data-vid-file style="display:none"></div>' +
+        '<label class="ed-rb-check"><input type="checkbox" data-rb-field="showCaption"' + (b.showCaption ? " checked" : "") + '> Açıklamayı göster</label>' +
+        '<input class="ed-input" data-rb-field="caption" value="' + esc(b.caption || "") + '" placeholder="Açıklama (opsiyonel)">';
     } else if (b.type === "table") {
       inner = renderBlockTableEditor(b);
+    } else if (b.type === "divider") {
+      var ds = b.dstyle || "solid";
+      inner = '<div class="ed-rb-poswrap"><span class="ed-rb-poslabel">ÇİZGİ</span><div class="ed-seg ed-seg--sm">' +
+        [["solid", "DÜZ"], ["dashed", "KESİK"], ["dotted", "NOKTALI"], ["thick", "KALIN"]].map(function (v) {
+          return '<button type="button" class="ed-seg__btn' + (ds === v[0] ? " active" : "") + '" data-div-style="' + v[0] + '">' + v[1] + '</button>';
+        }).join("") + '</div></div>';
+    } else if (b.type === "spacer") {
+      inner = '<div class="ed-rb-row2"><label class="ed-inline-lbl">Yükseklik (px)</label>' +
+        '<input class="ed-input" type="number" min="0" data-rb-field="height" value="' + esc(b.height || 40) + '" style="max-width:120px"></div>';
+    } else if (b.type === "button") {
+      var al = b.align || "left", bvr = b.variant || "solid";
+      inner =
+        '<div class="ed-rb-row2">' +
+          '<input class="ed-input" data-rb-field="label" value="' + esc(b.label || "") + '" placeholder="Buton yazısı">' +
+          '<input class="ed-input" data-rb-field="href" value="' + esc(b.href || "") + '" placeholder="Bağlantı (https://… veya #/bolum)">' +
+        '</div>' +
+        '<div class="ed-rb-poswrap"><span class="ed-rb-poslabel">STİL</span><div class="ed-seg ed-seg--sm">' +
+          [["solid", "DOLU"], ["outline", "ÇERÇEVE"], ["ghost", "SADE"]].map(function (v) { return '<button type="button" class="ed-seg__btn' + (bvr === v[0] ? " active" : "") + '" data-btn-var="' + v[0] + '">' + v[1] + '</button>'; }).join("") +
+        '</div></div>' +
+        '<div class="ed-rb-poswrap"><span class="ed-rb-poslabel">HİZALAMA</span><div class="ed-seg ed-seg--sm">' +
+          [["left", "SOL"], ["center", "ORTA"], ["right", "SAĞ"]].map(function (v) { return '<button type="button" class="ed-seg__btn' + (al === v[0] ? " active" : "") + '" data-btn-align="' + v[0] + '">' + v[1] + '</button>'; }).join("") +
+        '</div></div>';
+    } else if (b.type === "html") {
+      inner =
+        '<textarea class="ed-textarea ed-code-ta" data-rb-field="html" spellcheck="false" placeholder="&lt;div&gt;Ham HTML…&lt;/div&gt;" style="min-height:130px">' + esc(b.html || "") + '</textarea>' +
+        '<div class="ed-rb-hint">⚠ Ham HTML doğrudan siteye eklenir — yalnızca güvendiğin kodu yapıştır.</div>';
+    } else if (b.type === "gallery") {
+      var imgs = b.images || (b.images = []);
+      inner =
+        '<div class="ed-rb-row2"><label class="ed-inline-lbl">Sütun sayısı</label>' +
+          '<input class="ed-input" type="number" min="1" max="6" data-rb-field="columns" value="' + esc(b.columns || 3) + '" style="max-width:90px"></div>' +
+        '<div class="ed-gal-items">' + imgs.map(function (im, gi) { return galItemHtml(im, gi, imgs.length); }).join("") + '</div>' +
+        '<button class="ed-addbtn-inline" data-gal-add>+ GÖRSEL EKLE</button>';
+    } else if (b.type === "figuretext") {
+      var pos = b.position || "left";
+      inner =
+        '<div class="ed-rb-poswrap"><span class="ed-rb-poslabel">GÖRSEL KONUMU</span>' +
+          '<div class="ed-seg ed-seg--sm">' +
+            '<button type="button" class="ed-seg__btn' + (pos === "left" ? " active" : "") + '" data-ft-pos="left">SOL</button>' +
+            '<button type="button" class="ed-seg__btn' + (pos === "top" ? " active" : "") + '" data-ft-pos="top">ÜST</button>' +
+            '<button type="button" class="ed-seg__btn' + (pos === "bottom" ? " active" : "") + '" data-ft-pos="bottom">ALT</button>' +
+            '<button type="button" class="ed-seg__btn' + (pos === "right" ? " active" : "") + '" data-ft-pos="right">SAĞ</button>' +
+          '</div>' +
+        '</div>' +
+        imgField(b, "src") +
+        '<div class="ed-rb-row2">' +
+          '<input class="ed-input" data-rb-field="width" type="number" min="0" value="' + esc(b.width || "") + '" placeholder="Görsel genişliği (px)">' +
+          '<label class="ed-rb-check"><input type="checkbox" data-rb-field="showCaption"' + (b.showCaption ? " checked" : "") + '> Açıklamayı göster</label>' +
+        '</div>' +
+        '<input class="ed-input" data-rb-field="caption" value="' + esc(b.caption || "") + '" placeholder="Görsel açıklaması (opsiyonel)">' +
+        '<input class="ed-input" data-rb-field="heading" value="' + esc(b.heading || "") + '" placeholder="Metin başlığı (opsiyonel)">' +
+        fmtField("text", b.text, "Gövde metni…", 90);
     } else if (b.type === "tabs") {
       if (!b.tabs) b.tabs = [];
       var act = tabUI.get(b) || 0;
@@ -755,41 +1114,91 @@
             '<div class="ed-tabbody">' + renderBlockList(tb.blocks, false) + '</div>' +
           '</div>';
       }
-    } else if (b.type === "figuretext") {
-      var pos = b.position || "left";
+    } else if (b.type === "columns") {
+      if (!b.cols) b.cols = [];
+      var cact = tabUI.get(b) || 0;
+      if (cact >= b.cols.length) cact = 0;
+      var cchips = b.cols.map(function (c, ci) {
+        return '<button class="ed-tabchip' + (ci === cact ? " active" : "") + '" data-colsel="' + ci + '">Sütun ' + (ci + 1) + '</button>';
+      }).join("");
       inner =
-        '<div class="ed-rb-poswrap"><span class="ed-rb-poslabel">GÖRSEL KONUMU</span>' +
-          '<div class="ed-seg ed-seg--sm">' +
-            '<button class="ed-seg__btn' + (pos === "left" ? " active" : "") + '" data-ft-pos="left">SOL</button>' +
-            '<button class="ed-seg__btn' + (pos === "top" ? " active" : "") + '" data-ft-pos="top">ÜST</button>' +
-            '<button class="ed-seg__btn' + (pos === "bottom" ? " active" : "") + '" data-ft-pos="bottom">ALT</button>' +
-            '<button class="ed-seg__btn' + (pos === "right" ? " active" : "") + '" data-ft-pos="right">SAĞ</button>' +
-          '</div>' +
-        '</div>' +
-        '<input class="ed-input" data-rb-field="src" value="' + esc(b.src || "") + '" placeholder="Görsel URL (https://…)">' +
-        '<div class="ed-rb-row2">' +
-          '<input class="ed-input" data-rb-field="width" type="number" min="0" value="' + esc(b.width || "") + '" placeholder="Görsel genişliği (px)">' +
-          '<label class="ed-rb-check"><input type="checkbox" data-rb-field="showCaption"' + (b.showCaption ? " checked" : "") + '> Açıklamayı göster</label>' +
-        '</div>' +
-        '<input class="ed-input" data-rb-field="caption" value="' + esc(b.caption || "") + '" placeholder="Görsel açıklaması (opsiyonel)">' +
-        '<input class="ed-input" data-rb-field="heading" value="' + esc(b.heading || "") + '" placeholder="Metin başlığı (opsiyonel)">' +
-        '<textarea class="ed-textarea" data-rb-field="text" placeholder="Gövde metni… (**kalın** *italik*)">' + esc(b.text || "") + '</textarea>';
+        '<div class="ed-rb-row2"><label class="ed-inline-lbl">Oran</label>' +
+          '<input class="ed-input" data-col-ratio value="' + esc(b.ratio || "") + '" placeholder="örn. 1fr 1fr  ·  2fr 1fr"></div>' +
+        '<div class="ed-tabstrip">' + cchips + '<button class="ed-tabchip ed-tabchip--add" data-coladd>+ SÜTUN</button></div>';
+      if (b.cols.length) {
+        var col = b.cols[cact];
+        if (!col.blocks) col.blocks = [];
+        inner +=
+          '<div class="ed-tabedit">' +
+            '<div class="ed-rb-row2"><span class="ed-rb-poslabel">SÜTUN ' + (cact + 1) + '</span>' +
+              '<div class="ed-col__btns">' +
+                '<button class="ed-mini" data-colleft' + (cact === 0 ? " disabled" : "") + '>←</button>' +
+                '<button class="ed-mini" data-colright' + (cact === b.cols.length - 1 ? " disabled" : "") + '>→</button>' +
+                '<button class="ed-mini ed-mini--danger" data-coldel>✕</button>' +
+              '</div>' +
+            '</div>' +
+            '<div class="ed-tabbody">' + renderBlockList(col.blocks, false) + '</div>' +
+          '</div>';
+      }
+    } else if (b.type === "accordion") {
+      if (!b.items) b.items = [];
+      var aact = tabUI.get(b) || 0;
+      if (aact >= b.items.length) aact = 0;
+      var achips = b.items.map(function (a, ai) {
+        return '<button class="ed-tabchip' + (ai === aact ? " active" : "") + '" data-accsel="' + ai + '">' + esc(a.title || ("Bölüm " + (ai + 1))) + '</button>';
+      }).join("");
+      inner = '<div class="ed-tabstrip">' + achips + '<button class="ed-tabchip ed-tabchip--add" data-accadd>+ BÖLÜM</button></div>';
+      if (b.items.length) {
+        var ait = b.items[aact];
+        if (!ait.blocks) ait.blocks = [];
+        inner +=
+          '<div class="ed-tabedit">' +
+            '<div class="ed-rb-row2">' +
+              '<input class="ed-input" data-acclabel value="' + esc(ait.title || "") + '" placeholder="Bölüm başlığı">' +
+              '<div class="ed-col__btns">' +
+                '<label class="ed-rb-check" title="Sitede açık başlasın"><input type="checkbox" data-accopen' + (ait.open ? " checked" : "") + '> Açık</label>' +
+                '<button class="ed-mini" data-accleft' + (aact === 0 ? " disabled" : "") + '>↑</button>' +
+                '<button class="ed-mini" data-accright' + (aact === b.items.length - 1 ? " disabled" : "") + '>↓</button>' +
+                '<button class="ed-mini ed-mini--danger" data-accdel>✕</button>' +
+              '</div>' +
+            '</div>' +
+            '<div class="ed-tabbody">' + renderBlockList(ait.blocks, false) + '</div>' +
+          '</div>';
+      }
     }
-    var typeOpts = BLOCK_TYPES.map(function (bt) {
-      return '<option value="' + bt.t + '"' + (b.type === bt.t ? ' selected' : '') + '>' + bt.name + '</option>';
-    }).join('');
+    var typeOpts = blockTypeSelectOptions(b.type, true);
     return '' +
-      '<div class="ed-rb-card" data-rb-i="' + i + '">' +
+      '<div class="ed-rb-card" data-rb-i="' + i + '" data-rb-type="' + b.type + '">' +
         '<div class="ed-rb-head">' +
+          '<span class="ed-rb-drag" data-rb-drag title="Sürükleyerek taşı">⠿</span>' +
           '<select class="ed-rb-typesel" data-rb-typesel>' + typeOpts + '</select>' +
           '<div class="ed-rb-actions">' +
-            '<button class="ed-mini" data-rb-up' + (i === 0 ? " disabled" : "") + '>↑</button>' +
-            '<button class="ed-mini" data-rb-down' + (i === total - 1 ? " disabled" : "") + '>↓</button>' +
-            '<button class="ed-mini ed-mini--danger" data-rb-del>✕</button>' +
+            '<button class="ed-mini" data-rb-dup title="Çoğalt">⧉</button>' +
+            '<button class="ed-mini" data-rb-up' + (i === 0 ? " disabled" : "") + ' title="Yukarı">↑</button>' +
+            '<button class="ed-mini" data-rb-down' + (i === total - 1 ? " disabled" : "") + ' title="Aşağı">↓</button>' +
+            '<button class="ed-mini ed-mini--danger" data-rb-del title="Sil">✕</button>' +
           '</div>' +
         '</div>' +
-        '<div class="ed-rb-body">' + inner + '</div>' +
+        '<div class="ed-rb-body">' + inner + stylePanelHtml(b) + '</div>' +
       '</div>';
+  }
+
+  function galItemHtml(im, gi, total) {
+    return '<div class="ed-gal-item" data-gal-i="' + gi + '">' +
+      '<div class="ed-imgfield__prev' + (im.src ? "" : " empty") + '" data-gal-prev>' +
+        (im.src ? '<img src="' + esc(im.src) + '" alt="">' : '<span>+</span>') + '</div>' +
+      '<div class="ed-gal-item__fields">' +
+        '<input class="ed-input" data-gal-src value="' + esc(im.src || "") + '" placeholder="Görsel URL">' +
+        '<input class="ed-input" data-gal-cap value="' + esc(im.caption || "") + '" placeholder="Açıklama (opsiyonel)">' +
+      '</div>' +
+      '<div class="ed-gal-item__btns">' +
+        '<button type="button" class="btn btn--sm" data-gal-upload>YÜKLE</button>' +
+        '<input type="file" accept="image/*" data-gal-file style="display:none">' +
+        '<button class="ed-mini" data-gal-up' + (gi === 0 ? " disabled" : "") + '>↑</button>' +
+        '<button class="ed-mini" data-gal-down' + (gi === total - 1 ? " disabled" : "") + '>↓</button>' +
+        '<button class="ed-mini ed-mini--danger" data-gal-del>✕</button>' +
+      '</div>' +
+    '</div>';
   }
 
   function renderBlockTableEditor(b) {
@@ -818,8 +1227,160 @@
     if (rootWrap) wireBlockList(rootWrap, it.blocks || (it.blocks = []));
   }
 
+  // Metin alanına biçim işareti uygula
+  function applyWrap(ta, before, after) {
+    var s = ta.selectionStart, e = ta.selectionEnd, v = ta.value;
+    var sel = v.slice(s, e);
+    var body = sel || "metin";
+    var aft = (after == null) ? before : after;
+    ta.value = v.slice(0, s) + before + body + aft + v.slice(e);
+    ta.focus();
+    var caret = s + before.length;
+    ta.setSelectionRange(caret, caret + body.length);
+    ta.dispatchEvent(new Event("input", { bubbles: true }));
+  }
+  function wireFmtBar(bar) {
+    var field = bar.closest(".ed-fmtfield");
+    var ta = field && field.querySelector("textarea");
+    if (!ta) return;
+    bar.querySelectorAll("[data-fmt-wrap]").forEach(function (btn) {
+      btn.onclick = function () { applyWrap(ta, btn.getAttribute("data-fmt-wrap")); };
+    });
+    var lk = bar.querySelector("[data-fmt-link]");
+    if (lk) lk.onclick = function () {
+      var url = prompt("Bağlantı adresi (URL):", "https://");
+      if (url === null || url === "") return;
+      var s = ta.selectionStart, e = ta.selectionEnd, v = ta.value;
+      var sel = v.slice(s, e) || "bağlantı";
+      ta.value = v.slice(0, s) + "[" + sel + "](" + url + ")" + v.slice(e);
+      ta.dispatchEvent(new Event("input", { bubbles: true }));
+    };
+    var cl = bar.querySelector("[data-fmt-color]");
+    if (cl) cl.onclick = function () {
+      var col = prompt("Renk (örn. #e11 veya crimson):", "#FF4B26");
+      if (col === null || col === "") return;
+      var s = ta.selectionStart, e = ta.selectionEnd, v = ta.value;
+      var sel = v.slice(s, e) || "metin";
+      ta.value = v.slice(0, s) + "{" + col + "|" + sel + "}" + v.slice(e);
+      ta.dispatchEvent(new Event("input", { bubbles: true }));
+    };
+  }
+  function wireImgFields(card) {
+    card.querySelectorAll("[data-imgfield]").forEach(function (wrap) {
+      var input = wrap.querySelector('input.ed-input[data-rb-field]');
+      var prev = wrap.querySelector("[data-img-prev]");
+      var upBtn = wrap.querySelector("[data-img-upload]");
+      var file = wrap.querySelector("[data-img-file]");
+      function setPrev(src) {
+        if (!prev) return;
+        if (src) { prev.classList.remove("empty"); prev.innerHTML = '<img src="' + src.replace(/"/g, "&quot;") + '" alt="">'; }
+        else { prev.classList.add("empty"); prev.innerHTML = "<span>GÖRSEL</span>"; }
+      }
+      if (input) input.addEventListener("input", function () { setPrev(input.value); });
+      if (upBtn && file) {
+        upBtn.onclick = function () { file.click(); };
+        if (prev) prev.onclick = function () { file.click(); };
+        file.onchange = function () {
+          var fl = file.files[0]; if (!fl) return;
+          var rd = new FileReader();
+          rd.onload = function () { if (input) { input.value = rd.result; input.dispatchEvent(new Event("input", { bubbles: true })); } setPrev(rd.result); };
+          rd.readAsDataURL(fl);
+        };
+      }
+    });
+  }
+  function wireStylePanel(card, b) {
+    var sp = card.querySelector(":scope > .ed-rb-body > .ed-stylepanel");
+    if (!sp) return;
+    sp.querySelectorAll("[data-style-align]").forEach(function (el) {
+      el.onclick = function () {
+        b.style = b.style || {}; b.style.align = el.getAttribute("data-style-align");
+        sp.querySelectorAll("[data-style-align]").forEach(function (x) { x.classList.toggle("active", x === el); });
+        markDirty();
+      };
+    });
+    sp.querySelectorAll("[data-style]").forEach(function (el) {
+      el.oninput = function () { b.style = b.style || {}; b.style[el.getAttribute("data-style")] = el.value; markDirty(); };
+    });
+  }
+  function wireGallery(card, b) {
+    b.images = b.images || [];
+    var addBtn = card.querySelector("[data-gal-add]");
+    if (addBtn) addBtn.onclick = function () { b.images.push({ src: "", alt: "", caption: "" }); markDirty(); refresh(); };
+    card.querySelectorAll(".ed-gal-item").forEach(function (item) {
+      var gi = parseInt(item.getAttribute("data-gal-i"), 10);
+      var im = b.images[gi]; if (!im) return;
+      var prev = item.querySelector("[data-gal-prev]");
+      function setPrev(src) {
+        if (!prev) return;
+        if (src) { prev.classList.remove("empty"); prev.innerHTML = '<img src="' + src.replace(/"/g, "&quot;") + '" alt="">'; }
+        else { prev.classList.add("empty"); prev.innerHTML = "<span>+</span>"; }
+      }
+      var srcI = item.querySelector("[data-gal-src]");
+      if (srcI) srcI.oninput = function () { im.src = srcI.value; setPrev(srcI.value); markDirty(); };
+      var capI = item.querySelector("[data-gal-cap]");
+      if (capI) capI.oninput = function () { im.caption = capI.value; markDirty(); };
+      var upB = item.querySelector("[data-gal-upload]"), fileI = item.querySelector("[data-gal-file]");
+      if (upB && fileI) {
+        upB.onclick = function () { fileI.click(); };
+        if (prev) prev.onclick = function () { fileI.click(); };
+        fileI.onchange = function () {
+          var fl = fileI.files[0]; if (!fl) return;
+          var rd = new FileReader();
+          rd.onload = function () { im.src = rd.result; if (srcI) srcI.value = rd.result; setPrev(rd.result); markDirty(); };
+          rd.readAsDataURL(fl);
+        };
+      }
+      var up = item.querySelector("[data-gal-up]");
+      if (up) up.onclick = function () { if (gi > 0) { var t = b.images[gi - 1]; b.images[gi - 1] = b.images[gi]; b.images[gi] = t; markDirty(); refresh(); } };
+      var dn = item.querySelector("[data-gal-down]");
+      if (dn) dn.onclick = function () { if (gi < b.images.length - 1) { var t = b.images[gi + 1]; b.images[gi + 1] = b.images[gi]; b.images[gi] = t; markDirty(); refresh(); } };
+      var del = item.querySelector("[data-gal-del]");
+      if (del) del.onclick = function () { b.images.splice(gi, 1); markDirty(); refresh(); };
+    });
+  }
+  function enableDnD(listEl, blocks) {
+    var from = null;
+    listEl.querySelectorAll(":scope > .ed-rb-card").forEach(function (card) {
+      var handle = card.querySelector(":scope > .ed-rb-head [data-rb-drag]");
+      if (!handle) return;
+      handle.addEventListener("mousedown", function () { card.setAttribute("draggable", "true"); });
+      card.addEventListener("dragstart", function (e) {
+        from = parseInt(card.getAttribute("data-rb-i"), 10);
+        card.classList.add("ed-dragging");
+        e.dataTransfer.effectAllowed = "move";
+        try { e.dataTransfer.setData("text/plain", String(from)); } catch (_) {}
+      });
+      card.addEventListener("dragend", function () {
+        card.classList.remove("ed-dragging"); card.removeAttribute("draggable");
+        listEl.querySelectorAll(".ed-drop-before,.ed-drop-after").forEach(function (x) { x.classList.remove("ed-drop-before", "ed-drop-after"); });
+      });
+      card.addEventListener("dragover", function (e) {
+        if (from === null) return;
+        e.preventDefault();
+        var r = card.getBoundingClientRect();
+        var after = (e.clientY - r.top) > r.height / 2;
+        card.classList.toggle("ed-drop-after", after);
+        card.classList.toggle("ed-drop-before", !after);
+      });
+      card.addEventListener("dragleave", function () { card.classList.remove("ed-drop-before", "ed-drop-after"); });
+      card.addEventListener("drop", function (e) {
+        if (from === null) return;
+        e.preventDefault();
+        var to = parseInt(card.getAttribute("data-rb-i"), 10);
+        var r = card.getBoundingClientRect();
+        var after = (e.clientY - r.top) > r.height / 2;
+        var target = after ? to + 1 : to;
+        var moved = blocks.splice(from, 1)[0];
+        if (from < target) target--;
+        blocks.splice(target, 0, moved);
+        from = null; markDirty(); refresh();
+      });
+    });
+  }
+
   // Bir blok listesi sarmalayıcısını (.ed-rb-listwrap) ve içindeki kartları bağlar.
-  // Tabs blokları için aktif sekmenin iç listesine özyinelemeli iner.
+  // Yerleşim blokları (tabs/columns/accordion) için aktif alt listeye özyinelemeli iner.
   function wireBlockList(wrap, blocks) {
     var listEl = wrap.querySelector(":scope > .ed-rb-list");
     var addArea = wrap.querySelector(":scope > .ed-rb-add");
@@ -843,21 +1404,22 @@
         markDirty(); refresh();
       };
     });
+
     listEl.querySelectorAll(":scope > .ed-rb-card").forEach(function (card) {
       var i = parseInt(card.getAttribute("data-rb-i"), 10);
       var b = blocks[i];
       if (!b) return;
 
-      // Taşı / sil (yalnızca bu kartın kendi başlığındaki düğmeler)
       var head = card.querySelector(":scope > .ed-rb-head");
       var up = head.querySelector("[data-rb-up]");
       var down = head.querySelector("[data-rb-down]");
       var del = head.querySelector("[data-rb-del]");
+      var dup = head.querySelector("[data-rb-dup]");
       if (up) up.onclick = function () { if (i > 0) { var t = blocks[i - 1]; blocks[i - 1] = blocks[i]; blocks[i] = t; markDirty(); refresh(); } };
       if (down) down.onclick = function () { if (i < blocks.length - 1) { var t = blocks[i + 1]; blocks[i + 1] = blocks[i]; blocks[i] = t; markDirty(); refresh(); } };
-      if (del) del.onclick = function () { if (confirm("Bu blok silinsin mi?")) { blocks.splice(i, 1); markDirty(); refresh(); } };
+      if (del) del.onclick = function () { edConfirm("Bu blok silinsin mi?", { okLabel: "SİL" }).then(function (ok) { if (ok) { blocks.splice(i, 1); markDirty(); refresh(); } }); };
+      if (dup) dup.onclick = function () { blocks.splice(i + 1, 0, clone(b)); markDirty(); refresh(); };
 
-      // Tür değiştir
       var typesel = head.querySelector("[data-rb-typesel]");
       if (typesel) typesel.onchange = (function (bi) {
         return function () {
@@ -868,10 +1430,15 @@
         };
       })(i);
 
-      // Tabs bloğu: kendi alanlarını bağla + iç listeye özyinele
-      if (b.type === "tabs") { wireTabsCard(card, b); return; }
+      // Her blok için stil paneli (kendi paneline kapsamlı)
+      wireStylePanel(card, b);
 
-      // --- Diğer blok tipleri (iç içe yok, güvenli) ---
+      // Yerleşim blokları: özyinele ve dur
+      if (b.type === "tabs") { wireTabsCard(card, b); return; }
+      if (b.type === "columns") { wireColumnsCard(card, b); return; }
+      if (b.type === "accordion") { wireAccordionCard(card, b); return; }
+
+      // --- Yaprak blok tipleri ---
       card.querySelectorAll("[data-rb-field]").forEach(function (el) {
         var f = el.getAttribute("data-rb-field");
         var ev = (el.type === "checkbox" || el.tagName === "SELECT") ? "onchange" : "oninput";
@@ -885,6 +1452,21 @@
           if (f === "level") refresh();
         };
       });
+      // Biçim çubukları + görsel alanları
+      card.querySelectorAll("[data-fmtbar]").forEach(function (bar) { wireFmtBar(bar); });
+      wireImgFields(card);
+      if (b.type === "gallery") wireGallery(card, b);
+      // Video: dosyadan yükle
+      var vidUp = card.querySelector("[data-vid-upload]"), vidFile = card.querySelector("[data-vid-file]");
+      if (vidUp && vidFile) {
+        vidUp.onclick = function () { vidFile.click(); };
+        vidFile.onchange = function () {
+          var fl = vidFile.files[0]; if (!fl) return;
+          var rd = new FileReader();
+          rd.onload = function () { b.src = rd.result; var si2 = card.querySelector('[data-rb-field="src"]'); if (si2) si2.value = rd.result; markDirty(); };
+          rd.readAsDataURL(fl);
+        };
+      }
       // Tablo bloğu kontrolleri
       card.querySelectorAll("[data-bt-head]").forEach(function (el) {
         el.oninput = function () { b.header[parseInt(el.getAttribute("data-bt-head"), 10)] = el.value; markDirty(); };
@@ -905,28 +1487,40 @@
       card.querySelectorAll("[data-bt-rowdel]").forEach(function (el) {
         el.onclick = function () { b.rows.splice(parseInt(el.getAttribute("data-bt-rowdel"), 10), 1); markDirty(); refresh(); };
       });
-      // Görsel + Metin: konum segmenti
+      // Segment kontrolleri
       card.querySelectorAll("[data-ft-pos]").forEach(function (el) {
         el.onclick = function () { b.position = el.getAttribute("data-ft-pos"); markDirty(); refresh(); };
       });
+      card.querySelectorAll("[data-callout-var]").forEach(function (el) {
+        el.onclick = function () { b.variant = el.getAttribute("data-callout-var"); markDirty(); refresh(); };
+      });
+      card.querySelectorAll("[data-btn-var]").forEach(function (el) {
+        el.onclick = function () { b.variant = el.getAttribute("data-btn-var"); markDirty(); refresh(); };
+      });
+      card.querySelectorAll("[data-btn-align]").forEach(function (el) {
+        el.onclick = function () { b.align = el.getAttribute("data-btn-align"); markDirty(); refresh(); };
+      });
+      card.querySelectorAll("[data-div-style]").forEach(function (el) {
+        el.onclick = function () { b.dstyle = el.getAttribute("data-div-style"); markDirty(); refresh(); };
+      });
     });
+
+    // Sürükle-bırak sıralama
+    enableDnD(listEl, blocks);
   }
 
   function wireTabsCard(card, b) {
     var act = tabUI.get(b) || 0;
     if (act >= b.tabs.length) act = 0;
-    // Sekme seçimi
     card.querySelectorAll("[data-tabsel]").forEach(function (el) {
       el.onclick = function () { tabUI.set(b, parseInt(el.getAttribute("data-tabsel"), 10)); refresh(); };
     });
-    // Sekme ekle
     var tabAdd = card.querySelector("[data-tabadd]");
     if (tabAdd) tabAdd.onclick = function () {
       b.tabs.push({ label: "Sekme " + (b.tabs.length + 1), blocks: [] });
       tabUI.set(b, b.tabs.length - 1); markDirty(); refresh();
     };
     if (!b.tabs.length) return;
-    // Sekme adı (canlı; chip metnini de güncelle, refresh yok)
     var labelInp = card.querySelector("[data-tablabel]");
     if (labelInp) labelInp.oninput = function () {
       b.tabs[act].label = labelInp.value;
@@ -934,23 +1528,92 @@
       if (chip) chip.textContent = labelInp.value || ("Sekme " + (act + 1));
       markDirty();
     };
-    // Sekme taşı / sil
     var left = card.querySelector("[data-tableft]");
     var right = card.querySelector("[data-tabright]");
     var tdel = card.querySelector("[data-tabdel]");
     if (left) left.onclick = function () { if (act > 0) { var t = b.tabs[act - 1]; b.tabs[act - 1] = b.tabs[act]; b.tabs[act] = t; tabUI.set(b, act - 1); markDirty(); refresh(); } };
     if (right) right.onclick = function () { if (act < b.tabs.length - 1) { var t = b.tabs[act + 1]; b.tabs[act + 1] = b.tabs[act]; b.tabs[act] = t; tabUI.set(b, act + 1); markDirty(); refresh(); } };
     if (tdel) tdel.onclick = function () {
-      if (!confirm('"' + (b.tabs[act].label || "Sekme") + '" sekmesi silinsin mi?')) return;
-      b.tabs.splice(act, 1);
-      tabUI.set(b, Math.max(0, act - 1)); markDirty(); refresh();
+      edConfirm('"' + (b.tabs[act].label || "Sekme") + '" sekmesi silinsin mi?', { okLabel: "SİL" }).then(function (ok) {
+        if (!ok) return;
+        b.tabs.splice(act, 1);
+        tabUI.set(b, Math.max(0, act - 1)); markDirty(); refresh();
+      });
     };
-    // Aktif sekmenin iç blok listesi (özyinelemeli)
-    var nestedWrap = card.querySelector(".ed-tabbody > .ed-rb-listwrap");
+    var nestedWrap = card.querySelector(":scope > .ed-rb-body > .ed-tabedit > .ed-tabbody > .ed-rb-listwrap");
     if (nestedWrap) wireBlockList(nestedWrap, b.tabs[act].blocks || (b.tabs[act].blocks = []));
   }
 
-  /* --- YARATIK EDİTÖRÜ ---------------------------------------------------- */
+  function wireColumnsCard(card, b) {
+    b.cols = b.cols || [];
+    var act = tabUI.get(b) || 0;
+    if (act >= b.cols.length) act = 0;
+    var ratioI = card.querySelector("[data-col-ratio]");
+    if (ratioI) ratioI.oninput = function () { b.ratio = ratioI.value; markDirty(); };
+    card.querySelectorAll("[data-colsel]").forEach(function (el) {
+      el.onclick = function () { tabUI.set(b, parseInt(el.getAttribute("data-colsel"), 10)); refresh(); };
+    });
+    var add = card.querySelector("[data-coladd]");
+    if (add) add.onclick = function () {
+      b.cols.push({ blocks: [] });
+      b.ratio = b.cols.map(function () { return "1fr"; }).join(" ");
+      tabUI.set(b, b.cols.length - 1); markDirty(); refresh();
+    };
+    if (!b.cols.length) return;
+    var left = card.querySelector("[data-colleft]"), right = card.querySelector("[data-colright]"), del = card.querySelector("[data-coldel]");
+    if (left) left.onclick = function () { if (act > 0) { var t = b.cols[act - 1]; b.cols[act - 1] = b.cols[act]; b.cols[act] = t; tabUI.set(b, act - 1); markDirty(); refresh(); } };
+    if (right) right.onclick = function () { if (act < b.cols.length - 1) { var t = b.cols[act + 1]; b.cols[act + 1] = b.cols[act]; b.cols[act] = t; tabUI.set(b, act + 1); markDirty(); refresh(); } };
+    if (del) del.onclick = function () {
+      if (b.cols.length <= 1) { edAlert("En az bir sütun kalmalı."); return; }
+      edConfirm("Bu sütun ve içeriği silinsin mi?", { okLabel: "SİL" }).then(function (ok) {
+        if (!ok) return;
+        b.cols.splice(act, 1);
+        b.ratio = b.cols.map(function () { return "1fr"; }).join(" ");
+        tabUI.set(b, Math.max(0, act - 1)); markDirty(); refresh();
+      });
+    };
+    var nested = card.querySelector(":scope > .ed-rb-body > .ed-tabedit > .ed-tabbody > .ed-rb-listwrap");
+    if (nested) wireBlockList(nested, b.cols[act].blocks || (b.cols[act].blocks = []));
+  }
+
+  function wireAccordionCard(card, b) {
+    b.items = b.items || [];
+    var act = tabUI.get(b) || 0;
+    if (act >= b.items.length) act = 0;
+    card.querySelectorAll("[data-accsel]").forEach(function (el) {
+      el.onclick = function () { tabUI.set(b, parseInt(el.getAttribute("data-accsel"), 10)); refresh(); };
+    });
+    var add = card.querySelector("[data-accadd]");
+    if (add) add.onclick = function () {
+      b.items.push({ title: "Başlık " + (b.items.length + 1), open: false, blocks: [] });
+      tabUI.set(b, b.items.length - 1); markDirty(); refresh();
+    };
+    if (!b.items.length) return;
+    var it = b.items[act];
+    var lbl = card.querySelector("[data-acclabel]");
+    if (lbl) lbl.oninput = function () {
+      it.title = lbl.value;
+      var chip = card.querySelector('[data-accsel="' + act + '"]');
+      if (chip) chip.textContent = lbl.value || ("Bölüm " + (act + 1));
+      markDirty();
+    };
+    var openC = card.querySelector("[data-accopen]");
+    if (openC) openC.onchange = function () { it.open = openC.checked; markDirty(); };
+    var left = card.querySelector("[data-accleft]"), right = card.querySelector("[data-accright]"), del = card.querySelector("[data-accdel]");
+    if (left) left.onclick = function () { if (act > 0) { var t = b.items[act - 1]; b.items[act - 1] = b.items[act]; b.items[act] = t; tabUI.set(b, act - 1); markDirty(); refresh(); } };
+    if (right) right.onclick = function () { if (act < b.items.length - 1) { var t = b.items[act + 1]; b.items[act + 1] = b.items[act]; b.items[act] = t; tabUI.set(b, act + 1); markDirty(); refresh(); } };
+    if (del) del.onclick = function () {
+      edConfirm("Bu bölüm silinsin mi?", { okLabel: "SİL" }).then(function (ok) {
+        if (!ok) return;
+        b.items.splice(act, 1);
+        tabUI.set(b, Math.max(0, act - 1)); markDirty(); refresh();
+      });
+    };
+    var nested = card.querySelector(":scope > .ed-rb-body > .ed-tabedit > .ed-tabbody > .ed-rb-listwrap");
+    if (nested) wireBlockList(nested, it.blocks || (it.blocks = []));
+  }
+
+  /* --- YARATIK EDITORU ---------------------------------------------------- */
   var creatureEdSel = new WeakMap();
   function creatureUID() { return "c" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5); }
 
@@ -1136,14 +1799,16 @@
         el.onclick = function (e) {
           e.stopPropagation();
           var id = el.getAttribute("data-cred-del");
-          if (!confirm("Bu yaratık silinsin mi?")) return;
-          it.creatures = it.creatures.filter(function (c) { return c._id !== id; });
-          if (creatureEdSel.get(it) === id) {
-            var next = it.creatures.length ? it.creatures[0]._id : null;
-            if (next) creatureEdSel.set(it, next); else creatureEdSel.delete(it);
-            showForm(next ? it.creatures.find(function (c) { return c._id === next; }) : null);
-          }
-          markDirty(); refreshList();
+          edConfirm("Bu yaratık silinsin mi?", { okLabel: "SİL" }).then(function (ok) {
+            if (!ok) return;
+            it.creatures = it.creatures.filter(function (c) { return c._id !== id; });
+            if (creatureEdSel.get(it) === id) {
+              var next = it.creatures.length ? it.creatures[0]._id : null;
+              if (next) creatureEdSel.set(it, next); else creatureEdSel.delete(it);
+              showForm(next ? it.creatures.find(function (c) { return c._id === next; }) : null);
+            }
+            markDirty(); refreshList();
+          });
         };
       });
     }
@@ -1394,6 +2059,149 @@
     wireDk();
   }
 
+  /* --- WIKI EDİTÖRÜ ---------------------------------------------------------
+     Bilgi kutusu (infobox) + etiketler + ilgili sayfalar + zengin gövde.
+     Gövde, ZENGİN modla aynı blok motorunu kullanır (it.blocks). ------------ */
+  function wikiAllTargets(excludeItemId) {
+    var out = [];
+    getSectionOrder().forEach(function (key) {
+      var sec = draft.sections[key];
+      if (!sec) return;
+      if (isHub(sec)) {
+        (sec.items || []).forEach(function (cat) {
+          (cat.pages || []).forEach(function (pg) {
+            out.push({ section: key, item: cat.id, page: pg.id, title: pg.title, group: sec.label + " / " + cat.title });
+          });
+        });
+      } else {
+        (sec.items || []).forEach(function (leaf) {
+          if (leaf.id === excludeItemId) return;
+          out.push({ section: key, item: leaf.id, page: "", title: leaf.title, group: sec.label });
+        });
+      }
+    });
+    return out;
+  }
+
+  function renderWikiFacts(it) {
+    var entries = it.infobox.entries;
+    if (!entries.length) return '<div class="ed-rl-empty">Henüz alan yok.</div>';
+    return entries.map(function (e, i) {
+      return '' +
+        '<div class="ed-wiki-fact-row" data-fact-i="' + i + '">' +
+          '<input class="ed-input" data-fact-field="label" value="' + esc(e.label || "") + '" placeholder="Alan adı (örn. TÜR)">' +
+          '<input class="ed-input" data-fact-field="value" value="' + esc(e.value || "") + '" placeholder="Değer (örn. İnsansı)">' +
+          '<button type="button" class="ed-mini ed-mini--danger" data-fact-del title="Sil">✕</button>' +
+        '</div>';
+    }).join("");
+  }
+
+  function renderWikiRelated(it) {
+    var rel = it.related;
+    if (!rel.length) return '<div class="ed-rl-empty">Henüz bağlı sayfa yok.</div>';
+    var targets = wikiAllTargets(it.id);
+    return rel.map(function (r, i) {
+      var cur = r.section + "::" + r.item + "::" + (r.page || "");
+      var opts = targets.map(function (t) {
+        var val = t.section + "::" + t.item + "::" + t.page;
+        return '<option value="' + esc(val) + '"' + (val === cur ? " selected" : "") + '>' + esc(t.group) + ' — ' + esc(t.title) + '</option>';
+      }).join("");
+      return '' +
+        '<div class="ed-wiki-rel-row" data-rel-i="' + i + '">' +
+          '<select class="ed-input" data-rel-field="target">' + opts + '</select>' +
+          '<input class="ed-input" data-rel-field="label" value="' + esc(r.label || "") + '" placeholder="Özel etiket (opsiyonel — boşsa sayfa adı kullanılır)">' +
+          '<button type="button" class="ed-mini ed-mini--danger" data-rel-del title="Sil">✕</button>' +
+        '</div>';
+    }).join("");
+  }
+
+  function renderWikiEditor(it) {
+    if (!it.infobox) it.infobox = { image: "", entries: [] };
+    if (!Array.isArray(it.infobox.entries)) it.infobox.entries = [];
+    if (!Array.isArray(it.tags)) it.tags = [];
+    if (!Array.isArray(it.related)) it.related = [];
+    if (!Array.isArray(it.blocks)) it.blocks = [];
+    return '' +
+      '<div class="ed-field"><label>BİLGİ KUTUSU <span class="hint">sayfanın yanında görünen özet kart — kimlik, tür, bölge gibi kısa alan/değer çiftleri</span></label>' +
+        '<div class="ed-wiki-infobox">' +
+          imgField(it.infobox, "image") +
+          '<div class="ed-wiki-facts" id="wikiFacts">' + renderWikiFacts(it) + '</div>' +
+          '<button type="button" class="btn btn--sm" data-wiki-fact-add>+ ALAN EKLE</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="ed-field"><label>ETİKETLER <span class="hint">virgülle ayır — kategorilendirme için (örn. Diyar, Kuzey, Buzul)</span></label>' +
+        '<input class="ed-input" data-wiki-tags value="' + esc(it.tags.join(", ")) + '" placeholder="Etiket bir, Etiket iki, …">' +
+      '</div>' +
+      '<div class="ed-field"><label>İLGİLİ SAYFALAR <span class="hint">gövdenin altında "İlgili Sayfalar" olarak görünür</span></label>' +
+        '<div class="ed-wiki-related" id="wikiRelated">' + renderWikiRelated(it) + '</div>' +
+        '<div class="ed-rowbtns"><button type="button" class="btn btn--sm" data-wiki-rel-add>+ SAYFA BAĞLA</button></div>' +
+      '</div>' +
+      '<div class="ed-field"><label>GÖVDE İÇERİĞİ <span class="hint">' + it.blocks.length + ' blok · H2/H3 başlıklar sayfa içi içindekiler listesine otomatik eklenir</span></label>' +
+        renderBlockList(it.blocks, true) +
+      '</div>';
+  }
+
+  function wireWikiEditor(form, it) {
+    if (!it || it.mode !== "wiki") return;
+    if (!it.infobox) it.infobox = { image: "", entries: [] };
+    if (!Array.isArray(it.related)) it.related = [];
+
+    var box = form.querySelector(".ed-wiki-infobox");
+    if (box) {
+      wireImgFields(box);
+      var imgInput = box.querySelector('[data-imgfield="image"] input[data-rb-field]');
+      if (imgInput) imgInput.addEventListener("input", function () { it.infobox.image = imgInput.value; markDirty(); });
+    }
+
+    var factsWrap = form.querySelector("#wikiFacts");
+    if (factsWrap) {
+      factsWrap.querySelectorAll(".ed-wiki-fact-row").forEach(function (row) {
+        var i = parseInt(row.getAttribute("data-fact-i"), 10);
+        row.querySelectorAll("[data-fact-field]").forEach(function (inp) {
+          inp.oninput = function () { it.infobox.entries[i][inp.getAttribute("data-fact-field")] = inp.value; markDirty(); };
+        });
+        var del = row.querySelector("[data-fact-del]");
+        if (del) del.onclick = function () { it.infobox.entries.splice(i, 1); markDirty(); refresh(); };
+      });
+    }
+    var factAdd = form.querySelector("[data-wiki-fact-add]");
+    if (factAdd) factAdd.onclick = function () { it.infobox.entries.push({ label: "", value: "" }); markDirty(); refresh(); };
+
+    var tagsInput = form.querySelector("[data-wiki-tags]");
+    if (tagsInput) tagsInput.oninput = function () {
+      it.tags = tagsInput.value.split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+      markDirty();
+    };
+
+    var relWrap = form.querySelector("#wikiRelated");
+    if (relWrap) {
+      relWrap.querySelectorAll(".ed-wiki-rel-row").forEach(function (row) {
+        var i = parseInt(row.getAttribute("data-rel-i"), 10);
+        var targetSel = row.querySelector('[data-rel-field="target"]');
+        if (targetSel) targetSel.onchange = function () {
+          var parts = targetSel.value.split("::");
+          it.related[i].section = parts[0]; it.related[i].item = parts[1]; it.related[i].page = parts[2] || "";
+          markDirty();
+        };
+        var lblInput = row.querySelector('[data-rel-field="label"]');
+        if (lblInput) lblInput.oninput = function () { it.related[i].label = lblInput.value; markDirty(); };
+        var relDel = row.querySelector("[data-rel-del]");
+        if (relDel) relDel.onclick = function () { it.related.splice(i, 1); markDirty(); refresh(); };
+      });
+    }
+    var relAdd = form.querySelector("[data-wiki-rel-add]");
+    if (relAdd) relAdd.onclick = function () {
+      var targets = wikiAllTargets(it.id);
+      var t = targets[0] || { section: "", item: "", page: "" };
+      it.related.push({ section: t.section, item: t.item, page: t.page, label: "" });
+      markDirty(); refresh();
+    };
+
+    // Gövde: zengin blok motoru
+    var rootWrap = form.querySelector(".ed-rb-listwrap");
+    if (rootWrap) wireBlockList(rootWrap, it.blocks || (it.blocks = []));
+  }
+
   /* --- VERSİYON YÖNETİMİ -------------------------------------------------- */
   function renderVersionsForm() {
     var store = vEdStoreLoad();
@@ -1451,10 +2259,15 @@
     // Versiyona geç (düzenle)
     form.querySelectorAll("[data-ver-edit]").forEach(function (btn) {
       btn.onclick = function () {
-        if (dirty && !confirm("Kaydedilmemiş değişiklikler var. Geçmeden önce kaydetmek ister misin?\n\nDevam et = kaydetmeden geç.")) return;
-        localStorage.setItem(STORE_EDITOR_VER, btn.getAttribute("data-ver-edit"));
-        draft = loadDraft(); dirty = false; sel = { type: "meta" };
-        renderAll(); toast("VERSİYON DEĞİŞTİRİLDİ");
+        function go() {
+          localStorage.setItem(STORE_EDITOR_VER, btn.getAttribute("data-ver-edit"));
+          draft = loadDraft(); dirty = false; sel = { type: "meta" };
+          renderAll(); toast("VERSİYON DEĞİŞTİRİLDİ");
+        }
+        if (!dirty) { go(); return; }
+        edConfirm("Kaydedilmemiş değişiklikler var. Geçmeden önce kaydetmek ister misin? Devam et = kaydetmeden geç.", { okLabel: "DEVAM ET", cancelLabel: "VAZGEÇ" }).then(function (ok) {
+          if (ok) go();
+        });
       };
     });
 
@@ -1489,15 +2302,18 @@
         var store = vEdStoreLoad(); if (!store) return;
         var vid = btn.getAttribute("data-ver-delete");
         var v = store.versions.find(function (x) { return x.id === vid; });
-        if (!v || !confirm('"' + v.label + '" versiyonu kalıcı olarak silinecek. Emin misin?')) return;
-        store.versions = store.versions.filter(function (x) { return x.id !== vid; });
-        if (store.defaultId === vid) store.defaultId = store.versions[0] && store.versions[0].id;
-        vEdStoreSave(store);
-        if (vEdActiveId() === vid || !store.versions.find(function (x) { return x.id === localStorage.getItem(STORE_EDITOR_VER); })) {
-          localStorage.setItem(STORE_EDITOR_VER, store.defaultId || "");
-          draft = loadDraft(); dirty = false;
-        }
-        toast("VERSİYON SİLİNDİ"); refresh();
+        if (!v) return;
+        edConfirm('"' + v.label + '" versiyonu kalıcı olarak silinecek. Emin misin?', { okLabel: "SİL" }).then(function (ok) {
+          if (!ok) return;
+          store.versions = store.versions.filter(function (x) { return x.id !== vid; });
+          if (store.defaultId === vid) store.defaultId = store.versions[0] && store.versions[0].id;
+          vEdStoreSave(store);
+          if (vEdActiveId() === vid || !store.versions.find(function (x) { return x.id === localStorage.getItem(STORE_EDITOR_VER); })) {
+            localStorage.setItem(STORE_EDITOR_VER, store.defaultId || "");
+            draft = loadDraft(); dirty = false;
+          }
+          toast("VERSİYON SİLİNDİ"); refresh();
+        });
       };
     });
 
@@ -1532,9 +2348,14 @@
         '<div class="ed-top__right">' +
           '<span class="ed-status saved" id="edStatus"><span class="dot"></span><span class="txt">KAYDEDİLDİ</span></span>' +
           '<span class="ed-ver-indicator' + (!vEdIsDefault() ? " ed-ver-indicator--preview" : "") + '">' + esc(vEdActiveLabel()) + (!vEdIsDefault() ? ' <span class="ed-ver-preview-tag">ÖNİZLEME</span>' : "") + '</span>' +
+          '<div class="ed-undoredo">' +
+            '<button class="ed-mini ed-mini--lg" id="edUndo" title="Geri al (Ctrl+Z)"' + (undoStack.length ? "" : " disabled") + '>&#8630;</button>' +
+            '<button class="ed-mini ed-mini--lg" id="edRedo" title="Yinele (Ctrl+Shift+Z)"' + (redoStack.length ? "" : " disabled") + '>&#8631;</button>' +
+          '</div>' +
           '<a class="btn btn--ghost btn--sm" href="index.html" target="_blank">SİTEYİ AÇ ↗</a>' +
           '<button class="btn btn--sm" id="edTheme">' + I.moon + ' <span id="edThemeLbl">' + getTheme().toUpperCase() + '</span></button>' +
-          '<button class="btn btn--primary" id="edSave">KAYDET</button>' +
+          '<button class="btn btn--ghost btn--sm" id="edSaveFileTop" title="content.js dosyası olarak indir" style="white-space:nowrap">DOSYAYA KAYDET</button>' +
+          '<button class="btn btn--primary" id="edSave" title="Kaydet (Ctrl+S)">KAYDET</button>' +
         '</div>' +
       '</header>' +
       '<div class="ed-main">' +
@@ -1585,7 +2406,11 @@
   /* --- Olay bağlama ------------------------------------------------------- */
   function wireTop() {
     document.getElementById("edSave").onclick = save;
+    document.getElementById("edSaveFileTop").onclick = saveContentJSFile;
     document.getElementById("edTheme").onclick = toggleTheme;
+    var uB = document.getElementById("edUndo"), rB = document.getElementById("edRedo");
+    if (uB) uB.onclick = undo;
+    if (rB) rB.onclick = redo;
     document.getElementById("edExport").onclick = exportJSON;
     document.getElementById("edImport").onclick = importJSON;
     document.getElementById("edReset").onclick = resetDefaults;
@@ -1666,6 +2491,15 @@
         addItem(parts[0], parts[1]);
       };
     });
+    var addSecBtn = tree.querySelector("[data-addsection]");
+    if (addSecBtn) addSecBtn.onclick = function (e) { e.stopPropagation(); addSection(); };
+    tree.querySelectorAll("[data-secmove]").forEach(function (b) {
+      b.onclick = function (e) {
+        e.stopPropagation();
+        var parts = b.getAttribute("data-secmove").split("::");
+        moveSection(parts[0], parts[1] === "up" ? -1 : 1);
+      };
+    });
   }
 
   function wireForm() {
@@ -1733,6 +2567,15 @@
     if (pmUp) pmUp.onclick = function () { movePage(-1); };
     if (pmDown) pmDown.onclick = function () { movePage(1); };
     if (pDel) pDel.onclick = deletePage;
+    // Taşı / HUB / sil (bölüm)
+    var smUp = form.querySelector('[data-secmoveform="up"]');
+    var smDown = form.querySelector('[data-secmoveform="down"]');
+    var shTog = form.querySelector('[data-sechubtoggle]');
+    var sDel = form.querySelector('[data-secdelete]');
+    if (smUp) smUp.onclick = function () { moveSection(sel.section, -1); };
+    if (smDown) smDown.onclick = function () { moveSection(sel.section, 1); };
+    if (shTog) shTog.onclick = function () { toggleSectionHub(sel.section); };
+    if (sDel) sDel.onclick = function () { deleteSection(sel.section); };
 
     // Tablo editörü
     wireTableEditor(form);
@@ -1740,6 +2583,8 @@
     wireRichEditor(form);
     // Yaratık editörü
     wireCreatureEditor(form, curItem());
+    // Wiki editörü
+    wireWikiEditor(form, curItem());
     // Versiyon yönetimi
     wireVersions();
   }
@@ -1757,12 +2602,14 @@
     markDirty(); refresh();
   }
   function delCol(t, id) {
-    if (t.columns.length <= 1) { alert("En az bir sütun kalmalı."); return; }
+    if (t.columns.length <= 1) { edAlert("En az bir sütun kalmalı."); return; }
     var c = t.columns.find(function (x) { return x.id === id; });
-    if (!confirm('"' + (c ? c.label : id) + '" sütunu ve tüm satırlardaki verisi silinecek. Emin misin?')) return;
-    t.columns = t.columns.filter(function (x) { return x.id !== id; });
-    t.rows.forEach(function (r) { delete r[id]; });
-    markDirty(); refresh();
+    edConfirm('"' + (c ? c.label : id) + '" sütunu ve tüm satırlardaki verisi silinecek. Emin misin?', { okLabel: "SİL" }).then(function (ok) {
+      if (!ok) return;
+      t.columns = t.columns.filter(function (x) { return x.id !== id; });
+      t.rows.forEach(function (r) { delete r[id]; });
+      markDirty(); refresh();
+    });
   }
   function wireTableEditor(form) {
     // Mod değiştir (METİN / TABLO)
@@ -1773,6 +2620,13 @@
         if (mode === "table") { it.mode = "table"; if (!it.table) it.table = defaultTable(); }
         else if (mode === "rich") { it.mode = "rich"; if (!it.blocks) it.blocks = []; }
         else if (mode === "creature") { it.mode = "creature-list"; if (!Array.isArray(it.creatures)) it.creatures = []; }
+        else if (mode === "wiki") {
+          it.mode = "wiki";
+          if (!it.blocks) it.blocks = [];
+          if (!it.infobox) it.infobox = { image: "", entries: [] };
+          if (!Array.isArray(it.tags)) it.tags = [];
+          if (!Array.isArray(it.related)) it.related = [];
+        }
         else { it.mode = "text"; if (!it.body) it.body = window.SLVNZ_PLACEHOLDER_BODY || ""; }
         markDirty(); refresh();
       };
@@ -1858,10 +2712,12 @@
           el.onclick = function (e) {
             e.stopPropagation();
             var rid = el.getAttribute('data-rl-del');
-            if (!confirm('Bu kayıt silinsin mi?')) return;
-            t.rows = t.rows.filter(function (x) { return x._id !== rid; });
-            if (tableEditRow.get(t) === rid) tableEditRow.set(t, t.rows.length ? t.rows[0]._id : null);
-            markDirty(); refreshRowPanel();
+            edConfirm('Bu kayıt silinsin mi?', { okLabel: "SİL" }).then(function (ok) {
+              if (!ok) return;
+              t.rows = t.rows.filter(function (x) { return x._id !== rid; });
+              if (tableEditRow.get(t) === rid) tableEditRow.set(t, t.rows.length ? t.rows[0]._id : null);
+              markDirty(); refreshRowPanel();
+            });
           };
         });
       }
@@ -1928,11 +2784,13 @@
     if (!items) return;
     var idx = items.findIndex(function (x) { return x.id === sel.itemId; });
     if (idx < 0) return;
-    if (!confirm('"' + items[idx].title + '" öğesi silinecek. Emin misin?')) return;
-    items.splice(idx, 1);
-    if (items.length) sel = { type: "item", section: sel.section, pageId: sel.pageId, itemId: items[Math.max(0, idx - 1)].id };
-    else sel = sel.pageId ? { type: "page", section: sel.section, pageId: sel.pageId } : { type: "section", section: sel.section };
-    markDirty(); renderAll();
+    edConfirm('"' + items[idx].title + '" öğesi silinecek. Emin misin?', { okLabel: "SİL" }).then(function (ok) {
+      if (!ok) return;
+      items.splice(idx, 1);
+      if (items.length) sel = { type: "item", section: sel.section, pageId: sel.pageId, itemId: items[Math.max(0, idx - 1)].id };
+      else sel = sel.pageId ? { type: "page", section: sel.section, pageId: sel.pageId } : { type: "section", section: sel.section };
+      markDirty(); renderAll();
+    });
   }
   function moveItem(dir) {
     var items = itemListFor(sel);
@@ -1958,11 +2816,13 @@
     var sec = draft.sections[sel.section];
     var idx = sec.items.findIndex(function (p) { return p.id === sel.pageId; });
     if (idx < 0) return;
-    if (!confirm('"' + sec.items[idx].title + '" sayfası ve içindeki tüm bölümler silinecek. Emin misin?')) return;
-    sec.items.splice(idx, 1);
-    sel = sec.items.length ? { type: "page", section: sel.section, pageId: sec.items[Math.max(0, idx - 1)].id }
-                           : { type: "section", section: sel.section };
-    markDirty(); renderAll();
+    edConfirm('"' + sec.items[idx].title + '" sayfası ve içindeki tüm bölümler silinecek. Emin misin?', { okLabel: "SİL" }).then(function (ok) {
+      if (!ok) return;
+      sec.items.splice(idx, 1);
+      sel = sec.items.length ? { type: "page", section: sel.section, pageId: sec.items[Math.max(0, idx - 1)].id }
+                             : { type: "section", section: sel.section };
+      markDirty(); renderAll();
+    });
   }
   function movePage(dir) {
     var sec = draft.sections[sel.section];
@@ -1987,6 +2847,51 @@
 
   /* --- Toast -------------------------------------------------------------- */
   var toastTimer = null;
+  function edDialog(opts) {
+    return new Promise(function (resolve) {
+      var isAlert = opts.cancelLabel === null;
+      var ov = document.createElement("div");
+      ov.className = "ed-confirm-overlay";
+      ov.innerHTML =
+        '<div class="ed-confirm" role="alertdialog" aria-modal="true">' +
+          (opts.title ? '<p class="ed-confirm__title">' + esc(opts.title) + '</p>' : '') +
+          '<p class="ed-confirm__msg">' + esc(opts.message) + '</p>' +
+          '<div class="ed-confirm__foot">' +
+            (isAlert ? '' : '<button type="button" class="btn btn--sm btn--ghost" data-cc="cancel">' + esc(opts.cancelLabel || "İPTAL") + '</button>') +
+            '<button type="button" class="btn btn--sm btn--primary" data-cc="ok">' + esc(opts.okLabel || "TAMAM") + '</button>' +
+          '</div>' +
+        '</div>';
+      document.body.appendChild(ov);
+      var okBtn = ov.querySelector('[data-cc="ok"]');
+      var cancelBtn = ov.querySelector('[data-cc="cancel"]');
+      function close(result) {
+        document.removeEventListener("keydown", onKey);
+        ov.classList.remove("open");
+        setTimeout(function () { ov.remove(); }, 160);
+        resolve(result);
+      }
+      function onKey(e) {
+        if (e.key === "Escape") { e.preventDefault(); close(false); }
+        else if (e.key === "Enter") { e.preventDefault(); close(true); }
+      }
+      ov.addEventListener("click", function (e) { if (e.target === ov) close(false); });
+      if (okBtn) okBtn.onclick = function () { close(true); };
+      if (cancelBtn) cancelBtn.onclick = function () { close(false); };
+      document.addEventListener("keydown", onKey);
+      void ov.offsetWidth; // force reflow so the opacity/transform transition runs
+      ov.classList.add("open");
+      (okBtn || cancelBtn).focus();
+    });
+  }
+  function edConfirm(message, opts) {
+    opts = opts || {};
+    return edDialog({ message: message, title: opts.title, okLabel: opts.okLabel, cancelLabel: opts.cancelLabel });
+  }
+  function edAlert(message, opts) {
+    opts = opts || {};
+    return edDialog({ message: message, title: opts.title, okLabel: opts.okLabel || "TAMAM", cancelLabel: null });
+  }
+
   function toast(msg) {
     var t = document.getElementById("edToast");
     if (!t) return;
@@ -2001,7 +2906,21 @@
   });
 
   /* --- Başlat ------------------------------------------------------------- */
+  /* --- Klavye kısayolları: Ctrl/Cmd+S kaydet, Ctrl/Cmd+Z geri al, Ctrl/Cmd+Shift+Z veya Ctrl+Y yinele --- */
+  window.addEventListener("keydown", function (e) {
+    var mod = e.ctrlKey || e.metaKey;
+    if (!mod) return;
+    var key = e.key.toLowerCase();
+    if (key === "s") { e.preventDefault(); save(); return; }
+    var ae = document.activeElement;
+    var inField = ae && (ae.tagName === "INPUT" || ae.tagName === "TEXTAREA" || ae.isContentEditable);
+    if (inField) return;
+    if (key === "z" && !e.shiftKey) { e.preventDefault(); undo(); }
+    else if (key === "y" || (key === "z" && e.shiftKey)) { e.preventDefault(); redo(); }
+  });
+
   setTheme(getTheme());
+  checkAutosaveRecovery();
   if (document.readyState === "loading")
     document.addEventListener("DOMContentLoaded", renderAll);
   else renderAll();

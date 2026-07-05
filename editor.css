@@ -476,3 +476,139 @@
 .ed-tabbody { margin-top: 14px; padding-left: 14px; border-left: 2px solid var(--accent); }
 .ed-rb-listwrap { display: block; }
 .ed-tabbody .ed-rb-card { background: var(--surface-2); }
+
+/* ============================================================================
+   BLOK EDİTÖRÜ — GENİŞLETMELER (biçim çubuğu, görsel/galeri, stil paneli,
+   sürükle-bırak, yardımcı satırlar, bölüm yönetimi, undo/redo)
+   ========================================================================== */
+
+/* İki-sütunlu / satır düzeni yardımcıları */
+.ed-rb-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: center; }
+.ed-inline-lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dim); white-space: nowrap; }
+.ed-rb-hint { font-family: var(--font-mono); font-size: 10px; color: var(--text-faint); letter-spacing: 0.04em; line-height: 1.6; }
+.ed-code-ta { font-family: var(--font-mono); font-size: 12.5px; white-space: pre; }
+
+/* Sürükleyici tutamaç + sıralama */
+.ed-rb-head { gap: 8px; cursor: default; }
+.ed-rb-drag { cursor: grab; color: var(--text-faint); padding: 2px 4px; font-size: 14px; user-select: none; touch-action: none; }
+.ed-rb-drag:hover { color: var(--text-dim); }
+.ed-rb-card[draggable="true"] { cursor: grabbing; }
+.ed-rb-card.ed-dragging { opacity: 0.4; }
+.ed-rb-card.ed-drop-before { box-shadow: inset 0 2px 0 var(--accent); }
+.ed-rb-card.ed-drop-after { box-shadow: inset 0 -2px 0 var(--accent); }
+
+/* Biçim çubuğu (kalın/italik/altçizgi/üstüçizili/vurgu/kod/link/renk) */
+.ed-fmtfield { display: flex; flex-direction: column; gap: 6px; }
+.ed-fmtbar { display: flex; flex-wrap: wrap; gap: 4px; }
+.ed-ft-btn {
+  min-width: 28px; height: 26px; padding: 0 8px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--text-dim);
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.04em;
+  transition: border-color .14s var(--ease), color .14s var(--ease), background-color .14s var(--ease);
+}
+.ed-ft-btn:hover { border-color: var(--accent); color: var(--accent); }
+.ed-ft-btn.ed-ft--b { font-weight: 700; }
+.ed-ft-btn.ed-ft--i { font-style: italic; }
+.ed-ft-btn.ed-ft--u { text-decoration: underline; }
+.ed-ft-btn.ed-ft--s { text-decoration: line-through; }
+.ed-ft-btn.ed-ft--h { background: color-mix(in srgb, var(--accent) 12%, var(--surface)); }
+
+/* Görsel alanı: önizleme + URL + dosyadan yükle */
+.ed-imgfield { display: flex; gap: 12px; align-items: flex-start; }
+.ed-imgfield__prev {
+  width: 72px; height: 72px; flex-shrink: 0; overflow: hidden;
+  border: 1px solid var(--line); background: var(--surface);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: border-color .14s var(--ease);
+}
+.ed-imgfield__prev:hover { border-color: var(--accent); }
+.ed-imgfield__prev img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ed-imgfield__prev.empty span { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; color: var(--text-faint); }
+.ed-imgfield__ctrl { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.ed-imgfield__btns { display: flex; gap: 8px; align-items: center; }
+
+/* Galeri blok editörü */
+.ed-gal-items { display: flex; flex-direction: column; gap: 10px; }
+.ed-gal-item { display: flex; gap: 10px; align-items: flex-start; border: 1px solid var(--line); padding: 10px; background: var(--surface); }
+.ed-gal-item__fields { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.ed-gal-item__btns { display: flex; flex-direction: column; gap: 4px; flex-shrink: 0; }
+
+/* Blok başına stil & gelişmiş paneli (details/summary) */
+.ed-stylepanel { border: 1px solid var(--line-soft, var(--line)); margin-top: 4px; }
+.ed-stylepanel > summary {
+  cursor: pointer; padding: 8px 12px; font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-dim);
+  list-style: none; display: flex; align-items: center; gap: 6px;
+  transition: color .14s var(--ease);
+}
+.ed-stylepanel > summary::-webkit-details-marker { display: none; }
+.ed-stylepanel > summary::before { content: "▸"; color: var(--accent); transition: transform .16s var(--ease); }
+.ed-stylepanel[open] > summary::before { transform: rotate(90deg); }
+.ed-stylepanel > summary:hover { color: var(--text); }
+.ed-sp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 4px 12px 14px; }
+.ed-sp-full { grid-column: 1 / -1; }
+.ed-sp-lbl { display: block; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 5px; }
+
+/* Mini tablo editörü (blok içi tablo) */
+.ed-rows-scroll { overflow-x: auto; border: 1px solid var(--line); }
+.ed-rowtbl { border-collapse: collapse; width: 100%; min-width: 420px; }
+.ed-rowtbl th, .ed-rowtbl td { border: 1px solid var(--line); padding: 0; }
+.ed-rowtbl__act { width: 36px; text-align: center; }
+.ed-cell {
+  width: 100%; border: none; background: transparent; color: var(--text);
+  font-family: var(--font-mono); font-size: 12.5px; padding: 8px 10px; outline: none;
+}
+.ed-cell:focus { background: var(--surface-2); }
+
+/* Bölüm ağacı: taşı / HUB rozeti / yeni-bölüm */
+.ed-tree__secbtns { display: inline-flex; gap: 3px; }
+.ed-tree__secbtns .ed-mini { width: 22px; height: 22px; font-size: 11px; }
+.ed-hub-tag {
+  font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.12em;
+  border: 1px solid var(--accent); color: var(--accent); padding: 1px 5px; margin-left: 6px;
+}
+.ed-addbtn--section { border-color: var(--accent); color: var(--accent); margin: 14px 20px 4px; width: calc(100% - 40px); }
+.ed-addbtn--section:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); }
+
+/* Geri al / yinele (undo/redo) */
+.ed-undoredo { display: inline-flex; gap: 4px; padding-right: 4px; border-right: 1px solid var(--line); margin-right: 4px; }
+.ed-mini--lg { width: 34px; height: 34px; font-size: 16px; }
+
+/* ============================================================================
+   WIKI EDİTÖRÜ (bilgi kutusu + ilgili sayfalar)
+   ========================================================================== */
+.ed-wiki-infobox { border: 1px solid var(--line); background: var(--surface); padding: 16px; }
+.ed-wiki-facts { display: flex; flex-direction: column; gap: 8px; margin: 14px 0 12px; }
+.ed-wiki-fact-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; align-items: center; }
+.ed-wiki-related { display: flex; flex-direction: column; gap: 8px; }
+.ed-wiki-rel-row { display: grid; grid-template-columns: 1.4fr 1fr auto; gap: 8px; align-items: center; }
+@media (max-width: 640px) {
+  .ed-wiki-fact-row, .ed-wiki-rel-row { grid-template-columns: 1fr; }
+}
+
+/* ============================================================================
+   MİNİ ONAY / UYARI PENCERESİ (native confirm()/alert() yerine)
+   ========================================================================== */
+.ed-confirm-overlay {
+  position: fixed; inset: 0; z-index: 300; display: flex;
+  align-items: center; justify-content: center; padding: 24px;
+  background: color-mix(in srgb, #000 62%, transparent); backdrop-filter: blur(4px);
+  opacity: 0; transition: opacity .16s var(--ease);
+}
+.ed-confirm-overlay.open { opacity: 1; }
+.ed-confirm {
+  width: min(400px, 100%); background: var(--surface-2); border: 1px solid var(--line);
+  box-shadow: var(--shadow); padding: 24px 24px 20px;
+  transform: scale(.96) translateY(6px); transition: transform .16s var(--ease);
+}
+.ed-confirm-overlay.open .ed-confirm { transform: scale(1) translateY(0); }
+.ed-confirm__title {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent); margin: 0 0 12px; display: flex; align-items: center; gap: 8px;
+}
+.ed-confirm__title::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+.ed-confirm__msg {
+  font-family: var(--font-mono); font-size: 12.5px; line-height: 1.65; color: var(--text);
+  margin: 0; white-space: pre-line;
+}
+.ed-confirm__foot { display: flex; gap: 10px; justify-content: flex-end; margin-top: 22px; }

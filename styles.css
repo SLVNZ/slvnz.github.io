@@ -523,6 +523,153 @@ h1, h2, h3, h4 {
 .rb-tabpanel .rb-h2 { border-top: none; padding-top: 0; }
 @keyframes rbFade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
+/* Satır içi biçimlendirme (link/altçizgi/üstüçizili/vurgu/kod) */
+.rb-link { color: var(--accent); text-decoration: none; border-bottom: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); transition: border-color .15s var(--ease); }
+.rb-link:hover { border-bottom-color: var(--accent); }
+.rb-mark { background: color-mix(in srgb, var(--accent) 26%, transparent); color: var(--text); padding: 0.05em 0.25em; }
+.rb-code-inline { font-family: var(--font-mono); font-size: 0.88em; background: var(--surface); border: 1px solid var(--line); padding: 0.08em 0.4em; border-radius: var(--radius); color: var(--text); }
+.content__body.rich u { text-underline-offset: 0.18em; }
+
+/* ============================================================================
+   WIKI SAYFASI (mode: "wiki") — bilgi kutusu + içindekiler + ilgili sayfalar
+   ========================================================================== */
+.wiki-layout { display: flex; gap: 56px; align-items: flex-start; margin-top: 40px; }
+.wiki-main { flex: 1 1 480px; min-width: 0; max-width: 74ch; }
+.wiki-main > *:first-child { margin-top: 0; }
+
+.wiki-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; }
+.wiki-tag {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-dim); border: 1px solid var(--line); padding: 5px 11px;
+}
+
+.wiki-toc { border: 1px solid var(--line); background: var(--surface); padding: 20px 24px; margin: 0 0 40px; }
+.wiki-toc__label { display: block; margin-bottom: 12px; }
+.wiki-toc ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.wiki-toc__item a {
+  font-family: var(--font-mono); font-size: 12.5px; color: var(--text-dim); text-decoration: none;
+  border-bottom: 1px solid transparent; transition: color .14s var(--ease), border-color .14s var(--ease);
+}
+.wiki-toc__item a:hover { color: var(--accent); border-color: var(--accent); }
+.wiki-toc__item--h3 { padding-left: 20px; }
+.wiki-toc__item--h3 a { font-size: 11.5px; color: var(--text-faint); }
+
+.wiki-infobox {
+  flex: 0 0 300px; width: 300px; background: var(--surface); border: 1px solid var(--line);
+  align-self: flex-start; position: sticky; top: calc(var(--topbar-h) + 32px);
+}
+.wiki-infobox__img { width: 100%; aspect-ratio: 4 / 3; overflow: hidden; border-bottom: var(--line-w) solid var(--line); background: var(--surface-2); }
+.wiki-infobox__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.wiki-infobox__facts { margin: 0; padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; }
+.wiki-infobox__row dt { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint); margin: 0 0 4px; }
+.wiki-infobox__row dd { margin: 0; font-family: var(--font-display); font-size: 13.5px; color: var(--text); line-height: 1.5; }
+
+.wiki-related { margin-top: 56px; padding-top: 26px; border-top: var(--line-w) solid var(--line); }
+.wiki-related__list { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 28px; }
+.wiki-related__list a {
+  font-family: var(--font-display); font-weight: 600; font-size: 14px; text-transform: uppercase;
+  color: var(--text-dim); text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 2px;
+  transition: color .14s var(--ease), border-color .14s var(--ease);
+}
+.wiki-related__list a:hover { color: var(--accent); border-color: var(--accent); }
+
+@media (max-width: 860px) {
+  .wiki-layout { flex-direction: column; gap: 32px; }
+  .wiki-infobox { width: 100%; flex-basis: auto; order: -1; position: static; }
+}
+
+
+/* Genel blok sarmalayıcı (blok başına stil) */
+.rb-block { margin: 0 0 4px; }
+
+/* Alıntı (quote) */
+.rb-quote { margin: 24px 0 30px; padding: 6px 0 6px 26px; border-left: 3px solid var(--accent); }
+.rb-quote__text { font-family: var(--font-body); font-size: clamp(18px, 2vw, 23px); line-height: 1.5; color: var(--text); font-style: italic; }
+.rb-quote__cite { display: block; margin-top: 12px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); font-style: normal; }
+.rb-quote__cite::before { content: "— "; }
+
+/* Bilgi kutuları (callout) */
+.rb-callout { display: flex; gap: 14px; margin: 16px 0 28px; padding: 16px 18px; border: 1px solid var(--line); border-left-width: 3px; background: var(--surface); }
+.rb-callout__icon { flex: 0 0 auto; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 15px; border-radius: 50%; }
+.rb-callout__body { flex: 1 1 0; min-width: 0; }
+.rb-callout__title { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-stretch: 105%; font-size: 14px; letter-spacing: 0.02em; margin-bottom: 5px; color: var(--text); }
+.rb-callout__text { color: var(--text-dim); font-family: var(--font-body); font-size: 15px; line-height: 1.65; }
+.rb-callout__text > *:first-child { margin-top: 0; }
+.rb-callout--info    { border-left-color: #3B82F6; } .rb-callout--info .rb-callout__icon    { background: color-mix(in srgb, #3B82F6 18%, transparent); color: #3B82F6; }
+.rb-callout--note    { border-left-color: var(--text-dim); } .rb-callout--note .rb-callout__icon { background: var(--surface-2); color: var(--text-dim); }
+.rb-callout--success { border-left-color: #2BB673; } .rb-callout--success .rb-callout__icon { background: color-mix(in srgb, #2BB673 18%, transparent); color: #2BB673; }
+.rb-callout--warning { border-left-color: #E0A21A; } .rb-callout--warning .rb-callout__icon { background: color-mix(in srgb, #E0A21A 20%, transparent); color: #E0A21A; }
+.rb-callout--danger  { border-left-color: var(--accent); } .rb-callout--danger .rb-callout__icon { background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--accent); }
+.rb-callout--tip     { border-left-color: #9B6DFF; } .rb-callout--tip .rb-callout__icon     { background: color-mix(in srgb, #9B6DFF 20%, transparent); color: #9B6DFF; }
+
+/* Ayraç (divider) & boşluk (spacer) */
+.rb-divider { border: none; border-top: 1px solid var(--line); margin: 30px 0; }
+.rb-divider--dashed { border-top-style: dashed; }
+.rb-divider--dotted { border-top-style: dotted; }
+.rb-divider--thick { border-top-width: 3px; border-top-color: var(--accent); }
+.rb-spacer { width: 100%; }
+
+/* Buton / CTA */
+.rb-btnwrap { margin: 18px 0 28px; }
+.rb-btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px;
+  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+  border: 1px solid var(--accent); transition: background-color .18s var(--ease), color .18s var(--ease), border-color .18s var(--ease);
+}
+.rb-btn--solid   { background: var(--accent); color: var(--accent-ink); }
+.rb-btn--solid:hover { background: color-mix(in srgb, var(--accent) 85%, #000); }
+.rb-btn--outline { background: transparent; color: var(--accent); }
+.rb-btn--outline:hover { background: var(--accent); color: var(--accent-ink); }
+.rb-btn--ghost   { background: transparent; color: var(--text); border-color: var(--line); }
+.rb-btn--ghost:hover { border-color: var(--text-dim); }
+
+/* Video / gömme (embed) */
+.rb-fig--video { margin: 14px 0 30px; }
+.rb-embed { position: relative; width: 100%; max-width: 720px; aspect-ratio: 16 / 9; background: #000; border: 1px solid var(--line); }
+.rb-embed iframe, .rb-embed video { position: absolute; inset: 0; width: 100%; height: 100%; border: none; display: block; }
+.rb-embed--file { aspect-ratio: auto; }
+.rb-embed--file video { position: static; aspect-ratio: 16 / 9; }
+
+/* Kod bloğu */
+.rb-codeblock { position: relative; margin: 16px 0 28px; border: 1px solid var(--line); background: var(--surface); }
+.rb-codeblock__lang { position: absolute; top: 0; right: 0; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-faint); padding: 6px 10px; }
+.rb-codeblock pre { margin: 0; padding: 18px 20px; overflow-x: auto; }
+.rb-codeblock code { font-family: var(--font-mono); font-size: 13px; line-height: 1.7; color: var(--text); white-space: pre; }
+
+/* Ham HTML kabı */
+.rb-html { margin: 8px 0 24px; }
+
+/* Galeri */
+.rb-gallery { display: grid; grid-template-columns: repeat(var(--rb-gal-cols, 3), 1fr); gap: 12px; margin: 14px 0 30px; }
+.rb-gallery__item { margin: 0; }
+.rb-gallery__item img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; border: 1px solid var(--line); }
+.rb-gallery__item figcaption { margin-top: 6px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em; color: var(--text-dim); }
+@media (max-width: 680px) { .rb-gallery { grid-template-columns: repeat(2, 1fr); } }
+
+/* Sütunlar */
+.rb-columns { display: grid; gap: 26px; margin: 14px 0 30px; align-items: start; }
+.rb-column > *:first-child { margin-top: 0; }
+@media (max-width: 680px) { .rb-columns { grid-template-columns: 1fr !important; } }
+
+/* Akordeon */
+.rb-accordion { margin: 16px 0 30px; border: 1px solid var(--line); }
+.rb-acc-item { border-bottom: 1px solid var(--line); }
+.rb-acc-item:last-child { border-bottom: none; }
+.rb-acc-head {
+  display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 12px;
+  padding: 16px 18px; text-align: left; background: var(--surface);
+  font-family: var(--font-display); font-weight: 700; font-stretch: 105%; text-transform: uppercase; font-size: 14px; letter-spacing: 0.02em; color: var(--text);
+  transition: background-color .15s var(--ease);
+}
+.rb-acc-head:hover { background: var(--surface-2); }
+.rb-acc-chev { color: var(--accent); transition: transform .22s var(--ease); }
+.rb-acc-item.open .rb-acc-chev { transform: rotate(180deg); }
+.rb-acc-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .28s var(--ease); }
+.rb-acc-item.open .rb-acc-panel { grid-template-rows: 1fr; }
+.rb-acc-panel__inner { overflow: hidden; }
+.rb-acc-item.open .rb-acc-panel__inner { padding: 4px 18px 18px; }
+.rb-acc-panel__inner > *:first-child { margin-top: 0; }
+
 /* 8. YARDIMCILAR & RESPONSIVE ---------------------------------------------- */
 .icon { display: inline-block; vertical-align: middle; }
 .mobile-nav-toggle { display: none; }

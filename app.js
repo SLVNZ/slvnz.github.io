@@ -95,8 +95,16 @@
     '</div>';
   }
 
-  /* Bölüm sırası ve landing kartları bu diziye göre çizilir. */
-  var SECTION_ORDER = ["oyun-kurallari", "yetenekler", "evren-rehberi"];
+  /* Bölüm sırası — meta.sectionOrder varsa onu, yoksa nesne anahtarlarını kullan.
+     Böylece editörden yeni üst bölüm eklenebilir / sıralanabilir. */
+  function getSectionOrder() {
+    var keys = Object.keys(CONTENT.sections || {});
+    var ord = (CONTENT.meta && Array.isArray(CONTENT.meta.sectionOrder)) ? CONTENT.meta.sectionOrder : null;
+    if (!ord) return keys;
+    var out = ord.filter(function (k) { return CONTENT.sections[k]; });
+    keys.forEach(function (k) { if (out.indexOf(k) === -1) out.push(k); });
+    return out;
+  }
 
   /* Dekoratif kanji/etiketler (japon motifi) — istersen değiştir. */
   var SECTION_DECOR = {
@@ -218,7 +226,7 @@
 
   /* --- Render: TOPBAR ----------------------------------------------------- */
   function renderTopbar(active) {
-    var links = SECTION_ORDER.map(function (key) {
+    var links = getSectionOrder().map(function (key) {
       var sec = CONTENT.sections[key];
       var cls = active === key ? "topbar__link is-active" : "topbar__link";
       return '<a class="' + cls + '" href="#/' + key + '">' + esc(sec.label) + "</a>";
@@ -243,12 +251,13 @@
   /* --- Render: LANDING ---------------------------------------------------- */
   function renderLanding() {
     var m = CONTENT.meta;
-    var cards = SECTION_ORDER.map(function (key, i) {
+    var order = getSectionOrder();
+    var cards = order.map(function (key, i) {
       var sec = CONTENT.sections[key];
       return '' +
         '<a class="gateway" href="#/' + key + '">' +
           '<div class="gateway__top">' +
-            '<span class="index">' + pad(i + 1) + ' / ' + pad(SECTION_ORDER.length) + '</span>' +
+            '<span class="index">' + pad(i + 1) + ' / ' + pad(order.length) + '</span>' +
             ICON.arrow +
           '</div>' +
           '<h3 class="gateway__name">' + esc(sec.label) + '</h3>' +
@@ -288,6 +297,7 @@
     if (current.mode === "table") return renderTableBlock(current);
     if (current.mode === "rich") return renderBlocks(current.blocks);
     if (current.mode === "creature-list") return renderCreatureListBlock(current);
+    if (current.mode === "wiki") return renderWikiBody(current);
     return '<div class="content__body">' + toParagraphs(current.body) + '</div>';
   }
   // Tablo modundaki bir öğe için tablo durumunu sıfırla + ilk satırı seç.
@@ -353,7 +363,7 @@
           '</div>' +
           '<ul class="navlist">' + nav + '</ul>' +
         '</aside>' +
-        '<main class="content' + (current.mode === "table" ? " content--table" : current.mode === "creature-list" ? " content--creature" : "") + '">' +
+        '<main class="content' + (current.mode === "table" ? " content--table" : current.mode === "creature-list" ? " content--creature" : current.mode === "wiki" ? " content--wiki" : "") + '">' +
           '<div class="content__eyebrow">' +
             '<span class="bar"></span>' +
             '<span class="label label--accent">' + esc(sec.label) + '</span>' +
@@ -364,7 +374,9 @@
             ? renderTableBlock(current)
             : current.mode === "rich"
               ? renderBlocks(current.blocks)
-              : '<div class="content__body">' + toParagraphs(current.body) + '</div>') +
+              : current.mode === "wiki"
+                ? renderWikiBody(current)
+                : '<div class="content__body">' + toParagraphs(current.body) + '</div>') +
           '<nav class="content__pager">' +
             pagerBtn(prev, "prev", "← ÖNCEKİ") +
             pagerBtn(next, "next", "SONRAKİ →") +
@@ -470,7 +482,7 @@
           '</div>' +
           '<ul class="navlist">' + nav + '</ul>' +
         '</aside>' +
-        '<main class="content' + (current.mode === "table" ? " content--table" : current.mode === "creature-list" ? " content--creature" : "") + '">' +
+        '<main class="content' + (current.mode === "table" ? " content--table" : current.mode === "creature-list" ? " content--creature" : current.mode === "wiki" ? " content--wiki" : "") + '">' +
           '<div class="content__eyebrow">' +
             '<span class="bar"></span>' +
             '<span class="label label--accent">' + esc(page.title) + '</span>' +
@@ -646,11 +658,50 @@
      Satır içi biçim: **kalın**  *italik*
      ---------------------------------------------------------------------- */
   var tabSeq = 0;
+  var accSeq = 0;
   function inlineFmt(s) {
     s = esc(s);
+    // Bağlantı: [metin](url)
+    s = s.replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (_, t, u) {
+      var ext = /^https?:/i.test(u);
+      return '<a class="rb-link" href="' + u + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' + t + '</a>';
+    });
+    // Renk: {#e11|metin} veya {crimson|metin}
+    s = s.replace(/\{([#\w][\w#().,%\s-]*)\|([^{}]*)\}/g, function (_, c, t) {
+      return '<span style="color:' + c.trim() + '">' + t + '</span>';
+    });
     s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
     s = s.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+    s = s.replace(/__([^_]+)__/g, "<u>$1</u>");
+    s = s.replace(/~~([^~]+)~~/g, "<s>$1</s>");
+    s = s.replace(/==([^=]+)==/g, "<mark class='rb-mark'>$1</mark>");
+    s = s.replace(/`([^`]+)`/g, "<code class='rb-code-inline'>$1</code>");
     return s.replace(/\n/g, "<br>");
+  }
+  /* Blok başına stil sarmalayıcı — hizalama, arka plan, boşluk, kenarlık, özel CSS. */
+  function blockStyleAttr(b) {
+    var s = b && b.style; if (!s) return { style: "", cls: "" };
+    var css = [];
+    if (s.align) css.push("text-align:" + s.align);
+    if (s.bg) css.push("background:" + s.bg);
+    if (s.color) css.push("color:" + s.color);
+    if (s.pad) css.push("padding:" + s.pad);
+    if (s.margin) css.push("margin:" + s.margin);
+    if (s.border) css.push("border:" + s.border);
+    if (s.radius) css.push("border-radius:" + s.radius);
+    if (s.maxw) css.push("max-width:" + s.maxw + ";margin-inline:auto");
+    if (s.css) css.push(s.css);
+    return {
+      style: css.length ? ' style="' + css.join(";").replace(/"/g, "&quot;") + '"' : "",
+      cls: s.cls ? " " + esc(s.cls) : ""
+    };
+  }
+  function renderBlock(b) {
+    if (!b || !b.type) return "";
+    var inner = renderBlockInner(b);
+    var w = blockStyleAttr(b);
+    if (!w.style && !w.cls) return inner;
+    return '<div class="rb-block' + w.cls + '"' + w.style + '>' + inner + '</div>';
   }
   function renderStaticTable(b) {
     var head = (b.header || []).map(function (h) { return "<th>" + esc(h) + "</th>"; }).join("");
@@ -660,12 +711,26 @@
     return "<div class='rb-table-wrap'><table class='rb-table'>" +
       (head ? "<thead><tr>" + head + "</tr></thead>" : "") + "<tbody>" + rows + "</tbody></table></div>";
   }
-  function renderBlock(b) {
+  function videoEmbed(src) {
+    src = String(src || "").trim();
+    if (!src) return "";
+    var yt = src.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
+    if (yt) return "<div class='rb-embed'><iframe src='https://www.youtube.com/embed/" + yt[1] + "' title='video' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen loading='lazy'></iframe></div>";
+    var vm = src.match(/vimeo\.com\/(?:video\/)?(\d+)/);
+    if (vm) return "<div class='rb-embed'><iframe src='https://player.vimeo.com/video/" + vm[1] + "' title='video' frameborder='0' allow='autoplay; fullscreen; picture-in-picture' allowfullscreen loading='lazy'></iframe></div>";
+    if (/\.(mp4|webm|ogg)(\?|$)/i.test(src) || /^data:video/i.test(src))
+      return "<div class='rb-embed rb-embed--file'><video src='" + esc(src) + "' controls preload='metadata'></video></div>";
+    // Ham iframe/embed kodu
+    if (/^\s*<(iframe|video|embed)/i.test(src)) return "<div class='rb-embed'>" + src + "</div>";
+    return "<div class='rb-embed'><iframe src='" + esc(src) + "' frameborder='0' loading='lazy' allowfullscreen></iframe></div>";
+  }
+  function renderBlockInner(b) {
     if (!b || !b.type) return "";
     switch (b.type) {
       case "heading":
         var lv = b.level === 3 ? 3 : 2;
-        return "<h" + lv + " class='rb-h rb-h" + lv + "'>" + esc(b.text || "") + "</h" + lv + ">";
+        var hid = b._tocId ? " id='" + esc(b._tocId) + "'" : "";
+        return "<h" + lv + hid + " class='rb-h rb-h" + lv + "'>" + esc(b.text || "") + "</h" + lv + ">";
       case "paragraph":
         return "<p class='rb-p'>" + inlineFmt(b.text || "") + "</p>";
       case "list":
@@ -710,12 +775,166 @@
         }).join("");
         return "<div class='rb-tabs' data-rbtabs='" + gid + "'><div class='rb-tabbar'>" + bar + "</div>" +
           "<div class='rb-tabpanels'>" + panels + "</div></div>";
+      case "quote":
+        return "<blockquote class='rb-quote'><div class='rb-quote__text'>" + inlineFmt(b.text || "") + "</div>" +
+          (b.cite ? "<cite class='rb-quote__cite'>" + esc(b.cite) + "</cite>" : "") + "</blockquote>";
+      case "callout": {
+        var vr = b.variant || "info";
+        var icons = { info: "ℹ", note: "✎", success: "✓", warning: "⚠", danger: "✕", tip: "★" };
+        return "<aside class='rb-callout rb-callout--" + vr + "'>" +
+          "<span class='rb-callout__icon'>" + (icons[vr] || "•") + "</span>" +
+          "<div class='rb-callout__body'>" +
+            (b.title ? "<div class='rb-callout__title'>" + esc(b.title) + "</div>" : "") +
+            "<div class='rb-callout__text'>" + inlineFmt(b.text || "") + "</div>" +
+          "</div></aside>";
+      }
+      case "divider":
+        return "<hr class='rb-divider rb-divider--" + (b.dstyle || "solid") + "'>";
+      case "spacer":
+        return "<div class='rb-spacer' style='height:" + (parseInt(b.height, 10) || 40) + "px'></div>";
+      case "button": {
+        var align = b.align || "left";
+        var variant = b.variant || "solid";
+        var ext = /^https?:/i.test(b.href || "");
+        return "<div class='rb-btnwrap' style='text-align:" + align + "'>" +
+          "<a class='rb-btn rb-btn--" + variant + "' href='" + esc(b.href || "#") + "'" +
+          (ext ? " target='_blank' rel='noopener'" : "") + ">" + esc(b.label || "Buton") + "</a></div>";
+      }
+      case "video":
+        return "<figure class='rb-fig rb-fig--video'>" + videoEmbed(b.src) +
+          (b.caption && b.showCaption !== false ? "<figcaption>" + esc(b.caption) + "</figcaption>" : "") + "</figure>";
+      case "code":
+        return "<div class='rb-codeblock'>" + (b.lang ? "<span class='rb-codeblock__lang'>" + esc(b.lang) + "</span>" : "") +
+          "<pre><code>" + esc(b.code || "") + "</code></pre></div>";
+      case "html":
+        return "<div class='rb-html'>" + (b.html || "") + "</div>";
+      case "gallery": {
+        var imgs = (b.images || []).filter(function (im) { return im && im.src; });
+        if (!imgs.length) return "";
+        var gcols = parseInt(b.columns, 10) || 3;
+        return "<div class='rb-gallery' style='--rb-gal-cols:" + gcols + "'>" +
+          imgs.map(function (im) {
+            return "<figure class='rb-gallery__item'><img src='" + esc(im.src) + "' alt='" + esc(im.alt || "") + "' loading='lazy'>" +
+              (im.caption ? "<figcaption>" + esc(im.caption) + "</figcaption>" : "") + "</figure>";
+          }).join("") + "</div>";
+      }
+      case "columns": {
+        var cols = b.cols || [];
+        if (!cols.length) return "";
+        var ratio = b.ratio || cols.map(function () { return "1fr"; }).join(" ");
+        return "<div class='rb-columns' style='grid-template-columns:" + ratio + "'>" +
+          cols.map(function (col) {
+            return "<div class='rb-column'>" + (col.blocks || []).map(renderBlock).join("") + "</div>";
+          }).join("") + "</div>";
+      }
+      case "accordion": {
+        var items = b.items || [];
+        if (!items.length) return "";
+        var aid = "rba" + (accSeq++);
+        return "<div class='rb-accordion' data-rbacc='" + aid + "'>" +
+          items.map(function (ac, i) {
+            return "<div class='rb-acc-item" + (ac.open ? " open" : "") + "' data-rbacc-item>" +
+              "<button class='rb-acc-head' data-rbacc-toggle><span>" + esc(ac.title || ("Bölüm " + (i + 1))) + "</span><span class='rb-acc-chev'>▾</span></button>" +
+              "<div class='rb-acc-panel'><div class='rb-acc-panel__inner'>" +
+                (ac.blocks || []).map(renderBlock).join("") +
+              "</div></div></div>";
+          }).join("") + "</div>";
+      }
       default:
         return "";
     }
   }
   function renderBlocks(blocks) {
     return "<div class='content__body rich'>" + (blocks || []).map(renderBlock).join("") + "</div>";
+  }
+
+  /* --- WIKI SAYFASI (mode:"wiki") -----------------------------------------
+     Bilgi kutusu (infobox) + etiketler + otomatik içindekiler (TOC) +
+     zengin gövde (mode:"rich" ile aynı blok motoru) + ilgili sayfalar. ------ */
+  function slugifyToc(s) {
+    var map = { "ç":"c","ğ":"g","ı":"i","ö":"o","ş":"s","ü":"u","İ":"i" };
+    return String(s || "").toLowerCase()
+      .replace(/[çğıöşüİ]/g, function (c) { return map[c] || c; })
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "bolum";
+  }
+  function resolveWikiTarget(rel) {
+    var sec = CONTENT.sections[rel.section];
+    if (!sec) return null;
+    if (sec.type === "hub") {
+      var cat = (sec.items || []).find(function (c) { return c.id === rel.item; });
+      if (!cat) return null;
+      var pg = (cat.pages || []).find(function (p) { return p.id === rel.page; });
+      if (!pg) return null;
+      return { title: pg.title, href: "#/" + rel.section + "/" + rel.item + "/" + rel.page };
+    }
+    var leaf = (sec.items || []).find(function (i) { return i.id === rel.item; });
+    if (!leaf) return null;
+    return { title: leaf.title, href: "#/" + rel.section + "/" + rel.item };
+  }
+  function renderWikiBody(item) {
+    var blocks = item.blocks || [];
+    var used = {};
+    var tocItems = [];
+    blocks.forEach(function (b) {
+      if (b && b.type === "heading") {
+        var lvl = b.level === 3 ? 3 : 2;
+        var base = slugifyToc(b.text), id = base, n = 2;
+        while (used[id]) { id = base + "-" + (n++); }
+        used[id] = true;
+        b._tocId = id;
+        tocItems.push({ id: id, text: b.text || "", level: lvl });
+      }
+    });
+
+    var infobox = item.infobox || {};
+    var facts = (infobox.entries || []).filter(function (e) { return e && (e.label || e.value); });
+    var hasInfobox = !!(infobox.image || facts.length);
+    var tags = item.tags || [];
+    var related = (item.related || []).map(function (r) {
+      var t = resolveWikiTarget(r);
+      return t ? { href: t.href, label: (r.label && r.label.trim()) ? r.label : t.title } : null;
+    }).filter(Boolean);
+
+    var infoboxHtml = !hasInfobox ? "" : (
+      '<aside class="wiki-infobox">' +
+        (infobox.image ? '<div class="wiki-infobox__img"><img src="' + esc(infobox.image) + '" alt="' + esc(item.title) + '" loading="lazy"></div>' : '') +
+        (facts.length ? '<dl class="wiki-infobox__facts">' + facts.map(function (e) {
+          return '<div class="wiki-infobox__row"><dt>' + esc(e.label) + '</dt><dd>' + esc(e.value) + '</dd></div>';
+        }).join("") + '</dl>' : '') +
+      '</aside>'
+    );
+
+    var tocHtml = !tocItems.length ? "" : (
+      '<nav class="wiki-toc"><span class="wiki-toc__label label label--accent">İÇİNDEKİLER</span><ul>' +
+        tocItems.map(function (t) {
+          return '<li class="wiki-toc__item wiki-toc__item--h' + t.level + '"><a href="#' + t.id + '">' + esc(t.text) + '</a></li>';
+        }).join("") +
+      '</ul></nav>'
+    );
+
+    var tagsHtml = !tags.length ? "" : (
+      '<div class="wiki-tags">' + tags.map(function (t) { return '<span class="wiki-tag">' + esc(t) + '</span>'; }).join("") + '</div>'
+    );
+
+    var relatedHtml = !related.length ? "" : (
+      '<section class="wiki-related">' +
+        '<span class="label label--accent">İLGİLİ SAYFALAR</span>' +
+        '<ul class="wiki-related__list">' +
+          related.map(function (r) { return '<li><a href="' + r.href + '">' + esc(r.label) + '</a></li>'; }).join("") +
+        '</ul>' +
+      '</section>'
+    );
+
+    return '' +
+      '<div class="wiki-layout">' +
+        '<div class="wiki-main">' +
+          tagsHtml +
+          tocHtml +
+          renderBlocks(blocks) +
+          relatedHtml +
+        '</div>' +
+        infoboxHtml +
+      '</div>';
   }
 
   /* --- YARATIK BESTİYERİ (mode:"creature-list") --------------------------- */
@@ -1027,6 +1246,15 @@
           wrap.querySelectorAll(".rb-tabpanel").forEach(function (pnl) {
             pnl.classList.toggle("active", pnl.getAttribute("data-rbpanel") === key);
           });
+        });
+      });
+    });
+    // Zengin içerik: akordeon aç/kapat
+    document.querySelectorAll(".rb-accordion").forEach(function (wrap) {
+      wrap.querySelectorAll("[data-rbacc-toggle]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var item = btn.closest("[data-rbacc-item]");
+          if (item) item.classList.toggle("open");
         });
       });
     });
