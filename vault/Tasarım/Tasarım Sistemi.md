@@ -4,7 +4,7 @@ tags: [tasarım]
 
 # Tasarım Sistemi
 
-Tüm değişkenler `docs/assets/css/style.css` içindeki `:root` bloğunda. Bileşenler asla ham renk kullanmaz, hep token okur — tema geçişi bu sayede tek yerden çalışır ([[Tema Sistemi]]).
+Tüm değişkenler `assets/css/style.css` içindeki `:root` bloğunda. Bileşenler asla ham renk kullanmaz, hep token okur — tema geçişi bu sayede tek yerden çalışır ([[Tema Sistemi]]).
 
 ## Renk token'ları
 
@@ -40,16 +40,6 @@ Başlık sayfasındaki her ölçü bunun katı — detay [[Başlık Sayfası Geo
 | `--mark` | `134.69 × --s` | SLVNZ punto boyutu |
 | `--ease` | `cubic-bezier(.22,.61,.36,1)` | Ortak yumuşatma |
 | `--control-bg` / `--control-bd` | rgba | Tema anahtarı yüzeyleri |
-
-## Okuma sayfası token'ları
-
-`rulebook.css` içinde `body.is-rulebook` üzerinde ek üç değişken:
-
-| Token | Değer | Kullanım |
-|---|---|---|
-| `--measure` | `68ch` | Okuma kolonu genişliği |
-| `--rule` | `--ink %14` | Saç çizgisi ayraçlar |
-| `--muted` | `--ink %58` | İkincil metin |
 
 ## İlgili
 [[Tipografi]] · [[Tema Sistemi]] · [[Başlık Sayfası Geometrisi]] · [[Etkileşimler]]

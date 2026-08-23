@@ -1,10 +1,12 @@
 /* SLVNZ nav interactions — ink-soak hover, page exit.
-   Progressive enhancement: without JS the links are plain, working links.
+   Progressive enhancement: without JS the menu is plain, working markup.
 
-   1. Splits each link's text into letters so CSS can stagger the colour
+   1. Splits each item's text into letters so CSS can stagger the colour
       change per letter (ink soaking through the word).
    2. On click, runs a short exit sequence before following the link.
-      Modifier-clicks / middle-clicks / new-tab targets are left alone.    */
+      Modifier-clicks / middle-clicks / new-tab targets are left alone.
+      Items without an href (the menu is inert until its pages exist) fall
+      straight through this step, so no wiring changes when one gains one. */
 (function () {
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   var links = document.querySelectorAll('.mainnav__link');
@@ -13,8 +15,16 @@
   /* ---- 1. split letters ------------------------------------------------ */
   links.forEach(function (link) {
     var text = link.textContent.trim();
-    link.setAttribute('aria-label', text);          // SR reads the whole word
     link.textContent = '';
+
+    // the letters below are decorative; the whole word is kept here for
+    // assistive tech. A hidden copy, not aria-label: that would be dropped
+    // on the plain <span> an item is while it has no page to point at.
+    var label = document.createElement('span');
+    label.className = 'visually-hidden';
+    label.textContent = text;
+    link.appendChild(label);
+
     var word = document.createElement('span');
     word.className = 'spell';
     word.setAttribute('aria-hidden', 'true');

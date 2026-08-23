@@ -1,51 +1,62 @@
-# SLVNZ — kural kitabı sitesi
+# SLVNZ — slvnz.github.io
 
-Statik site + yerel PHP yönetim paneli. Sunucu gerekmez: GitHub Pages yalnızca `docs/` klasörünü yayınlar.
+Tek sayfalık statik site: **SLVNZ 4.0 Fantazya** başlık sayfası. Derleme adımı,
+bağımlılık ve sunucu yok — depodaki dosyalar olduğu gibi yayınlanır.
 
-## Klasörler
+## Yapı
 
 ```
-docs/        YAYINLANAN site — hepsi üretilir (index.html, 4.0/..., assets/, images/)
-content/     tek gerçek kaynak: site.json · versions/*.json · pages/<sürüm>/<bölüm>/<slug>.json
-templates/   PHP şablonlar (title page, sürüm, bölüm, sayfa, 404)
-admin/       yönetim paneli (yalnızca yerelde çalışır, yayınlanmaz)
-vault/       Obsidian dokümantasyonu — mimari, tasarım, iş akışları
-build.php    content/ → docs/ üretimi (panel kaydedince otomatik; elle de çalışır)
+index.html       başlık sayfası
+404.html         bulunamadı sayfası (her derinlikten çalışsın diye yollar kök-mutlak)
+assets/
+  css/style.css  tüm stiller ve tasarım token'ları
+  js/theme.js    aydınlık / karanlık tema anahtarı
+  js/nav.js      menüde harf harf hover, sayfa çıkış geçişi
+  fonts/         No Serenity — SLVNZ logosunu çizen yazı tipi
+  images/        başlık sayfası görselleri
+vault/           Obsidian tasarım notları — sitede bağlantısı yok
+.nojekyll        GitHub Pages Jekyll'ı atlasın diye
 ```
 
-## Çalıştırma
+## Yerelde açma
+
+`index.html` dosyasına çift tıklamak yeter. 404 sayfasının kök-mutlak yollarını
+da denemek istersen küçük bir sunucu:
 
 ```bash
-php -S 127.0.0.1:8000 -t admin    # panel  → http://localhost:8000
-php -S 127.0.0.1:8080 -t docs     # site   → http://localhost:8080
+python -m http.server 8080
 ```
 
-## Akış
+## Yayınlama
 
-1. Panelde düzenle → **Kaydet**: `content/` güncellenir, `docs/` anında yeniden üretilir.
-2. `localhost:8080`'de sonucu gör.
-3. `git add -A && git commit -m "..." && git push` → GitHub Pages yayınlar.
+```bash
+git add -A && git commit -m "..." && git push
+```
 
-## GitHub Pages ayarı (bir kez)
+GitHub Pages ayarı (bir kez): **Settings → Pages → Source: Deploy from a branch →
+Branch: `main`, Folder: `/ (root)`.** Önceden `/docs` seçiliydi; site kök dizine
+taşındığı için değiştirilmesi gerekiyor.
 
-Repo → Settings → Pages → Source: **Deploy from a branch** → Branch: `main`, Folder: **/docs**.
-Site `kullanici.github.io/repo-adi` altında yayınlanacaksa panelde **Site ayarları → URL tabanı** = `/repo-adi`.
+## Menü
 
-## Sürümler
+OYUN KURALLARI · YETENEKLER · EVREN REHBERİ şimdilik pasif — gidecekleri sayfa
+yok, o yüzden bağlantı değil düz metinler. Sayfa eklediğinde `index.html` içinde
 
-- Her sürüm `content/versions/<no>.json`; durumu `current` / `archived` / `draft` (draft yayınlanmaz).
-- Panelde **Sürümler → Yeni sürüme kopyala…** bir sürümün tüm sayfalarını yeni numaraya kopyalar.
-- Aynı slug başka sürümde de varsa sayfada "Diğer sürümlerde" bağlantısı otomatik çıkar.
+```html
+<span class="mainnav__link">Oyun Kuralları</span>
+```
 
-## Bloklar
+satırını
 
-Metin (zengin) · Not kutusu · Yetenek kartı · Tablo · Yaratık/NPC · İki sütun · Görsel.
-Yeni blok eklemek: `admin/lib/render.php` (HTML), `admin/assets/admin.js` (editör), `docs/assets/css/rulebook.css` (stil), `admin/lib/store.php` → `BLOCK_TYPES`.
+```html
+<a class="mainnav__link" href="/kurallar/">Oyun Kuralları</a>
+```
 
-## Dokümantasyon
+ile değiştir — hover efekti ve çıkış geçişi kendiliğinden çalışır.
 
-Ayrıntılı kılavuz `vault/` klasöründe bir Obsidian vault olarak duruyor:
-mimari, tasarım sistemi, blok referansı ve iş akışları.
+## Tasarım notları
 
-Obsidian'da **Open folder as vault** ile `vault/` klasörünü aç — giriş notu **SLVNZ**.
-Düz Markdown olduğu için Obsidian olmadan da okunabilir.
+`vault/` klasörü bir Obsidian vault: renk ve ölçek token'ları, tipografi,
+başlık sayfasının Figma'ya birebir hizalanma yöntemi, tema mantığı,
+etkileşimler. Obsidian'da **Open folder as vault** ile aç — giriş notu
+**SLVNZ**. Düz Markdown olduğu için Obsidian olmadan da okunur.

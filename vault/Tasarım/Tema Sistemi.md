@@ -4,7 +4,7 @@ tags: [tasarım, tema]
 
 # Tema Sistemi
 
-Üç durumlu. Denetleyici: `docs/assets/js/theme.js`.
+Üç durumlu. Denetleyici: `assets/js/theme.js`.
 
 ```mermaid
 stateDiagram-v2
@@ -25,7 +25,7 @@ stateDiagram-v2
 
 ## Flash önleme
 
-`templates/_head.php` içinde satır içi script, **ilk boyamadan önce** kaydedilmiş seçimi geri yükler:
+`index.html` (ve `404.html`) `<head>` bloğundaki satır içi script, **ilk boyamadan önce** kaydedilmiş seçimi geri yükler:
 
 ```js
 (function(){try{var t=localStorage.getItem("slvnz-theme");
@@ -69,7 +69,7 @@ SLVNZTheme.reset()      // seçimi sil, sistemi izlemeye dön
 
 ## Anahtar bileşeni
 
-`templates/_toggle.php`: 28 × 14 px saç çizgisi ray, 8 px vurgu rengi topuz, iki yanında güneş/ay ikonu. Dokunma hedefi düğme dolgusuyla 44 px'e çıkarılır. `role="switch"` + `aria-checked`.
+Her sayfanın altbilgisindeki düğme: 28 × 14 px saç çizgisi ray, 8 px vurgu rengi topuz, iki yanında güneş/ay ikonu. Dokunma hedefi düğme dolgusuyla 44 px'e çıkarılır. `role="switch"` + `aria-checked`.
 
 ## İlgili
 [[Tasarım Sistemi]] · [[Etkileşimler]]

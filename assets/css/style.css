@@ -177,6 +177,21 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .skip-link:focus-visible { transform: translate(-50%, 0); }
 
+/* ---------- Visually hidden --------------------------------------------- */
+/* Carries the accessible name for text that is drawn glyph by glyph: nav.js
+   splits each menu word into letters and hides the pieces from assistive
+   tech, so the whole word is kept here instead.                            */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* ---------- Page frame -------------------------------------------------- */
 /* Head / body / foot. The middle row absorbs the slack, so the footer pins
    to the bottom while the title block stays anchored to the top.          */
@@ -285,108 +300,6 @@ img { display: block; max-width: 100%; height: auto; }
   color: var(--accent);
 }
 
-/* ---------- Version selector ("4.0") ------------------------------------ */
-/* The "4.0" is a button. Its glyphs carry a two-layer "shader":
-   ① a diagonal light band sweeping through the letterforms
-     (gradient painted into the text via background-clip),
-   ② an ember glow bloom underneath (a blurred copy of the text).
-   Both are transform/opacity/background-position only → compositor.    */
-.version { --glow: 0; }
-.version__btn {
-  all: unset;
-  display: inline-block;
-  position: relative;
-  cursor: pointer;
-  font: inherit;
-  line-height: 1;
-  color: var(--accent);
-  /* touch target: the glyph is ~52px so padding only needs a little */
-  padding: .08em .12em;
-  margin: -.08em -.12em;
-}
-.version__glyph {
-  position: relative;
-  display: inline-block;
-  /* No Serenity's caps and descenders overshoot the 1em line box; the
-     clipped gradient only paints inside the box, so pad the box out to
-     cover the overshoot and pull it back with equal negative margins. */
-  padding: .16em .08em .14em;
-  margin:  -.16em -.08em -.14em;
-  /* ① sheen: accent → hot white → accent, moved by background-position */
-  background: linear-gradient(115deg,
-      var(--accent) 0 38%,
-      #fff3e8 46%, #ffd9c4 50%, #fff3e8 54%,
-      var(--accent) 62% 100%);
-  background-size: 320% 100%;
-  background-position: 100% 0;
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-  transition: background-position .9s cubic-bezier(.2, .7, .2, 1);
-}
-/* ② glow: blurred duplicate behind the glyph, scaled by --glow */
-.version__glyph::before {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  color: var(--accent);
-  -webkit-text-fill-color: var(--accent);
-  filter: blur(.14em);
-  opacity: var(--glow);
-  transition: opacity .45s var(--ease);
-}
-.version__btn:hover .version__glyph,
-.version__btn:focus-visible .version__glyph,
-.version__btn[aria-expanded="true"] .version__glyph { background-position: 0 0; }
-.version__btn:hover,
-.version__btn:focus-visible,
-.version__btn[aria-expanded="true"] { --glow: .85; }
-/* idle: a slow, faint breathing shimmer so the button reads as live */
-@media (prefers-reduced-motion: no-preference) {
-  .version__btn:not(:hover):not(:focus-visible) .version__glyph { animation: sheen-idle 7s ease-in-out infinite; }
-  .version__btn:not(:hover):not(:focus-visible) .version__glyph::before { animation: glow-idle 7s ease-in-out infinite; }
-}
-@keyframes sheen-idle { 0%, 70%, 100% { background-position: 100% 0; } 85% { background-position: 0 0; } }
-@keyframes glow-idle  { 0%, 70%, 100% { opacity: 0; } 85% { opacity: .35; } }
-
-/* menu */
-.version__menu {
-  position: absolute;
-  inset-inline-start: 0;
-  top: calc(100% + .3em);
-  z-index: 5;
-  min-width: 6.2em;
-  padding: .35em 0;
-  margin: 0;
-  list-style: none;
-  font-family: var(--font-grotesk);
-  font-size: max(11px, .26em);
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  background: var(--paper);
-  border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
-  opacity: 0;
-  translate: 0 -.4em;
-  transition: opacity .22s var(--ease), translate .22s var(--ease);
-}
-.version__menu[hidden] { display: block; visibility: hidden; pointer-events: none; }
-.version__menu:not([hidden]) { opacity: 1; translate: 0 0; }
-.version__opt {
-  display: flex;
-  justify-content: space-between;
-  gap: 1em;
-  padding: .55em .9em;
-  color: var(--ink);
-  text-decoration: none;
-  transition: color .18s var(--ease), background-color .18s var(--ease);
-}
-.version__opt small { font-size: .78em; letter-spacing: .12em; opacity: .5; }
-.version__opt:hover,
-.version__opt:focus-visible { color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); outline: none; }
-[aria-selected="true"] .version__opt { color: var(--accent); }
-
 /* ---------- Main navigation — Space Grotesk Regular 18.13 --------------- */
 .mainnav {
   position: relative;
@@ -425,9 +338,12 @@ img { display: block; max-width: 100%; height: auto; }
   text-transform: uppercase;
   text-decoration: none;
   color: var(--nav-ink);
-  cursor: pointer;
+  cursor: default;
   overflow: visible;
 }
+/* the items are <span> while their page does not exist yet; the day one
+   is written the <span> becomes an <a> and everything else still fits */
+a.mainnav__link { cursor: pointer; }
 
 /* -- Hover: ink hairline draws in under the word ------------------------ */
 .mainnav__link::after {
@@ -448,7 +364,14 @@ img { display: block; max-width: 100%; height: auto; }
 .mainnav__link:not(:hover):not(:focus-visible)::after { transform-origin: right center; }
 
 /* -- Hover: ink soaks through the word, letter by letter ---------------- */
-.spell { display: inline-block; white-space: nowrap; }
+/* the letters are a decorative copy of the word — the real text sits in the
+   .visually-hidden label beside them, so keep this copy out of selections */
+.spell {
+  display: inline-block;
+  white-space: nowrap;
+  -webkit-user-select: none;
+          user-select: none;
+}
 .spell__l {
   display: inline-block;
   --d: calc(var(--i) * .028s);
@@ -556,6 +479,61 @@ html.is-leaving .mainnav__link.is-chosen::after { scale: 1 1; }
   line-height: 1;
   color: var(--accent-text);
 }
+
+/* ---------- 404 --------------------------------------------------------- */
+/* Same page frame as the title page; only the middle row differs. */
+.page__body--center {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.notfound { max-width: 34rem; }
+
+.notfound__code {
+  font-family: var(--font-grotesk);
+  font-size: max(11px, calc(18.134 * var(--s)));
+  line-height: 1;
+  letter-spacing: .34em;
+  margin-inline-end: -.34em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+.notfound__title {
+  margin-block-start: calc(30 * var(--s));
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: max(2.25rem, calc(72 * var(--s)));
+  line-height: 1;
+  color: var(--ink);
+}
+
+.notfound__lede {
+  margin-block-start: calc(22 * var(--s));
+  font-family: var(--font-archivo);
+  font-weight: 200;
+  font-size: max(14px, calc(21.8435 * var(--s)));
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.notfound__back {
+  display: inline-block;
+  margin-block-start: calc(30 * var(--s));
+  padding-block-end: .35em;
+  font-family: var(--font-grotesk);
+  font-size: max(13px, calc(16 * var(--s)));
+  line-height: 1;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--nav-ink);
+  border-block-end: 1px solid var(--accent);
+  transition: color .2s var(--ease);
+}
+.notfound__back:hover { color: var(--accent); }
 
 /* ---------- Focus ------------------------------------------------------- */
 :focus-visible {

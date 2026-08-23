@@ -20,7 +20,7 @@ tags: [tasarım, tipografi]
 
 ## No Serenity
 
-Yerel dosya: `docs/assets/fonts/NoSerenity-Regular-fn-2-fixed-under.ttf` (60 KB).
+Yerel dosya: `assets/fonts/NoSerenity-Regular-fn-2-fixed-under.ttf` (60 KB).
 
 Metrikleri (1000 upm): ascender 850, cap height **800**, descender 400, line gap 100.
 
@@ -42,7 +42,7 @@ Türkçe kapsamı tam: `Ü İ Ş Ğ Ç Ö` hepsi var.
 Google Fonts'tan, `display=swap` ile. Yüklenen ağırlıklar: Archivo 200/400/500, Space Grotesk 400/500.
 
 > [!tip] Kendi sunucundan servis etmek
-> Gizlilik veya çevrimdışı çalışma istersen bu iki yazı tipini indirip `docs/assets/fonts/` altına koy, `templates/_head.php` içindeki Google Fonts satırını `@font-face` tanımlarıyla değiştir.
+> Gizlilik veya çevrimdışı çalışma istersen bu iki yazı tipini indirip `assets/fonts/` altına koy, `index.html` içindeki Google Fonts satırını `@font-face` tanımlarıyla değiştir.
 
 ## Cap-line hizalama
 
