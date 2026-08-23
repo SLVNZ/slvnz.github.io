@@ -1,0 +1,39 @@
+{
+  "title": "Savaş",
+  "version": "4.0",
+  "section": "kurallar",
+  "slug": "savas",
+  "order": 2,
+  "draft": false,
+  "summary": "Tur sırası, saldırı atışı ve hasar.",
+  "blocks": [
+    {
+      "type": "text",
+      "html": "<p>Savaş turlara bölünür. Her tur, en yüksek <strong>Çeviklik</strong> sahibinden başlayarak herkes bir eylem ve bir hareket alır.</p>"
+    },
+    {
+      "type": "statblock",
+      "name": "Bataklık Kurdu",
+      "level": "Tehlike 2",
+      "stats": [
+        {
+          "key": "Can",
+          "value": "14"
+        },
+        {
+          "key": "Zırh",
+          "value": "9"
+        },
+        {
+          "key": "Saldırı",
+          "value": "+3 / 1d8"
+        },
+        {
+          "key": "Hız",
+          "value": "12 m"
+        }
+      ],
+      "html": "<p><strong>Sürü içgüdüsü.</strong> Yanında başka bir kurt varsa saldırı atışına +2 ekler.</p><p><strong>Ulu.</strong> Tur başına bir kez, 30 m içindeki tüm kurtlar Çeviklik atışlarına +1 alır.</p>"
+    }
+  ]
+}

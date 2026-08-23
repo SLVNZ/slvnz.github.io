@@ -1,0 +1,69 @@
+{
+  "title": "Temel Kurallar",
+  "version": "4.0",
+  "section": "kurallar",
+  "slug": "temel-kurallar",
+  "order": 1,
+  "draft": false,
+  "summary": "Zar atma, zorluk sınıfı ve başarı dereceleri — tüm sistemin üstüne kurulduğu üç kavram.",
+  "blocks": [
+    {
+      "type": "text",
+      "html": "<p>SLVNZ'de her belirsiz eylem tek bir atışla çözülür: <code class=\"dice\">2d6</code> atar, bağlı niteliğini eklersin ve sonucu <strong>zorluk sınıfı</strong> ile karşılaştırırsın.</p><h2>Zorluk sınıfı</h2>"
+    },
+    {
+      "type": "table",
+      "caption": "Zorluk sınıfları",
+      "columns": [
+        "Sınıf",
+        "Hedef",
+        "Örnek"
+      ],
+      "rows": [
+        [
+          "Kolay",
+          "6",
+          "Tanıdık bir yolu takip etmek"
+        ],
+        [
+          "Orta",
+          "9",
+          "Kilitli bir sandığı açmak"
+        ],
+        [
+          "Zor",
+          "12",
+          "Kızgın bir boğayı yatıştırmak"
+        ],
+        [
+          "Efsanevi",
+          "15",
+          "Fırtınada uçurumdan atlamak"
+        ]
+      ],
+      "dice": false
+    },
+    {
+      "type": "callout",
+      "tone": "gm",
+      "title": "Oyun yöneticisine",
+      "html": "<p>Zorluk sınıfını açıklamadan önce oyuncunun ne yapmak istediğini bir cümleyle tekrar et. Niyet netleşince sınıf kendiliğinden ortaya çıkar.</p>"
+    },
+    {
+      "type": "text",
+      "html": "<h2>Başarı dereceleri</h2>"
+    },
+    {
+      "type": "columns",
+      "ratio": "1-1",
+      "left": "<h3>Başarı</h3><p>Sonuç hedefe eşit veya üstündeyse eylem istendiği gibi gerçekleşir.</p>",
+      "right": "<h3>Bedelli başarı</h3><p>Sonuç hedefin 1–2 altındaysa eylem gerçekleşir ama bir bedel ödenir: zaman, kaynak ya da konum.</p>"
+    },
+    {
+      "type": "callout",
+      "tone": "warn",
+      "title": "",
+      "html": "<p>Doğal çift 1 her zaman başarısızlıktır; nitelik bonusu bunu kurtaramaz.</p>"
+    }
+  ]
+}

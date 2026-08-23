@@ -1,0 +1,28 @@
+{
+  "title": "Dünya",
+  "version": "4.0",
+  "section": "evren",
+  "slug": "dunya",
+  "order": 1,
+  "draft": false,
+  "summary": "Kıtalar, hilal ve üç büyük güç.",
+  "blocks": [
+    {
+      "type": "text",
+      "html": "<p>Gökyüzünde tek bir hilal asılıdır ve hiç dolunaya dönmez. Eski yazıtlar onun bir zamanlar tam olduğunu söyler.</p>"
+    },
+    {
+      "type": "figure",
+      "image": "/images/titlepage.png",
+      "alt": "Tepede duran üç büyücü ve boynuzlu bir figür",
+      "caption": "Hilalin altındaki yürüyüş — 4.0 kapak çizimi",
+      "width": "wide"
+    },
+    {
+      "type": "callout",
+      "tone": "info",
+      "title": "Ölçek",
+      "html": "<p>Bir günlük yürüyüş yaklaşık 30 km'dir. Haritadaki tüm mesafeler bu birimle verilir.</p>"
+    }
+  ]
+}

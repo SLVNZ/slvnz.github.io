@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>SLVNZ 4.0 Fantazya — Masaüstü Rol Yapma Sistemi</title>
+<meta name="description" content="SLVNZ 4.0 Fantazya — masaüstü rol yapma sistemi.">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="SLVNZ">
+<meta property="og:title" content="SLVNZ 4.0 Fantazya — Masaüstü Rol Yapma Sistemi">
+<meta property="og:description" content="SLVNZ 4.0 Fantazya — masaüstü rol yapma sistemi.">
+<meta property="og:image" content="/images/titlepage.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="font" type="font/ttf" href="/assets/fonts/NoSerenity-Regular-fn-2-fixed-under.ttf" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@200;400;500&family=Space+Grotesk:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script>
+  /* runs before first paint: restore the saved theme so there is no flash */
+  (function(){try{var t=localStorage.getItem("slvnz-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#icerik">İçeriğe geç</a>
+
+<div class="page">
+
+  <header class="page__head">
+    <p class="eyebrow">Masaüstü Rol Yapma Sistemi</p>
+  </header>
+
+  <main class="page__body" id="icerik">
+
+    <section class="titleblock" aria-labelledby="baslik">
+
+      <picture class="titleblock__art">
+        <source srcset="/images/titlepage-art.webp" type="image/webp">
+        <img src="/images/titlepage-art.png" width="1900" height="1084" alt="" decoding="async" fetchpriority="high">
+      </picture>
+
+      <h1 class="wordmark" id="baslik" aria-label="SLVNZ 4.0 — Fantazya">
+        <span class="wordmark__lockup">
+          <span class="wordmark__name">SLVNZ</span><span class="wordmark__version version">
+            <button class="version__btn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="surum-menu" aria-label="Sürüm seç: 4.0">
+              <span class="version__glyph" data-text="4.0">4.0</span>
+            </button>
+            <ul class="version__menu" id="surum-menu" role="listbox" aria-label="Sürümler" hidden>
+                            <li role="option" aria-selected="true">
+                <a class="version__opt" href="/4.0/">4.0 <small>güncel</small></a>
+              </li>
+                            <li role="option" aria-selected="false">
+                <a class="version__opt" href="/3.0/">3.0</a>
+              </li>
+                          </ul>
+          </span>
+        </span>
+        <span class="wordmark__genre">Fantazya</span>
+      </h1>
+
+    </section>
+
+    <nav class="mainnav" aria-label="Ana menü">
+      <ul class="mainnav__list">
+                <li><a class="mainnav__link" href="/4.0/kurallar/">Oyun Kuralları</a></li>
+                <li><a class="mainnav__link" href="/4.0/yetenekler/">Yetenekler</a></li>
+                <li><a class="mainnav__link" href="/4.0/evren/">Evren Rehberi</a></li>
+              </ul>
+    </nav>
+
+  </main>
+
+  <footer class="page__foot">
+    <button class="theme-toggle" type="button" data-theme-toggle role="switch" aria-checked="false" aria-label="Karanlık mod">
+  <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>
+  <span class="theme-toggle__track" aria-hidden="true"></span>
+  <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13.5A8.5 8.5 0 1 1 10.5 4a6.6 6.6 0 0 0 9.5 9.5z"/></svg>
+</button>
+    <p class="copyright"><span aria-hidden="true">©</span> 2026 SLVNZ</p>
+  </footer>
+
+</div>
+<script src="/assets/js/theme.js" defer></script>
+<script src="/assets/js/nav.js" defer></script>
+<script src="/assets/js/version.js" defer></script>
+</body>
+</html>

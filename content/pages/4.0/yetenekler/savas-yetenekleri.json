@@ -1,0 +1,47 @@
+{
+  "title": "Savaş Yetenekleri",
+  "version": "4.0",
+  "section": "yetenekler",
+  "slug": "savas-yetenekleri",
+  "order": 1,
+  "draft": false,
+  "summary": "Yakın dövüş ve menzil odaklı yetenekler.",
+  "blocks": [
+    {
+      "type": "text",
+      "html": "<p>Yetenekler seviye atladıkça <strong>yetenek puanı</strong> karşılığında alınır. Bir yeteneğin bedeli, bağlı olduğu niteliğin altındaki sayıdır.</p>"
+    },
+    {
+      "type": "skill",
+      "name": "Kalkan Duvarı",
+      "attribute": "Güç",
+      "cost": "2 puan",
+      "tags": [
+        "savunma",
+        "tepki"
+      ],
+      "html": "<p>Yanındaki bir müttefik saldırıya uğradığında tepki olarak araya girersin; saldırı sana yönelir ve zırhına +2 eklenir.</p><p>Tur başına bir kez kullanılır.</p>"
+    },
+    {
+      "type": "skill",
+      "name": "Keskin Göz",
+      "attribute": "Çeviklik",
+      "cost": "1 puan",
+      "tags": [
+        "menzil"
+      ],
+      "html": "<p>Menzilli saldırılarda 30 m'ye kadar mesafe cezası almazsın.</p>"
+    },
+    {
+      "type": "skill",
+      "name": "Kan Kokusu",
+      "attribute": "Sezgi",
+      "cost": "3 puan",
+      "tags": [
+        "iz sürme",
+        "savaş"
+      ],
+      "html": "<p>Canı yarının altındaki hedeflere karşı saldırı atışına +1 eklersin ve onları 60 m içinde kokuyla bulabilirsin.</p>"
+    }
+  ]
+}

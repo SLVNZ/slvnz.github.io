@@ -1,0 +1,638 @@
+/* =========================================================================
+   SLVNZ 4.0 — Fantazya · Title page
+   1:1 rebuild of the Figma frame "Desktop - 1" (1440 × 1024).
+   Every value below is taken from the .fig node data, in artboard pixels.
+
+   Scaling model
+   -------------
+   --s is one artboard pixel. The 1440 × 1024 artboard is fitted INSIDE the
+   viewport like object-fit: contain, so the whole composition is always on
+   screen. Small UI text gets a legibility floor via max().
+
+   Vertical rhythm
+   ---------------
+   Figma positions text boxes; browsers position line boxes — and the two
+   differ per font. To stay exact, every element is placed by its CAP LINE
+   (the y of the top of the capitals), which is font-independent, and each
+   element's own box-top → cap-top offset is subtracted back out.
+   ========================================================================= */
+
+/* ---------- Display face ------------------------------------------------ */
+/* font-display:block, not swap: this face draws the wordmark. A flash of
+   Arial there reads as a broken logo. 60 KB and preloaded in <head>, so
+   the block period is effectively invisible.                              */
+@font-face {
+  font-family: "No Serenity";
+  src: url("../fonts/NoSerenity-Regular-fn-2-fixed-under.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+/* ---------- Tokens ------------------------------------------------------ */
+:root {
+  /* -- Artboard unit ---------------------------------------------------- */
+  /* limited by width (100vw/1440) or height (100dvh/1024), whichever is
+     tighter, and capped at 1.3px so it does not balloon on ultrawide.    */
+  --s: min(0.0694444vw, 0.09765625dvh, 1.3px);
+
+  /* -- Colour --------------------------------------------------------- */
+  /* Semantic tokens. Light values are the exact Figma fills. Dark values
+     apply (a) automatically via prefers-color-scheme when the user has
+     not chosen, and (b) explicitly via [data-theme="dark"]. Components
+     only ever reference these tokens, never raw hex.                      */
+  color-scheme: light;
+  --paper:       #ffffff;     /* frame fill       rgb(255,255,255)         */
+  --ink:         #1e1e1e;     /* SLVNZ            rgb(30,30,30)            */
+  --nav-ink:     #000000;     /* nav links        rgb(0,0,0)               */
+  --accent:      #fe4b26;     /* rgb(254,75,38) — eyebrow, 4.0, FANTAZYA,
+                                 footer                                    */
+  --accent-text: var(--accent);   /* set to #d63a12 for WCAG AA small text */
+  --art-invert:  0;           /* 1 flips the black-ink artwork to white    */
+  --control-bg:  rgba(0, 0, 0, .05);
+  --control-bd:  rgba(0, 0, 0, .14);
+
+  /* dark palette, referenced by both dark selectors below */
+  --dark-paper:   #121212;
+  --dark-ink:     #f2f2f2;
+  --dark-nav-ink: #ffffff;
+  --dark-accent:  #ff5a36;    /* lifted ~6% for the same perceived weight  */
+
+  /* -- Type ------------------------------------------------------------- */
+  --font-display: "No Serenity", Impact, sans-serif;
+  --font-archivo: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-grotesk: "Space Grotesk", "Archivo", "Helvetica Neue", Arial, sans-serif;
+
+  /* -- Line-box-top → cap-top offsets, in em, at line-height: 1 --------- */
+  /* = (ascender − capHeight) − (ascender + descender − 1) / 2
+     Measured in-browser from the loaded faces (canvas TextMetrics).
+     No Serenity's is negative: its caps poke 0.075em ABOVE the line box. */
+  --cap-serenity: -0.075;     /* asc .85  cap .80  desc .40                */
+  --cap-archivo:   0.145;     /* asc .88  cap .69  desc .21                */
+  --cap-grotesk:   0.145;     /* asc .98  cap .70  desc .29                */
+
+  /* -- Wordmark --------------------------------------------------------- */
+  /* Figma holds SLVNZ as an outlined vector, ink box 258.60 × 127.82 at
+     (591, 434). Live No Serenity draws its ink 1.92em wide, so
+     258.60 / 1.92 = 134.69 reproduces the width exactly with undistorted
+     letterforms. (The outline in the file is ~5% taller than the real
+     face; set --mark-stretch: 1.051 to reproduce that stretch too.)       */
+  --mark: calc(134.69 * var(--s));
+  --mark-stretch: 1;
+
+  /* -- Cap lines & geometry, in artboard px ----------------------------- */
+  --eyebrow-cap:    16.64;    /* Archivo Regular 9.10, box top 15           */
+  --art-w:         800.85;    /* trimmed illustration, ink width            */
+  --art-dx:        -14.28;    /* its ink centre sits left of frame centre   */
+  --art-top:       114.96;    /* illustration ink top (image node 291,20
+                                 ×1002×560.9, ink bbox mapped through)      */
+  --mark-cap:      434;       /* SLVNZ cap line (vector top)                */
+  --mark-base:     561.82;    /* SLVNZ baseline (vector bottom)             */
+  --version-size:   52.0921;  /* No Serenity, box top 429 → cap-aligned     */
+  --version-gap:     7;       /* Z ink → "4" ink                            */
+  --genre-cap:     574.78;    /* Archivo ExtraLight 21.84, box top 570.85   */
+  --nav-cap:       731.15;    /* Space Grotesk 18.13, box top 726           */
+  --nav-dx:        -12.5;     /* nav group centre (417→998) vs frame centre */
+  --nav-gap-1:     104;       /* OYUN KURALLARI → YETENEKLER                */
+  --nav-gap-2:      92;       /* YETENEKLER → EVREN REHBERİ                 */
+  --foot-cap:     1001.64;    /* Archivo Regular 9.10, box top 1000         */
+  --frame-h:      1024;
+
+  /* Nav hit-area padding — grows the touch target to ≥44px without moving
+     the text off its designed position (subtracted back out of the gaps). */
+  --nav-pad-y: 0.8rem;
+  --nav-pad-x: 0.5rem;
+
+  --ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+/* ---------- Dark theme -------------------------------------------------- */
+/* Applied through two selectors: the OS preference (only when no explicit
+   choice is stored) and the explicit attribute. Light is the :root
+   default, so data-theme="light" simply defeats the media query.        */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper:      var(--dark-paper);
+    --ink:        var(--dark-ink);
+    --nav-ink:    var(--dark-nav-ink);
+    --accent:     var(--dark-accent);
+    --art-invert: 1;
+    --control-bg: rgba(255, 255, 255, .07);
+    --control-bd: rgba(255, 255, 255, .18);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper:      var(--dark-paper);
+  --ink:        var(--dark-ink);
+  --nav-ink:    var(--dark-nav-ink);
+  --accent:     var(--dark-accent);
+  --art-invert: 1;
+  --control-bg: rgba(255, 255, 255, .07);
+  --control-bd: rgba(255, 255, 255, .18);
+}
+
+/* Smooth the switch — but only after first paint (theme.js adds the
+   class), so the initial load never animates from the wrong colours.    */
+html.theme-ready body,
+html.theme-ready .titleblock__art img,
+html.theme-ready .wordmark__lockup,
+html.theme-ready .mainnav__link {
+  transition: background-color .35s var(--ease), color .35s var(--ease),
+              filter .35s var(--ease);
+}
+
+/* ---------- Reset ------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-archivo);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, p, ul { margin: 0; }
+ul { padding: 0; list-style: none; }
+img { display: block; max-width: 100%; height: auto; }
+
+/* ---------- Skip link --------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  left: 50%; top: 0;
+  z-index: 100;
+  transform: translate(-50%, -120%);
+  padding: .7rem 1.2rem;
+  background: var(--nav-ink);
+  color: var(--paper);
+  font-family: var(--font-grotesk);
+  font-size: .875rem;
+  text-decoration: none;
+  transition: transform .18s var(--ease);
+}
+.skip-link:focus-visible { transform: translate(-50%, 0); }
+
+/* ---------- Page frame -------------------------------------------------- */
+/* Head / body / foot. The middle row absorbs the slack, so the footer pins
+   to the bottom while the title block stays anchored to the top.          */
+.page {
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding-inline: clamp(1.25rem, 3vw, 3rem);
+  padding-block: calc(var(--eyebrow-cap) * var(--s) - var(--cap-archivo) * var(--eyebrow-fs))
+                 calc((var(--frame-h) - var(--foot-cap)) * var(--s) - (1 - var(--cap-archivo)) * var(--foot-fs));
+  --eyebrow-fs: max(9px, calc(9.1015 * var(--s)));
+  --foot-fs:    max(9px, calc(9.1015 * var(--s)));
+}
+
+.page__head,
+.page__foot { text-align: center; }
+
+/* ---------- Eyebrow — Archivo Regular 9.10 / 94% ------------------------ */
+.eyebrow {
+  font-family: var(--font-archivo);
+  font-weight: 400;
+  font-size: var(--eyebrow-fs);
+  line-height: 1;
+  letter-spacing: .94em;
+  /* tracking adds a phantom space after the last glyph — pull it back so
+     the line stays optically centred */
+  margin-inline-end: -.94em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+/* ---------- Title block ------------------------------------------------- */
+/* Starts right below the eyebrow's line box; its top padding carries the
+   SLVNZ cap line to exactly --mark-cap on the artboard.                   */
+.titleblock {
+  position: relative;
+  --eyebrow-bottom: calc(var(--eyebrow-cap) * var(--s) + (1 - var(--cap-archivo)) * var(--eyebrow-fs));
+  padding-top: calc((var(--mark-cap) * var(--s) - var(--eyebrow-bottom))
+                    - var(--cap-serenity) * var(--mark));
+}
+
+.titleblock__art {
+  position: absolute;
+  inset-block-start: calc(var(--art-top) * var(--s) - var(--eyebrow-bottom));
+  inset-inline-start: 50%;
+  z-index: 0;
+  translate: calc(-50% + var(--art-dx) * var(--s)) 0;
+  width: calc(var(--art-w) * var(--s));
+  max-width: 100%;
+  pointer-events: none;
+}
+/* the art is black ink on alpha; one filter flips it for dark surfaces */
+.titleblock__art img { filter: invert(var(--art-invert)); }
+
+/* ---------- Wordmark ---------------------------------------------------- */
+.wordmark {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* SLVNZ — No Serenity, ink 258.60 wide at the reference width */
+.wordmark__lockup {
+  position: relative;
+  display: block;            /* inline-block adds a strut line box: +20px */
+  font-family: var(--font-display);
+  font-size: var(--mark);
+  line-height: 1;
+  color: var(--ink);
+  transform: scaleY(var(--mark-stretch));
+  transform-origin: center top;
+}
+
+/* 4.0 — No Serenity 52.09, cap-aligned with SLVNZ, hung off the Z.
+   Absolutely placed so it never shifts the optical centring of SLVNZ. */
+.wordmark__version {
+  position: absolute;
+  inset-inline-start: 100%;
+  inset-block-start: calc(var(--cap-serenity) * (var(--mark) - var(--version-size) * var(--s)));
+  /* gap between the Z's ink and the 4's ink, in artboard px */
+  margin-inline-start: calc(var(--version-gap) * var(--s) - 0.012 * var(--mark) + 4.3 * var(--s));
+  font-size: calc(var(--version-size) * var(--s));
+  line-height: 1;
+  color: var(--accent);
+}
+
+/* FANTAZYA — Archivo ExtraLight 21.84 / 94%.
+   Cap line at --genre-cap. The lockup's caps poke 0.075em above its line
+   box, so that box runs from cap + 0.075em to cap + 1.075em.            */
+.wordmark__genre {
+  --fs: calc(21.8435 * var(--s));
+  margin-block-start: calc(var(--genre-cap) * var(--s)
+                           - (var(--mark-cap) * var(--s) + 1.075 * var(--mark))
+                           - var(--cap-archivo) * var(--fs));
+  font-family: var(--font-archivo);
+  font-weight: 200;
+  font-size: var(--fs);
+  line-height: 1;
+  letter-spacing: .94em;
+  margin-inline-end: -.94em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ---------- Version selector ("4.0") ------------------------------------ */
+/* The "4.0" is a button. Its glyphs carry a two-layer "shader":
+   ① a diagonal light band sweeping through the letterforms
+     (gradient painted into the text via background-clip),
+   ② an ember glow bloom underneath (a blurred copy of the text).
+   Both are transform/opacity/background-position only → compositor.    */
+.version { --glow: 0; }
+.version__btn {
+  all: unset;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  font: inherit;
+  line-height: 1;
+  color: var(--accent);
+  /* touch target: the glyph is ~52px so padding only needs a little */
+  padding: .08em .12em;
+  margin: -.08em -.12em;
+}
+.version__glyph {
+  position: relative;
+  display: inline-block;
+  /* No Serenity's caps and descenders overshoot the 1em line box; the
+     clipped gradient only paints inside the box, so pad the box out to
+     cover the overshoot and pull it back with equal negative margins. */
+  padding: .16em .08em .14em;
+  margin:  -.16em -.08em -.14em;
+  /* ① sheen: accent → hot white → accent, moved by background-position */
+  background: linear-gradient(115deg,
+      var(--accent) 0 38%,
+      #fff3e8 46%, #ffd9c4 50%, #fff3e8 54%,
+      var(--accent) 62% 100%);
+  background-size: 320% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  transition: background-position .9s cubic-bezier(.2, .7, .2, 1);
+}
+/* ② glow: blurred duplicate behind the glyph, scaled by --glow */
+.version__glyph::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  color: var(--accent);
+  -webkit-text-fill-color: var(--accent);
+  filter: blur(.14em);
+  opacity: var(--glow);
+  transition: opacity .45s var(--ease);
+}
+.version__btn:hover .version__glyph,
+.version__btn:focus-visible .version__glyph,
+.version__btn[aria-expanded="true"] .version__glyph { background-position: 0 0; }
+.version__btn:hover,
+.version__btn:focus-visible,
+.version__btn[aria-expanded="true"] { --glow: .85; }
+/* idle: a slow, faint breathing shimmer so the button reads as live */
+@media (prefers-reduced-motion: no-preference) {
+  .version__btn:not(:hover):not(:focus-visible) .version__glyph { animation: sheen-idle 7s ease-in-out infinite; }
+  .version__btn:not(:hover):not(:focus-visible) .version__glyph::before { animation: glow-idle 7s ease-in-out infinite; }
+}
+@keyframes sheen-idle { 0%, 70%, 100% { background-position: 100% 0; } 85% { background-position: 0 0; } }
+@keyframes glow-idle  { 0%, 70%, 100% { opacity: 0; } 85% { opacity: .35; } }
+
+/* menu */
+.version__menu {
+  position: absolute;
+  inset-inline-start: 0;
+  top: calc(100% + .3em);
+  z-index: 5;
+  min-width: 6.2em;
+  padding: .35em 0;
+  margin: 0;
+  list-style: none;
+  font-family: var(--font-grotesk);
+  font-size: max(11px, .26em);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  background: var(--paper);
+  border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent);
+  opacity: 0;
+  translate: 0 -.4em;
+  transition: opacity .22s var(--ease), translate .22s var(--ease);
+}
+.version__menu[hidden] { display: block; visibility: hidden; pointer-events: none; }
+.version__menu:not([hidden]) { opacity: 1; translate: 0 0; }
+.version__opt {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  padding: .55em .9em;
+  color: var(--ink);
+  text-decoration: none;
+  transition: color .18s var(--ease), background-color .18s var(--ease);
+}
+.version__opt small { font-size: .78em; letter-spacing: .12em; opacity: .5; }
+.version__opt:hover,
+.version__opt:focus-visible { color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); outline: none; }
+[aria-selected="true"] .version__opt { color: var(--accent); }
+
+/* ---------- Main navigation — Space Grotesk Regular 18.13 --------------- */
+.mainnav {
+  position: relative;
+  z-index: 1;
+  --fs: max(14px, calc(18.134 * var(--s)));
+  --genre-fs: calc(21.8435 * var(--s));
+  /* from FANTAZYA's cap line: genre box remainder, then up to nav cap */
+  margin-block-start: calc((var(--nav-cap) - var(--genre-cap)) * var(--s)
+                           - (1 - var(--cap-archivo)) * var(--genre-fs)
+                           - var(--cap-grotesk) * var(--fs)
+                           - var(--nav-pad-y));
+}
+
+.mainnav__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* designed gap, minus the invisible hit-area padding on both neighbours */
+  gap: 0 calc(var(--nav-gap-2) * var(--s) - 2 * var(--nav-pad-x));
+  /* the group sits slightly left of the frame centre in the design */
+  translate: calc(var(--nav-dx) * var(--s)) 0;
+}
+/* the two gaps differ in the source file */
+.mainnav__list > li:first-child {
+  margin-inline-end: calc((var(--nav-gap-1) - var(--nav-gap-2)) * var(--s));
+}
+
+.mainnav__link {
+  position: relative;
+  display: block;
+  padding: var(--nav-pad-y) var(--nav-pad-x);   /* ≥44px touch target */
+  font-family: var(--font-grotesk);
+  font-weight: 400;
+  font-size: var(--fs);
+  line-height: 1;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--nav-ink);
+  cursor: pointer;
+  overflow: visible;
+}
+
+/* -- Hover: ink hairline draws in under the word ------------------------ */
+.mainnav__link::after {
+  content: "";
+  position: absolute;
+  left: var(--nav-pad-x);
+  right: var(--nav-pad-x);
+  bottom: calc(var(--nav-pad-y) - .34em);
+  height: 1px;
+  background: var(--accent);
+  scale: 0 1;
+  transform-origin: left center;
+  transition: scale .45s cubic-bezier(.77, 0, .18, 1);
+}
+.mainnav__link:hover::after,
+.mainnav__link:focus-visible::after { scale: 1 1; }
+/* leaving: the line withdraws to the right, like a pen lifting */
+.mainnav__link:not(:hover):not(:focus-visible)::after { transform-origin: right center; }
+
+/* -- Hover: ink soaks through the word, letter by letter ---------------- */
+.spell { display: inline-block; white-space: nowrap; }
+.spell__l {
+  display: inline-block;
+  --d: calc(var(--i) * .028s);
+  transition: color .26s var(--ease);
+  transition-delay: calc((var(--n) - 1 - var(--i)) * .028s);   /* drains right→left */
+}
+.spell__l--space { width: .28em; }
+.mainnav__link:hover .spell__l,
+.mainnav__link:focus-visible .spell__l {
+  color: var(--accent);
+  transition-delay: var(--d);                                   /* soaks left→right */
+}
+
+/* -- Exit: the page recedes, the chosen word stays lit ------------------ */
+html.is-leaving .page > :not(.page__body),
+html.is-leaving .titleblock,
+html.is-leaving .mainnav__link:not(.is-chosen) {
+  opacity: 0;
+  transition: opacity .45s var(--ease);
+}
+html.is-leaving .titleblock { translate: 0 -10px; transition: opacity .45s var(--ease), translate .55s var(--ease); }
+html.is-leaving .mainnav__link.is-chosen {
+  color: var(--accent);
+  scale: 1.06;
+  transition: scale .6s cubic-bezier(.2, .7, .2, 1), color .2s;
+}
+html.is-leaving .mainnav__link.is-chosen .spell__l { color: var(--accent); transition-delay: 0s; }
+html.is-leaving .mainnav__link.is-chosen::after { scale: 1 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .spell__l, .mainnav__link::after { transition-duration: .01ms; transition-delay: 0s; animation: none !important; }
+  html.is-leaving * { transition-duration: .01ms !important; }
+}
+
+/* ---------- Theme toggle ------------------------------------------------ */
+/* A small slide switch drawn with the page's own means: a 1px hairline
+   track, an accent dot for the knob, sun/moon glyphs at either end.
+   28 × 14 visually; the button's padding carries the 44px touch target. */
+.theme-toggle {
+  --track-w: 28px;
+  --track-h: 14px;
+  --knob: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 15px 12px;                     /* → 44px hit area */
+  margin-block-end: calc(2 * var(--s));
+  border: 0;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+  line-height: 0;
+}
+.theme-toggle__track {
+  position: relative;
+  display: block;
+  width: var(--track-w);
+  height: var(--track-h);
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+  border-radius: 999px;
+  transition: border-color .25s var(--ease);
+}
+.theme-toggle__track::after {             /* the knob */
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: calc((var(--track-h) - var(--knob)) / 2 - 1px);
+  width: var(--knob);
+  height: var(--knob);
+  border-radius: 50%;
+  background: var(--accent);
+  translate: 0 -50%;
+  transition: translate .3s var(--ease);
+}
+.theme-toggle[aria-checked="true"] .theme-toggle__track::after {
+  translate: calc(var(--track-w) - var(--track-h)) -50%;
+}
+.theme-toggle:hover .theme-toggle__track { border-color: color-mix(in srgb, currentColor 70%, transparent); }
+.theme-toggle:focus-visible { outline: none; }
+.theme-toggle:focus-visible .theme-toggle__track {
+  border-color: currentColor;
+  outline: 2px solid var(--nav-ink);
+  outline-offset: 4px;
+}
+
+/* sun / moon glyphs flanking the track — hairline, same stroke language */
+.theme-toggle__icon {
+  width: 11px;
+  height: 11px;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  fill: none;
+  opacity: .35;
+  transition: opacity .25s var(--ease);
+}
+.theme-toggle[aria-checked="false"] .theme-toggle__icon--sun,
+.theme-toggle[aria-checked="true"]  .theme-toggle__icon--moon { opacity: 1; }
+
+/* ---------- Footer — Archivo Regular 9.10 ------------------------------- */
+.copyright {
+  font-family: var(--font-archivo);
+  font-weight: 400;
+  font-size: var(--foot-fs);
+  line-height: 1;
+  color: var(--accent-text);
+}
+
+/* ---------- Focus ------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--nav-ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Entrance ---------------------------------------------------- */
+/* One short reveal, staggered top-down. The final state is the design —
+   the animation only changes how it arrives. */
+@media (prefers-reduced-motion: no-preference) {
+  .eyebrow,
+  .wordmark__lockup,
+  .wordmark__genre,
+  .mainnav,
+  .copyright {
+    animation: rise .7s var(--ease) both;
+  }
+  /* the artwork owns `translate` for its centring, so it only fades */
+  .titleblock__art  { animation: fade .9s var(--ease) .05s both; }
+  .wordmark__lockup { animation-delay: .16s; }
+  .wordmark__genre  { animation-delay: .24s; }
+  .mainnav          { animation-delay: .32s; }
+  .eyebrow          { animation-delay: .40s; }
+  .copyright        { animation-delay: .46s; }
+}
+
+@keyframes rise {
+  from { opacity: 0; translate: 0 .55rem; }
+  to   { opacity: 1; translate: 0 0; }
+}
+@keyframes fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ---------- Responsive -------------------------------------------------- */
+/* Below ~1000px, pure artboard scaling makes the composition tiny. The
+   artboard unit grows relative to the viewport so the lockup keeps its
+   presence, while the nav gaps relax to fit.                              */
+@media (max-width: 1000px) {
+  :root {
+    --s: min(0.092vw, 0.09765625dvh, 1.3px);
+    --nav-gap-1: 78;
+    --nav-gap-2: 68;
+  }
+}
+
+/* Phone — the "4.0" hangs past the lockup's right edge, so the whole
+   wordmark is shifted left by half its overhang to stay inside the
+   viewport; nav stacks. */
+@media (max-width: 620px) {
+  :root {
+    --s: min(0.14vw, 0.09765625dvh);
+    --art-w: 640;
+    --art-dx: -6;
+    --art-top: 80;
+  }
+
+  .eyebrow { letter-spacing: .42em; margin-inline-end: -.42em; }
+
+  /* extra end margin on a centred flex item shifts it left by half */
+  .wordmark__lockup { margin-inline-end: calc(0.3 * var(--mark)); }
+
+  .mainnav__list {
+    flex-direction: column;
+    align-items: center;
+    translate: 0 0;
+    gap: .1rem;
+  }
+  .mainnav__list > li:first-child { margin-inline-end: 0; }
+}
+
+/* ---------- Print ------------------------------------------------------- */
+@media print {
+  .skip-link { display: none; }
+  .page { min-height: auto; }
+  *, *::before, *::after { animation: none !important; }
+}
