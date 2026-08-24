@@ -1,0 +1,80 @@
+{
+  "surumler": [
+    {
+      "no": "4.0",
+      "tur": "Fantazya",
+      "durum": "simdiki",
+      "sayfa": "./"
+    },
+    {
+      "no": "3.0",
+      "tur": "Fantazya",
+      "durum": "arsiv",
+      "sayfa": ""
+    }
+  ],
+  "kurallar": {
+    "4.0": {
+      "bolumler": [
+        {
+          "id": "oyun-sistemi",
+          "baslik": "Oyun Sistemi",
+          "gorsel": {
+            "img": "assets/images/oyunkurallari-header-alpha.png",
+            "webp": "assets/images/oyunkurallari-header.webp",
+            "w": 2944,
+            "h": 1648
+          },
+          "html": "<h3>SLVNZ 4.0 Sistemi</h3>\n<p class=\"lede\">SLVNZ 4.0 sistemi, özünde D&amp;D ve FATE sistemlerini baz ve ilham alınarak düşünülmüş, özelleştirilmiş ve detaylandırılmış bir masaüstü rol yapma oyunu sistemidir. 3.0 sistemine kıyasla “Düşük Fantazya” atmosferini yaşatmak üzere düzenlenmiştir.</p>\n<p>Sistem mümkün olduğunca oyun etkisini barındırırken, oyuncunun sistemin ördüğü sınırlara bağlı kalmadan, yaratıcılığını ve rolünü ortaya koyarak oyunun ve savaşın gidişatına yön vermesini amaçlayan esnek gerçekçiliği sunmayı hedeflemektedir.</p>"
+        },
+        {
+          "id": "zarlar-eylemler",
+          "baslik": "Zarlar & Eylemler",
+          "gorsel": {
+            "img": "assets/images/dice.png",
+            "webp": null,
+            "w": 2944,
+            "h": 1648
+          },
+          "html": "<p class=\"panel__soon\">Bu bölümün kuralları yazım aşamasında.</p>"
+        },
+        {
+          "id": "nitelikler",
+          "baslik": "Nitelikler",
+          "gorsel": {
+            "img": "assets/images/figure1-alpha.png",
+            "webp": "assets/images/figure1.webp",
+            "w": 1904,
+            "h": 2544
+          },
+          "html": "<p class=\"panel__soon\">Bu bölümün kuralları yazım aşamasında.</p>"
+        },
+        {
+          "id": "beceriler",
+          "baslik": "Beceriler",
+          "gorsel": {
+            "img": "assets/images/oyunkurallari-alpha.png",
+            "webp": "assets/images/oyunkurallari.webp",
+            "w": 2944,
+            "h": 1648
+          },
+          "html": "<p class=\"panel__soon\">Bu bölümün kuralları yazım aşamasında.</p>"
+        },
+        {
+          "id": "enerjiler",
+          "baslik": "Enerjiler ve Enerji Kaynakları",
+          "gorsel": {
+            "img": "assets/images/titlepage-art.png",
+            "webp": "assets/images/titlepage-art.webp",
+            "w": 1900,
+            "h": 1084
+          },
+          "html": "<p class=\"panel__soon\">Bu bölümün kuralları yazım aşamasında.</p>"
+        }
+      ]
+    },
+    "3.0": {
+      "bolumler": []
+    }
+  }
+}

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+
+<title>Yönetim — SLVNZ</title>
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,200;0,300;0,400;0,500;0,700;0,900;1,200&family=Space+Grotesk:wght@400;500;700&display=swap">
+<!-- style.css: token'lar, tema, tema anahtarı · kurallar.css: .panel__rich
+     (editör birebir site tipografisiyle çizer) · admin.css: panelin kendisi -->
+<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/kurallar.css">
+<link rel="stylesheet" href="/admin/admin.css">
+<script>
+  (function(){try{var t=localStorage.getItem("slvnz-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#icerik">İçeriğe geç</a>
+
+<div class="adm">
+
+  <header class="adm__top">
+    <p class="adm__brand"><span class="adm__mark" aria-hidden="true">SLVNZ</span><span class="adm__tag">Yönetim</span></p>
+
+    <nav class="adm__links" aria-label="Site">
+      <a href="/" target="_blank" rel="noopener">Ana sayfa</a>
+      <a href="/kurallar.html" target="_blank" rel="noopener">Kurallar</a>
+    </nav>
+
+    <button class="adm__git" type="button" data-git title="Yenilemek için tıkla">git…</button>
+
+    <div class="adm__act">
+      <button class="theme-toggle" type="button" data-theme-toggle role="switch" aria-checked="false" aria-label="Karanlık mod">
+        <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>
+        <span class="theme-toggle__track" aria-hidden="true"></span>
+        <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13.5A8.5 8.5 0 1 1 10.5 4a6.6 6.6 0 0 0 9.5 9.5z"/></svg>
+      </button>
+      <button class="btn btn--primary" type="button" data-save disabled title="Ctrl+S">Kaydet</button>
+    </div>
+  </header>
+
+  <div class="adm__wrap">
+
+    <nav class="adm__rail" aria-label="Alanlar">
+      <p class="adm__railhead">Alanlar</p>
+      <ul class="adm__nav">
+        <li><button type="button" class="adm__navlink is-active" data-view="surumler" aria-current="page">Sürümler</button></li>
+        <li><button type="button" class="adm__navlink" data-view="kurallar">Oyun Kuralları</button></li>
+        <li><span class="adm__navlink is-soon">Yetenekler <small>yakında</small></span></li>
+        <li><span class="adm__navlink is-soon">Evren Rehberi <small>yakında</small></span></li>
+      </ul>
+      <p class="adm__hint">Kaydet, site dosyalarını doğrudan yazar. Yayımlamak için sonrasında:</p>
+      <code class="adm__cmd">git add -A<br>git commit<br>git push</code>
+    </nav>
+
+    <main class="adm__main" id="icerik" tabindex="-1">
+
+      <!-- ---------------- Sürümler ---------------- -->
+      <section class="view" data-view-panel="surumler">
+        <header class="view__head">
+          <h1 class="view__title">Sürümler</h1>
+          <p class="view__desc">Ana sayfadaki sürüm menüsü ve siteye hangi sürümün yazılacağı.
+          “Şimdiki” işaretli sürümün kuralları <code>kurallar.html</code>'e üretilir.</p>
+        </header>
+        <ol class="vlist" data-vlist></ol>
+        <form class="vadd" data-vadd>
+          <p class="vadd__head">Yeni sürüm</p>
+          <div class="vadd__row">
+            <div class="field">
+              <label class="field__label" for="vno">Sürüm no</label>
+              <input class="field__input" id="vno" name="no" required pattern="[0-9]+\.[0-9]+" placeholder="5.0" autocomplete="off">
+            </div>
+            <div class="field">
+              <label class="field__label" for="vtur">Tür</label>
+              <input class="field__input" id="vtur" name="tur" required placeholder="Fantazya" autocomplete="off">
+            </div>
+            <button class="btn" type="submit">Sürüm ekle</button>
+          </div>
+          <p class="field__help">Yeni sürüm “arşiv” olarak eklenir; hazır olduğunda şimdiki yaparsın.</p>
+        </form>
+      </section>
+
+      <!-- ---------------- Oyun Kuralları ---------------- -->
+      <section class="view" data-view-panel="kurallar" hidden>
+        <header class="view__head view__head--row">
+          <div>
+            <h1 class="view__title">Oyun Kuralları</h1>
+            <p class="view__desc" data-kdesc></p>
+          </div>
+          <div class="field field--tight">
+            <label class="field__label" for="kver">Sürüm</label>
+            <select class="field__input" id="kver" data-kver></select>
+          </div>
+        </header>
+        <ol class="chlist" data-chlist></ol>
+        <button class="btn btn--ghost" type="button" data-chadd>+ Bölüm ekle</button>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- görsel seçici -->
+<dialog class="picker" data-picker aria-label="Görsel seç">
+  <div class="picker__head">
+    <h2 class="picker__title">Görsel seç</h2>
+    <button class="iconbtn" type="button" data-picker-close aria-label="Kapat">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="picker__grid" data-picker-grid></div>
+  <div class="picker__foot">
+    <label class="btn btn--ghost picker__upload">Yeni çizim yükle (.png)
+      <input type="file" accept="image/png" hidden data-picker-upload>
+    </label>
+    <p class="field__help">Beyaz zeminli çizimler otomatik alfaya çevrilir, webp üretilir.</p>
+  </div>
+</dialog>
+
+<div class="toast" data-toast role="status" aria-live="polite" hidden></div>
+
+<script src="/assets/js/theme.js" defer></script>
+<script src="/admin/admin.js" defer></script>
+</body>
+</html>

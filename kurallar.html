@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="tr" class="page-kurallar">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Oyun Kuralları — SLVNZ 4.0 Fantazya</title>
+<meta name="description" content="SLVNZ 4.0 Fantazya oyun kuralları: oyun sistemi, zarlar &amp; eylemler, nitelikler, beceriler, enerjiler.">
+<link rel="canonical" href="https://slvnz.github.io/kurallar.html">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="SLVNZ">
+<meta property="og:title" content="Oyun Kuralları — SLVNZ 4.0 Fantazya">
+<meta property="og:description" content="SLVNZ 4.0 Fantazya oyun kuralları — 5 bölüm.">
+<meta property="og:image" content="https://slvnz.github.io/assets/images/oyunkurallari.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="font" type="font/ttf" href="assets/fonts/NoSerenity-Regular-fn-2-fixed-under.ttf" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,200;0,300;0,400;0,700;0,900;1,200&family=Space+Grotesk:wght@400;700&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/kurallar.css">
+<script>
+  /* runs before first paint: restore the saved theme so there is no flash */
+  (function(){try{var t=localStorage.getItem("slvnz-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#icerik">İçeriğe geç</a>
+
+<!-- duman — imleçle tepkileşen, alana dağılmış usul WebGL sisi -->
+<canvas class="mist" aria-hidden="true"></canvas>
+
+<!-- okuma ilerlemesi: açık bölüm kaydırılabildiğinde belirir -->
+<div class="progress" aria-hidden="true"><span class="progress__bar"></span></div>
+
+<!-- Sabit yükseklik: üstte eyebrow, altta tema anahtarı + telif; içerik
+     ortadaki kaydırılabilir konteynerde akar. -->
+<div class="rules">
+
+  <header class="rules__top">
+    <p class="eyebrow">Masaüstü Rol Yapma Sistemi</p>
+  </header>
+
+  <!-- ---------- sol ray ------------------------------------------------ -->
+  <aside class="rail">
+
+    <!-- yonetim:kimlik -->
+    <a class="rail__home" href="index.html" aria-label="SLVNZ 4.0 Fantazya — başlık sayfası">
+      <span class="rail__lockup" aria-hidden="true">
+        <span class="rail__mark">SLVNZ</span><span class="rail__ver">4.0</span>
+        <span class="rail__genre">Fantazya</span>
+      </span>
+    </a>
+    <!-- /yonetim:kimlik -->
+
+    <nav class="rail__nav" aria-label="Ana menü">
+      <h1 class="rail__title">Oyun<br>Kuralları</h1>
+      <!-- yonetim:bolum-sayisi -->
+      <p class="rail__count">5 Bölüm</p>
+      <!-- /yonetim:bolum-sayisi -->
+      <ul class="rail__list">
+        <!-- pasif: hedef sayfaları yazılınca span → a olur, etkileşimler hazır -->
+        <li><span class="mainnav__link rail__link">Yetenekler</span></li>
+        <li><span class="mainnav__link rail__link">Evren Rehberi</span></li>
+      </ul>
+    </nav>
+
+  </aside>
+
+  <!-- ---------- sağ bölüm menüsü ---------------------------------------- -->
+  <!-- Bağlantılar gerçek çapa: JS kapalıyken hepsi tek sayfada akar, açıkken
+       tıklanan bölüm açılır, ötekiler gizlenir. -->
+  <nav class="toc" aria-label="Bölümler">
+    <!-- yonetim:bolumler -->
+    <ol class="toc__list">
+      <li><a class="toc__link" href="#oyun-sistemi"><span class="toc__label">Oyun Sistemi</span><span class="toc__no" aria-hidden="true">01</span></a></li>
+      <li><a class="toc__link" href="#zarlar-eylemler"><span class="toc__label">Zarlar &amp; Eylemler</span><span class="toc__no" aria-hidden="true">02</span></a></li>
+      <li><a class="toc__link" href="#nitelikler"><span class="toc__label">Nitelikler</span><span class="toc__no" aria-hidden="true">03</span></a></li>
+      <li><a class="toc__link" href="#beceriler"><span class="toc__label">Beceriler</span><span class="toc__no" aria-hidden="true">04</span></a></li>
+      <li><a class="toc__link" href="#enerjiler"><span class="toc__label">Enerjiler ve Enerji Kaynakları</span><span class="toc__no" aria-hidden="true">05</span></a></li>
+    </ol>
+    <!-- /yonetim:bolumler -->
+  </nav>
+
+  <!-- ---------- kayan içerik konteyneri ---------------------------------- -->
+  <div class="rules__scroll" role="region" aria-label="Bölüm içeriği" tabindex="0">
+    <main class="rules__body" id="icerik">
+
+      <!-- ==================================================================
+           BÖLÜM MODÜLÜ — içerik content/site.json'dan üretilir; aşağıdaki
+           işaretlerin İÇİ her kayıtta ezilir, elle düzenleme için yönetim
+           panelini kullan (python admin/server.py). Her bölüm aynı iskelet:
+
+             <article class="panel" id="…" aria-labelledby="…" data-panel>
+               <figure class="panel__art">   üstte görsel
+               <header class="panel__head">  numara + başlık
+               <div class="panel__rich">     zengin metin
+
+           `panel__rich` içinde şu öğeler biçimlendirilmiş hâlde çalışır:
+           h3, h4, p, ul, ol, blockquote, table, hr, figure,
+           <strong>, <em>, <code>, <a>, ve <p class="lede"> (giriş paragrafı).
+           İleride yönetim paneli yalnız bu bloğun içini değiştirecek —
+           çevresindeki iskelete dokunmaya gerek yok.
+           ================================================================== -->
+
+      <!-- yonetim:paneller -->
+      <article class="panel" id="oyun-sistemi" aria-labelledby="b01" tabindex="-1" data-panel>
+        <figure class="panel__art" aria-hidden="true">
+          <picture>
+            <source srcset="assets/images/oyunkurallari-header.webp" type="image/webp">
+            <img src="assets/images/oyunkurallari-header-alpha.png" width="2944" height="1648"
+                 alt="" decoding="async" fetchpriority="high" data-parallax>
+          </picture>
+        </figure>
+        <header class="panel__head">
+          <p class="panel__no" aria-hidden="true">01</p>
+          <h2 class="panel__title" id="b01">Oyun Sistemi</h2>
+        </header>
+        <div class="panel__rich">
+          <h3>SLVNZ 4.0 Sistemi</h3>
+          <p class="lede">SLVNZ 4.0 sistemi, özünde D&amp;D ve FATE sistemlerini baz ve ilham alınarak düşünülmüş, özelleştirilmiş ve detaylandırılmış bir masaüstü rol yapma oyunu sistemidir. 3.0 sistemine kıyasla “Düşük Fantazya” atmosferini yaşatmak üzere düzenlenmiştir.</p>
+          <p>Sistem mümkün olduğunca oyun etkisini barındırırken, oyuncunun sistemin ördüğü sınırlara bağlı kalmadan, yaratıcılığını ve rolünü ortaya koyarak oyunun ve savaşın gidişatına yön vermesini amaçlayan esnek gerçekçiliği sunmayı hedeflemektedir.</p>
+        </div>
+      </article>
+
+      <article class="panel" id="zarlar-eylemler" aria-labelledby="b02" tabindex="-1" data-panel>
+        <figure class="panel__art" aria-hidden="true">
+          <img src="assets/images/dice.png" width="2944" height="1648"
+               alt="" decoding="async" loading="lazy" data-parallax>
+        </figure>
+        <header class="panel__head">
+          <p class="panel__no" aria-hidden="true">02</p>
+          <h2 class="panel__title" id="b02">Zarlar &amp; Eylemler</h2>
+        </header>
+        <div class="panel__rich">
+          <p class="panel__soon">Bu bölümün kuralları yazım aşamasında.</p>
+        </div>
+      </article>
+
+      <article class="panel" id="nitelikler" aria-labelledby="b03" tabindex="-1" data-panel>
+        <figure class="panel__art" aria-hidden="true">
+          <picture>
+            <source srcset="assets/images/figure1.webp" type="image/webp">
+            <img src="assets/images/figure1-alpha.png" width="1904" height="2544"
+                 alt="" decoding="async" loading="lazy" data-parallax>
+          </picture>
+        </figure>
+        <header class="panel__head">
+          <p class="panel__no" aria-hidden="true">03</p>
+          <h2 class="panel__title" id="b03">Nitelikler</h2>
+        </header>
+        <div class="panel__rich">
+          <p class="panel__soon">Bu bölümün kuralları yazım aşamasında.</p>
+        </div>
+      </article>
+
+      <article class="panel" id="beceriler" aria-labelledby="b04" tabindex="-1" data-panel>
+        <figure class="panel__art" aria-hidden="true">
+          <picture>
+            <source srcset="assets/images/oyunkurallari.webp" type="image/webp">
+            <img src="assets/images/oyunkurallari-alpha.png" width="2944" height="1648"
+                 alt="" decoding="async" loading="lazy" data-parallax>
+          </picture>
+        </figure>
+        <header class="panel__head">
+          <p class="panel__no" aria-hidden="true">04</p>
+          <h2 class="panel__title" id="b04">Beceriler</h2>
+        </header>
+        <div class="panel__rich">
+          <p class="panel__soon">Bu bölümün kuralları yazım aşamasında.</p>
+        </div>
+      </article>
+
+      <article class="panel" id="enerjiler" aria-labelledby="b05" tabindex="-1" data-panel>
+        <figure class="panel__art" aria-hidden="true">
+          <picture>
+            <source srcset="assets/images/titlepage-art.webp" type="image/webp">
+            <img src="assets/images/titlepage-art.png" width="1900" height="1084"
+                 alt="" decoding="async" loading="lazy" data-parallax>
+          </picture>
+        </figure>
+        <header class="panel__head">
+          <p class="panel__no" aria-hidden="true">05</p>
+          <h2 class="panel__title" id="b05">Enerjiler ve Enerji Kaynakları</h2>
+        </header>
+        <div class="panel__rich">
+          <p class="panel__soon">Bu bölümün kuralları yazım aşamasında.</p>
+        </div>
+      </article>
+      <!-- /yonetim:paneller -->
+
+    </main>
+  </div>
+
+  <footer class="rules__foot">
+    <button class="theme-toggle" type="button" data-theme-toggle role="switch" aria-checked="false" aria-label="Karanlık mod">
+      <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>
+      <span class="theme-toggle__track" aria-hidden="true"></span>
+      <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13.5A8.5 8.5 0 1 1 10.5 4a6.6 6.6 0 0 0 9.5 9.5z"/></svg>
+    </button>
+    <p class="copyright"><span aria-hidden="true">©</span> 2026 SLVNZ</p>
+  </footer>
+
+</div>
+
+<script src="assets/js/theme.js" defer></script>
+<script src="assets/js/nav.js" defer></script>
+<script src="assets/js/kurallar.js" defer></script>
+<script src="assets/js/ink-shader.js" defer></script>
+</body>
+</html>

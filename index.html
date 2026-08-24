@@ -48,20 +48,44 @@
 
       <h1 class="wordmark" id="baslik" aria-label="SLVNZ 4.0 — Fantazya">
         <span class="wordmark__lockup">
-          <span class="wordmark__name">SLVNZ</span><span class="wordmark__version">4.0</span>
+          <span class="wordmark__name">SLVNZ</span><span class="wordmark__slot">
+          <!-- yonetim:surum -->
+          <button class="wordmark__version" type="button" data-version-trigger
+                  aria-haspopup="true" aria-expanded="false"
+                  aria-label="Sürüm 4.0 — sürüm seç">
+            <span class="wordmark__version-label" data-text="4.0">4.0</span>
+          </button>
+
+          <!-- Sürüm listesi content/site.json'dan üretilir; buraya elle yazılan
+               her şey kaydetmede ezilir — yönetim panelini kullan. -->
+          <div class="vmenu" role="menu" data-version-menu aria-label="Sürümler" hidden>
+            <a class="vmenu__item is-current" role="menuitem" href="./" aria-current="true">
+              <span class="vmenu__no">4.0</span>
+              <span class="vmenu__name">Fantazya</span>
+              <span class="vmenu__tag">şimdiki</span>
+            </a>
+            <span class="vmenu__item" role="menuitem" aria-disabled="true">
+              <span class="vmenu__no">3.0</span>
+              <span class="vmenu__name">Fantazya</span>
+              <span class="vmenu__tag">arşiv</span>
+            </span>
+          </div>
+          <!-- /yonetim:surum -->
+        </span>
         </span>
         <span class="wordmark__genre">Fantazya</span>
       </h1>
 
     </section>
 
-    <!-- Menü şimdilik pasif: hedef sayfa yok, bu yüzden bağlantı değil düz metin.
-         Sayfa eklendiğinde <span class="mainnav__link">…</span> yerine
+    <!-- Yetenekler ve Evren Rehberi şimdilik pasif: hedef sayfa yok, bu
+         yüzden bağlantı değil düz metin. Sayfa eklendiğinde
+         <span class="mainnav__link">…</span> yerine
          <a class="mainnav__link" href="…">…</a> yazmak yeterli — hover ve
          çıkış geçişi kendiliğinden çalışır. -->
     <nav class="mainnav" aria-label="Ana menü">
       <ul class="mainnav__list">
-        <li><span class="mainnav__link">Oyun Kuralları</span></li>
+        <li><a class="mainnav__link" href="kurallar.html">Oyun Kuralları</a></li>
         <li><span class="mainnav__link">Yetenekler</span></li>
         <li><span class="mainnav__link">Evren Rehberi</span></li>
       </ul>
@@ -81,5 +105,6 @@
 </div>
 <script src="assets/js/theme.js" defer></script>
 <script src="assets/js/nav.js" defer></script>
+<script src="assets/js/version-menu.js" defer></script>
 </body>
 </html>

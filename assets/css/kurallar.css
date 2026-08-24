@@ -1,0 +1,582 @@
+/* =========================================================================
+   SLVNZ 4.0 — Oyun Kuralları
+   Kaynak: ui.fig "OYUN KURALLARI" çerçevesi (1440 × 1024). Başlık sayfası
+   sabit bir kompozisyon; bu sayfa ise akan bir belge. Bu yüzden --s artboard
+   birimi yerine akışkan clamp() ölçüleri kullanılır, renk/tip token'ları
+   style.css'ten okunur.
+
+   Yerleşim (≥1161px)
+   ------------------
+   sol ray   sabit (fixed) — logo kilidi üstte, bölüm bloğu ortada
+   içerik    ortalanmış tek sütun (Figma: x 475–965, merkez 720 = tam orta)
+   sağ TOC   sabit, dikeyde ortalı, sağa yaslı etiket + turuncu numara
+   ========================================================================= */
+
+/* ---------- Sayfaya özel token'lar -------------------------------------- */
+:root {
+  --muted:        #818181;              /* pasif ray bağlantıları (Figma)   */
+  --hairline:     color-mix(in srgb, var(--ink) 22%, transparent);
+  --rail-x:       clamp(1.5rem, 4.8vw, 69px);
+  --toc-x:        clamp(1.25rem, 3.75vw, 54px);
+  --content-w:    33rem;                /* Figma 490px @14px ≈ 70 karakter  */
+  --mist-ink:     30, 30, 30;           /* mist için rgb — JS okur          */
+  --mist-alpha:   0.04;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --muted: #8f8f8f; --mist-ink: 242, 242, 242; --mist-alpha: 0.035; }
+}
+:root[data-theme="dark"] { --muted: #8f8f8f; --mist-ink: 242, 242, 242; --mist-alpha: 0.035; }
+
+/* Kaydırma davranışı — hareket azaltmada kapalı. Sayfa değil, içerik
+   konteyneri kayar. */
+@media (prefers-reduced-motion: no-preference) {
+  .rules__scroll { scroll-behavior: smooth; }
+}
+/* Yalnız kurallar sayfasında: belge sabit, akış içeride. Kapsamlı, çünkü
+   yönetim paneli de bu dosyayı .panel__rich (WYSIWYG) için yükler. */
+html.page-kurallar, html.page-kurallar body { height: 100%; overflow: hidden; }
+
+/* ---------- Katmanlar --------------------------------------------------- */
+/* mist en altta, belge onun üstünde; progress ve skip-link en üstte */
+/* z-index −1: kök bağlamda gövde zemininin üstünde, akıştaki içeriğin
+   altında kalır. .rules bilerek katman bağlamı AÇMAZ — çizimin karışım modu
+   (multiply/screen) kâğıda kadar inebilsin diye. */
+.mist {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.rules { position: relative; }
+
+/* ---------- Okuma ilerlemesi — saç çizgisi ------------------------------ */
+.progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  height: 2px;
+  pointer-events: none;
+}
+.progress__bar {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transform: scaleX(var(--p, 0));
+  transform-origin: left center;
+}
+
+/* ---------- Belge çerçevesi --------------------------------------------- */
+/* Ana sayfadaki .page gibi sabit yükseklik: üst (eyebrow) · orta (kayan
+   içerik) · alt (tema anahtarı + telif). Ray ve TOC fixed olduğu için
+   akışa katılmaz; grid'in üç satırı üst / kaydırıcı / alttır. */
+.rules {
+  height: 100dvh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  /* style.css bunları .page üzerinde tanımlar; eyebrow ve telif satırı
+     burada da aynı Figma ölçüsünü okur */
+  --eyebrow-fs: max(9px, calc(9.1015 * var(--s)));
+  --foot-fs:    max(9px, calc(9.1015 * var(--s)));
+}
+
+.rules__top {
+  padding-block-start: clamp(.9rem, 1.5dvh, 15px);
+  text-align: center;
+}
+
+/* -- kayan içerik konteyneri --------------------------------------------- */
+.rules__scroll {
+  min-height: 0;                       /* grid satırında taşmaya izin verme  */
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--hairline) transparent;
+  /* içerik üstte eyebrow'a, altta alt bilgiye değmeden usulca solar */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 28px, #000 calc(100% - 28px), transparent);
+          mask-image: linear-gradient(to bottom, transparent, #000 28px, #000 calc(100% - 28px), transparent);
+}
+.rules__scroll:focus-visible { outline-offset: -3px; }
+
+.rules__body {
+  width: min(100% - 2.5rem, var(--content-w));
+  margin-inline: auto;
+  padding-block-end: clamp(2rem, 6dvh, 4rem);
+}
+
+.rules__foot {
+  padding-block: .25rem .9rem;
+  text-align: center;
+}
+
+/* ---------- Başlık illüstrasyonu ---------------------------------------- */
+/* Figma: (413, 42) 615 × 344, merkez 720 = sayfa ortası. Sütundan taşarak
+   tasarımdaki genişliğini korur. */
+.doc-art {
+  width: min(615px, 92vw);
+  margin: clamp(.5rem, 2.6dvh, 27px) auto 0;
+  margin-inline: calc((100% - min(615px, 92vw)) / 2);
+  pointer-events: none;
+}
+/* çizim alfa üstüne siyah mürekkep — karanlıkta tek filtreyle beyaza döner,
+   başlık sayfasındaki desenle aynı */
+.doc-art img {
+  filter: invert(var(--art-invert));
+  will-change: transform;
+}
+
+/* ---------- Sol ray ------------------------------------------------------ */
+.rail {
+  position: fixed;
+  inset-block: 0;
+  inset-inline-start: var(--rail-x);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  padding-block: clamp(2.5rem, 6.6dvh, 68px) 2rem;
+  pointer-events: none;              /* boşluklar tıklamayı yutmasın        */
+}
+.rail > * { pointer-events: auto; }
+
+/* -- Logo kilidi: SLVNZ 4.0 / FANTAZYA ----------------------------------- */
+/* Figma: SLVNZ mürekkebi 146.5px genişlik → No Serenity 146.5/1.92 ≈ 76.3px.
+   4.0 No Serenity 29.5, FANTAZYA Archivo ExtraLight 12.38 / %94 aralık.    */
+.rail__home {
+  display: inline-block;
+  text-decoration: none;
+  width: max-content;
+}
+.rail__lockup {
+  position: relative;
+  display: block;
+  --rmark: clamp(56px, 5.3vw, 76.3px);
+}
+.rail__mark {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--rmark);
+  line-height: 1;
+  color: var(--ink);
+  transition: color .35s var(--ease);
+}
+.rail__ver {
+  position: absolute;
+  inset-inline-start: 100%;
+  inset-block-start: calc(-0.075 * var(--rmark));
+  margin-inline-start: .06em;
+  font-family: var(--font-display);
+  font-size: calc(.387 * var(--rmark));   /* 29.5 / 76.3 */
+  line-height: 1;
+  color: var(--accent);
+}
+.rail__genre {
+  display: block;
+  margin-block-start: calc(.1 * var(--rmark));
+  font-family: var(--font-archivo);
+  font-weight: 200;
+  font-size: clamp(10px, .86vw, 12.4px);
+  line-height: 1;
+  letter-spacing: .94em;
+  margin-inline-end: -.94em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+/* üstüne gelince mürekkep vurgu rengine ısınır — sayfanın kendi dili */
+.rail__home:hover .rail__mark,
+.rail__home:focus-visible .rail__mark { color: var(--accent); }
+
+/* -- Bölüm bloğu ---------------------------------------------------------- */
+/* Figma: OYUN KURALLARI y=436 ≈ %42; blok dikeyde o hizada durur. */
+.rail__nav {
+  margin-block: auto;                 /* üst/alt boşluğu eşitler ≈ orta      */
+  translate: 0 -6%;
+}
+.rail__title {
+  font-family: var(--font-grotesk);
+  font-weight: 700;
+  font-size: clamp(27px, 2.44vw, 35.1px);
+  line-height: .87;                   /* Figma %73 — web'de nefes payıyla    */
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.rail__count {
+  margin-block-start: .5rem;
+  font-family: var(--font-archivo);
+  font-weight: 200;
+  font-style: italic;
+  font-size: clamp(13px, 1.11vw, 16px);
+  line-height: 1;
+  color: var(--accent);
+}
+.rail__list {
+  margin-block-start: clamp(1.6rem, 3.2dvh, 33px);
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  align-items: flex-start;
+}
+
+/* style.css'in .mainnav__link tabanını ray bağlamına uyarlar; nav.js aynı
+   sınıfı görüp harf harf mürekkep emmesini buraya da kurar */
+.rail__link {
+  padding: .55rem 0;                  /* dokunma alanı; metin sola hizalı    */
+  font-family: var(--font-grotesk);
+  font-weight: 400;
+  font-size: clamp(13px, 1.11vw, 16px);
+  color: var(--muted);
+}
+.rail__link::after {
+  left: 0;
+  right: 0;
+  bottom: calc(.55rem - .3em);
+}
+
+/* ---------- Sağ TOC ------------------------------------------------------ */
+/* Figma Group 8: (1231, 409) 155 × 206 — sağa yaslı etiket, turuncu numara,
+   45px dikey ritim. */
+.toc {
+  position: fixed;
+  inset-block-start: 50%;
+  inset-inline-end: var(--toc-x);
+  z-index: 2;
+  translate: 0 -50%;
+  max-width: 200px;
+}
+.toc__list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(.6rem, 1.8dvh, 19px);    /* 45 − satır ≈ ritim                  */
+  margin: 0;
+  padding: 0;
+  list-style: none;                   /* numaraları .toc__no çizer           */
+}
+.toc__link {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 13px;
+  padding: .3rem 0;
+  text-decoration: none;
+  text-align: end;
+}
+.toc__label {
+  font-family: var(--font-archivo);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1.25;
+  text-transform: uppercase;
+  color: var(--ink);
+  max-width: 138px;
+  transition: color .3s var(--ease), translate .3s var(--ease);
+}
+.toc__no {
+  font-family: var(--font-archivo);
+  font-weight: 300;
+  font-size: 10px;
+  line-height: 1;
+  color: var(--accent);
+  min-width: 12px;
+  text-align: end;
+  transition: translate .3s var(--ease);
+}
+
+/* saç çizgisi: üstüne gelince soldan içeri süzülür, ayrılınca sağdan çekilir
+   — ana menünün kalem dili */
+.toc__link::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--accent);
+  scale: 0 1;
+  transform-origin: right center;
+  transition: scale .45s cubic-bezier(.77, 0, .18, 1);
+}
+.toc__link:hover::after,
+.toc__link:focus-visible::after,
+.toc__link.is-active::after { scale: 1 1; transform-origin: left center; }
+
+.toc__link:hover .toc__label,
+.toc__link:focus-visible .toc__label { color: var(--accent); translate: -2px 0; }
+
+/* etkin bölüm: etiket mürekkepten vurguya döner, çizgi çizili kalır */
+.toc__link.is-active .toc__label { color: var(--accent); }
+
+/* ---------- Bölüm panelleri ---------------------------------------------
+   Bir seferde tek bölüm görünür; sağdaki menüden geçilir. JS kapalıyken
+   hepsi alt alta akar (aşağıdaki .js kuralı devreye girmez), yani sayfa
+   bağlantılı bir belge olarak eksiksiz çalışır.
+   ------------------------------------------------------------------------ */
+.panel {
+  outline: none;
+  padding-block-start: clamp(.5rem, 2.4dvh, 1.6rem);
+}
+/* JS varken: yalnız açık panel. `hidden` niteliğini JS koyar — böylece
+   JS'siz durumda hiçbir şey gizlenmez. */
+html.js .panel[hidden] { display: none; }
+
+/* panel değişim geçişi */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .panel {
+    opacity: 1;
+    translate: 0 0;
+    transition: opacity .36s var(--ease), translate .36s var(--ease);
+  }
+  html.js .panel.is-entering { opacity: 0; translate: 0 14px; }
+  html.js .panel.is-leaving  { opacity: 0; translate: 0 -10px; transition-duration: .22s; }
+}
+/* JS'siz akışta bölümler arası nefes payı */
+html:not(.js) .panel + .panel { margin-block-start: clamp(3.5rem, 9dvh, 6rem); }
+
+/* -- üstteki görsel: her panelde aynı yükseklikte şerit -------------------
+   Kaynak çizimlerin en-boy oranları farklı (kimi yatay, kimi dikey); sabit
+   yükseklikli bir kutu + contain, modülü boy oranından bağımsız kılar.     */
+.panel__art {
+  margin: 0 0 clamp(1.2rem, 3dvh, 2.2rem);
+  pointer-events: none;
+}
+/* Ölçü doğrudan <img>'de: sabit yükseklikli bir kutu + `object-fit: contain`.
+   Kutuyu <figure>'a verip resmi max-height ile sınırlamak, <picture> sarmalı
+   yüzünden yüzdeyi auto yüksekliğe dayandırıp sınırı düşürüyordu — dikey
+   çizim şeridi taşıyordu. Burada boy oranı ne olursa olsun şerit aynı. */
+.panel__art img {
+  display: block;
+  width: 100%;
+  height: clamp(140px, 27dvh, 300px);
+  object-fit: contain;
+  object-position: center;
+  filter: invert(var(--art-invert));
+  will-change: transform;
+}
+
+/* -- başlık ---------------------------------------------------------------- */
+.panel__no {
+  font-family: var(--font-archivo);
+  font-weight: 300;
+  font-size: clamp(11px, .9vw, 13px);
+  letter-spacing: .34em;
+  color: var(--accent);
+}
+.panel__title {
+  margin-block-start: .4rem;
+  font-family: var(--font-archivo);
+  font-weight: 900;
+  font-size: clamp(28px, 3.34vw, 48px);
+  line-height: 1.02;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* ---------- Zengin metin -------------------------------------------------
+   Bölüm gövdesinin tamamı. İleride yönetim paneli yalnız bu bloğun içini
+   yazacak, o yüzden yaygın öğelerin hepsi burada önceden biçimlendirilmiş.
+   ------------------------------------------------------------------------ */
+.panel__rich {
+  margin-block-start: clamp(1.1rem, 2vw, 1.6rem);
+  font-family: var(--font-archivo);
+  font-weight: 400;
+  font-size: clamp(14px, 1.05vw, 15px);
+  line-height: 1.65;
+  color: var(--ink);
+}
+.panel__rich > * + * { margin-block-start: .95em; }
+
+.panel__rich h3 {
+  margin-block-start: 1.9em;
+  font-weight: 700;
+  font-size: clamp(18px, 1.67vw, 24px);
+  line-height: 1.15;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.panel__rich > h3:first-child { margin-block-start: 0; }
+.panel__rich h4 {
+  margin-block-start: 1.6em;
+  font-weight: 700;
+  font-size: 1.05em;
+  line-height: 1.3;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.panel__rich .lede { font-size: 1.07em; line-height: 1.6; }
+
+.panel__rich ul, .panel__rich ol { margin-block: 0; padding-inline-start: 1.35em; }
+.panel__rich li + li { margin-block-start: .35em; }
+.panel__rich ul { list-style: none; padding-inline-start: 1.1em; }
+.panel__rich ul > li { position: relative; }
+/* madde imi: kalemle konmuş bir tire */
+.panel__rich ul > li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: -1.1em;
+  inset-block-start: .72em;
+  width: .5em;
+  height: 1px;
+  background: var(--accent);
+}
+.panel__rich ol { list-style: decimal; }
+.panel__rich ol > li::marker { color: var(--accent); font-variant-numeric: tabular-nums; }
+
+.panel__rich blockquote {
+  margin: 0;                            /* UA'nın 40px'lik girintisi değil    */
+  padding-inline-start: 1.1em;
+  border-inline-start: 1px solid var(--accent);
+  font-style: italic;
+  color: color-mix(in srgb, var(--ink) 82%, transparent);
+}
+
+.panel__rich table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .94em;
+  font-variant-numeric: tabular-nums;   /* sayı sütunları kaymasın */
+}
+.panel__rich th, .panel__rich td {
+  padding: .5em .7em;
+  text-align: start;
+  border-block-end: 1px solid var(--hairline);
+}
+.panel__rich th {
+  font-weight: 700;
+  font-size: .82em;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+/* geniş tablolar kendi içinde kaysın — sayfa yatay kaymaz */
+.panel__rich .table-wrap { overflow-x: auto; }
+
+.panel__rich hr {
+  margin-block: 2em;
+  border: 0;
+  border-block-start: 1px solid var(--hairline);
+}
+.panel__rich code {
+  padding: .12em .35em;
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .9em;
+}
+.panel__rich strong { font-weight: 700; }
+.panel__rich a {
+  color: var(--accent);
+  text-underline-offset: .22em;
+  text-decoration-thickness: 1px;
+}
+/* URL ve uzun kimlikler taşmasın */
+.panel__rich a, .panel__rich code { overflow-wrap: anywhere; }
+
+/* hazırlanmakta olan bölümler */
+.panel__soon {
+  font-weight: 200;
+  font-style: italic;
+  color: var(--muted);
+}
+
+/* ---------- İlk açılış ----------------------------------------------------
+   Panel geçişleri yukarıda; burada yalnız sayfanın ilk paneli süzülerek gelir.
+   ------------------------------------------------------------------------ */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .panel.is-first-in { animation: rise .7s var(--ease) .18s both; }
+}
+
+/* ---------- Giriş -------------------------------------------------------- */
+/* style.css'teki rise/fade kareleri yeniden kullanılır */
+@media (prefers-reduced-motion: no-preference) {
+  .rail__home   { animation: rise .7s var(--ease) .10s both; }
+  .rail__nav    { animation: rise .7s var(--ease) .22s both; }
+  .doc-art      { animation: fade .9s var(--ease) .05s both; }
+  .toc          { animation: rise .7s var(--ease) .30s both; }
+  .rules__foot .copyright,
+  .rules__foot .theme-toggle { animation: rise .7s var(--ease) .40s both; }
+}
+
+/* ---------- Sayfa çıkışı ------------------------------------------------- */
+/* rail__home veya gelecekte bir ray bağlantısı tıklanınca kurallar.js
+   is-leaving ekler; belge mürekkep gibi geri çekilir */
+html.is-leaving .rules,
+html.is-leaving .mist {
+  opacity: 0;
+  transition: opacity .4s var(--ease);
+}
+html.is-leaving .rules { translate: 0 8px; transition: opacity .4s var(--ease), translate .5s var(--ease); }
+
+/* ---------- Duyarlılık --------------------------------------------------- */
+/* Dar ekranda ray ve TOC akışa katılır ama kaydırıcının DIŞINDA kalır:
+   sabit yükseklik korunur, üst blok hep görünür, yalnız içerik kayar. */
+@media (max-width: 1160px) {
+  .rules { grid-template-rows: auto auto auto 1fr auto; }
+
+  .rail {
+    position: static;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 1.1rem clamp(1.25rem, 4vw, 2.5rem) 0;
+    max-width: 56rem;
+    margin-inline: auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .rail__nav { margin-block: 0; translate: 0 0; display: flex; flex-direction: column; align-items: flex-end; text-align: end; }
+  .rail__title { font-size: clamp(22px, 4.6vw, 28px); }
+  .rail__list { flex-direction: row; gap: 1.4rem; margin-block-start: .6rem; }
+  .rail__lockup { --rmark: clamp(42px, 8vw, 56px); }
+
+  /* TOC yatay şerit — kaydırıcının üstünde, hep görünür */
+  .toc {
+    position: static;
+    translate: 0 0;
+    max-width: none;
+    margin-block-start: .6rem;
+    border-block-end: 1px solid var(--hairline);
+  }
+  .toc__list {
+    flex-direction: row;
+    gap: clamp(.9rem, 3vw, 1.8rem);
+    justify-content: center;
+    padding: .55rem 1rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .toc__list::-webkit-scrollbar { display: none; }
+  .toc__link { padding: .35rem 0; white-space: nowrap; }
+  .toc__label { max-width: none; }
+
+  }
+
+/* dar ekranda etiketler yalnız etkin öğede görünür, numaralar hep durur */
+@media (max-width: 640px) {
+  .toc__link:not(.is-active):not(:hover):not(:focus-visible) .toc__label {
+    position: absolute; width: 1px; height: 1px; margin: -1px;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+  }
+  .toc__no { font-size: 12px; }
+}
+
+@media (max-width: 640px) {
+  .rail { flex-direction: column; align-items: flex-start; }
+  .rail__nav { align-items: flex-start; text-align: start; }
+  .doc-art { width: min(615px, 100vw - 2.5rem); margin-inline: auto; }
+}
+
+/* ---------- Yazdırma ----------------------------------------------------- */
+@media print {
+  html, body { height: auto; overflow: visible; }
+  .mist, .progress, .skip-link, .toc, .theme-toggle { display: none; }
+  .rules { height: auto; display: block; }
+  .rules__scroll { overflow: visible; -webkit-mask-image: none; mask-image: none; }
+  .rail { position: static; }
+  /* kâğıda bütün bölümler basılır, yalnız açık olan değil */
+  html.js .panel[hidden] { display: block; }
+  html.js .panel { opacity: 1 !important; translate: 0 0 !important; animation: none !important; }
+  .panel + .panel { break-before: page; }
+}

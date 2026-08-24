@@ -270,8 +270,10 @@ img { display: block; max-width: 100%; height: auto; }
 }
 
 /* 4.0 — No Serenity 52.09, cap-aligned with SLVNZ, hung off the Z.
-   Absolutely placed so it never shifts the optical centring of SLVNZ. */
-.wordmark__version {
+   The SLOT carries the Figma geometry (absolutely placed so it never shifts
+   the optical centring of SLVNZ); the button inside it is a plain, reset
+   control so the glyph lands on exactly the same pixel as before. */
+.wordmark__slot {
   position: absolute;
   inset-inline-start: 100%;
   inset-block-start: calc(var(--cap-serenity) * (var(--mark) - var(--version-size) * var(--s)));
@@ -279,8 +281,195 @@ img { display: block; max-width: 100%; height: auto; }
   margin-inline-start: calc(var(--version-gap) * var(--s) - 0.012 * var(--mark) + 4.3 * var(--s));
   font-size: calc(var(--version-size) * var(--s));
   line-height: 1;
+}
+
+.wordmark__version {
+  position: relative;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: var(--font-display);
+  font-size: inherit;         /* the slot holds the artboard-derived size */
+  font-weight: 400;
+  line-height: 1;
+  color: var(--accent);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color .25s var(--ease);
+}
+/* invisible hit area — reaches 44px on phones, where the glyph is ~27px,
+   without moving the glyph off its designed position */
+.wordmark__version::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(44px, 100%);
+  height: max(44px, 100%);
+  translate: -50% -50%;
+}
+
+/* -- Idle: a blade of light sweeps across the numerals ---------------------
+   Ayrı bir katman (::after) olarak durur: taban rengi hover'da serbestçe
+   geçiş yapabilsin diye. Gradyan metne kırpılır, `background-position`
+   animasyonu bıçağı geçirir — düzen okuması yok, kompozitörde çalışır.     */
+.wordmark__version-label {
+  position: relative;
+  display: block;
+  /* Kontur ortadan değil DIŞARIDAN çizilir: `paint-order: stroke fill` önce
+     konturu, sonra dolguyu boyar; dolgu konturun iç yarısını örter, geriye
+     temiz bir dış çerçeve kalır. Ortalanmış kontur (varsayılan) bu blackletter
+     yüzün ince ayrıntılarını yiyip bulanık gösteriyordu. */
+  -webkit-text-stroke: 0.055em transparent;   /* hover'da renk kazanır */
+  paint-order: stroke fill;
+  transition: color .3s var(--ease),
+              -webkit-text-stroke-color .3s var(--ease),
+              text-shadow .35s var(--ease);
+}
+
+.wordmark__version-label::after {
+  content: attr(data-text);
+  position: absolute;
+  /* Kutu her yönde taşırılır, sonra aynı kadar padding ile içerik kutusu geri
+     alınır (box-sizing: border-box) — metin tam yerinde kalır ama zemin
+     glyph'in TAŞAN kısmını da kaplar. Gerekli çünkü No Serenity'nin capları
+     satır kutusunun ~0.084em ÜSTÜNE çıkıyor; kutu `inset: 0` iken oraya zemin
+     boyanmıyor ve bıçak harfin tepesinde kesiliyordu. */
+  inset: -0.22em -0.14em;
+  padding: 0.22em 0.14em;
+  /* Bant dar tutulur: %280 genişlikte imgede 45–55 aralığı, kutunun ~%28'i.
+     Daha genişi "geçen bir bıçak" değil, topluca parlayan bir yazı olurdu. */
+  background-image: linear-gradient(102deg,
+                    transparent 45%,
+                    color-mix(in srgb, var(--accent) 18%, #fff7ec) 50%,
+                    transparent 55%);
+  background-size: 280% 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  pointer-events: none;
+  transition: opacity .25s var(--ease);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Eşit hızlı geçiş: sayfanın ortak `--ease`'i güçlü bir yavaşlama eğrisi,
+     onunla bıçak ilk 0.3sn'ye sıkışıp göz kırpması gibi kalıyordu. */
+  .wordmark__version-label::after {
+    animation: blade 6.5s linear infinite;
+  }
+}
+
+/* Bıçak ~1.3sn'de geçer, sonra uzunca bekler — sürekli kıpırdayan bir parıltı
+   göz yorar; buradaki niyet ara sıra kendini hatırlatan bir ışık. */
+@keyframes blade {
+  0%   { background-position: 128% 0; }
+  20%  { background-position: -28% 0; }
+  100% { background-position: -28% 0; }
+}
+
+/* -- Hover: içi kâğıda döner, konturu turuncu kalır, hafifçe ışır ---------- */
+.wordmark__version:hover .wordmark__version-label,
+.wordmark__version:focus-visible .wordmark__version-label,
+.wordmark__version[aria-expanded="true"] .wordmark__version-label {
+  text-shadow: 0 0 5px color-mix(in srgb, var(--accent) 50%, transparent),
+               0 0 16px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+/* bıçak hover'da susar — iki efekt üst üste binmesin */
+.wordmark__version:hover .wordmark__version-label::after,
+.wordmark__version:focus-visible .wordmark__version-label::after,
+.wordmark__version[aria-expanded="true"] .wordmark__version-label::after { opacity: 0; }
+
+/* Oyma görünüm yalnız kontur çizilebiliyorsa: desteklenmediği yerde metin
+   kâğıt renginde ve konturSUZ kalır, yani görünmez olurdu. */
+@supports (-webkit-text-stroke: 1px red) {
+  .wordmark__version:hover .wordmark__version-label,
+  .wordmark__version:focus-visible .wordmark__version-label,
+  .wordmark__version[aria-expanded="true"] .wordmark__version-label {
+    color: var(--paper);
+    -webkit-text-stroke-color: var(--accent);
+  }
+}
+.wordmark__version:focus-visible { outline: 2px solid var(--accent); outline-offset: 6px; border-radius: 3px; }
+
+/* ---------- Version menu ------------------------------------------------ */
+/* Opens from the trigger (scale + rise), in the page's own hairline language.
+   Type resets here: the slot above is sized in No Serenity display units. */
+.vmenu {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: calc(100% + .35em);
+  z-index: 30;
+  min-width: 12.5rem;
+  padding: .35rem;
+  background: var(--paper);
+  border: 1px solid color-mix(in srgb, var(--ink) 20%, transparent);
+  font-family: var(--font-archivo);
+  font-size: 1rem;
+  line-height: 1.4;
+  text-align: start;
+  opacity: 0;
+  translate: 0 -6px;
+  scale: .96;
+  transform-origin: top left;
+  transition: opacity .2s var(--ease), translate .28s var(--ease), scale .28s var(--ease);
+}
+.vmenu.is-open { opacity: 1; translate: 0 0; scale: 1; }
+.vmenu[hidden] { display: none; }
+
+.vmenu__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.6rem 1fr auto;
+  align-items: baseline;
+  gap: .1rem .7rem;
+  padding: .62rem .7rem;              /* ≥44px touch target */
+  text-decoration: none;
+  color: var(--ink);
+  transition: background-color .2s var(--ease), color .2s var(--ease);
+}
+.vmenu__item + .vmenu__item { border-block-start: 1px solid color-mix(in srgb, var(--ink) 12%, transparent); }
+
+.vmenu__no {
+  font-family: var(--font-grotesk);
+  font-weight: 500;
+  font-size: .9rem;
+  letter-spacing: .02em;
   color: var(--accent);
 }
+.vmenu__name {
+  font-size: .72rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.vmenu__tag {
+  font-size: .66rem;
+  font-style: italic;
+  font-weight: 200;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--ink) 55%, transparent);
+}
+
+.vmenu__item:hover,
+.vmenu__item:focus-visible { background: color-mix(in srgb, var(--accent) 9%, transparent); outline: none; }
+.vmenu__item:focus-visible { box-shadow: inset 0 0 0 1px var(--accent); }
+
+/* current version — a hairline marker in the accent, not a filled state */
+.vmenu__item.is-current .vmenu__name { color: var(--accent); }
+.vmenu__item.is-current::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block: .5rem;
+  width: 2px;
+  background: var(--accent);
+}
+
+/* archived versions: present and announced, but not yet reachable */
+.vmenu__item[aria-disabled="true"] { cursor: default; opacity: .5; }
+.vmenu__item[aria-disabled="true"]:hover { background: none; }
 
 /* FANTAZYA — Archivo ExtraLight 21.84 / 94%.
    Cap line at --genre-cap. The lockup's caps poke 0.075em above its line

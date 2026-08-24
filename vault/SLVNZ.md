@@ -26,6 +26,8 @@ assets/images/   başlık sayfası görselleri
 - [[Tema Sistemi]] — aydınlık / karanlık mantığı
 - [[Etkileşimler]] — nav hover, çıkış geçişi, giriş animasyonu
 - [[Figma Kaynak Verisi]] — `.fig` dosyasından çıkarılan ham değerler
+- [[Oyun Kuralları Sayfası]] — `kurallar.html`: sabit yükseklik, bölüm panelleri, duman
+- [[Yönetim Paneli]] — yerel içerik aracı: sürümler, bölümler, zengin metin
 
 ---
 
