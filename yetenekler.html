@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="tr" class="page-yetenekler">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Yetenekler — SLVNZ 4.0 Fantazya</title>
+<meta name="description" content="SLVNZ 4.0 Fantazya yetenek dizini: enerjisel, fiziksel ve karma yetenekler — aranabilir, süzülebilir ve sıralanabilir tablo.">
+<link rel="canonical" href="https://slvnz.github.io/yetenekler.html">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121212" media="(prefers-color-scheme: dark)">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:site_name" content="SLVNZ">
+<meta property="og:title" content="Yetenekler — SLVNZ 4.0 Fantazya">
+<meta property="og:description" content="Enerjisel, fiziksel ve karma yetenekler — tam dizin.">
+<meta property="og:image" content="https://slvnz.github.io/assets/images/spells.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="font" type="font/ttf" href="assets/fonts/NoSerenity-Regular-fn-2-fixed-under.ttf" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,200;0,300;0,400;0,700;0,900;1,200&family=Space+Grotesk:wght@400;700&display=swap">
+<!-- style.css: token'lar ve tema · kurallar.css: belge çerçevesi (ray, TOC,
+     panel, zengin metin) — bu sayfa aynı iskeleti kullanır · yetenekler.css:
+     yalnız tablo, süzgeç ve yetenek kartı -->
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/kurallar.css">
+<link rel="stylesheet" href="assets/css/yetenekler.css">
+<script>
+  /* runs before first paint: restore the saved theme so there is no flash */
+  (function(){try{var t=localStorage.getItem("slvnz-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t);}catch(e){}})();
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#icerik">İçeriğe geç</a>
+
+<!-- duman — imleçle tepkileşen, alana dağılmış usul WebGL sisi -->
+<canvas class="mist" aria-hidden="true"></canvas>
+
+<!-- okuma ilerlemesi: açık bölüm kaydırılabildiğinde belirir -->
+<div class="progress" aria-hidden="true"><span class="progress__bar"></span></div>
+
+<div class="rules">
+
+  <header class="rules__top">
+    <p class="eyebrow">Masaüstü Rol Yapma Sistemi</p>
+  </header>
+
+  <!-- ---------- sol ray ------------------------------------------------ -->
+  <aside class="rail">
+
+    <!-- yonetim:kimlik -->
+    <a class="rail__home" href="index.html" aria-label="SLVNZ 4.0 Fantazya — başlık sayfası">
+      <span class="rail__lockup" aria-hidden="true">
+        <span class="rail__mark">SLVNZ</span><span class="rail__ver">4.0</span>
+        <span class="rail__genre">Fantazya</span>
+      </span>
+    </a>
+    <!-- /yonetim:kimlik -->
+
+    <nav class="rail__nav" aria-label="Ana menü">
+      <h1 class="rail__title">Yetenekler</h1>
+      <!-- yonetim:yetenek-sayisi -->
+      <p class="rail__count">5 Yetenek</p>
+      <!-- /yonetim:yetenek-sayisi -->
+      <ul class="rail__list">
+        <li><a class="mainnav__link rail__link" href="kurallar.html">Oyun Kuralları</a></li>
+        <!-- pasif: hedef sayfa yazılınca span → a olur, etkileşimler hazır -->
+        <li><span class="mainnav__link rail__link">Evren Rehberi</span></li>
+      </ul>
+    </nav>
+
+  </aside>
+
+  <!-- ---------- sağ alan menüsü ----------------------------------------- -->
+  <!-- Bağlantılar gerçek çapa: JS kapalıyken üç alan da tek sayfada akar. -->
+  <nav class="toc" aria-label="Yetenek alanları">
+    <!-- yonetim:kategoriler -->
+    <ol class="toc__list">
+      <li><a class="toc__link" href="#enerjisel"><span class="toc__label">Enerjisel</span><span class="toc__no" aria-hidden="true">01</span></a></li>
+      <li><a class="toc__link" href="#fiziksel"><span class="toc__label">Fiziksel</span><span class="toc__no" aria-hidden="true">02</span></a></li>
+      <li><a class="toc__link" href="#karma"><span class="toc__label">Karma</span><span class="toc__no" aria-hidden="true">03</span></a></li>
+    </ol>
+    <!-- /yonetim:kategoriler -->
+  </nav>
+
+  <!-- ---------- kayan içerik konteyneri ---------------------------------- -->
+  <div class="rules__scroll" role="region" aria-label="Yetenek dizini" tabindex="0">
+    <main class="rules__body" id="icerik">
+
+      <!-- ==================================================================
+           YETENEK MODÜLÜ — içerik MySQL veritabanından üretilir (bkz.
+           admin/yetenek.py). Aşağıdaki işaretlerin İÇİ her kayıtta ezilir,
+           elle düzenleme için yönetim panelini kullan
+           (python admin/server.py → Yetenekler).
+
+           Her kategori bir <article class="panel">:
+             .yet__bar     arama + süzgeçler + sayaç
+             .yet__split   solda sıralanabilir tablo, sağda yetenek kartı
+             .ykart        yeteneğin tam kaydı — JS kapalıyken tablonun
+                           altında akar, açıkken sağdaki panele taşınır
+
+           Tabloda: Seviye · Ad · Eylem Türü · Element · Enerji Türü ·
+           Kaynak (tür + miktar) · Menzil. Kalan alanların hepsi karttadır.
+           ================================================================== -->
+
+      <!-- yonetim:yetenekler -->
+      <article class="panel" id="enerjisel" aria-labelledby="b01" tabindex="-1" data-panel>
+        <header class="panel__head">
+          <p class="panel__no" aria-hidden="true">01</p>
+          <h2 class="panel__title" id="b01">Enerjisel Yetenekler</h2>
+        </header>
+        <p class="panel__lede">Büyüler. Kaynak · kanal · enerji · element katmanlarıyla kurulur.</p>
+        <div class="yet" data-yet="enerjisel">
+          <div class="yet__bar">
+            <label class="yara">
+              <span class="yara__label">Ara</span>
+              <input class="yara__input" type="search" data-yara
+                     placeholder="Yetenek, element, enerji, açıklama…"
+                     autocomplete="off" spellcheck="false">
+            </label>
+            <label class="yfiltre">
+              <span class="yfiltre__label">Eylem</span>
+              <select class="yfiltre__sel" data-yfiltre="eylem">
+                <option value="">Hepsi</option>
+                <option value="Ek Eylem">Ek Eylem</option>
+                <option value="Eylem">Eylem</option>
+                <option value="Tepki Eylem">Tepki Eylem</option>
+              </select>
+            </label>
+            <label class="yfiltre">
+              <span class="yfiltre__label">Element</span>
+              <select class="yfiltre__sel" data-yfiltre="element">
+                <option value="">Hepsi</option>
+                <option value="Ateş">Ateş</option>
+                <option value="Hava">Hava</option>
+              </select>
+            </label>
+            <label class="yfiltre">
+              <span class="yfiltre__label">Enerji</span>
+              <select class="yfiltre__sel" data-yfiltre="enerji">
+                <option value="">Hepsi</option>
+                <option value="Koruma">Koruma</option>
+                <option value="Oluşturma">Oluşturma</option>
+                <option value="Yıkım">Yıkım</option>
+              </select>
+            </label>
+            <label class="yfiltre">
+              <span class="yfiltre__label">Kaynak</span>
+              <select class="yfiltre__sel" data-yfiltre="kaynak">
+                <option value="">Hepsi</option>
+                <option value="Ki">Ki</option>
+                <option value="Mana">Mana</option>
+              </select>
+            </label>
+            <label class="yfiltre">
+              <span class="yfiltre__label">Seviye</span>
+              <select class="yfiltre__sel" data-yfiltre="seviye">
+                <option value="">Hepsi</option>
+                <option value="0">0</option>
+                <option value="3">3</option>
+                <option value="5">5</option>
+              </select>
+            </label>
+            <button class="yet__sifirla" type="button" data-ysifirla hidden>Süzgeci temizle</button>
+            <p class="yet__sayac" data-ysayac role="status" aria-live="polite">3 yetenek</p>
+          </div>
+
+          <div class="yet__split">
+            <div class="yet__tablowrap">
+              <table class="ytablo" data-ytablo>
+                <caption class="visually-hidden">Enerjisel Yetenekler — sıralanabilir tablo</caption>
+                <thead>
+                  <tr>
+                    <th scope="col" data-ysort="seviye" data-ytur="sayi" aria-sort="none"><span class="ytablo__bas">Sv.<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="ad" data-ytur="metin" aria-sort="none"><span class="ytablo__bas">Yetenek<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="eylem" data-ytur="metin" aria-sort="none"><span class="ytablo__bas">Eylem Türü<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="element" data-ytur="metin" aria-sort="none"><span class="ytablo__bas">Element<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="enerji" data-ytur="metin" aria-sort="none"><span class="ytablo__bas">Enerji Türü<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="kaynak" data-ytur="metin" aria-sort="none"><span class="ytablo__bas">Kaynak<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="menzil" data-ytur="sayi" aria-sort="none"><span class="ytablo__bas">Menzil<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                  </tr>
+                </thead>
+                <tbody data-ygovde>
+            <tr class="ytablo__satir" data-yid="y-enerjisel-kivilcim" data-seviye="0" data-ad="kivilcim" data-eylem="Ek Eylem" data-element="Ateş" data-enerji="Oluşturma" data-kaynak="Mana" data-tuketim="1" data-menzil="2" data-ara="kivilcim 0 parmak ucunda bir an icin tutusan kucuk bir kivilcim belirir. mesale, fitil ya da kuru ot tutusturmaya yeter; bir canliya zarar vermez. islak ya da ruzgarli ortamda gm tutusma icin zar isteyebilir. ek eylem ates olusturma mana 2 metre yok hareket bas parmak ile orta parmak bir kez citlatilir.">
+              <td class="ytablo__lvl">0</td>
+              <th class="ytablo__ad" scope="row"><a class="ytablo__link" href="#y-enerjisel-kivilcim">Kıvılcım</a></th>
+              <td>Ek Eylem</td>
+              <td>Ateş</td>
+              <td>Oluşturma</td>
+              <td class="ytablo__kaynak">Mana 1</td>
+              <td class="ytablo__menzil">2 m</td>
+            </tr>
+            <tr class="ytablo__satir" data-yid="y-enerjisel-alev-mizragi" data-seviye="3" data-ad="alev mizragi" data-eylem="Eylem" data-element="Ateş" data-enerji="Yıkım" data-kaynak="Mana" data-tuketim="12" data-menzil="18" data-ara="alev mizragi 3 kullanicinin avucunda toplanan mana, ince ve uzun bir alev mizragina donusur. mizrak hedefe carptiginda dagilir ve cevresini kavurur. kapali mekanda kullanildiginda gm ortamdaki yanici maddeler icin ek bir zar isteyebilir. eylem ates yikim mana 18 metre kure · 3 metre yaricap soz vur, alev; kalbe dek yuru. hareket sag el omuz hizasinda ileri savrulur, isaret parmagi hedefi cizer. materyal bir tutam kizil kukurt yanmis mese kabugu">
+              <td class="ytablo__lvl">3</td>
+              <th class="ytablo__ad" scope="row"><a class="ytablo__link" href="#y-enerjisel-alev-mizragi">Alev Mızrağı</a></th>
+              <td>Eylem</td>
+              <td>Ateş</td>
+              <td>Yıkım</td>
+              <td class="ytablo__kaynak">Mana 12</td>
+              <td class="ytablo__menzil">18 m</td>
+            </tr>
+            <tr class="ytablo__satir" data-yid="y-enerjisel-ortu-perdesi" data-seviye="5" data-ad="ortu perdesi" data-eylem="Tepki Eylem" data-element="Hava" data-enerji="Koruma" data-kaynak="Ki" data-tuketim="7" data-menzil="-1" data-ara="ortu perdesi 5 kullanicinin cevresinde basincli havadan bir perde kurulur. perde, icinden gecen firlatma silahlarinin hizini keser ve savrulan tozu, dumani disarida tutar. konsantrasyon gerektirir; kullanici hasar aldiginda perde bozulma tehlikesine girer. tepki eylem hava koruma ki kendin silindir · 4 metre yaricap, 3 metre yukseklik soz dur. buradan otesi yok. hareket iki avuc ici disa donuk bicimde gogus hizasinda birlestirilir ve disa itilir.">
+              <td class="ytablo__lvl">5</td>
+              <th class="ytablo__ad" scope="row"><a class="ytablo__link" href="#y-enerjisel-ortu-perdesi">Örtü Perdesi</a></th>
+              <td>Tepki Eylem</td>
+              <td>Hava</td>
+              <td>Koruma</td>
+              <td class="ytablo__kaynak">Ki 7</td>
+              <td class="ytablo__menzil">Kendin</td>
+            </tr>
+                </tbody>
+              </table>
+              <p class="yet__bosluk" data-ybos hidden>Süzgece uyan yetenek yok.</p>
+            </div>
+
+            <div class="yet__panel" data-ypanel>
+              <p class="yet__ipucu" data-yipucu hidden>Ayrıntı için tablodan bir yetenek seç.</p>
+              <div class="yet__kartlar" data-ykartlar>
+        <article class="ykart" id="y-enerjisel-kivilcim" data-ykart="y-enerjisel-kivilcim" tabindex="-1">
+          <header class="ykart__head">
+            <p class="ykart__eyebrow">
+              <span class="ykart__lvl">Seviye 0</span>
+              <span class="ykart__kat">Enerjisel</span>
+            </p>
+            <h3 class="ykart__ad">Kıvılcım</h3>
+            <p class="ykart__etiketler">
+              <span class="yet-tag yet-tag--eylem">Ek Eylem</span>
+              <span class="yet-tag yet-tag--element">Ateş</span>
+              <span class="yet-tag yet-tag--enerji" data-sinif="temel">Oluşturma</span>
+            </p>
+          </header>
+          <dl class="ykart__stats">
+            <div class="ykart__stat">
+              <dt>Kaynak</dt>
+              <dd>Mana 1</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Menzil</dt>
+              <dd>2 Metre</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Alan</dt>
+              <dd>Yok</dd>
+            </div>
+          </dl>
+          <section class="ykart__ger">
+            <h4 class="ykart__bas">Gereksinimler</h4>
+            <p class="ykart__shm">
+              <span class="shm is-off" title="Söz gerekmiyor">S</span>
+              <span class="shm is-on" title="Hareket gerekli">H</span>
+              <span class="shm is-off" title="Materyal gerekmiyor">M</span>
+            </p>
+            <div class="ykart__gsat">
+              <p class="ykart__getiket">Hareket</p>
+              <p>Baş parmak ile orta parmak bir kez çıtlatılır.</p>
+            </div>
+          </section>
+          <div class="ykart__aciklama">
+            <p>Parmak ucunda bir an için tutuşan küçük bir kıvılcım belirir. Meşale, fitil ya da kuru ot tutuşturmaya yeter; bir canlıya zarar vermez.</p>
+          </div>
+          <aside class="ykart__dipnot">
+            <p class="ykart__getiket">Dipnot</p>
+            <p>Islak ya da rüzgârlı ortamda GM tutuşma için zar isteyebilir.</p>
+          </aside>
+        </article>
+        <article class="ykart" id="y-enerjisel-alev-mizragi" data-ykart="y-enerjisel-alev-mizragi" tabindex="-1">
+          <header class="ykart__head">
+            <p class="ykart__eyebrow">
+              <span class="ykart__lvl">Seviye 3</span>
+              <span class="ykart__kat">Enerjisel</span>
+            </p>
+            <h3 class="ykart__ad">Alev Mızrağı</h3>
+            <p class="ykart__etiketler">
+              <span class="yet-tag yet-tag--eylem">Eylem</span>
+              <span class="yet-tag yet-tag--element">Ateş</span>
+              <span class="yet-tag yet-tag--enerji" data-sinif="temel">Yıkım</span>
+            </p>
+          </header>
+          <dl class="ykart__stats">
+            <div class="ykart__stat">
+              <dt>Kaynak</dt>
+              <dd>Mana 12</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Menzil</dt>
+              <dd>18 Metre</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Alan</dt>
+              <dd>Küre · 3 Metre yarıçap</dd>
+            </div>
+          </dl>
+          <section class="ykart__ger">
+            <h4 class="ykart__bas">Gereksinimler</h4>
+            <p class="ykart__shm">
+              <span class="shm is-on" title="Söz gerekli">S</span>
+              <span class="shm is-on" title="Hareket gerekli">H</span>
+              <span class="shm is-on" title="Materyal gerekli">M</span>
+            </p>
+            <div class="ykart__gsat">
+              <p class="ykart__getiket">Söz</p>
+              <blockquote class="ykart__soz">
+                <p>Vur, alev; kalbe dek yürü.</p>
+              </blockquote>
+            </div>
+            <div class="ykart__gsat">
+              <p class="ykart__getiket">Hareket</p>
+              <p>Sağ el omuz hizasında ileri savrulur, işaret parmağı hedefi çizer.</p>
+            </div>
+            <div class="ykart__gsat">
+              <p class="ykart__getiket">Materyal</p>
+              <ul class="ykart__mat">
+                <li>Bir tutam kızıl kükürt</li>
+                <li>Yanmış meşe kabuğu</li>
+              </ul>
+            </div>
+          </section>
+          <div class="ykart__aciklama">
+            <p>Kullanıcının avucunda toplanan mana, ince ve uzun bir alev mızrağına dönüşür.</p>
+            <p>Mızrak hedefe çarptığında dağılır ve çevresini kavurur.</p>
+          </div>
+          <aside class="ykart__dipnot">
+            <p class="ykart__getiket">Dipnot</p>
+            <p>Kapalı mekânda kullanıldığında GM ortamdaki yanıcı maddeler için ek bir zar isteyebilir.</p>
+          </aside>
+        </article>
+        <article class="ykart" id="y-enerjisel-ortu-perdesi" data-ykart="y-enerjisel-ortu-perdesi" tabindex="-1">
+          <header class="ykart__head">
+            <p class="ykart__eyebrow">
+              <span class="ykart__lvl">Seviye 5</span>
+              <span class="ykart__kat">Enerjisel</span>
+            </p>
+            <h3 class="ykart__ad">Örtü Perdesi</h3>
+            <p class="ykart__etiketler">
+              <span class="yet-tag yet-tag--eylem">Tepki Eylem</span>
+              <span class="yet-tag yet-tag--element">Hava</span>
+              <span class="yet-tag yet-tag--enerji" data-sinif="temel">Koruma</span>
+            </p>
+          </header>
+          <dl class="ykart__stats">
+            <div class="ykart__stat">
+              <dt>Kaynak</dt>
+              <dd>Ki 7</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Menzil</dt>
+              <dd>Kendin</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Alan</dt>
+              <dd>Silindir · 4 Metre yarıçap, 3 Metre yükseklik</dd>
+            </div>
+          </dl>
+          <section class="ykart__ger">
+            <h4 class="ykart__bas">Gereksinimler</h4>
+            <p class="ykart__shm">
+              <span class="shm is-on" title="Söz gerekli">S</span>
+              <span class="shm is-on" title="Hareket gerekli">H</span>
+              <span class="shm is-off" title="Materyal gerekmiyor">M</span>
+            </p>
+            <div class="ykart__gsat">
+              <p class="ykart__getiket">Söz</p>
+              <blockquote class="ykart__soz">
+                <p>Dur. Buradan ötesi yok.</p>
+              </blockquote>
+            </div>
+            <div class="ykart__gsat">
+              <p class="ykart__getiket">Hareket</p>
+              <p>İki avuç içi dışa dönük biçimde göğüs hizasında birleştirilir ve dışa itilir.</p>
+            </div>
+          </section>
+          <div class="ykart__aciklama">
+            <p>Kullanıcının çevresinde basınçlı havadan bir perde kurulur. Perde, içinden geçen fırlatma silahlarının hızını keser ve savrulan tozu, dumanı dışarıda tutar.</p>
+          </div>
+          <aside class="ykart__dipnot">
+            <p class="ykart__getiket">Dipnot</p>
+            <p>Konsantrasyon gerektirir; kullanıcı hasar aldığında perde bozulma tehlikesine girer.</p>
+          </aside>
+        </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel" id="fiziksel" aria-labelledby="b02" tabindex="-1" data-panel>
+        <header class="panel__head">
+          <p class="panel__no" aria-hidden="true">02</p>
+          <h2 class="panel__title" id="b02">Fiziksel Yetenekler</h2>
+        </header>
+        <p class="panel__lede">Kas gücüne dayanan yetenekler; çoğunlukla SOLUK tüketir.</p>
+        <div class="yet" data-yet="fiziksel">
+          <div class="yet__bar">
+            <label class="yara">
+              <span class="yara__label">Ara</span>
+              <input class="yara__input" type="search" data-yara
+                     placeholder="Yetenek, element, enerji, açıklama…"
+                     autocomplete="off" spellcheck="false">
+            </label>
+            <label class="yfiltre">
+              <span class="yfiltre__label">Eylem</span>
+              <select class="yfiltre__sel" data-yfiltre="eylem">
+                <option value="">Hepsi</option>
+                <option value="Eylem">Eylem</option>
+              </select>
+            </label>
+            <label class="yfiltre">
+              <span class="yfiltre__label">Element</span>
+              <select class="yfiltre__sel" data-yfiltre="element">
+                <option value="">Hepsi</option>
+              </select>
+            </label>
+            <label class="yfiltre">
+              <span class="yfiltre__label">Enerji</span>
+              <select class="yfiltre__sel" data-yfiltre="enerji">
+                <option value="">Hepsi</option>
+              </select>
+            </label>
+            <label class="yfiltre">
+              <span class="yfiltre__label">Kaynak</span>
+              <select class="yfiltre__sel" data-yfiltre="kaynak">
+                <option value="">Hepsi</option>
+                <option value="Soluk">Soluk</option>
+              </select>
+            </label>
+            <label class="yfiltre">
+              <span class="yfiltre__label">Seviye</span>
+              <select class="yfiltre__sel" data-yfiltre="seviye">
+                <option value="">Hepsi</option>
+                <option value="2">2</option>
+              </select>
+            </label>
+            <button class="yet__sifirla" type="button" data-ysifirla hidden>Süzgeci temizle</button>
+            <p class="yet__sayac" data-ysayac role="status" aria-live="polite">1 yetenek</p>
+          </div>
+
+          <div class="yet__split">
+            <div class="yet__tablowrap">
+              <table class="ytablo" data-ytablo>
+                <caption class="visually-hidden">Fiziksel Yetenekler — sıralanabilir tablo</caption>
+                <thead>
+                  <tr>
+                    <th scope="col" data-ysort="seviye" data-ytur="sayi" aria-sort="none"><span class="ytablo__bas">Sv.<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="ad" data-ytur="metin" aria-sort="none"><span class="ytablo__bas">Yetenek<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="eylem" data-ytur="metin" aria-sort="none"><span class="ytablo__bas">Eylem Türü<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="element" data-ytur="metin" aria-sort="none"><span class="ytablo__bas">Element<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="enerji" data-ytur="metin" aria-sort="none"><span class="ytablo__bas">Enerji Türü<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="kaynak" data-ytur="metin" aria-sort="none"><span class="ytablo__bas">Kaynak<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="menzil" data-ytur="sayi" aria-sort="none"><span class="ytablo__bas">Menzil<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                  </tr>
+                </thead>
+                <tbody data-ygovde>
+            <tr class="ytablo__satir" data-yid="y-fiziksel-kalkan-kirici" data-seviye="2" data-ad="kalkan kirici" data-eylem="Eylem" data-element="" data-enerji="" data-kaynak="Soluk" data-tuketim="4" data-menzil="1" data-ara="kalkan kirici 2 karakter butun bedensel agirligini tek bir darbeye yukler. darbe hedefin kalkanina ya da savunma durusuna isabet ederse, hedef bir tur boyunca savunma degerini kullanamaz. agir silah yetkinligi olmayan karakterler bu yetenegi kullandiginda zarlarina eksi alir. eylem soluk 1 kare yok hareket agirlik arka ayaga alinir, silah omuz ustunden asagi dogru tam gucle indirilir.">
+              <td class="ytablo__lvl">2</td>
+              <th class="ytablo__ad" scope="row"><a class="ytablo__link" href="#y-fiziksel-kalkan-kirici">Kalkan Kırıcı</a></th>
+              <td>Eylem</td>
+              <td>—</td>
+              <td>—</td>
+              <td class="ytablo__kaynak">Soluk 4</td>
+              <td class="ytablo__menzil">1 kare</td>
+            </tr>
+                </tbody>
+              </table>
+              <p class="yet__bosluk" data-ybos hidden>Süzgece uyan yetenek yok.</p>
+            </div>
+
+            <div class="yet__panel" data-ypanel>
+              <p class="yet__ipucu" data-yipucu hidden>Ayrıntı için tablodan bir yetenek seç.</p>
+              <div class="yet__kartlar" data-ykartlar>
+        <article class="ykart" id="y-fiziksel-kalkan-kirici" data-ykart="y-fiziksel-kalkan-kirici" tabindex="-1">
+          <header class="ykart__head">
+            <p class="ykart__eyebrow">
+              <span class="ykart__lvl">Seviye 2</span>
+              <span class="ykart__kat">Fiziksel</span>
+            </p>
+            <h3 class="ykart__ad">Kalkan Kırıcı</h3>
+            <p class="ykart__etiketler">
+              <span class="yet-tag yet-tag--eylem">Eylem</span>
+            </p>
+          </header>
+          <dl class="ykart__stats">
+            <div class="ykart__stat">
+              <dt>Kaynak</dt>
+              <dd>Soluk 4</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Menzil</dt>
+              <dd>1 Kare</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Alan</dt>
+              <dd>Yok</dd>
+            </div>
+          </dl>
+          <section class="ykart__ger">
+            <h4 class="ykart__bas">Gereksinimler</h4>
+            <p class="ykart__shm">
+              <span class="shm is-off" title="Söz gerekmiyor">S</span>
+              <span class="shm is-on" title="Hareket gerekli">H</span>
+              <span class="shm is-off" title="Materyal gerekmiyor">M</span>
+            </p>
+            <div class="ykart__gsat">
+              <p class="ykart__getiket">Hareket</p>
+              <p>Ağırlık arka ayağa alınır, silah omuz üstünden aşağı doğru tam güçle indirilir.</p>
+            </div>
+          </section>
+          <div class="ykart__aciklama">
+            <p>Karakter bütün bedensel ağırlığını tek bir darbeye yükler. Darbe hedefin kalkanına ya da savunma duruşuna isabet ederse, hedef bir tur boyunca savunma değerini kullanamaz.</p>
+          </div>
+          <aside class="ykart__dipnot">
+            <p class="ykart__getiket">Dipnot</p>
+            <p>Ağır silah yetkinliği olmayan karakterler bu yeteneği kullandığında zarlarına eksi alır.</p>
+          </aside>
+        </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel" id="karma" aria-labelledby="b03" tabindex="-1" data-panel>
+        <header class="panel__head">
+          <p class="panel__no" aria-hidden="true">03</p>
+          <h2 class="panel__title" id="b03">Karma Yetenekler</h2>
+        </header>
+        <p class="panel__lede">Fiziksel gücü enerjisel yönlendirmeyle harmanlayan savaş manevraları.</p>
+        <div class="yet" data-yet="karma">
+          <div class="yet__bar">
+            <label class="yara">
+              <span class="yara__label">Ara</span>
+              <input class="yara__input" type="search" data-yara
+                     placeholder="Yetenek, element, enerji, açıklama…"
+                     autocomplete="off" spellcheck="false">
+            </label>
+            <label class="yfiltre">
+              <span class="yfiltre__label">Eylem</span>
+              <select class="yfiltre__sel" data-yfiltre="eylem">
+                <option value="">Hepsi</option>
+                <option value="Ek Eylem">Ek Eylem</option>
+              </select>
+            </label>
+            <label class="yfiltre">
+              <span class="yfiltre__label">Element</span>
+              <select class="yfiltre__sel" data-yfiltre="element">
+                <option value="">Hepsi</option>
+                <option value="Ateş">Ateş</option>
+              </select>
+            </label>
+            <label class="yfiltre">
+              <span class="yfiltre__label">Enerji</span>
+              <select class="yfiltre__sel" data-yfiltre="enerji">
+                <option value="">Hepsi</option>
+                <option value="Dönüştürme">Dönüştürme</option>
+              </select>
+            </label>
+            <label class="yfiltre">
+              <span class="yfiltre__label">Kaynak</span>
+              <select class="yfiltre__sel" data-yfiltre="kaynak">
+                <option value="">Hepsi</option>
+                <option value="Soluk">Soluk</option>
+              </select>
+            </label>
+            <label class="yfiltre">
+              <span class="yfiltre__label">Seviye</span>
+              <select class="yfiltre__sel" data-yfiltre="seviye">
+                <option value="">Hepsi</option>
+                <option value="4">4</option>
+              </select>
+            </label>
+            <button class="yet__sifirla" type="button" data-ysifirla hidden>Süzgeci temizle</button>
+            <p class="yet__sayac" data-ysayac role="status" aria-live="polite">1 yetenek</p>
+          </div>
+
+          <div class="yet__split">
+            <div class="yet__tablowrap">
+              <table class="ytablo" data-ytablo>
+                <caption class="visually-hidden">Karma Yetenekler — sıralanabilir tablo</caption>
+                <thead>
+                  <tr>
+                    <th scope="col" data-ysort="seviye" data-ytur="sayi" aria-sort="none"><span class="ytablo__bas">Sv.<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="ad" data-ytur="metin" aria-sort="none"><span class="ytablo__bas">Yetenek<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="eylem" data-ytur="metin" aria-sort="none"><span class="ytablo__bas">Eylem Türü<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="element" data-ytur="metin" aria-sort="none"><span class="ytablo__bas">Element<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="enerji" data-ytur="metin" aria-sort="none"><span class="ytablo__bas">Enerji Türü<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="kaynak" data-ytur="metin" aria-sort="none"><span class="ytablo__bas">Kaynak<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="menzil" data-ytur="sayi" aria-sort="none"><span class="ytablo__bas">Menzil<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                  </tr>
+                </thead>
+                <tbody data-ygovde>
+            <tr class="ytablo__satir" data-yid="y-karma-koz-yuruyusu" data-seviye="4" data-ad="koz yuruyusu" data-eylem="Ek Eylem" data-element="Ateş" data-enerji="Dönüştürme" data-kaynak="Soluk" data-tuketim="3" data-menzil="6" data-ara="koz yuruyusu 4 karakter attigi adimin ardinda kisa sure yanan bir koz izi birakir. izin ustunden gecen varliklar hafif yanik alir; karakterin kendisi bu izden etkilenmez. koz izi bir tur sonunda soner. yanici zeminde gm izin yayilmasina karar verebilir. ek eylem ates donusturme soluk 6 metre hat · 6 metre uzunluk hareket bir adim one atilir ve topuk yere sertce basilir; hareket kesintisiz olmalidir. materyal tabana surulmus bir tutam kul">
+              <td class="ytablo__lvl">4</td>
+              <th class="ytablo__ad" scope="row"><a class="ytablo__link" href="#y-karma-koz-yuruyusu">Köz Yürüyüşü</a></th>
+              <td>Ek Eylem</td>
+              <td>Ateş</td>
+              <td>Dönüştürme</td>
+              <td class="ytablo__kaynak">Soluk 3</td>
+              <td class="ytablo__menzil">6 m</td>
+            </tr>
+                </tbody>
+              </table>
+              <p class="yet__bosluk" data-ybos hidden>Süzgece uyan yetenek yok.</p>
+            </div>
+
+            <div class="yet__panel" data-ypanel>
+              <p class="yet__ipucu" data-yipucu hidden>Ayrıntı için tablodan bir yetenek seç.</p>
+              <div class="yet__kartlar" data-ykartlar>
+        <article class="ykart" id="y-karma-koz-yuruyusu" data-ykart="y-karma-koz-yuruyusu" tabindex="-1">
+          <header class="ykart__head">
+            <p class="ykart__eyebrow">
+              <span class="ykart__lvl">Seviye 4</span>
+              <span class="ykart__kat">Karma</span>
+            </p>
+            <h3 class="ykart__ad">Köz Yürüyüşü</h3>
+            <p class="ykart__etiketler">
+              <span class="yet-tag yet-tag--eylem">Ek Eylem</span>
+              <span class="yet-tag yet-tag--element">Ateş</span>
+              <span class="yet-tag yet-tag--enerji" data-sinif="temel">Dönüştürme</span>
+            </p>
+          </header>
+          <dl class="ykart__stats">
+            <div class="ykart__stat">
+              <dt>Kaynak</dt>
+              <dd>Soluk 3</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Menzil</dt>
+              <dd>6 Metre</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Alan</dt>
+              <dd>Hat · 6 Metre uzunluk</dd>
+            </div>
+          </dl>
+          <section class="ykart__ger">
+            <h4 class="ykart__bas">Gereksinimler</h4>
+            <p class="ykart__shm">
+              <span class="shm is-off" title="Söz gerekmiyor">S</span>
+              <span class="shm is-on" title="Hareket gerekli">H</span>
+              <span class="shm is-on" title="Materyal gerekli">M</span>
+            </p>
+            <div class="ykart__gsat">
+              <p class="ykart__getiket">Hareket</p>
+              <p>Bir adım öne atılır ve topuk yere sertçe basılır; hareket kesintisiz olmalıdır.</p>
+            </div>
+            <div class="ykart__gsat">
+              <p class="ykart__getiket">Materyal</p>
+              <ul class="ykart__mat">
+                <li>Tabana sürülmüş bir tutam kül</li>
+              </ul>
+            </div>
+          </section>
+          <div class="ykart__aciklama">
+            <p>Karakter attığı adımın ardında kısa süre yanan bir köz izi bırakır. İzin üstünden geçen varlıklar hafif yanık alır; karakterin kendisi bu izden etkilenmez.</p>
+          </div>
+          <aside class="ykart__dipnot">
+            <p class="ykart__getiket">Dipnot</p>
+            <p>Köz izi bir tur sonunda söner. Yanıcı zeminde GM izin yayılmasına karar verebilir.</p>
+          </aside>
+        </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+      <!-- /yonetim:yetenekler -->
+
+    </main>
+  </div>
+
+  <footer class="rules__foot">
+    <button class="theme-toggle" type="button" data-theme-toggle role="switch" aria-checked="false" aria-label="Karanlık mod">
+      <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>
+      <span class="theme-toggle__track" aria-hidden="true"></span>
+      <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13.5A8.5 8.5 0 1 1 10.5 4a6.6 6.6 0 0 0 9.5 9.5z"/></svg>
+    </button>
+    <p class="copyright"><span aria-hidden="true">©</span> 2026 SLVNZ</p>
+  </footer>
+
+</div>
+
+<script src="assets/js/theme.js" defer></script>
+<script src="assets/js/nav.js" defer></script>
+<script src="assets/js/kurallar.js" defer></script>
+<script src="assets/js/yetenekler.js" defer></script>
+<script src="assets/js/ink-shader.js" defer></script>
+</body>
+</html>

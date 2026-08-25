@@ -27,7 +27,8 @@ assets/images/   başlık sayfası görselleri
 - [[Etkileşimler]] — nav hover, çıkış geçişi, giriş animasyonu
 - [[Figma Kaynak Verisi]] — `.fig` dosyasından çıkarılan ham değerler
 - [[Oyun Kuralları Sayfası]] — `kurallar.html`: sabit yükseklik, bölüm panelleri, duman
-- [[Yönetim Paneli]] — yerel içerik aracı: sürümler, bölümler, zengin metin
+- [[Yetenekler Sayfası]] — `yetenekler.html`: veritabanından üretilen tablo + yetenek kartı
+- [[Yönetim Paneli]] — yerel içerik aracı: sürümler, bölümler, zengin metin, yetenekler
 
 ---
 

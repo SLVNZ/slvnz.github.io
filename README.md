@@ -1,28 +1,39 @@
 # SLVNZ — slvnz.github.io
 
-Statik site: **SLVNZ 4.0 Fantazya** başlık sayfası ve oyun kuralları. Derleme
-adımı, bağımlılık ve sunucu yok — depodaki dosyalar olduğu gibi yayınlanır.
+Statik site: **SLVNZ 4.0 Fantazya** başlık sayfası, oyun kuralları ve yetenek
+dizini. Derleme adımı, bağımlılık ve sunucu yok — depodaki dosyalar olduğu gibi
+yayınlanır. (Yetenekler yerelde bir veritabanında yazılır, siteye statik HTML
+olarak üretilir — bkz. *Yetenekler ve veritabanı*.)
 
 ## Yapı
 
 ```
-index.html           başlık sayfası
-kurallar.html        Oyun Kuralları — 5 bölüm panel, sol ray + sağ bölüm menüsü
-404.html             bulunamadı sayfası (her derinlikten çalışsın diye yollar kök-mutlak)
-content/site.json    içerik kaynağı — sürümler + bölümler (yönetim paneli yazar)
-admin/               yerel yönetim paneli (python admin/server.py → 127.0.0.1:8090)
+index.html               başlık sayfası
+kurallar.html            Oyun Kuralları — bölüm panelleri, sol ray + sağ bölüm menüsü
+yetenekler.html          Yetenekler — enerjisel / fiziksel / karma tablo + yetenek kartı
+404.html                 bulunamadı sayfası (her derinlikten çalışsın diye yollar kök-mutlak)
+content/site.json        içerik kaynağı — sürümler + bölümler (yönetim paneli yazar)
+content/yetenekler.json  yetenek kaydı — veritabanının git'e giren dışa aktarımı
+admin/                   yerel yönetim paneli (python admin/server.py → 127.0.0.1:8090)
+  server.py              HTTP sunucusu, API uçları, üretim, mürekkep motoru
+  admin.js · canvas.js   panel ve tuval editörü
+  yetenekler.js          Yetenekler görünümü (form + listeler)
+  db.py · schema.sql     yetenek veritabanı katmanı (MySQL, yoksa SQLite)
+  yetenek.py             yetenek CRUD, doğrulama, sayfa üretimi
 assets/
-  css/style.css      token'lar ve başlık sayfası stilleri
-  css/kurallar.css   Oyun Kuralları sayfasının stilleri
-  js/theme.js        aydınlık / karanlık tema anahtarı
-  js/nav.js          menüde harf harf hover, sayfa çıkış geçişi
-  js/kurallar.js     bölüm panelleri, okuma ilerlemesi, paralaks
-  js/version-menu.js "4.0" sürüm seçim menüsü (klavye destekli)
-  js/ink-shader.js   duman — imleçle tepkileşen WebGL shader (dekoratif)
-  fonts/             No Serenity — SLVNZ logosunu çizen yazı tipi
-  images/            başlık ve kurallar sayfası görselleri
-vault/               Obsidian tasarım notları — sitede bağlantısı yok
-.nojekyll            GitHub Pages Jekyll'ı atlasın diye
+  css/style.css          token'lar ve başlık sayfası stilleri
+  css/kurallar.css       belge çerçevesi — ray, TOC, panel, zengin metin
+  css/yetenekler.css     yetenek tablosu, süzgeç çubuğu ve yetenek kartı
+  js/theme.js            aydınlık / karanlık tema anahtarı
+  js/nav.js              menüde harf harf hover, sayfa çıkış geçişi
+  js/kurallar.js         bölüm panelleri, okuma ilerlemesi, paralaks
+  js/yetenekler.js       arama, süzgeç, sıralama, kart seçimi
+  js/version-menu.js     "4.0" sürüm seçim menüsü (klavye destekli)
+  js/ink-shader.js       duman — imleçle tepkileşen WebGL shader (dekoratif)
+  fonts/                 No Serenity — SLVNZ logosunu çizen yazı tipi
+  images/                başlık ve kurallar sayfası görselleri
+vault/                   Obsidian tasarım notları — sitede bağlantısı yok
+.nojekyll                GitHub Pages Jekyll'ı atlasın diye
 ```
 
 ## Yerelde açma
@@ -72,8 +83,8 @@ başlığında **Yazı boyutu (px)** alanı vardır; tabloda sütun sınırları
 sürüklenerek ya da özellik panelindeki % girişleriyle boyutlandırılır
 (genişlik verilen tablo sabit düzene geçer — uzun metin komşu sütunu
 sıkıştırmaz). Dönüşümler satır içi stil olarak üretilir, yayınlanan site
-bunları JS'siz gösterir. Sürümler ve
-form tabanlı bölüm editörü ayrı görünümlerde durur. **Kaydet** site
+bunları JS'siz gösterir. Sürümler,
+form tabanlı bölüm editörü ve **Yetenekler** ayrı görünümlerde durur. **Kaydet** site
 dosyalarını doğrudan yazar (`content/site.json` + `index.html` ve
 `kurallar.html`'deki `yonetim:*` işaretli bölgeler). Sonrasında
 `git add -A && git commit && git push` ile yayımla. Panel yalnız yerelde
@@ -102,21 +113,96 @@ işlenebilsin diye. Motor Pillow ister (`pip install Pillow`).
 
 ## Menü
 
-OYUN KURALLARI artık `kurallar.html` sayfasına gidiyor. YETENEKLER ve
-EVREN REHBERİ hâlâ pasif — gidecekleri sayfa yok, o yüzden bağlantı değil düz
-metinler. Sayfa eklediğinde (hem `index.html` hem `kurallar.html` içinde)
+OYUN KURALLARI `kurallar.html`, YETENEKLER `yetenekler.html` sayfasına gidiyor.
+EVREN REHBERİ hâlâ pasif — gideceği sayfa yok, o yüzden bağlantı değil düz
+metin. Sayfa eklediğinde (`index.html`, `kurallar.html` ve `yetenekler.html`
+içinde)
 
 ```html
-<span class="mainnav__link">Yetenekler</span>
+<span class="mainnav__link">Evren Rehberi</span>
 ```
 
 satırını
 
 ```html
-<a class="mainnav__link" href="yetenekler.html">Yetenekler</a>
+<a class="mainnav__link" href="evren.html">Evren Rehberi</a>
 ```
 
 ile değiştir — hover efekti ve çıkış geçişi kendiliğinden çalışır.
+
+## Yetenekler ve veritabanı
+
+Yetenekler, sitenin geri kalanından farklı olarak bir **ilişkisel veritabanında**
+durur. Şema `admin/schema.sql` içinde ve MySQL lehçesinde yazılıdır:
+
+```
+kategori · eylem_turu · element · enerji_turu · kaynak_turu
+uzaklik_birimi · alan_tipi          ← seçim listeleri (sözlük tabloları)
+yetenek                             ← kayıtlar, hepsine yabancı anahtarla bağlı
+yetenek_materyal                    ← "harcanacak materyaller" listesi (çocuk tablo)
+```
+
+Element, enerji türü, kaynak türü, birim ve alan tipi listeleri veritabanında
+durduğu için formdaki açılır menüler onlardan doğar; listeleri de panelin
+**Listeler…** bölümünden düzenlersin. Tohum satırları Oyun Kuralları'nın
+*Enerjiler ve Enerji Kaynakları* bölümünden alınmıştır (Ateş/Su/Toprak/Hava/
+Yıldırım/Işık · Yıkım…Çürüme, İnanç/Pakt/Kaos, Kan/Aydınlık/Karanlık/Ruh/Yaşam ·
+Mana/Ki/Ruh/Yaşam/Soluk).
+
+### Yazım tarafı ve okuma tarafı
+
+Yayındaki site GitHub Pages'te statik durur; **bir veritabanına bağlanamaz.**
+Bu yüzden veritabanı yalnız YAZIM tarafındadır:
+
+```
+panel → veritabanı → yetenekler.html + content/yetenekler.json → git push
+```
+
+Her kayıt/silme sonrasında sunucu ikisini de yeniden üretir. `yetenekler.html`
+içinde hem tablo satırları hem yetenek kartlarının **tamamı** HTML olarak
+bulunur: JS kapalıyken tablo bir dizin, kartlar altında akan tam metindir
+(satırdaki ad gerçek bir çapa bağlantısı). JS açıkken `assets/js/yetenekler.js`
+kartları teke indirip sağdaki panele taşır, aramayı, süzgeci ve sıralamayı
+bağlar. Ağ isteği yoktur — sayfa `file://` ile de çalışır.
+
+### MySQL'e geçiş
+
+`admin/db.py` sürücüyü kendi seçer: MySQL sürücüsü kurulu ve sunucuya
+ulaşılabiliyorsa MySQL, değilse **SQLite** (standart kütüphanede, kurulum
+istemez). Aynı `schema.sql`, üç satırlık bir lehçe çevirisiyle iki tarafta da
+kurulur. Hangisine yazıldığı panelin Yetenekler başlığının altında yazar.
+
+MySQL'e geçmek için:
+
+```bash
+pip install PyMySQL
+mysql -u root -p -e "CREATE DATABASE slvnz CHARACTER SET utf8mb4 COLLATE utf8mb4_turkish_ci;"
+```
+
+sonra `admin/db.config.json` içine kullanıcı/parolayı yaz (`"surucu": "mysql"`
+dersen SQLite'a sessizce düşmez, hata verir). Şema ve tohum ilk açılışta
+kurulur; veritabanı boşsa sunucu `content/yetenekler.json`'daki yetenekleri
+ada göre eşleştirerek geri yükler — taşıma yolu budur.
+
+`admin/data/*.db` ve `admin/db.config.json` git dışıdır (biri her yazımda
+değişen ikili dosya, öteki parola taşıyabilir). Kalıcı ve diff'lenebilir kayıt
+`content/yetenekler.json`'dır.
+
+### Bir yetenekte ne var
+
+Tabloda görünenler: **seviye · ad · eylem türü · element · enerji türü ·
+kaynak (tür + tüketim) · menzil**. Kalanların hepsi tıklanınca açılan kartta:
+etki alanı (biçim + ölçü + gereken yerde yükseklik), söz-hareket-materyal
+üçlüsü (her biri anahtarla açılır, açık olanın kendi alanı vardır), açıklama ve
+dipnot. Kart okuma hiyerarşisine göre dizilidir: kimlik → mekanik → bedel →
+anlatı → kenar notu.
+
+Doğrulama sunucudadır (`admin/yetenek.py`): seviye ve kaynak tüketimi 0'ın
+altına inemez, menzil ve alan ölçüsü en az 1'dir, silindir/koni/prizma
+biçimlerinde yükseklik zorunludur, açık bir anahtarın alanı boş bırakılamaz,
+enerjisel yetenekte element/enerji/kaynak seçilmelidir ve aynı alanda aynı ad
+iki kez kullanılamaz.
+
 
 ## Tasarım notları
 

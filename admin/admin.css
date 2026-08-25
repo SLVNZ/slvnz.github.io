@@ -976,3 +976,270 @@ select.field__input { cursor: pointer; }
 @media (prefers-reduced-motion: reduce) {
   .adm *, .picker *, .toast { transition-duration: .01ms !important; }
 }
+
+/* =========================================================================
+   Yetenekler görünümü
+   Panelin öteki görünümleri content/site.json'un aynasını düzenler; burası
+   bir veritabanına yazar. Bu yüzden her satır kendi formunu taşır ve kendi
+   başına kaydedilir — üstteki Kaydet düğmesiyle ilişkisi yoktur.
+   ========================================================================= */
+.view--genis { max-width: 70rem; }
+
+/* bağlantı künyesi: hangi sürücüye yazıldığı gözden kaçmasın */
+.ydb {
+  display: inline-block;
+  margin-block-start: .35rem;
+  padding: .12em .5em;
+  border: 1px solid var(--adm-hair);
+  background: var(--adm-soft);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 11px;
+  color: var(--muted);
+}
+.ydb.is-err { border-color: #c62828; color: #c62828; }
+
+.ytools {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  flex-wrap: wrap;
+  margin-block-end: 1rem;
+}
+.ytools__say {
+  margin-inline-start: auto;
+  font-size: 12.5px;
+  font-style: italic;
+  color: var(--muted);
+}
+.btn--kucuk { min-height: 32px; padding: .3rem .7rem; font-size: 12px; }
+[data-ylistele].is-acik { border-color: var(--accent); color: var(--accent); }
+
+/* ---------- yetenek listesi (akordeon) ------------------------------------ */
+.ylist { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+.yrow { border: 1px solid var(--adm-hair); background: var(--paper); }
+.yrow.is-acik { border-color: var(--accent); }
+.yrow--bos {
+  padding: 1.6rem;
+  border-style: dashed;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+.yrow__head { display: flex; align-items: stretch; }
+.yrow__toggle {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 2.4rem minmax(8rem, 16rem) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .8rem;
+  padding: .7rem .85rem;
+  border: 0;
+  background: none;
+  text-align: start;
+  cursor: pointer;
+  color: var(--ink);
+}
+.yrow__toggle:hover { background: var(--adm-soft); }
+.yrow__toggle:focus-visible { outline: 1px dashed var(--accent); outline-offset: -3px; }
+.yrow__lvl {
+  font-family: var(--font-grotesk);
+  font-weight: 700;
+  font-size: 17px;
+  text-align: center;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.yrow__ad {
+  font-family: var(--font-archivo);
+  font-weight: 700;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+.yrow__meta {
+  font-size: 12px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.yrow__chev { display: grid; place-items: center; width: 18px; color: var(--muted); }
+.yrow__chev svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+.yrow.is-acik .yrow__chev { rotate: 90deg; color: var(--accent); }
+.yrow__tools { display: flex; align-items: center; padding-inline-end: .5rem; }
+.yrow__baslik {
+  padding: .7rem .85rem;
+  font-family: var(--font-archivo);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.yrow__body { border-block-start: 1px solid var(--adm-hair); }
+
+/* ---------- yetenek formu -------------------------------------------------- */
+.yform { padding: 1.1rem .95rem 1.2rem; display: flex; flex-direction: column; gap: 1rem; }
+.yform__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: .8rem;
+}
+.yform__grid--kimlik { grid-template-columns: 6.5rem minmax(12rem, 2fr) minmax(10rem, 1fr); }
+
+.yform__set {
+  margin: 0;
+  padding: .85rem .9rem 1rem;
+  border: 1px solid var(--adm-hair);
+}
+.yform__legend {
+  padding-inline: .4rem;
+  font-family: var(--font-archivo);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.yform__satir { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; }
+.yform__kosul { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+/* koşullu blok anahtarın altında, anahtarın rayı kadar içeride durur:
+   hangi anahtara ait olduğu göz hizasında okunur */
+.yform__kosulblok { margin-block: .35rem .9rem; padding-inline-start: 3.2rem; }
+.yform__yuk { display: inline-flex; align-items: center; gap: .4rem; }
+.yform__carpi { color: var(--muted); font-size: 13px; }
+.field__input--sayi { width: 5.5rem; min-height: 38px; }
+.field__input--alan { min-height: 0; line-height: 1.55; resize: vertical; }
+.yform__set .field__input { min-height: 38px; }
+.yform__set select.field__input { max-width: 13rem; }
+
+.yform__foot {
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+  align-items: center;
+  border-block-start: 1px solid var(--adm-hair);
+  padding-block-start: .9rem;
+}
+.yform__foot .btn--danger { margin-inline-start: auto; }
+
+/* -- iki durumlu seçim (Kendin/Mesafe · Yok/Var) ---------------------------- */
+.segment { display: inline-flex; border: 1px solid var(--adm-hair); }
+.segment__opt { position: relative; }
+.segment__opt input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+.segment__opt span {
+  display: block;
+  padding: .5rem .9rem;
+  font-family: var(--font-archivo);
+  font-size: 13px;
+  color: var(--muted);
+  transition: background-color .15s ease, color .15s ease;
+}
+.segment__opt + .segment__opt span { border-inline-start: 1px solid var(--adm-hair); }
+.segment__opt input:checked + span { background: var(--accent); color: #fff; }
+.segment__opt input:focus-visible + span { outline: 1px dashed var(--accent); outline-offset: 2px; }
+
+/* -- anahtar (switch) -------------------------------------------------------
+   "gerekli olup olmaması durumu switch şeklinde işaretlenir" — durum hem
+   topuzun konumundan hem renkten okunur, yalnız renge yaslanmaz. */
+.sw {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  cursor: pointer;
+  padding-block: .35rem;
+}
+.sw input { position: absolute; opacity: 0; width: 0; height: 0; }
+.sw__track {
+  position: relative;
+  flex: 0 0 auto;
+  width: 2.6rem;
+  height: 1.4rem;
+  border: 1px solid var(--adm-hair);
+  background: var(--adm-soft);
+  transition: background-color .18s var(--ease), border-color .18s var(--ease);
+}
+.sw__knob {
+  position: absolute;
+  inset-block: 2px;
+  inset-inline-start: 2px;
+  width: calc(1.4rem - 6px);
+  background: var(--muted);
+  transition: translate .18s var(--ease), background-color .18s var(--ease);
+}
+.sw input:checked + .sw__track { background: var(--accent); border-color: var(--accent); }
+.sw input:checked + .sw__track .sw__knob { translate: calc(2.6rem - 1.4rem) 0; background: #fff; }
+.sw input:focus-visible + .sw__track { outline: 1px dashed var(--accent); outline-offset: 2px; }
+.sw__text {
+  font-family: var(--font-archivo);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.sw input:checked ~ .sw__text { color: var(--ink); }
+
+/* -- materyal listesi ------------------------------------------------------- */
+.ymat { display: flex; flex-direction: column; gap: .35rem; margin-block: .35rem .5rem; }
+.ymat__satir { display: flex; gap: .3rem; align-items: center; }
+.ymat__satir .field__input { min-height: 36px; flex: 1; max-width: 26rem; }
+
+/* ---------- sözlük yönetimi ------------------------------------------------ */
+.ysozluk {
+  margin-block-start: 1.6rem;
+  padding: 1.1rem;
+  border: 1px solid var(--adm-hair);
+  background: var(--adm-soft);
+}
+.ysozluk__baslik {
+  font-family: var(--font-archivo);
+  font-weight: 900;
+  font-size: 17px;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.ysozluk__not { margin-block: .35rem 1.1rem; max-width: 40rem; }
+.ysoz + .ysoz { margin-block-start: 1.4rem; }
+.ysoz__baslik {
+  font-family: var(--font-archivo);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-block-end: .5rem;
+}
+.ysoz__liste { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: .3rem; }
+.ysoz__satir { display: flex; gap: .3rem; align-items: center; flex-wrap: wrap; }
+.ysoz__satir .field__input { min-height: 34px; font-size: 13.5px; }
+.ysoz__ad { flex: 1 1 11rem; max-width: 16rem; }
+.ysoz__ek { flex: 0 0 auto; width: 9rem; }
+.ysoz__ek--kisa { width: 5rem; }
+.ysoz__bayrak {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+}
+.ysoz__bayrak input { accent-color: var(--accent); width: 14px; height: 14px; cursor: pointer; }
+.ysoz__ekle { display: flex; gap: .3rem; margin-block-start: .55rem; }
+.ysoz__ekle .field__input { min-height: 34px; max-width: 16rem; font-size: 13.5px; }
+
+@media (max-width: 860px) {
+  .yrow__toggle { grid-template-columns: 2.2rem minmax(0, 1fr) auto; }
+  .yrow__meta { display: none; }
+  .yform__grid--kimlik { grid-template-columns: 5.5rem minmax(0, 1fr); }
+  .yform__kosulblok { padding-inline-start: 0; }
+}

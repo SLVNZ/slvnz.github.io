@@ -1,0 +1,670 @@
+{
+  "kategoriler": [
+    {
+      "kod": "enerjisel",
+      "ad": "Enerjisel Yetenekler",
+      "aciklama": "Büyüler. Kaynak · kanal · enerji · element katmanlarıyla kurulur."
+    },
+    {
+      "kod": "fiziksel",
+      "ad": "Fiziksel Yetenekler",
+      "aciklama": "Kas gücüne dayanan yetenekler; çoğunlukla SOLUK tüketir."
+    },
+    {
+      "kod": "karma",
+      "ad": "Karma Yetenekler",
+      "aciklama": "Fiziksel gücü enerjisel yönlendirmeyle harmanlayan savaş manevraları."
+    }
+  ],
+  "sozluk": {
+    "kategori": [
+      {
+        "id": 1,
+        "kod": "enerjisel",
+        "ad": "Enerjisel Yetenekler",
+        "aciklama": "Büyüler. Kaynak · kanal · enerji · element katmanlarıyla kurulur.",
+        "sira": 1
+      },
+      {
+        "id": 2,
+        "kod": "fiziksel",
+        "ad": "Fiziksel Yetenekler",
+        "aciklama": "Kas gücüne dayanan yetenekler; çoğunlukla SOLUK tüketir.",
+        "sira": 2
+      },
+      {
+        "id": 3,
+        "kod": "karma",
+        "ad": "Karma Yetenekler",
+        "aciklama": "Fiziksel gücü enerjisel yönlendirmeyle harmanlayan savaş manevraları.",
+        "sira": 3
+      }
+    ],
+    "eylem_turu": [
+      {
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E",
+        "sira": 1
+      },
+      {
+        "id": 2,
+        "ad": "Ek Eylem",
+        "kisa": "EE",
+        "sira": 2
+      },
+      {
+        "id": 3,
+        "ad": "Tepki Eylem",
+        "kisa": "TE",
+        "sira": 3
+      }
+    ],
+    "element": [
+      {
+        "id": 1,
+        "ad": "Ateş",
+        "aciklama": "Isı, yanma, köz, alev, patlama, kavurma ve tüketim.",
+        "sira": 1
+      },
+      {
+        "id": 2,
+        "ad": "Su",
+        "aciklama": "Akış, soğutma, basınç, arındırma, sis, buz, sıvı hareketi.",
+        "sira": 2
+      },
+      {
+        "id": 3,
+        "ad": "Toprak",
+        "aciklama": "Taş, kum, maden, kil, kristal, ağırlık, yapı ve sabitlik.",
+        "sira": 3
+      },
+      {
+        "id": 4,
+        "ad": "Hava",
+        "aciklama": "Rüzgâr, basınç, ses, nefes, uçuş, itme, savurma.",
+        "sira": 4
+      },
+      {
+        "id": 5,
+        "ad": "Yıldırım",
+        "aciklama": "Elektrik, ani boşalma, sinirsel şok, iletkenlik.",
+        "sira": 5
+      },
+      {
+        "id": 6,
+        "ad": "Işık",
+        "aciklama": "Görünürlük, parlama, yansıma, gölge bastırma, algı yönlendirme.",
+        "sira": 6
+      }
+    ],
+    "enerji_turu": [
+      {
+        "id": 1,
+        "ad": "Yıkım",
+        "sinif": "temel",
+        "aciklama": "Var olan yapıyı bozma, parçalama, doğrudan hasar.",
+        "sira": 1
+      },
+      {
+        "id": 2,
+        "ad": "Koruma",
+        "sinif": "temel",
+        "aciklama": "Varlığı, alanı, nesneyi dış etkilerden muhafaza.",
+        "sira": 2
+      },
+      {
+        "id": 3,
+        "ad": "Oluşturma",
+        "sinif": "temel",
+        "aciklama": "Enerjiyi geçici biçime sokarak madde/form meydana getirme.",
+        "sira": 3
+      },
+      {
+        "id": 4,
+        "ad": "Dönüştürme",
+        "sinif": "temel",
+        "aciklama": "Var olanın formunu, halini, niteliğini değiştirme.",
+        "sira": 4
+      },
+      {
+        "id": 5,
+        "ad": "Efsun",
+        "sinif": "temel",
+        "aciklama": "Zihin, duygu, arzu, korku ve karar süreçlerine etki.",
+        "sira": 5
+      },
+      {
+        "id": 6,
+        "ad": "İllüzyon",
+        "sinif": "temel",
+        "aciklama": "Duyulara yönelik yanılsama; gerçekliği değil algıyı değiştirir.",
+        "sira": 6
+      },
+      {
+        "id": 7,
+        "ad": "Kehanet",
+        "sinif": "temel",
+        "aciklama": "İz, olasılık, geçmiş yankısı, gizli bağ ve sonuç sezme.",
+        "sira": 7
+      },
+      {
+        "id": 8,
+        "ad": "Çürüme",
+        "sinif": "temel",
+        "aciklama": "Canlı, ölü, ruhsal ya da maddesel bütünlüğün bozulması.",
+        "sira": 8
+      },
+      {
+        "id": 9,
+        "ad": "İnanç",
+        "sinif": "ozel",
+        "aciklama": "Kadim, kutsal ilke, yemin ya da manevi bağ üzerinden.",
+        "sira": 9
+      },
+      {
+        "id": 10,
+        "ad": "Pakt",
+        "sinif": "ozel",
+        "aciklama": "Bir patron ya da üstün varlıkla yapılan anlaşmadan doğar.",
+        "sira": 10
+      },
+      {
+        "id": 11,
+        "ad": "Kaos",
+        "sinif": "ozel",
+        "aciklama": "Denge dışına taşmış, sonuçları tam öngörülemeyen enerji.",
+        "sira": 11
+      },
+      {
+        "id": 12,
+        "ad": "Kan",
+        "sinif": "yasak",
+        "aciklama": "Soy, hafıza, bedensel bağ, hastalık ve yaşam izleri.",
+        "sira": 12
+      },
+      {
+        "id": 13,
+        "ad": "Aydınlık",
+        "sinif": "yasak",
+        "aciklama": "Varoluşsal arındırma, hüküm, kutsal yakıcılık.",
+        "sira": 13
+      },
+      {
+        "id": 14,
+        "ad": "Karanlık",
+        "sinif": "yasak",
+        "aciklama": "Enerjinin doğasını bozan, varoluşu içe çökerten enerji.",
+        "sira": 14
+      },
+      {
+        "id": 15,
+        "ad": "Ruh",
+        "sinif": "yasak",
+        "aciklama": "Ölüler, benlik izleri, hatıra yankıları, ruhsal bağlar.",
+        "sira": 15
+      },
+      {
+        "id": 16,
+        "ad": "Yaşam",
+        "sinif": "yasak",
+        "aciklama": "Büyüme, çoğalma, yenilenme, taşma ve mutasyon gücü.",
+        "sira": 16
+      }
+    ],
+    "kaynak_turu": [
+      {
+        "id": 1,
+        "ad": "Mana",
+        "aciklama": "Evrende vahşi biçimde akan temel büyüsel yakıt. En güvenli kaynak.",
+        "sira": 1
+      },
+      {
+        "id": 2,
+        "ad": "Ki",
+        "aciklama": "Beden-ruh disipliniyle açığa çıkan içsel kaynak. Kontrollü ama sınırlı.",
+        "sira": 2
+      },
+      {
+        "id": 3,
+        "ad": "Ruh",
+        "aciklama": "Benlik özünden harcanan kaynak. Çok riskli, yavaş yenilenir.",
+        "sira": 3
+      },
+      {
+        "id": 4,
+        "ad": "Yaşam",
+        "aciklama": "Varoluşsal canlılık gücü. Hem eksikliği hem fazlalığı ölümcül.",
+        "sira": 4
+      },
+      {
+        "id": 5,
+        "ad": "Soluk",
+        "aciklama": "Fiziksel kaynak havuzu; DAY niteliğine dayanır.",
+        "sira": 5
+      }
+    ],
+    "uzaklik_birimi": [
+      {
+        "id": 1,
+        "ad": "Birim",
+        "kisa": "br",
+        "varsayilan": 0,
+        "sira": 1
+      },
+      {
+        "id": 2,
+        "ad": "Metre",
+        "kisa": "m",
+        "varsayilan": 1,
+        "sira": 2
+      },
+      {
+        "id": 3,
+        "ad": "Feet",
+        "kisa": "ft",
+        "varsayilan": 0,
+        "sira": 3
+      },
+      {
+        "id": 4,
+        "ad": "Kare",
+        "kisa": "kare",
+        "varsayilan": 0,
+        "sira": 4
+      },
+      {
+        "id": 5,
+        "ad": "Adım",
+        "kisa": "adım",
+        "varsayilan": 0,
+        "sira": 5
+      },
+      {
+        "id": 6,
+        "ad": "Kilometre",
+        "kisa": "km",
+        "varsayilan": 0,
+        "sira": 6
+      }
+    ],
+    "alan_tipi": [
+      {
+        "id": 1,
+        "ad": "Küre",
+        "yukseklik_gerekir": 0,
+        "olcu_adi": "Yarıçap",
+        "sira": 1
+      },
+      {
+        "id": 2,
+        "ad": "Daire",
+        "yukseklik_gerekir": 0,
+        "olcu_adi": "Yarıçap",
+        "sira": 2
+      },
+      {
+        "id": 3,
+        "ad": "Küp",
+        "yukseklik_gerekir": 0,
+        "olcu_adi": "Kenar",
+        "sira": 3
+      },
+      {
+        "id": 4,
+        "ad": "Kare",
+        "yukseklik_gerekir": 0,
+        "olcu_adi": "Kenar",
+        "sira": 4
+      },
+      {
+        "id": 5,
+        "ad": "Silindir",
+        "yukseklik_gerekir": 1,
+        "olcu_adi": "Yarıçap",
+        "sira": 5
+      },
+      {
+        "id": 6,
+        "ad": "Koni",
+        "yukseklik_gerekir": 1,
+        "olcu_adi": "Yarıçap",
+        "sira": 6
+      },
+      {
+        "id": 7,
+        "ad": "Prizma",
+        "yukseklik_gerekir": 1,
+        "olcu_adi": "Kenar",
+        "sira": 7
+      },
+      {
+        "id": 8,
+        "ad": "Hat",
+        "yukseklik_gerekir": 0,
+        "olcu_adi": "Uzunluk",
+        "sira": 8
+      },
+      {
+        "id": 9,
+        "ad": "Halka",
+        "yukseklik_gerekir": 0,
+        "olcu_adi": "Yarıçap",
+        "sira": 9
+      }
+    ]
+  },
+  "yetenekler": [
+    {
+      "id": 1,
+      "kategori": "enerjisel",
+      "kategori_ad": "Enerjisel Yetenekler",
+      "seviye": 0,
+      "ad": "Kıvılcım",
+      "eylem_turu": {
+        "id": 2,
+        "ad": "Ek Eylem",
+        "kisa": "EE"
+      },
+      "element": {
+        "id": 1,
+        "ad": "Ateş"
+      },
+      "enerji_turu": {
+        "id": 3,
+        "ad": "Oluşturma",
+        "sinif": "temel"
+      },
+      "kaynak_turu": {
+        "id": 1,
+        "ad": "Mana"
+      },
+      "kaynak_tuketimi": 1,
+      "menzil": {
+        "tur": "mesafe",
+        "deger": 2,
+        "birim": {
+          "id": 2,
+          "ad": "Metre",
+          "kisa": "m"
+        }
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "gereksinim": {
+        "soz": {
+          "gerekli": false,
+          "metin": null
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "Baş parmak ile orta parmak bir kez çıtlatılır."
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Parmak ucunda bir an için tutuşan küçük bir kıvılcım belirir. Meşale, fitil ya da kuru ot tutuşturmaya yeter; bir canlıya zarar vermez.",
+      "dipnot": "Islak ya da rüzgârlı ortamda GM tutuşma için zar isteyebilir."
+    },
+    {
+      "id": 2,
+      "kategori": "fiziksel",
+      "kategori_ad": "Fiziksel Yetenekler",
+      "seviye": 2,
+      "ad": "Kalkan Kırıcı",
+      "eylem_turu": {
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
+      },
+      "element": null,
+      "enerji_turu": null,
+      "kaynak_turu": {
+        "id": 5,
+        "ad": "Soluk"
+      },
+      "kaynak_tuketimi": 4,
+      "menzil": {
+        "tur": "mesafe",
+        "deger": 1,
+        "birim": {
+          "id": 4,
+          "ad": "Kare",
+          "kisa": "kare"
+        }
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "gereksinim": {
+        "soz": {
+          "gerekli": false,
+          "metin": null
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "Ağırlık arka ayağa alınır, silah omuz üstünden aşağı doğru tam güçle indirilir."
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Karakter bütün bedensel ağırlığını tek bir darbeye yükler. Darbe hedefin kalkanına ya da savunma duruşuna isabet ederse, hedef bir tur boyunca savunma değerini kullanamaz.",
+      "dipnot": "Ağır silah yetkinliği olmayan karakterler bu yeteneği kullandığında zarlarına eksi alır."
+    },
+    {
+      "id": 3,
+      "kategori": "enerjisel",
+      "kategori_ad": "Enerjisel Yetenekler",
+      "seviye": 3,
+      "ad": "Alev Mızrağı",
+      "eylem_turu": {
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
+      },
+      "element": {
+        "id": 1,
+        "ad": "Ateş"
+      },
+      "enerji_turu": {
+        "id": 1,
+        "ad": "Yıkım",
+        "sinif": "temel"
+      },
+      "kaynak_turu": {
+        "id": 1,
+        "ad": "Mana"
+      },
+      "kaynak_tuketimi": 12,
+      "menzil": {
+        "tur": "mesafe",
+        "deger": 18,
+        "birim": {
+          "id": 2,
+          "ad": "Metre",
+          "kisa": "m"
+        }
+      },
+      "alan": {
+        "var": true,
+        "deger": 3,
+        "birim": {
+          "id": 2,
+          "ad": "Metre",
+          "kisa": "m"
+        },
+        "tipi": {
+          "id": 1,
+          "ad": "Küre",
+          "olcu_adi": "Yarıçap",
+          "yukseklik_gerekir": false
+        },
+        "yukseklik": null
+      },
+      "gereksinim": {
+        "soz": {
+          "gerekli": true,
+          "metin": "Vur, alev; kalbe dek yürü."
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "Sağ el omuz hizasında ileri savrulur, işaret parmağı hedefi çizer."
+        },
+        "materyal": {
+          "gerekli": true,
+          "liste": [
+            "Bir tutam kızıl kükürt",
+            "Yanmış meşe kabuğu"
+          ]
+        }
+      },
+      "aciklama": "Kullanıcının avucunda toplanan mana, ince ve uzun bir alev mızrağına dönüşür.\n\nMızrak hedefe çarptığında dağılır ve çevresini kavurur.",
+      "dipnot": "Kapalı mekânda kullanıldığında GM ortamdaki yanıcı maddeler için ek bir zar isteyebilir."
+    },
+    {
+      "id": 4,
+      "kategori": "karma",
+      "kategori_ad": "Karma Yetenekler",
+      "seviye": 4,
+      "ad": "Köz Yürüyüşü",
+      "eylem_turu": {
+        "id": 2,
+        "ad": "Ek Eylem",
+        "kisa": "EE"
+      },
+      "element": {
+        "id": 1,
+        "ad": "Ateş"
+      },
+      "enerji_turu": {
+        "id": 4,
+        "ad": "Dönüştürme",
+        "sinif": "temel"
+      },
+      "kaynak_turu": {
+        "id": 5,
+        "ad": "Soluk"
+      },
+      "kaynak_tuketimi": 3,
+      "menzil": {
+        "tur": "mesafe",
+        "deger": 6,
+        "birim": {
+          "id": 2,
+          "ad": "Metre",
+          "kisa": "m"
+        }
+      },
+      "alan": {
+        "var": true,
+        "deger": 6,
+        "birim": {
+          "id": 2,
+          "ad": "Metre",
+          "kisa": "m"
+        },
+        "tipi": {
+          "id": 8,
+          "ad": "Hat",
+          "olcu_adi": "Uzunluk",
+          "yukseklik_gerekir": false
+        },
+        "yukseklik": null
+      },
+      "gereksinim": {
+        "soz": {
+          "gerekli": false,
+          "metin": null
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "Bir adım öne atılır ve topuk yere sertçe basılır; hareket kesintisiz olmalıdır."
+        },
+        "materyal": {
+          "gerekli": true,
+          "liste": [
+            "Tabana sürülmüş bir tutam kül"
+          ]
+        }
+      },
+      "aciklama": "Karakter attığı adımın ardında kısa süre yanan bir köz izi bırakır. İzin üstünden geçen varlıklar hafif yanık alır; karakterin kendisi bu izden etkilenmez.",
+      "dipnot": "Köz izi bir tur sonunda söner. Yanıcı zeminde GM izin yayılmasına karar verebilir."
+    },
+    {
+      "id": 5,
+      "kategori": "enerjisel",
+      "kategori_ad": "Enerjisel Yetenekler",
+      "seviye": 5,
+      "ad": "Örtü Perdesi",
+      "eylem_turu": {
+        "id": 3,
+        "ad": "Tepki Eylem",
+        "kisa": "TE"
+      },
+      "element": {
+        "id": 4,
+        "ad": "Hava"
+      },
+      "enerji_turu": {
+        "id": 2,
+        "ad": "Koruma",
+        "sinif": "temel"
+      },
+      "kaynak_turu": {
+        "id": 2,
+        "ad": "Ki"
+      },
+      "kaynak_tuketimi": 7,
+      "menzil": {
+        "tur": "kendin",
+        "deger": null,
+        "birim": null
+      },
+      "alan": {
+        "var": true,
+        "deger": 4,
+        "birim": {
+          "id": 2,
+          "ad": "Metre",
+          "kisa": "m"
+        },
+        "tipi": {
+          "id": 5,
+          "ad": "Silindir",
+          "olcu_adi": "Yarıçap",
+          "yukseklik_gerekir": true
+        },
+        "yukseklik": 3
+      },
+      "gereksinim": {
+        "soz": {
+          "gerekli": true,
+          "metin": "Dur. Buradan ötesi yok."
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "İki avuç içi dışa dönük biçimde göğüs hizasında birleştirilir ve dışa itilir."
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Kullanıcının çevresinde basınçlı havadan bir perde kurulur. Perde, içinden geçen fırlatma silahlarının hızını keser ve savrulan tozu, dumanı dışarıda tutar.",
+      "dipnot": "Konsantrasyon gerektirir; kullanıcı hasar aldığında perde bozulma tehlikesine girer."
+    }
+  ]
+}

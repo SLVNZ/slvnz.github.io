@@ -58,6 +58,16 @@ SITE_JSON = ROOT / 'content' / 'site.json'
 IMGDIR = ROOT / 'assets' / 'images'
 HOST, PORT = '127.0.0.1', 8090
 
+# Yetenekler ayrı bir modülde ve ayrı bir veritabanında yaşar (admin/db.py +
+# admin/yetenek.py). Bağlantı kurulamazsa panelin geri kalanı çalışmaya devam
+# etsin diye ithal korumalı: hata metni /api/yetenek/durum ile panele düşer.
+try:
+    import yetenek
+    YETENEK_HATA = None
+except Exception as _e:                                # pragma: no cover
+    yetenek = None
+    YETENEK_HATA = str(_e)
+
 MIME = {
     '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8',
     '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8',
@@ -343,7 +353,23 @@ def regenerate(site):
     if t != t0:
         write_text(p, t)
         yazilan.append('kurallar.html')
+
+    # Yetenekler sayfasının ray logosu da sürümü izler: sürüm değişince
+    # orada eski numara kalmasın.
+    if yetenek is not None:
+        try:
+            yazilan += [y for y in yetenek.sayfa_uret(gen_kimlik(cur)) if y not in yazilan]
+        except Exception as e:
+            print('yetenekler.html üretilemedi: %s' % e, file=sys.stderr)
     return yazilan
+
+
+def yetenek_uret():
+    """Yetenek yazımından sonra sayfayı ve JSON'u tazele. Ray logosu için
+    şimdiki sürümü site.json'dan okur."""
+    site = load_site()
+    cur = next(v for v in site['surumler'] if v['durum'] == 'simdiki')
+    return yetenek.sayfa_uret(gen_kimlik(cur))
 
 
 # ---------------------------------------------------------------- mürekkep motoru
@@ -606,6 +632,20 @@ class Handler(BaseHTTPRequestHandler):
         n = int(self.headers.get('Content-Length') or 0)
         return self.rfile.read(n) if n else b''
 
+    def _govde_json(self):
+        """Gövdeyi JSON olarak çöz; bozuksa 400 yazıp None döner."""
+        try:
+            return json.loads(self._body().decode('utf-8') or '{}')
+        except Exception:
+            self._json({'hata': ['Gövde geçerli JSON değil']}, 400)
+            return None
+
+    def _yetenek_var(self):
+        if yetenek is None:
+            self._json({'hata': ['Yetenek modülü yüklenemedi: %s' % YETENEK_HATA]}, 500)
+            return False
+        return True
+
     def _static(self, path):
         rel = path.lstrip('/')
         if path == '/admin' or path == '/admin/':
@@ -652,6 +692,15 @@ class Handler(BaseHTTPRequestHandler):
             self._json(list_images())
         elif path == '/api/git':
             self._json(git_state())
+        elif path == '/api/yetenek':
+            if not self._yetenek_var():
+                return
+            try:
+                self._json({'durum': yetenek.db.durum(),
+                            'sozluk': yetenek.sozluk(),
+                            'yetenekler': yetenek.liste()})
+            except Exception as e:
+                self._json({'hata': ['Veritabanı okunamadı: %s' % e]}, 500)
         elif path == '/':
             self.send_response(302)
             self.send_header('Location', '/admin/')
@@ -704,15 +753,99 @@ class Handler(BaseHTTPRequestHandler):
                 self._json({'hata': [str(e)]}, 400)
                 return
             self._json({'tamam': True, 'gorsel': entry, 'rapor': rapor})
+        elif u.path.startswith('/api/yetenek'):
+            self._yetenek_yaz(u)
         else:
             self._json({'hata': ['bilinmeyen uç']}, 404)
 
     do_POST = do_PUT
 
+    def do_DELETE(self):
+        if not self._yerel():
+            return
+        u = urlparse(self.path)
+        if u.path.startswith('/api/yetenek'):
+            self._yetenek_yaz(u, silme=True)
+        else:
+            self._json({'hata': ['bilinmeyen uç']}, 404)
+
+    # ------------------------------------------------------------- yetenekler
+    # Her başarılı yazımdan sonra yetenekler.html ve content/yetenekler.json
+    # yeniden üretilir: veritabanı YAZIM tarafı, üretilmiş dosyalar OKUMA
+    # tarafıdır — yayındaki statik site veritabanına bağlanamaz.
+    def _yetenek_yaz(self, u, silme=False):
+        if not self._yetenek_var():
+            return
+        q = parse_qs(u.query)
+        yol = u.path
+
+        try:
+            if yol == '/api/yetenek/sozluk':
+                tablo = (q.get('tablo') or [''])[0]
+                if silme:
+                    hata = yetenek.sozluk_sil(tablo, (q.get('id') or [''])[0])
+                    sid = None
+                else:
+                    veri = self._govde_json()
+                    if veri is None:
+                        return
+                    sid, hata = yetenek.sozluk_kaydet(tablo, veri)
+                if hata:
+                    self._json({'hata': hata}, 400)
+                    return
+                self._json({'tamam': True, 'id': sid, 'sozluk': yetenek.sozluk(),
+                            'yazilan': yetenek_uret(), 'git': git_state()})
+
+            elif yol == '/api/yetenek/ice-aktar':
+                n, hata = yetenek.ice_aktar(zorla=True)
+                self._json({'tamam': True, 'sayi': n, 'hata': hata,
+                            'yetenekler': yetenek.liste(),
+                            'yazilan': yetenek_uret(), 'git': git_state()})
+
+            elif yol == '/api/yetenek/uret':
+                self._json({'tamam': True, 'yazilan': yetenek_uret(), 'git': git_state()})
+
+            elif yol == '/api/yetenek':
+                if silme:
+                    hata = yetenek.sil((q.get('id') or [''])[0])
+                    yid = None
+                else:
+                    veri = self._govde_json()
+                    if veri is None:
+                        return
+                    yid, hata = yetenek.kaydet(veri)
+                if hata:
+                    self._json({'hata': hata}, 400)
+                    return
+                self._json({'tamam': True, 'id': yid,
+                            'yetenekler': yetenek.liste(),
+                            'yazilan': yetenek_uret(), 'git': git_state()})
+            else:
+                self._json({'hata': ['bilinmeyen uç']}, 404)
+        except Exception as e:
+            yetenek.db.islem_geri()
+            self._json({'hata': ['Yetenek işlemi başarısız: %s' % e]}, 500)
+
+    def do_HEAD(self):
+        # Bazı istemciler (önizleme araçları, sağlık yoklamaları) HEAD atıyor.
+        # Tanımlı olmadığı sürece taban sınıf 501 üretiyor ve o yol
+        # log_message'ı metin olmayan argümanlarla çağırıyordu.
+        self.do_GET()
+
     def log_message(self, fmt, *args):
-        # yalnız API ve hataları yaz; statik dosya gürültüsü olmasın
-        if '/api/' in (args[0] if args else '') or (args and str(args[1]) >= '400'):
-            sys.stderr.write('%s %s\n' % (self.address_string(), fmt % args))
+        # Yalnız API ve hataları yaz; statik dosya gürültüsü olmasın.
+        # args[0] her zaman istek satırı DEĞİL: send_error() buraya
+        # (HTTPStatus, mesaj) ikilisiyle gelir ve `'/api/' in args[0]`
+        # TypeError atıp isteği işleyen iş parçacığını düşürüyordu.
+        ilk = str(args[0]) if args else ''
+        kod = str(args[1]) if len(args) > 1 else ''
+        if '/api/' not in ilk and kod < '400':
+            return
+        try:
+            satir = fmt % args
+        except Exception:
+            satir = ' '.join(str(a) for a in args)
+        sys.stderr.write('%s %s\n' % (self.address_string(), satir))
 
 
 def main():
@@ -722,6 +855,22 @@ def main():
             stream.reconfigure(encoding='utf-8', errors='replace')
         except Exception:
             pass
+    # Yetenek veritabanı: şemayı kur, boşsa content/yetenekler.json'dan geri
+    # yükle. Taze bir klonda ya da MySQL'e yeni geçildiğinde veri buradan gelir.
+    if yetenek is not None:
+        try:
+            d = yetenek.db.durum()
+            print('yetenek veritabanı → %s' % d['not'])
+            n, hatalar = yetenek.ice_aktar()
+            if n:
+                print('  content/yetenekler.json içinden %d yetenek geri yüklendi' % n)
+            for h in hatalar:
+                print('  ! %s' % h, file=sys.stderr)
+        except Exception as e:
+            print('yetenek veritabanı açılamadı: %s' % e, file=sys.stderr)
+    else:
+        print('yetenek modülü yüklenemedi: %s' % YETENEK_HATA, file=sys.stderr)
+
     srv = ThreadingHTTPServer((HOST, PORT), Handler)
     print(f'SLVNZ yönetim → http://{HOST}:{PORT}/  (durdurmak için Ctrl+C)')
     try:

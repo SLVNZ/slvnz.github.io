@@ -55,7 +55,7 @@
         <li><button type="button" class="adm__navlink is-active" data-view="tasarim" aria-current="page">Tasarım</button></li>
         <li><button type="button" class="adm__navlink" data-view="surumler">Sürümler</button></li>
         <li><button type="button" class="adm__navlink" data-view="kurallar">Oyun Kuralları</button></li>
-        <li><span class="adm__navlink is-soon">Yetenekler <small>yakında</small></span></li>
+        <li><button type="button" class="adm__navlink" data-view="yetenekler">Yetenekler</button></li>
         <li><span class="adm__navlink is-soon">Evren Rehberi <small>yakında</small></span></li>
       </ul>
       <p class="adm__hint">Kaydet, site dosyalarını doğrudan yazar. Yayımlamak için sonrasında:</p>
@@ -152,6 +152,41 @@
         <button class="btn btn--ghost" type="button" data-chadd>+ Bölüm ekle</button>
       </section>
 
+      <!-- ---------------- Yetenekler ---------------- -->
+      <!-- Öteki görünümlerden farklı olarak burası content/site.json'u değil
+           bir VERİTABANINI düzenler (admin/db.py → MySQL, yoksa SQLite).
+           Her kayıt anında yazılır; sunucu aynı istekte yetenekler.html ile
+           content/yetenekler.json'u yeniden üretir. Üstteki Kaydet düğmesi
+           bu görünümü ilgilendirmez. Çizimi admin/yetenekler.js yapar. -->
+      <section class="view view--genis" data-view-panel="yetenekler" hidden>
+        <header class="view__head view__head--row">
+          <div>
+            <h1 class="view__title">Yetenekler</h1>
+            <p class="view__desc">
+              Enerjisel, fiziksel ve karma yetenekler. Tablo alanları (seviye, ad,
+              eylem türü, element, enerji türü, kaynak, menzil) sitede listede;
+              kalan her şey yetenek kartında görünür.
+              <span class="ydb" data-ydb>veritabanı…</span>
+            </p>
+          </div>
+          <div class="field field--tight">
+            <label class="field__label" for="ykat">Alan</label>
+            <select class="field__input" id="ykat" data-ykat></select>
+          </div>
+        </header>
+
+        <div class="ytools">
+          <button class="btn btn--primary" type="button" data-yeni>+ Yetenek ekle</button>
+          <button class="btn btn--ghost" type="button" data-ylistele>Listeler…</button>
+          <button class="btn btn--ghost" type="button" data-yuret title="yetenekler.html ve content/yetenekler.json'u elle tazele">Sayfayı yeniden üret</button>
+          <p class="ytools__say" data-ysay></p>
+        </div>
+
+        <ol class="ylist" data-ylist></ol>
+
+        <section class="ysozluk" data-ysozluk hidden></section>
+      </section>
+
     </main>
   </div>
 </div>
@@ -189,5 +224,6 @@
 <script src="/assets/js/theme.js" defer></script>
 <script src="/admin/admin.js" defer></script>
 <script src="/admin/canvas.js" defer></script>
+<script src="/admin/yetenekler.js" defer></script>
 </body>
 </html>

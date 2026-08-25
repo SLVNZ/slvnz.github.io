@@ -1,0 +1,514 @@
+/* =========================================================================
+   SLVNZ 4.0 — Yetenekler
+   Belge çerçevesi (ray · TOC · panel · zengin metin) kurallar.css'ten gelir;
+   bu dosya yalnız yetenek dizinini kurar: süzgeç çubuğu, sıralanabilir tablo
+   ve yetenek kartı.
+
+   Yerleşim
+   --------
+   Kurallar sayfası dar bir okuma sütunudur (33rem). Burada solda tablo, sağda
+   kart duracağı için sütun genişletilir — ama ray ve TOC sabit (fixed)
+   olduğundan sütun ikisinin arasına sığmak zorunda: genişlik `100vw − 37.5rem`
+   ile sınırlanır, 74rem'de durur. 1440px'in altında kart tablonun üstüne iner.
+
+   Aşamalı iyileştirme
+   -------------------
+   JS kapalıyken tablo bir dizin, altındaki kartlar da tam metindir; satırdaki
+   ad gerçek bir çapa bağlantısıdır. `html.js` kuralları yalnız JS varken
+   kartları teke indirir. Hiçbir veri yalnız JS ile görünür değildir.
+   ========================================================================= */
+
+/* kurallar.css'in sabit yükseklikli belge kuralı bu sayfa için de geçerli */
+html.page-yetenekler, html.page-yetenekler body { height: 100%; overflow: hidden; }
+
+:root {
+  --yet-satir:  color-mix(in srgb, var(--ink) 12%, transparent);
+  --yet-zemin:  color-mix(in srgb, var(--ink) 3.5%, transparent);
+  --yet-vurgu:  color-mix(in srgb, var(--accent) 9%, transparent);
+}
+
+/* ---------- Okuma sütunu -------------------------------------------------
+   Kurallar sayfasının 33rem'lik okuma sütunu burada dar kalır. Genişletirken
+   tek sınır ray ve TOC: ikisi de `position: fixed` olduğu için sütun onların
+   ARASINA sığmak zorunda. Ölçülen değerler (1600px'te ray 69→276, TOC
+   1455→1546) her iki yana 300px'lik bir koridor bırakmayı gerektiriyor —
+   37.5rem toplam pay, 74rem'de duran bir tavan. */
+html.page-yetenekler .rules__body { width: min(100% - 2.5rem, 74rem); }
+@media (min-width: 1161px) {
+  html.page-yetenekler .rules__body { width: min(100vw - 37.5rem, 74rem); }
+}
+
+.panel__lede {
+  margin-block-start: .9rem;
+  max-width: 44rem;
+  font-family: var(--font-archivo);
+  font-size: clamp(14px, 1.05vw, 15px);
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--ink) 78%, transparent);
+}
+
+.yet__bos {
+  margin-block-start: 1.6rem;
+  padding: 1.6rem;
+  border: 1px dashed var(--hairline);
+  font-family: var(--font-archivo);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* ---------- Süzgeç çubuğu ------------------------------------------------ */
+.yet { margin-block-start: clamp(1.2rem, 2.4vw, 1.8rem); }
+
+.yet__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: .55rem .9rem;
+  padding-block-end: .9rem;
+  border-block-end: 1px solid var(--hairline);
+}
+
+/* arama kutusu — çubuğun büyüyen parçası */
+.yara { flex: 1 1 16rem; min-width: 12rem; }
+.yfiltre { flex: 0 0 auto; }
+.yara, .yfiltre { display: flex; flex-direction: column; gap: .3rem; }
+
+.yara__label, .yfiltre__label {
+  font-family: var(--font-archivo);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.yara__input, .yfiltre__sel {
+  appearance: none;
+  width: 100%;
+  min-height: 36px;
+  padding: .35rem .6rem;
+  border: 0;
+  border-block-end: 1px solid var(--yet-satir);
+  border-radius: 0;
+  background: transparent;
+  font-family: var(--font-archivo);
+  font-size: 14px;
+  color: var(--ink);
+  caret-color: var(--accent);
+  transition: border-color .2s var(--ease);
+}
+.yara__input::placeholder { color: color-mix(in srgb, var(--muted) 80%, transparent); }
+.yara__input:hover, .yfiltre__sel:hover { border-block-end-color: var(--muted); }
+.yara__input:focus-visible, .yfiltre__sel:focus-visible {
+  outline: none;
+  border-block-end-color: var(--accent);
+}
+/* arama kutusunun yerleşik temizleme düğmesi iki temada da görünür kalsın */
+.yara__input::-webkit-search-cancel-button { filter: invert(var(--art-invert)); }
+
+.yfiltre__sel {
+  min-width: 8.5rem;
+  padding-inline-end: 1.4rem;
+  cursor: pointer;
+  /* kendi oku: sistem oku iki temada tutarsız çiziliyor */
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+                    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: right .55rem center, right .3rem center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  color: var(--ink);
+}
+.yfiltre__sel option { background: var(--paper); color: var(--ink); }
+.yfiltre__sel.is-on { color: var(--accent); border-block-end-color: var(--accent); }
+
+.yet__sifirla {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: .45rem 0;
+  font-family: var(--font-archivo);
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: .3em;
+  text-decoration-thickness: 1px;
+}
+.yet__sifirla:hover { color: var(--ink); }
+
+.yet__sayac {
+  margin-inline-start: auto;
+  padding-block-end: .5rem;
+  font-family: var(--font-archivo);
+  font-weight: 200;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ---------- Bölünmüş yerleşim -------------------------------------------- */
+.yet__split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1.2rem, 2.4vw, 2rem);
+  margin-block-start: 1.1rem;
+}
+/* Bölünme eşiği ölçüyle seçildi: sütun `100vw − 37.5rem` olduğuna göre
+   tablonun 34rem'lik alt sınırı + 1.5rem boşluk + kartın 15rem'i ancak
+   1440px'ten sonra sığar. Altında kart tablonun ÜSTÜNE iner — dar ekranda
+   tıklamanın karşılığı hemen görünsün.
+
+   Tablo sütununun alt sınırı `minmax(34rem, 1fr)` ile YAZILI olmalı:
+   `minmax(0, 1fr)` yazıldığında ızgara boş alanı önce karta veriyor, kart
+   21rem'e şişiyor ve tablo kendi min-width'inin altında kalıp yatay
+   kaydırmaya düşüyordu. */
+@media (min-width: 1440px) {
+  .yet__split {
+    grid-template-columns: minmax(34rem, 1fr) minmax(15rem, 21rem);
+    gap: 1.5rem;
+    align-items: start;
+  }
+}
+
+.yet__tablowrap { overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--hairline) transparent; }
+@media (min-width: 1440px) {
+  /* uzun listede başlık satırı görünür kalsın: tablo kendi içinde kayar */
+  .yet__tablowrap { max-height: min(60dvh, 42rem); overflow: auto; }
+}
+
+/* ---------- Tablo -------------------------------------------------------- */
+.ytablo {
+  width: 100%;
+  min-width: 34rem;
+  border-collapse: collapse;
+  font-family: var(--font-archivo);
+  font-size: 13.5px;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.ytablo thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 0;
+  text-align: start;
+  background: var(--paper);
+  border-block-end: 1px solid var(--ink);
+}
+/* Başlık dar sütunda iki satıra iner — `nowrap` bırakılsaydı tablonun
+   min-content genişliği 632px'e çıkıyor ve 1440px'te yatay kaydırma
+   gerekiyordu. Ok, sarma olsa bile metnin sonunda kalsın diye satır içi. */
+.ytablo__bas {
+  display: flex;
+  align-items: baseline;
+  gap: .4em;
+  width: 100%;
+  padding: .5em .7em;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+/* başlıklar JS varken sıralama düğmesine döner */
+html.js .ytablo thead th { cursor: pointer; user-select: none; }
+html.js .ytablo thead th:hover .ytablo__bas { color: var(--ink); }
+html.js .ytablo thead th:focus-visible { outline: 1px dashed var(--accent); outline-offset: -2px; }
+
+/* sıralama oku — yönü aria-sort'tan okunur, tek kaynak */
+.ytablo__ok {
+  flex: 0 0 auto;
+  align-self: center;
+  width: 0;
+  height: 0;
+  border-inline: 3.5px solid transparent;
+  border-block-end: 5px solid currentColor;
+  opacity: 0;
+  transition: opacity .15s ease, rotate .15s ease;
+}
+html.js .ytablo thead th:hover .ytablo__ok { opacity: .35; }
+.ytablo thead th[aria-sort="ascending"]  .ytablo__ok { opacity: 1; }
+.ytablo thead th[aria-sort="descending"] .ytablo__ok { opacity: 1; rotate: 180deg; }
+.ytablo thead th:not([aria-sort="none"]) .ytablo__bas { color: var(--accent); }
+
+.ytablo tbody th, .ytablo tbody td {
+  padding: .55em .7em;
+  text-align: start;
+  font-weight: 400;
+  border-block-end: 1px solid var(--yet-satir);
+  vertical-align: baseline;
+}
+.ytablo__lvl {
+  width: 3.2em;
+  text-align: center !important;
+  font-family: var(--font-grotesk);
+  font-weight: 700;
+  color: var(--accent);
+}
+.ytablo__ad { min-width: 9em; }
+.ytablo__link {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 700;
+}
+.ytablo__kaynak, .ytablo__menzil { white-space: nowrap; }
+.ytablo__menzil { color: var(--muted); }
+
+.ytablo__satir { transition: background-color .15s ease; }
+html.js .ytablo__satir { cursor: pointer; }
+.ytablo__satir:hover { background: var(--yet-zemin); }
+.ytablo__satir:hover .ytablo__link { color: var(--accent); }
+.ytablo__satir[hidden] { display: none; }
+
+/* seçili satır: soldan mürekkep şeridi + hafif vurgu zemini */
+.ytablo__satir.is-secili { background: var(--yet-vurgu); }
+.ytablo__satir.is-secili .ytablo__link { color: var(--accent); }
+.ytablo__satir.is-secili > :first-child { box-shadow: inset 3px 0 0 var(--accent); }
+.ytablo__satir:focus-within { outline: 1px dashed var(--accent); outline-offset: -2px; }
+
+.yet__bosluk {
+  padding: 2rem .7rem;
+  font-family: var(--font-archivo);
+  font-size: 13.5px;
+  font-style: italic;
+  color: var(--muted);
+}
+
+/* ---------- Kart paneli --------------------------------------------------- */
+.yet__ipucu {
+  padding: 1.5rem 1.2rem;
+  border: 1px dashed var(--hairline);
+  font-family: var(--font-archivo);
+  font-size: 13px;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--muted);
+}
+@media (min-width: 1440px) {
+  .yet__panel {
+    position: sticky;
+    /* .rules__scroll üstte 28px maskeyle soluyor — panel onun altında dursun */
+    inset-block-start: 1.75rem;
+    max-height: calc(100dvh - 12rem);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--hairline) transparent;
+  }
+}
+/* JS kapalıyken bütün kartlar akar; aralarına nefes payı */
+html:not(.js) .ykart + .ykart { margin-block-start: 2rem; }
+
+/* ---------- Yetenek kartı -------------------------------------------------
+   Okuma sırası kasıtlı: kimlik → mekanik → bedel → anlatı → kenar not.
+   Kart tek başına okunabilir olmalı; tabloda görünen alanlar burada tekrar
+   eder. Kâğıt üstüne kalemle çizilmiş bir künye gibi durur: dış çerçeve
+   saç çizgisi, üstte kalın mürekkep şeridi. */
+.ykart {
+  border: 1px solid var(--yet-satir);
+  border-block-start: 3px solid var(--accent);
+  padding: clamp(1rem, 2vw, 1.35rem);
+  background: var(--paper);
+  font-family: var(--font-archivo);
+  font-size: 13.5px;
+  line-height: 1.62;
+  color: var(--ink);
+}
+.ykart:focus-visible { outline: 1px dashed var(--accent); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js .ykart.is-in { animation: rise .45s var(--ease) both; }
+}
+
+/* -- kimlik --------------------------------------------------------------- */
+.ykart__eyebrow {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: .5em;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.ykart__lvl { color: var(--accent); }
+.ykart__kat { color: var(--muted); }
+.ykart__kat::before { content: "· "; }
+
+.ykart__ad {
+  margin-block-start: .3rem;
+  font-family: var(--font-archivo);
+  font-weight: 900;
+  font-size: clamp(20px, 1.9vw, 26px);
+  line-height: 1.06;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.ykart__etiketler {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem;
+  margin-block-start: .6rem;
+}
+.yet-tag {
+  padding: .2em .55em;
+  border: 1px solid var(--yet-satir);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.yet-tag--eylem { border-color: var(--accent); color: var(--accent); }
+.yet-tag--element { color: var(--ink); }
+/* yasak enerji görsel olarak da uyarır — kural kitabının kendi işareti */
+.yet-tag--enerji[data-sinif="yasak"] {
+  border-style: double;
+  border-width: 3px;
+  color: var(--accent);
+}
+.yet-tag--enerji[data-sinif="ozel"] { border-style: dashed; }
+
+/* -- mekanik künyesi ------------------------------------------------------- */
+.ykart__stats {
+  margin-block-start: 1rem;
+  padding-block: .85rem;
+  border-block: 1px solid var(--yet-satir);
+  display: grid;
+  gap: .4rem;
+}
+.ykart__stat {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: .6rem;
+  align-items: baseline;
+}
+.ykart__stat dt {
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.ykart__stat dd {
+  margin: 0;
+  font-size: 13.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+/* -- bedel: söz · hareket · materyal --------------------------------------- */
+.ykart__bas {
+  font-family: var(--font-grotesk);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.ykart__ger { margin-block-start: 1rem; }
+
+/* S · H · M rozeti: dolu olan mürekkeple, boş olan soluk kalır */
+.ykart__shm { display: flex; gap: .3rem; margin-block-start: .5rem; }
+.shm {
+  display: grid;
+  place-items: center;
+  width: 1.7em;
+  height: 1.7em;
+  border: 1px solid var(--yet-satir);
+  font-family: var(--font-grotesk);
+  font-weight: 700;
+  font-size: 11px;
+  color: var(--muted);
+}
+.shm.is-on { border-color: var(--accent); background: var(--accent); color: var(--paper); }
+.shm.is-off { opacity: .5; }
+
+.ykart__gsat { margin-block-start: .85rem; }
+.ykart__getiket {
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-block-end: .2rem;
+}
+.ykart__soz {
+  margin: 0;
+  padding-inline-start: .9em;
+  border-inline-start: 1px solid var(--accent);
+  font-style: italic;
+}
+.ykart__mat { margin: 0; padding-inline-start: 1.1em; list-style: none; }
+.ykart__mat > li { position: relative; }
+.ykart__mat > li + li { margin-block-start: .2em; }
+.ykart__mat > li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: -1.1em;
+  inset-block-start: .72em;
+  width: .5em;
+  height: 1px;
+  background: var(--accent);
+}
+.ykart__yok {
+  margin-block-start: .5rem;
+  font-style: italic;
+  color: var(--muted);
+}
+
+/* -- anlatı ---------------------------------------------------------------- */
+.ykart__aciklama { margin-block-start: 1rem; }
+.ykart__aciklama > p + p { margin-block-start: .7em; }
+
+/* -- kenar not ------------------------------------------------------------- */
+.ykart__dipnot {
+  margin-block-start: 1.1rem;
+  padding: .75rem .9rem;
+  border: 1px solid var(--yet-satir);
+  border-inline-start: 3px solid var(--muted);
+  background: var(--yet-zemin);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--ink) 82%, transparent);
+}
+.ykart__dipnot .ykart__getiket { color: var(--muted); }
+.ykart__dipnot > p + p { margin-block-start: .55em; }
+
+/* ---------- Duyarlılık ---------------------------------------------------- */
+@media (max-width: 1439px) {
+  /* kart tablonun altına iner; seçilen kart tepeye taşınır ki tıklamanın
+     karşılığı hemen görünsün */
+  html.js .yet__panel { order: -1; }
+  .yet__split { display: flex; flex-direction: column; }
+}
+@media (max-width: 640px) {
+  /* süzgeçler ikişerli sıraya geçer ve alçalır — beş ayrı satır, tabloyu
+     ekranın çok altına itiyordu */
+  .yet__bar { gap: .45rem .6rem; }
+  .yara { flex: 1 1 100%; }
+  .yfiltre { flex: 1 1 calc(50% - .3rem); }
+  .yfiltre__sel { min-width: 0; }
+  .yara__input, .yfiltre__sel { min-height: 32px; padding-block: .25rem; }
+  .yara, .yfiltre { gap: .15rem; }
+  .yara__label, .yfiltre__label { font-size: 9px; letter-spacing: .14em; }
+  .yet__sayac { margin-inline-start: 0; padding-block-end: .2rem; }
+  .ykart__stat { grid-template-columns: 4.6rem 1fr; }
+}
+
+/* ---------- Yazdırma ------------------------------------------------------ */
+@media print {
+  .yet__bar, .yet__ipucu, .yet__sifirla { display: none; }
+  .yet__split { display: block; }
+  .yet__tablowrap { max-height: none; overflow: visible; }
+  .yet__panel { position: static; max-height: none; overflow: visible; }
+  html.js .ykart[hidden] { display: block; }
+  .ykart { break-inside: avoid; margin-block-start: 1rem; }
+}

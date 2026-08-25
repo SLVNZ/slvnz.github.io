@@ -1,3 +1,10 @@
 .claude/
 .DS_Store
 Thumbs.db
+
+# Yetenek veritabanı: yazım tarafı. Kalıcı ve diff'lenebilir kayıt
+# content/yetenekler.json'dur; sunucu açılışta veritabanı boşsa oradan
+# geri yükler. db.config.json MySQL parolası taşıyabilir.
+admin/data/
+admin/db.config.json
+admin/__pycache__/

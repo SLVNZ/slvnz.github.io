@@ -15,13 +15,23 @@ python admin/server.py     →  http://127.0.0.1:8090/
 
 ```
 content/site.json    içerik kaynağı (sürümler + bölümler)
-admin/server.py      tek dosyalık sunucu — yalnız standart kütüphane
+admin/server.py      sunucu, API uçları, üretim — yalnız standart kütüphane
 admin/index|css|js   panel arayüzü — sitenin token'larıyla
+admin/db.py          yetenek veritabanı katmanı (MySQL, yoksa SQLite)
+admin/schema.sql     tek şema, MySQL lehçesinde
+admin/yetenek.py     yetenek CRUD, doğrulama, sayfa üretimi
+admin/yetenekler.js  Yetenekler görünümü
 ```
 
 Kaydetme akışı: panel → `PUT /api/site` → doğrulama → `site.json` yazılır →
 `index.html` ve `kurallar.html`'deki **işaretli bölgeler** yeniden üretilir →
 sen `git add -A && git commit && git push`.
+
+> [!warning] Yetenekler ayrı akışta
+> Yetenekler görünümü `site.json`'u değil bir **veritabanını** düzenler ve her
+> form kaydı anında yazılır — üstteki **Kaydet** düğmesiyle ilişkisi yoktur.
+> Sunucu aynı istekte `yetenekler.html` + `content/yetenekler.json` üretir.
+> Ayrıntı: [[Yetenekler Sayfası]].
 
 ## İşaretli bölgeler
 
@@ -35,6 +45,10 @@ Site elle yazılmış statik HTML olarak kalır; panel yalnız şu işaretlerin
 | kurallar.html | `bolum-sayisi` | "5 Bölüm" |
 | kurallar.html | `bolumler` | sağ bölüm menüsü |
 | kurallar.html | `paneller` | bölüm makaleleri |
+| yetenekler.html | `kimlik` | ray logosu |
+| yetenekler.html | `yetenek-sayisi` | "12 Yetenek" |
+| yetenekler.html | `kategoriler` | sağ alan menüsü |
+| yetenekler.html | `yetenekler` | üç kategori paneli — tablo + kartlar |
 
 İşaret dışı her satır elle yazılmıştır, panel dokunmaz. İşaret silinirse
 üretim durur ve kayıt **hata verir** — dosya sessizce bozulmaz.
