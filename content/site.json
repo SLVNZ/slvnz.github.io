@@ -30,16 +30,18 @@
           "id": "zarlar-eylemler",
           "baslik": "Zarlar & Eylemler",
           "gorsel": {
-            "img": "assets/images/dice.png",
-            "webp": null,
+            "img": "assets/images/oyunkurallari-alpha.png",
+            "webp": "assets/images/oyunkurallari.webp",
             "w": 2944,
             "h": 1648,
             "t": {
-              "s": 2.133,
-              "z": -2
+              "x": -16,
+              "y": 62,
+              "s": 1.938,
+              "z": -1
             }
           },
-          "html": "<p class=\"panel__soon\">Bu bölümün kuralları yazım aşamasında.</p>"
+          "html": "<section class=\"tabs\"><h4 class=\"tabs__title\">D20</h4><div class=\"tabs__panel\"><p>Sistemin 1d20 (20 yüzlü zar) ile oynanması sonuç olarak daha fazla varyasyon, daha geniş sonuç ihtimali ve güçsüzün güçlü karşısında başarılı çıkabilme (veya tam tersi) ihtimalini artıran bir yapıya sahiptir. Karakterlerin yeterlikleri ve nitelikleri yüksek olsa da onlara kıyasla alt segmentte kalabilecek rakiplerin şans faktörüne bağlı olarak galip gelme ihtimallerini yükselten bir seçenek olarak değerlendirilebilir.</p><p>D20 ile oynanan sistem seçeneğinde zar sonuçlarının ifade ettiği karşılıklar şöyledir:</p></div><h4 class=\"tabs__title\">2D10</h4><div class=\"tabs__panel\"><p>İkinci sekmenin içeriği…</p></div></section>\n<h4>Zar Tablosu</h4>\n<div class=\"table-wrap\"><table><thead><tr><th>Zar</th><th>Sonuç</th><th>AÇIKLAMA</th></tr></thead><tbody><tr><td>1</td><td>Kritik Başarısızlık</td><td>Karakterin gerçekleştirmeye çalıştığı eylem bütün eklerden arındırılmış bir şekilde başarısız olur. Aynı zamanda karakterin üzerinde veya çevresinde olumsuz bir etki meydana getirebilir.</td></tr><tr><td>2-5</td><td>Başarısızlık</td><td>Karakter, gerçekleştirmeye çalıştığı eylemde başarısız olur.</td></tr><tr><td>6-10</td><td>Şartlı Başarı</td><td>Karakter, gerçekleştirmeye çalıştığı eylemde başarılı olur, ancak karşılığında kendisi veya çevresinin başına olumsuz etki oluşturabilecek bir olaya sebebiyet verebilir. </td></tr><tr><td>11-19</td><td>Başarı</td><td>Karakter, gerçekleştirmeye çalıştığı eylemde başarılı olur.</td></tr><tr><td>20</td><td>Kritik Başarı</td><td>Karakter, gerçekleştirmeye çalıştığı eylemde olağanüstü bir performans sergileyerek başarılı olur. Bu performans sayesinde eyleminin sonucunda veya ilerleyen sürecinde kendisi veya çevresinin lehine işleyecek bir etki meydana getirebilir.</td></tr></tbody></table></div>"
         },
         {
           "id": "nitelikler",

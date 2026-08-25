@@ -453,6 +453,53 @@ html:not(.js) .panel + .panel { margin-block-start: clamp(3.5rem, 9dvh, 6rem); }
 /* geniş tablolar kendi içinde kaysın — sayfa yatay kaymaz */
 .panel__rich .table-wrap { overflow-x: auto; }
 
+/* ---------- Sekmeler ------------------------------------------------------
+   <section class="tabs"> içinde h4.tabs__title + div.tabs__panel çiftleri
+   (yönetim paneli "Sekmeler" bloğu üretir). JS yoksa başlıklar ara başlık
+   olarak akar ve tüm paneller alt alta görünür — belge eksiksiz okunur.
+   kurallar.js (tuvalde canvas.js) başlıklardan role=tablist bir şerit üretir,
+   başlıkları gizler ve tek panel gösterir. */
+.panel__rich .tabs { margin-block-start: 1.5em; }
+.panel__rich .tabs__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .1em;
+  margin: 0;
+  padding: 0;
+  border-block-end: 1px solid var(--hairline);
+}
+.panel__rich .tabs__tab {
+  appearance: none;
+  background: none;
+  border: 0;
+  border-block-end: 2px solid transparent;
+  margin-block-end: -1px;               /* aktif çizgi şerit çizgisinin üstüne */
+  padding: .55em .85em .5em;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: .82em;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color .15s ease;
+}
+.panel__rich .tabs__tab:hover { color: var(--ink); }
+.panel__rich .tabs__tab.is-active {
+  color: var(--accent);
+  border-block-end-color: var(--accent);
+}
+.panel__rich .tabs__tab:focus-visible {
+  outline: 1px dashed var(--accent);
+  outline-offset: 2px;
+}
+.panel__rich .tabs__panel { padding-block-start: 1.1em; }
+.panel__rich .tabs__panel > * + * { margin-block-start: .95em; }
+.panel__rich .tabs__panel > h3:first-child,
+.panel__rich .tabs__panel > h4:first-child { margin-block-start: 0; }
+/* şerit kurulunca başlıklar gizlenir (şerit onları düğme olarak taşır) */
+.js .panel__rich .tabs__title { display: none; }
+
 .panel__rich hr {
   margin-block: 2em;
   border: 0;

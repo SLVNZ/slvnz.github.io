@@ -58,6 +58,8 @@
   var pd = null;                // palet sürüklemesi {blk, x0, y0, moved, ghost, target}
   var tbox = null;              // dönüşüm kutusu (tutamaçlar)
   var gesture = null;           // aktif dönüşüm jesti {kind, el, info, startT, ...}
+  var activeTabs = {};          // sekme bloklarının açık sekmesi — "chId:bi" → panel sırası
+  var renaming = null;          // şeritte ad düzenlenen sekme {btn, chId, bi, ti, orig}
 
   /* ---------------------------------------------------------------- bloklar
      Ekle paletinin sözlüğü. `html` süzgecin söz dağarcığında kalır — kayıtta
@@ -99,6 +101,9 @@
       html: '<h4>Künye</h4>\n<table><thead><tr><th>Özellik</th><th>Değer</th></tr></thead><tbody><tr><td>Menzil</td><td>30 m</td></tr><tr><td>Süre</td><td>1 tur</td></tr><tr><td>Bedel</td><td>2 enerji</td></tr></tbody></table>' },
     { id: 'card',  cat: 'Yapı', ad: 'Kural kartı',
       html: '<h4>Kural adı</h4>\n<p>Kuralın açıklaması.</p>\n<ul><li>Koşul ya da etki</li><li>Koşul ya da etki</li></ul>' },
+    { id: 'tabs',  cat: 'Yapı', ad: 'Sekmeler',
+      html: '<section class="tabs"><h4 class="tabs__title">Sekme 1</h4><div class="tabs__panel"><p>İlk sekmenin içeriği…</p></div><h4 class="tabs__title">Sekme 2</h4><div class="tabs__panel"><p>İkinci sekmenin içeriği…</p></div></section>',
+      prev: '<span class="cvp__tabsprev"><span class="cvp__tabsbar"><b>Sekme 1</b><span>Sekme 2</span></span><span class="cvp__tabsbody"></span></span>' },
     { id: 'hr',    cat: 'Yapı', ad: 'Ayraç', html: '<hr>' },
 
     { id: 'img', cat: 'Görsel', ad: 'Görsel', pick: true,
@@ -108,7 +113,8 @@
   ];
   var BLOCK_ADLAR = {
     P: 'Paragraf', H3: 'Başlık', H4: 'Alt başlık', UL: 'Madde listesi',
-    OL: 'Sıralı liste', BLOCKQUOTE: 'Alıntı', TABLE: 'Tablo', HR: 'Ayraç', FIGURE: 'Görsel'
+    OL: 'Sıralı liste', BLOCKQUOTE: 'Alıntı', TABLE: 'Tablo', HR: 'Ayraç', FIGURE: 'Görsel',
+    SECTION: 'Sekmeler'
   };
 
   /* ---------------------------------------------------------------- yardımcı */
@@ -142,6 +148,72 @@
     if (el.tagName === 'DIV' && el.classList.contains('table-wrap')) return 'Tablo';
     if (el.tagName === 'P' && el.classList.contains('lede')) return 'Giriş paragrafı';
     return BLOCK_ADLAR[el.tagName] || 'Blok';
+  }
+
+  /* -- sekmeler ------------------------------------------------------------
+     Kök bloklardan biri <section class="tabs"> olabilir: h4.tabs__title +
+     div.tabs__panel çiftleri (söz dağarcığı admin.js süzgecinde). Tuvalde
+     sitedeki şeridin aynısı krom olarak üretilir (decorateTabs) — kayda hiç
+     girmez, süzgeç düğmeleri zaten düşürür. Panel içi bloklar sel.sub ile
+     adreslenir: {si: panel sırası, ci: panel içi blok sırası}. */
+  function isTabsSection(el) {
+    return el && el.nodeType === 1 && el.tagName === 'SECTION' && el.classList.contains('tabs');
+  }
+  function tabParts(sec) {
+    var titles = [], panels = [];
+    elementChildren(sec).forEach(function (el) {
+      if (el.tagName === 'H4' && el.classList.contains('tabs__title')) titles.push(el);
+      else if (el.tagName === 'DIV' && el.classList.contains('tabs__panel')) panels.push(el);
+    });
+    return { titles: titles, panels: panels };
+  }
+  function tabsKey(chId, bi) { return chId + ':' + bi; }
+  function decorateTabs(chId) {
+    var rich = richOf(chId);
+    if (!rich) return;
+    elementChildren(rich).forEach(function (secEl, bi) {
+      if (!isTabsSection(secEl)) return;
+      var old = secEl.querySelector('.cv-tabstrip');
+      if (old) old.remove();
+      var p = tabParts(secEl);
+      if (!p.panels.length) return;
+      var key = tabsKey(chId, bi);
+      var ai = Math.max(0, Math.min(activeTabs[key] || 0, p.panels.length - 1));
+      activeTabs[key] = ai;
+      var strip = mk('div', 'tabs__list cv-tabstrip');
+      strip.setAttribute('contenteditable', 'false');
+      p.panels.forEach(function (pan, i) {
+        var b = mk('button', 'tabs__tab' + (i === ai ? ' is-active' : ''),
+                   p.titles[i] ? p.titles[i].textContent : 'Sekme ' + (i + 1));
+        b.type = 'button';
+        b.setAttribute('data-cvt', i);
+        b.title = 'Tıkla: sekmeyi aç · çift tıkla: adını değiştir';
+        strip.appendChild(b);
+        pan.hidden = i !== ai;
+      });
+      var add = mk('button', 'cv-tabadd', '+');
+      add.type = 'button';
+      add.title = 'Sekme ekle';
+      strip.appendChild(add);
+      secEl.insertBefore(strip, secEl.firstChild);
+    });
+  }
+  function decorateAllTabs() {
+    if (page !== 'kurallar' || !fdoc) return;
+    bolumler().forEach(function (ch) { decorateTabs(ch.id); });
+  }
+  function switchTab(chId, bi, ti) {
+    activeTabs[tabsKey(chId, bi)] = ti;
+    decorateTabs(chId);
+    if (!editing) {
+      var rich = richOf(chId);
+      var secEl = rich && elementChildren(rich)[bi];
+      if (secEl && isTabsSection(secEl)) {
+        select({ type: 'blok', el: secEl, id: chId, bi: bi, label: 'Sekmeler' });
+        return;
+      }
+    }
+    renderInspector();
   }
   function escT(s) { var d = document.createElement('div'); d.textContent = String(s == null ? '' : s); return d.innerHTML; }
   function escA(s) { return escT(s).replace(/"/g, '&quot;'); }
@@ -263,6 +335,7 @@
     if (main) {
       $$('article.panel', main).forEach(function (p) { p.remove(); });
       list.forEach(function (ch, i) { main.appendChild(buildPanel(ch, i)); });
+      decorateAllTabs();
     }
     ensureTocChrome();
     var keep = (shownId && list.some(function (c) { return c.id === shownId; }))
@@ -342,6 +415,14 @@
     '.toc__list li.cv-drop-before{box-shadow:0 -2px 0 var(--accent)}',
     '.toc__list li.cv-drop-after{box-shadow:0 2px 0 var(--accent)}',
     '.panel__rich:empty::before{content:"Ekle panelinden blok sürükle ya da çift tıklayıp yaz…";color:color-mix(in srgb,var(--ink) 45%,transparent);font-style:italic}',
+    /* sekme şeridi tuval kromudur: kayda girmez, süzgeç düğmeleri düşürür */
+    '.cv-tabstrip{cursor:default;-webkit-user-select:none;user-select:none}',
+    '.cv-tabstrip .tabs__tab{cursor:pointer}',
+    '.cv-tabstrip .tabs__tab[contenteditable]{cursor:text;outline:1px dashed var(--accent);outline-offset:2px}',
+    '.cv-tabadd{appearance:none;background:none;border:1px dashed color-mix(in srgb,var(--ink) 30%,transparent);color:var(--ink);width:20px;height:20px;padding:0;margin:auto 0 5px 8px;line-height:1;font:600 13px/1 "Space Grotesk",system-ui,sans-serif;cursor:pointer}',
+    '.cv-tabadd:hover{border-color:var(--accent);color:var(--accent)}',
+    '.tabs__panel:not([hidden]):empty{min-height:2.2em}',
+    '.tabs__panel:not([hidden]):empty::before{content:"Bu sekme boş — Ekle panelinden blok sürükle ya da çift tıklayıp yaz…";display:block;padding:.35em 0;color:color-mix(in srgb,var(--ink) 45%,transparent);font-style:italic}',
     '.cv-dropline{position:fixed;height:2px;background:var(--accent);z-index:2147483001;pointer-events:none;display:none}',
     '.cv-dropline::before{content:"";position:absolute;left:-3px;top:-3px;width:8px;height:8px;border-radius:50%;background:var(--accent)}',
     /* sitede şerit görseli tıklamaz (pointer-events:none) — tuvalde seçilebilsin */
@@ -432,6 +513,33 @@
       if ((m = q('.panel__title'))) return { type: 'title', el: m, id: m.closest('.panel').id, label: 'Bölüm başlığı' };
       if ((m = q('.panel__rich'))) {
         var pid = m.closest('.panel').id;
+        // sekme şeridi (tuval kromu): düğmeler seçim değil sekme işlemidir
+        var strip = node.closest('.cv-tabstrip');
+        if (strip && m.contains(strip)) {
+          var sec0 = strip.closest('section.tabs');
+          var bi0 = elementChildren(m).indexOf(sec0);
+          var abtn = node.closest('.cv-tabadd');
+          if (abtn) return { type: 'tabadd', el: abtn, id: pid, bi: bi0, label: 'Sekme ekle' };
+          var tbtn = node.closest('.tabs__tab');
+          if (tbtn) return { type: 'tabbtn', el: tbtn, id: pid, bi: bi0, ti: +tbtn.getAttribute('data-cvt'), label: 'Sekme' };
+          return { type: 'blok', el: sec0, id: pid, bi: bi0, label: 'Sekmeler' };
+        }
+        // sekme paneli içindeki blok: sel.sub {si, ci} ile adreslenir
+        var pan = node.closest('.tabs__panel');
+        if (pan && m.contains(pan)) {
+          var secN = pan.closest('section.tabs');
+          var biN = secN ? elementChildren(m).indexOf(secN) : -1;
+          if (biN > -1) {
+            var siN = tabParts(secN).panels.indexOf(pan);
+            var blkN = node;
+            while (blkN && blkN !== pan && blkN.parentElement !== pan) blkN = blkN.parentElement;
+            if (siN > -1 && blkN && blkN !== pan && blkN.nodeType === 1) {
+              var ciN = elementChildren(pan).indexOf(blkN);
+              if (ciN > -1) return { type: 'blok', el: blkN, id: pid, bi: biN, sub: { si: siN, ci: ciN }, label: blockLabel(blkN) };
+            }
+            return { type: 'blok', el: secN, id: pid, bi: biN, label: 'Sekmeler' };
+          }
+        }
         var blk = node;
         while (blk && blk !== m && blk.parentElement !== m) blk = blk.parentElement;
         if (blk && blk !== m && blk.nodeType === 1) {
@@ -469,8 +577,29 @@
       if (t === 'blok') {
         var rich = id && richOf(id);
         var kids = rich ? elementChildren(rich) : [];
-        elx = kids[Math.min(sel.bi, kids.length - 1)] || null;
-        if (elx) { sel.bi = kids.indexOf(elx); sel.label = blockLabel(elx); }
+        if (sel.sub) {                 // sekme paneli içindeki blok
+          var secEl = kids[Math.min(sel.bi, kids.length - 1)];
+          if (isTabsSection(secEl)) {
+            var pans = tabParts(secEl).panels;
+            var pan = pans[Math.min(sel.sub.si, pans.length - 1)];
+            var pk = pan ? elementChildren(pan) : [];
+            elx = pk[Math.min(sel.sub.ci, pk.length - 1)] || null;
+            if (elx) {
+              sel.bi = kids.indexOf(secEl);
+              sel.sub = { si: pans.indexOf(pan), ci: pk.indexOf(elx) };
+              sel.label = blockLabel(elx);
+            } else if (secEl) {        // panel boşaldı → bölümün kendisi
+              elx = secEl;
+              sel.bi = kids.indexOf(secEl);
+              sel.sub = null;
+              sel.label = 'Sekmeler';
+            }
+          } else sel.sub = null;
+        }
+        if (!elx) {
+          elx = kids[Math.min(sel.bi, kids.length - 1)] || null;
+          if (elx) { sel.bi = kids.indexOf(elx); sel.sub = null; sel.label = blockLabel(elx); }
+        }
       } else if (t === 'title' || t === 'rich' || t === 'art') {
         var p = id && fdoc.getElementById(id);
         if (p) elx = p.querySelector(t === 'title' ? '.panel__title' : t === 'rich' ? '.panel__rich' : '.panel__art');
@@ -497,6 +626,11 @@
   }
   function onMousedown(e) {
     if (e.button !== 0) return;
+    if (renaming) {
+      if (renaming.btn.contains(e.target)) return;          // ad içinde imleç serbest
+      commitTabRename(false);
+    }
+    if (e.target.closest && e.target.closest('.cv-tabstrip')) return;  // tık onClick'te
     if (editing && editing.el.contains(e.target)) return;   // metin seçimi serbest
     var info = targetInfo(e.target);
     if (info && info.type === 'toc' && !editing) {
@@ -552,6 +686,17 @@
       return;
     }
     if (justDragged) { e.preventDefault(); e.stopPropagation(); return; }
+    // sekme şeridi: metin düzenleme açıkken de çalışır (krom contenteditable değil)
+    if (t.closest && t.closest('.cv-tabstrip')) {
+      e.preventDefault(); e.stopPropagation();
+      if (renaming && !renaming.btn.contains(t)) commitTabRename(false);
+      if (renaming) return;                       // ad düzenlenirken tık serbest
+      var tinfo = targetInfo(t);
+      if (tinfo && tinfo.type === 'tabbtn') switchTab(tinfo.id, tinfo.bi, tinfo.ti);
+      else if (tinfo && tinfo.type === 'tabadd') addTab(tinfo.id, tinfo.bi);
+      else if (tinfo && tinfo.type === 'blok') select(tinfo);
+      return;
+    }
     if (editing && editing.el.contains(t)) {
       if (t.closest('a')) e.preventDefault();  // düzenlenen metindeki bağ gezinmesin
       return;
@@ -576,6 +721,20 @@
   function onDblclick(e) {
     var info = targetInfo(e.target);
     if (!info || (editing && editing.el === info.el)) return;
+    if (info.type === 'tabbtn') {
+      e.preventDefault(); e.stopPropagation();
+      if (renaming && renaming.btn === info.el) return;
+      if (editing) {
+        commitEditing();                 // rich yeniden kurulur — düğmeyi tazele
+        var secR = secAt(info.id, info.bi);
+        var btnR = secR && secR.querySelector('.cv-tabstrip .tabs__tab[data-cvt="' + info.ti + '"]');
+        if (!btnR) return;
+        info = { type: 'tabbtn', el: btnR, id: info.id, bi: info.bi, ti: info.ti, label: 'Sekme' };
+      }
+      startTabRename(info);
+      return;
+    }
+    if (info.type === 'tabadd') { e.preventDefault(); e.stopPropagation(); return; }
     if (info.type === 'blok') {
       info = { type: 'rich', el: info.el.closest('.panel__rich'), id: info.id, label: 'Metin' };
     }
@@ -590,6 +749,11 @@
   function onFrameKey(e) {
     var k = (e.key || '').toLowerCase();
     if (gesture && e.key === 'Escape') { e.preventDefault(); endGesture(true); return; }
+    if (renaming) {                     // sekme adı yazılırken tuval kısayolları sussun
+      if (e.key === 'Enter') { e.preventDefault(); commitTabRename(false); }
+      else if (e.key === 'Escape') { e.preventDefault(); commitTabRename(true); }
+      return;
+    }
     if ((e.ctrlKey || e.metaKey) && k === 's') { e.preventDefault(); A.save(); return; }
     if (editing) {
       if (e.key === 'Escape') { e.preventDefault(); commitEditing(); return; }
@@ -717,6 +881,7 @@
           A.markDirty('canvas');
         }
         ed.el.innerHTML = ch2.html;   // kayda gidecek normalize hâli göster
+        decorateTabs(ed.id);
       }
     }
     renderInspector();
@@ -793,6 +958,122 @@
     renderRegions();
   }
 
+  /* -- sekme işlemleri: DOM'da yap, modele serileştir ---------------------- */
+  function secAt(chId, bi) {
+    var rich = richOf(chId);
+    var el = rich && elementChildren(rich)[bi];
+    return isTabsSection(el) ? el : null;
+  }
+  function selectTabsSection(chId, bi) {
+    var secEl = secAt(chId, bi);
+    if (secEl) select({ type: 'blok', el: secEl, id: chId, bi: bi, label: 'Sekmeler' });
+    else select(null);
+  }
+  function addTab(chId, bi) {
+    var secEl = secAt(chId, bi);
+    if (!secEl) return;
+    commitEditing();
+    snapshot();
+    var n = tabParts(secEl).panels.length + 1;
+    var h = mk('h4', 'tabs__title', 'Sekme ' + n);
+    var d = mk('div', 'tabs__panel');
+    d.innerHTML = '<p>Sekme içeriği…</p>';
+    secEl.appendChild(h);
+    secEl.appendChild(d);
+    activeTabs[tabsKey(chId, bi)] = n - 1;
+    commitRichFromDom(chId);
+    selectTabsSection(chId, bi);
+  }
+  function moveTab(chId, bi, i, d) {
+    var secEl = secAt(chId, bi);
+    if (!secEl) return;
+    var p = tabParts(secEl);
+    var j = i + d;
+    if (i < 0 || i >= p.panels.length || j < 0 || j >= p.panels.length) return;
+    commitEditing();
+    snapshot();
+    var title = p.titles[i], pan = p.panels[i];
+    if (d < 0) {
+      secEl.insertBefore(title, p.titles[j]);
+      secEl.insertBefore(pan, p.titles[j]);
+    } else {
+      secEl.insertBefore(title, p.panels[j].nextSibling);
+      secEl.insertBefore(pan, title.nextSibling);
+    }
+    var key = tabsKey(chId, bi), ai = activeTabs[key] || 0;
+    if (ai === i) activeTabs[key] = j;
+    else if (ai === j) activeTabs[key] = i;
+    commitRichFromDom(chId);
+    selectTabsSection(chId, bi);
+  }
+  function deleteTab(chId, bi, i) {
+    var secEl = secAt(chId, bi);
+    if (!secEl) return;
+    var p = tabParts(secEl);
+    var pan = p.panels[i];
+    if (!pan) return;
+    var adM = p.titles[i] ? p.titles[i].textContent : 'Sekme ' + (i + 1);
+    var bos = !pan.textContent.trim() && !pan.querySelector('img, table');
+    var uygula = function () {
+      var secEl2 = secAt(chId, bi);        // diyalog beklerken değişmiş olabilir
+      if (!secEl2) return;
+      var p2 = tabParts(secEl2);
+      if (!p2.panels[i]) return;
+      commitEditing();
+      snapshot();
+      if (p2.titles[i]) p2.titles[i].remove();
+      p2.panels[i].remove();
+      var key = tabsKey(chId, bi);
+      activeTabs[key] = Math.max(0, Math.min(activeTabs[key] || 0, p2.panels.length - 2));
+      // son sekme de gittiyse süzgeç bölümü tümden düşürür
+      commitRichFromDom(chId);
+      if (secAt(chId, bi)) selectTabsSection(chId, bi);
+      else select(null);
+    };
+    if (bos) uygula();
+    else A.confirmDialog('"' + adM + '" sekmesi içeriğiyle birlikte silinsin mi?').then(function (ok) { if (ok) uygula(); });
+  }
+  function renameTab(chId, bi, i, ad) {
+    var secEl = secAt(chId, bi);
+    if (!secEl) return;
+    var t = tabParts(secEl).titles[i];
+    if (!t) return;
+    t.textContent = ad;
+    commitRichFromDom(chId);
+    // yazma sürerken inspector yeniden çizilmesin — seçimi elle tazele
+    if (sel && sel.type === 'blok' && sel.id === chId && !sel.sub && sel.bi === bi) {
+      var secEl2 = secAt(chId, bi);
+      if (secEl2) sel.el = secEl2;
+    }
+  }
+
+  /* şeritte çift tıkla ad düzenleme */
+  function startTabRename(info) {
+    commitTabRename(false);
+    var btn = info.el;
+    renaming = { btn: btn, chId: info.id, bi: info.bi, ti: info.ti, orig: btn.textContent };
+    btn.setAttribute('contenteditable', 'plaintext-only');
+    if (btn.contentEditable !== 'plaintext-only') btn.setAttribute('contenteditable', 'true');
+    btn.focus();
+    var r = fdoc.createRange();
+    r.selectNodeContents(btn);
+    var s = fwin.getSelection();
+    s.removeAllRanges(); s.addRange(r);
+  }
+  function commitTabRename(cancel) {
+    if (!renaming) return;
+    var rn = renaming; renaming = null;
+    rn.btn.removeAttribute('contenteditable');
+    var ad = rn.btn.textContent.replace(/\s+/g, ' ').trim();
+    if (cancel || !ad || ad === rn.orig) {
+      rn.btn.textContent = rn.orig;
+      return;
+    }
+    snapshot();
+    renameTab(rn.chId, rn.bi, rn.ti, ad);
+    selectTabsSection(rn.chId, rn.bi);
+  }
+
   /* ================================================================ bloklar
      Zengin metnin kök çocukları "blok"tur: tek tık seçer, çift tık metni
      düzenlemeye geçer; taşı/çoğalt/sil işlemleri DOM'da yapılıp modele
@@ -802,25 +1083,50 @@
     if (!ch || !rich) return;
     ch.html = A.serializeForSave(rich.innerHTML);
     rich.innerHTML = ch.html;      // kayda gidecek normalize hâli göster
+    decorateTabs(chId);
     A.markDirty('canvas');
   }
 
-  function selectBlock(chId, bi) {
+  function selectBlock(chId, bi, sub) {
     var rich = richOf(chId);
     var kids = rich ? elementChildren(rich) : [];
+    if (sub) {                        // sekme paneli içindeki blok
+      var secEl = kids[Math.max(0, Math.min(bi, kids.length - 1))];
+      if (isTabsSection(secEl)) {
+        var pans = tabParts(secEl).panels;
+        var si = Math.max(0, Math.min(sub.si, pans.length - 1));
+        var pk = pans[si] ? elementChildren(pans[si]) : [];
+        if (pk.length) {
+          var ci = Math.max(0, Math.min(sub.ci, pk.length - 1));
+          select({ type: 'blok', el: pk[ci], id: chId, bi: kids.indexOf(secEl),
+                   sub: { si: si, ci: ci }, label: blockLabel(pk[ci]) });
+          return;
+        }
+        select({ type: 'blok', el: secEl, id: chId, bi: kids.indexOf(secEl), label: 'Sekmeler' });
+        return;
+      }
+    }
     var el = kids[Math.max(0, Math.min(bi, kids.length - 1))];
     if (!el) { select(null); return; }
     select({ type: 'blok', el: el, id: chId, bi: kids.indexOf(el), label: blockLabel(el) });
   }
 
-  function insertBlock(chId, index, html) {
+  function insertBlock(chId, pos, html) {
+    // pos: sayı (kök sıra) ya da {bi, si, index} (sekme paneli içine)
     commitEditing();
     var rich = richOf(chId);
     if (!rich) return;
     snapshot();
-    var kids = elementChildren(rich);
+    var cont = rich, index = pos, sub = null;
+    if (pos && typeof pos === 'object') {
+      var secEl = elementChildren(rich)[pos.bi];
+      var pan = isTabsSection(secEl) ? tabParts(secEl).panels[pos.si] : null;
+      if (pan) { cont = pan; index = pos.index; sub = { si: pos.si, ci: pos.index }; }
+      else index = elementChildren(rich).length;      // hedef düştü → sona
+    }
+    var kids = elementChildren(cont);
     // gerçek içerik gelince "yazım aşamasında" yer tutucusu düşer
-    if (kids.length === 1 && kids[0].matches('p.panel__soon')) {
+    if (cont === rich && kids.length === 1 && kids[0].matches('p.panel__soon')) {
       kids[0].remove();
       index = 0;
       kids = [];
@@ -828,34 +1134,46 @@
     var ref = kids[index] || null;
     var tmp = fdoc.createElement('div');
     tmp.innerHTML = html;
-    while (tmp.firstChild) rich.insertBefore(tmp.firstChild, ref);
+    while (tmp.firstChild) cont.insertBefore(tmp.firstChild, ref);
     commitRichFromDom(chId);
     if (shownId !== chId) showPanel(chId);
-    selectBlock(chId, index);
+    if (sub) selectBlock(chId, pos.bi, sub);
+    else selectBlock(chId, index);
   }
 
   function blockOp(op) {
     if (!sel || sel.type !== 'blok') return;
-    var chId = sel.id, bi = sel.bi;
+    var chId = sel.id, bi = sel.bi, sub = sel.sub || null;
     var rich = richOf(chId);
-    var kids = rich ? elementChildren(rich) : [];
-    var el = kids[bi];
+    if (!rich) return;
+    var cont = rich, idx = bi;         // işlem kabı: kök ya da sekme paneli
+    if (sub) {
+      var secEl = elementChildren(rich)[bi];
+      cont = isTabsSection(secEl) ? tabParts(secEl).panels[sub.si] : null;
+      idx = sub.ci;
+    }
+    var kids = cont ? elementChildren(cont) : [];
+    var el = kids[idx];
     if (!el) return;
-    if (op === 'up' && bi === 0) return;
-    if (op === 'down' && bi === kids.length - 1) return;
+    if (op === 'up' && idx === 0) return;
+    if (op === 'down' && idx === kids.length - 1) return;
     commitEditing();
     snapshot();
-    var nbi = bi;
-    if (op === 'up') { rich.insertBefore(el, kids[bi - 1]); nbi = bi - 1; }
-    else if (op === 'down') { rich.insertBefore(kids[bi + 1], el); nbi = bi + 1; }
-    else if (op === 'dup') { el.insertAdjacentElement('afterend', el.cloneNode(true)); nbi = bi + 1; }
+    var nbi = idx;
+    if (op === 'up') { cont.insertBefore(el, kids[idx - 1]); nbi = idx - 1; }
+    else if (op === 'down') { cont.insertBefore(kids[idx + 1], el); nbi = idx + 1; }
+    else if (op === 'dup') { el.insertAdjacentElement('afterend', el.cloneNode(true)); nbi = idx + 1; }
     else if (op === 'del') { el.remove(); nbi = -1; }
     else if (op === 'lede') {
       el.classList.toggle('lede');
       if (!el.getAttribute('class')) el.removeAttribute('class');
     }
     commitRichFromDom(chId);
-    if (nbi < 0) select(null); else selectBlock(chId, nbi);
+    if (nbi < 0) {
+      if (sub && secAt(chId, bi)) selectTabsSection(chId, bi);   // sekme bloğuna dön
+      else select(null);
+    } else if (sub) selectBlock(chId, bi, { si: sub.si, ci: nbi });
+    else selectBlock(chId, nbi);
   }
 
   function figureHTML(g, cap) {
@@ -866,10 +1184,15 @@
 
   function changeFigure() {
     if (!sel || sel.type !== 'blok') return;
-    var chId = sel.id, bi = sel.bi;
+    var chId = sel.id, bi = sel.bi, sub = sel.sub || null;
     A.openPicker(function (g) {
       var rich = richOf(chId);
-      var el = rich && elementChildren(rich)[bi];
+      var el;
+      if (sub) {
+        var secEl = rich && elementChildren(rich)[bi];
+        var pan = isTabsSection(secEl) ? tabParts(secEl).panels[sub.si] : null;
+        el = pan && elementChildren(pan)[sub.ci];
+      } else el = rich && elementChildren(rich)[bi];
       var img = el && el.querySelector('img');
       if (!img) return;
       commitEditing();
@@ -878,7 +1201,7 @@
       img.setAttribute('width', g.w);
       img.setAttribute('height', g.h);
       commitRichFromDom(chId);
-      selectBlock(chId, bi);
+      selectBlock(chId, bi, sub);
     });
   }
 
@@ -971,7 +1294,7 @@
     if (!ch) return;
     if (info.type === 'blok') {
       commitRichFromDom(info.id);
-      selectBlock(info.id, info.bi);
+      selectBlock(info.id, info.bi, info.sub || null);
     } else if (info.type === 'art') {
       if (ch.gorsel) {
         var r = tRecord(t);
@@ -1089,11 +1412,17 @@
     var chSel = sel && sel.id && chById(sel.id);
     if (sel && sel.type === 'blok') {
       var rch = richOf(sel.id);
-      var nkids = rch ? elementChildren(rch).length : 0;
-      h += '<p class="cvi__type">Blok — ' + escT(sel.label) + '</p>';
+      var selIdx = sel.sub ? sel.sub.ci : sel.bi;      // kap içindeki sıra
+      var nkids = 0;
+      if (sel.sub) {
+        var selSec = rch && elementChildren(rch)[sel.bi];
+        var selPan = isTabsSection(selSec) ? tabParts(selSec).panels[sel.sub.si] : null;
+        nkids = selPan ? elementChildren(selPan).length : 0;
+      } else nkids = rch ? elementChildren(rch).length : 0;
+      h += '<p class="cvi__type">Blok — ' + escT(sel.label) + (sel.sub ? ' <small>(sekme içinde)</small>' : '') + '</p>';
       h += '<div class="field"><span class="field__label">İşlem</span><div class="cvi__row">' +
-           '<button type="button" class="iconbtn" data-cb-up aria-label="Yukarı taşı"' + (sel.bi === 0 ? ' disabled' : '') + '>' + A.ICON.up + '</button>' +
-           '<button type="button" class="iconbtn" data-cb-down aria-label="Aşağı taşı"' + (sel.bi === nkids - 1 ? ' disabled' : '') + '>' + A.ICON.down + '</button>' +
+           '<button type="button" class="iconbtn" data-cb-up aria-label="Yukarı taşı"' + (selIdx === 0 ? ' disabled' : '') + '>' + A.ICON.up + '</button>' +
+           '<button type="button" class="iconbtn" data-cb-down aria-label="Aşağı taşı"' + (selIdx === nkids - 1 ? ' disabled' : '') + '>' + A.ICON.down + '</button>' +
            '<button type="button" class="btn" data-cb-dup>Çoğalt</button>' +
            '<button type="button" class="iconbtn iconbtn--danger" data-cb-del aria-label="Bloğu sil">' + A.ICON.x + '</button>' +
            '</div></div>';
@@ -1104,7 +1433,25 @@
       if (sel.el.tagName === 'FIGURE') {
         h += '<button type="button" class="btn" data-cb-fig>Görseli değiştir</button>';
       }
-      h += '<p class="cvi__note">Çift tıkla → metni yerinde düzenle · Del → bloğu sil · yeni blok için üstten <strong>Ekle</strong>.</p>';
+      if (isTabsSection(sel.el)) {
+        var tp = tabParts(sel.el);
+        var akey = tabsKey(sel.id, sel.bi);
+        var ai2 = Math.max(0, Math.min(activeTabs[akey] || 0, tp.panels.length - 1));
+        h += '<div class="field"><span class="field__label">Sekmeler</span>';
+        tp.panels.forEach(function (pan, i) {
+          h += '<div class="cvi__row cvi__tabrow' + (i === ai2 ? ' is-active' : '') + '">' +
+            '<input class="field__input" data-cvt-name="' + i + '" value="' +
+            escA(tp.titles[i] ? tp.titles[i].textContent : 'Sekme ' + (i + 1)) + '">' +
+            '<button type="button" class="iconbtn" data-cvt-left="' + i + '" aria-label="Öne taşı"' + (i === 0 ? ' disabled' : '') + '>' + A.ICON.up + '</button>' +
+            '<button type="button" class="iconbtn" data-cvt-right="' + i + '" aria-label="Sona taşı"' + (i === tp.panels.length - 1 ? ' disabled' : '') + '>' + A.ICON.down + '</button>' +
+            '<button type="button" class="iconbtn iconbtn--danger" data-cvt-del="' + i + '" aria-label="Sekmeyi sil">' + A.ICON.x + '</button>' +
+            '</div>';
+        });
+        h += '<button type="button" class="btn btn--ghost" data-cvt-add>+ Sekme ekle</button></div>';
+        h += '<p class="cvi__note">Şeritte tıkla → sekmeyi aç · çift tıkla → adını yerinde değiştir · içerik açık sekmeye eklenir.</p>';
+      } else {
+        h += '<p class="cvi__note">Çift tıkla → metni yerinde düzenle · Del → bloğu sil · yeni blok için üstten <strong>Ekle</strong>.</p>';
+      }
     } else if (chSel) {
       var i = indexById(sel.id), ch = list[i];
       h += '<p class="cvi__type">Bölüm ' + nn(i) + '</p>';
@@ -1289,6 +1636,47 @@
     if ((b = $('[data-cb-del]', insp))) b.addEventListener('click', function () { blockOp('del'); });
     if ((b = $('[data-cb-lede]', insp))) b.addEventListener('click', function () { blockOp('lede'); });
     if ((b = $('[data-cb-fig]', insp))) b.addEventListener('click', changeFigure);
+    // sekme yöneticisi (seçili blok section.tabs iken)
+    if (sel && sel.type === 'blok' && sel.id && isTabsSection(sel.el)) {
+      var tChId = sel.id, tBi = sel.bi;
+      if ((b = $('[data-cvt-add]', insp))) b.addEventListener('click', function () { addTab(tChId, tBi); });
+      $$('[data-cvt-name]', insp).forEach(function (inp) {
+        var i = +inp.getAttribute('data-cvt-name'), prevAd = null;
+        inp.addEventListener('focus', function () {
+          prevAd = inp.value;
+          snapshot();
+          // yazarken o sekme görünür kalsın — inspector'ı yeniden çizmeden
+          activeTabs[tabsKey(tChId, tBi)] = i;
+          decorateTabs(tChId);
+          $$('.cvi__tabrow', insp).forEach(function (row, j) {
+            row.classList.toggle('is-active', j === i);
+          });
+        });
+        inp.addEventListener('input', function () {
+          if (inp.value.trim()) renameTab(tChId, tBi, i, inp.value.trim());
+        });
+        inp.addEventListener('blur', function () {
+          if (!inp.value.trim()) {
+            var geri = prevAd || 'Sekme ' + (i + 1);
+            inp.value = geri;
+            renameTab(tChId, tBi, i, geri);
+            A.toast('Sekme adı boş olamaz', true);
+          }
+        });
+        inp.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') { e.preventDefault(); inp.blur(); }
+        });
+      });
+      $$('[data-cvt-left]', insp).forEach(function (btn) {
+        btn.addEventListener('click', function () { moveTab(tChId, tBi, +btn.getAttribute('data-cvt-left'), -1); });
+      });
+      $$('[data-cvt-right]', insp).forEach(function (btn) {
+        btn.addEventListener('click', function () { moveTab(tChId, tBi, +btn.getAttribute('data-cvt-right'), 1); });
+      });
+      $$('[data-cvt-del]', insp).forEach(function (btn) {
+        btn.addEventListener('click', function () { deleteTab(tChId, tBi, +btn.getAttribute('data-cvt-del')); });
+      });
+    }
     if ((b = $('[data-ci-vers]', insp))) b.addEventListener('click', function () { A.switchView('surumler'); });
     if ((b = $('[data-ci-add]', insp))) b.addEventListener('click', function () { addChapter(); });
     if ((b = $('[data-ci-art]', insp))) b.addEventListener('click', function () {
@@ -1661,7 +2049,24 @@
       var panel = el.closest('article.panel');
       if (!panel) return null;
       rich = panel.querySelector('.panel__rich');
-      return { kind: 'rich', chId: panel.id, rich: rich, index: elementChildren(rich).length };
+      return { kind: 'rich', chId: panel.id, cont: rich, pos: elementChildren(rich).length };
+    }
+    // açık sekme panelinin içine bırakma (sekme bloğunun kendisi hariç)
+    var pan = el.closest('.tabs__panel');
+    if (pan && rich.contains(pan) && blk.id !== 'tabs') {
+      var secEl = pan.closest('section.tabs');
+      var biT = elementChildren(rich).indexOf(secEl);
+      var siT = secEl ? tabParts(secEl).panels.indexOf(pan) : -1;
+      if (biT > -1 && siT > -1) {
+        var pkids = elementChildren(pan);
+        var idxT = pkids.length;
+        for (var q2 = 0; q2 < pkids.length; q2++) {
+          var rq = pkids[q2].getBoundingClientRect();
+          if (iy < rq.top + rq.height / 2) { idxT = q2; break; }
+        }
+        return { kind: 'rich', chId: rich.closest('.panel').id, cont: pan,
+                 pos: { bi: biT, si: siT, index: idxT } };
+      }
     }
     var kids = elementChildren(rich);
     var idx2 = kids.length;
@@ -1669,7 +2074,7 @@
       var rr = kids[j].getBoundingClientRect();
       if (iy < rr.top + rr.height / 2) { idx2 = j; break; }
     }
-    return { kind: 'rich', chId: rich.closest('.panel').id, rich: rich, index: idx2 };
+    return { kind: 'rich', chId: rich.closest('.panel').id, cont: rich, pos: idx2 };
   }
 
   function showDropHint(t) {
@@ -1686,11 +2091,12 @@
       else lis[lis.length - 1].classList.add('cv-drop-after');
       return;
     }
-    var rr = t.rich.getBoundingClientRect();
-    var kids = elementChildren(t.rich);
+    var rr = t.cont.getBoundingClientRect();
+    var kids = elementChildren(t.cont);
+    var idx = typeof t.pos === 'object' ? t.pos.index : t.pos;
     var y;
     if (!kids.length) y = rr.top + 10;
-    else if (t.index < kids.length) y = kids[t.index].getBoundingClientRect().top - 7;
+    else if (idx < kids.length) y = kids[idx].getBoundingClientRect().top - 7;
     else y = kids[kids.length - 1].getBoundingClientRect().bottom + 7;
     dropline.style.display = 'block';
     dropline.style.left = rr.left + 'px';
@@ -1699,7 +2105,15 @@
   }
 
   function insertPos(chId) {
-    if (sel && sel.type === 'blok' && sel.id === chId) return sel.bi + 1;
+    if (sel && sel.type === 'blok' && sel.id === chId) {
+      if (sel.sub) return { bi: sel.bi, si: sel.sub.si, index: sel.sub.ci + 1 };
+      if (isTabsSection(sel.el)) {                    // sekme bloğu seçili → açık sekmenin sonuna
+        var pans = tabParts(sel.el).panels;
+        var si = Math.max(0, Math.min(activeTabs[tabsKey(chId, sel.bi)] || 0, pans.length - 1));
+        if (pans[si]) return { bi: sel.bi, si: si, index: elementChildren(pans[si]).length };
+      }
+      return sel.bi + 1;
+    }
     var rich = richOf(chId);
     return rich ? elementChildren(rich).length : 0;
   }
@@ -1716,7 +2130,9 @@
       A.openPicker(function (g) { insertBlock(chId, insertPos(chId), figureHTML(g, blk.cap)); });
       return;
     }
-    insertBlock(chId, insertPos(chId), blk.html);
+    var pos = insertPos(chId);
+    if (blk.id === 'tabs' && pos && typeof pos === 'object') pos = pos.bi + 1;  // sekme sekmeye girmez
+    insertBlock(chId, pos, blk.html);
   }
 
   function dropInsert(blk, t) {
@@ -1725,10 +2141,10 @@
       return;
     }
     if (blk.pick) {
-      A.openPicker(function (g) { insertBlock(t.chId, t.index, figureHTML(g, blk.cap)); });
+      A.openPicker(function (g) { insertBlock(t.chId, t.pos, figureHTML(g, blk.cap)); });
       return;
     }
-    insertBlock(t.chId, t.index, blk.html);
+    insertBlock(t.chId, t.pos, blk.html);
   }
 
   /* ================================================================ sahne */
@@ -1818,6 +2234,7 @@
 
     // Ekle paleti dışına tıklayınca kapanır (panel içindeyken açık kalır)
     document.addEventListener('pointerdown', function (e) {
+      commitTabRename(false);        // panel arayüzüne geçildi — şerit adı kesinleşir
       var pal = $('[data-cv-palette]');
       if (!pal || pal.hidden) return;
       if (e.target.closest('[data-cv-palette],[data-cv-addbtn]')) return;
@@ -1849,11 +2266,12 @@
       startLoop();
     },
     leave: function () {
+      commitTabRename(false);
       commitEditing();
       active = false;
       cancelAnimationFrame(rafId);
     },
-    flush: function () { commitEditing(); }
+    flush: function () { commitTabRename(false); commitEditing(); }
   });
 
   window.addEventListener('adm:ready', function () {

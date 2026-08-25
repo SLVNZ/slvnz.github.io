@@ -705,6 +705,36 @@ select.field__input { cursor: pointer; }
   color: var(--muted, #818181);
 }
 .cvp__prev .cvp__imgph svg { width: 30px; height: 30px; stroke: currentColor; stroke-width: 1.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+/* Sekmeler kartının minyatürü */
+.cvp__prev .cvp__tabsprev { display: block; padding: 2px; }
+.cvp__prev .cvp__tabsbar {
+  display: flex;
+  gap: 2px;
+  border-block-end: 1px solid color-mix(in srgb, var(--ink) 25%, transparent);
+  font-family: var(--font-grotesk);
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.cvp__prev .cvp__tabsbar b,
+.cvp__prev .cvp__tabsbar span {
+  padding: 5px 9px 4px;
+  font-weight: 600;
+  color: var(--muted, #818181);
+}
+.cvp__prev .cvp__tabsbar b {
+  color: var(--accent);
+  box-shadow: 0 1px 0 var(--accent);
+}
+.cvp__prev .cvp__tabsbody {
+  display: block;
+  height: 26px;
+  margin-top: 4px;
+  background: repeating-linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--ink) 16%, transparent) 0 3px,
+    transparent 3px 10px);
+}
 .cvp__name {
   font-family: var(--font-grotesk);
   font-size: 10.5px;
@@ -773,6 +803,10 @@ select.field__input { cursor: pointer; }
 .cvi__row { display: flex; gap: .4rem; align-items: center; flex-wrap: wrap; }
 .cvi__row .btn { min-height: 34px; padding: 0 .7rem; font-size: 11px; flex: 1; }
 .cvi__row .iconbtn { border: 1px solid var(--adm-hair); }
+/* sekme yöneticisi satırları: ad + öne/sona taşı + sil */
+.cvi__tabrow { flex-wrap: nowrap; margin-block-end: .35rem; }
+.cvi__tabrow .field__input { flex: 1; min-width: 0; }
+.cvi__tabrow.is-active .field__input { border-color: var(--accent); }
 .cvi__ro {
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   font-size: 12px;

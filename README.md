@@ -55,7 +55,12 @@ tuvalde açılır ve yerinde düzenlenir (tıkla-seç, metni sayfa üzerinde yaz
 bölümleri sağ menüde sürükleyip sırala, görsele tıklayıp değiştir; sağda
 özellik paneli, üstte kırılım önizlemesi ve geri al/yinele). **＋ Ekle**
 paleti bölüm şablonları ve içerik blokları sunar (paragraf, tablo, zar
-tablosu, kural kartı, içerik içi görsel…) — kartı tıkla ya da tuvale sürükle.
+tablosu, kural kartı, sekmeler, içerik içi görsel…) — kartı tıkla ya da tuvale
+sürükle. **Sekmeler** bloğu bölüm içinde sekmeli bir alan açar: şeritte tıkla →
+sekme değişir, çift tıkla → adı yerinde değişir, ＋ → yeni sekme; her sekme
+panele eklenebilen bütün blokları taşıyabilir (içerik açık sekmeye eklenir).
+Yayınlanan sayfada şeridi `kurallar.js` üretir; JS kapalıysa sekmeler başlıklı
+düz akışa döner.
 Seçili öğe serbestçe dönüştürülür: sürükle-taşı, köşeden ölçekle, kenardan
 genişlet, üst saptan döndür, katmanı öne/arkaya al — üstteki Masaüstü/Tablet/
 Mobil önizlemesi düzenleme hedefini de seçer, her kırılım için ayrı değer

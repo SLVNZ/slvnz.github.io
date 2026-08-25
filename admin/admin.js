@@ -119,7 +119,7 @@
   /* ================================================================ süzgeç
      Sitenin söz dağarcığına indirgeme — yapıştırma ve kaydetmede aynı yol. */
   var ALLOW = {
-    P: ['class', 'style'], H3: ['style'], H4: ['style'], UL: ['style'], OL: ['style'], LI: [], BLOCKQUOTE: ['style'],
+    P: ['class', 'style'], H3: ['style'], H4: ['style', 'class'], UL: ['style'], OL: ['style'], LI: [], BLOCKQUOTE: ['style'],
     TABLE: ['style'], THEAD: [], TBODY: [], TR: [], TH: [], TD: [], HR: ['style'],
     STRONG: [], EM: [], U: [], DEL: [], MARK: [], SUP: [], SUB: [], A: ['href'], CODE: [], BR: [],
     FIGURE: ['style'], FIGCAPTION: [], IMG: ['src', 'alt', 'width', 'height', 'loading', 'decoding']
@@ -201,6 +201,17 @@
         cleanNode(child);
         var want = RENAME[tag] || tag;
         if (!(want in ALLOW)) {                         // bilinmeyen → çöz
+          // sekme iskeleti: section.tabs ve div.tabs__panel korunur — sınıf
+          // dışındaki her öznitelik atılır (section'da dönüşüm stili kalır)
+          if ((tag === 'SECTION' && /\btabs\b/.test(child.className || '')) ||
+              (tag === 'DIV' && /\btabs__panel\b/.test(child.className || ''))) {
+            var tabStil = tag === 'SECTION' ? tEmit(tParse(child.getAttribute('style'))) : '';
+            while (child.attributes.length) child.removeAttribute(child.attributes[0].name);
+            child.setAttribute('class', tag === 'SECTION' ? 'tabs' : 'tabs__panel');
+            if (tabStil) child.setAttribute('style', tabStil);
+            child = next;
+            continue;
+          }
           if (tag === 'DIV' && /\btable-wrap\b/.test(child.className || '')) {
             // sarıcının dönüşüm stili tabloya iner; kayıtta tekrar sarıcıya çıkar
             var tw = child.querySelector('table');
@@ -231,6 +242,10 @@
           if (want === 'P') {
             var cls = (el.getAttribute('class') || '').split(/\s+/).filter(function (c) { return PCLASS[c]; });
             if (cls.length) el.setAttribute('class', cls.join(' '));
+            else el.removeAttribute('class');
+          }
+          if (want === 'H4') {                          // yalnız sekme başlığı sınıfı
+            if (/\btabs__title\b/.test(el.getAttribute('class') || '')) el.setAttribute('class', 'tabs__title');
             else el.removeAttribute('class');
           }
           if (want === 'IMG') {
@@ -293,6 +308,75 @@
     });
   }
 
+  function unwrapEl(el) {
+    while (el.firstChild) el.parentNode.insertBefore(el.firstChild, el);
+    el.parentNode.removeChild(el);
+  }
+
+  function normalizeTabs(root) {
+    /* Sekme söz dağarcığı: kök düzeyde <section class="tabs"> içinde
+       h4.tabs__title + div.tabs__panel çiftleri. Süzgeç yapıyı burada
+       zorlar: iç içe / yetim sekme parçaları düz içeriğe çözülür, çiftler
+       eşlenir, başıboş içerik son panele alınır, boş başlıklar adlandırılır.
+       Tuval kromu (şerit düğmeleri) cleanNode'da zaten düşmüştür. */
+    $$('section.tabs', root).forEach(function (sec) {   // yalnız kökte geçerli
+      if (sec.parentNode !== root) unwrapEl(sec);
+    });
+    $$('h4.tabs__title', root).forEach(function (h) {   // yetim başlık → düz h4
+      var p = h.parentNode;
+      if (!(p && p.nodeType === 1 && p.matches('section.tabs'))) h.removeAttribute('class');
+    });
+    $$('div.tabs__panel', root).forEach(function (d) {  // yetim panel → çöz
+      var p = d.parentNode;
+      if (!(p && p.nodeType === 1 && p.matches('section.tabs'))) unwrapEl(d);
+    });
+    $$('section.tabs', root).forEach(function (sec) {
+      var out = [], panel = null, n = 0;
+      function newTab(title) {
+        n++;
+        var h = document.createElement('h4');
+        h.className = 'tabs__title';
+        h.textContent = title || 'Sekme ' + n;
+        panel = document.createElement('div');
+        panel.className = 'tabs__panel';
+        out.push(h, panel);
+      }
+      Array.prototype.slice.call(sec.childNodes).forEach(function (nd) {
+        if (nd.nodeType === 1 && nd.matches('h4.tabs__title')) {
+          n++;
+          if (!nd.textContent.trim()) nd.textContent = 'Sekme ' + n;
+          panel = document.createElement('div');
+          panel.className = 'tabs__panel';
+          out.push(nd, panel);
+        } else if (nd.nodeType === 1 && nd.matches('div.tabs__panel')) {
+          if (panel && !panel.childNodes.length && out[out.length - 1] === panel) {
+            out.pop();                                  // boş yer tutucu — gerçek panel geldi
+          } else {                                      // başlıksız panel: başlık üret
+            n++;
+            var h4 = document.createElement('h4');
+            h4.className = 'tabs__title';
+            h4.textContent = 'Sekme ' + n;
+            out.push(h4);
+          }
+          panel = nd;
+          out.push(nd);
+        } else {
+          if (nd.nodeType === 3 && !nd.nodeValue.trim()) return;   // boşluk
+          if (!panel) newTab(null);
+          panel.appendChild(nd);
+        }
+      });
+      if (!out.length) { sec.parentNode.removeChild(sec); return; }
+      while (sec.firstChild) sec.removeChild(sec.firstChild);
+      out.forEach(function (nd) { sec.appendChild(nd); });
+      $$('div.tabs__panel', sec).forEach(function (pan) {
+        wrapLoose(pan);
+        figureWrap(pan);
+        dropEmpties(pan);
+      });
+    });
+  }
+
   function sanitizeHTML(html) {
     var tpl = document.createElement('template');
     tpl.innerHTML = html;
@@ -300,6 +384,7 @@
     wrapLoose(tpl.content);
     figureWrap(tpl.content);
     dropEmpties(tpl.content);
+    normalizeTabs(tpl.content);
     // not: DocumentFragment'ta ':scope > *' boş döner — .children kullan
     return Array.prototype.map.call(tpl.content.children, function (el) { return el.outerHTML; }).join('\n');
   }

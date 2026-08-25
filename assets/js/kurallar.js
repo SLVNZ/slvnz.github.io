@@ -107,6 +107,67 @@
     show(byId[id] ? id : panels[0].id, { focus: false });
   });
 
+  /* ---- sekmeler ----------------------------------------------------------
+     <section class="tabs"> içindeki h4.tabs__title + div.tabs__panel
+     çiftlerinden role=tablist bir şerit üretilir; başlıkları CSS gizler
+     (.js .tabs__title), tek panel görünür. Ok tuşları sekmeler arasında
+     gezinir (roving tabindex). JS yoksa bu blok hiç çalışmaz ve içerik
+     başlıklarıyla birlikte sıralı akar. */
+  var tabSeq = 0;
+  Array.prototype.forEach.call(document.querySelectorAll('.panel__rich .tabs'), function (sec) {
+    var titles = [], tPanels = [];
+    Array.prototype.forEach.call(sec.children, function (el) {
+      if (el.classList.contains('tabs__title')) titles.push(el);
+      else if (el.classList.contains('tabs__panel')) tPanels.push(el);
+    });
+    if (!tPanels.length) return;
+    var name = 'sekme-' + (++tabSeq);
+    var list = document.createElement('div');
+    list.className = 'tabs__list';
+    list.setAttribute('role', 'tablist');
+    var btns = tPanels.map(function (p, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'tabs__tab';
+      b.id = name + '-tab-' + (i + 1);
+      b.setAttribute('role', 'tab');
+      if (!p.id) p.id = name + '-panel-' + (i + 1);
+      b.setAttribute('aria-controls', p.id);
+      p.setAttribute('role', 'tabpanel');
+      p.setAttribute('aria-labelledby', b.id);
+      p.tabIndex = 0;
+      b.textContent = titles[i] ? titles[i].textContent : 'Sekme ' + (i + 1);
+      list.appendChild(b);
+      return b;
+    });
+    sec.insertBefore(list, sec.firstChild);
+    function activate(i, focus) {
+      btns.forEach(function (b, j) {
+        var on = j === i;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-selected', String(on));
+        b.tabIndex = on ? 0 : -1;
+        tPanels[j].hidden = !on;
+      });
+      if (focus) btns[i].focus();
+    }
+    list.addEventListener('click', function (e) {
+      var b = e.target.closest('.tabs__tab');
+      if (b) activate(btns.indexOf(b), false);
+    });
+    list.addEventListener('keydown', function (e) {
+      var i = btns.indexOf(document.activeElement);
+      if (i < 0) return;
+      var n = null;
+      if (e.key === 'ArrowRight') n = (i + 1) % btns.length;
+      else if (e.key === 'ArrowLeft') n = (i - 1 + btns.length) % btns.length;
+      else if (e.key === 'Home') n = 0;
+      else if (e.key === 'End') n = btns.length - 1;
+      if (n != null) { e.preventDefault(); activate(n, true); }
+    });
+    activate(0, false);
+  });
+
   /* ---- okuma ilerlemesi + paralaks --------------------------------------- */
   /* Kısa bir bölümde kaydırma yoksa çubuk kendini gizler — hep sıfırda duran
      bir gösterge ölü arayüzdür. */
