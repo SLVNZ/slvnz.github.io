@@ -520,6 +520,71 @@ html:not(.js) .panel + .panel { margin-block-start: clamp(3.5rem, 9dvh, 6rem); }
   border: 0;
   border-block-start: 1px solid var(--hairline);
 }
+
+/* ---------- Kutular ------------------------------------------------------
+   <aside class="kutu kutu--ornek|ipucu|uyari|not"> + isteğe bağlı
+   <h4 class="kutu__baslik">. Kural kitabı kenar kutusu geleneği: kâğıdın
+   üstüne çekilmiş bir çerçeve, solda kalın mürekkep şeridi, üstte küçük
+   büyük harf etiket. Renk paleti tek accent olduğu için türler etiket ve
+   şerit dokusuyla ayrışır. */
+.panel__rich .kutu {
+  --kutu-cizgi: var(--accent);
+  margin-block: 1.6em;
+  padding: .95em 1.15em 1.05em;
+  border: 1px solid var(--hairline);
+  border-inline-start: 3px solid var(--kutu-cizgi);
+  background: color-mix(in srgb, var(--ink) 3.5%, transparent);
+}
+.panel__rich .kutu > * + * { margin-block-start: .7em; }
+.panel__rich .kutu__baslik {
+  margin-block: 0 .55em;
+  font-family: var(--font-grotesk);
+  font-weight: 700;
+  font-size: .8em;                      /* th / sekme etiketleriyle aynı ölçek */
+  line-height: 1.2;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--kutu-cizgi);
+}
+/* örnek: oyunun içinden bir an — eğik gövde, kurala değil anlatıya benzer */
+.panel__rich .kutu--ornek { --kutu-cizgi: var(--accent); }
+.panel__rich .kutu--ornek > p { font-style: italic; }
+/* ipucu: kesikli şerit, daha hafif bir ses */
+.panel__rich .kutu--ipucu {
+  --kutu-cizgi: color-mix(in srgb, var(--accent) 70%, var(--ink));
+  border-inline-start-style: dashed;
+}
+/* uyarı: çift şerit, en yüksek sesli kutu */
+.panel__rich .kutu--uyari {
+  --kutu-cizgi: var(--accent);
+  border-inline-start-width: 6px;
+  border-inline-start-style: double;
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+}
+/* not: mürekkep şeridi yok, kâğıdın kendi sesi */
+.panel__rich .kutu--not {
+  --kutu-cizgi: var(--muted);
+  border-inline-start-color: var(--hairline);
+  background: none;
+}
+.panel__rich .kutu table { font-size: .9em; }
+
+/* ---------- Tanım listesi ------------------------------------------------
+   Terim + karşılığı: sözlük ve künye satırları için tablodan hafif yapı. */
+.panel__rich dl { margin-block: 1.2em; }
+.panel__rich dt {
+  font-weight: 700;
+  font-size: .88em;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.panel__rich dd {
+  margin-inline-start: 0;
+  padding-inline-start: 1.1em;
+  border-inline-start: 1px solid var(--hairline);
+}
+.panel__rich dd + dt { margin-block-start: 1em; }
 .panel__rich code {
   padding: .12em .35em;
   background: color-mix(in srgb, var(--ink) 8%, transparent);

@@ -89,6 +89,19 @@
     { id: 'qa', cat: 'Metin', ad: 'Soru & Cevap',
       html: '<h4>Soru başlığı?</h4>\n<p>Cevap metni…</p>' },
 
+    { id: 'ornek', cat: 'Kutular', ad: 'Örnek kutusu',
+      html: '<aside class="kutu kutu--ornek"><h4 class="kutu__baslik">Örnek</h4><p>Oyunun içinden bir an: karakterin ne yaptığını, zarın ne söylediğini ve masada nasıl sonuçlandığını anlat.</p></aside>' },
+    { id: 'ipucu', cat: 'Kutular', ad: 'İpucu kutusu',
+      html: '<aside class="kutu kutu--ipucu"><h4 class="kutu__baslik">İpucu</h4><p>Oyun Kurucu ya da oyuncu için pratik bir öneri.</p></aside>' },
+    { id: 'uyari', cat: 'Kutular', ad: 'Uyarı kutusu',
+      html: '<aside class="kutu kutu--uyari"><h4 class="kutu__baslik">Dikkat</h4><p>Sık yapılan hata ya da kolayca gözden kaçan kural.</p></aside>' },
+    { id: 'not',   cat: 'Kutular', ad: 'Kenar notu',
+      html: '<aside class="kutu kutu--not"><h4 class="kutu__baslik">Not</h4><p>Ana akışı bölmeden eklenen açıklama.</p></aside>' },
+    { id: 'ornek-diyalog', cat: 'Kutular', ad: 'Oyun anı (diyalog)',
+      html: '<aside class="kutu kutu--ornek"><h4 class="kutu__baslik">Oyun Anı</h4><p><strong>Oyuncu:</strong> Kapıyı omuzlayarak kırmaya çalışıyorum.</p><p><strong>Oyun Kurucu:</strong> Kuvvet at bakalım — zorluk 12.</p><p><strong>Oyuncu:</strong> On yedi geldi.</p><p><strong>Oyun Kurucu:</strong> Menteşeler bir çığlıkla kopuyor, kapı içeri devriliyor.</p></aside>' },
+    { id: 'ornek-kural', cat: 'Kutular', ad: 'Kurallı örnek',
+      html: '<aside class="kutu kutu--ornek"><h4 class="kutu__baslik">Örnek</h4><p>Durumun kısa anlatımı.</p><ul><li><strong>Atılan zar:</strong> 1d20 + Çeviklik</li><li><strong>Sonuç:</strong> 14 — şartlı başarı</li></ul></aside>' },
+
     { id: 'ul',    cat: 'Yapı', ad: 'Madde listesi', html: '<ul><li>Birinci madde</li><li>İkinci madde</li></ul>' },
     { id: 'ol',    cat: 'Yapı', ad: 'Sıralı liste',  html: '<ol><li>Birinci adım</li><li>İkinci adım</li></ol>' },
     { id: 'adim',  cat: 'Yapı', ad: 'Adım adım',
@@ -103,6 +116,10 @@
       html: '<h4>Künye</h4>\n<table><thead><tr><th>Özellik</th><th>Değer</th></tr></thead><tbody><tr><td>Menzil</td><td>30 m</td></tr><tr><td>Süre</td><td>1 tur</td></tr><tr><td>Bedel</td><td>2 enerji</td></tr></tbody></table>' },
     { id: 'card',  cat: 'Yapı', ad: 'Kural kartı',
       html: '<h4>Kural adı</h4>\n<p>Kuralın açıklaması.</p>\n<ul><li>Koşul ya da etki</li><li>Koşul ya da etki</li></ul>' },
+    { id: 'tanim', cat: 'Yapı', ad: 'Tanım listesi',
+      html: '<dl><dt>Terim</dt><dd>Terimin karşılığı ve kısa açıklaması.</dd><dt>İkinci terim</dt><dd>Karşılığı.</dd></dl>' },
+    { id: 'sozluk', cat: 'Yapı', ad: 'Sözlük bölümü',
+      html: '<h4>Sözlük</h4>\n<dl><dt>Yeterlik</dt><dd>Karakterin bir işi ne kadar iyi yaptığını gösteren değer.</dd><dt>Efor</dt><dd>Bir eylemin sıradanlığın dışına çıkma derecesi.</dd></dl>' },
     { id: 'tabs',  cat: 'Yapı', ad: 'Sekmeler',
       html: '<section class="tabs"><h4 class="tabs__title">Sekme 1</h4><div class="tabs__panel"><p>İlk sekmenin içeriği…</p></div><h4 class="tabs__title">Sekme 2</h4><div class="tabs__panel"><p>İkinci sekmenin içeriği…</p></div></section>',
       prev: '<span class="cvp__tabsprev"><span class="cvp__tabsbar"><b>Sekme 1</b><span>Sekme 2</span></span><span class="cvp__tabsbody"></span></span>' },
@@ -116,8 +133,9 @@
   var BLOCK_ADLAR = {
     P: 'Paragraf', H3: 'Başlık', H4: 'Alt başlık', UL: 'Madde listesi',
     OL: 'Sıralı liste', BLOCKQUOTE: 'Alıntı', TABLE: 'Tablo', HR: 'Ayraç', FIGURE: 'Görsel',
-    SECTION: 'Sekmeler'
+    SECTION: 'Sekmeler', DL: 'Tanım listesi', ASIDE: 'Kutu'
   };
+  var KUTU_ADLAR = { ornek: 'Örnek kutusu', ipucu: 'İpucu kutusu', uyari: 'Uyarı kutusu', not: 'Kenar notu' };
 
   /* ---------------------------------------------------------------- yardımcı */
   function site() { return A.getSite(); }
@@ -149,6 +167,10 @@
   function blockLabel(el) {
     if (el.tagName === 'DIV' && el.classList.contains('table-wrap')) return 'Tablo';
     if (el.tagName === 'P' && el.classList.contains('lede')) return 'Giriş paragrafı';
+    if (el.tagName === 'ASIDE') {
+      var mk2 = /\bkutu--(\w+)\b/.exec(el.className || '');
+      return (mk2 && KUTU_ADLAR[mk2[1]]) || 'Kutu';
+    }
     return BLOCK_ADLAR[el.tagName] || 'Blok';
   }
 
@@ -879,6 +901,13 @@
     select(info);
   }
   function onDblclick(e) {
+    /* Zaten düzenlenen metnin İÇİNDE çift tık: tarayıcıya bırak. Eskiden buraya
+       düşüp commitEditing() + startEditing() çalışıyordu; commit innerHTML'i
+       baştan yazdığı, startEditing de imleci noktaya indirdiği için kelime
+       seçimi anında kayboluyor ve çift tık + sürükleyerek kelime kelime seçim
+       hiç yapılamıyordu. */
+    var krom = e.target.closest && e.target.closest('.cv-tabstrip, .cv-panadd');
+    if (editing && editing.el.contains(e.target) && !krom) return;
     var info = targetInfo(e.target);
     if (!info || (editing && editing.el === info.el)) return;
     if (info.type === 'tabbtn') {
@@ -959,18 +988,51 @@
   }
 
   /* ================================================================ düzenleme */
-  function placeCaret(e) {
-    if (!e || e.clientX == null) return;
-    var r = null;
-    if (fdoc.caretRangeFromPoint) r = fdoc.caretRangeFromPoint(e.clientX, e.clientY);
-    else if (fdoc.caretPositionFromPoint) {
+  function caretRangeAt(e) {
+    if (!e || e.clientX == null) return null;
+    if (fdoc.caretRangeFromPoint) return fdoc.caretRangeFromPoint(e.clientX, e.clientY);
+    if (fdoc.caretPositionFromPoint) {
       var pos = fdoc.caretPositionFromPoint(e.clientX, e.clientY);
-      if (pos) { r = fdoc.createRange(); r.setStart(pos.offsetNode, pos.offset); }
+      if (pos) { var r = fdoc.createRange(); r.setStart(pos.offsetNode, pos.offset); return r; }
     }
-    if (r) {
-      var s = fwin.getSelection();
-      s.removeAllRanges(); s.addRange(r);
+    return null;
+  }
+  function placeCaret(e) {
+    var r = caretRangeAt(e);
+    if (!r) return;
+    var s = fwin.getSelection();
+    s.removeAllRanges(); s.addRange(r);
+  }
+  /* Çift tıkla düzenlemeye girerken imleci noktaya indirmek yerine o kelimeyi
+     seçili bırak. Kelime sınırını tarayıcının kendi algısı (selection.modify)
+     belirler; elle yazılan noktalama listesi "4.0" gibi şeyleri ikiye bölüyordu. */
+  var KELIME_DISI = /[\s,;:!?()\[\]{}"'«»…]/;
+  function selectWordAt(e) {
+    var r = caretRangeAt(e);
+    if (!r || r.startContainer.nodeType !== 3) return false;
+    var s0 = fwin.getSelection();
+    if (s0.modify) {                       // tarayıcının kendi kelime algısı
+      s0.removeAllRanges();
+      s0.addRange(r);
+      s0.modify('move', 'backward', 'word');
+      s0.modify('extend', 'forward', 'word');
+      // 'word' ilerlemesi sondaki boşluğu da yutar; çift tık gibi kırp
+      for (var g = 0; g < 4 && /\s$/.test(s0.toString()) && s0.toString().length > 1; g++) {
+        s0.modify('extend', 'backward', 'character');
+      }
+      if (!s0.isCollapsed) return true;
     }
+    var txt = r.startContainer.nodeValue || '';
+    var a = r.startOffset, b = r.startOffset;
+    while (a > 0 && !KELIME_DISI.test(txt.charAt(a - 1))) a--;
+    while (b < txt.length && !KELIME_DISI.test(txt.charAt(b))) b++;
+    if (a === b) return false;
+    var nr = fdoc.createRange();
+    nr.setStart(r.startContainer, a);
+    nr.setEnd(r.startContainer, b);
+    var s = fwin.getSelection();
+    s.removeAllRanges(); s.addRange(nr);
+    return true;
   }
 
   function startEditing(info, e) {
@@ -992,7 +1054,8 @@
       } catch (err) {}
       editing = { type: 'rich', el: info.el, id: info.id };
       info.el.focus();
-      placeCaret(e);
+      if (e && e.type === 'dblclick') { if (!selectWordAt(e)) placeCaret(e); }
+      else placeCaret(e);
       textbar.hidden = false;
       syncBar();
     }
@@ -1595,6 +1658,14 @@
       if (sel.el.tagName === 'FIGURE') {
         h += '<button type="button" class="btn" data-cb-fig>Görseli değiştir</button>';
       }
+      if (sel.el.tagName === 'ASIDE') {
+        var kt = (/\bkutu--(\w+)\b/.exec(sel.el.className || '') || [])[1] || 'not';
+        h += '<div class="field"><label class="field__label" for="cb-kutu">Kutu türü</label>' +
+             '<select class="field__input" id="cb-kutu" data-cb-kutu>' +
+             ['ornek', 'ipucu', 'uyari', 'not'].map(function (k) {
+               return '<option value="' + k + '"' + (k === kt ? ' selected' : '') + '>' + escT(KUTU_ADLAR[k]) + '</option>';
+             }).join('') + '</select></div>';
+      }
       var iTbl = selTableEl();
       if (iTbl && tableCols(iTbl).length > 1) {
         h += '<div class="field"><span class="field__label">Sütun genişlikleri (%)</span>' +
@@ -1820,6 +1891,22 @@
     if ((b = $('[data-cb-del]', insp))) b.addEventListener('click', function () { blockOp('del'); });
     if ((b = $('[data-cb-lede]', insp))) b.addEventListener('click', function () { blockOp('lede'); });
     if ((b = $('[data-cb-fig]', insp))) b.addEventListener('click', changeFigure);
+    // not: `b` aşağıda yeniden atandığı için kapanışta kullanılamaz — this ile oku
+    if ((b = $('[data-cb-kutu]', insp))) b.addEventListener('change', function () {
+      if (!sel || sel.type !== 'blok' || sel.el.tagName !== 'ASIDE') return;
+      commitEditing();
+      snapshot();
+      var tur = this.value;
+      sel.el.className = 'kutu kutu--' + tur;
+      // etiket türle birlikte değişsin (kullanıcı elle yazdıysa dokunma)
+      var bas = sel.el.querySelector(':scope > .kutu__baslik');
+      var VARSAYILAN = { ornek: 'Örnek', ipucu: 'İpucu', uyari: 'Dikkat', not: 'Not' };
+      if (bas && Object.keys(VARSAYILAN).some(function (k) { return VARSAYILAN[k] === bas.textContent.trim(); })) {
+        bas.textContent = VARSAYILAN[tur];
+      }
+      commitRichFromDom(sel.id);
+      selectBlock(sel.id, sel.bi, sel.sub || null);
+    });
     // tablo sütun genişlikleri (seçili blok tablo iken)
     if (sel && sel.type === 'blok' && selTableEl()) {
       if ((b = $('[data-cvc-esit]', insp))) b.addEventListener('click', function () {

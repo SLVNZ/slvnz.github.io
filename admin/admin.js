@@ -126,6 +126,7 @@
      Sitenin söz dağarcığına indirgeme — yapıştırma ve kaydetmede aynı yol. */
   var ALLOW = {
     P: ['class', 'style'], H3: ['style'], H4: ['style', 'class'], UL: ['style'], OL: ['style'], LI: [], BLOCKQUOTE: ['style'],
+    ASIDE: ['class', 'style'], DL: ['style'], DT: [], DD: [],
     TABLE: ['style'], THEAD: [], TBODY: [], TR: [], TH: ['style'], TD: ['style'], HR: ['style'],
     STRONG: [], EM: [], U: [], DEL: [], MARK: [], SUP: [], SUB: [], A: ['href'], CODE: [], BR: [],
     FIGURE: ['style'], FIGCAPTION: [], IMG: ['src', 'alt', 'width', 'height', 'loading', 'decoding']
@@ -252,9 +253,15 @@
             if (cls.length) el.setAttribute('class', cls.join(' '));
             else el.removeAttribute('class');
           }
-          if (want === 'H4') {                          // yalnız sekme başlığı sınıfı
-            if (/\btabs__title\b/.test(el.getAttribute('class') || '')) el.setAttribute('class', 'tabs__title');
+          if (want === 'H4') {                          // yalnız tanınan başlık sınıfları
+            var h4c = el.getAttribute('class') || '';
+            if (/\btabs__title\b/.test(h4c)) el.setAttribute('class', 'tabs__title');
+            else if (/\bkutu__baslik\b/.test(h4c)) el.setAttribute('class', 'kutu__baslik');
             else el.removeAttribute('class');
+          }
+          if (want === 'ASIDE') {                       // kutu: kutu + kutu--<tür>
+            var m2 = /\bkutu--(ornek|ipucu|uyari|not)\b/.exec(el.getAttribute('class') || '');
+            el.setAttribute('class', 'kutu kutu--' + (m2 ? m2[1] : 'not'));
           }
           if (want === 'IMG') {
             // yalnız site çizimleri — dış URL ya da data: gömüsü dosyaya sızmaz
@@ -301,7 +308,12 @@
       if (!el.textContent.trim() && el.children.length && !el.querySelector('table, img')) el.remove();
     });
     $$('figure', root).forEach(function (el) { if (!el.querySelector('img')) el.remove(); });
-    $$('ul, ol', root).forEach(function (el) { if (!el.children.length) el.remove(); });
+    $$('dt, dd', root).forEach(function (el) { if (!el.textContent.trim() && !el.querySelector('img')) el.remove(); });
+    $$('ul, ol, dl', root).forEach(function (el) { if (!el.children.length) el.remove(); });
+    $$('aside.kutu', root).forEach(function (el) {
+      // yalnız etiketi kalmış kutu içerik değil gürültüdür
+      if (!el.querySelector(':scope > :not(.kutu__baslik)')) el.remove();
+    });
   }
 
   function figureWrap(root) {
@@ -319,6 +331,20 @@
   function unwrapEl(el) {
     while (el.firstChild) el.parentNode.insertBefore(el.firstChild, el);
     el.parentNode.removeChild(el);
+  }
+
+  function normalizeBoxes(root) {
+    /* Kutular yalnız kök düzeyde durur (kutu içinde kutu ya da sekme paneli
+       içindeki kutu dışında; panel kendi kökü sayılır). İçlerindeki başıboş
+       metin p'ye sarılır, görseller figure'a alınır. */
+    $$('aside.kutu', root).forEach(function (box) {
+      $$('aside.kutu', box).forEach(unwrapEl);         // iç içe kutu → çöz
+      var b = box.querySelector(':scope > .kutu__baslik');
+      if (b && b !== box.firstElementChild) box.insertBefore(b, box.firstChild);
+      wrapLoose(box);
+      figureWrap(box);
+      if (b) box.insertBefore(b, box.firstChild);      // wrapLoose sırayı bozmuş olabilir
+    });
   }
 
   function normalizeTabs(root) {
@@ -380,6 +406,7 @@
       $$('div.tabs__panel', sec).forEach(function (pan) {
         wrapLoose(pan);
         figureWrap(pan);
+        normalizeBoxes(pan);
         dropEmpties(pan);
       });
     });
@@ -391,6 +418,7 @@
     cleanNode(tpl.content);
     wrapLoose(tpl.content);
     figureWrap(tpl.content);
+    normalizeBoxes(tpl.content);
     dropEmpties(tpl.content);
     normalizeTabs(tpl.content);
     // not: DocumentFragment'ta ':scope > *' boş döner — .children kullan
