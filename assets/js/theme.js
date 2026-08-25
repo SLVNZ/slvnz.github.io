@@ -34,7 +34,19 @@
     syncMeta();
   }
 
+  /* Tema değişimi süresince bir işaret sınıfı: menü harflerinin renk akışı
+     normalde sağdan sola boşalır (hover'dan çıkış hareketi), tema geçişinde
+     ise soldan sağa dolsun. Süre en uzun menü sözcüğünü kapsar
+     (harf başına .028s gecikme + .26s geçiş). */
+  var swTimer = null;
+  function markSwitch() {
+    root.classList.add('theme-switching');
+    clearTimeout(swTimer);
+    swTimer = setTimeout(function () { root.classList.remove('theme-switching'); }, 800);
+  }
+
   function apply(theme, persist) {
+    markSwitch();
     root.setAttribute('data-theme', theme);
     if (persist) { try { localStorage.setItem(KEY, theme); } catch (e) {} }
     render();
@@ -48,7 +60,7 @@
   // follow OS changes while the user has not chosen explicitly
   if (mq.addEventListener) {
     mq.addEventListener('change', function () {
-      if (!root.hasAttribute('data-theme')) render();
+      if (!root.hasAttribute('data-theme')) { markSwitch(); render(); }
     });
   }
 

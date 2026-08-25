@@ -573,6 +573,13 @@ a.mainnav__link { cursor: pointer; }
   color: var(--accent);
   transition-delay: var(--d);                                   /* soaks left→right */
 }
+/* Theme switch: sweep the new ink left→right like reading, not right→left.
+   The base delay above is the hover-out drain; the switch borrows the hover
+   direction instead. theme.js flags the moment (html.theme-switching).
+   Kept below the hover rule on purpose — hover still wins while pointing. */
+@media (prefers-reduced-motion: no-preference) {
+  html.theme-switching .spell__l { transition-delay: var(--d); }
+}
 
 /* -- Exit: the page recedes, the chosen word stays lit ------------------ */
 html.is-leaving .page > :not(.page__body),
