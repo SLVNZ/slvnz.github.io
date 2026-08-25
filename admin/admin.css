@@ -500,6 +500,8 @@ select.field__input { cursor: pointer; }
   max-height: 52vh;
   overflow-y: auto;
 }
+/* hücre: seçim düğmesi + (gerekiyorsa) rozet ve işleme düğmesi */
+.picker__cell { position: relative; display: flex; flex-direction: column; }
 .picker__item {
   display: flex;
   flex-direction: column;
@@ -509,14 +511,50 @@ select.field__input { cursor: pointer; }
   background: none;
   cursor: pointer;
   transition: border-color .2s var(--ease);
+  width: 100%;
 }
+.picker__cell.is-raw .picker__item { border-color: color-mix(in srgb, #c62828 45%, var(--adm-hair)); }
+.picker__badge {
+  position: absolute;
+  inset-block-start: .45rem;
+  inset-inline-start: .45rem;
+  padding: .1rem .35rem;
+  background: #c62828;
+  color: #fff;
+  font-family: var(--font-grotesk);
+  font-size: 9.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+.picker__fix {
+  margin-block-start: .25rem;
+  padding: .35rem .3rem;
+  border: 1px solid var(--accent);
+  background: none;
+  color: var(--accent);
+  font-family: var(--font-grotesk);
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+.picker__fix:hover:not(:disabled) { background: var(--accent); color: var(--paper); }
+.picker__fix:disabled { opacity: .55; cursor: default; }
 .picker__item:hover, .picker__item:focus-visible { border-color: var(--accent); }
 .picker__item.is-selected { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+/* dama zemin: saydamlık gözle görünür olsun — işlenmiş çizimin arkasından
+   damalar geçer, zemini opak olan düz bir blok gibi durur */
 .picker__item img {
   width: 100%;
   height: 74px;
   object-fit: contain;
   filter: invert(var(--art-invert));
+  background-image:
+    linear-gradient(45deg, var(--adm-soft) 25%, transparent 25.5% 74.5%, var(--adm-soft) 75%),
+    linear-gradient(45deg, var(--adm-soft) 25%, transparent 25.5% 74.5%, var(--adm-soft) 75%);
+  background-size: 12px 12px;
+  background-position: 0 0, 6px 6px;
 }
 .picker__item span {
   font-size: 11px;

@@ -321,15 +321,26 @@ html.page-kurallar, html.page-kurallar body { height: 100%; overflow: hidden; }
    JS'siz durumda hiçbir şey gizlenmez. */
 html.js .panel[hidden] { display: none; }
 
-/* panel değişim geçişi */
+/* Panel değişimi — süre kurallar.js'teki CIKIS ile eşleşir.
+   Çıkış: bütün blok tek parça olarak geri çekilir.
+   Giriş: sayfa açılışındaki kademeli dil panelin İÇİNE taşınır — şerit görseli,
+   numara, başlık ve gövde sırayla gelir. Tek düz blok solmasında içerik topluca
+   düşüyor ve "kesildi" hissi veriyordu.
+   Dolgu `backwards`: `both` olsaydı animasyon bittikten sonra da değerleri
+   ANİMASYON önceliğinde tutup o panelin sonraki geçişlerini kilitlerdi —
+   .is-first-in'de tam olarak bu oluyordu. */
 @media (prefers-reduced-motion: no-preference) {
   html.js .panel {
     opacity: 1;
     translate: 0 0;
-    transition: opacity .36s var(--ease), translate .36s var(--ease);
+    transition: opacity .22s var(--ease), translate .22s var(--ease);
   }
-  html.js .panel.is-entering { opacity: 0; translate: 0 14px; }
-  html.js .panel.is-leaving  { opacity: 0; translate: 0 -10px; transition-duration: .22s; }
+  html.js .panel.is-leaving { opacity: 0; translate: 0 -12px; }
+
+  html.js .panel.is-in .panel__art   { animation: fade .85s var(--ease) .02s backwards; }
+  html.js .panel.is-in .panel__no    { animation: rise .65s var(--ease) .10s backwards; }
+  html.js .panel.is-in .panel__title { animation: rise .65s var(--ease) .17s backwards; }
+  html.js .panel.is-in .panel__rich  { animation: rise .7s  var(--ease) .26s backwards; }
 }
 /* JS'siz akışta bölümler arası nefes payı */
 html:not(.js) .panel + .panel { margin-block-start: clamp(3.5rem, 9dvh, 6rem); }

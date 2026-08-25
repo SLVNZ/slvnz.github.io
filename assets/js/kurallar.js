@@ -29,8 +29,12 @@
   var byId = {};
   panels.forEach(function (p) { byId[p.id] = p; });
 
-  var current = null;
+  var current = null;      // menüde seçili bölüm (tıklar tıklamaz)
+  var gorunen = null;      // ekranda gerçekten duran panel (çıkış bitene dek eskisi)
   var swapTimer = null;
+  var inTimer = null;
+  var CIKIS = 220;         // kurallar.css'teki .is-leaving süresiyle aynı
+  var GIRIS = 1000;        // en geç biten giriş animasyonu (.26s gecikme + .7s) + pay
 
   /* ---- menü durumu ------------------------------------------------------- */
   function markLinks(id) {
@@ -43,39 +47,52 @@
   }
 
   /* ---- panel geçişi ------------------------------------------------------ */
+  /* Açılış animasyonu (.is-first-in → `rise … both`) bittikten sonra da son
+     karesini ANİMASYON önceliğinde tutar; bu öncelik normal bildirimleri ezdiği
+     için .is-in/.is-leaving o panelde hiç işlemez. Yani ilk bölüm bir kez
+     süzülür, sonra bütün geçişleri ölür. İşi biten sınıfı bu yüzden kaldırıyoruz. */
+  function acilisiBitir(p) {
+    if (p) p.classList.remove('is-first-in');
+  }
+
   function show(id, opts) {
     opts = opts || {};
     var next = byId[id];
     if (!next || next === current) return;
     clearTimeout(swapTimer);
 
-    var prev = current;
+    /* ekranda duran panel, seçili olandan farklı olabilir: menüye hızlı hızlı
+       tıklanınca eski panel hâlâ görünürken current çoktan ilerlemiş olur */
+    var prev = gorunen || current;
     current = next;
     markLinks(id);
 
     var swap = function () {
       panels.forEach(function (p) {
-        if (p !== next) { p.hidden = true; p.classList.remove('is-leaving', 'is-entering'); }
+        if (p !== next) { p.hidden = true; p.classList.remove('is-leaving', 'is-in'); }
       });
+      acilisiBitir(next);
       next.hidden = false;
+      gorunen = next;
       scroller.scrollTop = 0;
 
       if (reduce.matches) { afterSwap(opts); return; }
 
-      /* giriş: bir kare gizli-başlangıç durumunda dur, sonra bırak — yoksa
-         tarayıcı geçişi atlar */
-      next.classList.add('is-entering');
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          next.classList.remove('is-entering');
-          afterSwap(opts);
-        });
-      });
+      /* giriş: parçalar kademeli gelsin (.is-in). Sınıf önce KALDIRILIP ölçüm
+         zorlanır — yoksa aynı sınıf zaten duruyorsa animasyonlar baştan
+         koşmaz ve panel olduğu gibi belirir. */
+      next.classList.remove('is-in');
+      void next.offsetHeight;
+      next.classList.add('is-in');
+      clearTimeout(inTimer);
+      inTimer = setTimeout(function () { next.classList.remove('is-in'); }, GIRIS);
+      afterSwap(opts);
     };
 
     if (prev && !reduce.matches) {
+      acilisiBitir(prev);                 // dolgulu açılış çıkışı bloklamasın
       prev.classList.add('is-leaving');
-      swapTimer = setTimeout(swap, 220);
+      swapTimer = setTimeout(swap, CIKIS);
     } else {
       swap();
     }
@@ -195,14 +212,43 @@
   scroller.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
 
+  /* ---- gizli panellerin çizimlerini önden indir ---------------------------
+     Şerit görselleri `loading="lazy"`; panel `display:none` olduğu için hiç
+     yükleme başlamıyor ve bölüm açıldığında çizim geçişin ORTASINDA düşüyordu
+     — "içerik pıt diye geldi" hissinin bir kaynağı buydu. Sayfa yerleştikten
+     sonra tembelliği kaldırıyoruz: geçiş anında çizim çoktan önbellekte olur. */
+  function cizimleriIsit() {
+    panels.forEach(function (p) {
+      Array.prototype.forEach.call(p.querySelectorAll('img[loading="lazy"]'), function (im) {
+        im.loading = 'eager';
+      });
+    });
+  }
+  function isitmayiPlanla() {
+    if (window.requestIdleCallback) requestIdleCallback(cizimleriIsit, { timeout: 2500 });
+    else setTimeout(cizimleriIsit, 1200);
+  }
+  if (document.readyState === 'complete') isitmayiPlanla();
+  else window.addEventListener('load', isitmayiPlanla);
+
   /* ---- açılış ------------------------------------------------------------- */
   var startId = location.hash.slice(1);
   if (!byId[startId]) startId = panels[0].id;
   /* ilk paneli geçişsiz kur */
   panels.forEach(function (p) { p.hidden = (p.id !== startId); });
   current = byId[startId];
+  gorunen = current;
   markLinks(startId);
-  if (!reduce.matches) current.classList.add('is-first-in');
+  if (!reduce.matches) {
+    var acilan = current;
+    acilan.classList.add('is-first-in');
+    /* animasyon biter bitmez sınıfı bırak; yoksa `both` dolgusu bu panelin
+       sonraki giriş/çıkış geçişlerini kilitler */
+    acilan.addEventListener('animationend', function (e) {
+      if (e.target === acilan && e.animationName === 'rise') acilisiBitir(acilan);
+    });
+    setTimeout(function () { acilisiBitir(acilan); }, 1200);   // emniyet: .18s gecikme + .7s süre
+  }
   paint();
 
   /* ---- ray bağlantıları: sayfa çıkışı ------------------------------------ */

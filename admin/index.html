@@ -169,7 +169,9 @@
     <label class="btn btn--ghost picker__upload">Yeni çizim yükle (.png)
       <input type="file" accept="image/png" hidden data-picker-upload>
     </label>
-    <p class="field__help">Beyaz zeminli çizimler otomatik alfaya çevrilir, webp üretilir.</p>
+    <!-- işlenmemiş (zemini opak) çizim varsa toplu düğme belirir -->
+    <button type="button" class="btn" data-picker-tumu hidden>Tümünü işle</button>
+    <p class="field__help" data-picker-help>Beyaz zeminli çizimler otomatik alfaya çevrilir, webp üretilir.</p>
   </div>
 </dialog>
 

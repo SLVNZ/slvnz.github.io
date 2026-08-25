@@ -346,9 +346,140 @@ def regenerate(site):
     return yazilan
 
 
+# ---------------------------------------------------------------- mürekkep motoru
+# Sitenin çizim geleneği: RGB'si saf siyah, saydamlığı mürekkebin koyuluğu olan
+# PNG. Aydınlık temada siyah mürekkep kâğıtsız durur; karanlık temada
+# kurallar.css `filter: invert(var(--art-invert))` uygular ve aynı dosya beyaz
+# mürekkebe döner. Zemin saydam olduğundan iki temada da çerçeve görünmez.
+#
+# Naif 255−L dönüşümü yetmiyor: tarayıcı kâğıdı 255 değil 248 olabiliyor, geriye
+# alfası 2–10 olan soluk bir kutu kalıyor. Motor bu yüzden kâğıt tonunu
+# histogramın parlak ucundaki tepeden, mürekkep koyuluğunu alt yüzdelikten okur
+# ve ikisi arasına doğrusal rampa kurar: kâğıt ve ondan açığı TAM saydam, en koyu
+# mürekkep TAM opak olur.
+
+KAGIT_TOL = 4              # kâğıt tepesinin kaç basamak altı da kâğıt sayılsın
+MUREKKEP_DILIM = 0.005     # en koyu bu oran tam opak (%0,5)
+_ALFA_ONBELLEK = {}
+
+
+def _pil():
+    try:
+        from PIL import Image
+        return Image
+    except ImportError:
+        return None
+
+
+def gercek_alfa(path):
+    """Dosyada GERÇEKTEN saydam piksel var mı?
+
+    PNG renk tipi baytı yetmez: panel dışından kopyalanan RGBA çizimler tamamen
+    opak olabiliyor ve sitede beyaz kutu görünüyorlar. mtime+boy ile
+    önbelleklenir — /api/images her çağrıda bütün dosyaları çözmesin.
+    """
+    try:
+        st = path.stat()
+    except OSError:
+        return False
+    key = (str(path), st.st_mtime_ns, st.st_size)
+    if key in _ALFA_ONBELLEK:
+        return _ALFA_ONBELLEK[key]
+    Image = _pil()
+    if Image is None:
+        sonuc = png_alfali(path)              # Pillow yoksa renk tipiyle yetin
+    else:
+        try:
+            with Image.open(path) as im:
+                sonuc = 'A' in im.getbands() and im.getchannel('A').getextrema()[0] < 255
+        except Exception:
+            sonuc = False
+    _ALFA_ONBELLEK[key] = sonuc
+    return sonuc
+
+
+def _kenar_ort(lum):
+    """Çerçeve şeridinin ortalama parlaklığı — zemin gerçekten açık mı?"""
+    w, h = lum.size
+    k = max(1, min(w, h) // 50)
+    seritler = [lum.crop((0, 0, w, k)), lum.crop((0, h - k, w, h)),
+                lum.crop((0, 0, k, h)), lum.crop((w - k, 0, w, h))]
+    toplam = adet = 0
+    for s in seritler:
+        hist = s.histogram()
+        toplam += sum(i * n for i, n in enumerate(hist))
+        adet += sum(hist)
+    return toplam / max(1, adet)
+
+
+def beyazi_alfaya(data=None, path=None, tol=KAGIT_TOL):
+    """Beyaz kâğıt → saydamlık, mürekkep → siyah + alfa.
+
+    Dönüş: (RGBA görsel, rapor). Zemin açık değilse ValueError — koyu zeminli ya
+    da fotoğraf bir görseli sessizce bozmaktansa dokunmamak doğrusu.
+    """
+    Image = _pil()
+    if Image is None:
+        raise ValueError('Pillow kurulu değil — "pip install Pillow" sonrası yeniden dene')
+    im = Image.open(io.BytesIO(data)) if data is not None else Image.open(path)
+    im.load()
+    rapor = {'genislik': im.width, 'yukseklik': im.height}
+
+    if 'A' in im.getbands() and im.getchannel('A').getextrema()[0] < 255:
+        rapor.update({'zaten_alfali': True,
+                      'not': 'Görselde saydamlık zaten vardı — olduğu gibi alındı'})
+        return im.convert('RGBA'), rapor
+
+    lum = im.convert('L')
+    hist = lum.histogram()
+    toplam = sum(hist) or 1
+    kenar = _kenar_ort(lum)
+    parlak = sum(hist[200:]) / toplam
+    if kenar < 200 or parlak < 0.25:
+        raise ValueError('Zemin açık değil (kenar parlaklığı %d/255, açık piksel %%%d) — '
+                         'bu motor beyaz kâğıt üstüne çizim içindir'
+                         % (round(kenar), round(parlak * 100)))
+
+    kagit = max(range(200, 256), key=lambda v: hist[v])   # kâğıt tonu: parlak uçtaki tepe
+    esik = MUREKKEP_DILIM * toplam
+    birikim, murekkep = 0, 0
+    for v in range(256):
+        birikim += hist[v]
+        if birikim >= esik:
+            murekkep = v
+            break
+    beyaz = max(1, kagit - tol)
+    murekkep = max(0, min(murekkep, beyaz - 20))          # rampa çökmesin
+
+    olcek = 255.0 / max(1, beyaz - murekkep)
+    tablo = [0 if v >= beyaz else 255 if v <= murekkep else int(round((beyaz - v) * olcek))
+             for v in range(256)]
+    rgba = Image.new('RGBA', im.size, (0, 0, 0, 0))
+    rgba.putalpha(lum.point(tablo))
+
+    shist = im.convert('RGB').resize((64, 64)).convert('HSV').getchannel('S').histogram()
+    doygun = sum(i * n for i, n in enumerate(shist)) / max(1, sum(shist))
+    rapor.update({'zaten_alfali': False, 'kagit': kagit, 'murekkep': murekkep,
+                  'renkli': doygun > 28})
+    if rapor['renkli']:
+        rapor['not'] = 'Kaynak renkliydi — site geleneği gereği tek renk mürekkebe çevrildi'
+    return rgba, rapor
+
+
+def _yaz_cift(base, rgba):
+    """İşlenmiş çifti diske yaz: <base>-alpha.png + <base>.webp"""
+    rgba.save(IMGDIR / f'{base}-alpha.png', optimize=True)
+    rgba.save(IMGDIR / f'{base}.webp', quality=90, method=6)
+    return {'ad': base, 'img': f'assets/images/{base}-alpha.png',
+            'webp': f'assets/images/{base}.webp',
+            'w': rgba.width, 'h': rgba.height, 'islenmis': True}
+
+
 # ---------------------------------------------------------------- görseller
 def list_images():
-    """Kullanılabilir çizimler: alfa çifti olanlar + kendisi alfalı png'ler."""
+    """Klasördeki çizimler. Ham/işlenmiş çifti olanlarda işlenmiş olan listelenir;
+    tek başına duran dosyalar da listelenir ama saydamlığı yoksa `islenmis: False`
+    ile — panel onlara "Arka planı temizle" düğmesi gösterir."""
     out, gorulen = [], set()
     pngler = {p.name for p in IMGDIR.glob('*.png')}
     webpler = {p.stem for p in IMGDIR.glob('*.webp')}
@@ -359,8 +490,6 @@ def list_images():
             base = p.stem
             if f'{base}-alpha.png' in pngler:
                 continue                      # ham kaynak; alfa çifti listelenir
-            if not png_alfali(p):
-                continue                      # düz RGB — sitede kutu görünür
         if base in gorulen:
             continue
         gorulen.add(base)
@@ -371,8 +500,32 @@ def list_images():
             'img': f'assets/images/{img}',
             'webp': f'assets/images/{base}.webp' if base in webpler else None,
             'w': w, 'h': h,
+            'islenmis': gercek_alfa(IMGDIR / img),
+            'ham': f'{base}.png' in pngler,
         })
     return out
+
+
+def process_image(ad, tol=KAGIT_TOL):
+    """Klasörde duran bir çizimi işle — panelin "Arka planı temizle" düğmesi.
+
+    Kaynak hep HAM dosyadır (<base>.png); yoksa <base>-alpha.png okunur. Üretim
+    <base>-alpha.png + <base>.webp; ham dosyaya dokunulmaz, böylece eşik
+    değiştirilip yeniden işlenebilir.
+    """
+    if not re.fullmatch(r'[a-z0-9-]+', ad or ''):
+        raise ValueError('Geçersiz görsel adı')
+    ham = IMGDIR / f'{ad}.png'
+    alfali = IMGDIR / f'{ad}-alpha.png'
+    kaynak = ham if ham.is_file() else alfali
+    if not kaynak.is_file():
+        raise ValueError(f'Görsel bulunamadı: {ad}')
+    if kaynak == alfali and gercek_alfa(alfali):
+        raise ValueError('Bu çizimin zemini zaten temiz — yeniden işlemek için ham .png gerekir')
+    rgba, rapor = beyazi_alfaya(path=kaynak, tol=tol)
+    entry = _yaz_cift(ad, rgba)
+    entry['ham'] = ham.is_file()
+    return entry, rapor
 
 
 def save_upload(ad, data):
@@ -382,26 +535,19 @@ def save_upload(ad, data):
     base, k = base0, 2
     while (IMGDIR / f'{base}-alpha.png').exists() or (IMGDIR / f'{base}.png').exists():
         base, k = f'{base0}-{k}', k + 1
+    (IMGDIR / f'{base}.png').write_bytes(data)     # ham hep kalsın: yeniden işlenebilsin
     try:
-        from PIL import Image
-    except ImportError:
-        # Pillow yoksa ham kaydet — çizim zaten alfalıysa sorunsuz çalışır
-        (IMGDIR / f'{base}.png').write_bytes(data)
-        w, h = png_boyut(IMGDIR / f'{base}.png')
-        return {'ad': base, 'img': f'assets/images/{base}.png', 'webp': None, 'w': w, 'h': h}
-    im = Image.open(io.BytesIO(data))
-    im.load()
-    if 'A' in im.getbands() and im.getchannel('A').getextrema()[0] < 255:
-        rgba = im.convert('RGBA')             # zaten saydam — dokunma
-    else:
-        # site geleneği: beyaz kâğıt üstüne siyah mürekkep → beyaz alfaya döner
-        l = im.convert('L')
-        rgba = Image.new('RGBA', im.size, (0, 0, 0, 0))
-        rgba.putalpha(l.point(lambda v: 255 - v))
-    rgba.save(IMGDIR / f'{base}-alpha.png', optimize=True)
-    rgba.save(IMGDIR / f'{base}.webp', quality=90, method=6)
-    return {'ad': base, 'img': f'assets/images/{base}-alpha.png',
-            'webp': f'assets/images/{base}.webp', 'w': rgba.width, 'h': rgba.height}
+        rgba, rapor = beyazi_alfaya(data=data)
+    except ValueError as e:
+        # Pillow yok ya da zemin açık değil — ham durur, panel "işlenmemiş" der
+        yol = IMGDIR / f'{base}.png'
+        w, h = png_boyut(yol)
+        return ({'ad': base, 'img': f'assets/images/{base}.png', 'webp': None,
+                 'w': w, 'h': h, 'islenmis': gercek_alfa(yol), 'ham': True},
+                {'not': str(e)})
+    entry = _yaz_cift(base, rgba)
+    entry['ham'] = True
+    return entry, rapor
 
 
 # ---------------------------------------------------------------- tuval modu
@@ -540,11 +686,24 @@ class Handler(BaseHTTPRequestHandler):
         elif u.path == '/api/upload':
             ad = (parse_qs(u.query).get('ad') or [''])[0]
             try:
-                entry = save_upload(ad, self._body())
+                entry, rapor = save_upload(ad, self._body())
             except ValueError as e:
                 self._json({'hata': [str(e)]}, 400)
                 return
-            self._json({'tamam': True, 'gorsel': entry})
+            self._json({'tamam': True, 'gorsel': entry, 'rapor': rapor})
+        elif u.path == '/api/islem':
+            q = parse_qs(u.query)
+            ad = (q.get('ad') or [''])[0]
+            try:
+                tol = int((q.get('tol') or [KAGIT_TOL])[0])
+            except ValueError:
+                tol = KAGIT_TOL
+            try:
+                entry, rapor = process_image(ad, max(0, min(40, tol)))
+            except ValueError as e:
+                self._json({'hata': [str(e)]}, 400)
+                return
+            self._json({'tamam': True, 'gorsel': entry, 'rapor': rapor})
         else:
             self._json({'hata': ['bilinmeyen uç']}, 404)
 

@@ -79,6 +79,27 @@ dosyalarını doğrudan yazar (`content/site.json` + `index.html` ve
 `git add -A && git commit && git push` ile yayımla. Panel yalnız yerelde
 çalışır; ayrıntı `vault/Tasarım/Yönetim Paneli.md`.
 
+### Mürekkep motoru — beyaz zemini kaldırma
+
+Sitenin çizim geleneği: RGB'si saf siyah, saydamlığı mürekkebin koyuluğu olan
+PNG. Aydınlık temada siyah mürekkep kâğıtsız durur, karanlık temada
+`kurallar.css` `filter: invert(var(--art-invert))` uygular ve aynı dosya beyaz
+mürekkebe döner — zemin saydam olduğu için iki temada da çerçeve görünmez.
+
+Bu dönüşüm `admin/server.py` içindeki `beyazi_alfaya()` motorudur ve **çizim
+yüklendiğinde kendiliğinden** çalışır. Görsel seçicide zemini hâlâ opak olan
+çizimler kırmızı **zemin opak** rozetiyle işaretlenir; kartındaki **Arka planı
+temizle** düğmesi (ya da altta **Tümünü işle**) motoru o dosyaya uygular.
+Küçük resimlerin damalı zemini saydamlığı gözle gösterir.
+
+Motor kâğıt tonunu histogramın parlak ucundaki tepeden, mürekkep koyuluğunu alt
+yüzdelikten okuyup arasına doğrusal rampa kurar. Naif `255 − L` yetmiyordu:
+tarayıcı kâğıdı 255 değil 248 olduğunda geriye alfası 2–10 olan soluk bir kutu
+kalıyordu. Zemin açık değilse (koyu arka plan, fotoğraf) motor dosyaya
+**dokunmaz**, sebebini söyler. Ham `.png` her zaman korunur, üretim
+`<ad>-alpha.png` + `<ad>.webp` olarak yazılır — eşik değiştirilip yeniden
+işlenebilsin diye. Motor Pillow ister (`pip install Pillow`).
+
 ## Menü
 
 OYUN KURALLARI artık `kurallar.html` sayfasına gidiyor. YETENEKLER ve

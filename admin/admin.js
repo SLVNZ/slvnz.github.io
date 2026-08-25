@@ -42,6 +42,12 @@
      tutulur, geride kalan yüzey görünür olduğunda modelden tazelenir. */
   var stale = { form: false, canvas: false };
 
+  function esc(s) {
+    var d = document.createElement('div');
+    d.textContent = String(s == null ? '' : s);
+    return d.innerHTML;
+  }
+
   function markDirty(src) {
     if (src === 'canvas') stale.form = true; else stale.canvas = true;
     if (!dirty) {
@@ -961,22 +967,112 @@
     $('[data-ch-title]', last).select();
   });
 
-  /* ================================================================ seçici */
-  function openPicker(cb) {
-    pickerCb = cb;
+  /* ================================================================ seçici
+     Zemini hâlâ opak olan çizimler (panel dışından kopyalananlar) sitede beyaz
+     kutu görünür. Seçicide bunlar "zemin opak" rozetiyle işaretlenir ve tek
+     tıkla işlenir: sunucudaki mürekkep motoru beyazı alfaya çevirip webp üretir
+     — aynı dosya aydınlık temada siyah, karanlıkta beyaz mürekkep olur. */
+  function renderPicker() {
     var grid = $('[data-picker-grid]');
     grid.innerHTML = images.map(function (g, i) {
-      return '<button type="button" class="picker__item" data-pick="' + i + '">' +
-        '<img src="/' + g.img + '" alt="" loading="lazy"><span>' + g.ad + '</span></button>';
+      return '<div class="picker__cell' + (g.islenmis ? '' : ' is-raw') + '">' +
+        '<button type="button" class="picker__item" data-pick="' + i + '">' +
+        '<img src="/' + g.img + '?v=' + (g.rev || 0) + '" alt="" loading="lazy">' +
+        '<span>' + esc(g.ad) + '</span></button>' +
+        (g.islenmis ? '' :
+          '<span class="picker__badge" title="Zemin saydam değil — sitede beyaz kutu görünür">zemin opak</span>' +
+          '<button type="button" class="picker__fix" data-fix="' + i + '">Arka planı temizle</button>') +
+        '</div>';
     }).join('') || '<p class="field__help">Henüz görsel yok — aşağıdan yükle.</p>';
+    var ham = images.filter(function (g) { return !g.islenmis; }).length;
+    var btn = $('[data-picker-tumu]');
+    btn.hidden = ham < 2;
+    btn.textContent = 'Tümünü işle (' + ham + ')';
+    $('[data-picker-help]').innerHTML = ham
+      ? '<strong>' + ham + '</strong> çizimin zemini opak — sitede beyaz kutu görünür. Kartındaki düğmeyle temizle.'
+      : 'Beyaz zeminli çizimler otomatik alfaya çevrilir, webp üretilir.';
+  }
+  function openPicker(cb) {
+    pickerCb = cb;
+    renderPicker();
     $('[data-picker]').showModal();
   }
+
+  /* tek çizimi işle: /api/islem → motor beyazı alfaya çevirir */
+  function islemYap(i) {
+    var g = images[i];
+    if (!g) return Promise.resolve(false);
+    return api('/api/islem?ad=' + encodeURIComponent(g.ad), { method: 'PUT' })
+      .then(function (r) {
+        var yeni = r.gorsel;
+        yeni.rev = Date.now();                 // tarayıcı bayat küçük resmi göstermesin
+        images[i] = yeni;
+        gorselYolunuTazele(g.img, yeni);
+        return r;
+      });
+  }
+
+  /* Site modelinde eski yola bağlı bölümler varsa yeni alfa yoluna taşı —
+     yoksa kayıtta hâlâ opak dosyayı gösterirdi. */
+  function gorselYolunuTazele(eskiImg, yeni) {
+    var degisti = false;
+    Object.keys(site.kurallar || {}).forEach(function (no) {
+      (site.kurallar[no].bolumler || []).forEach(function (ch) {
+        if (ch.gorsel && ch.gorsel.img === eskiImg) {
+          ch.gorsel.img = yeni.img;
+          ch.gorsel.webp = yeni.webp;
+          ch.gorsel.w = yeni.w;
+          ch.gorsel.h = yeni.h;
+          degisti = true;
+        }
+      });
+    });
+    if (degisti) { markDirty('gorsel'); renderChapters(); }
+  }
+
   $('[data-picker-grid]').addEventListener('click', function (e) {
+    var f = e.target.closest('[data-fix]');
+    if (f) {
+      e.preventDefault(); e.stopPropagation();
+      f.disabled = true;
+      f.textContent = 'İşleniyor…';
+      islemYap(+f.getAttribute('data-fix')).then(function (r) {
+        renderPicker();
+        toast('<strong>' + r.gorsel.ad + '</strong> — zemin temizlendi, webp üretildi' +
+              (r.rapor && r.rapor['not'] ? '<br><small>' + esc(r.rapor['not']) + '</small>' : ''));
+      }).catch(function (err) {
+        renderPicker();
+        toast(err.message, true);
+      });
+      return;
+    }
     var b = e.target.closest('[data-pick]');
     if (!b) return;
     var g = images[+b.getAttribute('data-pick')];
+    // seçmeyi engelleme — ama sonucu söyle
+    if (!g.islenmis) {
+      toast('Bu çizimin zemini opak — sitede beyaz kutu görünecek. "Arka planı temizle" ile düzeltebilirsin.', true);
+    }
     $('[data-picker]').close();
     if (pickerCb) pickerCb({ img: g.img, webp: g.webp, w: g.w, h: g.h });
+  });
+  $('[data-picker-tumu]').addEventListener('click', function () {
+    var btn = this;
+    btn.disabled = true;
+    var sira = images.map(function (g, i) { return g.islenmis ? -1 : i; })
+                     .filter(function (i) { return i > -1; });
+    var ok = 0, hata = [];
+    sira.reduce(function (zincir, i) {
+      return zincir.then(function () {
+        return islemYap(i).then(function () { ok++; })
+          .catch(function (err) { hata.push(images[i].ad + ': ' + err.message); });
+      });
+    }, Promise.resolve()).then(function () {
+      btn.disabled = false;
+      renderPicker();
+      toast(ok + ' çizim işlendi' + (hata.length
+        ? '<br><small>Atlanan: ' + esc(hata.join(' · ')) + '</small>' : ''), !!hata.length);
+    });
   });
   $('[data-picker-close]').addEventListener('click', function () { $('[data-picker]').close(); });
   $('[data-picker-upload]').addEventListener('change', function (e) {
@@ -987,10 +1083,20 @@
     f.arrayBuffer().then(function (buf) {
       return api('/api/upload?ad=' + encodeURIComponent(ad), { method: 'PUT', body: buf });
     }).then(function (r) {
+      r.gorsel.rev = Date.now();
       images.push(r.gorsel);
-      toast('Yüklendi: <strong>' + r.gorsel.ad + '</strong> — alfa + webp üretildi');
-      $('[data-picker]').close();
-      if (pickerCb) pickerCb({ img: r.gorsel.img, webp: r.gorsel.webp, w: r.gorsel.w, h: r.gorsel.h });
+      var nt = r.rapor && r.rapor['not'];
+      if (r.gorsel.islenmis) {
+        toast('Yüklendi: <strong>' + esc(r.gorsel.ad) + '</strong> — zemin temizlendi, webp üretildi' +
+              (nt ? '<br><small>' + esc(nt) + '</small>' : ''));
+        $('[data-picker]').close();
+        if (pickerCb) pickerCb({ img: r.gorsel.img, webp: r.gorsel.webp, w: r.gorsel.w, h: r.gorsel.h });
+      } else {
+        // motor dokunamadı (koyu zemin / Pillow yok) — ham durur, seçici açık kalır
+        toast('Yüklendi: <strong>' + esc(r.gorsel.ad) + '</strong> — zemin temizlenemedi' +
+              (nt ? '<br><small>' + esc(nt) + '</small>' : ''), true);
+        renderPicker();
+      }
     }).catch(function (err) { toast(err.message, true); });
     e.target.value = '';
   });
