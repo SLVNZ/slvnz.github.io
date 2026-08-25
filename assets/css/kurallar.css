@@ -465,6 +465,14 @@ html:not(.js) .panel + .panel { margin-block-start: clamp(3.5rem, 9dvh, 6rem); }
   font-size: .9em;
 }
 .panel__rich strong { font-weight: 700; }
+.panel__rich u { text-underline-offset: .18em; text-decoration-thickness: 1px; }
+.panel__rich del { opacity: .55; }
+.panel__rich mark {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: inherit;
+  padding: .04em .16em;
+}
+.panel__rich sub, .panel__rich sup { font-size: .72em; line-height: 1; }
 .panel__rich a {
   color: var(--accent);
   text-underline-offset: .22em;
@@ -472,6 +480,44 @@ html:not(.js) .panel + .panel { margin-block-start: clamp(3.5rem, 9dvh, 6rem); }
 }
 /* URL ve uzun kimlikler taşmasın */
 .panel__rich a, .panel__rich code { overflow-wrap: anywhere; }
+
+/* içerik içi çizim: akışta duran görsel bloğu (yönetim paneli "Görsel" bloğu
+   üretir; şerit görseli .panel__art'tan bağımsız). Çizimler beyaz-zeminsiz
+   mürekkep olduğundan karanlık temada panel şeridiyle aynı biçimde terslenir. */
+.panel__rich figure { margin: 1.6em 0; }
+.panel__rich figure img {
+  margin-inline: auto;
+  width: auto;
+  max-height: min(42dvh, 380px);
+  object-fit: contain;
+  filter: invert(var(--art-invert));
+}
+.panel__rich figcaption {
+  margin-block-start: .55em;
+  text-align: center;
+  font-size: .82em;
+  letter-spacing: .06em;
+  color: var(--muted);
+}
+
+/* -- kırılıma özel dönüşümler ----------------------------------------------
+   Yönetim panelinin tuvali, öğe dönüşümlerini kırılım başına ayrı kaydeder:
+   temel (masaüstü) değerler doğrudan satır içi stildedir; tablet/mobil
+   geçersiz kılmaları --t-t/--w-t ve --t-m/--w-m özel değişkenleri olarak
+   yazılır. Aşağıdaki kurallar bu değişkenleri site kırılımlarında (1160/640,
+   sayfanın kendi düzen eşikleri) uygular — satır içi stili ezmek için
+   !important gerekir. Mobil kuralları sonra gelir: tablet değerini devralır,
+   kendi değeri varsa onu ezer. */
+@media (max-width: 1160px) {
+  [style*="--t-t:"] { transform: var(--t-t) !important; }
+  [style*="--w-t:"] { width: var(--w-t) !important; }
+}
+@media (max-width: 640px) {
+  [style*="--t-t:"] { transform: var(--t-t) !important; }
+  [style*="--w-t:"] { width: var(--w-t) !important; }
+  [style*="--t-m:"] { transform: var(--t-m) !important; }
+  [style*="--w-m:"] { width: var(--w-m) !important; }
+}
 
 /* hazırlanmakta olan bölümler */
 .panel__soon {

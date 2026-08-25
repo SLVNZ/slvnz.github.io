@@ -13,7 +13,9 @@
    dağarcığına İNDİRGENİR:
 
      p (+lede) · h3 · h4 · ul ol li · blockquote · table thead tbody tr th td
-     hr · strong em code a[href] · br
+     hr · strong em u del mark sup sub code a[href] · br
+     figure figcaption img[assets/images]
+     blok düzeyinde style: yalnız kanonik dönüşüm dili (tParse/tEmit)
 
    Bunun dışındaki her etiket ya eşlenir (b→strong, h1/h2→h3, div→çöz) ya da
    çözülür; stiller/sınıflar atılır. Aynı süzgeç hem yapıştırmada hem
@@ -35,7 +37,13 @@
   var dirty = false;
   var pickerCb = null;      // görsel seçici geri çağrısı
 
-  function markDirty() {
+  /* Aynı modeli iki yüzey düzenler: form görünümleri ve tuval (canvas.js).
+     Bir yüzeyden yazılan değişiklik ötekinin DOM'unu geride bırakır — bayrak
+     tutulur, geride kalan yüzey görünür olduğunda modelden tazelenir. */
+  var stale = { form: false, canvas: false };
+
+  function markDirty(src) {
+    if (src === 'canvas') stale.form = true; else stale.canvas = true;
     if (!dirty) {
       dirty = true;
       $('[data-save]').disabled = false;
@@ -67,6 +75,35 @@
     toastTimer = setTimeout(function () { t.hidden = true; }, isErr ? 6500 : 3800);
   }
 
+  /* ---------------------------------------------------------------- onay
+     Tarayıcının confirm()'u yerine panelin kendi diyaloğu. Promise<boolean>
+     döner; Esc / Vazgeç / dışına tıklama false sayılır. */
+  var confirmResolve = null;
+  function confirmDialog(msg, okText) {
+    return new Promise(function (resolve) {
+      var d = $('[data-confirm]');
+      $('[data-confirm-msg]').textContent = msg;
+      $('[data-confirm-ok]').textContent = okText || 'Sil';
+      confirmResolve = resolve;
+      d.showModal();
+      $('[data-confirm-cancel]').focus();
+    });
+  }
+  (function () {
+    var d = $('[data-confirm]');
+    if (!d) return;
+    function settle(val) {
+      if (confirmResolve) { confirmResolve(val); confirmResolve = null; }
+      if (d.open) d.close();
+    }
+    $('[data-confirm-ok]').addEventListener('click', function () { settle(true); });
+    $('[data-confirm-cancel]').addEventListener('click', function () { settle(false); });
+    d.addEventListener('close', function () { settle(false); });
+    d.addEventListener('click', function (e) {
+      if (e.target === d) settle(false);           // arka plana tıklama = vazgeç
+    });
+  })();
+
   /* ---------------------------------------------------------------- git */
   function renderGit(g) {
     var el = $('[data-git]');
@@ -82,14 +119,66 @@
   /* ================================================================ süzgeç
      Sitenin söz dağarcığına indirgeme — yapıştırma ve kaydetmede aynı yol. */
   var ALLOW = {
-    P: ['class'], H3: [], H4: [], UL: [], OL: [], LI: [], BLOCKQUOTE: [],
-    TABLE: [], THEAD: [], TBODY: [], TR: [], TH: [], TD: [], HR: [],
-    STRONG: [], EM: [], A: ['href'], CODE: [], BR: []
+    P: ['class', 'style'], H3: ['style'], H4: ['style'], UL: ['style'], OL: ['style'], LI: [], BLOCKQUOTE: ['style'],
+    TABLE: ['style'], THEAD: [], TBODY: [], TR: [], TH: [], TD: [], HR: ['style'],
+    STRONG: [], EM: [], U: [], DEL: [], MARK: [], SUP: [], SUB: [], A: ['href'], CODE: [], BR: [],
+    FIGURE: ['style'], FIGCAPTION: [], IMG: ['src', 'alt', 'width', 'height', 'loading', 'decoding']
   };
-  var RENAME = { B: 'STRONG', I: 'EM', H1: 'H3', H2: 'H3', H5: 'H4', H6: 'H4' };
-  var DROP = { SCRIPT: 1, STYLE: 1, META: 1, LINK: 1, TITLE: 1, IFRAME: 1, OBJECT: 1, EMBED: 1, FORM: 1, INPUT: 1, BUTTON: 1, SELECT: 1, TEXTAREA: 1, CANVAS: 1, SVG: 1, NOSCRIPT: 1, IMG: 1 };
+  var RENAME = { B: 'STRONG', I: 'EM', STRIKE: 'DEL', S: 'DEL', H1: 'H3', H2: 'H3', H5: 'H4', H6: 'H4' };
+  var DROP = { SCRIPT: 1, STYLE: 1, META: 1, LINK: 1, TITLE: 1, IFRAME: 1, OBJECT: 1, EMBED: 1, FORM: 1, INPUT: 1, BUTTON: 1, SELECT: 1, TEXTAREA: 1, CANVAS: 1, SVG: 1, NOSCRIPT: 1 };
   var PCLASS = { lede: 1, panel__soon: 1 };
-  var INLINE = { STRONG: 1, EM: 1, A: 1, CODE: 1, BR: 1, '#text': 1 };
+  var INLINE = { STRONG: 1, EM: 1, U: 1, DEL: 1, MARK: 1, SUP: 1, SUB: 1, A: 1, CODE: 1, BR: 1, '#text': 1 };
+
+  /* -- dönüşüm stili -----------------------------------------------------
+     Blok düzeyinde `style` yalnız şu dile izinlidir ve HEP kanonik biçimde
+     yazılır (tuvalin serbest dönüşümleri; site bunları JS'siz gösterir):
+       position:relative;z-index:Z;width:W%;text-align:A;
+       transform:translate(Xpx, Ypx) scale(S) rotate(Rdeg)
+     Uymayan her stil atılır. server.py style_t aynı dili konuşur. */
+  function tParse(style) {
+    var t = { x: 0, y: 0, s: 1, r: 0, w: null, z: null, a: null, tab: null, mob: null }, m;
+    if (!style) return t;
+    // temel değerler: kırılım değişkenleri (--t-t: translate…) temel transform
+    // regex'ine yakalanmasın diye önce ayıklanır
+    var base = style.replace(/--[tw]-[tm]:[^;]*/g, '');
+    if ((m = /translate\((-?[\d.]+)px,\s*(-?[\d.]+)px\)/.exec(base))) { t.x = +m[1]; t.y = +m[2]; }
+    if ((m = /scale\(([\d.]+)\)/.exec(base))) t.s = +m[1];
+    if ((m = /rotate\((-?[\d.]+)deg\)/.exec(base))) t.r = +m[1];
+    if ((m = /(?:^|;)\s*width:\s*([\d.]+)%/.exec(base))) t.w = +m[1];
+    if ((m = /z-index:\s*(-?\d+)/.exec(base))) t.z = +m[1];
+    if ((m = /text-align:\s*(center|right|justify)/.exec(base))) t.a = m[1];
+    ['tab', 'mob'].forEach(function (bp) {
+      var sfx = bp === 'tab' ? 't' : 'm';
+      var mt = new RegExp('--t-' + sfx + ':translate\\((-?[\\d.]+)px, (-?[\\d.]+)px\\) scale\\(([\\d.]+)\\) rotate\\((-?[\\d.]+)deg\\)').exec(style);
+      var mw = new RegExp('--w-' + sfx + ':([\\d.]+)%').exec(style);
+      if (mt || mw) {
+        t[bp] = { x: mt ? +mt[1] : 0, y: mt ? +mt[2] : 0, s: mt ? +mt[3] : 1,
+                  r: mt ? +mt[4] : 0, w: mw ? +mw[1] : null };
+      }
+    });
+    ['x', 'y', 's', 'r', 'w', 'z'].forEach(function (k) { if (t[k] != null && !isFinite(t[k])) t[k] = k === 's' ? 1 : (k === 'w' || k === 'z' ? null : 0); });
+    return t;
+  }
+  function tNum(v) { return String(Math.round(v * 1000) / 1000); }
+  function tEmit(t) {
+    var parts = [];
+    if (t.z != null && t.z !== 0) parts.push('position:relative', 'z-index:' + Math.round(t.z));
+    if (t.w != null && t.w > 0 && t.w < 100) parts.push('width:' + tNum(t.w) + '%');
+    if (t.a) parts.push('text-align:' + t.a);
+    if (t.x || t.y || t.s !== 1 || t.r) {
+      parts.push('transform:translate(' + Math.round(t.x) + 'px, ' + Math.round(t.y) + 'px) scale(' +
+                 tNum(t.s) + ') rotate(' + tNum(t.r) + 'deg)');
+    }
+    ['tab', 'mob'].forEach(function (bp) {
+      var l = t[bp];
+      if (!l) return;
+      var sfx = bp === 'tab' ? 't' : 'm';
+      parts.push('--t-' + sfx + ':translate(' + Math.round(l.x || 0) + 'px, ' + Math.round(l.y || 0) +
+                 'px) scale(' + tNum(l.s != null ? l.s : 1) + ') rotate(' + tNum(l.r || 0) + 'deg)');
+      if (l.w != null && l.w > 0 && l.w < 100) parts.push('--w-' + sfx + ':' + tNum(l.w) + '%');
+    });
+    return parts.join(';');
+  }
 
   function safeHref(h) {
     h = (h || '').trim();
@@ -112,6 +201,12 @@
         cleanNode(child);
         var want = RENAME[tag] || tag;
         if (!(want in ALLOW)) {                         // bilinmeyen → çöz
+          if (tag === 'DIV' && /\btable-wrap\b/.test(child.className || '')) {
+            // sarıcının dönüşüm stili tabloya iner; kayıtta tekrar sarıcıya çıkar
+            var tw = child.querySelector('table');
+            var tst = tEmit(tParse(child.getAttribute('style')));
+            if (tw && tst) tw.setAttribute('style', tst);
+          }
           while (child.firstChild) node.insertBefore(child.firstChild, child);
           node.removeChild(child);
         } else {
@@ -138,6 +233,19 @@
             if (cls.length) el.setAttribute('class', cls.join(' '));
             else el.removeAttribute('class');
           }
+          if (want === 'IMG') {
+            // yalnız site çizimleri — dış URL ya da data: gömüsü dosyaya sızmaz
+            if (!/^assets\/images\/[a-z0-9._-]+\.(png|webp|svg)$/i.test(el.getAttribute('src') || '')) {
+              node.removeChild(el);
+              child = next;
+              continue;
+            }
+          }
+          if (el.hasAttribute && el.hasAttribute('style')) {
+            var stv = tEmit(tParse(el.getAttribute('style')));
+            if (stv) el.setAttribute('style', stv);
+            else el.removeAttribute('style');
+          }
         }
       }
       child = next;
@@ -163,13 +271,26 @@
   }
 
   function dropEmpties(root) {
-    $$('p, h3, h4, li', root).forEach(function (el) {
-      if (!el.textContent.trim() && !el.querySelector('br')) el.remove();
+    $$('p, h3, h4, li, figcaption', root).forEach(function (el) {
+      if (!el.textContent.trim() && !el.querySelector('br, img')) el.remove();
     });
     $$('p', root).forEach(function (el) {                    // yalnız <br> kalan p
-      if (!el.textContent.trim() && el.children.length && !el.querySelector('table')) el.remove();
+      if (!el.textContent.trim() && el.children.length && !el.querySelector('table, img')) el.remove();
     });
+    $$('figure', root).forEach(function (el) { if (!el.querySelector('img')) el.remove(); });
     $$('ul, ol', root).forEach(function (el) { if (!el.children.length) el.remove(); });
+  }
+
+  function figureWrap(root) {
+    // görsel bloğu sitede hep <figure>'dur: başıboş kök img ve yalnız-img p'ler sarılır
+    Array.prototype.slice.call(root.children).forEach(function (el) {
+      if (el.tagName === 'IMG' || (el.tagName === 'P' && !el.textContent.trim() && el.querySelector('img'))) {
+        var f = document.createElement('figure');
+        root.insertBefore(f, el);
+        if (el.tagName === 'IMG') f.appendChild(el);
+        else { while (el.firstChild) f.appendChild(el.firstChild); root.removeChild(el); }
+      }
+    });
   }
 
   function sanitizeHTML(html) {
@@ -177,6 +298,7 @@
     tpl.innerHTML = html;
     cleanNode(tpl.content);
     wrapLoose(tpl.content);
+    figureWrap(tpl.content);
     dropEmpties(tpl.content);
     // not: DocumentFragment'ta ':scope > *' boş döner — .children kullan
     return Array.prototype.map.call(tpl.content.children, function (el) { return el.outerHTML; }).join('\n');
@@ -185,10 +307,13 @@
   function serializeForSave(html) {
     var tpl = document.createElement('template');
     tpl.innerHTML = sanitizeHTML(html);
-    // geniş tablolar sitede kendi içinde kaysın
+    // geniş tablolar sitede kendi içinde kaysın; dönüşüm stili sarıcıya çıkar
+    // (tabloda kalsa sarıcının overflow'u taşan dönüşümü kırpardı)
     $$('table', tpl.content).forEach(function (t) {
       var w = document.createElement('div');
       w.className = 'table-wrap';
+      var st = t.getAttribute('style');
+      if (st) { w.setAttribute('style', st); t.removeAttribute('style'); }
       t.parentNode.replaceChild(w, t);
       w.appendChild(t);
     });
@@ -207,6 +332,11 @@
     table: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15"/><path d="M3.5 10h17M10 4.5v15M16 4.5v15"/></svg>',
     hr: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18M7 6h10M7 18h10" opacity=".35"/><path d="M3 12h18"/></svg>',
     clear: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 15 8.5-8.5a2 2 0 0 1 2.8 0l1.2 1.2a2 2 0 0 1 0 2.8L9 19H5.8L5 18.2z"/><path d="M12 21h9"/></svg>',
+    mark: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 12.5 6.5-6.5a1.8 1.8 0 0 1 2.5 2.5L11.5 15 8 16z"/><path d="M4 20h16" opacity=".45"/><path d="M4 20h7"/></svg>',
+    alignl: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 10.5h10M4 15h16M4 19.5h10"/></svg>',
+    alignc: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M7 10.5h10M4 15h16M7 19.5h10"/></svg>',
+    alignr: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M10 10.5h10M4 15h16M10 19.5h10"/></svg>',
+    alignj: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 10.5h16M4 15h16M4 19.5h16"/></svg>',
     up: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>',
     down: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>',
     x: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>',
@@ -230,8 +360,18 @@
         '<span class="rte__sep"></span>' +
         '<button type="button" class="iconbtn rte__b" data-cmd="bold" aria-label="Kalın" title="Ctrl+B">K</button>' +
         '<button type="button" class="iconbtn rte__i" data-cmd="italic" aria-label="İtalik" title="Ctrl+I">T</button>' +
+        '<button type="button" class="iconbtn rte__u" data-cmd="underline" aria-label="Altı çizili" title="Ctrl+U">A</button>' +
+        '<button type="button" class="iconbtn rte__st" data-cmd="strike" aria-label="Üstü çizili">A</button>' +
+        '<button type="button" class="iconbtn" data-cmd="marktag" aria-label="Vurgula" title="Fosforlu vurgu">' + ICON.mark + '</button>' +
+        '<button type="button" class="iconbtn rte__ss" data-cmd="sup" aria-label="Üst simge">x²</button>' +
+        '<button type="button" class="iconbtn rte__ss" data-cmd="sub" aria-label="Alt simge">x₂</button>' +
         '<button type="button" class="iconbtn" data-cmd="codetag" aria-label="Kod" title="Satır içi kod">' + ICON.code + '</button>' +
         '<button type="button" class="iconbtn" data-cmd="linktag" aria-label="Bağlantı" title="Ctrl+K">' + ICON.link + '</button>' +
+        '<span class="rte__sep"></span>' +
+        '<button type="button" class="iconbtn" data-cmd="align-left" aria-label="Sola hizala">' + ICON.alignl + '</button>' +
+        '<button type="button" class="iconbtn" data-cmd="align-center" aria-label="Ortala">' + ICON.alignc + '</button>' +
+        '<button type="button" class="iconbtn" data-cmd="align-right" aria-label="Sağa hizala">' + ICON.alignr + '</button>' +
+        '<button type="button" class="iconbtn" data-cmd="align-justify" aria-label="İki yana yasla">' + ICON.alignj + '</button>' +
         '<span class="rte__sep"></span>' +
         '<button type="button" class="iconbtn" data-cmd="ul" aria-label="Madde listesi">' + ICON.ul + '</button>' +
         '<button type="button" class="iconbtn" data-cmd="ol" aria-label="Sıralı liste">' + ICON.ol + '</button>' +
@@ -307,19 +447,19 @@
       markDirty(); syncBar();
     });
 
-    /* -- satır içi kod ---------------------------------------------------- */
-    function toggleCode() {
+    /* -- satır içi sarma: kod / vurgu ------------------------------------- */
+    function toggleWrap(tagName) {
       var s = getSelection();
       if (!s.rangeCount || !inSurface(s.anchorNode)) return;
-      var code = closest(s.anchorNode, 'code');
-      if (code) {
-        var p = code.parentNode;
-        while (code.firstChild) p.insertBefore(code.firstChild, code);
-        p.removeChild(code); p.normalize();
+      var hit = closest(s.anchorNode, tagName);
+      if (hit) {
+        var p = hit.parentNode;
+        while (hit.firstChild) p.insertBefore(hit.firstChild, hit);
+        p.removeChild(hit); p.normalize();
       } else {
         var r = s.getRangeAt(0);
         if (r.collapsed) return;
-        var el = document.createElement('code');
+        var el = document.createElement(tagName);
         el.appendChild(r.extractContents());
         r.insertNode(el);
         s.removeAllRanges();
@@ -429,12 +569,20 @@
       var b = e.target.closest('[data-cmd]');
       if (!b) return;
       var c = b.getAttribute('data-cmd');
-      if (c === 'undo' || c === 'redo' || c === 'bold' || c === 'italic') exec(c);
+      if (c === 'undo' || c === 'redo' || c === 'bold' || c === 'italic' || c === 'underline') exec(c);
+      else if (c === 'strike') exec('strikeThrough');
+      else if (c === 'sup') exec('superscript');
+      else if (c === 'sub') exec('subscript');
+      else if (c === 'align-left') exec('justifyLeft');
+      else if (c === 'align-center') exec('justifyCenter');
+      else if (c === 'align-right') exec('justifyRight');
+      else if (c === 'align-justify') exec('justifyFull');
       else if (c === 'ul') exec('insertUnorderedList');
       else if (c === 'ol') exec('insertOrderedList');
       else if (c === 'hr') exec('insertHTML', '<hr><p><br></p>');
       else if (c === 'clear') { exec('removeFormat'); exec('unlink'); }
-      else if (c === 'codetag') toggleCode();
+      else if (c === 'codetag') toggleWrap('code');
+      else if (c === 'marktag') toggleWrap('mark');
       else if (c === 'linktag') openLink();
       else if (c === 'table') insertTable();
       else tableOp(c);
@@ -465,8 +613,17 @@
       try {
         $('[data-cmd="bold"]', host).setAttribute('aria-pressed', document.queryCommandState('bold'));
         $('[data-cmd="italic"]', host).setAttribute('aria-pressed', document.queryCommandState('italic'));
+        $('[data-cmd="underline"]', host).setAttribute('aria-pressed', document.queryCommandState('underline'));
+        $('[data-cmd="strike"]', host).setAttribute('aria-pressed', document.queryCommandState('strikeThrough'));
+        $('[data-cmd="sup"]', host).setAttribute('aria-pressed', document.queryCommandState('superscript'));
+        $('[data-cmd="sub"]', host).setAttribute('aria-pressed', document.queryCommandState('subscript'));
+        $('[data-cmd="align-left"]', host).setAttribute('aria-pressed', document.queryCommandState('justifyLeft'));
+        $('[data-cmd="align-center"]', host).setAttribute('aria-pressed', document.queryCommandState('justifyCenter'));
+        $('[data-cmd="align-right"]', host).setAttribute('aria-pressed', document.queryCommandState('justifyRight'));
+        $('[data-cmd="align-justify"]', host).setAttribute('aria-pressed', document.queryCommandState('justifyFull'));
       } catch (e) {}
       $('[data-cmd="codetag"]', host).setAttribute('aria-pressed', !!closest(node, 'code'));
+      $('[data-cmd="marktag"]', host).setAttribute('aria-pressed', !!closest(node, 'mark'));
       $('[data-cmd="linktag"]', host).setAttribute('aria-pressed', !!closest(node, 'a'));
       var b = closest(node, 'p, h3, h4, blockquote, li');
       var v = 'p';
@@ -515,11 +672,14 @@
       $('[data-vdown]', li).addEventListener('click', function () { moveVer(i, 1); });
       $('[data-vdel]', li).addEventListener('click', function () {
         var nb = (site.kurallar[v.no] || {}).bolumler || [];
-        if (!confirm('"' + v.no + '" sürümü silinsin mi?' + (nb.length ? '\nİçindeki ' + nb.length + ' bölüm de içerikten silinir.' : ''))) return;
-        site.surumler.splice(i, 1);
-        delete site.kurallar[v.no];
-        if (editingVer === v.no) editingVer = null;
-        markDirty(); renderVersions(); renderKverSelect();
+        confirmDialog('"' + v.no + '" sürümü silinsin mi?' + (nb.length ? '\nİçindeki ' + nb.length + ' bölüm de içerikten silinir.' : ''))
+          .then(function (ok) {
+            if (!ok) return;
+            site.surumler.splice(i, 1);
+            delete site.kurallar[v.no];
+            if (editingVer === v.no) editingVer = null;
+            markDirty(); renderVersions(); renderKverSelect();
+          });
       });
       ol.appendChild(li);
     });
@@ -592,12 +752,13 @@
     });
   }
 
-  function slugify(t) {
+  function slugify(t, list) {
     var map = { 'ç': 'c', 'ğ': 'g', 'ı': 'i', 'ö': 'o', 'ş': 's', 'ü': 'u', 'â': 'a', 'î': 'i', 'û': 'u' };
     var s = t.toLowerCase().replace(/[çğıöşüâîû]/g, function (c) { return map[c] || c; })
       .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'bolum';
+    var pool = list || chapters();
     var base = s, k = 2;
-    while (chapters().some(function (c) { return c.id === s; })) s = base + '-' + k++;
+    while (pool.some(function (c) { return c.id === s; })) s = base + '-' + k++;
     return s;
   }
 
@@ -661,10 +822,12 @@
       $('[data-ch-up]', li).addEventListener('click', function () { moveCh(i, -1); });
       $('[data-ch-down]', li).addEventListener('click', function () { moveCh(i, 1); });
       $('[data-ch-del]', li).addEventListener('click', function () {
-        if (!confirm('"' + ch.baslik + '" bölümü silinsin mi?')) return;
-        captureChapters();
-        chapters().splice(i, 1);
-        markDirty(); renderChapters();
+        confirmDialog('"' + ch.baslik + '" bölümü silinsin mi?').then(function (ok) {
+          if (!ok) return;
+          captureChapters();
+          chapters().splice(i, 1);
+          markDirty(); renderChapters();
+        });
       });
 
       $('[data-ch-art]', li).addEventListener('click', function () {
@@ -761,10 +924,24 @@
     return true;
   }
 
+  function validateModel() {
+    var errs = [];
+    Object.keys(site.kurallar || {}).forEach(function (no) {
+      ((site.kurallar[no] || {}).bolumler || []).forEach(function (ch) {
+        if (!String(ch.baslik || '').trim()) errs.push(no + ' / ' + ch.id + ': başlık boş olamaz');
+      });
+    });
+    return errs;
+  }
+
   function save() {
     if (!dirty) return;
-    if (!validateLocal()) return;
-    captureChapters();
+    // aktif yüzeydeki bekleyen düzenlemeleri modele boşalt
+    var av = activeViewName();
+    if (viewHooks[av] && viewHooks[av].flush) viewHooks[av].flush();
+    if (av === 'kurallar' && !validateLocal()) return;
+    var errs = validateModel();
+    if (errs.length) { toast(errs.join(' · '), true); return; }
     var btn = $('[data-save]');
     btn.disabled = true; btn.textContent = 'Yazılıyor…';
     api('/api/site', { method: 'PUT', body: JSON.stringify(site) })
@@ -789,18 +966,41 @@
   $('[data-git]').addEventListener('click', refreshGit);
 
   /* ================================================================ görünüm */
-  $$('[data-view]').forEach(function (b) {
-    b.addEventListener('click', function () {
-      $$('[data-view]').forEach(function (x) {
-        x.classList.toggle('is-active', x === b);
-        if (x === b) x.setAttribute('aria-current', 'page');
-        else x.removeAttribute('aria-current');
-      });
-      $$('[data-view-panel]').forEach(function (p) {
-        p.hidden = p.getAttribute('data-view-panel') !== b.getAttribute('data-view');
-      });
-      $('#icerik').focus();
+  /* Kancalar: leave — yüzeydeki düzenlemeleri modele boşalt; enter — yüzey
+     geride kaldıysa modelden tazele; flush — kaydet öncesi boşaltma.
+     Tuval kendi kancalarını registerView ile takar (canvas.js). */
+  var viewHooks = {
+    kurallar: {
+      enter: function () { if (stale.form) { renderChapters(); stale.form = false; } },
+      leave: function () { captureChapters(); },
+      flush: function () { captureChapters(); }
+    }
+  };
+
+  function activeViewName() {
+    var b = $('[data-view].is-active');
+    return b ? b.getAttribute('data-view') : null;
+  }
+
+  function switchView(name) {
+    var prev = activeViewName();
+    if (prev === name) return;
+    if (prev && viewHooks[prev] && viewHooks[prev].leave) viewHooks[prev].leave();
+    $$('[data-view]').forEach(function (x) {
+      var on = x.getAttribute('data-view') === name;
+      x.classList.toggle('is-active', on);
+      if (on) x.setAttribute('aria-current', 'page');
+      else x.removeAttribute('aria-current');
     });
+    $$('[data-view-panel]').forEach(function (p) {
+      p.hidden = p.getAttribute('data-view-panel') !== name;
+    });
+    if (viewHooks[name] && viewHooks[name].enter) viewHooks[name].enter();
+    $('#icerik').focus();
+  }
+
+  $$('[data-view]').forEach(function (b) {
+    b.addEventListener('click', function () { switchView(b.getAttribute('data-view')); });
   });
 
   /* ================================================================ açılış */
@@ -812,11 +1012,39 @@
       renderVersions();
       renderKverSelect();
       renderChapters();
+      stale.form = stale.canvas = false;
+      window.dispatchEvent(new CustomEvent('adm:ready'));
+      var av = activeViewName();
+      if (viewHooks[av] && viewHooks[av].enter) viewHooks[av].enter();
     })
     .catch(function (err) {
       toast('Sunucuya ulaşılamadı: ' + err.message, true);
     });
 
-  /* testler için */
-  window.__adm = { sanitizeHTML: sanitizeHTML, serializeForSave: serializeForSave };
+  /* ------------------------------------------------------- köprü (canvas.js)
+     Tuval editörü ayrı dosyada yaşar; modele ve ortak araçlara buradan erişir.
+     sanitizeHTML/serializeForSave testlerde de kullanılır. */
+  window.__adm = {
+    sanitizeHTML: sanitizeHTML,
+    serializeForSave: serializeForSave,
+    safeHref: safeHref,
+    tParse: tParse,
+    tEmit: tEmit,
+    rteToolbarHTML: rteToolbarHTML,
+    ICON: ICON,
+    slugify: slugify,
+    currentVerNo: currentVerNo,
+    stale: stale,
+    markDirty: markDirty,
+    save: save,
+    toast: toast,
+    confirmDialog: confirmDialog,
+    openPicker: openPicker,
+    renderVersions: renderVersions,
+    renderKverSelect: renderKverSelect,
+    switchView: switchView,
+    registerView: function (name, hooks) { viewHooks[name] = hooks; },
+    getSite: function () { return site; },
+    getImages: function () { return images; }
+  };
 })();

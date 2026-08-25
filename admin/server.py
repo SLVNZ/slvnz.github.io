@@ -17,6 +17,10 @@ Ne yapar
 - /api/images     assets/images içindeki kullanılabilir çizimler
 - /api/upload     PUT ?ad=x.png — beyaz zemin alfaya çevrilir, webp üretilir
 - /api/git        git durumu (salt okunur — commit'i sen atarsın)
+- /index.html?edit=1 · /kurallar.html?edit=1
+                  tuval modu: sayfa, site etkileşim script'leri OLMADAN servis
+                  edilir (theme.js kalır) — davranışı panelin canvas editörü
+                  devralır (admin/canvas.js). Sayfanın diskteki hâli değişmez.
 
 Üretim modeli
 -------------
@@ -95,7 +99,65 @@ def png_alfali(path):
     return len(d) >= 26 and d[25] in (4, 6)     # gri+alfa | RGBA
 
 
+def style_t(t):
+    """Tuvalin serbest dönüşümü → satır içi stil (admin.js tEmit ile aynı dil).
+
+    Kayıt: {x, y (px) · s (ölçek) · r (derece) · z (katman)} + kırılım
+    geçersiz kılmaları `tab`/`mob` (aynı alanlar; kurallar.css'in
+    --t-t/--t-m medya kuralları uygular). Boş/varsayılan kayıt hiç stil
+    üretmez; üretim bayt-kararlı kalır.
+    """
+    if not isinstance(t, dict):
+        return ''
+
+    def g(v):
+        return f'{v:g}'
+
+    def num(d, k, dft):
+        v = d.get(k, dft)
+        return float(v) if isinstance(v, (int, float)) else dft
+
+    def tl(d):
+        return (f'translate({g(num(d, "x", 0))}px, {g(num(d, "y", 0))}px) '
+                f'scale({g(num(d, "s", 1))}) rotate({g(num(d, "r", 0))}deg)')
+
+    x, y, s, r = num(t, 'x', 0), num(t, 'y', 0), num(t, 's', 1), num(t, 'r', 0)
+    z = t.get('z')
+    parts = []
+    if isinstance(z, (int, float)) and int(z) != 0:
+        parts += ['position:relative', f'z-index:{int(z)}']
+    if x or y or s != 1 or r:
+        parts.append(f'transform:{tl(t)}')
+    for key, sfx in (('tab', 't'), ('mob', 'm')):
+        sub = t.get(key)
+        if isinstance(sub, dict):
+            parts.append(f'--t-{sfx}:{tl(sub)}')
+            w = sub.get('w')
+            if isinstance(w, (int, float)) and 0 < w < 100:
+                parts.append(f'--w-{sfx}:{g(float(w))}%')
+    return f' style="{";".join(parts)}"' if parts else ''
+
+
 # ---------------------------------------------------------------- doğrulama
+def t_dogrula(t, yer, errs):
+    """Dönüşüm kaydı: sayılar makul aralıkta olsun — tuval dışından gelen
+    bozuk değer siteyi görünmez öğelerle doldurmasın."""
+    if t is None:
+        return
+    if not isinstance(t, dict):
+        errs.append(f'{yer}: dönüşüm nesne olmalı')
+        return
+    for k, lo, hi in (('x', -3000, 3000), ('y', -3000, 3000),
+                      ('s', 0.05, 20), ('r', -360, 360), ('z', -99, 999),
+                      ('w', 5, 100)):
+        v = t.get(k)
+        if v is not None and not (isinstance(v, (int, float)) and lo <= v <= hi):
+            errs.append(f'{yer}: dönüşüm {k} değeri {lo}..{hi} arası sayı olmalı')
+    for key in ('tab', 'mob'):
+        if t.get(key) is not None:
+            t_dogrula(t.get(key), f'{yer}/{key}', errs)
+
+
 def validate(site):
     errs = []
     sv = site.get('surumler')
@@ -133,6 +195,8 @@ def validate(site):
                 img = str(g.get('img', ''))
                 if not img.startswith('assets/images/') or '..' in img:
                     errs.append(f'{no}/{cid}: görsel yolu assets/images altında olmalı')
+                t_dogrula(g.get('t'), f'{no}/{cid}/görsel', errs)
+            t_dogrula(ch.get('baslik_t'), f'{no}/{cid}/başlık', errs)
             if not isinstance(ch.get('html', ''), str):
                 errs.append(f'{no}/{cid}: html metin olmalı')
     return errs
@@ -219,7 +283,7 @@ def gen_panel(ch, i):
     if g:
         # ilk bölüm açılışta görünür: öncelikli iner; ötekiler tembel yüklenir
         attrs = 'decoding="async" fetchpriority="high"' if i == 0 else 'decoding="async" loading="lazy"'
-        L.append('        <figure class="panel__art" aria-hidden="true">')
+        L.append(f'        <figure class="panel__art" aria-hidden="true"{style_t(g.get("t"))}>')
         if g.get('webp'):
             L += [
                 '          <picture>',
@@ -237,7 +301,7 @@ def gen_panel(ch, i):
     L += [
         '        <header class="panel__head">',
         f'          <p class="panel__no" aria-hidden="true">{no}</p>',
-        f'          <h2 class="panel__title" id="b{no}">{esc(ch["baslik"])}</h2>',
+        f'          <h2 class="panel__title" id="b{no}"{style_t(ch.get("baslik_t"))}>{esc(ch["baslik"])}</h2>',
         '        </header>',
         '        <div class="panel__rich">',
     ]
@@ -337,6 +401,18 @@ def save_upload(ad, data):
             'webp': f'assets/images/{base}.webp', 'w': rgba.width, 'h': rgba.height}
 
 
+# ---------------------------------------------------------------- tuval modu
+# Canvas editörü sayfayı iframe'e alır; site script'leri (panel geçişi, duman,
+# sürüm menüsü) editörle yarışmasın diye çıkarılır. theme.js kalır — tuval,
+# panelin temasını izler. Yalnız bellekte: diskteki dosyaya dokunulmaz.
+EDIT_STRIP = re.compile(
+    r'\s*<script src="assets/js/(?:nav|kurallar|ink-shader|version-menu)\.js" defer></script>')
+
+
+def edit_html(name):
+    return EDIT_STRIP.sub('', (ROOT / name).read_text(encoding='utf-8'))
+
+
 # ---------------------------------------------------------------- git
 def git_state():
     try:
@@ -411,8 +487,17 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         if not self._yerel():
             return
-        path = urlparse(self.path).path
-        if path == '/api/site':
+        u = urlparse(self.path)
+        path = u.path
+        if path in ('/index.html', '/kurallar.html') and 'edit' in parse_qs(u.query):
+            body = edit_html(path.lstrip('/')).encode('utf-8')
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/html; charset=utf-8')
+            self.send_header('Cache-Control', 'no-store')
+            self.send_header('Content-Length', str(len(body)))
+            self.end_headers()
+            self.wfile.write(body)
+        elif path == '/api/site':
             self._json(load_site())
         elif path == '/api/images':
             self._json(list_images())

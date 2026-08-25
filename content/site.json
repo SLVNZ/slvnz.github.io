@@ -5,12 +5,6 @@
       "tur": "Fantazya",
       "durum": "simdiki",
       "sayfa": "./"
-    },
-    {
-      "no": "3.0",
-      "tur": "Fantazya",
-      "durum": "arsiv",
-      "sayfa": ""
     }
   ],
   "kurallar": {
@@ -23,7 +17,12 @@
             "img": "assets/images/oyunkurallari-header-alpha.png",
             "webp": "assets/images/oyunkurallari-header.webp",
             "w": 2944,
-            "h": 1648
+            "h": 1648,
+            "t": {
+              "y": 63,
+              "s": 1.624,
+              "z": -2
+            }
           },
           "html": "<h3>SLVNZ 4.0 Sistemi</h3>\n<p class=\"lede\">SLVNZ 4.0 sistemi, özünde D&amp;D ve FATE sistemlerini baz ve ilham alınarak düşünülmüş, özelleştirilmiş ve detaylandırılmış bir masaüstü rol yapma oyunu sistemidir. 3.0 sistemine kıyasla “Düşük Fantazya” atmosferini yaşatmak üzere düzenlenmiştir.</p>\n<p>Sistem mümkün olduğunca oyun etkisini barındırırken, oyuncunun sistemin ördüğü sınırlara bağlı kalmadan, yaratıcılığını ve rolünü ortaya koyarak oyunun ve savaşın gidişatına yön vermesini amaçlayan esnek gerçekçiliği sunmayı hedeflemektedir.</p>"
         },
@@ -34,7 +33,11 @@
             "img": "assets/images/dice.png",
             "webp": null,
             "w": 2944,
-            "h": 1648
+            "h": 1648,
+            "t": {
+              "s": 2.133,
+              "z": -2
+            }
           },
           "html": "<p class=\"panel__soon\">Bu bölümün kuralları yazım aşamasında.</p>"
         },
@@ -56,7 +59,12 @@
             "img": "assets/images/oyunkurallari-alpha.png",
             "webp": "assets/images/oyunkurallari.webp",
             "w": 2944,
-            "h": 1648
+            "h": 1648,
+            "t": {
+              "x": -5,
+              "y": 59,
+              "s": 1.615
+            }
           },
           "html": "<p class=\"panel__soon\">Bu bölümün kuralları yazım aşamasında.</p>"
         },
@@ -67,14 +75,16 @@
             "img": "assets/images/titlepage-art.png",
             "webp": "assets/images/titlepage-art.webp",
             "w": 1900,
-            "h": 1084
+            "h": 1084,
+            "t": {
+              "x": 6,
+              "y": 83,
+              "s": 1.58
+            }
           },
           "html": "<p class=\"panel__soon\">Bu bölümün kuralları yazım aşamasında.</p>"
         }
       ]
-    },
-    "3.0": {
-      "bolumler": []
     }
   }
 }

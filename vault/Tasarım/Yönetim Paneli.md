@@ -45,6 +45,99 @@ Site elle yazılmış statik HTML olarak kalır; panel yalnız şu işaretlerin
 > aynı kalıyor. Sürüm geçişi (3.0 şimdiki → geri) menü/ray/panel bölgelerini
 > doğru üretip geri dönüşte bayt bayt eski hâline oturuyor.
 
+## Tasarım görünümü (tuval editörü)
+
+Panelin varsayılan görünümü: **gerçek site** bir iframe tuvalinde açılır ve
+Wix Studio mantığıyla yerinde düzenlenir. Dosyalar: `admin/canvas.js` (editör)
++ `server.py`'de `?edit=1` (tuval modu — site etkileşim script'leri çıkarılmış
+sayfa; theme.js kalır, davranışı editör devralır).
+
+- **Tıkla** → öğe seçilir (çerçeve + sağda özellik paneli) · **tekrar tıkla /
+  çift tıkla** → metin yerinde düzenlenir (başlık düz metin; zengin metin üst
+  çubuktaki biçim araçlarıyla — form editörüyle aynı süzgeç).
+- **Sağ bölüm menüsü**: tıkla → bölüme git; **sürükle** → sırala; altta
+  "+ Bölüm". Görsele tıkla → panelden değiştir/kaldır.
+- **Kilitli** öğeler (eyebrow, ray başlığı, tema anahtarı, telif, menüler)
+  şablonun parçasıdır; gri çerçeveyle işaretlenir, tuvalden düzenlenmez.
+- Üst çubuk: sayfa seçici (Başlık / Kurallar), **yapısal geri al–yinele**
+  (Ctrl+Z/Y; metin içindeyken tarayıcının kendi geri alması), kırılım
+  önizlemesi (1280/768/375 — tuval sığacak şekilde ölçeklenir).
+
+Tuval, işaretli bölgeleri her zaman **modelden** üretir (server.py `gen_*`
+fonksiyonlarının DOM aynası) — kaydedilmemiş değişiklikler de tuvalde görünür;
+kaydet yine sunucuda üretir. Form görünümleriyle tuval aynı modeli düzenler;
+görünüm geçişlerinde `stale` bayrakları geride kalan yüzeyi modelden tazeler
+(`admin.js` görünüm kancaları: enter/leave/flush).
+
+> [!note] Ölçüldü
+> Tuvalde düzenle → kaydet → tuvalde geri al → kaydet turu: `site.json` +
+> `kurallar.html` **bayt bayt** eski hâline dönüyor (JS üretici ile Python
+> üretici birebir aynı çıktıyı veriyor). Süzgeç tuvalde de çalışıyor:
+> `<b>`→`<strong>`, stilli `div` çözülüp `p`'ye sarılıyor.
+
+### Ekle paleti (bloklar)
+
+Üst çubuktaki **＋ Ekle** paleti iki şey ekler; kartlar **tıklanınca** mantıklı
+yere (seçili bloğun altı / bölümün sonu), **sürüklenince** bırakıldığı yere girer
+(zengin metinde araya turuncu bırakma çizgisi; sürükleme pointer capture ile
+parent'tan iframe'e ölçek eşlemeli taşınır):
+
+- **Bölüm şablonları** — yeni bölüm açar (Metin / Tablolu / Listeli / Boş);
+  sağ menünün (toc) üstüne sürüklenirse o sıraya girer.
+- **İçerik blokları** — paragraf, giriş paragrafı, başlık, alt başlık, alıntı,
+  listeler, tablo, zar tablosu, kural kartı, ayraç, **görsel** (önce seçici açılır).
+
+Zengin metnin kök çocukları artık **blok**tur: tek tık blok seçer (taşı /
+çoğalt / sil / `lede` dönüştür / görseli değiştir — sağ panelden; Del siler),
+çift tık metin düzenlemeye geçer. Yer tutucu (`panel__soon`) ilk gerçek blok
+gelince kendiliğinden düşer.
+
+Söz dağarcığına **figure + img + figcaption** eklendi (`kurallar.css`'te
+`.panel__rich figure` stilleri — çizim karanlık temada panel şeridi gibi
+terslenir). Süzgeç img'yi yalnız `assets/images/` altındaki dosyalara izinle
+tutar: dış URL, `data:` gömüsü ve `../` kaçışı atılır (ölçüldü); başıboş
+img'ler figure'a sarılır, boş figure düşer.
+
+### Serbest dönüşüm (transform katmanı)
+
+Seçili öğe (zengin metin bloğu, bölüm şeridi görseli `panel__art`, bölüm
+başlığı) Wix mantığıyla serbestçe düzenlenir: **sürükle** taşır, **köşe
+tutamaçları** ölçekler, **kenar tutamaçları** (blokta) genişliği değiştirir,
+**üst sap** döndürür; katman (z, öne/arkaya) ve sayısal X/Y/ölçek/açı sağ
+panelden. Shift eksene/15°'ye kilitler, Esc jesti iptal eder, "Dönüşümü
+sıfırla" temizler.
+
+Kalıcılık — dönüşümler **satır içi stil** olarak üretime yazılır; yayınlanan
+site JS'siz birebir gösterir:
+
+- **blok** → `ch.html` içindeki `style` niteliği (süzgeç yalnız kanonik dili
+  geçirir: `position:relative;z-index;width%;text-align;transform:translate
+  scale rotate` — başka her stil atılır; tablo stili `.table-wrap` sarıcısına
+  taşınır ki overflow kırpmasın)
+- **şerit görseli** → `gorsel.t {x,y,s,r,z}`, **başlık** → `baslik_t` —
+  `server.py style_t` üretir, doğrulama aralık denetler (x/y ±3000, s
+  0.05–20, r ±360, z −99..999)
+
+Zengin metin söz dağarcığı genişledi: `u del mark sup sub` + blok hizalama
+(`text-align`). Araç çubuğu iki editörde de aynı (altı/üstü çizili, fosforlu
+vurgu, alt/üst simge, sola/ortaya/sağa/iki yana).
+
+**Kırılıma özel dönüşüm:** üstteki Masaüstü/Tablet/Mobil önizlemesi aynı
+zamanda düzenleme hedefini seçer — masaüstünde temel değerler, tablet/mobilde
+o kırılımın geçersiz kılması yazılır (devralma: mobil ← tablet ← masaüstü;
+mirasla aynı değere dönen katman kendiliğinden silinir). Kalıcılık: stil
+içinde `--t-t/--w-t` (tablet) ve `--t-m/--w-m` (mobil) özel değişkenleri;
+kurallar.css bunları sitenin kendi eşiklerinde (1160/640) `!important`
+medya kurallarıyla uygular — yayın yine JS'siz. Inspector hangi kırılımın
+düzenlendiğini rozetle gösterir; "X ayarını kaldır" katmanı siler. Katman
+(z) kırılımdan bağımsızdır.
+
+> [!note] Ölçüldü
+> Jest zinciri (taşı 40/80 · köşe ölçek 1.6 · döndür 45° · blok genişlik %70 ·
+> z+1 · X=33 · mark + ortala) → kaydet → tam geri al → kaydet: `site.json` +
+> `kurallar.html` bayt bayt eski hâline döndü. Süzgeç `color/font-size/
+> position:absolute` gibi kanonik dışı stilleri atıyor.
+
 ## Sürüm sistemi
 
 `site.json → surumler`: `no` (4.0), `tur` (Fantazya), `durum`

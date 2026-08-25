@@ -50,9 +50,20 @@ taşındığı için değiştirilmesi gerekiyor.
 python admin/server.py
 ```
 
-http://127.0.0.1:8090/ — sürümleri ve Oyun Kuralları bölümlerini panelden
-düzenle; **Kaydet** site dosyalarını doğrudan yazar (`content/site.json` +
-`index.html` ve `kurallar.html`'deki `yonetim:*` işaretli bölgeler). Sonrasında
+http://127.0.0.1:8090/ — açılışta **Tasarım** görünümü: gerçek site bir
+tuvalde açılır ve yerinde düzenlenir (tıkla-seç, metni sayfa üzerinde yaz,
+bölümleri sağ menüde sürükleyip sırala, görsele tıklayıp değiştir; sağda
+özellik paneli, üstte kırılım önizlemesi ve geri al/yinele). **＋ Ekle**
+paleti bölüm şablonları ve içerik blokları sunar (paragraf, tablo, zar
+tablosu, kural kartı, içerik içi görsel…) — kartı tıkla ya da tuvale sürükle.
+Seçili öğe serbestçe dönüştürülür: sürükle-taşı, köşeden ölçekle, kenardan
+genişlet, üst saptan döndür, katmanı öne/arkaya al — üstteki Masaüstü/Tablet/
+Mobil önizlemesi düzenleme hedefini de seçer, her kırılım için ayrı değer
+verilebilir (devralma: mobil ← tablet ← masaüstü). Dönüşümler satır içi stil
+olarak üretilir, yayınlanan site bunları JS'siz gösterir. Sürümler ve
+form tabanlı bölüm editörü ayrı görünümlerde durur. **Kaydet** site
+dosyalarını doğrudan yazar (`content/site.json` + `index.html` ve
+`kurallar.html`'deki `yonetim:*` işaretli bölgeler). Sonrasında
 `git add -A && git commit && git push` ile yayımla. Panel yalnız yerelde
 çalışır; ayrıntı `vault/Tasarım/Yönetim Paneli.md`.
 
