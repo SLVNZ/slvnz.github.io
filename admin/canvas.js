@@ -175,8 +175,7 @@
     if (!rich) return;
     elementChildren(rich).forEach(function (secEl, bi) {
       if (!isTabsSection(secEl)) return;
-      var old = secEl.querySelector('.cv-tabstrip');
-      if (old) old.remove();
+      $$('.cv-tabstrip, .cv-panadd', secEl).forEach(function (n) { n.remove(); });
       var p = tabParts(secEl);
       if (!p.panels.length) return;
       var key = tabsKey(chId, bi);
@@ -198,6 +197,18 @@
       add.title = 'Sekme ekle';
       strip.appendChild(add);
       secEl.insertBefore(strip, secEl.firstChild);
+
+      /* Açık sekmenin altında bariz ekleme düğmesi. Sekmeye içerik koymanın
+         keşfedilebilir yolu buydu: eskiden önce sekme bloğunu seçmek gerekiyordu,
+         seçmeden eklenen blok sekmenin ALTINA düşüyordu. Düğme panelin İÇİNE
+         değil hemen ARDINA konur — panel çocuklarını sayan her yer (blok sırası,
+         ekleme konumu) bozulmasın diye. */
+      var pAdd = mk('button', 'cv-panadd', '＋ Bu sekmeye içerik ekle');
+      pAdd.type = 'button';
+      pAdd.setAttribute('contenteditable', 'false');
+      pAdd.setAttribute('data-cv-panadd', ai);
+      pAdd.title = 'Ekle paletini aç — seçtiğin blok bu sekmeye girer';
+      secEl.insertBefore(pAdd, p.panels[ai].nextSibling);
     });
   }
   function decorateAllTabs() {
@@ -533,6 +544,13 @@
     '.cv-tabstrip .tabs__tab[contenteditable]{cursor:text;outline:1px dashed var(--accent);outline-offset:2px}',
     '.cv-tabadd{appearance:none;background:none;border:1px dashed color-mix(in srgb,var(--ink) 30%,transparent);color:var(--ink);width:20px;height:20px;padding:0;margin:auto 0 5px 8px;line-height:1;font:600 13px/1 "Space Grotesk",system-ui,sans-serif;cursor:pointer}',
     '.cv-tabadd:hover{border-color:var(--accent);color:var(--accent)}',
+    /* açık sekmenin altındaki ekleme düğmesi — "+ Bölüm" ile aynı dil */
+    '.cv-panadd{display:block;width:100%;margin-top:10px;padding:9px 0;border:1px dashed color-mix(in srgb,var(--accent) 55%,transparent);background:none;color:var(--accent);font:500 11px/1 "Space Grotesk",system-ui,sans-serif;letter-spacing:.13em;text-transform:uppercase;cursor:pointer;-webkit-user-select:none;user-select:none}',
+    '.cv-panadd:hover{background:color-mix(in srgb,var(--accent) 8%,transparent);border-style:solid}',
+    /* palet sürüklenirken açık sekme panelleri görünür bırakma alanı olur */
+    'html.cv-dragging .tabs__panel:not([hidden]){min-height:52px;outline:1px dashed color-mix(in srgb,var(--accent) 45%,transparent);outline-offset:5px}',
+    'html.cv-dragging .cv-panadd{opacity:.35}',
+    '.tabs__panel.cv-droptarget{outline:2px solid var(--accent);outline-offset:5px;background:color-mix(in srgb,var(--accent) 8%,transparent)}',
     '.tabs__panel:not([hidden]):empty{min-height:2.2em}',
     '.tabs__panel:not([hidden]):empty::before{content:"Bu sekme boş — Ekle panelinden blok sürükle ya da çift tıklayıp yaz…";display:block;padding:.35em 0;color:color-mix(in srgb,var(--ink) 45%,transparent);font-style:italic}',
     '.cv-dropline{position:fixed;height:2px;background:var(--accent);z-index:2147483001;pointer-events:none;display:none}',
@@ -633,6 +651,13 @@
       if ((m = q('.panel__title'))) return { type: 'title', el: m, id: m.closest('.panel').id, label: 'Bölüm başlığı' };
       if ((m = q('.panel__rich'))) {
         var pid = m.closest('.panel').id;
+        // "bu sekmeye içerik ekle" düğmesi (tuval kromu)
+        var pAddBtn = node.closest('.cv-panadd');
+        if (pAddBtn && m.contains(pAddBtn)) {
+          var secP = pAddBtn.closest('section.tabs');
+          return { type: 'panadd', el: pAddBtn, id: pid, bi: elementChildren(m).indexOf(secP),
+                   ti: +pAddBtn.getAttribute('data-cv-panadd'), label: 'Sekmeye içerik ekle' };
+        }
         // sekme şeridi (tuval kromu): düğmeler seçim değil sekme işlemidir
         var strip = node.closest('.cv-tabstrip');
         if (strip && m.contains(strip)) {
@@ -751,7 +776,7 @@
       if (renaming.btn.contains(e.target)) return;          // ad içinde imleç serbest
       commitTabRename(false);
     }
-    if (e.target.closest && e.target.closest('.cv-tabstrip')) return;  // tık onClick'te
+    if (e.target.closest && e.target.closest('.cv-tabstrip, .cv-panadd')) return;  // tık onClick'te
     if (editing && editing.el.contains(e.target)) return;   // metin seçimi serbest
     var info = targetInfo(e.target);
     if (info && info.type === 'toc' && !editing) {
@@ -807,6 +832,20 @@
       return;
     }
     if (justDragged) { e.preventDefault(); e.stopPropagation(); return; }
+    // "bu sekmeye içerik ekle": sekmeyi hedef olarak seçer ve paleti açar —
+    // sonraki palet tıklaması insertPos üzerinden bu sekmenin sonuna girer
+    if (t.closest && t.closest('.cv-panadd')) {
+      e.preventDefault(); e.stopPropagation();
+      if (editing) commitEditing();
+      var pinfo = targetInfo(t);
+      if (pinfo && pinfo.type === 'panadd') {
+        switchTab(pinfo.id, pinfo.bi, pinfo.ti);
+        selectTabsSection(pinfo.id, pinfo.bi);
+        togglePalette(true);
+        A.toast('Palet açık — seçtiğin blok bu sekmenin içine eklenecek');
+      }
+      return;
+    }
     // sekme şeridi: metin düzenleme açıkken de çalışır (krom contenteditable değil)
     if (t.closest && t.closest('.cv-tabstrip')) {
       e.preventDefault(); e.stopPropagation();
@@ -1584,7 +1623,8 @@
             '</div>';
         });
         h += '<button type="button" class="btn btn--ghost" data-cvt-add>+ Sekme ekle</button></div>';
-        h += '<p class="cvi__note">Şeritte tıkla → sekmeyi aç · çift tıkla → adını yerinde değiştir · içerik açık sekmeye eklenir.</p>';
+        h += '<button type="button" class="btn" data-cvt-icerik>＋ Açık sekmeye içerik ekle</button>';
+        h += '<p class="cvi__note">Şeritte tıkla → sekmeyi aç · çift tıkla → adını yerinde değiştir. İçerik eklemek için tuvalde sekmenin altındaki <strong>＋ Bu sekmeye içerik ekle</strong> düğmesini kullan ya da paletten bloğu doğrudan sekme kutusuna sürükle.</p>';
       } else {
         h += '<p class="cvi__note">Çift tıkla → metni yerinde düzenle · Del → bloğu sil · yeni blok için üstten <strong>Ekle</strong>.</p>';
       }
@@ -1821,6 +1861,11 @@
     if (sel && sel.type === 'blok' && sel.id && isTabsSection(sel.el)) {
       var tChId = sel.id, tBi = sel.bi;
       if ((b = $('[data-cvt-add]', insp))) b.addEventListener('click', function () { addTab(tChId, tBi); });
+      if ((b = $('[data-cvt-icerik]', insp))) b.addEventListener('click', function () {
+        selectTabsSection(tChId, tBi);      // hedef: açık sekmenin sonu (insertPos)
+        togglePalette(true);
+        A.toast('Palet açık — seçtiğin blok açık sekmenin içine eklenecek');
+      });
       $$('[data-cvt-name]', insp).forEach(function (inp) {
         var i = +inp.getAttribute('data-cvt-name'), prevAd = null;
         inp.addEventListener('focus', function () {
@@ -2186,6 +2231,8 @@
       pd.ghost.className = 'cv-ghost';
       pd.ghost.textContent = pd.blk.ad;
       document.body.appendChild(pd.ghost);
+      // sürükleme boyunca açık sekme panelleri görünür birer bırakma alanı olur
+      if (fdoc) fdoc.documentElement.classList.add('cv-dragging');
     }
     pd.ghost.style.left = (e.clientX + 14) + 'px';
     pd.ghost.style.top = (e.clientY + 12) + 'px';
@@ -2196,6 +2243,7 @@
     if (!pd) return;
     var p = pd; pd = null;
     if (p.ghost) p.ghost.remove();
+    if (fdoc) fdoc.documentElement.classList.remove('cv-dragging');
     showDropHint(null);
     if (!p.moved) { paletteClick(p.blk); return; }
     if (p.target) dropInsert(p.blk, p.target);
@@ -2204,6 +2252,7 @@
     if (!pd) return;
     if (pd.ghost) pd.ghost.remove();
     pd = null;
+    if (fdoc) fdoc.documentElement.classList.remove('cv-dragging');
     showDropHint(null);
   }
 
@@ -2234,6 +2283,19 @@
     }
     // açık sekme panelinin içine bırakma (sekme bloğunun kendisi hariç)
     var pan = el.closest('.tabs__panel');
+    if (!pan && blk.id !== 'tabs') {
+      /* Sekme kutusunun içinde ama panelin dışında (şerit, ekleme düğmesi,
+         kenar boşluğu) bırakıldıysa da içeri alınır — yoksa içerik sekmenin
+         dışına düşüyor ve bunun sebebi kullanıcıya hiç belli olmuyor. */
+      var secHit = el.closest('section.tabs');
+      if (secHit && rich.contains(secHit)) {
+        var pansHit = tabParts(secHit).panels;
+        var chIdHit = rich.closest('.panel').id;
+        var biHit = elementChildren(rich).indexOf(secHit);
+        var siHit = Math.max(0, Math.min(activeTabs[tabsKey(chIdHit, biHit)] || 0, pansHit.length - 1));
+        pan = pansHit[siHit] || null;
+      }
+    }
     if (pan && rich.contains(pan) && blk.id !== 'tabs') {
       var secEl = pan.closest('section.tabs');
       var biT = elementChildren(rich).indexOf(secEl);
@@ -2263,6 +2325,9 @@
     $$('.toc__list li', fdoc).forEach(function (li) {
       li.classList.remove('cv-drop-before', 'cv-drop-after');
     });
+    // sekme paneli hedefse panelin tamamı vurgulanır — "içine girecek" belli olsun
+    $$('.cv-droptarget', fdoc).forEach(function (n) { n.classList.remove('cv-droptarget'); });
+    if (t && t.kind === 'rich' && t.pos && typeof t.pos === 'object') t.cont.classList.add('cv-droptarget');
     if (!t) { if (dropline) dropline.style.display = 'none'; return; }
     if (t.kind === 'toc') {
       dropline.style.display = 'none';
