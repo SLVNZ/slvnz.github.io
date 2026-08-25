@@ -64,8 +64,15 @@ düz akışa döner.
 Seçili öğe serbestçe dönüştürülür: sürükle-taşı, köşeden ölçekle, kenardan
 genişlet, üst saptan döndür, katmanı öne/arkaya al — üstteki Masaüstü/Tablet/
 Mobil önizlemesi düzenleme hedefini de seçer, her kırılım için ayrı değer
-verilebilir (devralma: mobil ← tablet ← masaüstü). Dönüşümler satır içi stil
-olarak üretilir, yayınlanan site bunları JS'siz gösterir. Sürümler ve
+verilebilir (devralma: mobil ← tablet ← masaüstü). Kırılım düğmelerinin
+yanındaki px kutusuna kendi ekran genişliğini yazarak (ör. 1920) siteyi
+birebir o genişlikte önizleyebilirsin — site tipografisi vw tabanlı olduğu
+için dar önizleme geniş monitörle aynı kırılmaz. Seçili blok ve bölüm
+başlığında **Yazı boyutu (px)** alanı vardır; tabloda sütun sınırları
+sürüklenerek ya da özellik panelindeki % girişleriyle boyutlandırılır
+(genişlik verilen tablo sabit düzene geçer — uzun metin komşu sütunu
+sıkıştırmaz). Dönüşümler satır içi stil olarak üretilir, yayınlanan site
+bunları JS'siz gösterir. Sürümler ve
 form tabanlı bölüm editörü ayrı görünümlerde durur. **Kaydet** site
 dosyalarını doğrudan yazar (`content/site.json` + `index.html` ve
 `kurallar.html`'deki `yonetim:*` işaretli bölgeler). Sonrasında

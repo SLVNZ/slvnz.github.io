@@ -452,6 +452,10 @@ html:not(.js) .panel + .panel { margin-block-start: clamp(3.5rem, 9dvh, 6rem); }
 }
 /* geniş tablolar kendi içinde kaysın — sayfa yatay kaymaz */
 .panel__rich .table-wrap { overflow-x: auto; }
+/* yönetim panelinde sütun genişliği verilen tablo sabit düzene geçer:
+   uzun içerik komşu sütunu sıkıştırmaz, hücre içinde sarar */
+.panel__rich table:has(th[style*="width"], td[style*="width"]) { table-layout: fixed; }
+.panel__rich th, .panel__rich td { overflow-wrap: break-word; }
 
 /* ---------- Sekmeler ------------------------------------------------------
    <section class="tabs"> içinde h4.tabs__title + div.tabs__panel çiftleri

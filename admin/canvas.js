@@ -60,6 +60,8 @@
   var gesture = null;           // aktif dönüşüm jesti {kind, el, info, startT, ...}
   var activeTabs = {};          // sekme bloklarının açık sekmesi — "chId:bi" → panel sırası
   var renaming = null;          // şeritte ad düzenlenen sekme {btn, chId, bi, ti, orig}
+  var colbar = null;            // sütun boyutlandırma tutamaçları (seçili tablo)
+  var colGesture = null;        // aktif sütun sürüklemesi {table, k, x0, tw, start, selInfo}
 
   /* ---------------------------------------------------------------- bloklar
      Ekle paletinin sözlüğü. `html` süzgecin söz dağarcığında kalır — kayıtta
@@ -214,6 +216,116 @@
       }
     }
     renderInspector();
+  }
+
+  /* -- tablo sütunları -----------------------------------------------------
+     Seçili tablo bloğunda sütun sınırlarına dikey tutamaçlar çizilir
+     (updateColbar, tick döngüsünde). Sürükleme ilk kımıldamada TÜM sütunlara
+     ölçülen %'leri yazar — böylece kurallar.css'in :has(…[style*="width"])
+     kuralı tabloyu sabit düzene (table-layout:fixed) geçirir ve uzun içerik
+     komşu sütunu artık sıkıştıramaz. Genişlikler ilk satırın hücrelerinde
+     width:% olarak durur; süzgeç (th/td style → tEmit) yalnız bunu geçirir. */
+  function selTableEl() {
+    if (!sel || sel.type !== 'blok' || !sel.el || !sel.el.isConnected) return null;
+    if (sel.el.tagName === 'TABLE') return sel.el;
+    return sel.el.matches && sel.el.matches('div.table-wrap') ? sel.el.querySelector('table') : null;
+  }
+  function tableCols(table) {
+    return table.rows.length ? Array.prototype.slice.call(table.rows[0].cells) : [];
+  }
+  function colWidthsPct(table) {
+    var tw = table.getBoundingClientRect().width || 1;
+    return tableCols(table).map(function (c) { return c.getBoundingClientRect().width / tw * 100; });
+  }
+  function applyColWidths(table, ws) {
+    tableCols(table).forEach(function (c, i) {
+      if (ws[i] != null) c.style.width = (Math.round(ws[i] * 10) / 10) + '%';
+    });
+  }
+  function clearColWidths(table) {
+    $$('th, td', table).forEach(function (c) {
+      c.style.width = '';
+      if (!c.getAttribute('style')) c.removeAttribute('style');
+    });
+  }
+  function commitCols() {
+    if (!sel) return;
+    var id = sel.id, bi = sel.bi, sub = sel.sub || null;
+    commitRichFromDom(id);
+    selectBlock(id, bi, sub);
+  }
+  function updateColbar() {
+    if (!colbar) return;
+    var table = colGesture ? colGesture.table
+      : (!editing && !pd && !gesture ? selTableEl() : null);
+    if (!table || !table.isConnected || table.closest('[hidden]')) { colbar.style.display = 'none'; return; }
+    var cells = tableCols(table);
+    var need = cells.length - 1;
+    if (need < 1) { colbar.style.display = 'none'; return; }
+    while (colbar.children.length > need) colbar.removeChild(colbar.lastChild);
+    while (colbar.children.length < need) {
+      var hnd = mk('i');
+      hnd.addEventListener('pointerdown', colDown);
+      hnd.addEventListener('pointermove', colMove);
+      hnd.addEventListener('pointerup', colUp);
+      hnd.addEventListener('pointercancel', colUp);
+      colbar.appendChild(hnd);
+    }
+    var tr = table.getBoundingClientRect();
+    colbar.style.display = 'block';
+    for (var i = 0; i < need; i++) {
+      var hh = colbar.children[i];
+      hh.setAttribute('data-k', i);
+      hh.style.left = cells[i].getBoundingClientRect().right + 'px';
+      hh.style.top = tr.top + 'px';
+      hh.style.height = tr.height + 'px';
+    }
+  }
+  function colDown(e) {
+    if (e.button !== 0) return;
+    var table = selTableEl();
+    if (!table) return;
+    e.preventDefault(); e.stopPropagation();
+    colGesture = {
+      table: table,
+      k: +e.currentTarget.getAttribute('data-k'),
+      x0: e.clientX,
+      tw: table.getBoundingClientRect().width || 1,
+      start: colWidthsPct(table),
+      selInfo: { id: sel.id, bi: sel.bi, sub: sel.sub || null },
+      moved: false
+    };
+    e.currentTarget.classList.add('is-on');
+    try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) {}
+  }
+  function colMove(e) {
+    var cg = colGesture;
+    if (!cg) return;
+    var d = (e.clientX - cg.x0) / cg.tw * 100;
+    if (!cg.moved && Math.abs(d) < 0.3) return;
+    if (!cg.moved) {
+      cg.moved = true;
+      snapshot();
+      applyColWidths(cg.table, cg.start);    // hepsi açık yazılır → sabit düzen
+    }
+    var ws = cg.start.slice();
+    var l = cg.start[cg.k] + d, r = cg.start[cg.k + 1] - d;
+    if (l < 5) { r -= 5 - l; l = 5; }
+    if (r < 5) { l -= 5 - r; r = 5; }
+    ws[cg.k] = l;
+    ws[cg.k + 1] = r;
+    applyColWidths(cg.table, ws);
+  }
+  function colUp(e) {
+    var cg = colGesture;
+    if (!cg) return;
+    colGesture = null;
+    e.currentTarget.classList.remove('is-on');
+    if (!cg.moved) return;
+    justDragged = true;
+    setTimeout(function () { justDragged = false; }, 0);
+    commitRichFromDom(cg.selInfo.id);
+    selectBlock(cg.selInfo.id, cg.selInfo.bi, cg.selInfo.sub);
   }
   function escT(s) { var d = document.createElement('div'); d.textContent = String(s == null ? '' : s); return d.innerHTML; }
   function escA(s) { return escT(s).replace(/"/g, '&quot;'); }
@@ -424,6 +536,11 @@
     '.tabs__panel:not([hidden]):empty{min-height:2.2em}',
     '.tabs__panel:not([hidden]):empty::before{content:"Bu sekme boş — Ekle panelinden blok sürükle ya da çift tıklayıp yaz…";display:block;padding:.35em 0;color:color-mix(in srgb,var(--ink) 45%,transparent);font-style:italic}',
     '.cv-dropline{position:fixed;height:2px;background:var(--accent);z-index:2147483001;pointer-events:none;display:none}',
+    /* tablo sütun sınırı tutamaçları: dikey çizgi, sürükle → genişlik */
+    '.cv-colbar{display:none}',
+    '.cv-colbar i{position:fixed;z-index:2147483001;width:9px;margin-left:-4.5px;cursor:col-resize;pointer-events:auto}',
+    '.cv-colbar i::before{content:"";position:absolute;left:4px;top:0;bottom:0;width:1px;background:var(--accent);opacity:.25;transition:opacity .12s}',
+    '.cv-colbar i:hover::before,.cv-colbar i.is-on::before{opacity:1;width:2px;left:3.5px}',
     '.cv-dropline::before{content:"";position:absolute;left:-3px;top:-3px;width:8px;height:8px;border-radius:50%;background:var(--accent)}',
     /* sitede şerit görseli tıklamaz (pointer-events:none) — tuvalde seçilebilsin */
     '.panel__art{pointer-events:auto!important}',
@@ -448,6 +565,7 @@
     selectBox = mk('div'); selectBox.setAttribute('data-cv-box', ''); selectBox.setAttribute('data-cv-sel', '');
     selectBox.innerHTML = '<span class="tag"></span>';
     dropline = mk('div', 'cv-dropline');
+    colbar = mk('div', 'cv-colbar');
     tbox = mk('div', 'cv-tbox');
     tbox.innerHTML = ['nw', 'ne', 'se', 'sw', 'e', 'w', 'rot'].map(function (h) {
       return '<i data-h="' + h + '"></i>';
@@ -459,7 +577,8 @@
       h.addEventListener('pointercancel', onHandleUp);
     });
     fdoc.body.appendChild(hoverBox); fdoc.body.appendChild(selectBox);
-    fdoc.body.appendChild(dropline); fdoc.body.appendChild(tbox);
+    fdoc.body.appendChild(dropline); fdoc.body.appendChild(colbar);
+    fdoc.body.appendChild(tbox);
   }
   function place(box, elx, label, locked) {
     if (!elx || !elx.isConnected || elx.closest('[hidden]')) { box.style.display = 'none'; return; }
@@ -490,6 +609,7 @@
           tbox.classList.toggle('no-sides', sel.type !== 'blok');
         } else tbox.style.display = 'none';
       }
+      updateColbar();
     }
     rafId = requestAnimationFrame(tick);
   }
@@ -506,7 +626,7 @@
   /* ================================================================ hedefler */
   function targetInfo(node) {
     if (node && node.nodeType !== 1) node = node.parentElement;
-    if (!node || node.closest('[data-cv-box],.cv-addch')) return null;
+    if (!node || node.closest('[data-cv-box],.cv-addch,.cv-colbar')) return null;
     function q(s) { return node.closest(s); }
     var m;
     if (page === 'kurallar') {
@@ -626,6 +746,7 @@
   }
   function onMousedown(e) {
     if (e.button !== 0) return;
+    if (e.target.closest && e.target.closest('.cv-colbar')) { e.preventDefault(); return; }
     if (renaming) {
       if (renaming.btn.contains(e.target)) return;          // ad içinde imleç serbest
       commitTabRename(false);
@@ -1228,6 +1349,7 @@
     if (Math.round(t.s * 1000) !== 1000) r.s = Math.round(t.s * 1000) / 1000;
     if (Math.round(t.r * 10)) r.r = Math.round(t.r * 10) / 10;
     if (t.z != null && Math.round(t.z)) r.z = Math.round(t.z);
+    if (t.fs != null && t.fs >= 8 && t.fs <= 72) r.fs = Math.round(t.fs);
     ['tab', 'mob'].forEach(function (bp) {
       var l = t[bp];
       if (!l) return;
@@ -1247,6 +1369,7 @@
     }
     return { x: rec.x || 0, y: rec.y || 0, s: rec.s != null ? rec.s : 1,
              r: rec.r || 0, w: null, z: rec.z != null ? rec.z : null, a: null,
+             fs: rec.fs != null ? rec.fs : null,
              tab: lay(rec.tab), mob: lay(rec.mob) };
   }
 
@@ -1319,8 +1442,8 @@
     commitEditing();
     snapshot();
     var t = readT(sel.el);
-    // hizalama dönüşüm değil — kalır; katmanlar dahil her şey temizlenir
-    var clean = { x: 0, y: 0, s: 1, r: 0, w: null, z: null, a: t.a, tab: null, mob: null };
+    // hizalama ve yazı boyutu dönüşüm değil — kalır; katmanlar dahil her şey temizlenir
+    var clean = { x: 0, y: 0, s: 1, r: 0, w: null, z: null, a: t.a, fs: t.fs, tab: null, mob: null };
     writeT(sel.el, clean);
     commitTransform(sel, clean);
   }
@@ -1433,6 +1556,19 @@
       if (sel.el.tagName === 'FIGURE') {
         h += '<button type="button" class="btn" data-cb-fig>Görseli değiştir</button>';
       }
+      var iTbl = selTableEl();
+      if (iTbl && tableCols(iTbl).length > 1) {
+        h += '<div class="field"><span class="field__label">Sütun genişlikleri (%)</span>' +
+             '<div class="cvi__colgrid">' + tableCols(iTbl).map(function (c, i) {
+               var w = parseFloat((c.style && c.style.width) || '');
+               return '<input class="field__input" type="number" data-cvc-w="' + i + '" value="' +
+                      (isFinite(w) ? Math.round(w * 10) / 10 : '') +
+                      '" min="5" max="95" step="1" placeholder="oto" aria-label="Sütun ' + (i + 1) + ' genişliği %">';
+             }).join('') + '</div>' +
+             '<div class="cvi__row"><button type="button" class="btn" data-cvc-esit>Eşit dağıt</button>' +
+             '<button type="button" class="btn btn--ghost" data-cvc-oto>Otomatik</button></div></div>';
+        h += '<p class="cvi__note">Tablodaki sütun sınırlarını sürükleyerek de boyutlandırabilirsin. Genişlik verilen tablo sabit düzene geçer — uzun metin komşu sütunu sıkıştırmaz.</p>';
+      }
       if (isTabsSection(sel.el)) {
         var tp = tabParts(sel.el);
         var akey = tabsKey(sel.id, sel.bi);
@@ -1518,6 +1654,9 @@
       fld('Ölçek', 's', eff.s, ' step="0.05" min="0.05" max="20"') +
       fld('Açı (°)', 'r', eff.r, ' step="1" min="-360" max="360"');
     if (sel.type === 'blok') h += fld('Genişlik %', 'w', eff.w != null ? eff.w : '', ' step="1" min="10" max="100" placeholder="100"');
+    if (sel.type === 'blok' || sel.type === 'title') {
+      h += fld('Yazı boyutu (px)', 'fs', t.fs != null ? t.fs : '', ' step="1" min="8" max="72" placeholder="site"');
+    }
     h += fld('Katman (z)', 'z', t.z != null ? t.z : '', ' step="1" min="-99" max="999" placeholder="0"');
     h += '</div><div class="cvi__row">' +
          '<button type="button" class="btn" data-ct-front>Bir öne</button>' +
@@ -1526,7 +1665,7 @@
     if (hasOverride) h += '<button type="button" class="btn btn--ghost" data-ct-clearbp>' + BP_AD[bp] + ' ayarını kaldır</button>';
     h += '<button type="button" class="btn btn--ghost" data-ct-reset>Dönüşümü sıfırla (tümü)</button>' +
          '<p class="cvi__note">Tuvalde sürükle: taşı · köşe: ölçek · üst sap: döndür' +
-         (sel.type === 'blok' ? ' · kenar: genişlik' : '') + ' · Shift: eksene/15°ye kilitle. Katman (z) tüm kırılımlarda ortaktır.</p>';
+         (sel.type === 'blok' ? ' · kenar: genişlik' : '') + ' · Shift: eksene/15°ye kilitle. Katman (z) ve yazı boyutu tüm kırılımlarda ortaktır.</p>';
     return h;
   }
 
@@ -1545,6 +1684,11 @@
         var v = parseFloat(inp.value);
         if (k === 'z') {                       // katman kırılımdan bağımsız
           t.z = (isFinite(v) && Math.round(v)) ? Math.round(v) : null;
+          writeT(sel.el, t);
+          return;
+        }
+        if (k === 'fs') {                      // yazı boyutu da kırılımdan bağımsız
+          t.fs = isFinite(v) ? Math.max(8, Math.min(72, Math.round(v))) : null;
           writeT(sel.el, t);
           return;
         }
@@ -1636,6 +1780,43 @@
     if ((b = $('[data-cb-del]', insp))) b.addEventListener('click', function () { blockOp('del'); });
     if ((b = $('[data-cb-lede]', insp))) b.addEventListener('click', function () { blockOp('lede'); });
     if ((b = $('[data-cb-fig]', insp))) b.addEventListener('click', changeFigure);
+    // tablo sütun genişlikleri (seçili blok tablo iken)
+    if (sel && sel.type === 'blok' && selTableEl()) {
+      if ((b = $('[data-cvc-esit]', insp))) b.addEventListener('click', function () {
+        var tbl = selTableEl();
+        if (!tbl) return;
+        commitEditing();
+        snapshot();
+        var n = tableCols(tbl).length;
+        applyColWidths(tbl, tableCols(tbl).map(function () { return 100 / n; }));
+        commitCols();
+      });
+      if ((b = $('[data-cvc-oto]', insp))) b.addEventListener('click', function () {
+        var tbl = selTableEl();
+        if (!tbl) return;
+        commitEditing();
+        snapshot();
+        clearColWidths(tbl);
+        commitCols();
+      });
+      $$('[data-cvc-w]', insp).forEach(function (inp) {
+        var i = +inp.getAttribute('data-cvc-w');
+        inp.addEventListener('focus', function () { snapshot(); });
+        inp.addEventListener('change', function () {
+          var tbl = selTableEl();
+          if (!tbl) return;
+          var cell = tableCols(tbl)[i];
+          if (!cell) return;
+          var v = parseFloat(inp.value);
+          if (isFinite(v)) cell.style.width = Math.max(5, Math.min(95, v)) + '%';
+          else { cell.style.width = ''; if (!cell.getAttribute('style')) cell.removeAttribute('style'); }
+          commitCols();
+        });
+        inp.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') { e.preventDefault(); inp.blur(); }
+        });
+      });
+    }
     // sekme yöneticisi (seçili blok section.tabs iken)
     if (sel && sel.type === 'blok' && sel.id && isTabsSection(sel.el)) {
       var tChId = sel.id, tBi = sel.bi;
@@ -2223,14 +2404,29 @@
     $$('[data-cv-page]').forEach(function (b) {
       b.addEventListener('click', function () { setPage(b.getAttribute('data-cv-page')); });
     });
-    $$('[data-cv-bp]').forEach(function (b) {
-      b.addEventListener('click', function () {
-        bpW = +b.getAttribute('data-cv-bp');
-        $$('[data-cv-bp]').forEach(function (x) { x.classList.toggle('is-active', x === b); });
-        fitStage();
-        renderInspector();               // dönüşüm alanları o kırılımın değerlerini gösterir
+    var bpwInp = $('[data-cv-bpw]');
+    function setBpW(w) {
+      bpW = Math.max(320, Math.min(3840, Math.round(w) || 1280));
+      if (bpwInp) bpwInp.value = bpW;
+      $$('[data-cv-bp]').forEach(function (x) {
+        x.classList.toggle('is-active', +x.getAttribute('data-cv-bp') === bpW);
       });
+      fitStage();
+      renderInspector();               // dönüşüm alanları o kırılımın değerlerini gösterir
+    }
+    $$('[data-cv-bp]').forEach(function (b) {
+      b.addEventListener('click', function () { setBpW(+b.getAttribute('data-cv-bp')); });
     });
+    if (bpwInp) {
+      // ilk açılışta kullanıcının gerçek ekran genişliğini öner — site tipografisi
+      // vw tabanlı olduğundan dar önizleme geniş monitörle birebir örtüşmez
+      bpwInp.placeholder = window.screen && screen.width ? String(screen.width) : '1280';
+      bpwInp.title = 'Önizleme genişliği (px) — ekranın için ör. ' + (window.screen ? screen.width : 1920);
+      bpwInp.addEventListener('change', function () { setBpW(+bpwInp.value); });
+      bpwInp.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { e.preventDefault(); setBpW(+bpwInp.value); bpwInp.blur(); }
+      });
+    }
 
     // Ekle paleti dışına tıklayınca kapanır (panel içindeyken açık kalır)
     document.addEventListener('pointerdown', function (e) {

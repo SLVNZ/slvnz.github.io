@@ -123,9 +123,12 @@ def style_t(t):
 
     x, y, s, r = num(t, 'x', 0), num(t, 'y', 0), num(t, 's', 1), num(t, 'r', 0)
     z = t.get('z')
+    fs = t.get('fs')
     parts = []
     if isinstance(z, (int, float)) and int(z) != 0:
         parts += ['position:relative', f'z-index:{int(z)}']
+    if isinstance(fs, (int, float)) and 8 <= fs <= 72:
+        parts.append(f'font-size:{g(float(fs))}px')
     if x or y or s != 1 or r:
         parts.append(f'transform:{tl(t)}')
     for key, sfx in (('tab', 't'), ('mob', 'm')):
@@ -149,7 +152,7 @@ def t_dogrula(t, yer, errs):
         return
     for k, lo, hi in (('x', -3000, 3000), ('y', -3000, 3000),
                       ('s', 0.05, 20), ('r', -360, 360), ('z', -99, 999),
-                      ('w', 5, 100)):
+                      ('w', 5, 100), ('fs', 8, 72)):
         v = t.get(k)
         if v is not None and not (isinstance(v, (int, float)) and lo <= v <= hi):
             errs.append(f'{yer}: dönüşüm {k} değeri {lo}..{hi} arası sayı olmalı')

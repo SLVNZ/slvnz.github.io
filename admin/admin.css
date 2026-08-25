@@ -612,6 +612,21 @@ select.field__input { cursor: pointer; }
 .cv__bp svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .cv__bp:hover { color: var(--accent); }
 .cv__bp.is-active { color: var(--accent); background: var(--adm-soft); }
+/* serbest önizleme genişliği (px) */
+.cv__bpw {
+  width: 5.2ch;
+  margin-inline-start: .35rem;
+  padding: .3rem .2rem;
+  border: 1px solid var(--adm-hair);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-grotesk);
+  font-size: 11px;
+  text-align: center;
+  -moz-appearance: textfield;
+}
+.cv__bpw::-webkit-outer-spin-button, .cv__bpw::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.cv__bpw:focus { outline: none; border-color: var(--accent); }
 
 .cv__zoom {
   font-family: var(--font-grotesk);
@@ -803,6 +818,9 @@ select.field__input { cursor: pointer; }
 .cvi__row { display: flex; gap: .4rem; align-items: center; flex-wrap: wrap; }
 .cvi__row .btn { min-height: 34px; padding: 0 .7rem; font-size: 11px; flex: 1; }
 .cvi__row .iconbtn { border: 1px solid var(--adm-hair); }
+/* tablo sütun genişliği girişleri */
+.cvi__colgrid { display: flex; gap: .3rem; flex-wrap: wrap; margin-block-end: .4rem; }
+.cvi__colgrid .field__input { width: 3.6rem; flex: 0 0 auto; padding-inline: .3rem; text-align: center; }
 /* sekme yöneticisi satırları: ad + öne/sona taşı + sil */
 .cvi__tabrow { flex-wrap: nowrap; margin-block-end: .35rem; }
 .cvi__tabrow .field__input { flex: 1; min-width: 0; }

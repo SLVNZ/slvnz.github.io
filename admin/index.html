@@ -89,6 +89,10 @@
               <button type="button" class="cv__bp" data-cv-bp="375" title="Mobil — 375px">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7.5" y="3" width="9" height="18" rx="1.6"/><path d="M11 18.2h2"/></svg>
               </button>
+              <!-- serbest genişlik: gerçek monitör genişliğini yaz (site tipografisi
+                   vw tabanlı — dar önizleme geniş ekranla birebir örtüşmez) -->
+              <input type="number" class="cv__bpw" data-cv-bpw value="1280" min="320" max="3840" step="10"
+                     title="Önizleme genişliği (px) — kendi ekranın için ör. 1920" aria-label="Önizleme genişliği (px)">
             </div>
             <span class="cv__zoom" data-cv-zoom aria-live="polite">%100</span>
           </div>

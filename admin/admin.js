@@ -120,7 +120,7 @@
      Sitenin söz dağarcığına indirgeme — yapıştırma ve kaydetmede aynı yol. */
   var ALLOW = {
     P: ['class', 'style'], H3: ['style'], H4: ['style', 'class'], UL: ['style'], OL: ['style'], LI: [], BLOCKQUOTE: ['style'],
-    TABLE: ['style'], THEAD: [], TBODY: [], TR: [], TH: [], TD: [], HR: ['style'],
+    TABLE: ['style'], THEAD: [], TBODY: [], TR: [], TH: ['style'], TD: ['style'], HR: ['style'],
     STRONG: [], EM: [], U: [], DEL: [], MARK: [], SUP: [], SUB: [], A: ['href'], CODE: [], BR: [],
     FIGURE: ['style'], FIGCAPTION: [], IMG: ['src', 'alt', 'width', 'height', 'loading', 'decoding']
   };
@@ -136,7 +136,7 @@
        transform:translate(Xpx, Ypx) scale(S) rotate(Rdeg)
      Uymayan her stil atılır. server.py style_t aynı dili konuşur. */
   function tParse(style) {
-    var t = { x: 0, y: 0, s: 1, r: 0, w: null, z: null, a: null, tab: null, mob: null }, m;
+    var t = { x: 0, y: 0, s: 1, r: 0, w: null, z: null, a: null, fs: null, tab: null, mob: null }, m;
     if (!style) return t;
     // temel değerler: kırılım değişkenleri (--t-t: translate…) temel transform
     // regex'ine yakalanmasın diye önce ayıklanır
@@ -147,6 +147,7 @@
     if ((m = /(?:^|;)\s*width:\s*([\d.]+)%/.exec(base))) t.w = +m[1];
     if ((m = /z-index:\s*(-?\d+)/.exec(base))) t.z = +m[1];
     if ((m = /text-align:\s*(center|right|justify)/.exec(base))) t.a = m[1];
+    if ((m = /font-size:\s*([\d.]+)px/.exec(base))) t.fs = +m[1];
     ['tab', 'mob'].forEach(function (bp) {
       var sfx = bp === 'tab' ? 't' : 'm';
       var mt = new RegExp('--t-' + sfx + ':translate\\((-?[\\d.]+)px, (-?[\\d.]+)px\\) scale\\(([\\d.]+)\\) rotate\\((-?[\\d.]+)deg\\)').exec(style);
@@ -156,7 +157,7 @@
                   r: mt ? +mt[4] : 0, w: mw ? +mw[1] : null };
       }
     });
-    ['x', 'y', 's', 'r', 'w', 'z'].forEach(function (k) { if (t[k] != null && !isFinite(t[k])) t[k] = k === 's' ? 1 : (k === 'w' || k === 'z' ? null : 0); });
+    ['x', 'y', 's', 'r', 'w', 'z', 'fs'].forEach(function (k) { if (t[k] != null && !isFinite(t[k])) t[k] = k === 's' ? 1 : (k === 'w' || k === 'z' || k === 'fs' ? null : 0); });
     return t;
   }
   function tNum(v) { return String(Math.round(v * 1000) / 1000); }
@@ -165,6 +166,7 @@
     if (t.z != null && t.z !== 0) parts.push('position:relative', 'z-index:' + Math.round(t.z));
     if (t.w != null && t.w > 0 && t.w < 100) parts.push('width:' + tNum(t.w) + '%');
     if (t.a) parts.push('text-align:' + t.a);
+    if (t.fs != null && t.fs >= 8 && t.fs <= 72) parts.push('font-size:' + tNum(t.fs) + 'px');
     if (t.x || t.y || t.s !== 1 || t.r) {
       parts.push('transform:translate(' + Math.round(t.x) + 'px, ' + Math.round(t.y) + 'px) scale(' +
                  tNum(t.s) + ') rotate(' + tNum(t.r) + 'deg)');
