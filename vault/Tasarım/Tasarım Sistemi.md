@@ -16,6 +16,10 @@ Tüm değişkenler `assets/css/style.css` içindeki `:root` bloğunda. Bileşenl
 | `--accent` | `#fe4b26` | `#ff5a36` | Eyebrow, 4.0, FANTAZYA, alt bilgi |
 | `--accent-text` | `= --accent` | — | Küçük metin varyantı |
 | `--art-invert` | `0` | `1` | Çizimi negatife çevirir |
+| `--codex` | `#876e31` | `#c0a052` | Ekosistem rayında CODEX kelime markası |
+
+> [!note] CODEX altını neden iki değer
+> `#C0A052` CODEX'in kendi marka rengi, kendi koyu sitesi için çizilmiş. Bu sayfanın beyaz kâğıdında 2.5:1 kalıyor; aydınlık değer aynı ton ve doygunlukta, yalnız değeri düşük (4.9:1). Karanlık vurgunun tersi yönde, aynı hile.
 
 > [!note] Karanlık modda vurgu neden farklı
 > `#ff5a36`, `#fe4b26`'nın değeri ~%6 açılmış hali. Koyu zeminde aynı algısal ağırlığı korumak için; ton ve doygunluk aynı.

@@ -52,6 +52,14 @@
   --control-bg:  rgba(0, 0, 0, .05);
   --control-bd:  rgba(0, 0, 0, .14);
 
+  /* -- Sibling brand: SLVNZ CODEX --------------------------------------- */
+  /* CODEX's own wordmark colour is #C0A052 — designed for its dark site.
+     On this page's white paper that gold is 2.5:1, so light mode uses the
+     same hue and saturation at a lower value (4.9:1). Same trick as the
+     dark accent below, in the other direction.                            */
+  --codex:       #876e31;
+  --dark-codex:  #c0a052;     /* the brand value, on a dark ground         */
+
   /* dark palette, referenced by both dark selectors below */
   --dark-paper:   #121212;
   --dark-ink:     #f2f2f2;
@@ -120,6 +128,7 @@
     --art-invert: 1;
     --control-bg: rgba(255, 255, 255, .07);
     --control-bd: rgba(255, 255, 255, .18);
+    --codex:      var(--dark-codex);
   }
 }
 :root[data-theme="dark"] {
@@ -131,6 +140,7 @@
   --art-invert: 1;
   --control-bg: rgba(255, 255, 255, .07);
   --control-bd: rgba(255, 255, 255, .18);
+  --codex:      var(--dark-codex);
 }
 
 /* Smooth the switch — but only after first paint (theme.js adds the
@@ -204,7 +214,13 @@ img { display: block; max-width: 100%; height: auto; }
                  calc((var(--frame-h) - var(--foot-cap)) * var(--s) - (1 - var(--cap-archivo)) * var(--foot-fs));
   --eyebrow-fs: max(9px, calc(9.1015 * var(--s)));
   --foot-fs:    max(9px, calc(9.1015 * var(--s)));
+  /* the y where the eyebrow's line box ends = where .page__body starts.
+     Both the title block and the ecosystem rail measure down from here. */
+  --eyebrow-bottom: calc(var(--eyebrow-cap) * var(--s) + (1 - var(--cap-archivo)) * var(--eyebrow-fs));
 }
+
+/* the middle row is the ecosystem rail's containing block */
+.page__body { position: relative; }
 
 .page__head,
 .page__foot { text-align: center; }
@@ -228,7 +244,6 @@ img { display: block; max-width: 100%; height: auto; }
    SLVNZ cap line to exactly --mark-cap on the artboard.                   */
 .titleblock {
   position: relative;
-  --eyebrow-bottom: calc(var(--eyebrow-cap) * var(--s) + (1 - var(--cap-archivo)) * var(--eyebrow-fs));
   padding-top: calc((var(--mark-cap) * var(--s) - var(--eyebrow-bottom))
                     - var(--cap-serenity) * var(--mark));
 }
@@ -584,6 +599,7 @@ a.mainnav__link { cursor: pointer; }
 /* -- Exit: the page recedes, the chosen word stays lit ------------------ */
 html.is-leaving .page > :not(.page__body),
 html.is-leaving .titleblock,
+html.is-leaving .ecosystem,
 html.is-leaving .mainnav__link:not(.is-chosen) {
   opacity: 0;
   transition: opacity .45s var(--ease);
@@ -598,8 +614,210 @@ html.is-leaving .mainnav__link.is-chosen .spell__l { color: var(--accent); trans
 html.is-leaving .mainnav__link.is-chosen::after { scale: 1 1; }
 
 @media (prefers-reduced-motion: reduce) {
-  .spell__l, .mainnav__link::after { transition-duration: .01ms; transition-delay: 0s; animation: none !important; }
+  .spell__l, .mainnav__link::after,
+  a.ecosystem__link::after, .ecosystem__mark, .ecosystem__out { transition-duration: .01ms; transition-delay: 0s; animation: none !important; }
   html.is-leaving * { transition-duration: .01ms !important; }
+}
+
+/* ---------- Ecosystem rail ---------------------------------------------- */
+/* Bridge to the sibling products. Not in the Figma frame — like the theme
+   toggle, this is UI laid ON TOP of the artboard, so it is sized in artboard
+   units with px floors instead of being pinned to a design coordinate.
+
+   Vertical anchor: the heading's cap line lands on the SLVNZ cap line
+   (--mark-cap) and the block runs down to about FANTAZYA's baseline, so it
+   reads as a column standing beside the wordmark, not a floating box.
+   Horizontally it hugs the page's inline padding edge; at 1440 its right
+   edge stops ~100px clear of the illustration's ink (x 305).
+
+   The lockups deliberately echo the page's own: family name in the display
+   face, product name below it in tracked Archivo — the shape of
+   SLVNZ / FANTAZYA, several sizes down.                                    */
+.ecosystem {
+  --eco-w:     max(150px, calc(160 * var(--s)));
+  --eco-mark:  max(30px,  calc(38 * var(--s)));
+  --eco-gap:   max(10px,  calc(13 * var(--s)));
+  --eco-title: max(9px,   calc(9.1015 * var(--s)));
+  --eco-name:  max(19px,  calc(24 * var(--s)));
+  --eco-word:  max(8px,   calc(9 * var(--s)));
+  --eco-soon:  max(9px,   calc(10.5 * var(--s)));
+  --eco-pad:   max(6px,   calc(7 * var(--s)));
+
+  position: absolute;
+  /* Flush left, always. Not an artboard coordinate: the rail is UI, so it
+     rides the page's own inline padding edge — the same edge the eyebrow
+     and the footer sit inside. That padding is itself fluid
+     (clamp(1.25rem, 3vw, 3rem)), so the rail travels inward as the window
+     narrows without ever losing the left alignment.                       */
+  inset-inline-start: 0;
+  /* heading cap → --mark-cap, measured down from .page__body's own top */
+  inset-block-start: calc(var(--mark-cap) * var(--s) - var(--eyebrow-bottom)
+                          - var(--cap-archivo) * var(--eco-title));
+  z-index: 2;
+  width: var(--eco-w);
+}
+
+/* -- Heading — the eyebrow's type, standing on a hairline ---------------- */
+.ecosystem__title {
+  width: var(--eco-w);
+  margin: 0;
+  padding-block-end: max(7px, calc(9 * var(--s)));
+  border-block-end: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+  font-family: var(--font-archivo);
+  font-weight: 400;
+  font-size: var(--eco-title);
+  line-height: 1;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+.ecosystem__list {
+  display: flex;
+  flex-direction: column;
+  gap: max(18px, calc(24 * var(--s)));
+  margin-block-start: max(15px, calc(20 * var(--s)));
+}
+
+/* -- One product: mark + lockup ----------------------------------------- */
+.ecosystem__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--eco-gap);
+  padding-block: var(--eco-pad);                 /* → ≥44px touch target */
+  text-decoration: none;
+  color: var(--ink);
+}
+/* the item is a <span> while its product has no address yet; the day it
+   gains one the <span> becomes an <a> and the hover wiring lights up */
+a.ecosystem__link { cursor: pointer; }
+
+/* The mark is a two-tone woodcut — black lines with a white page block —
+   not the flat black ink of the illustration, so it is NOT run through
+   invert() for dark mode. Left alone it reads as white line-work on the
+   dark ground, which is exactly how CODEX shows it on its own site.      */
+.ecosystem__mark {
+  flex: none;
+  display: block;
+  width: var(--eco-mark);
+  height: var(--eco-mark);
+  transition: translate .4s var(--ease);
+}
+.ecosystem__mark img { width: 100%; height: 100%; object-fit: contain; }
+
+/* NEXUS has no mark yet — a hairline slot keeps both rows on one grid.
+   An empty frame reads as "not revealed", which is what "Yakında…" says. */
+.ecosystem__mark--empty {
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
+  color: color-mix(in srgb, var(--ink) 38%, transparent);
+  font-size: calc(var(--eco-mark) * .3);
+  line-height: 1;
+}
+.ecosystem__mark--empty::before { content: "\2726"; }
+
+/* The lockup's box is trimmed to its INK, so `align-items: center` above
+   lines both rows up on the mark instead of on font metrics. Metrics below
+   were measured in-browser from the loaded faces (canvas TextMetrics),
+   same method as the --cap-* tokens:
+
+     No Serenity "SLVNZ"  ink .80 above the baseline, .10 BELOW it
+                          (the Z's tail and the L's spur)
+     Archivo 700 "CODEX"  ink .70 above, .02 below
+
+   · the name gains the .075em its caps poke above the line box
+     (--cap-serenity), so its box top lands on the cap line;
+   · the word sheds what is left under its ink, so the box bottom does too;
+   · between them, the word's cap line sits .145em (of the name's size)
+     below the name's INK — not its baseline. That is the gap the live
+     page actually shows between SLVNZ and FANTAZYA, so the small lockup
+     reads as the big one, several sizes down. Measuring from the baseline
+     instead would run the word straight into the Z's tail.               */
+.ecosystem__lockup {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.ecosystem__name {
+  padding-block-start: calc(-1 * var(--cap-serenity) * var(--eco-name));
+  font-family: var(--font-display);
+  font-size: var(--eco-name);
+  line-height: 1;
+  color: var(--ink);
+}
+
+/* Muted by default: a product without a colour of its own does not get
+   one. --codex is added back by the modifier below.                      */
+.ecosystem__word {
+  /* name box bottom is 1.075em down; the word's cap must land at
+     .90em (ink bottom) + .145em, so its box top goes 0.145em higher   */
+  margin-block-start: calc(-0.030 * var(--eco-name)
+                           - var(--cap-archivo) * var(--eco-word));
+  margin-block-end: calc(-0.145 * var(--eco-word));
+  font-family: var(--font-archivo);
+  font-weight: 700;
+  font-size: var(--eco-word);
+  line-height: 1;
+  letter-spacing: .46em;         /* CODEX's own tracking: 4.14 / 9        */
+  margin-inline-end: -.46em;     /* pull the phantom trailing space back  */
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--ink) 45%, transparent);
+}
+.ecosystem__word--codex { color: var(--codex); }
+
+/* the same tag the version menu uses for "şimdiki" — light italic, muted;
+   indented past the mark so it starts on the name's column               */
+.ecosystem__soon {
+  margin-block-end: max(2px, calc(3 * var(--s)));
+  padding-inline-start: calc(var(--eco-mark) + var(--eco-gap));
+  font-family: var(--font-archivo);
+  font-weight: 200;
+  font-style: italic;
+  font-size: var(--eco-soon);
+  line-height: 1;
+  letter-spacing: .04em;
+  color: color-mix(in srgb, var(--ink) 55%, transparent);
+}
+
+/* opens in a new tab — the arrow says so, the hidden text beside it says
+   so to assistive tech */
+.ecosystem__out {
+  align-self: center;
+  font-family: var(--font-grotesk);
+  font-size: max(10px, calc(12 * var(--s)));
+  line-height: 1;
+  color: color-mix(in srgb, var(--ink) 40%, transparent);
+  transition: color .25s var(--ease), translate .3s var(--ease);
+}
+
+/* -- Hover: the nav's language, in the sibling's colour ------------------ */
+/* hairline draws in from the left under the lockup, withdraws right on
+   the way out; the mark lifts a hair and the arrow steps away            */
+a.ecosystem__link::after {
+  content: "";
+  position: absolute;
+  inset-inline: calc(var(--eco-mark) + var(--eco-gap)) 0;
+  inset-block-end: var(--eco-pad);      /* lands on the mark's lower edge */
+  height: 1px;
+  background: var(--codex);
+  scale: 0 1;
+  transform-origin: left center;
+  transition: scale .45s cubic-bezier(.77, 0, .18, 1);
+}
+a.ecosystem__link:hover::after,
+a.ecosystem__link:focus-visible::after { scale: 1 1; }
+a.ecosystem__link:not(:hover):not(:focus-visible)::after { transform-origin: right center; }
+
+a.ecosystem__link:hover .ecosystem__mark,
+a.ecosystem__link:focus-visible .ecosystem__mark { translate: 0 -6%; }
+
+a.ecosystem__link:hover .ecosystem__out,
+a.ecosystem__link:focus-visible .ecosystem__out {
+  color: var(--codex);
+  translate: .18em -.18em;
 }
 
 /* ---------- Theme toggle ------------------------------------------------ */
@@ -746,6 +964,7 @@ html.is-leaving .mainnav__link.is-chosen::after { scale: 1 1; }
   .wordmark__lockup,
   .wordmark__genre,
   .mainnav,
+  .ecosystem,
   .copyright {
     animation: rise .7s var(--ease) both;
   }
@@ -755,7 +974,8 @@ html.is-leaving .mainnav__link.is-chosen::after { scale: 1 1; }
   .wordmark__genre  { animation-delay: .24s; }
   .mainnav          { animation-delay: .32s; }
   .eyebrow          { animation-delay: .40s; }
-  .copyright        { animation-delay: .46s; }
+  .ecosystem        { animation-delay: .44s; }
+  .copyright        { animation-delay: .50s; }
 }
 
 @keyframes rise {
@@ -776,6 +996,27 @@ html.is-leaving .mainnav__link.is-chosen::after { scale: 1 1; }
     --s: min(0.092vw, 0.09765625dvh, 1.3px);
     --nav-gap-1: 78;
     --nav-gap-2: 68;
+  }
+
+  /* --s jumps here, so the illustration widens into the rail's column.
+     The rail leaves the margin and becomes a centred strip under the nav —
+     which is already where it sits in the DOM, so only the box changes. */
+  .ecosystem {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    /* hugs the two products instead of the page, so it stays on the left
+       edge and the heading's hairline spans exactly the strip's width */
+    width: fit-content;
+    margin-block-start: max(24px, calc(44 * var(--s)));
+  }
+  .ecosystem__title { width: auto; }
+  .ecosystem__list {
+    flex-direction: row;
+    align-items: end;               /* "Yakında…" grows upward, rows align */
+    gap: max(26px, calc(46 * var(--s)));
+    margin-block-start: max(13px, calc(18 * var(--s)));
   }
 }
 
@@ -802,6 +1043,21 @@ html.is-leaving .mainnav__link.is-chosen::after { scale: 1 1; }
     gap: .1rem;
   }
   .mainnav__list > li:first-child { margin-inline-end: 0; }
+
+  /* The nav stacks here and the artboard grows, so the frame is already
+     full: the strip trims itself down to keep the page on one screen.
+     On the shortest windows (≈600px tall and under) it no longer quite
+     fits and the page scrolls a little — the honest cost of the extra row. */
+  .ecosystem {
+    --eco-mark: max(26px, calc(34 * var(--s)));
+    --eco-name: max(17px, calc(21 * var(--s)));
+    margin-block-start: max(18px, calc(34 * var(--s)));
+  }
+  .ecosystem__title { padding-block-end: max(6px, calc(7 * var(--s))); }
+  .ecosystem__list {
+    gap: max(20px, calc(34 * var(--s)));
+    margin-block-start: max(11px, calc(15 * var(--s)));
+  }
 }
 
 /* ---------- Print ------------------------------------------------------- */

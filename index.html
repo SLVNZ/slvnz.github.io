@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="font" type="font/ttf" href="assets/fonts/NoSerenity-Regular-fn-2-fixed-under.ttf" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@200;400;500&family=Space+Grotesk:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@200;400;500;700&family=Space+Grotesk:wght@400;500&display=swap">
 <link rel="stylesheet" href="assets/css/style.css">
 <script>
   /* runs before first paint: restore the saved theme so there is no flash */
@@ -85,6 +85,47 @@
         <li><span class="mainnav__link">Evren Rehberi</span></li>
       </ul>
     </nav>
+
+    <!-- SLVNZ Ekosistemi — kardeş ürünlere köprü. Figma çerçevesinde yok:
+         tema anahtarı gibi, artboard'ın ÜSTÜNE eklenen bir arayüz parçası.
+         Masaüstünde solda mutlak konumlu bir ray (başlığın cap çizgisi
+         SLVNZ'ninkiyle aynı hizada); 1000px altında nav'ın altına akar —
+         DOM sırası zaten öyle, ikincil olduğu için nav'dan sonra geliyor. -->
+    <aside class="ecosystem" aria-labelledby="ekosistem-baslik">
+      <h2 class="ecosystem__title" id="ekosistem-baslik">SLVNZ Ekosistemi</h2>
+
+      <ul class="ecosystem__list">
+        <li class="ecosystem__item">
+          <a class="ecosystem__link" href="https://slvnzcodex.com/" target="_blank" rel="noopener">
+            <picture class="ecosystem__mark">
+              <source srcset="assets/images/codex-mark.webp" type="image/webp">
+              <img src="assets/images/codex-mark.png" width="160" height="159" alt="" decoding="async">
+            </picture>
+            <span class="ecosystem__lockup">
+              <span class="ecosystem__name">SLVNZ</span>
+              <span class="ecosystem__word ecosystem__word--codex">Codex</span>
+            </span>
+            <span class="ecosystem__out" aria-hidden="true">↗</span>
+            <span class="visually-hidden">(yeni sekmede açılır)</span>
+          </a>
+        </li>
+
+        <li class="ecosystem__item">
+          <p class="ecosystem__soon">Yakında…</p>
+          <!-- NEXUS'un adresi yok: bağlantı değil düz metin, nav'daki "Evren
+               Rehberi" gibi. Adres belli olduğunda <span> yerine
+               <a href="…" target="_blank" rel="noopener"> yazmak yeter;
+               hover ve dış bağlantı oku kendiliğinden çalışır. -->
+          <span class="ecosystem__link">
+            <span class="ecosystem__mark ecosystem__mark--empty" aria-hidden="true"></span>
+            <span class="ecosystem__lockup">
+              <span class="ecosystem__name">SLVNZ</span>
+              <span class="ecosystem__word">Nexus</span>
+            </span>
+          </span>
+        </li>
+      </ul>
+    </aside>
 
   </main>
 

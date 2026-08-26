@@ -107,6 +107,23 @@ geçiş yumuşak olur ve **düzen hiç kaymaz**. Bıçak hover'da susar, iki efe
 > `text-shadow` da kutuyu değil glyph'i izlediği için "kenarları belli kutu"
 > sorunu burada zaten yok.
 
+## Ekosistem rayı — saf CSS
+
+Rayın CODEX satırı `nav.js`'e hiç uğramaz (o yalnız `.mainnav__link` arar); hover'ı tümüyle CSS.
+
+| Yön | Davranış |
+|---|---|
+| Üstüne gelince | Kilidin altında 1 px saç çizgisi soldan çizilir — nav'ın aynısı, ama `--accent` yerine `--codex` |
+| Ayrılınca | Çizgi sağdan çekilir |
+| Aynı anda | Logomark bir tık yükselir (`translate: 0 -6%`), `↗` oku altın rengine dönüp sağ üste adımlar |
+
+Çizgi tam olarak logomarkın alt kenarına oturur (`inset-block-end: var(--eco-pad)`, kutunun kendi dikey padding'i).
+
+> [!note] Yeni sekme
+> Bağlantı `target="_blank" rel="noopener"`. Görsel işaret `↗` (`aria-hidden`), ekran okuyucu için yanında `.visually-hidden` bir *(yeni sekmede açılır)* durur. `nav.js`'in çıkış geçişi zaten `target="_blank"` bağlantılara dokunmuyor.
+
+NEXUS satırı `<span>` olduğu için hiçbir hover kuralı ona uymaz — kurallar `a.ecosystem__link` ile seçiliyor.
+
 ## Sürüm menüsü (`version-menu.js`)
 
 "4.0"a tıklayınca sürüm listesi açılır (tetikleyiciden ölçek + yükselme ile).

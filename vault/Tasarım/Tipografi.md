@@ -14,6 +14,13 @@ tags: [tasarım, tipografi]
 | FANTAZYA | **Archivo** ExtraLight (200) | 21.84 | %94 | `--accent` |
 | Nav bağlantıları | **Space Grotesk** Regular | 18.13 | 0 | `--nav-ink` |
 | Alt bilgi | **Archivo** Regular | 9.10 | 0 | `--accent` |
+| Ekosistem başlığı | **Archivo** Regular | 9.10 | %28 | `--accent` |
+| Ekosistem `SLVNZ` | **No Serenity** | 24 | 0 | `--ink` |
+| Ekosistem ürün adı | **Archivo** Bold (700) | 9 | %46 | `--codex` |
+| *Yakında…* | **Archivo** ExtraLight italik | 10.5 | %4 | soluk `--ink` |
+
+> [!note] Ekosistem satırları Figma'da yok
+> Bu dört satır artboard'a sonradan eklenen rayın ([[Başlık Sayfası Geometrisi]]) tipografisi. Ürün adının %46 aralığı uydurma değil: CODEX'in kendi marka kilidinden ölçüldü (9 px'de 4.14 px).
 
 > [!warning] Sık yapılan hata
 > Archivo ile Space Grotesk'in yerini karıştırmak. **Archivo** = eyebrow, FANTAZYA, alt bilgi. **Space Grotesk** = nav ve okuma sayfası etiketleri. Bu, Figma dosyasındaki gerçek atama.
@@ -39,7 +46,10 @@ Türkçe kapsamı tam: `Ü İ Ş Ğ Ç Ö` hepsi var.
 
 ## Archivo + Space Grotesk
 
-Google Fonts'tan, `display=swap` ile. Yüklenen ağırlıklar: Archivo 200/400/500, Space Grotesk 400/500.
+Google Fonts'tan, `display=swap` ile. Yüklenen ağırlıklar: Archivo 200/400/500/**700**, Space Grotesk 400/500.
+
+> [!note] 700 bedava geldi
+> Archivo'yu Google değişken yazı tipi olarak servis ediyor: `wght@200;400;500` ile `wght@200;400;500;700` **aynı üç dosyayı** döndürüyor (alt küme başına bir tane), yalnız `@font-face` satırı artıyor. Yani CODEX'in kendi ağırlığına sadık kalmanın ek indirme maliyeti yok.
 
 > [!tip] Kendi sunucundan servis etmek
 > Gizlilik veya çevrimdışı çalışma istersen bu iki yazı tipini indirip `assets/fonts/` altına koy, `index.html` içindeki Google Fonts satırını `@font-face` tanımlarıyla değiştir.
