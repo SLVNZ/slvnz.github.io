@@ -63,7 +63,7 @@
     <nav class="rail__nav" aria-label="Ana menü">
       <h1 class="rail__title">Yetenekler</h1>
       <!-- yonetim:yetenek-sayisi -->
-      <p class="rail__count">19 Yetenek</p>
+      <p class="rail__count">24 Yetenek</p>
       <!-- /yonetim:yetenek-sayisi -->
       <ul class="rail__list">
         <li><a class="mainnav__link rail__link" href="kurallar.html">Oyun Kuralları</a></li>
@@ -1457,7 +1457,282 @@
           <h2 class="panel__title" id="b02">Fiziksel Yetenekler</h2>
         </header>
         <p class="panel__lede">Kas gücüne dayanan yetenekler; çoğunlukla SOLUK tüketir.</p>
-        <p class="yet__bos">Bu alanda henüz yetenek yok. Yönetim panelindeki <strong>Yetenekler</strong> görünümünden ekleyebilirsin.</p>
+        <div class="yet" data-yet="fiziksel">
+          <div class="yet__bar">
+            <label class="yara">
+              <span class="yara__label">Ara</span>
+              <input class="yara__input" type="search" data-yara
+                     placeholder="Yetenek, element, enerji, açıklama…"
+                     autocomplete="off" spellcheck="false">
+            </label>
+            <label class="yfiltre">
+              <span class="yfiltre__label">Eylem</span>
+              <select class="yfiltre__sel" data-yfiltre="eylem">
+                <option value="">Hepsi</option>
+                <option value="Ek Eylem">Ek Eylem</option>
+                <option value="Eylem">Eylem</option>
+                <option value="Tepki Eylem">Tepki Eylem</option>
+              </select>
+            </label>
+            <label class="yfiltre">
+              <span class="yfiltre__label">Yetkinlik</span>
+              <select class="yfiltre__sel" data-yfiltre="yetkinlik" data-ykapsar>
+                <option value="">Hepsi</option>
+                <option value="Balta">Balta</option>
+                <option value="Kılıç">Kılıç</option>
+                <option value="Mızrak">Mızrak</option>
+                <option value="Silahsız">Silahsız</option>
+              </select>
+            </label>
+            <label class="yfiltre">
+              <span class="yfiltre__label">Seviye</span>
+              <select class="yfiltre__sel" data-yfiltre="seviye">
+                <option value="">Hepsi</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </label>
+            <button class="yet__sifirla" type="button" data-ysifirla hidden>Süzgeci temizle</button>
+            <p class="yet__sayac" data-ysayac role="status" aria-live="polite">5 yetenek</p>
+          </div>
+
+          <div class="yet__split" data-yprofil="fiziksel">
+            <div class="yet__tablowrap">
+              <table class="ytablo" data-ytablo data-yprofil="fiziksel">
+                <caption class="visually-hidden">Fiziksel Yetenekler — sıralanabilir tablo</caption>
+                <thead>
+                  <tr>
+                    <th scope="col" data-ysort="seviye" data-ytur="sayi" aria-sort="none"><span class="ytablo__bas">Sv.<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="ad" data-ytur="metin" aria-sort="none"><span class="ytablo__bas">Yetenek<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="eylem" data-ytur="metin" aria-sort="none"><span class="ytablo__bas">Eylem Türü<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="yetkinlik" data-ytur="metin" aria-sort="none"><span class="ytablo__bas">Yetkinlik<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="soluk" data-ytur="sayi" aria-sort="none"><span class="ytablo__bas">Soluk<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                    <th scope="col" data-ysort="menzil" data-ytur="sayi" aria-sort="none"><span class="ytablo__bas">Menzil<span class="ytablo__ok" aria-hidden="true"></span></span></th>
+                  </tr>
+                </thead>
+                <tbody data-ygovde>
+            <tr class="ytablo__satir" data-yid="y-fiziksel-agir-darbe" data-seviye="2" data-ad="agir darbe" data-eylem="Eylem" data-element="" data-enerji="" data-sure="-1" data-yetkinlik="" data-ritual="0" data-konsantrasyon="0" data-kaynak="Soluk" data-soluk="2" data-tuketim="2" data-menzil="-1" data-ara="agir darbe 2 normalde yaptigin saldirilara gore daha fazla kuvvet bindirdigin bir saldiri gerceklestirirsin. kuvvet zarina ek d6 zar atarak sonuca ekleyebilirsin. bu yetenek gelistirilebilir. her gelistirildiginde, seviye basina atilacak zarin yuzu +2 artar. mevcut zar yuzu d10 olduktan sonra, d12 olmak yerine ikiye bolunur ve zarin biri artmaya devam eder. bu sistem, butun zarlar d10&#x27;a tamamlandikca bolunerek ayni mantikta devam eder. yetenegin gelistirilebilirlik siniri, karakterin kuv niteliginin + x2 ustu seklindedir (kuv=1 karakter icin azami 3, kuv=2 karakter icin azami 5 yapilabilir gibi...). eylem soluk kendin yok">
+              <td class="ytablo__lvl">2</td>
+              <th class="ytablo__ad" scope="row"><a class="ytablo__link" href="#y-fiziksel-agir-darbe">Ağır Darbe</a></th>
+              <td>Eylem</td>
+              <td class="ytablo__yetkinlik">—</td>
+              <td class="ytablo__soluk">2</td>
+              <td class="ytablo__menzil">Kendin</td>
+            </tr>
+            <tr class="ytablo__satir" data-yid="y-fiziksel-ek-saldiri" data-seviye="2" data-ad="ek saldiri" data-eylem="Ek Eylem" data-element="" data-enerji="" data-sure="-1" data-yetkinlik="" data-ritual="0" data-konsantrasyon="0" data-kaynak="Soluk" data-soluk="2" data-tuketim="2" data-menzil="-1" data-ara="ek saldiri 2 yetkin oldugun silahla ek saldiri yapmani saglar. ek eylem soluk kendin yok">
+              <td class="ytablo__lvl">2</td>
+              <th class="ytablo__ad" scope="row"><a class="ytablo__link" href="#y-fiziksel-ek-saldiri">Ek Saldırı</a></th>
+              <td>Ek Eylem</td>
+              <td class="ytablo__yetkinlik">—</td>
+              <td class="ytablo__soluk">2</td>
+              <td class="ytablo__menzil">Kendin</td>
+            </tr>
+            <tr class="ytablo__satir" data-yid="y-fiziksel-karsi-saldiri" data-seviye="3" data-ad="karsi saldiri" data-eylem="Tepki Eylem" data-element="" data-enerji="" data-sure="-1" data-yetkinlik="" data-ritual="0" data-konsantrasyon="0" data-kaynak="Soluk" data-soluk="3" data-tuketim="3" data-menzil="-1" data-ara="karsi saldiri 3 sana yonlenmis bir yakin mesafe saldirisini basarili bir sekilde savusturman halinde, tepki olarak karsi bir saldiri gerceklestirebilirsin. tepki eylem soluk kendin yok">
+              <td class="ytablo__lvl">3</td>
+              <th class="ytablo__ad" scope="row"><a class="ytablo__link" href="#y-fiziksel-karsi-saldiri">Karşı Saldırı</a></th>
+              <td>Tepki Eylem</td>
+              <td class="ytablo__yetkinlik">—</td>
+              <td class="ytablo__soluk">3</td>
+              <td class="ytablo__menzil">Kendin</td>
+            </tr>
+            <tr class="ytablo__satir" data-yid="y-fiziksel-seri-darbe" data-seviye="3" data-ad="seri darbe" data-eylem="Eylem" data-element="" data-enerji="" data-sure="-1" data-yetkinlik="Kılıç" data-ritual="0" data-konsantrasyon="0" data-kaynak="Soluk" data-soluk="3" data-tuketim="3" data-menzil="-1" data-ara="seri darbe 3 kilicinla rakibine arka arkaya seri iki kesme hamlesi yaparsin. rakibin bu yetenek sebebiyle 2 yipranma puani alir. eylem soluk kilic kendin yok">
+              <td class="ytablo__lvl">3</td>
+              <th class="ytablo__ad" scope="row"><a class="ytablo__link" href="#y-fiziksel-seri-darbe">Seri Darbe</a></th>
+              <td>Eylem</td>
+              <td class="ytablo__yetkinlik">Kılıç</td>
+              <td class="ytablo__soluk">3</td>
+              <td class="ytablo__menzil">Kendin</td>
+            </tr>
+            <tr class="ytablo__satir" data-yid="y-fiziksel-silahsizlandirma" data-seviye="3" data-ad="silahsizlandirma" data-eylem="Tepki Eylem" data-element="" data-enerji="" data-sure="-1" data-yetkinlik="Kılıç · Balta · Mızrak · Silahsız" data-ritual="0" data-konsantrasyon="0" data-kaynak="Soluk" data-soluk="2" data-tuketim="2" data-menzil="-1" data-ara="silahsizlandirma 3 yakin mesafeli saldirini silahiyla bloklamis bir karaktere karsi tepki olarak silahini elinden atmak uzere bir denemeye girebilirsin. bu durumda, karakterle karsilikli kuv testine girilir. karsi taraf testte basarisiz olursa, rakibin silahini belirleyecegin bir dogrultuda 2 birim uzakliga firlatirsin. tepki eylem soluk kilic balta mizrak silahsiz kendin yok">
+              <td class="ytablo__lvl">3</td>
+              <th class="ytablo__ad" scope="row"><a class="ytablo__link" href="#y-fiziksel-silahsizlandirma">Silahsızlandırma</a></th>
+              <td>Tepki Eylem</td>
+              <td class="ytablo__yetkinlik">Kılıç · Balta · Mızrak · Silahsız</td>
+              <td class="ytablo__soluk">2</td>
+              <td class="ytablo__menzil">Kendin</td>
+            </tr>
+                </tbody>
+              </table>
+              <p class="yet__bosluk" data-ybos hidden>Süzgece uyan yetenek yok.</p>
+            </div>
+
+            <div class="yet__panel" data-ypanel>
+              <p class="yet__ipucu" data-yipucu hidden>Ayrıntı için tablodan bir yetenek seç.</p>
+              <div class="yet__kartlar" data-ykartlar>
+        <article class="ykart" id="y-fiziksel-agir-darbe" data-ykart="y-fiziksel-agir-darbe" tabindex="-1">
+          <header class="ykart__head">
+            <p class="ykart__eyebrow">
+              <span class="ykart__lvl">Seviye 2</span>
+              <span class="ykart__kat">Fiziksel</span>
+            </p>
+            <h3 class="ykart__ad">Ağır Darbe</h3>
+            <p class="ykart__etiketler">
+              <span class="yet-tag yet-tag--eylem">Eylem</span>
+            </p>
+          </header>
+          <dl class="ykart__stats">
+            <div class="ykart__stat">
+              <dt>Yetkinlik</dt>
+              <dd>—</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Soluk</dt>
+              <dd>2</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Menzil</dt>
+              <dd>Kendin</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Alan</dt>
+              <dd>Yok</dd>
+            </div>
+          </dl>
+          <div class="ykart__aciklama">
+            <p>Normalde yaptığın saldırılara göre daha fazla kuvvet bindirdiğin bir saldırı gerçekleştirirsin. Kuvvet zarına ek d6 zar atarak sonuca ekleyebilirsin.</p>
+          </div>
+          <aside class="ykart__dipnot">
+            <p class="ykart__getiket">Dipnot</p>
+            <p>Bu yetenek geliştirilebilir. Her geliştirildiğinde, seviye başına atılacak zarın yüzü +2 artar. Mevcut zar yüzü d10 olduktan sonra, d12 olmak yerine ikiye bölünür ve zarın biri artmaya devam eder. Bu sistem, bütün zarlar d10'a tamamlandıkça bölünerek aynı mantıkta devam eder.</p>
+            <p>Yeteneğin geliştirilebilirlik sınırı, karakterin KUV niteliğinin + x2 üstü şeklindedir (KUV=1 karakter için azami 3, KUV=2 karakter için azami 5 yapılabilir gibi...).</p>
+          </aside>
+        </article>
+        <article class="ykart" id="y-fiziksel-ek-saldiri" data-ykart="y-fiziksel-ek-saldiri" tabindex="-1">
+          <header class="ykart__head">
+            <p class="ykart__eyebrow">
+              <span class="ykart__lvl">Seviye 2</span>
+              <span class="ykart__kat">Fiziksel</span>
+            </p>
+            <h3 class="ykart__ad">Ek Saldırı</h3>
+            <p class="ykart__etiketler">
+              <span class="yet-tag yet-tag--eylem">Ek Eylem</span>
+            </p>
+          </header>
+          <dl class="ykart__stats">
+            <div class="ykart__stat">
+              <dt>Yetkinlik</dt>
+              <dd>—</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Soluk</dt>
+              <dd>2</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Menzil</dt>
+              <dd>Kendin</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Alan</dt>
+              <dd>Yok</dd>
+            </div>
+          </dl>
+          <div class="ykart__aciklama">
+            <p>Yetkin olduğun silahla ek saldırı yapmanı sağlar.</p>
+          </div>
+        </article>
+        <article class="ykart" id="y-fiziksel-karsi-saldiri" data-ykart="y-fiziksel-karsi-saldiri" tabindex="-1">
+          <header class="ykart__head">
+            <p class="ykart__eyebrow">
+              <span class="ykart__lvl">Seviye 3</span>
+              <span class="ykart__kat">Fiziksel</span>
+            </p>
+            <h3 class="ykart__ad">Karşı Saldırı</h3>
+            <p class="ykart__etiketler">
+              <span class="yet-tag yet-tag--eylem">Tepki Eylem</span>
+            </p>
+          </header>
+          <dl class="ykart__stats">
+            <div class="ykart__stat">
+              <dt>Yetkinlik</dt>
+              <dd>—</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Soluk</dt>
+              <dd>3</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Menzil</dt>
+              <dd>Kendin</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Alan</dt>
+              <dd>Yok</dd>
+            </div>
+          </dl>
+          <div class="ykart__aciklama">
+            <p>Sana yönlenmiş bir yakın mesafe saldırısını başarılı bir şekilde savuşturman halinde, tepki olarak karşı bir saldırı gerçekleştirebilirsin.</p>
+          </div>
+        </article>
+        <article class="ykart" id="y-fiziksel-seri-darbe" data-ykart="y-fiziksel-seri-darbe" tabindex="-1">
+          <header class="ykart__head">
+            <p class="ykart__eyebrow">
+              <span class="ykart__lvl">Seviye 3</span>
+              <span class="ykart__kat">Fiziksel</span>
+            </p>
+            <h3 class="ykart__ad">Seri Darbe</h3>
+            <p class="ykart__etiketler">
+              <span class="yet-tag yet-tag--eylem">Eylem</span>
+            </p>
+          </header>
+          <dl class="ykart__stats">
+            <div class="ykart__stat">
+              <dt>Yetkinlik</dt>
+              <dd>Kılıç</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Soluk</dt>
+              <dd>3</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Menzil</dt>
+              <dd>Kendin</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Alan</dt>
+              <dd>Yok</dd>
+            </div>
+          </dl>
+          <div class="ykart__aciklama">
+            <p>Kılıcınla rakibine arka arkaya seri iki kesme hamlesi yaparsın. Rakibin bu yetenek sebebiyle 2 yıpranma puanı alır.</p>
+          </div>
+        </article>
+        <article class="ykart" id="y-fiziksel-silahsizlandirma" data-ykart="y-fiziksel-silahsizlandirma" tabindex="-1">
+          <header class="ykart__head">
+            <p class="ykart__eyebrow">
+              <span class="ykart__lvl">Seviye 3</span>
+              <span class="ykart__kat">Fiziksel</span>
+            </p>
+            <h3 class="ykart__ad">Silahsızlandırma</h3>
+            <p class="ykart__etiketler">
+              <span class="yet-tag yet-tag--eylem">Tepki Eylem</span>
+            </p>
+          </header>
+          <dl class="ykart__stats">
+            <div class="ykart__stat">
+              <dt>Yetkinlik</dt>
+              <dd>Kılıç · Balta · Mızrak · Silahsız</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Soluk</dt>
+              <dd>2</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Menzil</dt>
+              <dd>Kendin</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Alan</dt>
+              <dd>Yok</dd>
+            </div>
+          </dl>
+          <div class="ykart__aciklama">
+            <p>Yakın mesafeli saldırını silahıyla bloklamış bir karaktere karşı tepki olarak silahını elinden atmak üzere bir denemeye girebilirsin. Bu durumda, karakterle karşılıklı KUV testine girilir. Karşı taraf testte başarısız olursa, rakibin silahını belirleyeceğin bir doğrultuda 2 birim uzaklığa fırlatırsın.</p>
+          </div>
+        </article>
+              </div>
+            </div>
+          </div>
+        </div>
       </article>
 
       <article class="panel" id="karma" aria-labelledby="b03" tabindex="-1" data-panel>

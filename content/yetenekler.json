@@ -1736,6 +1736,116 @@
       "dipnot": null
     },
     {
+      "id": 27,
+      "kategori": "fiziksel",
+      "kategori_ad": "Fiziksel Yetenekler",
+      "seviye": 2,
+      "ad": "Ağır Darbe",
+      "eylem_turu": {
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
+      },
+      "element": null,
+      "enerji_turu": null,
+      "kaynak_turu": {
+        "id": 5,
+        "ad": "Soluk"
+      },
+      "kaynak_tuketimi": 2,
+      "menzil": {
+        "tur": "kendin",
+        "deger": null,
+        "birim": null
+      },
+      "sure": {
+        "tur": "anlik",
+        "deger": null,
+        "birim": null
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "ritual": false,
+      "konsantrasyon": false,
+      "yetkinlik": [],
+      "gereksinim": {
+        "soz": {
+          "gerekli": false,
+          "metin": null
+        },
+        "hareket": {
+          "gerekli": false,
+          "metin": null
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Normalde yaptığın saldırılara göre daha fazla kuvvet bindirdiğin bir saldırı gerçekleştirirsin. Kuvvet zarına ek d6 zar atarak sonuca ekleyebilirsin.",
+      "dipnot": "Bu yetenek geliştirilebilir. Her geliştirildiğinde, seviye başına atılacak zarın yüzü +2 artar. Mevcut zar yüzü d10 olduktan sonra, d12 olmak yerine ikiye bölünür ve zarın biri artmaya devam eder. Bu sistem, bütün zarlar d10'a tamamlandıkça bölünerek aynı mantıkta devam eder.\n\nYeteneğin geliştirilebilirlik sınırı, karakterin KUV niteliğinin + x2 üstü şeklindedir (KUV=1 karakter için azami 3, KUV=2 karakter için azami 5 yapılabilir gibi...)."
+    },
+    {
+      "id": 25,
+      "kategori": "fiziksel",
+      "kategori_ad": "Fiziksel Yetenekler",
+      "seviye": 2,
+      "ad": "Ek Saldırı",
+      "eylem_turu": {
+        "id": 2,
+        "ad": "Ek Eylem",
+        "kisa": "EE"
+      },
+      "element": null,
+      "enerji_turu": null,
+      "kaynak_turu": {
+        "id": 5,
+        "ad": "Soluk"
+      },
+      "kaynak_tuketimi": 2,
+      "menzil": {
+        "tur": "kendin",
+        "deger": null,
+        "birim": null
+      },
+      "sure": {
+        "tur": "anlik",
+        "deger": null,
+        "birim": null
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "ritual": false,
+      "konsantrasyon": false,
+      "yetkinlik": [],
+      "gereksinim": {
+        "soz": {
+          "gerekli": false,
+          "metin": null
+        },
+        "hareket": {
+          "gerekli": false,
+          "metin": null
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Yetkin olduğun silahla ek saldırı yapmanı sağlar.",
+      "dipnot": null
+    },
+    {
       "id": 23,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
@@ -1804,6 +1914,193 @@
         }
       },
       "aciklama": "Menzilde görebildiğin bir hedefin zihninde kendini korkutucu hale getirirsin. İRD testine giren varlık, başarısız olması durumunda test sırasında seninle arasında bulunan her 5 fark için sana karşı veya senin 3 birim çevrendeyken gerçekleştireceği eylemlere -1 ceza alır.",
+      "dipnot": null
+    },
+    {
+      "id": 28,
+      "kategori": "fiziksel",
+      "kategori_ad": "Fiziksel Yetenekler",
+      "seviye": 3,
+      "ad": "Karşı Saldırı",
+      "eylem_turu": {
+        "id": 3,
+        "ad": "Tepki Eylem",
+        "kisa": "TE"
+      },
+      "element": null,
+      "enerji_turu": null,
+      "kaynak_turu": {
+        "id": 5,
+        "ad": "Soluk"
+      },
+      "kaynak_tuketimi": 3,
+      "menzil": {
+        "tur": "kendin",
+        "deger": null,
+        "birim": null
+      },
+      "sure": {
+        "tur": "anlik",
+        "deger": null,
+        "birim": null
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "ritual": false,
+      "konsantrasyon": false,
+      "yetkinlik": [],
+      "gereksinim": {
+        "soz": {
+          "gerekli": false,
+          "metin": null
+        },
+        "hareket": {
+          "gerekli": false,
+          "metin": null
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Sana yönlenmiş bir yakın mesafe saldırısını başarılı bir şekilde savuşturman halinde, tepki olarak karşı bir saldırı gerçekleştirebilirsin.",
+      "dipnot": null
+    },
+    {
+      "id": 26,
+      "kategori": "fiziksel",
+      "kategori_ad": "Fiziksel Yetenekler",
+      "seviye": 3,
+      "ad": "Seri Darbe",
+      "eylem_turu": {
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
+      },
+      "element": null,
+      "enerji_turu": null,
+      "kaynak_turu": {
+        "id": 5,
+        "ad": "Soluk"
+      },
+      "kaynak_tuketimi": 3,
+      "menzil": {
+        "tur": "kendin",
+        "deger": null,
+        "birim": null
+      },
+      "sure": {
+        "tur": "anlik",
+        "deger": null,
+        "birim": null
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "ritual": false,
+      "konsantrasyon": false,
+      "yetkinlik": [
+        {
+          "id": 1,
+          "ad": "Kılıç"
+        }
+      ],
+      "gereksinim": {
+        "soz": {
+          "gerekli": false,
+          "metin": null
+        },
+        "hareket": {
+          "gerekli": false,
+          "metin": null
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Kılıcınla rakibine arka arkaya seri iki kesme hamlesi yaparsın. Rakibin bu yetenek sebebiyle 2 yıpranma puanı alır.",
+      "dipnot": null
+    },
+    {
+      "id": 29,
+      "kategori": "fiziksel",
+      "kategori_ad": "Fiziksel Yetenekler",
+      "seviye": 3,
+      "ad": "Silahsızlandırma",
+      "eylem_turu": {
+        "id": 3,
+        "ad": "Tepki Eylem",
+        "kisa": "TE"
+      },
+      "element": null,
+      "enerji_turu": null,
+      "kaynak_turu": {
+        "id": 5,
+        "ad": "Soluk"
+      },
+      "kaynak_tuketimi": 2,
+      "menzil": {
+        "tur": "kendin",
+        "deger": null,
+        "birim": null
+      },
+      "sure": {
+        "tur": "anlik",
+        "deger": null,
+        "birim": null
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "ritual": false,
+      "konsantrasyon": false,
+      "yetkinlik": [
+        {
+          "id": 1,
+          "ad": "Kılıç"
+        },
+        {
+          "id": 2,
+          "ad": "Balta"
+        },
+        {
+          "id": 3,
+          "ad": "Mızrak"
+        },
+        {
+          "id": 8,
+          "ad": "Silahsız"
+        }
+      ],
+      "gereksinim": {
+        "soz": {
+          "gerekli": false,
+          "metin": null
+        },
+        "hareket": {
+          "gerekli": false,
+          "metin": null
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Yakın mesafeli saldırını silahıyla bloklamış bir karaktere karşı tepki olarak silahını elinden atmak üzere bir denemeye girebilirsin. Bu durumda, karakterle karşılıklı KUV testine girilir. Karşı taraf testte başarısız olursa, rakibin silahını belirleyeceğin bir doğrultuda 2 birim uzaklığa fırlatırsın.",
       "dipnot": null
     }
   ]
