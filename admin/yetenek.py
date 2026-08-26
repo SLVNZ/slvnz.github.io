@@ -46,10 +46,86 @@ SOZLUKLER = {
     'kaynak_turu':    (('ad', 'aciklama', 'sira'), 'Kaynak türü'),
     'eylem_turu':     (('ad', 'kisa', 'sira'), 'Eylem türü'),
     'uzaklik_birimi': (('ad', 'kisa', 'varsayilan', 'sira'), 'Uzaklık birimi'),
+    'sure_birimi':    (('ad', 'kisa', 'saniye', 'varsayilan', 'sira'), 'Süre birimi'),
     'alan_tipi':      (('ad', 'yukseklik_gerekir', 'olcu_adi', 'sira'), 'Alan tipi'),
+    'yetkinlik':      (('ad', 'aciklama', 'sira'), 'Yetkinlik'),
 }
 
 ENERJI_SINIF = {'temel': 'Temel', 'ozel': 'Özel', 'yasak': 'Yasak'}
+
+
+# ======================================================================= profil
+# Kategoriler artık AYNI tabloyu paylaşmıyor. Fiziksel yetenekte element,
+# enerji türü, kaynak türü, süre, ritüel ve söz/hareket/materyal üçlüsü yok;
+# buna karşılık yetkinlik (silah türü) var ve kaynak hep Soluk olduğu için
+# sütun "Soluk" başlığıyla yalnız tüketimi gösterir. Karma ikisinin birleşimi.
+#
+# Tablo sütunları, kart katmanları, süzgeç çubuğu, form alanları ve doğrulama
+# HEP buradan türer. Üç yerin ayrışması bu dosyadaki en pahalı hata olurdu:
+# formda görünmeyen bir alanı doğrulama zorunlu tutarsa kayıt hiç kaydedilemez.
+VARSAYILAN_PROFIL = {
+    'element': True,
+    'enerji': True,
+    'kaynak': True,          # kaynak TÜRÜ seçilir mi (yoksa sabit)
+    'sure': True,
+    'gereksinim': True,      # söz · hareket · materyal
+    'yetkinlik': False,
+    'nitelikler': (('ritual', 'R', 'Ritüel'),
+                   ('konsantrasyon', 'K', 'Konsantrasyon')),
+    'kaynak_basligi': 'Kaynak',
+    'sabit_kaynak': None,
+}
+
+PROFILLER = {
+    'fiziksel': {
+        'element': False, 'enerji': False, 'kaynak': False, 'sure': False,
+        'gereksinim': False, 'yetkinlik': True,
+        # Ritüel yok; konsantrasyon aynı sütunda ama bu alanda "Odak" adıyla
+        # ve O harfiyle görünür.
+        'nitelikler': (('konsantrasyon', 'O', 'Odak'),),
+        'kaynak_basligi': 'Soluk',
+        'sabit_kaynak': 'Soluk',
+    },
+    'karma': {
+        'yetkinlik': True,   # gerisi varsayılan: enerjisel alanların hepsi
+    },
+}
+
+
+def profil(kod):
+    p = dict(VARSAYILAN_PROFIL)
+    p.update(PROFILLER.get(kod) or {})
+    return p
+
+
+def nitelikleri(y):
+    """Yeteneğin taşıdığı nitelikler — (anahtar, harf, ad) üçlüleri.
+    Harf ve ad KATEGORİYE bağlı: aynı `konsantrasyon` sütunu enerjisel alanda
+    K/Konsantrasyon, fiziksel alanda O/Odak olarak okunur."""
+    return [n for n in profil(y.get('kategori'))['nitelikler'] if y.get(n[0])]
+
+
+def sutunlar(kod):
+    """Kategorinin tablo başlıkları: (anahtar, etiket, sıralama türü)."""
+    p = profil(kod)
+    L = [('seviye', 'Sv.', 'sayi'),
+         ('ad', 'Yetenek', 'metin'),
+         ('eylem', 'Eylem Türü', 'metin')]
+    if p['element']:
+        L.append(('element', 'Element', 'metin'))
+    if p['enerji']:
+        L.append(('enerji', 'Enerji Türü', 'metin'))
+    if p['sure']:
+        L.append(('sure', 'Süre', 'sayi'))
+    if p['yetkinlik']:
+        L.append(('yetkinlik', 'Yetkinlik', 'metin'))
+    if p['kaynak']:
+        L.append(('kaynak', p['kaynak_basligi'], 'metin'))
+    else:
+        # Kaynak türü sabit: sütun yalnız tüketimi taşır, o yüzden sayısal.
+        L.append(('soluk', p['kaynak_basligi'], 'sayi'))
+    L.append(('menzil', 'Menzil', 'sayi'))
+    return tuple(L)
 
 
 # ---------------------------------------------------------------- yardımcılar
@@ -118,7 +194,9 @@ def sozluk():
         'enerji_turu': db.sorgu('SELECT id, ad, sinif, aciklama, sira FROM enerji_turu ORDER BY sira, id'),
         'kaynak_turu': db.sorgu('SELECT id, ad, aciklama, sira FROM kaynak_turu ORDER BY sira, id'),
         'uzaklik_birimi': db.sorgu('SELECT id, ad, kisa, varsayilan, sira FROM uzaklik_birimi ORDER BY sira, id'),
+        'sure_birimi': db.sorgu('SELECT id, ad, kisa, saniye, varsayilan, sira FROM sure_birimi ORDER BY sira, id'),
         'alan_tipi': db.sorgu('SELECT id, ad, yukseklik_gerekir, olcu_adi, sira FROM alan_tipi ORDER BY sira, id'),
+        'yetkinlik': db.sorgu('SELECT id, ad, aciklama, sira FROM yetkinlik ORDER BY sira, id'),
     }
 
 
@@ -147,6 +225,12 @@ def sozluk_kaydet(tablo, veri):
         deger['varsayilan'] = _bool(veri.get('varsayilan'))
     if 'yukseklik_gerekir' in kolonlar:
         deger['yukseklik_gerekir'] = _bool(veri.get('yukseklik_gerekir'))
+    if 'saniye' in kolonlar:
+        # Sıralamanın tek dayanağı; 0/negatif bütün süreleri eşitler.
+        sn = _int(veri.get('saniye'))
+        if sn is None or sn < 1:
+            return None, ['Saniye karşılığı en az 1 olmalı']
+        deger['saniye'] = sn
     yid = _int(veri.get('id'))
     if 'sira' in kolonlar:
         s = _int(veri.get('sira'))
@@ -172,8 +256,8 @@ def sozluk_kaydet(tablo, veri):
             tablo, ', '.join(k), ', '.join('?' for _ in k)), [deger[x] for x in k])
 
     # tek varsayılan birim: yenisi işaretlenince ötekiler düşer
-    if tablo == 'uzaklik_birimi' and deger.get('varsayilan'):
-        db.calistir('UPDATE uzaklik_birimi SET varsayilan = 0 WHERE id <> ?', (yid,))
+    if tablo in ('uzaklik_birimi', 'sure_birimi') and deger.get('varsayilan'):
+        db.calistir('UPDATE %s SET varsayilan = 0 WHERE id <> ?' % tablo, (yid,))
     db.islem_bitir()
     return yid, []
 
@@ -198,6 +282,14 @@ def sozluk_sil(tablo, sid):
                    'WHERE menzil_birim_id = ? OR alan_birim_id = ?', (sid, sid))['n']
         if n:
             return ['Bu birim %d yetenekte kullanılıyor — önce onları değiştir' % n]
+    if tablo == 'sure_birimi':
+        n = db.tek('SELECT COUNT(*) AS n FROM yetenek WHERE sure_birim_id = ?', (sid,))['n']
+        if n:
+            return ['Bu birim %d yetenekte kullanılıyor — önce onları değiştir' % n]
+    if tablo == 'yetkinlik':
+        n = db.tek('SELECT COUNT(*) AS n FROM yetenek_yetkinlik WHERE yetkinlik_id = ?', (sid,))['n']
+        if n:
+            return ['Bu yetkinlik %d yetenekte kullanılıyor — önce onları değiştir' % n]
     db.calistir('DELETE FROM %s WHERE id = ?' % tablo, (sid,))
     db.islem_bitir()
     return []
@@ -212,6 +304,7 @@ SELECT y.*,
        en.ad  AS enerji_ad,     en.sinif AS enerji_sinif,
        kt.ad  AS kaynak_ad,
        mb.ad  AS mbirim_ad,     mb.kisa AS mbirim_kisa,
+       sb.ad  AS sbirim_ad,     sb.kisa AS sbirim_kisa,   sb.saniye AS sbirim_sn,
        ab.ad  AS abirim_ad,     ab.kisa AS abirim_kisa,
        at.ad  AS atipi_ad,      at.olcu_adi AS atipi_olcu,
        at.yukseklik_gerekir AS atipi_yuk
@@ -222,12 +315,13 @@ SELECT y.*,
   LEFT JOIN enerji_turu    en ON en.id = y.enerji_turu_id
   LEFT JOIN kaynak_turu    kt ON kt.id = y.kaynak_turu_id
   LEFT JOIN uzaklik_birimi mb ON mb.id = y.menzil_birim_id
+  LEFT JOIN sure_birimi    sb ON sb.id = y.sure_birim_id
   LEFT JOIN uzaklik_birimi ab ON ab.id = y.alan_birim_id
   LEFT JOIN alan_tipi      at ON at.id = y.alan_tipi_id
 '''
 
 
-def _sar(r, materyaller):
+def _sar(r, materyaller, yetkinlikler=None):
     """Ham satır → panelin ve sayfanın okuduğu kayıt. Yazım da aynı biçimi
     kabul eder; okuma ile yazma biçiminin ayrışması hata kaynağıdır."""
     def ref(idk, adk, **ek):
@@ -253,6 +347,12 @@ def _sar(r, materyaller):
             'deger': r['menzil_deger'],
             'birim': ref('menzil_birim_id', 'mbirim_ad', kisa=r.get('mbirim_kisa')),
         },
+        'sure': {
+            'tur': r['sure_tur'],
+            'deger': r['sure_deger'],
+            'birim': ref('sure_birim_id', 'sbirim_ad', kisa=r.get('sbirim_kisa'),
+                         saniye=r.get('sbirim_sn')),
+        },
         'alan': {
             'var': bool(r['alan_var']),
             'deger': r['alan_deger'],
@@ -261,6 +361,9 @@ def _sar(r, materyaller):
                         yukseklik_gerekir=bool(r.get('atipi_yuk'))),
             'yukseklik': r['alan_yukseklik'],
         },
+        'ritual': bool(r['ritual']),
+        'konsantrasyon': bool(r['konsantrasyon']),
+        'yetkinlik': (yetkinlikler or {}).get(r['id'], []),
         'gereksinim': {
             'soz': {'gerekli': bool(r['soz_gerekli']), 'metin': r['soz_metin']},
             'hareket': {'gerekli': bool(r['hareket_gerekli']), 'metin': r['hareket_metin']},
@@ -282,7 +385,12 @@ def liste(kategori=None):
     mat = {}
     for m in db.sorgu('SELECT yetenek_id, ad FROM yetenek_materyal ORDER BY yetenek_id, sira, id'):
         mat.setdefault(m['yetenek_id'], []).append(m['ad'])
-    kayitlar = [_sar(r, mat) for r in satirlar]
+    yet = {}
+    for w in db.sorgu('SELECT yy.yetenek_id, y.id, y.ad FROM yetenek_yetkinlik yy '
+                      'JOIN yetkinlik y ON y.id = yy.yetkinlik_id '
+                      'ORDER BY yy.yetenek_id, yy.sira, yy.id'):
+        yet.setdefault(w['yetenek_id'], []).append({'id': w['id'], 'ad': w['ad']})
+    kayitlar = [_sar(r, mat, yet) for r in satirlar]
     kayitlar.sort(key=lambda y: (y['seviye'], db.tr_anahtar(y['ad'])))
     return kayitlar
 
@@ -293,7 +401,10 @@ def getir(yid):
         return None
     mat = {r['id']: [m['ad'] for m in db.sorgu(
         'SELECT ad FROM yetenek_materyal WHERE yetenek_id = ? ORDER BY sira, id', (r['id'],))]}
-    return _sar(r, mat)
+    yet = {r['id']: [{'id': w['id'], 'ad': w['ad']} for w in db.sorgu(
+        'SELECT y.id, y.ad FROM yetenek_yetkinlik yy JOIN yetkinlik y ON y.id = yy.yetkinlik_id '
+        'WHERE yy.yetenek_id = ? ORDER BY yy.sira, yy.id', (r['id'],))]}
+    return _sar(r, mat, yet)
 
 
 # ---------------------------------------------------------------- doğrulama
@@ -302,8 +413,14 @@ def _var_mi(tablo, sid):
 
 
 def dogrula(v):
-    """Panelden gelen kayıt → (temizlenmiş alanlar, materyal listesi, hatalar)."""
+    """Panelden gelen kayıt → (alanlar, materyal, yetkinlik, hatalar).
+
+    Kategorinin profilinde OLMAYAN alanlar burada susturulur: formda
+    görünmeyen bir alanı zorunlu tutmak kaydı imkânsız kılar, gelen çöp veriyi
+    saklamak da kategori değiştiğinde eski alanların geri gelmesine yol açar.
+    Her iki yönde de tek doğru yer burasıdır."""
     h = []
+    prf = profil(v.get('kategori'))
     kat = db.tek('SELECT id FROM kategori WHERE kod = ?', (v.get('kategori'),))
     if not kat:
         h.append('Kategori seçilmeli (enerjisel / fiziksel / karma)')
@@ -335,11 +452,28 @@ def dogrula(v):
     enerji = ref('enerji_turu', 'enerji_turu', etiket='Enerji türü')
     kaynak = ref('kaynak_turu', 'kaynak_turu', etiket='Kaynak türü')
 
+    # Profilde olmayan alanlar sessizce düşer.
+    if not prf['element']:
+        element = None
+    if not prf['enerji']:
+        enerji = None
+
     # Enerjisel yetenekte element/enerji/kaynak üçlüsü kimliğin kendisidir.
     if kat and v.get('kategori') == 'enerjisel':
         for sid, etiket in ((element, 'Element'), (enerji, 'Enerji türü'), (kaynak, 'Kaynak türü')):
             if not sid:
                 h.append('Enerjisel yetenekte %s seçilmeli' % etiket.lower())
+
+    # Kaynak türü sabit olan alanda (fiziksel → Soluk) seçim yapılmaz: tür
+    # addan bulunur, yoksa yaratılmaz — sözlükten silinmişse hata söylenir.
+    if prf['sabit_kaynak']:
+        sbt = db.tek('SELECT id FROM kaynak_turu WHERE ad = ?', (prf['sabit_kaynak'],))
+        if sbt:
+            kaynak = sbt['id']
+        else:
+            kaynak = None
+            h.append('"%s" kaynak türü listede yok — Listeler bölümünden ekle'
+                     % prf['sabit_kaynak'])
 
     tuketim = _int(v.get('kaynak_tuketimi'), 0) or 0
     if tuketim < 0:
@@ -363,6 +497,24 @@ def dogrula(v):
         if not _var_mi('uzaklik_birimi', mbirim):
             h.append('Menzil birimi seçilmeli')
             mbirim = None
+
+    # -- süre -------------------------------------------------------------
+    # Menzille aynı kalıp: 'anlik' değer istemez, 'sureli' değer + birim ister.
+    sr = (v.get('sure') or {}) if prf['sure'] else {}
+    stur = sr.get('tur') or 'anlik'
+    if stur not in ('anlik', 'sureli'):
+        h.append('Süre türü "anlik" ya da "sureli" olmalı')
+        stur = 'anlik'
+    sdeger = sbirim = None
+    if stur == 'sureli':
+        sdeger = _int(sr.get('deger'))
+        if sdeger is None or sdeger < 1:
+            h.append('Süre en az 1 olmalı (ya da "Anlık" seç)')
+        sbirim = _int((sr.get('birim') or {}).get('id') if isinstance(sr.get('birim'), dict)
+                      else sr.get('birim'))
+        if not _var_mi('sure_birimi', sbirim):
+            h.append('Süre birimi seçilmeli')
+            sbirim = None
 
     # -- alan ------------------------------------------------------------
     a = v.get('alan') or {}
@@ -390,7 +542,7 @@ def dogrula(v):
                     h.append('%s biçiminde yükseklik en az 1 olmalı' % t['ad'])
 
     # -- söz / hareket / materyal ----------------------------------------
-    g = v.get('gereksinim') or {}
+    g = (v.get('gereksinim') or {}) if prf['gereksinim'] else {}
     soz = g.get('soz') or {}
     hrk = g.get('hareket') or {}
     mtl = g.get('materyal') or {}
@@ -412,6 +564,27 @@ def dogrula(v):
         hrk_m = None
     if not mtl_g:
         liste_mat = []
+
+    # Ritüel ve konsantrasyon birbirinden bağımsız iki nitelik; kısıtı yok,
+    # yalnız profilde bulunmayan bayrak kapatılır (fiziksel alanda ritüel yok).
+    nitelik_anahtarlari = {n[0] for n in prf['nitelikler']}
+    ritual = _bool(v.get('ritual')) if 'ritual' in nitelik_anahtarlari else False
+    konsantrasyon = (_bool(v.get('konsantrasyon'))
+                     if 'konsantrasyon' in nitelik_anahtarlari else False)
+
+    # -- yetkinlik (silah türleri) ---------------------------------------
+    yetkinlikler = []
+    if prf['yetkinlik']:
+        gorulen = set()
+        for x in (v.get('yetkinlik') or []):
+            wid = _int(x.get('id') if isinstance(x, dict) else x)
+            if not wid or wid in gorulen:
+                continue
+            if not _var_mi('yetkinlik', wid):
+                h.append('Yetkinlik listede yok (id %s)' % wid)
+                continue
+            gorulen.add(wid)
+            yetkinlikler.append(wid)
 
     aciklama = _metin(v.get('aciklama'), 8000)
     dipnot = _metin(v.get('dipnot'), 4000)
@@ -435,24 +608,28 @@ def dogrula(v):
         'menzil_tur': mtur,
         'menzil_deger': mdeger if mtur == 'mesafe' else None,
         'menzil_birim_id': mbirim if mtur == 'mesafe' else None,
+        'sure_tur': stur,
+        'sure_deger': sdeger if stur == 'sureli' else None,
+        'sure_birim_id': sbirim if stur == 'sureli' else None,
         'alan_var': avar,
         'alan_deger': adeger if avar else None,
         'alan_birim_id': abirim if avar else None,
         'alan_tipi_id': atipi if avar else None,
         'alan_yukseklik': ayuk if avar else None,
+        'ritual': ritual, 'konsantrasyon': konsantrasyon,
         'soz_gerekli': soz_g, 'soz_metin': soz_m,
         'hareket_gerekli': hrk_g, 'hareket_metin': hrk_m,
         'materyal_gerekli': mtl_g,
         'aciklama': aciklama, 'dipnot': dipnot,
         'sira': _int(v.get('sira'), 0) or 0,
     }
-    return alanlar, liste_mat, h
+    return alanlar, liste_mat, yetkinlikler, h
 
 
 # ---------------------------------------------------------------- yazma
 def kaydet(v):
     """Yetenek ekle/güncelle. Dönüş: (id, hatalar)."""
-    alanlar, materyaller, h = dogrula(v)
+    alanlar, materyaller, yetkinlikler, h = dogrula(v)
     if h:
         return None, h
     yid = _int(v.get('id'))
@@ -466,6 +643,7 @@ def kaydet(v):
             db.calistir('UPDATE yetenek SET %s WHERE id = ?' % ', '.join(x + ' = ?' for x in k),
                         [alanlar[x] for x in k] + [yid])
             db.calistir('DELETE FROM yetenek_materyal WHERE yetenek_id = ?', (yid,))
+            db.calistir('DELETE FROM yetenek_yetkinlik WHERE yetenek_id = ?', (yid,))
         else:
             alanlar['olusturma'] = alanlar['guncelleme'] = simdi
             k = list(alanlar.keys())
@@ -474,6 +652,9 @@ def kaydet(v):
         for i, m in enumerate(materyaller):
             db.calistir('INSERT INTO yetenek_materyal (yetenek_id, sira, ad) VALUES (?, ?, ?)',
                         (yid, i, m))
+        for i, w in enumerate(yetkinlikler):
+            db.calistir('INSERT INTO yetenek_yetkinlik (yetenek_id, yetkinlik_id, sira) '
+                        'VALUES (?, ?, ?)', (yid, w, i))
         db.islem_bitir()
     except Exception as e:
         db.islem_geri()
@@ -488,6 +669,7 @@ def sil(yid):
     # SQLite'ta ON DELETE CASCADE için PRAGMA açık, ama silmeyi açıkça
     # yazmak sürücüden bağımsız aynı sonucu verir
     db.calistir('DELETE FROM yetenek_materyal WHERE yetenek_id = ?', (yid,))
+    db.calistir('DELETE FROM yetenek_yetkinlik WHERE yetenek_id = ?', (yid,))
     db.calistir('DELETE FROM yetenek WHERE id = ?', (yid,))
     db.islem_bitir()
     return []
@@ -509,6 +691,27 @@ def menzil_metin(y, kisa=False):
     return ('%d %s' % (m['deger'], ad)).strip()
 
 
+def sure_metin(y, kisa=False):
+    sr = y.get('sure') or {}
+    if sr.get('tur') != 'sureli' or not sr.get('deger'):
+        return 'Anlık'
+    b = sr.get('birim') or {}
+    ad = (b.get('kisa') if kisa else b.get('ad')) or b.get('ad') or ''
+    return ('%d %s' % (sr['deger'], ad)).strip()
+
+
+def sure_saniye(y):
+    """Süre sütununun sıralama değeri — saniyeye indirgenmiş.
+
+    Ham değerle sıralamak birimleri karıştırırdı: "2 Saat" (7200 sn) ile
+    "3 Tur" (18 sn) arasında 2 < 3 çıkardı. "Anlık" −1'dir, yani artan
+    sıralamada en başa gelir; menzildeki "Kendin" ile aynı deyim."""
+    sr = y.get('sure') or {}
+    if sr.get('tur') != 'sureli' or not sr.get('deger'):
+        return -1
+    return (sr['deger'] or 0) * ((sr.get('birim') or {}).get('saniye') or 1)
+
+
 def alan_metin(y, kisa=False):
     a = y['alan']
     if not a['var'] or not a.get('deger'):
@@ -528,7 +731,7 @@ def kaynak_metin(y):
     if not k:
         return '—'
     if y.get('kaynak_tuketimi'):
-        return '%s %d' % (k['ad'], y['kaynak_tuketimi'])
+        return '%s - %d' % (k['ad'], y['kaynak_tuketimi'])
     return k['ad']
 
 
@@ -545,8 +748,16 @@ def arama_metni(y):
     for k in ('eylem_turu', 'element', 'enerji_turu', 'kaynak_turu'):
         if y.get(k):
             p.append(y[k]['ad'])
+    for w in (y.get('yetkinlik') or []):
+        p.append(w['ad'])
     p.append(menzil_metin(y))
+    if profil(y.get('kategori'))['sure']:
+        p.append(sure_metin(y))
     p.append(alan_metin(y))
+    if y.get('ritual'):
+        p.append('ritüel')
+    if y.get('konsantrasyon'):
+        p.append('konsantrasyon')
     g = y['gereksinim']
     if g['soz']['gerekli']:
         p += ['söz', g['soz']['metin'] or '']
@@ -574,9 +785,33 @@ def _paragraflar(metin, sinif=''):
 
 
 # ---------------------------------------------------------------- HTML üretimi
+def yetkinlik_metin(y):
+    """Yetkinlik sütunu: birden çok silah türü orta noktayla ayrılır."""
+    w = y.get('yetkinlik') or []
+    return ' · '.join(x['ad'] for x in w) if w else '—'
+
+
+# Hücreyi de başlığı da `sutunlar()` sırası çizer; ikisi ayrı listelerden
+# üretilseydi bir kategoriye sütun eklemek ötekinde kaymaya yol açardı.
+_HUCRE = {
+    'eylem':     lambda y: (esc((y.get('eylem_turu') or {}).get('ad') or '—'), ''),
+    'element':   lambda y: (esc((y.get('element') or {}).get('ad') or '—'), ''),
+    'enerji':    lambda y: (esc((y.get('enerji_turu') or {}).get('ad') or '—'), ''),
+    'sure':      lambda y: (esc(sure_metin(y, kisa=True)), ' class="ytablo__sure"'),
+    'yetkinlik': lambda y: (esc(yetkinlik_metin(y)), ' class="ytablo__yetkinlik"'),
+    'kaynak':    lambda y: (esc(kaynak_metin(y)), ' class="ytablo__kaynak"'),
+    'soluk':     lambda y: (esc(str(y.get('kaynak_tuketimi') or 0)), ' class="ytablo__soluk"'),
+    'menzil':    lambda y: (esc(menzil_metin(y, kisa=True)), ' class="ytablo__menzil"'),
+}
+
+
 def _satir(y):
     """Tablo satırı. data-* nitelikleri sıralama/süzme/arama için — JS ham
-    değeri okur, gösterilen metni değil (18 m ile 9 m doğru sıralansın)."""
+    değeri okur, gösterilen metni değil (18 m ile 9 m doğru sıralansın).
+
+    Sütunlar kategoriye göre değişir (bkz. profil); nitelikler ise HEP yazılır.
+    Süzülmeyen bir data-* niteliğinin bedeli birkaç bayt, eksik olanınki ise
+    sessizce çalışmayan bir süzgeç."""
     m = y['menzil']
     menzil_sayi = -1 if m['tur'] != 'mesafe' else (m.get('deger') or 0)
     a = [
@@ -586,31 +821,36 @@ def _satir(y):
         ('data-eylem', (y.get('eylem_turu') or {}).get('ad') or ''),
         ('data-element', (y.get('element') or {}).get('ad') or ''),
         ('data-enerji', (y.get('enerji_turu') or {}).get('ad') or ''),
+        ('data-sure', sure_saniye(y)),
+        ('data-yetkinlik', yetkinlik_metin(y) if (y.get('yetkinlik') or []) else ''),
+        ('data-ritual', 1 if y.get('ritual') else 0),
+        ('data-konsantrasyon', 1 if y.get('konsantrasyon') else 0),
         ('data-kaynak', (y.get('kaynak_turu') or {}).get('ad') or ''),
+        ('data-soluk', y.get('kaynak_tuketimi') or 0),
         ('data-tuketim', y.get('kaynak_tuketimi') or 0),
         ('data-menzil', menzil_sayi),
         ('data-ara', arama_metni(y)),
     ]
     nit = ' '.join('%s="%s"' % (k, esc_attr(v)) for k, v in a)
     kid = kart_kimlik(y)
-    et = y.get('eylem_turu') or {}
-    return (
-        '            <tr class="ytablo__satir" {nit}>\n'
-        '              <td class="ytablo__lvl">{sev}</td>\n'
-        '              <th class="ytablo__ad" scope="row">'
-        '<a class="ytablo__link" href="#{kid}">{ad}</a></th>\n'
-        '              <td>{eylem}</td>\n'
-        '              <td>{element}</td>\n'
-        '              <td>{enerji}</td>\n'
-        '              <td class="ytablo__kaynak">{kaynak}</td>\n'
-        '              <td class="ytablo__menzil">{menzil}</td>\n'
-        '            </tr>'
-    ).format(
-        nit=nit, sev=y['seviye'], kid=esc_attr(kid), ad=esc(y['ad']),
-        eylem=esc(et.get('ad') or '—'),
-        element=esc((y.get('element') or {}).get('ad') or '—'),
-        enerji=esc((y.get('enerji_turu') or {}).get('ad') or '—'),
-        kaynak=esc(kaynak_metin(y)), menzil=esc(menzil_metin(y, kisa=True)))
+    bayrak = ''.join(
+        '<span class="ybayrak" data-nitelik="%s" title="%s">%s</span>'
+        % (esc_attr(anahtar), esc_attr(ad), esc(harf))
+        for anahtar, harf, ad in nitelikleri(y))
+
+    L = ['            <tr class="ytablo__satir" %s>' % nit]
+    for anahtar, _etiket, _tur in sutunlar(y['kategori']):
+        if anahtar == 'seviye':
+            L.append('              <td class="ytablo__lvl">%d</td>' % y['seviye'])
+        elif anahtar == 'ad':
+            L.append('              <th class="ytablo__ad" scope="row">'
+                     '<a class="ytablo__link" href="#%s">%s</a>%s</th>'
+                     % (esc_attr(kid), esc(y['ad']), bayrak))
+        else:
+            metin, sinif = _HUCRE[anahtar](y)
+            L.append('              <td%s>%s</td>' % (sinif, metin))
+    L.append('            </tr>')
+    return '\n'.join(L)
 
 
 def _kart(y):
@@ -644,23 +884,61 @@ def _kart(y):
         en = y['enerji_turu']
         L.append('              <span class="yet-tag yet-tag--enerji" data-sinif="%s">%s</span>'
                  % (esc_attr(en.get('sinif') or 'temel'), esc(en['ad'])))
+    # tabloda harf, kartta sözcük — kart tek başına okunabilir olmalı
+    for anahtar, _harf, ad in nitelikleri(y):
+        L.append('              <span class="yet-tag yet-tag--nitelik" data-nitelik="%s">%s</span>'
+                 % (esc_attr(anahtar), esc(ad)))
     L += ['            </p>', '          </header>']
 
     # -- mekanik
+    prf = profil(y['kategori'])
+    kunye = []
+    if prf['yetkinlik']:
+        kunye.append(('Yetkinlik', yetkinlik_metin(y)))
+    # Kaynak türü sabitse başlık türün kendisi olur ("Soluk"), değer tüketim
+    kunye.append((prf['kaynak_basligi'],
+                  kaynak_metin(y) if prf['kaynak'] else str(y.get('kaynak_tuketimi') or 0)))
+    if prf['sure']:
+        kunye.append(('Süre', sure_metin(y)))
+    kunye += [('Menzil', menzil_metin(y)), ('Alan', alan_metin(y))]
+
     L.append('          <dl class="ykart__stats">')
-    for etiket, deger in (('Kaynak', kaynak_metin(y)),
-                          ('Menzil', menzil_metin(y)),
-                          ('Alan', alan_metin(y))):
+    for etiket, deger in kunye:
         L += ['            <div class="ykart__stat">',
               '              <dt>%s</dt>' % esc(etiket),
               '              <dd>%s</dd>' % esc(deger),
               '            </div>']
     L.append('          </dl>')
 
-    # -- bedel: söz · hareket · materyal
-    L += ['          <section class="ykart__ger">',
-          '            <h4 class="ykart__bas">Gereksinimler</h4>',
-          '            <p class="ykart__shm">']
+    # -- bedel: söz · hareket · materyal (profilde varsa)
+    if prf['gereksinim']:
+        L += _kart_gereksinim(g)
+
+    # -- anlatı
+    if y.get('aciklama'):
+        L.append('          <div class="ykart__aciklama">')
+        L += ['            ' + q for q in _paragraflar(y['aciklama'])]
+        L.append('          </div>')
+
+    # -- kenar not
+    if y.get('dipnot'):
+        L += ['          <aside class="ykart__dipnot">',
+              '            <p class="ykart__getiket">Dipnot</p>']
+        L += ['            ' + q for q in _paragraflar(y['dipnot'])]
+        L.append('          </aside>')
+
+    L.append('        </article>')
+    return '\n'.join(L)
+
+
+def _kart_gereksinim(g):
+    """Söz · hareket · materyal katmanı — satır listesi döner.
+
+    Yalnız profilinde gereksinim olan kategorilerde çağrılır; fiziksel
+    yetenekte bu katman hiç yoktur."""
+    L = ['          <section class="ykart__ger">',
+         '            <h4 class="ykart__bas">Gereksinimler</h4>',
+         '            <p class="ykart__shm">']
     for harf, anahtar, ad in (('S', 'soz', 'Söz'), ('H', 'hareket', 'Hareket'),
                               ('M', 'materyal', 'Materyal')):
         var = g[anahtar]['gerekli']
@@ -673,12 +951,12 @@ def _kart(y):
         L += ['            <div class="ykart__gsat">',
               '              <p class="ykart__getiket">Söz</p>',
               '              <blockquote class="ykart__soz">']
-        L += ['                ' + p for p in _paragraflar(g['soz']['metin'])]
+        L += ['                ' + q for q in _paragraflar(g['soz']['metin'])]
         L += ['              </blockquote>', '            </div>']
     if g['hareket']['gerekli']:
         L += ['            <div class="ykart__gsat">',
               '              <p class="ykart__getiket">Hareket</p>']
-        L += ['              ' + p for p in _paragraflar(g['hareket']['metin'])]
+        L += ['              ' + q for q in _paragraflar(g['hareket']['metin'])]
         L.append('            </div>')
     if g['materyal']['gerekli'] and g['materyal']['liste']:
         L += ['            <div class="ykart__gsat">',
@@ -689,28 +967,16 @@ def _kart(y):
     if not any(g[k]['gerekli'] for k in ('soz', 'hareket', 'materyal')):
         L.append('            <p class="ykart__yok">Söz, hareket ya da materyal gerektirmez.</p>')
     L.append('          </section>')
-
-    # -- anlatı
-    if y.get('aciklama'):
-        L.append('          <div class="ykart__aciklama">')
-        L += ['            ' + p for p in _paragraflar(y['aciklama'])]
-        L.append('          </div>')
-
-    # -- kenar not
-    if y.get('dipnot'):
-        L += ['          <aside class="ykart__dipnot">',
-              '            <p class="ykart__getiket">Dipnot</p>']
-        L += ['            ' + p for p in _paragraflar(y['dipnot'])]
-        L.append('          </aside>')
-
-    L.append('        </article>')
-    return '\n'.join(L)
+    return L
 
 
-def _secenekler(ad, etiket, degerler):
+def _secenekler(ad, etiket, degerler, kapsar=False):
+    """Açılır süzgeç. `kapsar=True` ise satırın değeri TEK bir ad değil bir
+    liste ("Kılıç · Balta"); eşleşme tam değil kapsayan olur."""
     L = ['            <label class="yfiltre">',
          '              <span class="yfiltre__label">%s</span>' % esc(etiket),
-         '              <select class="yfiltre__sel" data-yfiltre="%s">' % esc_attr(ad),
+         '              <select class="yfiltre__sel" data-yfiltre="%s"%s>'
+         % (esc_attr(ad), ' data-ykapsar' if kapsar else ''),
          '                <option value="">Hepsi</option>']
     for d in degerler:
         L.append('                <option value="%s">%s</option>' % (esc_attr(d), esc(d)))
@@ -718,15 +984,31 @@ def _secenekler(ad, etiket, degerler):
     return '\n'.join(L)
 
 
-BASLIKLAR = (
-    ('seviye', 'Sv.', 'sayi'),
-    ('ad', 'Yetenek', 'metin'),
-    ('eylem', 'Eylem Türü', 'metin'),
-    ('element', 'Element', 'metin'),
-    ('enerji', 'Enerji Türü', 'metin'),
-    ('kaynak', 'Kaynak', 'metin'),
-    ('menzil', 'Menzil', 'sayi'),
-)
+def _kutular(kayitlar, prf):
+    """Nitelik süzgeçleri — onay kutusu olarak.
+
+    Öteki süzgeçlerle aynı kural: seçenek yalnız o kategoride GERÇEKTEN
+    kullanılıyorsa üretilir. Hiçbir yetenek ritüel değilse "Ritüel" kutusu da
+    olmaz; sonucu hep boş çıkan bir süzgeç kullanıcıyı yanıltır."""
+    var = [n for n in prf['nitelikler'] if any(y.get(n[0]) for y in kayitlar)]
+    if not var:
+        return ''
+    L = ['            <div class="yfnitelik">',
+         '              <span class="yfiltre__label">Nitelik</span>',
+         '              <div class="yfnitelik__kutular">']
+    # Kutu yalnız HARF gösterir, sözcüğü değil: sözcüklerle çubuk 1000px'de
+    # ikinci satıra taşıyor ve kartın ekrana sığması için kazanılan 56px geri
+    # gidiyordu. Harf kriptik değil — tablo hemen altında aynı rozeti adın
+    # yanında taşıyor; kartın S·H·M rozeti de aynı deyimi kullanıyor.
+    # Sözcük `title` ve ekran okuyucu metniyle duruyor.
+    for anahtar, harf, ad in var:
+        L += ['                <label class="ybkutu" title="Yalnız %s olanları göster">' % esc_attr(ad),
+              '                  <input type="checkbox" data-ykutu="%s">' % esc_attr(anahtar),
+              '                  <span class="ybkutu__im" aria-hidden="true">%s</span>' % esc(harf),
+              '                  <span class="visually-hidden">%s</span>' % esc(ad),
+              '                </label>']
+    L += ['              </div>', '            </div>']
+    return '\n'.join(L)
 
 
 def _bolum(kat, kayitlar, i):
@@ -748,6 +1030,8 @@ def _bolum(kat, kayitlar, i):
               '      </article>']
         return '\n'.join(L)
 
+    prf = profil(kod)
+
     def benzersiz(anahtar):
         s = {(y.get(anahtar) or {}).get('ad') for y in kayitlar}
         return sorted((x for x in s if x), key=db.tr_anahtar)
@@ -761,23 +1045,36 @@ def _bolum(kat, kayitlar, i):
           '                     autocomplete="off" spellcheck="false">',
           '            </label>']
     L.append(_secenekler('eylem', 'Eylem', benzersiz('eylem_turu')))
-    L.append(_secenekler('element', 'Element', benzersiz('element')))
-    L.append(_secenekler('enerji', 'Enerji', benzersiz('enerji_turu')))
-    L.append(_secenekler('kaynak', 'Kaynak', benzersiz('kaynak_turu')))
+    if prf['element']:
+        L.append(_secenekler('element', 'Element', benzersiz('element')))
+    if prf['enerji']:
+        L.append(_secenekler('enerji', 'Enerji', benzersiz('enerji_turu')))
+    if prf['yetkinlik']:
+        # yetkinlik çoklu: süzgeç TEK bir türe göre eşleşir, satırın listesinde
+        # o tür geçiyorsa satır kalır (bkz. yetenekler.js — kapsayan eşleşme)
+        adlar = sorted({w['ad'] for y in kayitlar for w in (y.get('yetkinlik') or [])},
+                       key=db.tr_anahtar)
+        if adlar:
+            L.append(_secenekler('yetkinlik', 'Yetkinlik', adlar, kapsar=True))
+    if prf['kaynak']:
+        L.append(_secenekler('kaynak', 'Kaynak', benzersiz('kaynak_turu')))
     sv = sorted({y['seviye'] for y in kayitlar})
     L.append(_secenekler('seviye', 'Seviye', [str(x) for x in sv]))
+    kutular = _kutular(kayitlar, prf)
+    if kutular:
+        L.append(kutular)
     L += ['            <button class="yet__sifirla" type="button" data-ysifirla hidden>Süzgeci temizle</button>',
           '            <p class="yet__sayac" data-ysayac role="status" aria-live="polite">'
           '%d yetenek</p>' % len(kayitlar),
           '          </div>',
           '',
-          '          <div class="yet__split">',
+          '          <div class="yet__split" data-yprofil="%s">' % esc_attr(kod),
           '            <div class="yet__tablowrap">',
-          '              <table class="ytablo" data-ytablo>',
+          '              <table class="ytablo" data-ytablo data-yprofil="%s">' % esc_attr(kod),
           '                <caption class="visually-hidden">%s — sıralanabilir tablo</caption>' % esc(kat['ad']),
           '                <thead>',
           '                  <tr>']
-    for anahtar, etiket, tur in BASLIKLAR:
+    for anahtar, etiket, tur in sutunlar(kod):
         L.append('                    <th scope="col" data-ysort="%s" data-ytur="%s" aria-sort="none">'
                  '<span class="ytablo__bas">%s<span class="ytablo__ok" aria-hidden="true"></span></span></th>'
                  % (esc_attr(anahtar), tur, esc(etiket)))
@@ -902,6 +1199,13 @@ def ice_aktar(zorla=False):
         m = dict(y.get('menzil') or {})
         m['birim'] = id_ile_ad('uzaklik_birimi', (y.get('menzil') or {}).get('birim'))
         kayit['menzil'] = m
+        sr = dict(y.get('sure') or {})
+        sr['birim'] = id_ile_ad('sure_birimi', (y.get('sure') or {}).get('birim'))
+        kayit['sure'] = sr
+        # yetkinlikler de ada göre bağlanır — id'ler iki veritabanında farklı
+        kayit['yetkinlik'] = [w for w in
+                              (id_ile_ad('yetkinlik', x) for x in (y.get('yetkinlik') or []))
+                              if w]
         a = dict(y.get('alan') or {})
         a['birim'] = id_ile_ad('uzaklik_birimi', (y.get('alan') or {}).get('birim'))
         a['tipi'] = id_ile_ad('alan_tipi', (y.get('alan') or {}).get('tipi'))

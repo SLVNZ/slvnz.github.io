@@ -1066,16 +1066,54 @@ select.field__input { cursor: pointer; }
 .yrow__chev svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.6; }
 .yrow.is-acik .yrow__chev { rotate: 90deg; color: var(--accent); }
 .yrow__tools { display: flex; align-items: center; padding-inline-end: .5rem; }
-.yrow__baslik {
-  padding: .7rem .85rem;
+
+/* ---------- yetenek penceresi ---------------------------------------------
+   Form eskiden `.yrow__body` içinde, satırın altında açılan bir akordeondu:
+   1280x720'de 1392px tutuyor, listeyi ekranın iki katına itiyordu. Artık
+   kendi <dialog>'unda — yükseklik ekrana bağlı, gövde kendi içinde kayıyor,
+   altlık dibe yapışıyor.
+
+   `display` YALNIZ [open] altında yazılı: tabana yazılsaydı tarayıcının
+   `dialog:not([open]) { display: none }` kuralını ezer, pencere kapalıyken
+   de sayfada dururdu. */
+.ypop {
+  width: min(94vw, 56rem);
+  max-height: min(90vh, 48rem);
+  padding: 0;
+  border: 1px solid var(--adm-hair);
+  background: var(--paper);
+  color: var(--ink);
+  overflow: hidden;
+}
+.ypop[open] { display: flex; flex-direction: column; }
+.ypop::backdrop { background: color-mix(in srgb, var(--ink) 45%, transparent); }
+
+.ypop__head {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .7rem .9rem .6rem;
+  border-block-end: 1px solid var(--adm-hair);
+}
+.ypop__ustbas {
   font-family: var(--font-archivo);
   font-weight: 700;
-  font-size: 12px;
+  font-size: 10px;
   letter-spacing: .18em;
   text-transform: uppercase;
   color: var(--accent);
 }
-.yrow__body { border-block-start: 1px solid var(--adm-hair); }
+.ypop__bas {
+  margin-block-start: .15rem;
+  font-family: var(--font-archivo);
+  font-weight: 900;
+  font-size: 17px;
+  line-height: 1.15;
+  text-transform: uppercase;
+  color: var(--ink);
+}
 
 /* ---------- yetenek formu -------------------------------------------------- */
 .yform { padding: 1.1rem .95rem 1.2rem; display: flex; flex-direction: column; gap: 1rem; }
@@ -1102,13 +1140,53 @@ select.field__input { cursor: pointer; }
 }
 .yform__satir { display: flex; flex-wrap: wrap; align-items: center; gap: .7rem; }
 .yform__kosul { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; }
+/* `hidden` niteliği tarayıcının `[hidden] { display: none }` kuralıyla iş
+   görür; ondan daha belirgin bir `display` yazıldığında sessizce ezilir.
+   İkisi de `display` taşıyor, yani JS `hidden = true` dese de kutular
+   ekranda kalıyordu: "Kendin" menzilli kayıtta mesafe alanı, yükseklik
+   istemeyen biçimde yükseklik alanı görünüyor, üstelik satırı sarmalayıp
+   formu ~40px uzatıyordu. */
+.yform__kosul[hidden], .yform__yuk[hidden] { display: none; }
 /* koşullu blok anahtarın altında, anahtarın rayı kadar içeride durur:
    hangi anahtara ait olduğu göz hizasında okunur */
 .yform__kosulblok { margin-block: .35rem .9rem; padding-inline-start: 3.2rem; }
 .yform__yuk { display: inline-flex; align-items: center; gap: .4rem; }
+/* seçilen süre biriminin adı sayının yanında: formda da "3 Tur" okunsun */
+.yform__birimad {
+  font-family: var(--font-archivo);
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+}
 .yform__carpi { color: var(--muted); font-size: 13px; }
 .field__input--sayi { width: 5.5rem; min-height: 38px; }
 .field__input--alan { min-height: 0; line-height: 1.55; resize: vertical; }
+/* İki nitelik anahtarı yan yana. Kümeyi flex yapmak yerine anahtarlara
+   boşluk veriliyor: `<legend>` flex kapsayıcıda tarayıcıdan tarayıcıya farklı
+   davranıyor, blok akış daha öngörülebilir. `.sw` zaten inline-flex. */
+.yform__set--nitelik .sw + .sw { margin-inline-start: 1.6rem; }
+
+/* Yetkinlik: silah türleri az sayıda ve hepsi bir bakışta görünmeli.
+   <select multiple> Ctrl-tık gerektirir ve kaç tanesinin seçili olduğu
+   kaydırmadan okunmaz; kutucuklar ikisini de çözüyor. */
+.ywet { display: flex; flex-wrap: wrap; gap: .35rem .5rem; }
+.ywet__kutu {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .25rem .55rem;
+  border: 1px solid var(--adm-hair);
+  cursor: pointer;
+  font-family: var(--font-archivo);
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+  transition: border-color .2s var(--ease), color .2s var(--ease);
+}
+.ywet__kutu:hover { border-color: color-mix(in srgb, var(--ink) 32%, transparent); color: var(--ink); }
+.ywet__kutu:has(input:checked) { border-color: var(--accent); color: var(--accent); }
+.ywet__kutu:focus-within { outline: 1px dashed var(--accent); outline-offset: 2px; }
+
 .yform__set .field__input { min-height: 38px; }
 .yform__set select.field__input { max-width: 13rem; }
 
@@ -1121,6 +1199,70 @@ select.field__input { cursor: pointer; }
   padding-block-start: .9rem;
 }
 .yform__foot .btn--danger { margin-inline-start: auto; }
+
+/* -- formun pencere içindeki hâli ------------------------------------------
+   Pencerede form kayan gövdedir: altlık dibe yapışır, alanlar bir tık
+   alçalır. Genişçe ekranda iki sütuna ayrılır — kimlik satırı, gereksinim
+   kümesi ve altlık tam genişlikte kalır, kalan kümeler yan yana dizilir. */
+.ypop .yform {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--adm-hair) transparent;
+  padding: .8rem .9rem 0;
+  gap: .7rem;
+}
+.ypop .yform__foot {
+  position: sticky;
+  inset-block-end: 0;
+  margin-block-start: auto;
+  padding-block: .7rem;
+  background: var(--paper);
+}
+.ypop .field { gap: .25rem; }
+.ypop .field__input { min-height: 34px; padding: .35rem .6rem; font-size: 14px; }
+.ypop .yform__set .field__input,
+.ypop .field__input--sayi { min-height: 34px; }
+.ypop .yform__set { padding: .5rem .7rem .65rem; }
+/* 11rem'lik alt sınır 419px'lik sütunda ancak iki sütun veriyor, üç alanlık
+   sınıflandırma ızgarası ikinci satıra taşıyordu. 8rem'de üçü tek satıra
+   giriyor (3x128 + 2x9.6 = 403 ≤ 419) ve küme 119px yerine ~55px tutuyor. */
+.ypop .yform__grid {
+  gap: .6rem;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+}
+.ypop .yform__grid--kimlik { grid-template-columns: 5.5rem minmax(10rem, 2fr) minmax(9rem, 1fr); }
+.ypop .yform__kosulblok { margin-block: .3rem .55rem; padding-inline-start: 2.9rem; }
+.ypop .ymat { gap: .25rem; margin-block: .3rem .4rem; }
+.ypop .ymat__satir .field__input { min-height: 32px; }
+
+/* Eşik pencerenin GENİŞLİĞİNDEN türer, ekranınkinden değil: pencere
+   `min(94vw, 56rem)`, iki sütun için ~700px gerekiyor, yani 94vw ≥ 700 →
+   ekran ≥ 745px. 47rem bunun yuvarlağı; 56rem'de bırakılsaydı 820px'lik
+   ekranda 771px genişliğinde bir pencere tek sütunda kalıyordu. */
+@media (min-width: 47rem) {
+  .ypop .yform {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: start;
+    /* `stretch` kısa kümeyi komşusunun boyuna geriyordu: Menzil'in kendi
+       içeriği 75px, yanındaki Etki alanı 177px, aradaki 100px boş kutu
+       olarak duruyordu. */
+    align-items: start;
+    column-gap: 1.1rem;
+    row-gap: .7rem;
+  }
+  .ypop .yform > .yform__grid--kimlik,
+  .ypop .yform > .yform__set--ger,
+  .ypop .yform > .yform__foot { grid-column: 1 / -1; }
+
+  /* Üç gereksinim yığını yan yana: alt alta 467px tutuyordu. Küme tam
+     genişlikte olduğu için üç sütun rahat sığıyor; koşullu bloğun anahtar
+     rayı kadar girintisi burada gereksiz — blok zaten kendi sütununda. */
+  .ypop .yger { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem .9rem; }
+  .ypop .yger .yform__kosulblok { padding-inline-start: 0; margin-block: .3rem 0; }
+}
 
 /* -- iki durumlu seçim (Kendin/Mesafe · Yok/Var) ---------------------------- */
 .segment { display: inline-flex; border: 1px solid var(--adm-hair); }

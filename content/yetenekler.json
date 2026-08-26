@@ -249,14 +249,14 @@
         "id": 1,
         "ad": "Birim",
         "kisa": "br",
-        "varsayilan": 0,
+        "varsayilan": 1,
         "sira": 1
       },
       {
         "id": 2,
         "ad": "Metre",
         "kisa": "m",
-        "varsayilan": 1,
+        "varsayilan": 0,
         "sira": 2
       },
       {
@@ -286,6 +286,71 @@
         "kisa": "km",
         "varsayilan": 0,
         "sira": 6
+      },
+      {
+        "id": 7,
+        "ad": "Derece",
+        "kisa": "ang",
+        "varsayilan": 0,
+        "sira": 7
+      }
+    ],
+    "sure_birimi": [
+      {
+        "id": 1,
+        "ad": "Tur",
+        "kisa": "Tur",
+        "saniye": 6,
+        "varsayilan": 1,
+        "sira": 1
+      },
+      {
+        "id": 2,
+        "ad": "Dakika",
+        "kisa": "Dk",
+        "saniye": 60,
+        "varsayilan": 0,
+        "sira": 2
+      },
+      {
+        "id": 3,
+        "ad": "Saat",
+        "kisa": "Saat",
+        "saniye": 3600,
+        "varsayilan": 0,
+        "sira": 3
+      },
+      {
+        "id": 4,
+        "ad": "Gün",
+        "kisa": "Gün",
+        "saniye": 86400,
+        "varsayilan": 0,
+        "sira": 4
+      },
+      {
+        "id": 5,
+        "ad": "Hafta",
+        "kisa": "Hafta",
+        "saniye": 604800,
+        "varsayilan": 0,
+        "sira": 5
+      },
+      {
+        "id": 6,
+        "ad": "Ay",
+        "kisa": "Ay",
+        "saniye": 2592000,
+        "varsayilan": 0,
+        "sira": 6
+      },
+      {
+        "id": 7,
+        "ad": "Yıl",
+        "kisa": "Yıl",
+        "saniye": 31536000,
+        "varsayilan": 0,
+        "sira": 7
       }
     ],
     "alan_tipi": [
@@ -352,124 +417,140 @@
         "olcu_adi": "Yarıçap",
         "sira": 9
       }
+    ],
+    "yetkinlik": [
+      {
+        "id": 1,
+        "ad": "Kılıç",
+        "aciklama": "Tek ya da çift elle kullanılan kesici kılıç sınıfı.",
+        "sira": 1
+      },
+      {
+        "id": 2,
+        "ad": "Balta",
+        "aciklama": "Savaş baltası ve türevleri.",
+        "sira": 2
+      },
+      {
+        "id": 3,
+        "ad": "Mızrak",
+        "aciklama": "Mızrak, kargı, uzun saplı delici silahlar.",
+        "sira": 3
+      },
+      {
+        "id": 4,
+        "ad": "Yay",
+        "aciklama": "Yay ve arbalet gibi menzilli atış silahları.",
+        "sira": 4
+      },
+      {
+        "id": 5,
+        "ad": "Hançer",
+        "aciklama": "Kısa saplı delici ve kesici silahlar.",
+        "sira": 5
+      },
+      {
+        "id": 6,
+        "ad": "Topuz",
+        "aciklama": "Topuz, gürz, çekiç gibi ezici silahlar.",
+        "sira": 6
+      },
+      {
+        "id": 7,
+        "ad": "Kalkan",
+        "aciklama": "Savunma amaçlı kalkan kullanımı.",
+        "sira": 7
+      },
+      {
+        "id": 8,
+        "ad": "Silahsız",
+        "aciklama": "Yumruk, tekme, tutuş — silah gerektirmeyen dövüş.",
+        "sira": 8
+      }
     ]
   },
   "yetenekler": [
     {
-      "id": 1,
+      "id": 8,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
       "seviye": 0,
-      "ad": "Kıvılcım",
+      "ad": "Ateş Kontrolü",
       "eylem_turu": {
-        "id": 2,
-        "ad": "Ek Eylem",
-        "kisa": "EE"
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
       },
       "element": {
         "id": 1,
         "ad": "Ateş"
       },
       "enerji_turu": {
-        "id": 3,
-        "ad": "Oluşturma",
+        "id": 4,
+        "ad": "Dönüştürme",
         "sinif": "temel"
       },
       "kaynak_turu": {
         "id": 1,
         "ad": "Mana"
       },
-      "kaynak_tuketimi": 1,
+      "kaynak_tuketimi": 0,
       "menzil": {
         "tur": "mesafe",
-        "deger": 2,
+        "deger": 12,
         "birim": {
-          "id": 2,
-          "ad": "Metre",
-          "kisa": "m"
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
         }
+      },
+      "sure": {
+        "tur": "anlik",
+        "deger": null,
+        "birim": null
       },
       "alan": {
-        "var": false,
-        "deger": null,
-        "birim": null,
-        "tipi": null,
-        "yukseklik": null
-      },
-      "gereksinim": {
-        "soz": {
-          "gerekli": false,
-          "metin": null
-        },
-        "hareket": {
-          "gerekli": true,
-          "metin": "Baş parmak ile orta parmak bir kez çıtlatılır."
-        },
-        "materyal": {
-          "gerekli": false,
-          "liste": []
-        }
-      },
-      "aciklama": "Parmak ucunda bir an için tutuşan küçük bir kıvılcım belirir. Meşale, fitil ya da kuru ot tutuşturmaya yeter; bir canlıya zarar vermez.",
-      "dipnot": "Islak ya da rüzgârlı ortamda GM tutuşma için zar isteyebilir."
-    },
-    {
-      "id": 2,
-      "kategori": "fiziksel",
-      "kategori_ad": "Fiziksel Yetenekler",
-      "seviye": 2,
-      "ad": "Kalkan Kırıcı",
-      "eylem_turu": {
-        "id": 1,
-        "ad": "Eylem",
-        "kisa": "E"
-      },
-      "element": null,
-      "enerji_turu": null,
-      "kaynak_turu": {
-        "id": 5,
-        "ad": "Soluk"
-      },
-      "kaynak_tuketimi": 4,
-      "menzil": {
-        "tur": "mesafe",
+        "var": true,
         "deger": 1,
         "birim": {
-          "id": 4,
-          "ad": "Kare",
-          "kisa": "kare"
-        }
-      },
-      "alan": {
-        "var": false,
-        "deger": null,
-        "birim": null,
-        "tipi": null,
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
+        },
+        "tipi": {
+          "id": 3,
+          "ad": "Küp",
+          "olcu_adi": "Kenar",
+          "yukseklik_gerekir": false
+        },
         "yukseklik": null
       },
+      "ritual": false,
+      "konsantrasyon": false,
+      "yetkinlik": [],
       "gereksinim": {
         "soz": {
-          "gerekli": false,
-          "metin": null
+          "gerekli": true,
+          "metin": "Ateşin Kalbi"
         },
         "hareket": {
           "gerekli": true,
-          "metin": "Ağırlık arka ayağa alınır, silah omuz üstünden aşağı doğru tam güçle indirilir."
+          "metin": "Etki edecek alana doğru söndürülecekse avcu kapama, tutuşturulacaksa avcu açma hareketi."
         },
         "materyal": {
           "gerekli": false,
           "liste": []
         }
       },
-      "aciklama": "Karakter bütün bedensel ağırlığını tek bir darbeye yükler. Darbe hedefin kalkanına ya da savunma duruşuna isabet ederse, hedef bir tur boyunca savunma değerini kullanamaz.",
-      "dipnot": "Ağır silah yetkinliği olmayan karakterler bu yeteneği kullandığında zarlarına eksi alır."
+      "aciklama": "Menzilde görebildiğin bir alandaki ateş kaynağını söndürürsün. Eğer sönmüş bir ateş kaynağı varsa ve hala korları soğumadıysa, bu ateş kaynağını yeniden yakabilirsin.",
+      "dipnot": null
     },
     {
-      "id": 3,
+      "id": 6,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
-      "seviye": 3,
-      "ad": "Alev Mızrağı",
+      "seviye": 0,
+      "ad": "Ateş Oku",
       "eylem_turu": {
         "id": 1,
         "ad": "Eylem",
@@ -488,66 +569,265 @@
         "id": 1,
         "ad": "Mana"
       },
-      "kaynak_tuketimi": 12,
+      "kaynak_tuketimi": 0,
       "menzil": {
         "tur": "mesafe",
-        "deger": 18,
+        "deger": 12,
         "birim": {
-          "id": 2,
-          "ad": "Metre",
-          "kisa": "m"
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
         }
       },
+      "sure": {
+        "tur": "anlik",
+        "deger": null,
+        "birim": null
+      },
       "alan": {
-        "var": true,
-        "deger": 3,
-        "birim": {
-          "id": 2,
-          "ad": "Metre",
-          "kisa": "m"
-        },
-        "tipi": {
-          "id": 1,
-          "ad": "Küre",
-          "olcu_adi": "Yarıçap",
-          "yukseklik_gerekir": false
-        },
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
         "yukseklik": null
       },
+      "ritual": false,
+      "konsantrasyon": false,
+      "yetkinlik": [],
       "gereksinim": {
         "soz": {
           "gerekli": true,
-          "metin": "Vur, alev; kalbe dek yürü."
+          "metin": "Yan!"
         },
         "hareket": {
           "gerekli": true,
-          "metin": "Sağ el omuz hizasında ileri savrulur, işaret parmağı hedefi çizer."
+          "metin": "Ateş okunun fırlayacağı yöne doğru el uzatılır ve sözler söylenirken parmak şıklatılır."
         },
         "materyal": {
-          "gerekli": true,
-          "liste": [
-            "Bir tutam kızıl kükürt",
-            "Yanmış meşe kabuğu"
-          ]
+          "gerekli": false,
+          "liste": []
         }
       },
-      "aciklama": "Kullanıcının avucunda toplanan mana, ince ve uzun bir alev mızrağına dönüşür.\n\nMızrak hedefe çarptığında dağılır ve çevresini kavurur.",
-      "dipnot": "Kapalı mekânda kullanıldığında GM ortamdaki yanıcı maddeler için ek bir zar isteyebilir."
+      "aciklama": "Menzilde görebildiğin bir hedefe ateşten oluşan bir ok fırlatırsın. Okun isabet etmesi halinde, ok hafif bir şekilde patlayarak çarptığı noktaya yanma hasarı uygular.",
+      "dipnot": null
     },
     {
-      "id": 4,
-      "kategori": "karma",
-      "kategori_ad": "Karma Yetenekler",
-      "seviye": 4,
-      "ad": "Köz Yürüyüşü",
+      "id": 12,
+      "kategori": "enerjisel",
+      "kategori_ad": "Enerjisel Yetenekler",
+      "seviye": 0,
+      "ad": "Buz Işını",
       "eylem_turu": {
-        "id": 2,
-        "ad": "Ek Eylem",
-        "kisa": "EE"
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
       },
       "element": {
+        "id": 2,
+        "ad": "Su"
+      },
+      "enerji_turu": {
         "id": 1,
-        "ad": "Ateş"
+        "ad": "Yıkım",
+        "sinif": "temel"
+      },
+      "kaynak_turu": {
+        "id": 1,
+        "ad": "Mana"
+      },
+      "kaynak_tuketimi": 0,
+      "menzil": {
+        "tur": "mesafe",
+        "deger": 9,
+        "birim": {
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
+        }
+      },
+      "sure": {
+        "tur": "anlik",
+        "deger": null,
+        "birim": null
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "ritual": false,
+      "konsantrasyon": false,
+      "yetkinlik": [],
+      "gereksinim": {
+        "soz": {
+          "gerekli": true,
+          "metin": "Don!"
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "İşaret ve orta parmaklar yan yana kalacak şekilde diğer parmaklar avuç içine kapatılır, iki parmakla vücudun yanından bir çember hattı oluşturularak en son hedef işaret edilecek biçimde bitirilir."
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Havadaki nemi parmaklarının ucuna toplayıp soğutarak, menzilde görebildiğin bir hedefe ani bir dondurma etkisiyle yönlendirirsin. Hedefe isabet etmesi halinde isabet noktasında parçalanarak hafif bir donma hasarı uygular.",
+      "dipnot": null
+    },
+    {
+      "id": 9,
+      "kategori": "enerjisel",
+      "kategori_ad": "Enerjisel Yetenekler",
+      "seviye": 0,
+      "ad": "Cadı Eli",
+      "eylem_turu": {
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
+      },
+      "element": {
+        "id": 4,
+        "ad": "Hava"
+      },
+      "enerji_turu": {
+        "id": 3,
+        "ad": "Oluşturma",
+        "sinif": "temel"
+      },
+      "kaynak_turu": {
+        "id": 1,
+        "ad": "Mana"
+      },
+      "kaynak_tuketimi": 0,
+      "menzil": {
+        "tur": "mesafe",
+        "deger": 6,
+        "birim": {
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
+        }
+      },
+      "sure": {
+        "tur": "sureli",
+        "deger": 1,
+        "birim": {
+          "id": 2,
+          "ad": "Dakika",
+          "kisa": "Dk",
+          "saniye": 60
+        }
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "ritual": false,
+      "konsantrasyon": true,
+      "yetkinlik": [],
+      "gereksinim": {
+        "soz": {
+          "gerekli": true,
+          "metin": "Kenett"
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "Elin oluşturulacağı noktaya doğru açılan avuç hareketini takiben orta ve yüzük parmaklarının avuç içine bükülmesi. Eli hareket ettirirken yeteneği yapan el ile komuta edilir."
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Menzilde görebildiğin bir noktada havada süzülen bir el formu meydana getirirsin. Bu el, menzili kadar senden uzaklaşabilir, erişebildiği noktalarda hafif nesneleri kaldırabilir, kapı, kol vb. ile etkileşime geçebilir.",
+      "dipnot": null
+    },
+    {
+      "id": 16,
+      "kategori": "enerjisel",
+      "kategori_ad": "Enerjisel Yetenekler",
+      "seviye": 0,
+      "ad": "Çarpan Kavrama",
+      "eylem_turu": {
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
+      },
+      "element": {
+        "id": 5,
+        "ad": "Yıldırım"
+      },
+      "enerji_turu": {
+        "id": 1,
+        "ad": "Yıkım",
+        "sinif": "temel"
+      },
+      "kaynak_turu": {
+        "id": 1,
+        "ad": "Mana"
+      },
+      "kaynak_tuketimi": 0,
+      "menzil": {
+        "tur": "mesafe",
+        "deger": 1,
+        "birim": {
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
+        }
+      },
+      "sure": {
+        "tur": "anlik",
+        "deger": null,
+        "birim": null
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "ritual": false,
+      "konsantrasyon": false,
+      "yetkinlik": [],
+      "gereksinim": {
+        "soz": {
+          "gerekli": true,
+          "metin": "Veks!"
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "Parmak şıklatılarak el bir yıldırımla yüklenir, hemen ardından avuç açık şekilde hedef kavranmaya çalışılır."
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Yakın saldırı menzilindeki bir rakibe uzanarak yıldırım hasarıyla çarpmaya çalışırsın. Hedef, saldırıdan kaçınamaması durumunda  hafif yıldırım hasarı alır.",
+      "dipnot": "Bu saldırı, bir tepki eylem olarak da kullanılabilir."
+    },
+    {
+      "id": 7,
+      "kategori": "enerjisel",
+      "kategori_ad": "Enerjisel Yetenekler",
+      "seviye": 0,
+      "ad": "Esinti",
+      "eylem_turu": {
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
+      },
+      "element": {
+        "id": 4,
+        "ad": "Hava"
       },
       "enerji_turu": {
         "id": 4,
@@ -555,35 +835,190 @@
         "sinif": "temel"
       },
       "kaynak_turu": {
-        "id": 5,
-        "ad": "Soluk"
+        "id": 1,
+        "ad": "Mana"
       },
-      "kaynak_tuketimi": 3,
+      "kaynak_tuketimi": 0,
       "menzil": {
         "tur": "mesafe",
         "deger": 6,
         "birim": {
-          "id": 2,
-          "ad": "Metre",
-          "kisa": "m"
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
         }
+      },
+      "sure": {
+        "tur": "anlik",
+        "deger": null,
+        "birim": null
       },
       "alan": {
         "var": true,
-        "deger": 6,
+        "deger": 1,
         "birim": {
-          "id": 2,
-          "ad": "Metre",
-          "kisa": "m"
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
         },
         "tipi": {
-          "id": 8,
-          "ad": "Hat",
-          "olcu_adi": "Uzunluk",
+          "id": 3,
+          "ad": "Küp",
+          "olcu_adi": "Kenar",
           "yukseklik_gerekir": false
         },
         "yukseklik": null
       },
+      "ritual": false,
+      "konsantrasyon": false,
+      "yetkinlik": [],
+      "gereksinim": {
+        "soz": {
+          "gerekli": true,
+          "metin": "Es!"
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "Bir el ile havayı arkadan toplar bir hareketi takiben öne doğru itme hareketi."
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Menzilde görebildiğin bir noktada, 1 birim küplük alanda anlık sert bir esintiye sebep olursun. Alan içinde bulunan ve yere sabitliği bulunmayan hafif cisimler, sana göre tam ters yöne 2 birime kadar uçuşarak dağılır. Aynı şekilde, bu alanda küçük veya normal boyutlarda bulunan bir varlık, kuvvet testine girerek geri itilmeye direnebilir. Kuvvet testini geçemeyen varlık, farkında 10'dan az olması halinde 1 birim, fazla olması halinde 2 birim geriye itilir.",
+      "dipnot": null
+    },
+    {
+      "id": 17,
+      "kategori": "enerjisel",
+      "kategori_ad": "Enerjisel Yetenekler",
+      "seviye": 0,
+      "ad": "Hafif Yara Baskısı",
+      "eylem_turu": {
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
+      },
+      "element": {
+        "id": 4,
+        "ad": "Hava"
+      },
+      "enerji_turu": {
+        "id": 4,
+        "ad": "Dönüştürme",
+        "sinif": "temel"
+      },
+      "kaynak_turu": {
+        "id": 1,
+        "ad": "Mana"
+      },
+      "kaynak_tuketimi": 0,
+      "menzil": {
+        "tur": "mesafe",
+        "deger": 1,
+        "birim": {
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
+        }
+      },
+      "sure": {
+        "tur": "sureli",
+        "deger": 1,
+        "birim": {
+          "id": 3,
+          "ad": "Saat",
+          "kisa": "Saat",
+          "saniye": 3600
+        }
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "ritual": false,
+      "konsantrasyon": true,
+      "yetkinlik": [],
+      "gereksinim": {
+        "soz": {
+          "gerekli": true,
+          "metin": "Darhka"
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "İki elin avuç içleri birbirine bastırıldıktan sonra ayrılır, hemen arkasından yaranın üstüne bant çeker gibi bir hareket gerçekleştirilir."
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Dokunma mesafendeki bir varlığın kesik, delik vb. hafif yarasından kaynaklanan kanamasını süre boyunca baskılayabilirsin.",
+      "dipnot": "Bu yetenek, normalden derin yaralanmalarda da etkili olabilme kapasitesine sahiptir, ancak yeteneğin enerji zarının yüksek olması gerekir."
+    },
+    {
+      "id": 14,
+      "kategori": "enerjisel",
+      "kategori_ad": "Enerjisel Yetenekler",
+      "seviye": 0,
+      "ad": "Hoş Koku",
+      "eylem_turu": {
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
+      },
+      "element": {
+        "id": 4,
+        "ad": "Hava"
+      },
+      "enerji_turu": {
+        "id": 4,
+        "ad": "Dönüştürme",
+        "sinif": "temel"
+      },
+      "kaynak_turu": {
+        "id": 1,
+        "ad": "Mana"
+      },
+      "kaynak_tuketimi": 0,
+      "menzil": {
+        "tur": "kendin",
+        "deger": null,
+        "birim": null
+      },
+      "sure": {
+        "tur": "sureli",
+        "deger": 1,
+        "birim": {
+          "id": 2,
+          "ad": "Dakika",
+          "kisa": "Dk",
+          "saniye": 60
+        }
+      },
+      "alan": {
+        "var": true,
+        "deger": 1,
+        "birim": {
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
+        },
+        "tipi": {
+          "id": 3,
+          "ad": "Küp",
+          "olcu_adi": "Kenar",
+          "yukseklik_gerekir": false
+        },
+        "yukseklik": null
+      },
+      "ritual": true,
+      "konsantrasyon": false,
+      "yetkinlik": [],
       "gereksinim": {
         "soz": {
           "gerekli": false,
@@ -591,28 +1026,372 @@
         },
         "hareket": {
           "gerekli": true,
-          "metin": "Bir adım öne atılır ve topuk yere sertçe basılır; hareket kesintisiz olmalıdır."
+          "metin": "Ritüel nesnesinin etrafında el yere işaret ederek bir tur dolaştırılır, ardından nesne avuç içine alınır. Ritüel boyunca tutulduktan sonra ritüel sonunda avuç açılır."
         },
         "materyal": {
           "gerekli": true,
           "liste": [
-            "Tabana sürülmüş bir tutam kül"
+            "Kokuyu sağlayacak koku nesnesi"
           ]
         }
       },
-      "aciklama": "Karakter attığı adımın ardında kısa süre yanan bir köz izi bırakır. İzin üstünden geçen varlıklar hafif yanık alır; karakterin kendisi bu izden etkilenmez.",
-      "dipnot": "Köz izi bir tur sonunda söner. Yanıcı zeminde GM izin yayılmasına karar verebilir."
+      "aciklama": "Koku sağlayacak herhangi bir nesne elde tutularak bir ritüel yapılır. Ritüel sonunda nesne çözünerek 1 birim küp hacmine buharlaşarak yayılır ve kokusunu yayar. Koku, havada ve tutunduğu zeminde doğal bir şekilde bulunur.",
+      "dipnot": null
     },
     {
-      "id": 5,
+      "id": 15,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
-      "seviye": 5,
-      "ad": "Örtü Perdesi",
+      "seviye": 0,
+      "ad": "Kutsal Ateş",
       "eylem_turu": {
-        "id": 3,
-        "ad": "Tepki Eylem",
-        "kisa": "TE"
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
+      },
+      "element": {
+        "id": 1,
+        "ad": "Ateş"
+      },
+      "enerji_turu": {
+        "id": 9,
+        "ad": "İnanç",
+        "sinif": "ozel"
+      },
+      "kaynak_turu": {
+        "id": 1,
+        "ad": "Mana"
+      },
+      "kaynak_tuketimi": 0,
+      "menzil": {
+        "tur": "mesafe",
+        "deger": 9,
+        "birim": {
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
+        }
+      },
+      "sure": {
+        "tur": "anlik",
+        "deger": null,
+        "birim": null
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "ritual": false,
+      "konsantrasyon": false,
+      "yetkinlik": [],
+      "gereksinim": {
+        "soz": {
+          "gerekli": true,
+          "metin": "Erra!"
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "Sağ el, kalbin üstünde yumruk yapıldıktan sonra el havaya doğru açılır, ardından hedef işaret edilir."
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Menzilde görebileceğin bir varlığın çevresinde parlayan kutsal alevler meydana getirirsin. Varlık, ÇEV testine girerek parlayan alevlerden kaçınmaya çalışabilir, geçemezse anlık olarak parlayan alevler vücudunun açıklık bölgelerinden sızarak hafif yakma hazarı uygular.",
+      "dipnot": "Sadece Kutban ve Ruhbanlar tarafından kullanılır."
+    },
+    {
+      "id": 10,
+      "kategori": "enerjisel",
+      "kategori_ad": "Enerjisel Yetenekler",
+      "seviye": 0,
+      "ad": "Mesaj",
+      "eylem_turu": {
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
+      },
+      "element": {
+        "id": 4,
+        "ad": "Hava"
+      },
+      "enerji_turu": {
+        "id": 4,
+        "ad": "Dönüştürme",
+        "sinif": "temel"
+      },
+      "kaynak_turu": {
+        "id": 1,
+        "ad": "Mana"
+      },
+      "kaynak_tuketimi": 0,
+      "menzil": {
+        "tur": "mesafe",
+        "deger": 12,
+        "birim": {
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
+        }
+      },
+      "sure": {
+        "tur": "anlik",
+        "deger": null,
+        "birim": null
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "ritual": false,
+      "konsantrasyon": false,
+      "yetkinlik": [],
+      "gereksinim": {
+        "soz": {
+          "gerekli": true,
+          "metin": "Mesaj"
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "İki el gövdenin önünde bir çember çizer, ardından iki el birleştirilerek bir elde toplama hareketi yapılır ve bir el seslenir şekilde ağza götürülür. Kelimeler sarfedilene kadar bu şekilde tutulur."
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Menzilde görebildiğin bir hedefe yoğunlaşarak, kulaklarının dibinde duyabileceği bir mesaj iletirsin. Bu mesaj en fazla 15 kelimeden oluşabilir. Hedefindeki varlık sarf ettiğin kelimeleri bire bir duyar, ancak geldiği yönü anlayamaz veya sana cevap veremez.",
+      "dipnot": null
+    },
+    {
+      "id": 11,
+      "kategori": "enerjisel",
+      "kategori_ad": "Enerjisel Yetenekler",
+      "seviye": 0,
+      "ad": "Minör Görüntü",
+      "eylem_turu": {
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
+      },
+      "element": {
+        "id": 6,
+        "ad": "Işık"
+      },
+      "enerji_turu": {
+        "id": 6,
+        "ad": "İllüzyon",
+        "sinif": "temel"
+      },
+      "kaynak_turu": {
+        "id": 1,
+        "ad": "Mana"
+      },
+      "kaynak_tuketimi": 0,
+      "menzil": {
+        "tur": "mesafe",
+        "deger": 12,
+        "birim": {
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
+        }
+      },
+      "sure": {
+        "tur": "sureli",
+        "deger": 1,
+        "birim": {
+          "id": 2,
+          "ad": "Dakika",
+          "kisa": "Dk",
+          "saniye": 60
+        }
+      },
+      "alan": {
+        "var": true,
+        "deger": 1,
+        "birim": {
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
+        },
+        "tipi": {
+          "id": 3,
+          "ad": "Küp",
+          "olcu_adi": "Kenar",
+          "yukseklik_gerekir": false
+        },
+        "yukseklik": null
+      },
+      "ritual": false,
+      "konsantrasyon": true,
+      "yetkinlik": [],
+      "gereksinim": {
+        "soz": {
+          "gerekli": true,
+          "metin": "Kadans"
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "Sağ el ile görüntünün oluşturulacağı alana bakılarak, işaret parmağı ile işaret edilecek biçimde oluşturulmak istenen görüntü kabaca çizilir."
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Menzilde görebildiğin bir alanda, hayalinde canlandırabildiğin bir görüntü gerçekçi bir biçimde belirir. Bu görüntü, en fazla normal boyutlarda bir varlığa veya 1 birim küplük alan hacme sahip olabilecek bir nesne / oluşuma ait olabilir.",
+      "dipnot": null
+    },
+    {
+      "id": 18,
+      "kategori": "enerjisel",
+      "kategori_ad": "Enerjisel Yetenekler",
+      "seviye": 0,
+      "ad": "Ölümün Çanları",
+      "eylem_turu": {
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
+      },
+      "element": {
+        "id": 4,
+        "ad": "Hava"
+      },
+      "enerji_turu": {
+        "id": 8,
+        "ad": "Çürüme",
+        "sinif": "temel"
+      },
+      "kaynak_turu": {
+        "id": 1,
+        "ad": "Mana"
+      },
+      "kaynak_tuketimi": 0,
+      "menzil": {
+        "tur": "mesafe",
+        "deger": 12,
+        "birim": {
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
+        }
+      },
+      "sure": {
+        "tur": "anlik",
+        "deger": null,
+        "birim": null
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "ritual": false,
+      "konsantrasyon": false,
+      "yetkinlik": [],
+      "gereksinim": {
+        "soz": {
+          "gerekli": true,
+          "metin": "Akarna!"
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "Bir elin parmakları şıklatılarak yumruk yapılır, ardından hedefe doğru yumruk bir patlamaya sebep olacak gibi açılır."
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Menzilde görebildiğin bir hedefin zihninde yüksek sesli ölüm çanlarını çalmayı denersin. İRADE testi başarısız olan varlığın zihninde baskı oluşturacak çanlar çalarak, kısa sürede etkinin birikmesi durumunda algı bozukluğu, denge kaybı, baygınlık gibi etkilere sebep olabilir. Etki birikmesi durumunda varlık, DAY testine girerek bu etkilerden minimum hasarda çıkmaya çalışır.",
+      "dipnot": "Bu yeteneğin yaşayan ölülere karşı kullanılması, testlerin DEZAVANTAJLI yapılmasına sebep olur."
+    },
+    {
+      "id": 13,
+      "kategori": "enerjisel",
+      "kategori_ad": "Enerjisel Yetenekler",
+      "seviye": 0,
+      "ad": "Temizlik",
+      "eylem_turu": {
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
+      },
+      "element": {
+        "id": 4,
+        "ad": "Hava"
+      },
+      "enerji_turu": {
+        "id": 4,
+        "ad": "Dönüştürme",
+        "sinif": "temel"
+      },
+      "kaynak_turu": {
+        "id": 1,
+        "ad": "Mana"
+      },
+      "kaynak_tuketimi": 0,
+      "menzil": {
+        "tur": "mesafe",
+        "deger": 1,
+        "birim": {
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
+        }
+      },
+      "sure": {
+        "tur": "anlik",
+        "deger": null,
+        "birim": null
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "ritual": false,
+      "konsantrasyon": false,
+      "yetkinlik": [],
+      "gereksinim": {
+        "soz": {
+          "gerekli": true,
+          "metin": "Tenne"
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "Parmak şıklatmanın ardından el işaret eder konumda bilekten bir çember çizer ve uygulama noktasına dokunur."
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Dokunma mesafesinde ortalama bir insanın avuç içi yüzey genişliğine sahip bir alandaki havayı titreştirerek, belirlenen yüzeye bulaşmış yabancı maddelerin yüzeyden ayrışarak kaybolmasını sağlarsın.",
+      "dipnot": null
+    },
+    {
+      "id": 19,
+      "kategori": "enerjisel",
+      "kategori_ad": "Enerjisel Yetenekler",
+      "seviye": 1,
+      "ad": "Alarım",
+      "eylem_turu": {
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
       },
       "element": {
         "id": 4,
@@ -624,47 +1403,408 @@
         "sinif": "temel"
       },
       "kaynak_turu": {
-        "id": 2,
-        "ad": "Ki"
+        "id": 1,
+        "ad": "Mana"
       },
-      "kaynak_tuketimi": 7,
+      "kaynak_tuketimi": 1,
+      "menzil": {
+        "tur": "mesafe",
+        "deger": 1,
+        "birim": {
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
+        }
+      },
+      "sure": {
+        "tur": "sureli",
+        "deger": 8,
+        "birim": {
+          "id": 3,
+          "ad": "Saat",
+          "kisa": "Saat",
+          "saniye": 3600
+        }
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "ritual": true,
+      "konsantrasyon": false,
+      "yetkinlik": [],
+      "gereksinim": {
+        "soz": {
+          "gerekli": false,
+          "metin": null
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "Yeteneğin kullanılacağı yüzeyde bir ip gerer veya mühür çizer şekilde hareket yaptıktan sonra iki avcun içinin birbirine bakış yönü ters olacak şekilde bastırılıp beklenmesi."
+        },
+        "materyal": {
+          "gerekli": true,
+          "liste": [
+            "Ufak bir zil"
+          ]
+        }
+      },
+      "aciklama": "1 Dakikalık bir ritüel sonunda belirlediğin bir kapı eşiği, sandık ağzı, çanta kapağı vb. gibi bir alanda enerjisel bir sensör oluşturursun. Bu sensörü oluştururken tanıdığın varlıklar arasında kimler tarafından tetikleneceğini belirleyebilirsin. Tanımadığın veya betimleyemediğin varlıklar sensörü tetikler. Sensörün tetiklenmesiyle yetenek bozulur ve zihninde bir zil sesi işitirsin.",
+      "dipnot": "Bu yetenek, tıklama yeteneğiyle bozulabilir. Bu durumda, sensörü gerçekleştiren varlık zihninde bir şey işitmez."
+    },
+    {
+      "id": 22,
+      "kategori": "enerjisel",
+      "kategori_ad": "Enerjisel Yetenekler",
+      "seviye": 1,
+      "ad": "Ateş Elleri",
+      "eylem_turu": {
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
+      },
+      "element": {
+        "id": 1,
+        "ad": "Ateş"
+      },
+      "enerji_turu": {
+        "id": 1,
+        "ad": "Yıkım",
+        "sinif": "temel"
+      },
+      "kaynak_turu": {
+        "id": 1,
+        "ad": "Mana"
+      },
+      "kaynak_tuketimi": 1,
       "menzil": {
         "tur": "kendin",
         "deger": null,
         "birim": null
       },
+      "sure": {
+        "tur": "anlik",
+        "deger": null,
+        "birim": null
+      },
       "alan": {
         "var": true,
-        "deger": 4,
+        "deger": 60,
         "birim": {
-          "id": 2,
-          "ad": "Metre",
-          "kisa": "m"
+          "id": 7,
+          "ad": "Derece",
+          "kisa": "ang"
         },
         "tipi": {
-          "id": 5,
-          "ad": "Silindir",
+          "id": 6,
+          "ad": "Koni",
           "olcu_adi": "Yarıçap",
           "yukseklik_gerekir": true
         },
-        "yukseklik": 3
+        "yukseklik": 2
       },
+      "ritual": false,
+      "konsantrasyon": false,
+      "yetkinlik": [],
       "gereksinim": {
         "soz": {
           "gerekli": true,
-          "metin": "Dur. Buradan ötesi yok."
+          "metin": "Köz ve Ateş"
         },
         "hareket": {
           "gerekli": true,
-          "metin": "İki avuç içi dışa dönük biçimde göğüs hizasında birleştirilir ve dışa itilir."
+          "metin": "İki avcun parmakları bir küre tutar gibi havada karşı karşıya getirilir, ardından eller ileriye doğru açılır."
         },
         "materyal": {
           "gerekli": false,
           "liste": []
         }
       },
-      "aciklama": "Kullanıcının çevresinde basınçlı havadan bir perde kurulur. Perde, içinden geçen fırlatma silahlarının hızını keser ve savrulan tozu, dumanı dışarıda tutar.",
-      "dipnot": "Konsantrasyon gerektirir; kullanıcı hasar aldığında perde bozulma tehlikesine girer."
+      "aciklama": "Baktığın yöne doğru oluşturacağın yetenek alanında kalan varlıklar, üstlerine patlatacağın alev hüzmesinden sıyrılabilmek için ÇEV testine girerler. Testi geçebilenler gürleyen ateşlerin bir kısmından vücutlarını kaçırmayı başarırlar, ancak vücutlarının bir kısmı yine de alevlerden etkilenerek yanma hasarı alır. Testi geçemeyenler bu hasardan kaçınamazlar.",
+      "dipnot": null
+    },
+    {
+      "id": 20,
+      "kategori": "enerjisel",
+      "kategori_ad": "Enerjisel Yetenekler",
+      "seviye": 1,
+      "ad": "Cadı Zırhı",
+      "eylem_turu": {
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
+      },
+      "element": {
+        "id": 4,
+        "ad": "Hava"
+      },
+      "enerji_turu": {
+        "id": 2,
+        "ad": "Koruma",
+        "sinif": "temel"
+      },
+      "kaynak_turu": {
+        "id": 1,
+        "ad": "Mana"
+      },
+      "kaynak_tuketimi": 1,
+      "menzil": {
+        "tur": "kendin",
+        "deger": null,
+        "birim": null
+      },
+      "sure": {
+        "tur": "sureli",
+        "deger": 8,
+        "birim": {
+          "id": 3,
+          "ad": "Saat",
+          "kisa": "Saat",
+          "saniye": 3600
+        }
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "ritual": false,
+      "konsantrasyon": false,
+      "yetkinlik": [],
+      "gereksinim": {
+        "soz": {
+          "gerekli": true,
+          "metin": "Armatura"
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "Kollar iki yana açılır, sözler söylenirken birer tur dirseklerden döndürülür ve iki avuç içi gövdeye doğru vurulur."
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Vücudunun çevresinde meydana getireceğin enerjisel bir bariyer oluşturursun. Bu bariyer, enerjisel ya da fiziksel saldırıların vücuduna ulaşmasını engelleyerek seni korunaklı hale getirir. Hasarı nereden alacağı fark etmeksizin, hasar aldıkça bariyerin bütünlüğü çatlayarak azalır.",
+      "dipnot": "Bu yeteneğin sağladığı bariyer kullanıcıyı hasar almaz hale getirmez. Saldırılar vücuda erişemeyecek olsa da karakter, saldırılardan kaynaklanacak basınçtan hasar alabilir."
+    },
+    {
+      "id": 24,
+      "kategori": "enerjisel",
+      "kategori_ad": "Enerjisel Yetenekler",
+      "seviye": 1,
+      "ad": "Emir",
+      "eylem_turu": {
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
+      },
+      "element": {
+        "id": 6,
+        "ad": "Işık"
+      },
+      "enerji_turu": {
+        "id": 5,
+        "ad": "Efsun",
+        "sinif": "temel"
+      },
+      "kaynak_turu": {
+        "id": 1,
+        "ad": "Mana"
+      },
+      "kaynak_tuketimi": 1,
+      "menzil": {
+        "tur": "mesafe",
+        "deger": 6,
+        "birim": {
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
+        }
+      },
+      "sure": {
+        "tur": "sureli",
+        "deger": 10,
+        "birim": {
+          "id": 1,
+          "ad": "Tur",
+          "kisa": "Tur",
+          "saniye": 6
+        }
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "ritual": false,
+      "konsantrasyon": true,
+      "yetkinlik": [],
+      "gereksinim": {
+        "soz": {
+          "gerekli": true,
+          "metin": "Yunta Zak"
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "Hedefe doğru uzanıp hedefe bağlıymışçasına bir ipi tutma hareketi."
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Menzilde görebildiğin bir hedefin zihnine erişerek onu basit bir komuta uymaya zorlarsın. İRD testini geçemeyen varlık aşağıda belirtilen komutlardan birine uymak zorundadır:\n\nDur: Varlık turunu hiçbir şey yapmadan paslar.\nBırak: Varlık elinde tuttuğu her şeyi elinden düşürür.\nKaç: Varlık sana baktığı yönün tam tersine bütün hareketini harcayarak turunu bitirir.\nYat: Varlık yere yatar pozisyona girer.\n\nVarlık, süre boyunca her tur bu etkiden kurtulmayı yeni bir İRD testi ile deneyebilir. Takip eden turlarda İRD testinin geçişi için şu formül izlenir:\n10+((Senin Enerjin - Varlığın İRD testi)/2)",
+      "dipnot": null
+    },
+    {
+      "id": 21,
+      "kategori": "enerjisel",
+      "kategori_ad": "Enerjisel Yetenekler",
+      "seviye": 1,
+      "ad": "Nazar",
+      "eylem_turu": {
+        "id": 2,
+        "ad": "Ek Eylem",
+        "kisa": "EE"
+      },
+      "element": {
+        "id": 6,
+        "ad": "Işık"
+      },
+      "enerji_turu": {
+        "id": 5,
+        "ad": "Efsun",
+        "sinif": "temel"
+      },
+      "kaynak_turu": {
+        "id": 1,
+        "ad": "Mana"
+      },
+      "kaynak_tuketimi": 1,
+      "menzil": {
+        "tur": "mesafe",
+        "deger": 6,
+        "birim": {
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
+        }
+      },
+      "sure": {
+        "tur": "sureli",
+        "deger": 10,
+        "birim": {
+          "id": 1,
+          "ad": "Tur",
+          "kisa": "Tur",
+          "saniye": 6
+        }
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "ritual": false,
+      "konsantrasyon": true,
+      "yetkinlik": [],
+      "gereksinim": {
+        "soz": {
+          "gerekli": true,
+          "metin": "Nassar"
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "Bir kere parmak şıklatıp hedefi işaret ettikten hemen sonra bir kere daha parmak şıklatma."
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Menzilinde görebildiğin bir hedefin temel niteliğine tesir edersin. Karakter, İRD testini geçememesi durumunda, seninle arasında olan her 5 fark için, belirlediğin temel niteliğe bağlı olarak gerçekleştireceği testlerde -1 ceza alır.",
+      "dipnot": null
+    },
+    {
+      "id": 23,
+      "kategori": "enerjisel",
+      "kategori_ad": "Enerjisel Yetenekler",
+      "seviye": 2,
+      "ad": "Korku Sar",
+      "eylem_turu": {
+        "id": 1,
+        "ad": "Eylem",
+        "kisa": "E"
+      },
+      "element": {
+        "id": 6,
+        "ad": "Işık"
+      },
+      "enerji_turu": {
+        "id": 5,
+        "ad": "Efsun",
+        "sinif": "temel"
+      },
+      "kaynak_turu": {
+        "id": 1,
+        "ad": "Mana"
+      },
+      "kaynak_tuketimi": 2,
+      "menzil": {
+        "tur": "mesafe",
+        "deger": 6,
+        "birim": {
+          "id": 1,
+          "ad": "Birim",
+          "kisa": "br"
+        }
+      },
+      "sure": {
+        "tur": "sureli",
+        "deger": 10,
+        "birim": {
+          "id": 1,
+          "ad": "Tur",
+          "kisa": "Tur",
+          "saniye": 6
+        }
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "ritual": false,
+      "konsantrasyon": true,
+      "yetkinlik": [],
+      "gereksinim": {
+        "soz": {
+          "gerekli": true,
+          "metin": "Gözlerindeki Korku"
+        },
+        "hareket": {
+          "gerekli": true,
+          "metin": "İki elin parmaklarıyla bir üçgen şekli yapıldıktan sonra, eller yumruk yapılarak birbirine tokuşturulur. Hemen ardından hedefe doğru açılır."
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Menzilde görebildiğin bir hedefin zihninde kendini korkutucu hale getirirsin. İRD testine giren varlık, başarısız olması durumunda test sırasında seninle arasında bulunan her 5 fark için sana karşı veya senin 3 birim çevrendeyken gerçekleştireceği eylemlere -1 ceza alır.",
+      "dipnot": null
     }
   ]
 }

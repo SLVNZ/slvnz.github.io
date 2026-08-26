@@ -5,6 +5,10 @@
 
      · arama kutusu   satırın data-ara alanında geçiyor mu (aksansız, küçük)
      · süzgeçler      data-eylem / element / enerji / kaynak / seviye eşleşmesi
+                      (data-ykapsar taşıyan süzgeç tam değil KAPSAYAN eşleşir:
+                      satırın " · " ile ayrılmış listesinde geçiyor mu)
+     · nitelikler     ritüel / konsantrasyon onay kutuları (İŞARETLİ olan
+                      süzer, işaretsiz kutu hiçbir şeyi elemez)
      · sıralama       başlığa tıkla → artan → azalan → varsayılan
      · seçim          satıra tıkla → o yeteneğin kartı sağdaki panele geçer
 
@@ -77,6 +81,7 @@
     var sifirla = blok.querySelector('[data-ysifirla]');
     var arama = blok.querySelector('[data-yara]');
     var seciciler = Array.prototype.slice.call(blok.querySelectorAll('[data-yfiltre]'));
+    var kutular = Array.prototype.slice.call(blok.querySelectorAll('[data-ykutu]'));
     var basliklar = Array.prototype.slice.call(tablo.querySelectorAll('th[data-ysort]'));
 
     var kartlar = {};
@@ -98,10 +103,23 @@
       var q = katla(arama ? arama.value.trim() : '');
       var kosul = {};
       var suzgecVar = !!q;
+      var kapsayan = {};
       seciciler.forEach(function (s) {
         var v = s.value;
+        var ad = s.getAttribute('data-yfiltre');
         s.classList.toggle('is-on', !!v);
-        if (v) { kosul[s.getAttribute('data-yfiltre')] = v; suzgecVar = true; }
+        if (s.hasAttribute('data-ykapsar')) kapsayan[ad] = true;
+        if (v) { kosul[ad] = v; suzgecVar = true; }
+      });
+
+      /* Onay kutusu açılır menü gibi okunamaz: `value` işaretli olup
+         olmadığından bağımsızdır. İşaretli kutu "yalnız bu niteliği taşıyanlar"
+         demektir; işaretsiz kutu hiçbir şeyi elemez. */
+      var nitelik = [];
+      kutular.forEach(function (c) {
+        var acik = c.checked;
+        c.parentNode.classList.toggle('is-on', acik);
+        if (acik) { nitelik.push(c.getAttribute('data-ykutu')); suzgecVar = true; }
       });
 
       var gorunen = 0;
@@ -110,7 +128,19 @@
         if (q && tr.getAttribute('data-ara').indexOf(q) < 0) ok = false;
         if (ok) {
           for (var k in kosul) {
-            if (tr.getAttribute('data-' + k) !== kosul[k]) { ok = false; break; }
+            var deger = tr.getAttribute('data-' + k) || '';
+            /* Kapsayan süzgeç (yetkinlik): satır birden çok değer taşır,
+               " · " ile ayrılmış. Tam eşleşme ararsak "Kılıç · Balta" satırı
+               "Kılıç" süzgecine takılmazdı. */
+            var uydu = kapsayan[k]
+              ? deger.split(' · ').indexOf(kosul[k]) >= 0
+              : deger === kosul[k];
+            if (!uydu) { ok = false; break; }
+          }
+        }
+        if (ok) {
+          for (var i = 0; i < nitelik.length; i++) {
+            if (tr.getAttribute('data-' + nitelik[i]) !== '1') { ok = false; break; }
           }
         }
         tr.hidden = !ok;
@@ -268,10 +298,12 @@
       });
     }
     seciciler.forEach(function (s) { s.addEventListener('change', suz); });
+    kutular.forEach(function (c) { c.addEventListener('change', suz); });
     if (sifirla) {
       sifirla.addEventListener('click', function () {
         if (arama) arama.value = '';
         seciciler.forEach(function (s) { s.value = ''; });
+        kutular.forEach(function (c) { c.checked = false; });
         suz();
         if (arama) arama.focus();
       });

@@ -238,6 +238,23 @@ def _zaten_var(e):
     return 'exist' in m or 'duplicate' in m
 
 
+# CREATE TABLE IF NOT EXISTS var olan bir tabloya SÜTUN eklemez: şemaya sonradan
+# giren alanlar buradan geçer. Her ifade bir kez denenir, "zaten var" yutulur —
+# CREATE INDEX'te kullanılan deyimin aynısı (SQLite "duplicate column name",
+# MySQL "Duplicate column name" der; ikisi de _zaten_var'a takılır).
+#
+# Yabancı anahtar bilerek yok: SQLite ALTER TABLE ile kısıt eklemeyi
+# desteklemiyor. Taze kurulumlar fk_yetenek_sbirim'i schema.sql'den alır,
+# göçle gelenlerde referansı yetenek.py doğrular (_var_mi).
+_GOCLER = (
+    "ALTER TABLE yetenek ADD COLUMN sure_tur VARCHAR(8) NOT NULL DEFAULT 'anlik'",
+    'ALTER TABLE yetenek ADD COLUMN sure_deger INT NULL',
+    'ALTER TABLE yetenek ADD COLUMN sure_birim_id INT NULL',
+    'ALTER TABLE yetenek ADD COLUMN ritual TINYINT(1) NOT NULL DEFAULT 0',
+    'ALTER TABLE yetenek ADD COLUMN konsantrasyon TINYINT(1) NOT NULL DEFAULT 0',
+)
+
+
 _KURULDU = False
 
 
@@ -256,6 +273,12 @@ def kur():
                 cur.execute(ifade)
             except Exception as e:              # MySQL'de CREATE INDEX'in
                 if not _zaten_var(e):           # IF NOT EXISTS'i yok
+                    raise
+        for ifade in _GOCLER:
+            try:
+                cur.execute(ifade)
+            except Exception as e:
+                if not _zaten_var(e):
                     raise
     finally:
         cur.close()
@@ -320,6 +343,32 @@ TOHUM = {
         ('ad', 'kisa', 'varsayilan', 'sira'),
         [('Birim', 'br', 0, 1), ('Metre', 'm', 1, 2), ('Feet', 'ft', 0, 3),
          ('Kare', 'kare', 0, 4), ('Adım', 'adım', 0, 5), ('Kilometre', 'km', 0, 6)],
+    ),
+    # saniye: sıralama bununla yapılır (bkz. schema.sql). Tur = savaş turu,
+    # 6 saniye. Ay 30 gün, yıl 365 gün kabul edilir — takvim doğruluğu değil
+    # tutarlı bir SIRA aranıyor.
+    'sure_birimi': (
+        ('ad', 'kisa', 'saniye', 'varsayilan', 'sira'),
+        [('Tur', 'Tur', 6, 1, 1),
+         ('Dakika', 'Dk', 60, 0, 2),
+         ('Saat', 'Saat', 3600, 0, 3),
+         ('Gün', 'Gün', 86400, 0, 4),
+         ('Hafta', 'Hafta', 604800, 0, 5),
+         ('Ay', 'Ay', 2592000, 0, 6),
+         ('Yıl', 'Yıl', 31536000, 0, 7)],
+    ),
+    # Başlangıç seti; panelden düzenlenir. Yalnız BOŞ tabloya yazılır, yani
+    # silinen bir tür her açılışta geri gelmez (bkz. tohumla).
+    'yetkinlik': (
+        ('ad', 'aciklama', 'sira'),
+        [('Kılıç', 'Tek ya da çift elle kullanılan kesici kılıç sınıfı.', 1),
+         ('Balta', 'Savaş baltası ve türevleri.', 2),
+         ('Mızrak', 'Mızrak, kargı, uzun saplı delici silahlar.', 3),
+         ('Yay', 'Yay ve arbalet gibi menzilli atış silahları.', 4),
+         ('Hançer', 'Kısa saplı delici ve kesici silahlar.', 5),
+         ('Topuz', 'Topuz, gürz, çekiç gibi ezici silahlar.', 6),
+         ('Kalkan', 'Savunma amaçlı kalkan kullanımı.', 7),
+         ('Silahsız', 'Yumruk, tekme, tutuş — silah gerektirmeyen dövüş.', 8)],
     ),
     'alan_tipi': (
         ('ad', 'yukseklik_gerekir', 'olcu_adi', 'sira'),

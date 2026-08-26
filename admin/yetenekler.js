@@ -10,7 +10,9 @@
    Yapı
    ----
      Alan seçici        enerjisel · fiziksel · karma (üç ayrı tablo)
-     Yetenek listesi    akordeon satırlar; açılan satır tam formu getirir
+     Yetenek listesi    düz satırlar; satıra basınca form kendi penceresinde
+                        açılır (bkz. popAc) — eskiden satırın altına inen
+                        akordeon bloktu ve listeyi ekranın iki katına itiyordu
      Listeler           element / enerji / kaynak / eylem / birim / alan tipi
                         sözlüklerinin kendisi de panelden yönetilir
 
@@ -36,6 +38,35 @@
   var kategori = 'enerjisel';
   var acikId = null;        // formu açık olan yetenek (null → kapalı, 0 → yeni)
   var yuklendi = false;
+
+  /* ===================================================================== profil
+     `yetenek.py: VARSAYILAN_PROFIL / PROFILLER` ile AYNI tabloyu tutar.
+     Sunucu doğrulaması profilde olmayan alanı zaten susturur; buradaki kopya
+     yalnız formu çizmek için — ayrışırlarsa panel var olmayan bir alanı sorar
+     ya da olan bir alanı gizler, ikisi de sessizdir. Yeni bir kategori ya da
+     alan eklerken İKİSİNİ birden güncelle. */
+  var VARSAYILAN_PROFIL = {
+    element: true, enerji: true, kaynak: true, sure: true,
+    gereksinim: true, yetkinlik: false,
+    nitelikler: [['ritual', 'Ritüel'], ['konsantrasyon', 'Konsantrasyon']],
+    kaynakBasligi: 'Kaynak'
+  };
+  var PROFILLER = {
+    fiziksel: {
+      element: false, enerji: false, kaynak: false, sure: false,
+      gereksinim: false, yetkinlik: true,
+      nitelikler: [['konsantrasyon', 'Odak']],
+      kaynakBasligi: 'Soluk'
+    },
+    karma: { yetkinlik: true }
+  };
+  function profil(kod) {
+    var p = {}, k;
+    for (k in VARSAYILAN_PROFIL) p[k] = VARSAYILAN_PROFIL[k];
+    var ek = PROFILLER[kod];
+    if (ek) for (k in ek) p[k] = ek[k];
+    return p;
+  }
 
   function esc(s) {
     var d = document.createElement('div');
@@ -75,21 +106,45 @@
     return b ? b.id : ((sozluk.uzaklik_birimi || [])[0] || {}).id;
   }
 
+  function varsayilanSureBirim() {
+    var b = (sozluk.sure_birimi || []).filter(function (x) { return x.varsayilan; })[0];
+    return b ? b.id : ((sozluk.sure_birimi || [])[0] || {}).id;
+  }
+
   function refId(r) { return r && r.id ? r.id : ''; }
 
   /* ---- kayıt özeti (liste satırı) ----------------------------------------- */
   function ozet(y) {
+    var prf = profil(y.kategori);
     var p = [];
     if (y.eylem_turu) p.push(y.eylem_turu.ad);
-    if (y.element) p.push(y.element.ad);
-    if (y.enerji_turu) p.push(y.enerji_turu.ad);
-    if (y.kaynak_turu) p.push(y.kaynak_turu.ad + (y.kaynak_tuketimi ? ' ' + y.kaynak_tuketimi : ''));
+    if (prf.element && y.element) p.push(y.element.ad);
+    if (prf.enerji && y.enerji_turu) p.push(y.enerji_turu.ad);
+    if (prf.yetkinlik && (y.yetkinlik || []).length) {
+      p.push(y.yetkinlik.map(function (w) { return w.ad; }).join(' · '));
+    }
+    if (prf.kaynak) {
+      if (y.kaynak_turu) p.push(y.kaynak_turu.ad + (y.kaynak_tuketimi ? ' - ' + y.kaynak_tuketimi : ''));
+    } else {
+      p.push(prf.kaynakBasligi + ' - ' + (y.kaynak_tuketimi || 0));
+    }
+    if (prf.sure) {
+      var sr = y.sure || {};
+      p.push(sr.tur === 'sureli' && sr.deger
+        ? sr.deger + ' ' + ((sr.birim || {}).kisa || (sr.birim || {}).ad || '')
+        : 'Anlık');
+    }
     p.push(y.menzil.tur === 'mesafe' && y.menzil.deger
       ? y.menzil.deger + ' ' + ((y.menzil.birim || {}).kisa || (y.menzil.birim || {}).ad || '')
       : 'Kendin');
-    var g = ['soz', 'hareket', 'materyal'].filter(function (k) { return y.gereksinim[k].gerekli; })
-      .map(function (k) { return k.charAt(0).toUpperCase(); }).join('');
-    if (g) p.push(g);
+    var n = prf.nitelikler.filter(function (x) { return y[x[0]]; })
+      .map(function (x) { return x[1].charAt(0); }).join('');
+    if (n) p.push(n);
+    if (prf.gereksinim) {
+      var g = ['soz', 'hareket', 'materyal'].filter(function (k) { return y.gereksinim[k].gerekli; })
+        .map(function (k) { return k.charAt(0).toUpperCase(); }).join('');
+      if (g) p.push(g);
+    }
     return p.join(' · ');
   }
 
@@ -103,6 +158,8 @@
       eylem_turu: null, element: null, enerji_turu: null, kaynak_turu: null,
       kaynak_tuketimi: 0,
       menzil: { tur: 'kendin', deger: null, birim: { id: varsayilanBirim() } },
+      sure: { tur: 'anlik', deger: null, birim: null },
+      ritual: false, konsantrasyon: false, yetkinlik: [],
       alan: { var: false, deger: null, birim: { id: varsayilanBirim() }, tipi: null, yukseklik: null },
       gereksinim: {
         soz: { gerekli: false, metin: '' },
@@ -121,6 +178,28 @@
       '</label>';
   }
 
+  function yetkinlikBlogu(y) {
+    var secili = {};
+    (y.yetkinlik || []).forEach(function (w) { secili[String(w.id || w)] = true; });
+    var liste = sozluk.yetkinlik || [];
+    if (!liste.length) {
+      return '<fieldset class="yform__set">' +
+        '<legend class="yform__legend">Yetkinlik</legend>' +
+        '<p class="field__help">Yetkinlik listesi boş — <strong>Listeler…</strong> ' +
+        'bölümünden silah türü ekle.</p></fieldset>';
+    }
+    return '<fieldset class="yform__set yform__set--yetkinlik">' +
+      '<legend class="yform__legend">Yetkinlik</legend>' +
+      '<div class="ywet">' +
+      liste.map(function (w) {
+        return '<label class="ywet__kutu">' +
+          '<input type="checkbox" data-ywet value="' + w.id + '"' +
+          (secili[String(w.id)] ? ' checked' : '') + '>' +
+          '<span>' + esc(w.ad) + '</span></label>';
+      }).join('') +
+      '</div></fieldset>';
+  }
+
   function materyalSatir(deger) {
     return '<div class="ymat__satir">' +
       '<input class="field__input" data-ymat value="' + esc(deger || '') +
@@ -130,7 +209,10 @@
   }
 
   function formHTML(y) {
+    var prf = profil(y.kategori);
     var m = y.menzil, a = y.alan, g = y.gereksinim;
+    var sr = y.sure || { tur: 'anlik', deger: null, birim: null };
+    var sureli = sr.tur === 'sureli' && !!refId(sr.birim);
     var mesafe = m.tur === 'mesafe';
     var alanVar = !!a['var'];
     var tipi = (sozluk.alan_tipi || []).filter(function (t) {
@@ -158,17 +240,39 @@
       '<div class="yform__grid">' +
         alan('Eylem türü', '<select class="field__input" data-yf="eylem_turu" required>' +
              opsiyonlar(sozluk.eylem_turu, refId(y.eylem_turu), 'Seç…') + '</select>', 'yf-eyl') +
-        alan('Element', '<select class="field__input" data-yf="element">' +
-             opsiyonlar(sozluk.element, refId(y.element), '—') + '</select>', 'yf-ele') +
-        alan('Enerji türü', '<select class="field__input" data-yf="enerji_turu">' +
-             opsiyonlar(sozluk.enerji_turu, refId(y.enerji_turu), '—') + '</select>', 'yf-ene') +
+        (prf.element
+          ? alan('Element', '<select class="field__input" data-yf="element">' +
+                 opsiyonlar(sozluk.element, refId(y.element), '—') + '</select>', 'yf-ele') : '') +
+        (prf.enerji
+          ? alan('Enerji türü', '<select class="field__input" data-yf="enerji_turu">' +
+                 opsiyonlar(sozluk.enerji_turu, refId(y.enerji_turu), '—') + '</select>', 'yf-ene') : '') +
       '</div>' +
 
-      /* -- kaynak -- */
+      /* -- yetkinlik: çoklu seçim, kutucuklarla --
+         Silah türleri az sayıda ve hepsi bir bakışta görünmeli; <select
+         multiple> hem az keşfedilir hem de Ctrl-tık gerektirir. */
+      (prf.yetkinlik ? yetkinlikBlogu(y) : '') +
+
+      /* -- nitelikler --
+         Koşullu bloğu olmayan iki serbest anahtar; gereksinimlerdeki
+         anahtarlarla aynı denetim, orada olduğu gibi bir alt alan açmıyorlar.
+         Tabloda adın yanında R ve K rozeti olarak çıkarlar. */
+      '<fieldset class="yform__set yform__set--nitelik">' +
+        '<legend class="yform__legend">Nitelikler</legend>' +
+        prf.nitelikler.map(function (x) {
+          return anahtar(x[0], x[1], y[x[0]]);
+        }).join('') +
+      '</fieldset>' +
+
+      /* -- kaynak --
+         Kaynak türü sabit olan alanda (fiziksel → Soluk) seçim yok: yalnız
+         tüketim sorulur, tür sunucuda addan bulunur. */
       '<div class="yform__grid">' +
-        alan('Kaynak türü', '<select class="field__input" data-yf="kaynak_turu">' +
-             opsiyonlar(sozluk.kaynak_turu, refId(y.kaynak_turu), '—') + '</select>', 'yf-kay') +
-        alan('Kaynak tüketimi', '<input class="field__input" type="number" data-yf="kaynak_tuketimi" ' +
+        (prf.kaynak
+          ? alan('Kaynak türü', '<select class="field__input" data-yf="kaynak_turu">' +
+                 opsiyonlar(sozluk.kaynak_turu, refId(y.kaynak_turu), '—') + '</select>', 'yf-kay') : '') +
+        alan(prf.kaynak ? 'Kaynak tüketimi' : prf.kaynakBasligi + ' tüketimi',
+             '<input class="field__input" type="number" data-yf="kaynak_tuketimi" ' +
              'min="0" step="1" value="' + (y.kaynak_tuketimi || 0) + '">', 'yf-tuk') +
       '</div>' +
 
@@ -190,6 +294,26 @@
           '</div>' +
         '</div>' +
       '</fieldset>' +
+
+      /* -- süre --
+         Menzilden farklı olarak TEK açılır menü: boş seçenek "Anlık", geri
+         kalanı süre birimleri. Birim seçilince sayı alanı beliriyor —
+         "anlık mı" sorusuyla "hangi birim" sorusu tek denetimde birleşiyor,
+         iki adımlık bir seçim kullanıcıya tek adım olarak görünüyor. */
+      (prf.sure ?
+      '<fieldset class="yform__set">' +
+        '<legend class="yform__legend">Süre</legend>' +
+        '<div class="yform__satir">' +
+          '<select class="field__input" data-yf="sure_birim" aria-label="Süre birimi">' +
+            opsiyonlar(sozluk.sure_birimi, sureli ? refId(sr.birim) : '', 'Anlık') +
+          '</select>' +
+          '<div class="yform__kosul" data-ysureli' + (sureli ? '' : ' hidden') + '>' +
+            '<input class="field__input field__input--sayi" type="number" data-yf="sure_deger" ' +
+              'min="1" step="1" value="' + (sr.deger == null ? '' : sr.deger) + '" aria-label="Süre">' +
+            '<span class="yform__birimad" data-ysuread></span>' +
+          '</div>' +
+        '</div>' +
+      '</fieldset>' : '') +
 
       /* -- alan (etki alanı) -- */
       '<fieldset class="yform__set">' +
@@ -219,40 +343,53 @@
         '<p class="field__help" data-yalanipucu' + (alanVar ? '' : ' hidden') + '></p>' +
       '</fieldset>' +
 
-      /* -- söz · hareket · materyal -- */
-      '<fieldset class="yform__set">' +
+      /* -- söz · hareket · materyal --
+         Üç anahtar-blok çifti `.yger__blok` içine sarılı: pencerede sarmalı
+         olmasalar üç yığın alt alta 467px tutuyordu. Sarmalayıcı olmadan
+         ızgaraya alınamazlar — anahtar ile kendi bloğu kardeş öğeler. */
+      (prf.gereksinim ?
+      '<fieldset class="yform__set yform__set--ger">' +
         '<legend class="yform__legend">Gereksinimler — söz · hareket · materyal</legend>' +
+        '<div class="yger">' +
 
-        anahtar('soz', 'Söz gerekli', g.soz.gerekli) +
-        '<div class="yform__kosulblok" data-ysozblok' + (g.soz.gerekli ? '' : ' hidden') + '>' +
-          alan('Sarf edilecek sözler',
-               '<textarea class="field__input field__input--alan" data-yf="soz_metin" rows="2" ' +
-               'placeholder="Vur, alev; kalbe dek yürü.">' + esc(g.soz.metin) + '</textarea>', 'yf-soz') +
-        '</div>' +
-
-        anahtar('hareket', 'Hareket gerekli', g.hareket.gerekli) +
-        '<div class="yform__kosulblok" data-yhareketblok' + (g.hareket.gerekli ? '' : ' hidden') + '>' +
-          alan('Yapılacak hareketlerin betimlemesi',
-               '<textarea class="field__input field__input--alan" data-yf="hareket_metin" rows="2" ' +
-               'placeholder="Sağ el omuz hizasında ileri savrulur…">' + esc(g.hareket.metin) +
-               '</textarea>', 'yf-hrk') +
-        '</div>' +
-
-        anahtar('materyal', 'Materyal gerekli', g.materyal.gerekli) +
-        '<div class="yform__kosulblok" data-ymateryalblok' + (g.materyal.gerekli ? '' : ' hidden') + '>' +
-          '<p class="field__label">Harcanacak materyaller</p>' +
-          '<div class="ymat" data-ymatliste>' +
-            (g.materyal.liste.length ? g.materyal.liste.map(materyalSatir).join('') : materyalSatir('')) +
+          '<div class="yger__blok">' +
+            anahtar('soz', 'Söz gerekli', g.soz.gerekli) +
+            '<div class="yform__kosulblok" data-ysozblok' + (g.soz.gerekli ? '' : ' hidden') + '>' +
+              alan('Sarf edilecek sözler',
+                   '<textarea class="field__input field__input--alan" data-yf="soz_metin" rows="2" ' +
+                   'placeholder="Vur, alev; kalbe dek yürü.">' + esc(g.soz.metin) + '</textarea>', 'yf-soz') +
+            '</div>' +
           '</div>' +
-          '<button class="btn btn--ghost btn--kucuk" type="button" data-ymatekle>+ Materyal ekle</button>' +
+
+          '<div class="yger__blok">' +
+            anahtar('hareket', 'Hareket gerekli', g.hareket.gerekli) +
+            '<div class="yform__kosulblok" data-yhareketblok' + (g.hareket.gerekli ? '' : ' hidden') + '>' +
+              alan('Yapılacak hareketlerin betimlemesi',
+                   '<textarea class="field__input field__input--alan" data-yf="hareket_metin" rows="2" ' +
+                   'placeholder="Sağ el omuz hizasında ileri savrulur…">' + esc(g.hareket.metin) +
+                   '</textarea>', 'yf-hrk') +
+            '</div>' +
+          '</div>' +
+
+          '<div class="yger__blok">' +
+            anahtar('materyal', 'Materyal gerekli', g.materyal.gerekli) +
+            '<div class="yform__kosulblok" data-ymateryalblok' + (g.materyal.gerekli ? '' : ' hidden') + '>' +
+              '<p class="field__label">Harcanacak materyaller</p>' +
+              '<div class="ymat" data-ymatliste>' +
+                (g.materyal.liste.length ? g.materyal.liste.map(materyalSatir).join('') : materyalSatir('')) +
+              '</div>' +
+              '<button class="btn btn--ghost btn--kucuk" type="button" data-ymatekle>+ Materyal ekle</button>' +
+            '</div>' +
+          '</div>' +
+
         '</div>' +
-      '</fieldset>' +
+      '</fieldset>' : '') +
 
       /* -- metinler -- */
-      alan('Açıklama', '<textarea class="field__input field__input--alan" data-yf="aciklama" rows="5" ' +
+      alan('Açıklama', '<textarea class="field__input field__input--alan" data-yf="aciklama" rows="4" ' +
            'placeholder="Yeteneğin sitede görünecek açıklaması. Boş satır yeni paragraf açar.">' +
            esc(y.aciklama) + '</textarea>', 'yf-acik', 'yform__blok') +
-      alan('Dipnot', '<textarea class="field__input field__input--alan" data-yf="dipnot" rows="3" ' +
+      alan('Dipnot', '<textarea class="field__input field__input--alan" data-yf="dipnot" rows="2" ' +
            'placeholder="Açıklamaya ek özel not — kartta ayrı bir kutuda durur.">' +
            esc(y.dipnot) + '</textarea>', 'yf-dip', 'yform__blok') +
 
@@ -271,7 +408,11 @@
       '</div>';
   }
 
-  /* ============================================================ liste çizimi */
+  /* ============================================================ liste çizimi
+     Liste artık yalnız satırlardan ibaret: form kendi penceresinde açılıyor,
+     bu yüzden satır yüksekliği kaydın açık olup olmamasından bağımsız. Açık
+     kayıt yalnız `is-acik` ile işaretlenir — hangi satırın düzenlendiği
+     pencerenin arkasında da görünsün diye. */
   function ciz() {
     var liste = $('[data-ylist]', kok);
     var kayitlar = yetenekler.filter(function (y) { return y.kategori === kategori; });
@@ -282,18 +423,10 @@
         : 'Bu alanda henüz yetenek yok';
     }
 
-    var h = '';
-    if (acikId === 0) {
-      h += '<li class="yrow yrow--yeni is-acik" data-yrow="0">' +
-             '<div class="yrow__head"><p class="yrow__baslik">Yeni yetenek</p></div>' +
-             '<div class="yrow__body">' + formHTML(bosKayit()) + '</div>' +
-           '</li>';
-    }
-    kayitlar.forEach(function (y) {
-      var acik = acikId === y.id;
-      h += '<li class="yrow' + (acik ? ' is-acik' : '') + '" data-yrow="' + y.id + '">' +
+    var h = kayitlar.map(function (y) {
+      return '<li class="yrow' + (acikId === y.id ? ' is-acik' : '') + '" data-yrow="' + y.id + '">' +
         '<div class="yrow__head">' +
-          '<button class="yrow__toggle" type="button" aria-expanded="' + acik + '">' +
+          '<button class="yrow__toggle" type="button" aria-haspopup="dialog">' +
             '<span class="yrow__lvl">' + y.seviye + '</span>' +
             '<span class="yrow__ad">' + esc(y.ad) + '</span>' +
             '<span class="yrow__meta">' + esc(ozet(y)) + '</span>' +
@@ -304,18 +437,136 @@
               A.ICON.x + '</button>' +
           '</div>' +
         '</div>' +
-        '<div class="yrow__body"' + (acik ? '' : ' hidden') + '>' + (acik ? formHTML(y) : '') + '</div>' +
       '</li>';
-    });
+    }).join('');
     if (!h) {
       h = '<li class="yrow yrow--bos">Bu alanda yetenek yok — yukarıdan ekleyebilirsin.</li>';
     }
     liste.innerHTML = h;
-    var acikForm = $('.yrow.is-acik [data-yform]', kok);
-    if (acikForm) {
-      alanIpucu(acikForm);
-      var ilk = $('[data-yf="ad"]', acikForm);
-      if (ilk && acikId === 0) ilk.focus();
+  }
+
+  /* ================================================================= pencere
+     Form eskiden satırın altına inen bir akordeon bloktu — 1280x720'de
+     1392px tutuyor, listeyi ekranın iki katına itiyordu. Artık <dialog>:
+     liste yerinde kalır, form ekranın ortasında sabit yükseklikte durur ve
+     kendi içinde kayar.
+
+     Diyalog `kok`un içinde durur; olay dinleyicileri orada delege edildiği
+     için gövdesi tepe katmana (top layer) çıksa da baloncuk aynı yoldan
+     gider. Arka plana tıklamak KAPATMAZ: yarısı doldurulmuş bir formu
+     kazara tıklamayla kaybetmek pahalı. Esc ile kapanır (tarayıcının kendi
+     davranışı) ve Vazgeç/× düğmeleri vardır. */
+  function pop() { return $('[data-ypop]', kok); }
+
+  function popAc(y) {
+    var d = pop();
+    acikId = y.id || 0;
+    d.innerHTML =
+      '<div class="ypop__head">' +
+        '<div class="ypop__kim">' +
+          '<p class="ypop__ustbas">' + (y.id ? 'Yeteneği düzenle' : 'Yeni yetenek') + '</p>' +
+          '<h2 class="ypop__bas" data-ypopbas>' + esc(y.ad || 'Adsız yetenek') + '</h2>' +
+        '</div>' +
+        '<button class="iconbtn" type="button" data-ypopkapat aria-label="Kapat">' +
+          A.ICON.x + '</button>' +
+      '</div>' +
+      formHTML(y);
+    if (!d.open) d.showModal();
+    alanIpucu($('[data-yform]', d));
+    sureIpucu($('[data-yform]', d));
+    var ilk = $('[data-yf="ad"]', d);
+    if (ilk) { ilk.focus(); ilk.setSelectionRange(ilk.value.length, ilk.value.length); }
+  }
+
+  /* Kapanış tek kapıdan geçer: durum sıfırlanır, gövde boşaltılır, liste
+     yeniden çizilir. Temizlik `close` OLAYINA BIRAKILMAZ — olay bazı gömülü
+     tarayıcılarda hiç doğmuyor (panelin kendi `confirm` diyaloğu da aynı
+     yerde sessiz kalıyor), o zaman `acikId` askıda kalır ve liste eski
+     satırı açık göstermeye devam ederdi. Olaylar yalnız Esc'i bu kapıya
+     bağlamak için var. */
+  /* formuOku() düz kimlik döndürür ({element: "3"}), formHTML ise nesne
+     bekler ({element: {id: 3}}). Kategori değişiminde form yeniden çizilirken
+     bu çeviri olmasaydı bütün açılır menüler boşa düşerdi. */
+  function kayitBicimine(v) {
+    var ref = function (x) { return x ? { id: x } : null; };
+    return {
+      id: v.id, kategori: v.kategori, seviye: v.seviye, ad: v.ad,
+      eylem_turu: ref(v.eylem_turu),
+      element: ref(v.element),
+      enerji_turu: ref(v.enerji_turu),
+      kaynak_turu: ref(v.kaynak_turu),
+      kaynak_tuketimi: v.kaynak_tuketimi,
+      menzil: { tur: v.menzil.tur, deger: v.menzil.deger, birim: ref(v.menzil.birim) },
+      sure: { tur: v.sure.tur, deger: v.sure.deger, birim: ref(v.sure.birim) },
+      alan: {
+        'var': v.alan['var'], deger: v.alan.deger, birim: ref(v.alan.birim),
+        tipi: ref(v.alan.tipi), yukseklik: v.alan.yukseklik
+      },
+      gereksinim: v.gereksinim,
+      ritual: v.ritual, konsantrasyon: v.konsantrasyon,
+      yetkinlik: (v.yetkinlik || []).map(function (id) { return { id: id }; }),
+      aciklama: v.aciklama, dipnot: v.dipnot
+    };
+  }
+
+  function popYenidenCiz(v) {
+    var d = pop();
+    var eski = $('[data-yform]', d);
+    if (!eski) return;
+    var kap = document.createElement('div');
+    kap.innerHTML = formHTML(kayitBicimine(v));
+    var yeni = kap.firstChild;
+    eski.parentNode.replaceChild(yeni, eski);
+    alanIpucu(yeni);
+    sureIpucu(yeni);
+    var sec = $('[data-yf="kategori"]', yeni);
+    if (sec) sec.focus();          // odak, az önce kullanılan denetimde kalsın
+  }
+
+  function popKapat() {
+    var d = pop();
+    acikId = null;
+    d.innerHTML = '';
+    if (d.open) d.close();
+    ciz();
+  }
+
+  (function () {
+    var d = pop();
+    if (!d) return;
+    /* Esc: tarayıcı önce `cancel` yollar. Varsayılanı durdurup kendi
+       kapımızdan geçiriyoruz ki temizlik tek yerde kalsın. */
+    d.addEventListener('cancel', function (e) { e.preventDefault(); popKapat(); });
+    /* dışarıdan close() çağrılsa da durum tutarlı kalsın; popKapat `acikId`i
+       kapatmadan önce sıfırladığı için bu dal kendini tekrar çağırmaz */
+    d.addEventListener('close', function () { if (acikId !== null) popKapat(); });
+    /* başlık yazıldıkça güncellensin — hangi kaydın düzenlendiği hep görünür */
+    d.addEventListener('input', function (e) {
+      if (!e.target.matches || !e.target.matches('[data-yf="ad"]')) return;
+      var bas = $('[data-ypopbas]', d);
+      if (bas) bas.textContent = e.target.value.trim() || 'Adsız yetenek';
+    });
+  })();
+
+  /* Süre birimi seçimi sayı alanını açar/kapar. Boş seçenek "Anlık"tır:
+     birim yoksa girilecek sayı da yok. Seçilen birimin adı sayının yanında
+     yazılır — tabloda "3 Tur" göründüğü için formda da öyle okunsun. */
+  function sureIpucu(form, odakla) {
+    var sel = $('[data-yf="sure_birim"]', form);
+    var kutu = $('[data-ysureli]', form);
+    if (!sel || !kutu) return;
+    var acik = !!sel.value;
+    kutu.hidden = !acik;
+    var ad = $('[data-ysuread]', form);
+    if (ad) {
+      var b = (sozluk.sure_birimi || []).filter(function (x) {
+        return String(x.id) === sel.value;
+      })[0];
+      ad.textContent = b ? (b.ad || '') : '';
+    }
+    if (acik && odakla) {
+      var g = $('[data-yf="sure_deger"]', form);
+      if (g && !g.value) g.focus();
     }
   }
 
@@ -344,6 +595,10 @@
     };
     var mesafe = $('input[name="ymenzil"]:checked', form).value === 'mesafe';
     var alanVar = $('input[name="yalan"]:checked', form).value === 'var';
+    var sbirim = d('sure_birim') ? (d('sure_birim').value || null) : null;
+    var sureliMi = !!sbirim;
+    var yetkinlik = $$('[data-ywet]', form).filter(function (c) { return c.checked; })
+      .map(function (c) { return parseInt(c.value, 10); });
     var sw = function (ad) { var e = $('[data-ysw="' + ad + '"]', form); return !!(e && e.checked); };
 
     return {
@@ -352,14 +607,23 @@
       seviye: sayi('seviye') || 0,
       ad: d('ad').value,
       eylem_turu: d('eylem_turu').value || null,
-      element: d('element').value || null,
-      enerji_turu: d('enerji_turu').value || null,
-      kaynak_turu: d('kaynak_turu').value || null,
+      /* Profilde olmayan alanın denetimi formda hiç yok; okumaya kalkmak
+         null'a çarpardı. Sunucu da bu alanları zaten susturuyor. */
+      element: d('element') ? (d('element').value || null) : null,
+      enerji_turu: d('enerji_turu') ? (d('enerji_turu').value || null) : null,
+      kaynak_turu: d('kaynak_turu') ? (d('kaynak_turu').value || null) : null,
+      yetkinlik: yetkinlik,
       kaynak_tuketimi: sayi('kaynak_tuketimi') || 0,
       menzil: {
         tur: mesafe ? 'mesafe' : 'kendin',
         deger: mesafe ? sayi('menzil_deger') : null,
         birim: mesafe ? (d('menzil_birim').value || null) : null
+      },
+      /* boş birim = Anlık; tür ayrı bir denetimden değil seçimden türer */
+      sure: {
+        tur: sureliMi ? 'sureli' : 'anlik',
+        deger: sureliMi ? sayi('sure_deger') : null,
+        birim: sureliMi ? sbirim : null
       },
       alan: {
         'var': alanVar,
@@ -377,6 +641,10 @@
             .filter(function (v) { return v.trim(); })
         }
       },
+      ritual: sw('ritual'),
+      konsantrasyon: sw('konsantrasyon'),
+      /* sw() olmayan anahtarda false döner — profilde bulunmayan nitelik
+         kapalı gider, sunucu da aynı kararı verir */
       aciklama: d('aciklama').value,
       dipnot: d('dipnot').value
     };
@@ -389,14 +657,16 @@
     var toggle = t.closest ? t.closest('.yrow__toggle') : null;
     if (toggle) {
       var id = parseInt(toggle.closest('.yrow').getAttribute('data-yrow'), 10);
-      acikId = (acikId === id) ? null : id;
-      ciz();
+      var kayit = yetenekler.filter(function (y) { return y.id === id; })[0];
+      if (kayit) { popAc(kayit); ciz(); }
       return;
     }
 
+    /* Sil düğmesi iki yerde: liste satırında ve formun altında. Pencerenin
+       içinde `.yrow` atası yok — orada hedef, düzenlenen kayıt. */
     if (t.closest && t.closest('[data-ysil], [data-ysil2]')) {
       var satir = t.closest('.yrow');
-      var yid = parseInt(satir.getAttribute('data-yrow'), 10);
+      var yid = satir ? parseInt(satir.getAttribute('data-yrow'), 10) : acikId;
       var kayit = yetenekler.filter(function (y) { return y.id === yid; })[0];
       if (!kayit) return;
       A.confirmDialog('“' + kayit.ad + '” yeteneği silinsin mi? Bu geri alınamaz.', 'Sil')
@@ -405,8 +675,8 @@
           gonder('/api/yetenek?id=' + yid, 'DELETE')
             .then(function (j) {
               yetenekler = j.yetenekler;
-              if (acikId === yid) acikId = null;
-              ciz();
+              if (acikId === yid) popKapat();   // popKapat listeyi de çizer
+              else ciz();
               A.toast('“' + kayit.ad + '” silindi · ' + (j.yazilan || []).join(', '));
             })
             .catch(function (err) { A.toast(err.message, true); });
@@ -414,9 +684,8 @@
       return;
     }
 
-    if (t.closest && t.closest('[data-yvazgec]')) {
-      acikId = null;
-      ciz();
+    if (t.closest && t.closest('[data-yvazgec], [data-ypopkapat]')) {
+      popKapat();
       return;
     }
 
@@ -470,10 +739,24 @@
       alanIpucu(form);
       return;
     }
+    if (t.getAttribute && t.getAttribute('data-yf') === 'sure_birim' && form) {
+      sureIpucu(form, true);
+      return;
+    }
+    /* Kategori değişince alan kümesi de değişir (element/enerji/süre/
+       gereksinim/yetkinlik). Formu o an elde ne varsa onunla yeniden çiziyoruz
+       — kullanıcının doldurduğu ortak alanlar korunur, kategoriye ait olmayan
+       alanlar düşer. */
+    if (t.getAttribute && t.getAttribute('data-yf') === 'kategori' && form) {
+      var suanki = formuOku(form);
+      suanki.kategori = t.value;
+      suanki.id = acikId || 0;
+      popYenidenCiz(suanki);
+      return;
+    }
     if (t.hasAttribute && t.hasAttribute('data-ykat')) {
       kategori = t.value;
-      acikId = null;
-      ciz();
+      popKapat();       // başka alanın kaydı açık kalmasın; listeyi de çizer
     }
   });
 
@@ -488,8 +771,7 @@
     gonder('/api/yetenek', 'PUT', veri)
       .then(function (j) {
         yetenekler = j.yetenekler;
-        acikId = null;
-        ciz();
+        popKapat();                          // popKapat listeyi de çizer
         A.toast('“' + veri.ad + '” kaydedildi · ' + (j.yazilan || []).join(', '));
       })
       .catch(function (err) {
@@ -508,7 +790,9 @@
     { t: 'kaynak_turu', ad: 'Kaynak türleri', ek: [] },
     { t: 'eylem_turu', ad: 'Eylem türleri', ek: ['kisa'] },
     { t: 'uzaklik_birimi', ad: 'Uzaklık birimleri', ek: ['kisa', 'varsayilan'] },
-    { t: 'alan_tipi', ad: 'Alan tipleri', ek: ['olcu_adi', 'yukseklik_gerekir'] }
+    { t: 'sure_birimi', ad: 'Süre birimleri', ek: ['kisa', 'saniye', 'varsayilan'] },
+    { t: 'alan_tipi', ad: 'Alan tipleri', ek: ['olcu_adi', 'yukseklik_gerekir'] },
+    { t: 'yetkinlik', ad: 'Yetkinlikler (silah türleri)', ek: [] }
   ];
   var SINIF = { temel: 'Temel', ozel: 'Özel', yasak: 'Yasak' };
 
@@ -530,6 +814,10 @@
             (s.ek.indexOf('kisa') >= 0
               ? '<input class="field__input ysoz__ek ysoz__ek--kisa" data-ysozek="kisa" value="' +
                 esc(x.kisa || '') + '" placeholder="kısa" aria-label="Kısaltma">' : '') +
+            (s.ek.indexOf('saniye') >= 0
+              ? '<input class="field__input ysoz__ek ysoz__ek--kisa" type="number" min="1" ' +
+                'step="1" data-ysozek="saniye" value="' + esc(x.saniye || 1) +
+                '" placeholder="sn" aria-label="Kaç saniye">' : '') +
             (s.ek.indexOf('olcu_adi') >= 0
               ? '<input class="field__input ysoz__ek" data-ysozek="olcu_adi" value="' +
                 esc(x.olcu_adi || '') + '" placeholder="Yarıçap" aria-label="Ölçünün adı">' : '') +
@@ -589,9 +877,7 @@
     }
 
     if (t.closest('[data-yeni]')) {
-      acikId = 0;
-      ciz();
-      $('.yrow--yeni', kok).scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      popAc(bosKayit());
       return;
     }
 

@@ -73,6 +73,19 @@ CREATE TABLE IF NOT EXISTS uzaklik_birimi (
   CONSTRAINT uq_uzaklik_birimi_ad UNIQUE (ad)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
+-- saniye: birimin saniye cinsinden uzunlugu. Tablodaki Sure sutunu BUNUNLA
+-- siralanir; ham deger ile siralamak "2 Saat"i "3 Tur"un onune atardi. Tur bir
+-- tur savas turudur, 6 saniye kabul edilir.
+CREATE TABLE IF NOT EXISTS sure_birimi (
+  id          INT AUTO_INCREMENT PRIMARY KEY,
+  ad          VARCHAR(64) NOT NULL,
+  kisa        VARCHAR(12) NULL,
+  saniye      INT         NOT NULL DEFAULT 1,
+  varsayilan  TINYINT(1)  NOT NULL DEFAULT 0,
+  sira        INT         NOT NULL DEFAULT 0,
+  CONSTRAINT uq_sure_birimi_ad UNIQUE (ad)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+
 -- yukseklik_gerekir: silindir/koni/prizma gibi yarıçap tek başına yetmeyen
 -- biçimlerde form ikinci bir ölçü ister
 CREATE TABLE IF NOT EXISTS alan_tipi (
@@ -100,12 +113,22 @@ CREATE TABLE IF NOT EXISTS yetenek (
   menzil_deger    INT          NULL,
   menzil_birim_id INT          NULL,
 
+  -- sure: 'anlik' ya da 'sureli' + en az 1 değer + birim
+  sure_tur      VARCHAR(8) NOT NULL DEFAULT 'anlik',
+  sure_deger    INT        NULL,
+  sure_birim_id INT        NULL,
+
   -- alan: yok (0) ya da var (1) + en az 1 yarıçap + birim + biçim
   alan_var        TINYINT(1)   NOT NULL DEFAULT 0,
   alan_deger      INT          NULL,
   alan_birim_id   INT          NULL,
   alan_tipi_id    INT          NULL,
   alan_yukseklik  INT          NULL,
+
+  -- ritual / konsantrasyon: iki bagimsiz nitelik. Tabloda adin yaninda R ve K
+  -- rozeti olarak cikar, suzgec cubugunda onay kutusuna baglanir.
+  ritual        TINYINT(1) NOT NULL DEFAULT 0,
+  konsantrasyon TINYINT(1) NOT NULL DEFAULT 0,
 
   -- söz / hareket / materyal üçlüsü: her biri anahtar + kendi alanı
   soz_gerekli      TINYINT(1)  NOT NULL DEFAULT 0,
@@ -127,7 +150,9 @@ CREATE TABLE IF NOT EXISTS yetenek (
   CONSTRAINT ck_yetenek_menzil  CHECK (menzil_deger IS NULL OR menzil_deger >= 1),
   CONSTRAINT ck_yetenek_alan    CHECK (alan_deger IS NULL OR alan_deger >= 1),
   CONSTRAINT ck_yetenek_alan_h  CHECK (alan_yukseklik IS NULL OR alan_yukseklik >= 1),
+  CONSTRAINT ck_yetenek_sure    CHECK (sure_deger IS NULL OR sure_deger >= 1),
   CONSTRAINT ck_yetenek_mtur    CHECK (menzil_tur IN ('kendin', 'mesafe')),
+  CONSTRAINT ck_yetenek_stur    CHECK (sure_tur IN ('anlik', 'sureli')),
   CONSTRAINT fk_yetenek_kategori FOREIGN KEY (kategori_id)     REFERENCES kategori (id),
   CONSTRAINT fk_yetenek_eylem    FOREIGN KEY (eylem_turu_id)   REFERENCES eylem_turu (id),
   CONSTRAINT fk_yetenek_element  FOREIGN KEY (element_id)      REFERENCES element (id),
@@ -135,7 +160,27 @@ CREATE TABLE IF NOT EXISTS yetenek (
   CONSTRAINT fk_yetenek_kaynak   FOREIGN KEY (kaynak_turu_id)  REFERENCES kaynak_turu (id),
   CONSTRAINT fk_yetenek_mbirim   FOREIGN KEY (menzil_birim_id) REFERENCES uzaklik_birimi (id),
   CONSTRAINT fk_yetenek_abirim   FOREIGN KEY (alan_birim_id)   REFERENCES uzaklik_birimi (id),
+  CONSTRAINT fk_yetenek_sbirim   FOREIGN KEY (sure_birim_id)   REFERENCES sure_birimi (id),
   CONSTRAINT fk_yetenek_atipi    FOREIGN KEY (alan_tipi_id)    REFERENCES alan_tipi (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+
+-- Yetkinlik: fiziksel/karma yeteneklerin gerektirdigi silah turleri. Sozluk
+-- tablosu + cok-a-cok bag: bir yetenek birden cok yetkinlik tasiyabilir.
+CREATE TABLE IF NOT EXISTS yetkinlik (
+  id       INT AUTO_INCREMENT PRIMARY KEY,
+  ad       VARCHAR(64) NOT NULL,
+  aciklama TEXT        NULL,
+  sira     INT         NOT NULL DEFAULT 0,
+  CONSTRAINT uq_yetkinlik_ad UNIQUE (ad)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+
+CREATE TABLE IF NOT EXISTS yetenek_yetkinlik (
+  id           INT AUTO_INCREMENT PRIMARY KEY,
+  yetenek_id   INT NOT NULL,
+  yetkinlik_id INT NOT NULL,
+  sira         INT NOT NULL DEFAULT 0,
+  CONSTRAINT fk_yy_yetenek   FOREIGN KEY (yetenek_id)   REFERENCES yetenek (id) ON DELETE CASCADE,
+  CONSTRAINT fk_yy_yetkinlik FOREIGN KEY (yetkinlik_id) REFERENCES yetkinlik (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 CREATE TABLE IF NOT EXISTS yetenek_materyal (
@@ -151,3 +196,4 @@ CREATE INDEX ix_yetenek_element  ON yetenek (element_id);
 CREATE INDEX ix_yetenek_enerji   ON yetenek (enerji_turu_id);
 CREATE INDEX ix_yetenek_kaynak   ON yetenek (kaynak_turu_id);
 CREATE INDEX ix_materyal_yetenek ON yetenek_materyal (yetenek_id, sira);
+CREATE INDEX ix_yy_yetenek ON yetenek_yetkinlik (yetenek_id, sira);

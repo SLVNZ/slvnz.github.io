@@ -21,7 +21,45 @@ admin/db.py          yetenek veritabanı katmanı (MySQL, yoksa SQLite)
 admin/schema.sql     tek şema, MySQL lehçesinde
 admin/yetenek.py     yetenek CRUD, doğrulama, sayfa üretimi
 admin/yetenekler.js  Yetenekler görünümü
+admin/gerekli.py     gereksinim denetimi — panel.bat açılışta çağırır
 ```
+
+## Başlatıcı neyi denetler
+
+`panel.bat` sunucuyu açmadan önce `admin/gerekli.py`'yi çalıştırır: Python
+sürümü, pip, MySQL sürücüsü, MySQL sunucusu. **Hiçbiri zorunlu değil** —
+eksikse panel SQLite'a düşer ve tam çalışır — o yüzden denetim paneli
+durdurmaz, yalnız söyler ve kurulabilir olanı sorar. Sıfırdan farklı çıkış
+yalnızca Python'un kendisi yetersizken gelir.
+
+| Bayrak | Ne yapar |
+|---|---|
+| yok | denetle, eksik sürücüyü **sorarak** kur, sonra başlat |
+| `/kur` | sormadan kur (gözetimsiz) |
+| `/atla` | denetimi geç |
+| `/denetle` | yalnız rapor; sunucuya dokunma |
+
+> [!warning] Sürücü ile sunucu ayrı iki gerekliliktir
+> En sık karışan yer burası. `pip install PyMySQL` tek başına MySQL'e
+> geçirmez: sunucu ayakta değilse `db.py` yine SQLite'a düşer, yalnız mesajı
+> değişir. Rapor bu yüzden ikisini ayrı satırda gösterir ve sonuç cümlesinde
+> hangisinin eksik olduğunu adıyla söyler.
+
+> [!note] Sürücü sırası `db.py` ile aynı kalmalı
+> `gerekli.py: SURUCULER` ile `db.py: _mysql_modul()` aynı sırayı izler
+> (PyMySQL → mysql.connector → MySQLdb). Ayrışırsa rapor, panelin gerçekte
+> kullanacağı sürücüyü yanlış gösterir.
+
+> [!warning] `if errorlevel` bir önceki komuttan kalanı okur
+> cmd bu değeri her komutta güncellemez — örneğin `echo` dokunmaz. Denetim
+> çağrısı bloğa gömülüp errorlevel orada okunduğunda, yukarıdaki
+> `netstat | findstr`'dan kalan 1 okunuyor ve panel boşuna duruyordu. Çağrı
+> bu yüzden düz bir satır, denetim hemen ardından.
+
+> [!note] Denetim sunucudan ÖNCE çalışır
+> `gerekli.py` soru sorabiliyor; sunucudan sonra çalıştırılsaydı istem,
+> sunucunun kendi çıktısının altında kaybolurdu. `/denetle` dalı ise port
+> denetiminden de önce: panel ayaktayken de gereksinimlere bakılabilsin.
 
 Kaydetme akışı: panel → `PUT /api/site` → doğrulama → `site.json` yazılır →
 `index.html` ve `kurallar.html`'deki **işaretli bölgeler** yeniden üretilir →
@@ -32,6 +70,48 @@ sen `git add -A && git commit && git push`.
 > form kaydı anında yazılır — üstteki **Kaydet** düğmesiyle ilişkisi yoktur.
 > Sunucu aynı istekte `yetenekler.html` + `content/yetenekler.json` üretir.
 > Ayrıntı: [[Yetenekler Sayfası]].
+
+### Yetenek formu bir pencerede durur
+
+Form eskiden satırın altına inen bir akordeon bloktu. Yirmi küsur alanla
+1280×720'de **1392px** tutuyor, listeyi 1548px'e itiyordu: düzenlediğin kaydı
+görmek için kaydırmak, listeye dönmek için geri kaydırmak gerekiyordu. Artık
+kendi `<dialog>`'unda — liste yerinde kalır (155px), pencere ekrana bağlı bir
+yükseklikte durur ve gövdesi kendi içinde kayar, altlık dibe yapışır.
+
+Genişçe ekranda (≥47rem) form iki sütuna ayrılır; kimlik satırı, gereksinim
+kümesi ve altlık tam genişlikte kalır. Gereksinimlerin üç yığını da kendi
+içinde yan yana geçer. Toplam: **1392 → 705px**.
+
+> [!note] Diyalog `[data-view-panel]`in İÇİNDE durmalı
+> `yetenekler.js` bütün olayları o bölümde delege eder. Gövde tepe katmana
+> (top layer) çıksa da baloncuk DOM ağacından gider — diyalog dışarı alınırsa
+> formdaki hiçbir düğme çalışmaz.
+
+> [!warning] Kapanış `close` olayına bırakılmaz
+> Temizliği (durum sıfırlama, gövdeyi boşaltma, listeyi çizme) `popKapat()`
+> yapar. Bazı gömülü tarayıcılarda `<dialog>` hiç `close` olayı doğurmuyor —
+> panelin kendi `confirm` diyaloğu da aynı yerde sessiz kalıyor. Olaya
+> güvenilseydi `acikId` askıda kalır, liste kapanmış bir kaydı açık
+> göstermeye devam ederdi. Olaylar yalnız Esc'i bu kapıya bağlar.
+
+> [!warning] Şemaya sonradan eklenen sütun göç ister
+> `kur()` `CREATE TABLE IF NOT EXISTS` çalıştırır; bu, VAR OLAN bir tabloya
+> sütun EKLEMEZ. Süre alanları geldiğinde taze kurulumlar schema.sql'den
+> aldı, mevcut veritabanları ise `db.py: _GOCLER` listesinden — her ifade bir
+> kez denenir, "zaten var" hatası yutulur (CREATE INDEX'te kullanılan deyimin
+> aynısı). Yeni bir sütun eklerken bu listeyi güncellemeyi unutmak, panelin
+> yalnız senin makinende çalışmasıyla sonuçlanır.
+>
+> Yabancı anahtar göçe bilerek konmadı: SQLite `ALTER TABLE` ile kısıt
+> eklemeyi desteklemiyor. Referansı `yetenek.py: _var_mi` doğruluyor.
+
+> [!warning] `hidden` niteliğini `display` ezer
+> `.yform__kosul` ve `.yform__yuk` `display: flex` taşıyor; bu, tarayıcının
+> `[hidden] { display: none }` kuralından daha belirgin. JS `hidden = true`
+> dese de kutular ekranda kalıyordu: "Kendin" menzilli kayıtta mesafe alanı,
+> yükseklik istemeyen biçimde yükseklik alanı görünüyor ve satırı sarmalayıp
+> formu ~40px uzatıyordu. Çözüm açık bir `[hidden] { display: none }`.
 
 ## İşaretli bölgeler
 

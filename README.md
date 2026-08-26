@@ -18,8 +18,10 @@ admin/                   yerel yönetim paneli (python admin/server.py → 127.0
   server.py              HTTP sunucusu, API uçları, üretim, mürekkep motoru
   admin.js · canvas.js   panel ve tuval editörü
   yetenekler.js          Yetenekler görünümü (form + listeler)
-  db.py · schema.sql     yetenek veritabanı katmanı (MySQL, yoksa SQLite)
+  db.py · schema.sql     yetenek veritabanı katmanı (MySQL, yoksa SQLite) + şema göçleri
+                         (kategori profilleri: yetenek.py PROFILLER)
   yetenek.py             yetenek CRUD, doğrulama, sayfa üretimi
+  gerekli.py             gereksinim denetimi (panel.bat açılışta çağırır)
 assets/
   css/style.css          token'lar ve başlık sayfası stilleri
   css/kurallar.css       belge çerçevesi — ray, TOC, panel, zengin metin
@@ -172,6 +174,47 @@ ulaşılabiliyorsa MySQL, değilse **SQLite** (standart kütüphanede, kurulum
 istemez). Aynı `schema.sql`, üç satırlık bir lehçe çevirisiyle iki tarafta da
 kurulur. Hangisine yazıldığı panelin Yetenekler başlığının altında yazar.
 
+**Neyin eksik olduğunu panel.bat söyler.** Açılışta `admin/gerekli.py`
+çalışır; Python sürümünü, pip'i, MySQL sürücüsünü ve MySQL sunucusunun
+dinleyip dinlemediğini ayrı ayrı raporlar, sürücü eksikse kurmayı önerir:
+
+```
+  [ok] Python                 3.13.7
+  [ok] pip                    pip 25.2
+  [--] MySQL sürücüsü         kurulu değil — panel SQLite kullanır
+  [--] MySQL sunucusu         127.0.0.1:3306 yanıt vermiyor
+```
+
+| Komut | Ne yapar |
+|---|---|
+| `panel.bat` | denetler, eksik sürücüyü sorarak kurar, paneli açar |
+| `panel.bat /kur` | sormadan kurar (gözetimsiz) |
+| `panel.bat /atla` | denetimi geçer |
+| `panel.bat /denetle` | yalnız rapor; paneli açmaz |
+
+> Sürücü ile sunucu **ayrı** iki gerekliliktir. Yalnız `pip install PyMySQL`
+> demek MySQL'e geçirmez: sunucu ayakta değilse `db.py` yine SQLite'a düşer,
+> yalnızca mesajı değişir. Denetim bu yüzden ikisini birden gösterir.
+
+`admin/db.config.json` içindeki `"surucu"` üç değer alır:
+
+| Değer | Davranış |
+|---|---|
+| `"otomatik"` | MySQL'i dener, olmazsa SQLite'a düşer (varsayılan) |
+| `"mysql"` | yalnız MySQL; bağlanamazsa **sessizce düşmez, hata verir** |
+| `"sqlite"` | MySQL hiç denenmez |
+
+`"sqlite"` seçilirse denetim de MySQL satırlarını atlar — kurulu olmayan bir
+sürücüyü "eksik" diye göstermek bilinçli bir tercihi arıza gibi okutur:
+
+```
+  [..] MySQL                  db.config.json "sqlite" diyor — denetlenmedi
+```
+
+> `db.config.json` git dışıdır (parola taşıyabilir), yani bu seçim **makineye
+> özeldir**. Taze bir klonda dosya yoksa `db.py` varsayılana, yani
+> `"otomatik"`e döner.
+
 MySQL'e geçmek için:
 
 ```bash
@@ -179,7 +222,12 @@ pip install PyMySQL
 mysql -u root -p -e "CREATE DATABASE slvnz CHARACTER SET utf8mb4 COLLATE utf8mb4_turkish_ci;"
 ```
 
-sonra `admin/db.config.json` içine kullanıcı/parolayı yaz (`"surucu": "mysql"`
+Sunucu kurulumu kendiliğinden yapılmaz: servisi ayağa kaldırmayı, root
+parolası belirlemeyi ve veritabanını açmayı da gerektirdiği için başlatıcı
+zincirin yalnız ilk halkasını yapabilir — yarısında bırakmak "kuruldu" sanıp
+sonraki hatayı gizlerdi. Denetim bunun yerine komutları yazdırır.
+
+Sonra `admin/db.config.json` içine kullanıcı/parolayı yaz (`"surucu": "mysql"`
 dersen SQLite'a sessizce düşmez, hata verir). Şema ve tohum ilk açılışta
 kurulur; veritabanı boşsa sunucu `content/yetenekler.json`'daki yetenekleri
 ada göre eşleştirerek geri yükler — taşıma yolu budur.
