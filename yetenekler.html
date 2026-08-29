@@ -63,7 +63,7 @@
     <nav class="rail__nav" aria-label="Ana menü">
       <h1 class="rail__title">Yetenekler</h1>
       <!-- yonetim:yetenek-sayisi -->
-      <p class="rail__count">24 Yetenek</p>
+      <p class="rail__count">25 Yetenek</p>
       <!-- /yonetim:yetenek-sayisi -->
       <ul class="rail__list">
         <li><a class="mainnav__link rail__link" href="kurallar.html">Oyun Kuralları</a></li>
@@ -1479,7 +1479,9 @@
               <select class="yfiltre__sel" data-yfiltre="yetkinlik" data-ykapsar>
                 <option value="">Hepsi</option>
                 <option value="Balta">Balta</option>
+                <option value="Hançer">Hançer</option>
                 <option value="Kılıç">Kılıç</option>
+                <option value="Kısa Mızrak">Kısa Mızrak</option>
                 <option value="Mızrak">Mızrak</option>
                 <option value="Silahsız">Silahsız</option>
               </select>
@@ -1490,10 +1492,11 @@
                 <option value="">Hepsi</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
+                <option value="4">4</option>
               </select>
             </label>
             <button class="yet__sifirla" type="button" data-ysifirla hidden>Süzgeci temizle</button>
-            <p class="yet__sayac" data-ysayac role="status" aria-live="polite">5 yetenek</p>
+            <p class="yet__sayac" data-ysayac role="status" aria-live="polite">6 yetenek</p>
           </div>
 
           <div class="yet__split" data-yprofil="fiziksel">
@@ -1549,6 +1552,14 @@
               <td>Tepki Eylem</td>
               <td class="ytablo__yetkinlik">Kılıç · Balta · Mızrak · Silahsız</td>
               <td class="ytablo__soluk">2</td>
+              <td class="ytablo__menzil">Kendin</td>
+            </tr>
+            <tr class="ytablo__satir" data-yid="y-fiziksel-sirtkiran" data-seviye="4" data-ad="sirtkiran" data-eylem="Tepki Eylem" data-element="" data-enerji="" data-sure="-1" data-yetkinlik="Kılıç · Hançer · Silahsız · Kısa Mızrak" data-ritual="0" data-konsantrasyon="0" data-kaynak="Soluk" data-soluk="4" data-tuketim="4" data-menzil="-1" data-ara="sirtkiran 4 sana karsi gelen bir yakin mesafe saldirisindan kacinmayi takiben rakibin arkasina gecerek bir karsi saldiri gerceklestirmeye calisirsin. kacinmayi basarirsan, rakibin tam arkasina seri bir hamleyle kendini gecirirsin, hemen arkasindan rakibine dezavantaj olusturacak sekilde bir yakin mesafe saldirisi yaparsin. bu tepki, sana saldiran rakibin firsat saldirisini tetiklemez, ancak cevrende firsat saldirisi menzilinde olan baska rakipler sana firsat saldirisi yapabilir. tepki eylem soluk kilic hancer silahsiz kisa mizrak kendin yok">
+              <td class="ytablo__lvl">4</td>
+              <th class="ytablo__ad" scope="row"><a class="ytablo__link" href="#y-fiziksel-sirtkiran">Sırtkıran</a></th>
+              <td>Tepki Eylem</td>
+              <td class="ytablo__yetkinlik">Kılıç · Hançer · Silahsız · Kısa Mızrak</td>
+              <td class="ytablo__soluk">4</td>
               <td class="ytablo__menzil">Kendin</td>
             </tr>
                 </tbody>
@@ -1728,6 +1739,43 @@
           <div class="ykart__aciklama">
             <p>Yakın mesafeli saldırını silahıyla bloklamış bir karaktere karşı tepki olarak silahını elinden atmak üzere bir denemeye girebilirsin. Bu durumda, karakterle karşılıklı KUV testine girilir. Karşı taraf testte başarısız olursa, rakibin silahını belirleyeceğin bir doğrultuda 2 birim uzaklığa fırlatırsın.</p>
           </div>
+        </article>
+        <article class="ykart" id="y-fiziksel-sirtkiran" data-ykart="y-fiziksel-sirtkiran" tabindex="-1">
+          <header class="ykart__head">
+            <p class="ykart__eyebrow">
+              <span class="ykart__lvl">Seviye 4</span>
+              <span class="ykart__kat">Fiziksel</span>
+            </p>
+            <h3 class="ykart__ad">Sırtkıran</h3>
+            <p class="ykart__etiketler">
+              <span class="yet-tag yet-tag--eylem">Tepki Eylem</span>
+            </p>
+          </header>
+          <dl class="ykart__stats">
+            <div class="ykart__stat">
+              <dt>Yetkinlik</dt>
+              <dd>Kılıç · Hançer · Silahsız · Kısa Mızrak</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Soluk</dt>
+              <dd>4</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Menzil</dt>
+              <dd>Kendin</dd>
+            </div>
+            <div class="ykart__stat">
+              <dt>Alan</dt>
+              <dd>Yok</dd>
+            </div>
+          </dl>
+          <div class="ykart__aciklama">
+            <p>Sana karşı gelen bir yakın mesafe saldırısından kaçınmayı takiben rakibin arkasına geçerek bir karşı saldırı gerçekleştirmeye çalışırsın. Kaçınmayı başarırsan, rakibin tam arkasına seri bir hamleyle kendini geçirirsin, hemen arkasından rakibine dezavantaj oluşturacak şekilde bir yakın mesafe saldırısı yaparsın.</p>
+          </div>
+          <aside class="ykart__dipnot">
+            <p class="ykart__getiket">Dipnot</p>
+            <p>Bu tepki, sana saldıran rakibin fırsat saldırısını tetiklemez, ancak çevrende fırsat saldırısı menzilinde olan başka rakipler sana fırsat saldırısı yapabilir.</p>
+          </aside>
         </article>
               </div>
             </div>

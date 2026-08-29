@@ -797,7 +797,7 @@ class Handler(BaseHTTPRequestHandler):
                             'yazilan': yetenek_uret(), 'git': git_state()})
 
             elif yol == '/api/yetenek/ice-aktar':
-                n, hata = yetenek.ice_aktar(zorla=True)
+                n, hata = yetenek.ice_aktar()
                 self._json({'tamam': True, 'sayi': n, 'hata': hata,
                             'yetenekler': yetenek.liste(),
                             'yazilan': yetenek_uret(), 'git': git_state()})
@@ -855,8 +855,10 @@ def main():
             stream.reconfigure(encoding='utf-8', errors='replace')
         except Exception:
             pass
-    # Yetenek veritabanı: şemayı kur, boşsa content/yetenekler.json'dan geri
-    # yükle. Taze bir klonda ya da MySQL'e yeni geçildiğinde veri buradan gelir.
+    # Yetenek veritabanı: şemayı kur, sonra content/yetenekler.json'da olup
+    # veritabanında olmayan yetenekleri geri yükle. Taze bir klonda, MySQL'e
+    # yeni geçildiğinde ya da JSON git'ten güncel gelmişken veri buradan gelir.
+    # Bu adım atlanırsa bayat veritabanı ilk yazımda dosyanın üzerine yazar.
     if yetenek is not None:
         try:
             d = yetenek.db.durum()

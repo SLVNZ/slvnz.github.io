@@ -31,6 +31,7 @@ süzgeci ve sıralamayı bağlar. Hiçbir veri yalnız JS ile görünür değild
 import html as html_mod
 import json
 import re
+import sys
 from pathlib import Path
 
 import db
@@ -38,6 +39,9 @@ import db
 ROOT = Path(__file__).resolve().parent.parent
 JSON_YOL = ROOT / 'content' / 'yetenekler.json'
 SAYFA = ROOT / 'yetenekler.html'
+# Üretim JSON'un üzerine yazmadan önceki güvenlik kopyası. admin/data
+# git dışıdır: yedekler depoyu kirletmez.
+YEDEK_DIZIN = ROOT / 'admin' / 'data' / 'yedek'
 
 # Panelden yönetilebilen sözlükler: tablo → (yazılabilir kolonlar, etiket)
 SOZLUKLER = {
@@ -232,6 +236,10 @@ def sozluk_kaydet(tablo, veri):
             return None, ['Saniye karşılığı en az 1 olmalı']
         deger['saniye'] = sn
     yid = _int(veri.get('id'))
+    # Olmayan bir id ile gelen UPDATE hiçbir satıra dokunmaz ama hata da
+    # vermez: çağıran "kaydettim" sanır, satır ortada yoktur. Baştan söyle.
+    if yid and not db.tek('SELECT id FROM %s WHERE id = ?' % tablo, (yid,)):
+        return None, ['Kayıt bulunamadı (id %s)' % yid]
     if 'sira' in kolonlar:
         s = _int(veri.get('sira'))
         if s is None and not yid:
@@ -1129,6 +1137,39 @@ def _write_text(path, text):
     tmp.replace(path)
 
 
+# Bu oturumda JSON'a YAZDIĞIMIZ yetenek adları. Panelden silinen bir yetenek de
+# "dosyada var, veritabanında yok" durumuna düşer; onu dışarıdan gelmiş kayıt
+# sanıp boşuna uyarmamak için bir kez yazdığımızı hatırlamak gerekiyor.
+_YAZILAN_ADLAR = set()
+
+
+def _dis_kayitlari_yedekle(hepsi):
+    """Üzerine yazmadan önce: dosyada olup veritabanında OLMAYAN, bu oturumda
+    da bizim yazmadığımız bir yetenek var mı? Varsa dosya arkamızdan değişmiş
+    demektir (elle düzenleme, ``git pull``, başka bir veritabanı) — kopyasını
+    al ve söyle. Sessizce üzerine yazmak 24 yeteneği bir kez sildi."""
+    if not JSON_YOL.is_file():
+        return
+    try:
+        eski = json.loads(JSON_YOL.read_text(encoding='utf-8'))
+    except Exception:
+        return                              # okunamayan dosya korunacak veri değil
+    dosyada = {y.get('ad') for y in (eski.get('yetenekler') or []) if y.get('ad')}
+    kaybolan = sorted(dosyada - {y['ad'] for y in hepsi} - _YAZILAN_ADLAR,
+                      key=db.tr_anahtar)
+    if not kaybolan:
+        return
+    YEDEK_DIZIN.mkdir(parents=True, exist_ok=True)
+    damga = db.simdi().replace('-', '').replace(':', '').replace(' ', '-')
+    yol = YEDEK_DIZIN / ('yetenekler-%s.json' % damga)
+    yol.write_text(JSON_YOL.read_text(encoding='utf-8'), encoding='utf-8', newline='\n')
+    sys.stderr.write(
+        '! content/yetenekler.json içinde veritabanında bulunmayan %d yetenek vardı: %s\n'
+        '  Üzerine yazılmadan önce kopyası alındı → %s\n'
+        '  Geri almak için: paneli kapat, dosyayı geri koy, paneli yeniden aç.\n'
+        % (len(kaybolan), ' · '.join(kaybolan), yol.relative_to(ROOT).as_posix()))
+
+
 def disa_aktar(hepsi=None):
     """content/yetenekler.json — git'e giren kalıcı kayıt. Veritabanı silinse
     de yetenekler burada durur; ``ice_aktar()`` onları geri yükler."""
@@ -1138,7 +1179,9 @@ def disa_aktar(hepsi=None):
             'sozluk': sozluk(),
             'yetenekler': hepsi}
     JSON_YOL.parent.mkdir(parents=True, exist_ok=True)
+    _dis_kayitlari_yedekle(hepsi)
     _write_text(JSON_YOL, json.dumps(veri, ensure_ascii=False, indent=2) + '\n')
+    _YAZILAN_ADLAR.update(y['ad'] for y in hepsi)
     return 'content/yetenekler.json'
 
 
@@ -1163,25 +1206,44 @@ def sayfa_uret(kimlik_html=None):
     return yazilan
 
 
-def ice_aktar(zorla=False):
-    """content/yetenekler.json → veritabanı. Yalnız veritabanı BOŞken (ya da
-    açıkça zorlandığında) çalışır: taze bir klon ya da MySQL'e geçiş sonrası
-    yetenekleri geri getirmenin yolu budur."""
+def ice_aktar():
+    """content/yetenekler.json → veritabanı. Her açılışta çalışır ve YALNIZ
+    veritabanında adı bulunmayan yetenekleri ekler. Dönüş: (sayı, hatalar).
+
+    Kayıt yönü normalde veritabanı → JSON'dur. Ama JSON git'e girer: taze bir
+    klon, bir ``git pull``, elle yapılmış bir düzenleme ya da başka bir makinede
+    tutulan veritabanı dosyayı veritabanının ÖNÜNE geçirebilir. Bu içe aktarma
+    eskiden yalnız tablo BOŞken çalışıyordu; dolu ama bayat bir veritabanı
+    JSON'daki yetenekleri hiç görmüyor, ilk yazımda da üzerlerine yazıp
+    siliyordu. Ada göre birleştirmek o kaybı kapatır ve tekrar tekrar
+    çalıştırılabilir: panelden silinen yetenek JSON'dan da silindiği için geri
+    gelmez, iki yerde de duran yetenek ikinci kez eklenmez."""
     if not JSON_YOL.is_file():
-        return 0, []
-    if not zorla and db.tek('SELECT COUNT(*) AS n FROM yetenek')['n']:
         return 0, []
     try:
         veri = json.loads(JSON_YOL.read_text(encoding='utf-8'))
     except Exception as e:
         return 0, ['yetenekler.json okunamadı: %s' % e]
 
+    n, hatalar = 0, []
+
     # Sözlükteki eksik satırları önce tamamla (JSON'daki yetenekler ada göre
-    # bağlanır — id'ler iki veritabanı arasında aynı olmak zorunda değil)
+    # bağlanır — id'ler iki veritabanı arasında aynı olmak zorunda değil).
+    # id'yi ATMAK şart: sozluk_kaydet id'yi "şu satırı güncelle" diye okur,
+    # o id burada yoksa UPDATE hiçbir satıra dokunmaz ve satır sessizce
+    # eklenmemiş olur — sonra ona bağlı yetenek "birim seçilmeli" diye düşer.
     for tablo in SOZLUKLER:
-        for s in (veri.get('sozluk') or {}).get(tablo) or []:
-            if s.get('ad') and not db.tek('SELECT id FROM %s WHERE ad = ?' % tablo, (s['ad'],)):
-                sozluk_kaydet(tablo, s)
+        for satir in (veri.get('sozluk') or {}).get(tablo) or []:
+            if not satir.get('ad'):
+                continue
+            if db.tek('SELECT id FROM %s WHERE ad = ?' % tablo, (satir['ad'],)):
+                continue
+            yeni = dict(satir)
+            yeni.pop('id', None)
+            _, h = sozluk_kaydet(tablo, yeni)
+            if h:
+                hatalar.append('%s "%s": %s' % (SOZLUKLER[tablo][1], satir['ad'],
+                                                ' · '.join(h)))
 
     def id_ile_ad(tablo, ref):
         if not ref or not ref.get('ad'):
@@ -1189,8 +1251,9 @@ def ice_aktar(zorla=False):
         r = db.tek('SELECT id FROM %s WHERE ad = ?' % tablo, (ref['ad'],))
         return r['id'] if r else None
 
-    n, hatalar = 0, []
     for y in veri.get('yetenekler') or []:
+        if not y.get('ad') or db.tek('SELECT id FROM yetenek WHERE ad = ?', (y['ad'],)):
+            continue
         kayit = dict(y)
         kayit.pop('id', None)
         for alan, tablo in (('eylem_turu', 'eylem_turu'), ('element', 'element'),

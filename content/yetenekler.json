@@ -466,12 +466,18 @@
         "ad": "Silahsız",
         "aciklama": "Yumruk, tekme, tutuş — silah gerektirmeyen dövüş.",
         "sira": 8
+      },
+      {
+        "id": 9,
+        "ad": "Kısa Mızrak",
+        "aciklama": null,
+        "sira": 9
       }
     ]
   },
   "yetenekler": [
     {
-      "id": 8,
+      "id": 1,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
       "seviye": 0,
@@ -546,7 +552,7 @@
       "dipnot": null
     },
     {
-      "id": 6,
+      "id": 2,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
       "seviye": 0,
@@ -612,7 +618,7 @@
       "dipnot": null
     },
     {
-      "id": 12,
+      "id": 3,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
       "seviye": 0,
@@ -678,7 +684,7 @@
       "dipnot": null
     },
     {
-      "id": 9,
+      "id": 4,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
       "seviye": 0,
@@ -749,7 +755,7 @@
       "dipnot": null
     },
     {
-      "id": 16,
+      "id": 5,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
       "seviye": 0,
@@ -815,7 +821,7 @@
       "dipnot": "Bu saldırı, bir tepki eylem olarak da kullanılabilir."
     },
     {
-      "id": 7,
+      "id": 6,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
       "seviye": 0,
@@ -890,7 +896,7 @@
       "dipnot": null
     },
     {
-      "id": 17,
+      "id": 7,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
       "seviye": 0,
@@ -961,7 +967,7 @@
       "dipnot": "Bu yetenek, normalden derin yaralanmalarda da etkili olabilme kapasitesine sahiptir, ancak yeteneğin enerji zarının yüksek olması gerekir."
     },
     {
-      "id": 14,
+      "id": 8,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
       "seviye": 0,
@@ -1039,7 +1045,7 @@
       "dipnot": null
     },
     {
-      "id": 15,
+      "id": 9,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
       "seviye": 0,
@@ -1251,7 +1257,7 @@
       "dipnot": null
     },
     {
-      "id": 18,
+      "id": 12,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
       "seviye": 0,
@@ -1383,7 +1389,7 @@
       "dipnot": null
     },
     {
-      "id": 19,
+      "id": 14,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
       "seviye": 1,
@@ -1456,7 +1462,7 @@
       "dipnot": "Bu yetenek, tıklama yeteneğiyle bozulabilir. Bu durumda, sensörü gerçekleştiren varlık zihninde bir şey işitmez."
     },
     {
-      "id": 22,
+      "id": 25,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
       "seviye": 1,
@@ -1527,7 +1533,7 @@
       "dipnot": null
     },
     {
-      "id": 20,
+      "id": 16,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
       "seviye": 1,
@@ -1594,7 +1600,7 @@
       "dipnot": "Bu yeteneğin sağladığı bariyer kullanıcıyı hasar almaz hale getirmez. Saldırılar vücuda erişemeyecek olsa da karakter, saldırılardan kaynaklanacak basınçtan hasar alabilir."
     },
     {
-      "id": 24,
+      "id": 17,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
       "seviye": 1,
@@ -1665,7 +1671,7 @@
       "dipnot": null
     },
     {
-      "id": 21,
+      "id": 26,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
       "seviye": 1,
@@ -1736,7 +1742,7 @@
       "dipnot": null
     },
     {
-      "id": 27,
+      "id": 19,
       "kategori": "fiziksel",
       "kategori_ad": "Fiziksel Yetenekler",
       "seviye": 2,
@@ -1791,7 +1797,7 @@
       "dipnot": "Bu yetenek geliştirilebilir. Her geliştirildiğinde, seviye başına atılacak zarın yüzü +2 artar. Mevcut zar yüzü d10 olduktan sonra, d12 olmak yerine ikiye bölünür ve zarın biri artmaya devam eder. Bu sistem, bütün zarlar d10'a tamamlandıkça bölünerek aynı mantıkta devam eder.\n\nYeteneğin geliştirilebilirlik sınırı, karakterin KUV niteliğinin + x2 üstü şeklindedir (KUV=1 karakter için azami 3, KUV=2 karakter için azami 5 yapılabilir gibi...)."
     },
     {
-      "id": 25,
+      "id": 20,
       "kategori": "fiziksel",
       "kategori_ad": "Fiziksel Yetenekler",
       "seviye": 2,
@@ -1846,7 +1852,7 @@
       "dipnot": null
     },
     {
-      "id": 23,
+      "id": 21,
       "kategori": "enerjisel",
       "kategori_ad": "Enerjisel Yetenekler",
       "seviye": 2,
@@ -1917,7 +1923,7 @@
       "dipnot": null
     },
     {
-      "id": 28,
+      "id": 22,
       "kategori": "fiziksel",
       "kategori_ad": "Fiziksel Yetenekler",
       "seviye": 3,
@@ -1972,7 +1978,7 @@
       "dipnot": null
     },
     {
-      "id": 26,
+      "id": 23,
       "kategori": "fiziksel",
       "kategori_ad": "Fiziksel Yetenekler",
       "seviye": 3,
@@ -2032,7 +2038,7 @@
       "dipnot": null
     },
     {
-      "id": 29,
+      "id": 24,
       "kategori": "fiziksel",
       "kategori_ad": "Fiziksel Yetenekler",
       "seviye": 3,
@@ -2102,6 +2108,78 @@
       },
       "aciklama": "Yakın mesafeli saldırını silahıyla bloklamış bir karaktere karşı tepki olarak silahını elinden atmak üzere bir denemeye girebilirsin. Bu durumda, karakterle karşılıklı KUV testine girilir. Karşı taraf testte başarısız olursa, rakibin silahını belirleyeceğin bir doğrultuda 2 birim uzaklığa fırlatırsın.",
       "dipnot": null
+    },
+    {
+      "id": 27,
+      "kategori": "fiziksel",
+      "kategori_ad": "Fiziksel Yetenekler",
+      "seviye": 4,
+      "ad": "Sırtkıran",
+      "eylem_turu": {
+        "id": 3,
+        "ad": "Tepki Eylem",
+        "kisa": "TE"
+      },
+      "element": null,
+      "enerji_turu": null,
+      "kaynak_turu": {
+        "id": 5,
+        "ad": "Soluk"
+      },
+      "kaynak_tuketimi": 4,
+      "menzil": {
+        "tur": "kendin",
+        "deger": null,
+        "birim": null
+      },
+      "sure": {
+        "tur": "anlik",
+        "deger": null,
+        "birim": null
+      },
+      "alan": {
+        "var": false,
+        "deger": null,
+        "birim": null,
+        "tipi": null,
+        "yukseklik": null
+      },
+      "ritual": false,
+      "konsantrasyon": false,
+      "yetkinlik": [
+        {
+          "id": 1,
+          "ad": "Kılıç"
+        },
+        {
+          "id": 5,
+          "ad": "Hançer"
+        },
+        {
+          "id": 8,
+          "ad": "Silahsız"
+        },
+        {
+          "id": 9,
+          "ad": "Kısa Mızrak"
+        }
+      ],
+      "gereksinim": {
+        "soz": {
+          "gerekli": false,
+          "metin": null
+        },
+        "hareket": {
+          "gerekli": false,
+          "metin": null
+        },
+        "materyal": {
+          "gerekli": false,
+          "liste": []
+        }
+      },
+      "aciklama": "Sana karşı gelen bir yakın mesafe saldırısından kaçınmayı takiben rakibin arkasına geçerek bir karşı saldırı gerçekleştirmeye çalışırsın. Kaçınmayı başarırsan, rakibin tam arkasına seri bir hamleyle kendini geçirirsin, hemen arkasından rakibine dezavantaj oluşturacak şekilde bir yakın mesafe saldırısı yaparsın.",
+      "dipnot": "Bu tepki, sana saldıran rakibin fırsat saldırısını tetiklemez, ancak çevrende fırsat saldırısı menzilinde olan başka rakipler sana fırsat saldırısı yapabilir."
     }
   ]
 }
